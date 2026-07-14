@@ -118,7 +118,11 @@ public abstract class GameImpl implements Game {
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected Map<UUID, Card> gameCards = new HashMap<>();
+    // LinkedHashMap: getCards() feeds TargetCard's any-zone candidate
+    // enumeration; a plain HashMap would leave that candidate order
+    // dependent on per-run-random card-id hashcodes (deterministic candidate
+    // order fix, see TargetCardInHand).
+    protected Map<UUID, Card> gameCards = new LinkedHashMap<>();
     protected Map<UUID, MeldCard> meldCards = new HashMap<>(0);
 
     protected Map<Zone, Map<UUID, MageObject>> lki = new EnumMap<>(Zone.class);
@@ -2604,7 +2608,10 @@ public abstract class GameImpl implements Game {
 
         List<Permanent> legendary = new ArrayList<>();
         List<Permanent> worldEnchantment = new ArrayList<>();
-        Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new HashMap<>();
+        // LinkedHashMap/LinkedHashSet: the tied-Role-duplicate destroy loop
+        // below iterates this structure directly (deterministic candidate
+        // order fix, see TargetCardInHand / CombatGroup).
+        Map<UUID, Map<UUID, Set<Permanent>>> roleMap = new LinkedHashMap<>();
         List<FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters();
         for (Permanent perm : getBattlefield().getAllActivePermanents()) {
             if (perm.isCreature(this)) {
@@ -2780,8 +2787,8 @@ public abstract class GameImpl implements Game {
                     }
                 }
                 if (perm.hasSubtype(SubType.ROLE, this) && state.getZone(perm.getId()) == Zone.BATTLEFIELD) {
-                    roleMap.computeIfAbsent(perm.getControllerId(), x -> new HashMap<>())
-                            .computeIfAbsent(perm.getAttachedTo(), x -> new HashSet<>())
+                    roleMap.computeIfAbsent(perm.getControllerId(), x -> new LinkedHashMap<>())
+                            .computeIfAbsent(perm.getAttachedTo(), x -> new LinkedHashSet<>())
                             .add(perm);
                 }
             }

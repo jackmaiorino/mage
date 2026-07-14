@@ -1,8 +1,9 @@
 
 package mage.abilities.effects.common.continuous;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -28,8 +29,11 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
     private boolean withSource;
     private boolean withSecondTarget;
     private boolean destroyAttachedAuras;
-    private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
-    private Map<UUID, UUID> lockedControllers = new HashMap<>();  // Controllers for each permanent that is enforced by this effect
+    // LinkedHashMap: apply() iterates zoneChangeCounter.entrySet() to drive
+    // sequential changeControllerId()/aura-destroy calls (deterministic
+    // candidate order fix, see TargetCardInHand / CombatGroup).
+    private Map<UUID, Integer> zoneChangeCounter = new LinkedHashMap<>();
+    private Map<UUID, UUID> lockedControllers = new LinkedHashMap<>();  // Controllers for each permanent that is enforced by this effect
 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
@@ -57,8 +61,8 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         this.withSource = effect.withSource;
         this.withSecondTarget = effect.withSecondTarget;
         this.destroyAttachedAuras = effect.destroyAttachedAuras;
-        this.lockedControllers = new HashMap<>(effect.lockedControllers);
-        this.zoneChangeCounter = new HashMap<>(effect.zoneChangeCounter);
+        this.lockedControllers = new LinkedHashMap<>(effect.lockedControllers);
+        this.zoneChangeCounter = new LinkedHashMap<>(effect.zoneChangeCounter);
     }
 
     @Override
@@ -131,7 +135,9 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             if (destroyAttachedAuras) {
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(SubType.AURA.getPredicate());
-                for (UUID attachmentId : new HashSet<>(permanent.getAttachments())) {
+                // LinkedHashSet: preserve getAttachments()' (already-ordered)
+                // attach order for the sequential destroy() calls below.
+                for (UUID attachmentId : new LinkedHashSet<>(permanent.getAttachments())) {
                     Permanent attachment = game.getPermanent(attachmentId);
                     if (filter.match(attachment, game)) {
                         attachment.destroy(source, game, false);

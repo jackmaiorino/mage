@@ -22,7 +22,10 @@ public class Exile implements Serializable, Copyable<Exile> {
     private static final UUID PERMANENT = PERMANENT_ZONE_ID;
     private static final String PERMANENT_NAME = "Permanent - Exile";
 
-    private final Map<UUID, ExileZone> exileZones = new HashMap<>();
+    // LinkedHashMap: getExileZones()/getCardsInRange() feed TargetCard's
+    // exile-zone candidate enumeration; deterministic candidate order fix
+    // (see TargetCardInHand) applied to the zone map itself.
+    private final Map<UUID, ExileZone> exileZones = new LinkedHashMap<>();
 
     public Exile() {
         createZone(PERMANENT, "Permanent");

@@ -62,7 +62,10 @@ public class Combat implements Serializable, Copyable<Combat> {
     protected List<CombatGroup> formerGroups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new LinkedHashMap<>();
     // all possible defenders (players, planeswalkers or battle)
-    protected Set<UUID> defenders = new HashSet<>();
+    // LinkedHashSet: getDefenders() feeds attack-target candidate enumeration
+    // (see ComputerPlayerRL's DECLARE_ATTACK_TARGET phase); deterministic
+    // candidate order fix, same as getAttackers()/getBlockers() above.
+    protected Set<UUID> defenders = new LinkedHashSet<>();
     // how many creatures attack defending player
     protected Map<UUID, Set<UUID>> numberCreaturesDefenderAttackedBy = new HashMap<>();
     protected UUID attackingPlayerId; //the player that is attacking
@@ -129,7 +132,12 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public Set<UUID> getAttackers() {
-        Set<UUID> attackers = new HashSet<>();
+        // Determinism: LinkedHashSet preserves group-iteration + per-group
+        // ArrayList insertion order. A plain HashSet re-buckets by
+        // UUID.hashCode, so power-tied attacker candidates would enumerate in
+        // a JVM-instance-dependent order (proven root cause of decision-level
+        // divergence across identical-seed fresh-JVM det-eval runs).
+        Set<UUID> attackers = new LinkedHashSet<>();
         for (CombatGroup group : groups) {
             attackers.addAll(group.attackers);
         }
@@ -137,7 +145,8 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public Set<UUID> getBlockers() {
-        Set<UUID> blockers = new HashSet<>();
+        // Determinism: see getAttackers() above; same order-preserving fix.
+        Set<UUID> blockers = new LinkedHashSet<>();
         for (CombatGroup group : groups) {
             blockers.addAll(group.blockers);
         }
@@ -223,9 +232,11 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean addAttackingCreature(UUID creatureId, Game game, UUID playerToAttack) {
+        // LinkedHashSet: preserve defenders' insertion order into the
+        // TargetDefender candidate set below (see getDefenders() above).
         Set<UUID> possibleDefenders;
         if (playerToAttack != null) {
-            possibleDefenders = new HashSet<>();
+            possibleDefenders = new LinkedHashSet<>();
             for (UUID objectId : defenders) {
                 if (playerToAttack.equals(objectId)) {
                     possibleDefenders.add(objectId);
@@ -237,7 +248,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         } else {
-            possibleDefenders = new HashSet<>(defenders);
+            possibleDefenders = new LinkedHashSet<>(defenders);
         }
         Player player = game.getPlayer(attackingPlayerId);
         if (player == null) {
@@ -477,7 +488,9 @@ public class Combat implements Serializable, Copyable<Combat> {
 
             // find must attack targets
             boolean mustAttack = false;
-            Set<UUID> defendersForcedToAttack = new HashSet<>(); // contains only forced defenders
+            // LinkedHashSet: feeds TargetDefender / iterator().next() single-pick
+            // below (deterministic candidate order fix, see getDefenders() above).
+            Set<UUID> defendersForcedToAttack = new LinkedHashSet<>(); // contains only forced defenders
             if (creature.getGoadingPlayers().isEmpty()) {
                 // must attack effects (not goad)
                 for (Map.Entry<RequirementEffect, Set<Ability>> entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, false, game).entrySet()) {
@@ -511,7 +524,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                         .map(game::getPlayer)
                         .filter(Objects::nonNull)
                         .map(Player::getId)
-                        .collect(Collectors.toSet()));
+                        .collect(Collectors.toCollection(LinkedHashSet::new)));
             }
             if (!mustAttack) {
                 continue;
@@ -524,7 +537,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             // (2020-04-17)
 
             // remove costable targets from require list
-            Set<UUID> defendersCostlessAttackable = new HashSet<>(defenders); // contains all defenders (forced + own)
+            // LinkedHashSet: same fix as defendersForcedToAttack above.
+            Set<UUID> defendersCostlessAttackable = new LinkedHashSet<>(defenders); // contains all defenders (forced + own)
             for (UUID defenderId : defenders) {
                 // filter must pay to attack
                 if (game.getContinuousEffects().checkIfThereArePayCostToAttackBlockEffects(
@@ -877,7 +891,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (creatureMustBlockAttackers.containsKey(possibleBlocker.getId())) {
                                 creatureMustBlockAttackers.get(possibleBlocker.getId()).add(attackingCreatureId);
                             } else {
-                                Set<UUID> forcingAttackers = new HashSet<>();
+                                // LinkedHashSet for consistency with sibling collections in
+                                // this class; creatureMustBlockAttackers values are only
+                                // ever null-checked/looked up here, not iterated, so this is
+                                // not itself a divergence source today.
+                                Set<UUID> forcingAttackers = new LinkedHashSet<>();
                                 forcingAttackers.add(attackingCreatureId);
                                 creatureMustBlockAttackers.put(possibleBlocker.getId(), forcingAttackers);
                                 // assign block to the first forcing attacker automatically
@@ -917,7 +935,10 @@ public class Combat implements Serializable, Copyable<Combat> {
         Set<UUID> opponents = game.getOpponents(attackingPlayerId);
         //20101001 - 509.1c
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
-        Map<UUID, Set<UUID>> mustBeBlockedByAtLeastX = new HashMap<>();
+        // LinkedHashMap: keySet()/values() below drive the "must be blocked"
+        // auto-fix, including an explicit "take the first potential blocker"
+        // AI pick (deterministic candidate order fix, see getAttackers()).
+        Map<UUID, Set<UUID>> mustBeBlockedByAtLeastX = new LinkedHashMap<>();
         Map<UUID, Integer> minNumberOfBlockersMap = new HashMap<>();
         Map<UUID, Integer> minPossibleBlockersMap = new HashMap<>();
 
@@ -948,7 +969,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
                                     } else {
-                                        potentialBlockers = new HashSet<>();
+                                        // LinkedHashSet: see mustBeBlockedByAtLeastX above.
+                                        potentialBlockers = new LinkedHashSet<>();
                                         mustBeBlockedByAtLeastX.put(toBeBlockedCreature, potentialBlockers);
                                     }
                                     potentialBlockers.add(creature.getId());
@@ -1051,7 +1073,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
                                     } else {
-                                        potentialBlockers = new HashSet<>();
+                                        // LinkedHashSet: see mustBeBlockedByAtLeastX above.
+                                        potentialBlockers = new LinkedHashSet<>();
                                         mustBeBlockedByAtLeastX.put(toBeBlockedCreature, potentialBlockers);
                                     }
                                     potentialBlockers.add(creature.getId());
@@ -1779,7 +1802,11 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public Set<UUID> getPlayerDefenders(Game game, boolean includePermanents) {
-        Set<UUID> playerDefenders = new HashSet<>();
+        // LinkedHashSet: iterated directly by selectBlockers()/resumeSelectBlockers()
+        // and several card effects (deterministic candidate order fix, see
+        // getAttackers() above). Only ever a singleton in 1v1 games, but
+        // matters for multiplayer.
+        Set<UUID> playerDefenders = new LinkedHashSet<>();
         for (CombatGroup group : groups) {
             if (group.isDefenderIsPermanent() && !includePermanents) {
                 continue;

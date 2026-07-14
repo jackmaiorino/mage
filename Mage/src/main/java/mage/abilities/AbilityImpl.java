@@ -709,12 +709,15 @@ public abstract class AbilityImpl implements Ability {
         );
         target.withChooseHint("to tap for waterbending");
         controller.choose(Outcome.Tap, target, source, game);
+        // LinkedHashSet: Permanent has no equals()/hashCode() override, so
+        // Collectors.toSet() (a HashSet) would bucket by default identity
+        // hashCode, randomizing the tap() call order below across JVM runs.
         Set<Permanent> permanents = target
                 .getTargets()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         for (Permanent permanent : permanents) {
             permanent.tap(source, game);
         }

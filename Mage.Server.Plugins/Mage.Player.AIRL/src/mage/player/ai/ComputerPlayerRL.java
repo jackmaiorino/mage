@@ -2299,7 +2299,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         seed = seed * 31L + RandomUtil.getConsumptionCount();
         seed = seed * 31L + replayDecisionOrdinal;
         seed = seed * 31L + (isolationKey == null ? 0L : isolationKey.hashCode());
-        seed = seed * 31L + (ability == null || ability.getSourceId() == null ? 0L : ability.getSourceId().hashCode());
+        // Determinism: ability.getSourceId() is a per-run-random UUID (not
+        // RandomUtil-seeded), so its hashCode() differed across JVM runs even
+        // for the "same" logical ability. Use the (content-stable) rule text
+        // instead so this isolation seed is reproducible under det-eval.
+        seed = seed * 31L + (ability == null ? 0L : String.valueOf(ability.getRule()).hashCode());
         try {
             seed = seed * 31L + (game == null ? 0L : game.getTurnNum());
             seed = seed * 31L + (game == null || game.getStep() == null || game.getStep().getType() == null
@@ -4552,9 +4556,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     wcfg.genericBranchOrder = SEARCH_OP_GENERIC_BRANCH_ORDER;
                     wcfg.modelGuidedFallback = SEARCH_OP_MODEL_GUIDED;
                     wcfg.log = SEARCH_OP_LOG;
-                    wcfg.baseSeed = (((long) System.identityHashCode(game)) << 21)
-                            ^ (((long) searchOpActivations) * 0x100000001B3L)
-                            ^ (long) System.identityHashCode(this);
+                    // Determinism: identityHashCode is memory-address-derived and differs
+                    // across independent JVM runs even for the "same" logical decision,
+                    // which would make SEARCH_OP rollouts (and any distilled targets) run-
+                    // dependent under --deterministic-eval. When RL_BASE_SEED is set, derive
+                    // the seed from run-stable quantities (config seed + per-instance
+                    // activation count + game turn) instead. When unset (normal training),
+                    // keep the prior identity-hash-based entropy source unchanged.
+                    wcfg.baseSeed = RL_BASE_SEED >= 0L
+                            ? RL_BASE_SEED
+                                    ^ (((long) searchOpActivations) * 0x100000001B3L)
+                                    ^ (((long) game.getTurnNum()) * 0x9E3779B97F4A7C15L)
+                            : (((long) System.identityHashCode(game)) << 21)
+                                    ^ (((long) searchOpActivations) * 0x100000001B3L)
+                                    ^ (long) System.identityHashCode(this);
                     mage.player.ai.rl.TerminalPrefixSearch.WinRateResult wr =
                             mage.player.ai.rl.TerminalPrefixSearch.estimateCandidateWinRates(
                                     game, getId(), candidates, actionType, policyMaskedProbs, model, wcfg);

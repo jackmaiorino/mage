@@ -98,7 +98,9 @@ class VeilsOfFearEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<UUID, Card> map = new HashMap<>();
+        // LinkedHashMap: preserve player-range order for the sequential
+        // discard/life-loss loop below (run-stable resolution order).
+        Map<UUID, Card> map = new LinkedHashMap<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player == null) {

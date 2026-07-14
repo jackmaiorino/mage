@@ -1174,7 +1174,10 @@ public final class CardUtil {
                 .mapToInt(valueMapper)
                 .sum();
         int remainingValue = maxValue - selectedValue;
-        Set<UUID> validTargets = new HashSet<>();
+        // LinkedHashSet: preserve possibleTargets' (already-ordered) iteration
+        // order instead of re-bucketing by UUID hashcode (deterministic
+        // candidate order fix, see TargetCardInHand).
+        Set<UUID> validTargets = new LinkedHashSet<>();
         for (UUID id : possibleTargets) {
             MageObject mageObject = game.getObject(id);
             if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
@@ -1497,7 +1500,9 @@ public final class CardUtil {
     }
 
     public static boolean castSpellWithAttributesForFree(Player player, Ability source, Game game, Cards cards, FilterCard filter, SpellCastTracker spellCastTracker, boolean playLand) {
-        Map<UUID, List<Card>> cardMap = new HashMap<>();
+        // LinkedHashMap: cardMap.keySet() feeds the "cast for free" candidate
+        // list below (deterministic candidate order fix, see TargetCardInHand).
+        Map<UUID, List<Card>> cardMap = new LinkedHashMap<>();
         for (Card card : cards.getCards(game)) {
             List<Card> castableComponents = getCastableComponents(card, filter, source, player, game, spellCastTracker, playLand);
             if (!castableComponents.isEmpty()) {

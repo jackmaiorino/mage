@@ -10,7 +10,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -55,7 +55,9 @@ public class CreateXXTokenExiledEffectManaValueEffect extends OneShotEffect {
         // that player creates a token with power and toughness equal to the sum of those cards' converted mana costs.
         // If the first ability exiled cards owned by more than one player, each of those players creates a token
         // with power and toughness equal to the sum of the converted mana costs of all cards exiled by the first ability.
-        Set<UUID> owners = new HashSet<>();
+        // LinkedHashSet: preserve exile-order so the per-owner token-creation
+        // loop below (and its ETB triggers) fires in a run-stable order.
+        Set<UUID> owners = new LinkedHashSet<>();
         int totalCMC = exile
                 .getCards(game)
                 .stream()

@@ -97,7 +97,9 @@ public class SpellAbility extends ActivatedAbilityImpl {
         }
 
         // forced to cast (can be part id or main id)
-        Set<UUID> idsToCheck = new HashSet<>();
+        // LinkedHashSet: preserve fixed insertion order (object id, then main
+        // card id) so the "first matching flag wins" loop below is run-stable.
+        Set<UUID> idsToCheck = new LinkedHashSet<>();
         idsToCheck.add(object.getId());
         if (object instanceof Card && !(object instanceof SpellOptionCard)) {
             idsToCheck.add(((Card) object).getMainCard().getId());

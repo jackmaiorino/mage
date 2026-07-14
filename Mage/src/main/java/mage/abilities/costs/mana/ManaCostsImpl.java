@@ -216,12 +216,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         );
         target.withChooseHint("to tap for waterbending");
         payingPlayer.choose(Outcome.Tap, target, source, game);
+        // LinkedHashSet: see AbilityImpl.handleWaterbendingCosts for rationale.
         Set<Permanent> permanents = target
                 .getTargets()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         for (Permanent permanent : permanents) {
             permanent.tap(source, game);
         }

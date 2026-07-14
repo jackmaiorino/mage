@@ -273,7 +273,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                 }
             }
-            Map<UUID, Integer> assigned = new HashMap<>();
+            // Determinism: LinkedHashMap so entrySet() iteration below (which
+            // drives markDamage call order, and thus simultaneous-trigger
+            // ordering) follows blockersCopy's deterministic insertion order
+            // instead of UUID-hashcode bucket order (random across JVM runs).
+            Map<UUID, Integer> assigned = new LinkedHashMap<>();
             List<MultiAmountMessage> damageDivision = new ArrayList<>();
             List<UUID> blockersCopy = new ArrayList<>(blockers);
             if (blocked) {
@@ -375,7 +379,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         }
                     }
                 }
-                Map<UUID, Integer> assigned = new HashMap<>();
+                // Determinism: see blockerDamage() above; same entrySet()-order fix.
+                Map<UUID, Integer> assigned = new LinkedHashMap<>();
                 for (Permanent defendingCreature : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defendingPlayerId, game)) {
                     if (defendingCreature != null) {
                         if (!(damage > 0)) {
@@ -462,7 +467,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         int damage = getDamageValueFromPermanent(blocker, game);
 
         if (dealsDamageThisStep(blocker, first, game)) {
-            Map<UUID, Integer> assigned = new HashMap<>();
+            // Determinism: see blockerDamage() above; same entrySet()-order fix.
+            Map<UUID, Integer> assigned = new LinkedHashMap<>();
             List<MultiAmountMessage> damageDivision = new ArrayList<>();
             List<UUID> attackersCopy = new ArrayList<>(attackers);
             int remainingDamage = damage;

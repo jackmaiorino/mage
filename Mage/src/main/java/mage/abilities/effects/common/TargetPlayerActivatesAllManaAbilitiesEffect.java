@@ -15,7 +15,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +47,12 @@ public class TargetPlayerActivatesAllManaAbilitiesEffect extends OneShotEffect {
             return false;
         }
         List<Permanent> ignorePermanents = new ArrayList<>();
-        Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new HashMap<>();
+        // Determinism: Permanent has no equals()/hashCode() override, so a plain
+        // HashMap<Permanent,...> buckets by default identity hashCode (memory-
+        // address-derived, differs across JVM runs). keySet() below feeds the
+        // land-to-tap candidate list (deterministic candidate order fix, same
+        // class of bug as CombatInfo.combat / Combat.getAttackers()).
+        Map<Permanent, List<ActivatedManaAbilityImpl>> manaAbilitiesMap = new LinkedHashMap<>();
         TargetPermanent target = null;
 
         while (targetPlayer.canRespond()) {

@@ -78,7 +78,10 @@ public class SacrificeAllEffect extends OneShotEffect {
         if (num < 1) {
             return false;
         }
-        Set<UUID> perms = new HashSet<>();
+        // LinkedHashSet: preserves per-player selection order below so the
+        // sequential sacrifice()/dies-trigger order is run-stable
+        // (deterministic candidate order fix, see TargetCardInHand).
+        Set<UUID> perms = new LinkedHashSet<>();
         for (UUID playerId : onlyOpponents ?
                 game.getOpponents(source.getControllerId()) :
                 game.getState().getPlayersInRange(source.getControllerId(), game)) {
