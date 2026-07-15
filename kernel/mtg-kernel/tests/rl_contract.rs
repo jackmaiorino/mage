@@ -9,10 +9,13 @@ use mtg_kernel::rl::{
     legal_action_candidates_v1, make_legal_action_v1, observe_v2, record_burn_mirror_episode,
     ActionSemanticV1, EpisodeTerminalSummaryV1, GitDirtyFlagV1, GitMetadataV1, LegalActionV1,
     ObservationV2, PlayerSeatV1, TerminalClassificationV1, TerminalOutcomeV1,
-    AUDIT_EPISODE_JSONL_FILENAME, LEGAL_ACTION_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION,
-    POLICY_EPISODE_JSONL_FILENAME,
+    AUDIT_EPISODE_JSONL_FILENAME, AUDIT_EPISODE_SCHEMA_VERSION, LEGAL_ACTION_SCHEMA_VERSION,
+    MANIFEST_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION, POLICY_EPISODE_JSONL_FILENAME,
+    POLICY_EPISODE_SCHEMA_VERSION,
 };
-use mtg_kernel::state::{Counters, GameObject, GameState, Step, Target, Zone};
+use mtg_kernel::state::{
+    Counters, GameObject, GameState, StackItem, StackItemKind, Step, Target, Zone,
+};
 use mtg_kernel::surface_v2::{HarnessSurfaceV2, SurfaceAction};
 use serde::Serialize;
 use serde_json::Value;
@@ -157,7 +160,7 @@ fn rl_contract_serde_roundtrip_and_schema_versions() {
         .remove(0)
         .record;
     assert_eq!(action.schema_version, LEGAL_ACTION_SCHEMA_VERSION);
-    assert!(action.stable_id.starts_with("legal-action-v1:"));
+    assert!(action.stable_id.starts_with("legal-action-v2:"));
     let action_roundtrip: LegalActionV1 =
         serde_json::from_str(&serde_json::to_string(&action).unwrap()).unwrap();
     assert_eq!(action_roundtrip, action);
@@ -335,6 +338,65 @@ fn rl_contract_effective_characteristics_match_engine_queries() {
 }
 
 #[test]
+fn rl_contract_continuous_effects_filter_hidden_affected_objects_by_actor() {
+    let mut opponent_hand = empty_state();
+    let hidden = make_object(
+        &mut opponent_hand,
+        PlayerId::P1,
+        "Lightning Bolt",
+        Zone::Hand,
+    );
+    opponent_hand
+        .engine
+        .until_end_of_turn
+        .push(UntilEndOfTurnEffect::ResolvedSetEffect {
+            object_ids: vec![hidden],
+            layer: Layers::POWER_TOUGHNESS,
+            timestamp: 42,
+            duration: EffectDuration::EndOfTurn,
+            power: 1,
+            toughness: 0,
+            grant_haste: false,
+        });
+
+    let p0_view = observe_for_test(&opponent_hand, PlayerId::P0, 0);
+    assert!(
+        p0_view.projection.continuous_effects.is_empty(),
+        "opponent hand affected object must be filtered"
+    );
+    let p0_json = serde_json::to_string(&p0_view).unwrap();
+    assert!(!p0_json.contains("Lightning Bolt"));
+    assert!(!p0_json.contains(&format!("\"arena_id\":{}", hidden.0)));
+
+    let p1_view = observe_for_test(&opponent_hand, PlayerId::P1, 0);
+    assert_eq!(p1_view.projection.continuous_effects.len(), 1);
+    assert_eq!(
+        p1_view.projection.continuous_effects[0].affected_objects[0].arena_id,
+        hidden.0
+    );
+
+    let mut library = empty_state();
+    let library_hidden = make_object(&mut library, PlayerId::P1, "Lightning Bolt", Zone::Library);
+    library
+        .engine
+        .until_end_of_turn
+        .push(UntilEndOfTurnEffect::ResolvedSetEffect {
+            object_ids: vec![library_hidden],
+            layer: Layers::POWER_TOUGHNESS,
+            timestamp: 43,
+            duration: EffectDuration::EndOfTurn,
+            power: 1,
+            toughness: 0,
+            grant_haste: false,
+        });
+    let p1_library_view = observe_for_test(&library, PlayerId::P1, 0);
+    assert!(
+        p1_library_view.projection.continuous_effects.is_empty(),
+        "library affected object identity must be filtered even for its owner"
+    );
+}
+
+#[test]
 fn rl_contract_active_exile_permission_holder_and_expiry_are_public() {
     let mut base = empty_state();
     let bolt = make_object(&mut base, PlayerId::P0, "Lightning Bolt", Zone::Exile);
@@ -379,6 +441,57 @@ fn rl_contract_active_exile_permission_holder_and_expiry_are_public() {
         obs_stale.projection.exile_play_permissions.is_empty(),
         "stale/void permissions must be excluded"
     );
+}
+
+#[test]
+fn rl_contract_stack_items_expose_explicit_public_kind() {
+    let mut state = empty_state();
+    let spell = make_object(&mut state, PlayerId::P0, "Lightning Bolt", Zone::Stack);
+    let activated = make_object(&mut state, PlayerId::P0, "Blood Token", Zone::Battlefield);
+    let triggered = make_object(
+        &mut state,
+        PlayerId::P1,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    let madness = make_object(&mut state, PlayerId::P0, "Fiery Temper", Zone::Exile);
+    for (kind, source, controller, madness_offer) in [
+        (StackItemKind::Spell, spell, PlayerId::P0, false),
+        (
+            StackItemKind::ActivatedAbility,
+            activated,
+            PlayerId::P0,
+            false,
+        ),
+        (
+            StackItemKind::TriggeredAbility,
+            triggered,
+            PlayerId::P1,
+            false,
+        ),
+        (StackItemKind::MadnessOffer, madness, PlayerId::P0, true),
+    ] {
+        state.stack.push(StackItem {
+            kind,
+            source,
+            controller,
+            targets: Vec::new(),
+            inline_effect: None,
+            discarded: Vec::new(),
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer,
+            kicked: false,
+        });
+    }
+
+    let obs = observe_for_test(&state, PlayerId::P0, 0);
+    let stack = serde_json::to_value(&obs.projection.stack).unwrap();
+    assert_eq!(stack[0]["stack_item_kind"], "spell");
+    assert_eq!(stack[1]["stack_item_kind"], "activated_ability");
+    assert_eq!(stack[2]["stack_item_kind"], "triggered_ability");
+    assert_eq!(stack[3]["stack_item_kind"], "madness_offer");
+    assert!(!contains_key(&stack, "is_trigger_or_ability"));
 }
 
 #[test]
@@ -432,6 +545,20 @@ fn rl_contract_h2_blocker_and_discard_reshape_context_changes_hash() {
         blocker_obs_a.visible_projection_hash,
         blocker_obs_b.visible_projection_hash
     );
+    assert_ne!(
+        blocker_obs_a.projection.surface_context.private_blockers,
+        blocker_obs_b.projection.surface_context.private_blockers,
+        "blocker owner must receive enough private reshape state to distinguish progress"
+    );
+    let opponent_blocker_obs = observe_v2(&state_a, &surface_a, PlayerId::P0, 10).unwrap();
+    assert!(
+        opponent_blocker_obs
+            .projection
+            .surface_context
+            .private_blockers
+            .is_none(),
+        "attacking player must not see defender's partial blocker reshape"
+    );
 
     let mut discard_a = empty_state();
     let card_0 = make_object(&mut discard_a, PlayerId::P0, "Lightning Bolt", Zone::Hand);
@@ -468,27 +595,48 @@ fn rl_contract_h2_blocker_and_discard_reshape_context_changes_hash() {
     assert!(discard_obs_a
         .projection
         .surface_context
-        .discard
+        .private_discard
         .as_ref()
         .unwrap()
         .chosen
-        .contains(&card_0));
+        .iter()
+        .any(|card| card.arena_id == card_0.0));
     assert!(discard_obs_b
         .projection
         .surface_context
-        .discard
+        .private_discard
         .as_ref()
         .unwrap()
         .chosen
-        .contains(&card_1));
+        .iter()
+        .any(|card| card.arena_id == card_1.0));
     assert!(discard_obs_a
         .projection
         .surface_context
-        .discard
+        .private_discard
         .as_ref()
         .unwrap()
         .remaining_choices
-        .contains(&card_2));
+        .iter()
+        .any(|card| card.arena_id == card_2.0));
+    let opponent_discard_obs =
+        observe_v2(&discard_a, &discard_surface_a, PlayerId::P1, 11).unwrap();
+    assert!(
+        opponent_discard_obs
+            .projection
+            .surface_context
+            .private_discard
+            .is_none(),
+        "opponent must not see partial discard choices"
+    );
+    let opponent_json = serde_json::to_string(&opponent_discard_obs).unwrap();
+    for hidden in [card_0, card_1, card_2] {
+        assert!(
+            !opponent_json.contains(&format!("\"arena_id\":{}", hidden.0)),
+            "opponent recovered hidden discard object id {}",
+            hidden.0
+        );
+    }
 }
 
 #[test]
@@ -515,6 +663,38 @@ fn rl_contract_engine_pending_cast_context_changes_hash() {
     let obs_a = observe_for_test(&a, PlayerId::P0, 20);
     let obs_b = observe_for_test(&b, PlayerId::P0, 20);
     assert_ne!(obs_a.visible_projection_hash, obs_b.visible_projection_hash);
+}
+
+#[test]
+fn rl_contract_semantic_flags_change_hash_but_raw_priority_counter_offset_does_not() {
+    let base = empty_state();
+    let base_obs = observe_for_test(&base, PlayerId::P0, 20);
+
+    let mut pass_changed = base.clone();
+    pass_changed.engine.priority_passes = [true, false];
+    let pass_obs = observe_for_test(&pass_changed, PlayerId::P0, 20);
+    assert_ne!(
+        base_obs.visible_projection_hash,
+        pass_obs.visible_projection_hash
+    );
+
+    let mut mana_actor_changed = base.clone();
+    mana_actor_changed.engine.last_mana_ability_activator = Some(PlayerId::P1);
+    let mana_actor_obs = observe_for_test(&mana_actor_changed, PlayerId::P0, 20);
+    assert_ne!(
+        base_obs.visible_projection_hash,
+        mana_actor_obs.visible_projection_hash
+    );
+
+    let mut raw_counter_offset = base.clone();
+    raw_counter_offset.engine.priority_round += 99;
+    raw_counter_offset.engine.next_effect_timestamp += 99;
+    let raw_counter_obs = observe_for_test(&raw_counter_offset, PlayerId::P0, 20);
+    assert_eq!(
+        serde_json::to_vec(&base_obs).unwrap(),
+        serde_json::to_vec(&raw_counter_obs).unwrap(),
+        "irrelevant raw monotonic counters must not affect serialized ObservationV2"
+    );
 }
 
 #[test]
@@ -575,12 +755,81 @@ fn rl_contract_identical_seeds_produce_identical_policy_and_audit_records() {
 }
 
 #[test]
+fn rl_contract_episode_records_use_independent_v2_schema_versions() {
+    let env_seed = derive_env_seed(9999, 0);
+    let policy_seed = derive_policy_seed(9999, 0);
+    let run = record_burn_mirror_episode(0, env_seed, policy_seed, 64).unwrap();
+
+    let audit_header = serde_json::to_value(&run.audit_records[0]).unwrap();
+    assert_eq!(audit_header["schema_version"], AUDIT_EPISODE_SCHEMA_VERSION);
+    assert!(audit_header.get("game_id").is_some());
+    assert!(audit_header.get("env_seed").is_some());
+    assert!(audit_header.get("policy_seed").is_some());
+
+    let policy_header = serde_json::to_value(&run.policy_records[0]).unwrap();
+    assert_eq!(
+        policy_header["schema_version"],
+        POLICY_EPISODE_SCHEMA_VERSION
+    );
+    assert!(policy_header.get("episode_key").is_some());
+    assert!(policy_header.get("game_id").is_none());
+    assert!(policy_header.get("env_seed").is_none());
+    assert!(policy_header.get("policy_seed").is_none());
+
+    let policy_decision = run
+        .policy_records
+        .iter()
+        .find(|record| {
+            matches!(
+                record,
+                mtg_kernel::rl::PolicyEpisodeRecordV2::Decision { .. }
+            )
+        })
+        .expect("policy stream should contain a decision");
+    let policy_decision = serde_json::to_value(policy_decision).unwrap();
+    assert_eq!(
+        policy_decision["schema_version"],
+        POLICY_EPISODE_SCHEMA_VERSION
+    );
+    assert_eq!(
+        policy_decision["observation"]["schema_version"],
+        OBSERVATION_SCHEMA_VERSION
+    );
+    assert_eq!(
+        policy_decision["legal_actions"][0]["schema_version"],
+        LEGAL_ACTION_SCHEMA_VERSION
+    );
+
+    let policy_terminal = run
+        .policy_records
+        .iter()
+        .find(|record| {
+            matches!(
+                record,
+                mtg_kernel::rl::PolicyEpisodeRecordV2::Terminal { .. }
+            )
+        })
+        .expect("policy stream should contain a terminal");
+    let policy_terminal = serde_json::to_value(policy_terminal).unwrap();
+    assert_eq!(
+        policy_terminal["schema_version"],
+        POLICY_EPISODE_SCHEMA_VERSION
+    );
+    assert!(policy_terminal.get("terminal_code").is_some());
+    assert!(policy_terminal.get("terminal_reason").is_none());
+}
+
+#[test]
 fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
     let run = record_burn_mirror_episode(0, env_seed, policy_seed, 200_000).unwrap();
     let policy_jsonl = records_to_jsonl(&run.policy_records);
     let audit_jsonl = records_to_jsonl(&run.audit_records);
+    let audit_game_id = format!(
+        "burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{:06}",
+        0
+    );
 
     for line in policy_jsonl.lines() {
         let value: Value = serde_json::from_str(line).unwrap();
@@ -593,6 +842,8 @@ fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
             "rng_state",
             "hidden_state_marker",
             "event_history",
+            "library_setup",
+            "shuffle_algorithm",
         ] {
             assert!(
                 !contains_key(&value, forbidden),
@@ -601,9 +852,30 @@ fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
         }
     }
     assert!(!policy_jsonl.contains("privileged"));
+    for forbidden_value in [
+        env_seed.to_string(),
+        policy_seed.to_string(),
+        format!("{env_seed:016x}"),
+        format!("{policy_seed:016x}"),
+        format!("{env_seed:016X}"),
+        format!("{policy_seed:016X}"),
+        audit_game_id.clone(),
+        "engine_halted".to_string(),
+        "fail_closed:".to_string(),
+        "decision_cap_reached:".to_string(),
+        "ObjectId".to_string(),
+    ] {
+        assert!(
+            !policy_jsonl.contains(&forbidden_value),
+            "policy stream leaked forbidden value {forbidden_value}"
+        );
+    }
+    assert!(policy_jsonl.contains("terminal_code"));
+    assert!(!policy_jsonl.contains("terminal_reason"));
     assert!(audit_jsonl.contains("diagnostic_state_hash"));
     assert!(audit_jsonl.contains("env_seed"));
     assert!(audit_jsonl.contains("policy_seed"));
+    assert!(audit_jsonl.contains(&audit_game_id));
 }
 
 #[test]
@@ -697,7 +969,8 @@ fn rl_contract_terminal_outcome_accounting_is_explicit() {
             commit: "test".to_string(),
             dirty: GitDirtyFlagV1::Clean,
         },
-    );
+    )
+    .unwrap();
     assert_eq!(manifest.aggregate.p0_wins, 1);
     assert_eq!(manifest.aggregate.p1_wins, 1);
     assert_eq!(manifest.aggregate.draws, 1);
@@ -706,6 +979,7 @@ fn rl_contract_terminal_outcome_accounting_is_explicit() {
     assert_eq!(manifest.aggregate.total_decisions, 57);
 
     let value = serde_json::to_value(&manifest).unwrap();
+    assert_eq!(value["schema_version"], MANIFEST_SCHEMA_VERSION);
     assert!(value["aggregate"].get("wins").is_none());
     assert!(value["aggregate"].get("losses").is_none());
     assert_eq!(value["aggregate"]["p0_wins"], 1);
@@ -720,6 +994,70 @@ fn rl_contract_terminal_outcome_accounting_is_explicit() {
     );
     assert!(manifest.streams[0].policy_safe);
     assert!(manifest.streams[1].contains_hidden_state_diagnostics);
+}
+
+#[test]
+fn rl_contract_manifest_rejects_inconsistent_terminal_tuples() {
+    let valid = EpisodeTerminalSummaryV1 {
+        episode_id: 0,
+        outcome: TerminalOutcomeV1::P0Win,
+        classification: TerminalClassificationV1::Natural,
+        winner: Some(PlayerSeatV1::P0),
+        terminal_reward: [1, -1],
+        terminal_reason: "game_over".to_string(),
+        decision_count: 10,
+    };
+    let err = build_run_manifest(
+        2,
+        5151,
+        12,
+        vec![],
+        Path::new("local-training/kernel_rl/test"),
+        std::slice::from_ref(&valid),
+        GitMetadataV1 {
+            commit: "test".to_string(),
+            dirty: GitDirtyFlagV1::Clean,
+        },
+    )
+    .unwrap_err();
+    assert!(err.to_string().contains("game_count"));
+
+    let mut invalid_winner = valid.clone();
+    invalid_winner.winner = Some(PlayerSeatV1::P1);
+    let err = build_run_manifest(
+        1,
+        5151,
+        12,
+        vec![],
+        Path::new("local-training/kernel_rl/test"),
+        &[invalid_winner],
+        GitMetadataV1 {
+            commit: "test".to_string(),
+            dirty: GitDirtyFlagV1::Clean,
+        },
+    )
+    .unwrap_err();
+    assert!(err.to_string().contains("invalid terminal tuple"));
+
+    let mut invalid_truncated = valid;
+    invalid_truncated.outcome = TerminalOutcomeV1::Truncated;
+    invalid_truncated.classification = TerminalClassificationV1::Truncated;
+    invalid_truncated.winner = Some(PlayerSeatV1::P0);
+    invalid_truncated.terminal_reward = [1, -1];
+    let err = build_run_manifest(
+        1,
+        5151,
+        12,
+        vec![],
+        Path::new("local-training/kernel_rl/test"),
+        &[invalid_truncated],
+        GitMetadataV1 {
+            commit: "test".to_string(),
+            dirty: GitDirtyFlagV1::Clean,
+        },
+    )
+    .unwrap_err();
+    assert!(err.to_string().contains("invalid terminal tuple"));
 }
 
 #[test]

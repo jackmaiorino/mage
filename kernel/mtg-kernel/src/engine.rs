@@ -44,7 +44,7 @@ use crate::effect::{self, EffectOp, ExecCtx, ObjectRef};
 use crate::event::{self, ActiveReplacement, CommittedEvent, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
 use crate::mana::{self, Cost};
-use crate::state::{GameState, StackItem, Step, Target, Zone};
+use crate::state::{GameState, StackItem, StackItemKind, Step, Target, Zone};
 use crate::trigger::{self, PendingTrigger};
 use serde::{Deserialize, Serialize};
 
@@ -1294,117 +1294,6 @@ pub(crate) fn active_permission_for(
     })
 }
 
-pub(crate) fn public_context_v2(state: &GameState) -> EnginePublicContextV2 {
-    EnginePublicContextV2 {
-        priority_passes: state.engine.priority_passes,
-        priority_round: state.engine.priority_round,
-        stack_len_at_round_open: state.engine.stack_len_at_round_open,
-        mana_ability_activations: state.engine.mana_ability_activations,
-        last_mana_ability_activator: state.engine.last_mana_ability_activator,
-        pending_cast: state
-            .engine
-            .pending_cast
-            .as_ref()
-            .map(|p| PendingCastPublicV2 {
-                spell: p.spell,
-                controller: p.controller,
-                target_spec: p.target_spec,
-                targets_chosen: p.targets_chosen.clone(),
-                is_flashback: p.is_flashback,
-                cast_mode: p.cast_mode,
-                additional_cost_discarded: p.additional_cost_discarded.clone(),
-                mode_chosen: p.mode_chosen,
-                origin_zone: p.origin_zone,
-                sacrifice_chosen: p.sacrifice_chosen.clone(),
-                kicked: p.kicked,
-            }),
-        pending_activation: state.engine.pending_activation.as_ref().map(|p| {
-            PendingActivationPublicV2 {
-                source: p.source,
-                controller: p.controller,
-                ability_index: p.ability_index,
-                target_spec: p.target_spec,
-                targets_chosen: p.targets_chosen.clone(),
-                cost_discard_paid: p.cost_discard_paid.clone(),
-            }
-        }),
-        pending_discard: state
-            .engine
-            .pending_discard
-            .as_ref()
-            .map(pending_discard_public_v2),
-        pending_optional_cost: state.engine.pending_optional_cost.as_ref().map(|p| {
-            PendingOptionalCostPublicV2 {
-                player: p.player,
-                source: p.source,
-                discard: p.discard,
-                sacrifice_lands: p.sacrifice_lands,
-                discard_payable: p.discard_payable,
-                sacrifice_payable: p.sacrifice_payable,
-                spell_resume: p.spell_resume,
-            }
-        }),
-        pending_optional_cost_sacrifice: state.engine.pending_optional_cost_sacrifice.as_ref().map(
-            |p| PendingOptionalCostSacrificePublicV2 {
-                player: p.player,
-                source: p.source,
-                remaining: p.remaining,
-                chosen: p.chosen.clone(),
-                spell_resume: p.spell_resume,
-            },
-        ),
-        pending_triggers: state
-            .engine
-            .pending_triggers
-            .iter()
-            .map(|p| PendingTriggerPublicV2 {
-                source: p.source,
-                controller: p.controller,
-                is_madness_offer: p.is_madness_offer,
-                kicked: p.kicked,
-            })
-            .collect(),
-    }
-}
-
-fn pending_discard_public_v2(p: &PendingDiscard) -> PendingDiscardPublicV2 {
-    let (resume_kind, resume_source, resume_controller, resume_to_zone) = match &p.resume {
-        DiscardResume::None => (DiscardResumePublicKindV2::None, None, None, None),
-        DiscardResume::FinishCast => (DiscardResumePublicKindV2::FinishCast, None, None, None),
-        DiscardResume::FinishActivation => (
-            DiscardResumePublicKindV2::FinishActivation,
-            None,
-            None,
-            None,
-        ),
-        DiscardResume::FinishSpellResolution { source, to_zone } => (
-            DiscardResumePublicKindV2::FinishSpellResolution,
-            Some(*source),
-            None,
-            Some(*to_zone),
-        ),
-        DiscardResume::FinishOptionalCost {
-            source,
-            controller,
-            spell_resume,
-            ..
-        } => (
-            DiscardResumePublicKindV2::FinishOptionalCost,
-            Some(*source),
-            Some(*controller),
-            spell_resume.map(|(_, zone)| zone),
-        ),
-    };
-    PendingDiscardPublicV2 {
-        player: p.player,
-        count: p.count,
-        resume_kind,
-        resume_source,
-        resume_controller,
-        resume_to_zone,
-    }
-}
-
 /// Sorcery-speed timing (508.1a's "any time you could cast a sorcery"),
 /// shared by an ordinary sorcery-speed cast (`is_castable_now`), a Plotted
 /// card cast from exile, and Plotting itself (`plot_action_candidates`) --
@@ -2260,6 +2149,11 @@ fn drain_pending_triggers_or_decide(state: &mut GameState) -> Option<Decision> {
 
 fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
     state.stack.push(StackItem {
+        kind: if t.is_madness_offer {
+            StackItemKind::MadnessOffer
+        } else {
+            StackItemKind::TriggeredAbility
+        },
         source: t.source,
         controller: t.controller,
         targets: vec![],
@@ -3400,6 +3294,7 @@ fn begin_cast_ex(
 
     move_to_stack(state, spell_id, origin_zone);
     state.stack.push(StackItem {
+        kind: StackItemKind::Spell,
         source: spell_id,
         controller: player,
         targets: vec![],
@@ -3660,6 +3555,7 @@ fn finalize_activation(state: &mut GameState) {
 
     let effect = (ability.effect)();
     state.stack.push(StackItem {
+        kind: StackItemKind::ActivatedAbility,
         source: pending.source,
         controller: pending.controller,
         targets: pending.targets_chosen,
@@ -4307,6 +4203,7 @@ mod tests {
             zone_change_count: 0,
         });
         state.stack.push(StackItem {
+            kind: StackItemKind::Spell,
             source: obj_id,
             controller: player,
             targets: vec![],

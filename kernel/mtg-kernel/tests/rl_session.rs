@@ -120,6 +120,7 @@ fn rl_session_terminal_response_has_provenance_and_no_diagnostic_hash() {
     assert_eq!(value["request_id"], "terminal-provenance");
     assert_eq!(value["terminal_outcome"], "truncated");
     assert_eq!(value["terminal_classification"], "truncated");
+    assert_eq!(value["terminal_code"], "decision_cap");
     assert_eq!(value["terminal_reward"], json!([0, 0]));
     assert_eq!(value["provenance"]["protocol"], "kernel_rl_jsonl");
     assert_eq!(
@@ -182,6 +183,7 @@ fn rl_session_deterministic_action_sequence_reaches_same_terminal() {
     assert_eq!(terminal["response_type"], "terminal");
     assert_eq!(terminal["terminal_outcome"], "truncated");
     assert_eq!(terminal["terminal_classification"], "truncated");
+    assert_eq!(terminal["terminal_code"], "decision_cap");
     assert_eq!(terminal["terminal_reward"], json!([0, 0]));
     assert_eq!(terminal["decision_count"], 8);
 }
@@ -303,7 +305,7 @@ fn rl_session_invalid_index_and_id_errors_do_not_mutate() {
 
     let before = current_snapshot(&session);
     let err = session
-        .step(0, 0, 0, "legal-action-v1:ffffffffffffffff")
+        .step(0, 0, 0, "legal-action-v2:ffffffffffffffff")
         .unwrap_err();
     assert_eq!(err.code, RlSessionErrorCode::SelectedActionIdUnknown);
     assert_eq!(current_snapshot(&session), before);
@@ -407,7 +409,7 @@ fn rl_session_step_before_reset_and_malformed_input_recover_cleanly() {
     let mut server = KernelRlJsonlServerV1::new();
 
     let step_before_reset =
-        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v1:0"));
+        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v2:0"));
     let step_value: KernelRlResponseV1 = serde_json::from_str(&step_before_reset).unwrap();
     match step_value {
         KernelRlResponseV1::Error {
@@ -457,6 +459,61 @@ fn rl_session_step_before_reset_and_malformed_input_recover_cleanly() {
     ));
     let valid_value = parse_response(&valid);
     assert_ne!(valid_value["response_type"], "error");
+}
+
+#[test]
+fn rl_session_schema_one_requests_fail_before_session_mutation() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let schema_one_reset = json!({
+        "request_type": "reset",
+        "schema_version": 1,
+        "request_id": "schema-one-reset",
+        "episode_id": 0,
+        "env_seed": derive_env_seed(5151, 0),
+        "max_decisions": 16,
+    })
+    .to_string();
+    let rejected_reset = parse_response(&server.handle_line(&schema_one_reset));
+    assert_eq!(rejected_reset["response_type"], "error");
+    assert_eq!(rejected_reset["error"]["code"], "schema_version_mismatch");
+
+    let still_no_session = parse_response(&server.handle_line(&step_line(
+        "after-schema-one-reset",
+        0,
+        0,
+        0,
+        "legal-action-v2:0",
+    )));
+    assert_eq!(still_no_session["response_type"], "error");
+    assert_eq!(still_no_session["error"]["code"], "step_before_reset");
+
+    let reset = parse_response(&server.handle_line(&reset_line("schema-two-reset", 16)));
+    assert_eq!(reset["response_type"], "decision");
+    assert_eq!(reset["schema_version"], RL_SESSION_SCHEMA_VERSION);
+    assert_eq!(reset["observation"]["schema_version"], 2);
+
+    let action = &reset["legal_actions"].as_array().unwrap()[0];
+    let schema_one_step = json!({
+        "request_type": "step",
+        "schema_version": 1,
+        "request_id": "schema-one-step",
+        "episode_id": reset["episode_id"].as_u64().unwrap(),
+        "expected_step": reset["step"].as_u64().unwrap(),
+        "selected_index": action["selected_index"].as_u64().unwrap() as u32,
+        "selected_action_id": action["stable_id"].as_str().unwrap(),
+    })
+    .to_string();
+    let rejected_step = parse_response(&server.handle_line(&schema_one_step));
+    assert_eq!(rejected_step["response_type"], "error");
+    assert_eq!(rejected_step["error"]["code"], "schema_version_mismatch");
+
+    let valid = parse_response(&server.handle_line(&step_line_from_decision(
+        "after-schema-one-step",
+        &reset,
+        0,
+    )));
+    assert_ne!(valid["response_type"], "error");
+    assert_eq!(valid["step"], 1);
 }
 
 #[test]
@@ -533,6 +590,47 @@ fn rl_session_batch_rollout_uses_session_path_and_stays_deterministic() {
 }
 
 #[test]
+fn rl_session_sequential_reset_rejects_stale_steps_and_retry_cache_after_reset() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let reset0 = parse_response(&server.handle_line(&reset_line_for_episode("seq-reset-0", 0, 16)));
+    assert_eq!(reset0["response_type"], "decision");
+    assert_eq!(reset0["episode_id"], 0);
+    assert_eq!(reset0["step"], 0);
+
+    let stale_step_line = step_line_from_decision("seq-step-0", &reset0, 0);
+    let step0 = parse_response(&server.handle_line(&stale_step_line));
+    assert_ne!(step0["response_type"], "error");
+
+    let reset1 = parse_response(&server.handle_line(&reset_line_for_episode("seq-reset-1", 1, 16)));
+    assert_eq!(reset1["response_type"], "decision");
+    assert_eq!(reset1["episode_id"], 1);
+    assert_eq!(reset1["step"], 0);
+
+    let stale_after_reset = parse_response(&server.handle_line(&stale_step_line));
+    assert_eq!(stale_after_reset["response_type"], "error");
+    assert_eq!(stale_after_reset["error"]["code"], "episode_id_mismatch");
+
+    let valid1 =
+        parse_response(&server.handle_line(&step_line_from_decision("seq-step-1", &reset1, 0)));
+    assert_ne!(valid1["response_type"], "error");
+    assert_eq!(valid1["episode_id"], 1);
+
+    let terminal =
+        parse_response(&server.handle_line(&reset_line_for_episode("seq-terminal-reset", 2, 0)));
+    assert_eq!(terminal["response_type"], "terminal");
+    assert_eq!(terminal["terminal_code"], "decision_cap");
+
+    let after_terminal = parse_response(&server.handle_line(&reset_line_for_episode(
+        "seq-reset-after-terminal",
+        3,
+        16,
+    )));
+    assert_eq!(after_terminal["response_type"], "decision");
+    assert_eq!(after_terminal["episode_id"], 3);
+    assert_eq!(after_terminal["step"], 0);
+}
+
+#[test]
 fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
     let mut child = Command::new(env!("CARGO_BIN_EXE_kernel_rl_env"))
         .stdin(Stdio::piped())
@@ -544,13 +642,39 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
     let stdout = child.stdout.take().unwrap();
     let mut reader = BufReader::new(stdout);
 
+    let schema_one_reset = json!({
+        "request_type": "reset",
+        "schema_version": 1,
+        "request_id": "process-schema-one-reset",
+        "episode_id": 0,
+        "env_seed": derive_env_seed(5151, 0),
+        "max_decisions": 16,
+    })
+    .to_string();
+    writeln!(stdin, "{schema_one_reset}").unwrap();
+    stdin.flush().unwrap();
+    let mut schema_one_line = String::new();
+    reader.read_line(&mut schema_one_line).unwrap();
+    let schema_one = parse_response(schema_one_line.trim_end());
+    assert_eq!(schema_one["response_type"], "error");
+    assert_eq!(schema_one["error"]["code"], "schema_version_mismatch");
+
     writeln!(stdin, "{}", reset_line("process-reset", 16)).unwrap();
     stdin.flush().unwrap();
     let mut first_line = String::new();
     reader.read_line(&mut first_line).unwrap();
     let first = parse_response(first_line.trim_end());
     assert_eq!(first["response_type"], "decision");
+    assert_eq!(first["schema_version"], RL_SESSION_SCHEMA_VERSION);
+    assert_eq!(
+        first["provenance"]["schema_version"],
+        RL_SESSION_SCHEMA_VERSION
+    );
     assert_eq!(first["observation"]["schema_version"], 2);
+    assert_eq!(
+        first["legal_actions"][0]["schema_version"],
+        RL_SESSION_SCHEMA_VERSION
+    );
     assert!(first["observation"]["projection"].get("combat").is_some());
     assert!(first["observation"]["projection"]
         .get("engine_context")
@@ -581,12 +705,8 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
     assert_eq!(error["response_type"], "error");
     assert_eq!(error["error"]["code"], "malformed_request");
 
-    writeln!(
-        stdin,
-        "{}",
-        step_line_from_decision("process-valid-after-error", &first, 0)
-    )
-    .unwrap();
+    let valid_step_line = step_line_from_decision("process-valid-after-error", &first, 0);
+    writeln!(stdin, "{valid_step_line}").unwrap();
     stdin.flush().unwrap();
     let mut valid_line = String::new();
     reader.read_line(&mut valid_line).unwrap();
@@ -594,6 +714,56 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
     assert_ne!(valid["response_type"], "error");
     assert!(!contains_key(&valid, "diagnostic_state_hash"));
     assert!(!contains_key(&valid, "state_hash"));
+
+    writeln!(
+        stdin,
+        "{}",
+        reset_line_for_episode("process-reset-episode-1", 1, 16)
+    )
+    .unwrap();
+    stdin.flush().unwrap();
+    let mut reset1_line = String::new();
+    reader.read_line(&mut reset1_line).unwrap();
+    let reset1 = parse_response(reset1_line.trim_end());
+    assert_eq!(reset1["response_type"], "decision");
+    assert_eq!(reset1["episode_id"], 1);
+    assert_eq!(reset1["step"], 0);
+
+    writeln!(stdin, "{valid_step_line}").unwrap();
+    stdin.flush().unwrap();
+    let mut stale_line = String::new();
+    reader.read_line(&mut stale_line).unwrap();
+    let stale = parse_response(stale_line.trim_end());
+    assert_eq!(stale["response_type"], "error");
+    assert_eq!(stale["error"]["code"], "episode_id_mismatch");
+
+    writeln!(
+        stdin,
+        "{}",
+        step_line_from_decision("process-episode-1-step", &reset1, 0)
+    )
+    .unwrap();
+    stdin.flush().unwrap();
+    let mut episode1_step_line = String::new();
+    reader.read_line(&mut episode1_step_line).unwrap();
+    let episode1_step = parse_response(episode1_step_line.trim_end());
+    assert_ne!(episode1_step["response_type"], "error");
+
+    writeln!(
+        stdin,
+        "{}",
+        reset_line_for_episode("process-terminal-reset", 2, 0)
+    )
+    .unwrap();
+    stdin.flush().unwrap();
+    let mut terminal_line = String::new();
+    reader.read_line(&mut terminal_line).unwrap();
+    let terminal = parse_response(terminal_line.trim_end());
+    assert_eq!(terminal["response_type"], "terminal");
+    assert_eq!(terminal["terminal_outcome"], "truncated");
+    assert_eq!(terminal["terminal_classification"], "truncated");
+    assert_eq!(terminal["terminal_code"], "decision_cap");
+    assert!(!contains_key(&terminal, "diagnostic_state_hash"));
 
     drop(stdin);
     let status = child.wait().unwrap();

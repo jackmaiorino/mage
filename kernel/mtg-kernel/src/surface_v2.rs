@@ -1695,6 +1695,7 @@ mod tests {
         state.players[0].hand.retain(|&h| h != id);
         state.objects.get_mut(id).zone = Zone::Stack;
         state.stack.push(crate::state::StackItem {
+            kind: crate::state::StackItemKind::Spell,
             source: id,
             controller: PlayerId::P0,
             targets: vec![Target::Player(PlayerId::P1)],
@@ -2571,6 +2572,7 @@ mod tests {
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
 
         state.stack.push(crate::state::StackItem {
+            kind: crate::state::StackItemKind::MadnessOffer,
             source: temper,
             controller: PlayerId::P0,
             targets: vec![],
@@ -2715,6 +2717,7 @@ mod tests {
         put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
 
         state.stack.push(crate::state::StackItem {
+            kind: crate::state::StackItemKind::MadnessOffer,
             source: temper,
             controller: PlayerId::P0,
             targets: vec![],

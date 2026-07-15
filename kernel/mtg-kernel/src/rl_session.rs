@@ -11,7 +11,7 @@ use crate::rl::{
     acting_player_for_surface_decision, build_burn_mirror_state, legal_action_candidates_v1,
     observe_v2, validate_selected_action, EpisodeTerminalSummaryV1, LegalActionCandidateV1,
     LegalActionV1, ObservationV2, PlayerSeatV1, RlContractError, TerminalClassificationV1,
-    TerminalOutcomeV1,
+    TerminalOutcomeV1, TerminalSafeCodeV2,
 };
 use crate::surface_v2::{HarnessSurfaceV2, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::fmt;
 
-pub const RL_SESSION_SCHEMA_VERSION: u32 = 1;
+pub const RL_SESSION_SCHEMA_VERSION: u32 = 2;
 pub const RL_SESSION_PROTOCOL_VERSION: u32 = 2;
 pub const RL_SESSION_PROTOCOL_NAME: &str = "kernel_rl_jsonl";
 
@@ -63,6 +63,7 @@ pub struct RlSessionTerminalV1 {
     pub episode_id: u64,
     pub terminal_outcome: TerminalOutcomeV1,
     pub terminal_classification: TerminalClassificationV1,
+    pub terminal_code: TerminalSafeCodeV2,
     pub winner: Option<PlayerSeatV1>,
     pub terminal_reward: [i32; 2],
     pub terminal_reason: String,
@@ -401,6 +402,7 @@ pub enum KernelRlResponseV1 {
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
         terminal_classification: TerminalClassificationV1,
+        terminal_code: TerminalSafeCodeV2,
         winner: Option<PlayerSeatV1>,
         terminal_reward: [i32; 2],
         terminal_reason: String,
@@ -452,7 +454,7 @@ impl KernelRlJsonlServerV1 {
                 return serialize_response(error_response(
                     request_id,
                     "malformed_request",
-                    "request does not match the v1 protocol schema",
+                    "request does not match the v2 protocol schema",
                 ));
             }
         };
@@ -566,6 +568,7 @@ fn session_response_to_protocol(
             episode_id: terminal.episode_id,
             terminal_outcome: terminal.terminal_outcome,
             terminal_classification: terminal.terminal_classification,
+            terminal_code: terminal.terminal_code,
             winner: terminal.winner,
             terminal_reward: terminal.terminal_reward,
             terminal_reason: terminal.terminal_reason,
@@ -631,6 +634,7 @@ fn terminal_from_winner(
         episode_id,
         terminal_outcome,
         terminal_classification: TerminalClassificationV1::Natural,
+        terminal_code: TerminalSafeCodeV2::NaturalGameOver,
         winner: winner.map(Into::into),
         terminal_reward,
         terminal_reason,
@@ -648,6 +652,7 @@ fn halted_terminal(
         episode_id,
         terminal_outcome: TerminalOutcomeV1::Halted,
         terminal_classification: TerminalClassificationV1::Halted,
+        terminal_code: TerminalSafeCodeV2::FailClosed,
         winner: None,
         terminal_reward: [0, 0],
         terminal_reason,
@@ -665,6 +670,7 @@ fn truncated_terminal(
         episode_id,
         terminal_outcome: TerminalOutcomeV1::Truncated,
         terminal_classification: TerminalClassificationV1::Truncated,
+        terminal_code: TerminalSafeCodeV2::DecisionCap,
         winner: None,
         terminal_reward: [0, 0],
         terminal_reason,

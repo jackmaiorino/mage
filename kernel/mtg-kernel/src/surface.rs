@@ -801,6 +801,7 @@ mod tests {
         state.players[0].hand.retain(|&h| h != id);
         state.objects.get_mut(id).zone = Zone::Stack;
         state.stack.push(crate::state::StackItem {
+            kind: crate::state::StackItemKind::Spell,
             source: id,
             controller: PlayerId::P0,
             // A real target, not empty: this test's second `next_decision`

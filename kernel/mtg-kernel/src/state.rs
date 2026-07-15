@@ -157,10 +157,21 @@ pub enum Target {
     Player(PlayerId),
 }
 
+/// Publicly distinguishable origin of a stack item. This is stamped by the
+/// creation path, not inferred from card text.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum StackItemKind {
+    Spell,
+    ActivatedAbility,
+    TriggeredAbility,
+    MadnessOffer,
+}
+
 /// Minimal stack entry: enough to represent "something is on the stack with
 /// these targets." Resolution/effect semantics belong to the step layer.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct StackItem {
+    pub kind: StackItemKind,
     pub source: ObjectId,
     pub controller: PlayerId,
     pub targets: Vec<Target>,

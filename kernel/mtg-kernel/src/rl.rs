@@ -13,7 +13,7 @@ use crate::engine::{
 use crate::event::{self, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
 use crate::rl_session::{RlEpisodeSessionV1, RlSessionResponseV1};
-use crate::state::{GameObject, GameState, SplitMix64, StackItem, Target, Zone};
+use crate::state::{GameObject, GameState, SplitMix64, StackItem, StackItemKind, Target, Zone};
 use crate::surface_v2::{SurfaceAction, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
 use serde::{Deserialize, Serialize};
@@ -25,9 +25,10 @@ use std::path::{Path, PathBuf};
 
 pub const OBSERVATION_SCHEMA_VERSION_V1: u32 = 1;
 pub const OBSERVATION_SCHEMA_VERSION: u32 = 2;
-pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 1;
-pub const EPISODE_SCHEMA_VERSION: u32 = 1;
-pub const MANIFEST_SCHEMA_VERSION: u32 = 1;
+pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 2;
+pub const AUDIT_EPISODE_SCHEMA_VERSION: u32 = 2;
+pub const POLICY_EPISODE_SCHEMA_VERSION: u32 = 2;
+pub const MANIFEST_SCHEMA_VERSION: u32 = 2;
 pub const DEFAULT_MAX_DECISIONS: u64 = 200_000;
 pub const BURN_MIRROR_MATCHUP: &str = "burn_mirror";
 pub const AUDIT_EPISODE_JSONL_FILENAME: &str = "audit_episodes.jsonl";
@@ -179,6 +180,39 @@ pub struct StackItemPublicV1 {
     pub kicked: bool,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum StackItemKindV2 {
+    Spell,
+    ActivatedAbility,
+    TriggeredAbility,
+    MadnessOffer,
+}
+
+impl From<StackItemKind> for StackItemKindV2 {
+    fn from(value: StackItemKind) -> Self {
+        match value {
+            StackItemKind::Spell => StackItemKindV2::Spell,
+            StackItemKind::ActivatedAbility => StackItemKindV2::ActivatedAbility,
+            StackItemKind::TriggeredAbility => StackItemKindV2::TriggeredAbility,
+            StackItemKind::MadnessOffer => StackItemKindV2::MadnessOffer,
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct StackItemPublicV2 {
+    pub stack_index: u32,
+    pub source: CardStableRefV1,
+    pub controller: PlayerSeatV1,
+    pub targets: Vec<TargetRefV1>,
+    pub stack_item_kind: StackItemKindV2,
+    pub is_flashback: bool,
+    pub mode_chosen: u8,
+    pub madness_offer: bool,
+    pub kicked: bool,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct PlayerStatusV1 {
     pub has_lost: bool,
@@ -252,6 +286,160 @@ pub struct ExilePlayPermissionPublicV2 {
     pub expiry: PlayPermissionExpiryV2,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum EngineDecisionStageV2 {
+    Priority,
+    PendingCast,
+    PendingActivation,
+    PendingDiscard,
+    PendingOptionalCost,
+    PendingOptionalCostSacrifice,
+    PendingTriggers,
+    Halted,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingCastSemanticV2 {
+    pub source: Option<CardStableRefV1>,
+    pub controller: PlayerSeatV1,
+    pub chosen_targets: Vec<TargetRefV1>,
+    pub is_flashback: bool,
+    pub cast_mode: Option<CastMode>,
+    pub additional_cost_discarded: Option<Vec<CardStableRefV1>>,
+    pub mode_chosen: Option<u8>,
+    pub origin_zone: Zone,
+    pub sacrifice_chosen: Vec<CardStableRefV1>,
+    pub kicked: Option<bool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingActivationSemanticV2 {
+    pub source: Option<CardStableRefV1>,
+    pub controller: PlayerSeatV1,
+    pub ability_index: u8,
+    pub chosen_targets: Vec<TargetRefV1>,
+    pub cost_discard_paid: Option<Vec<CardStableRefV1>>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DiscardResumeSemanticV2 {
+    None,
+    FinishCast,
+    FinishActivation,
+    FinishSpellResolution,
+    FinishOptionalCost,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingDiscardSemanticV2 {
+    pub player: PlayerSeatV1,
+    pub count: u32,
+    pub resume_stage: DiscardResumeSemanticV2,
+    pub resume_source: Option<CardStableRefV1>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCostSemanticV2 {
+    pub player: PlayerSeatV1,
+    pub source: Option<CardStableRefV1>,
+    pub discard_cards: u8,
+    pub sacrifice_lands: u8,
+    pub discard_payable: bool,
+    pub sacrifice_payable: bool,
+    pub spell_resume_source: Option<CardStableRefV1>,
+    pub spell_resume_zone: Option<Zone>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCostSacrificeSemanticV2 {
+    pub player: PlayerSeatV1,
+    pub source: Option<CardStableRefV1>,
+    pub remaining: u8,
+    pub chosen: Vec<CardStableRefV1>,
+    pub spell_resume_source: Option<CardStableRefV1>,
+    pub spell_resume_zone: Option<Zone>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PendingTriggerKindV2 {
+    TriggeredAbility,
+    MadnessOffer,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingTriggerSemanticV2 {
+    pub source: Option<CardStableRefV1>,
+    pub controller: PlayerSeatV1,
+    pub trigger_kind: PendingTriggerKindV2,
+    pub kicked: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct EngineContextV2 {
+    pub priority_passes: [bool; 2],
+    pub stack_nonempty: bool,
+    pub stack_activity_since_priority_boundary: bool,
+    pub mana_activity_since_priority_boundary: bool,
+    pub last_mana_ability_activator: Option<PlayerSeatV1>,
+    pub current_stage: EngineDecisionStageV2,
+    pub pending_cast: Option<PendingCastSemanticV2>,
+    pub pending_activation: Option<PendingActivationSemanticV2>,
+    pub pending_discard: Option<PendingDiscardSemanticV2>,
+    pub pending_optional_cost: Option<PendingOptionalCostSemanticV2>,
+    pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrificeSemanticV2>,
+    pub pending_triggers: Vec<PendingTriggerSemanticV2>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum SurfaceDecisionStageV2 {
+    Priority,
+    DeclareBlockersForAttacker,
+    DiscardPick,
+    OptionalCostUse,
+    OptionalCostWhich,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PrivateBlockersContextV2 {
+    pub current_attacker: Option<CardStableRefV1>,
+    pub accumulated: Vec<(CardStableRefV1, CardStableRefV1)>,
+    pub remaining: Vec<(CardStableRefV1, Vec<CardStableRefV1>)>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PrivateDiscardContextV2 {
+    pub chosen: Vec<CardStableRefV1>,
+    pub remaining_choices: Vec<CardStableRefV1>,
+    pub remaining_needed: u32,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PrivateOptionalCostContextV2 {
+    pub discard_payable: bool,
+    pub sacrifice_payable: bool,
+    pub stage: SurfaceDecisionStageV2,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct HarnessSurfaceContextV2 {
+    pub current_stage: SurfaceDecisionStageV2,
+    pub combat_priority_spent: [bool; 2],
+    pub combat_priority_rearmed_by_stack_activity: bool,
+    pub combat_priority_rearmed_by_mana_activity: bool,
+    pub stack_activity_since_round_open: bool,
+    pub mana_activity_since_round_open: bool,
+    pub stack_length_changed_since_observed: Option<bool>,
+    pub mana_activity_since_last_stack_change: bool,
+    pub madness_cast_reprompt_source: Option<CardStableRefV1>,
+    pub private_blockers: Option<PrivateBlockersContextV2>,
+    pub private_discard: Option<PrivateDiscardContextV2>,
+    pub private_optional_cost: Option<PrivateOptionalCostContextV2>,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct PublicObservationProjectionV2 {
     pub turn: u32,
@@ -266,12 +454,12 @@ pub struct PublicObservationProjectionV2 {
     pub battlefield: [Vec<CardPublicV2>; 2],
     pub graveyards: [Vec<CardPublicV2>; 2],
     pub exile: Vec<CardPublicV2>,
-    pub stack: Vec<StackItemPublicV1>,
+    pub stack: Vec<StackItemPublicV2>,
     pub combat: CombatStatePublicV2,
     pub continuous_effects: Vec<ContinuousEffectPublicV2>,
     pub exile_play_permissions: Vec<ExilePlayPermissionPublicV2>,
-    pub engine_context: engine::EnginePublicContextV2,
-    pub surface_context: crate::surface_v2::HarnessSurfacePublicContextV2,
+    pub engine_context: EngineContextV2,
+    pub surface_context: HarnessSurfaceContextV2,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -473,6 +661,14 @@ pub enum TerminalClassificationV1 {
     Halted,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TerminalSafeCodeV2 {
+    NaturalGameOver,
+    DecisionCap,
+    FailClosed,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "record_type", rename_all = "snake_case")]
 pub enum EpisodeRecordV1 {
@@ -527,7 +723,7 @@ pub enum PolicyEpisodeRecordV2 {
         card_db_hash: u64,
         matchup: String,
         episode_id: u64,
-        game_id: String,
+        episode_key: String,
         deck_identifiers: [String; 2],
     },
     Decision {
@@ -546,9 +742,9 @@ pub enum PolicyEpisodeRecordV2 {
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
         terminal_classification: TerminalClassificationV1,
+        terminal_code: TerminalSafeCodeV2,
         winner: Option<PlayerSeatV1>,
         terminal_reward: [i32; 2],
-        terminal_reason: String,
         decision_count: u64,
     },
 }
@@ -752,7 +948,7 @@ pub fn observe_v1(
             public_cards(state, &state.players[1].graveyard)?,
         ],
         exile: public_cards(state, &state.exile)?,
-        stack: stack_public(state)?,
+        stack: stack_public_v1(state)?,
     };
     let own_hand = state.players[acting_player.index()]
         .hand
@@ -805,12 +1001,12 @@ pub fn observe_v2(
             public_cards_v2(state, &state.players[1].graveyard)?,
         ],
         exile: public_cards_v2(state, &state.exile)?,
-        stack: stack_public(state)?,
+        stack: stack_public_v2(state, acting_player)?,
         combat: combat_public_v2(state)?,
-        continuous_effects: continuous_effects_public_v2(state)?,
+        continuous_effects: continuous_effects_public_v2(state, acting_player)?,
         exile_play_permissions: exile_play_permissions_public_v2(state)?,
-        engine_context: engine::public_context_v2(state),
-        surface_context: surface.public_context(),
+        engine_context: engine_context_v2(state, acting_player)?,
+        surface_context: surface_context_v2(state, surface, acting_player)?,
     };
     let own_hand = state.players[acting_player.index()]
         .hand
@@ -846,7 +1042,7 @@ pub fn make_legal_action_v1(
     Ok(LegalActionV1 {
         schema_version: LEGAL_ACTION_SCHEMA_VERSION,
         selected_index,
-        stable_id: format!("legal-action-v1:{hash:016x}"),
+        stable_id: format!("legal-action-v2:{hash:016x}"),
         semantic,
         display_text,
     })
@@ -1202,7 +1398,7 @@ pub fn record_burn_mirror_episode(
     let game_id =
         format!("burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{episode_id:06}");
     let mut audit_records = vec![EpisodeRecordV1::Header {
-        schema_version: EPISODE_SCHEMA_VERSION,
+        schema_version: AUDIT_EPISODE_SCHEMA_VERSION,
         stream_safety: "privileged_audit_contains_hidden_state_diagnostics".to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
@@ -1222,14 +1418,14 @@ pub fn record_burn_mirror_episode(
         },
     }];
     let mut policy_records = vec![PolicyEpisodeRecordV2::Header {
-        schema_version: OBSERVATION_SCHEMA_VERSION,
+        schema_version: POLICY_EPISODE_SCHEMA_VERSION,
         stream_safety: "policy_safe_model_visible_v2".to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
         card_db_hash: KERNEL_CARDDB_HASH,
         matchup: BURN_MIRROR_MATCHUP.to_string(),
         episode_id,
-        game_id,
+        episode_key: format!("burn_mirror_episode_{episode_id:06}"),
         deck_identifiers: deck_identifiers(),
     }];
     loop {
@@ -1240,7 +1436,7 @@ pub fn record_burn_mirror_episode(
                 let legal_actions = decision.legal_actions.clone();
                 let observation = (*decision.observation).clone();
                 audit_records.push(EpisodeRecordV1::Decision {
-                    schema_version: EPISODE_SCHEMA_VERSION,
+                    schema_version: AUDIT_EPISODE_SCHEMA_VERSION,
                     episode_id,
                     step: decision.step,
                     acting_player: decision.acting_player,
@@ -1253,7 +1449,7 @@ pub fn record_burn_mirror_episode(
                     reward: [0, 0],
                 });
                 policy_records.push(PolicyEpisodeRecordV2::Decision {
-                    schema_version: OBSERVATION_SCHEMA_VERSION,
+                    schema_version: POLICY_EPISODE_SCHEMA_VERSION,
                     episode_id,
                     step: decision.step,
                     acting_player: decision.acting_player,
@@ -1319,9 +1515,10 @@ pub fn build_run_manifest(
     out_dir: &Path,
     summaries: &[EpisodeTerminalSummaryV1],
     git: GitMetadataV1,
-) -> RunManifestV1 {
+) -> Result<RunManifestV1> {
+    validate_manifest_inputs(games, summaries)?;
     let deck_hash = burn_deck_hash();
-    RunManifestV1 {
+    Ok(RunManifestV1 {
         schema_version: MANIFEST_SCHEMA_VERSION,
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
@@ -1367,7 +1564,7 @@ pub fn build_run_manifest(
         variable_metadata: VariableMetadataV1 {
             out_dir: out_dir.display().to_string(),
         },
-    }
+    })
 }
 
 pub fn git_metadata() -> GitMetadataV1 {
@@ -1447,6 +1644,79 @@ fn deck_identifiers() -> [String; 2] {
     ]
 }
 
+fn validate_manifest_inputs(games: u64, summaries: &[EpisodeTerminalSummaryV1]) -> Result<()> {
+    if games != summaries.len() as u64 {
+        return Err(RlContractError(format!(
+            "manifest game_count {games} does not match terminal summary count {}",
+            summaries.len()
+        )));
+    }
+    for summary in summaries {
+        validate_terminal_summary(summary)?;
+    }
+    let aggregate = aggregate_summaries(summaries);
+    let counted_games = aggregate.p0_wins
+        + aggregate.p1_wins
+        + aggregate.draws
+        + aggregate.truncated
+        + aggregate.halted;
+    if counted_games != games {
+        return Err(RlContractError(format!(
+            "manifest aggregate terminal counts sum to {counted_games}, expected {games}"
+        )));
+    }
+    Ok(())
+}
+
+fn validate_terminal_summary(summary: &EpisodeTerminalSummaryV1) -> Result<()> {
+    let valid = matches!(
+        (
+            summary.outcome,
+            summary.classification,
+            summary.winner,
+            summary.terminal_reward,
+        ),
+        (
+            TerminalOutcomeV1::P0Win,
+            TerminalClassificationV1::Natural,
+            Some(PlayerSeatV1::P0),
+            [1, -1],
+        ) | (
+            TerminalOutcomeV1::P1Win,
+            TerminalClassificationV1::Natural,
+            Some(PlayerSeatV1::P1),
+            [-1, 1],
+        ) | (
+            TerminalOutcomeV1::Draw,
+            TerminalClassificationV1::Natural,
+            None,
+            [0, 0]
+        ) | (
+            TerminalOutcomeV1::Truncated,
+            TerminalClassificationV1::Truncated,
+            None,
+            [0, 0]
+        ) | (
+            TerminalOutcomeV1::Halted,
+            TerminalClassificationV1::Halted,
+            None,
+            [0, 0]
+        )
+    );
+    if valid {
+        Ok(())
+    } else {
+        Err(RlContractError(format!(
+            "invalid terminal tuple for episode {}: outcome={:?} classification={:?} winner={:?} reward={:?}",
+            summary.episode_id,
+            summary.outcome,
+            summary.classification,
+            summary.winner,
+            summary.terminal_reward
+        )))
+    }
+}
+
 fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1 {
     let mut aggregate = RunAggregateV1 {
         p0_wins: 0,
@@ -1469,13 +1739,21 @@ fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1
     aggregate
 }
 
+fn terminal_safe_code(summary: &EpisodeTerminalSummaryV1) -> TerminalSafeCodeV2 {
+    match summary.classification {
+        TerminalClassificationV1::Natural => TerminalSafeCodeV2::NaturalGameOver,
+        TerminalClassificationV1::Truncated => TerminalSafeCodeV2::DecisionCap,
+        TerminalClassificationV1::Halted => TerminalSafeCodeV2::FailClosed,
+    }
+}
+
 fn push_terminal(
     records: &mut Vec<EpisodeRecordV1>,
     summary: &EpisodeTerminalSummaryV1,
     diagnostic_state_hash: u64,
 ) {
     records.push(EpisodeRecordV1::Terminal {
-        schema_version: EPISODE_SCHEMA_VERSION,
+        schema_version: AUDIT_EPISODE_SCHEMA_VERSION,
         episode_id: summary.episode_id,
         terminal_outcome: summary.outcome,
         terminal_classification: summary.classification,
@@ -1492,13 +1770,13 @@ fn push_policy_terminal(
     summary: &EpisodeTerminalSummaryV1,
 ) {
     records.push(PolicyEpisodeRecordV2::Terminal {
-        schema_version: OBSERVATION_SCHEMA_VERSION,
+        schema_version: POLICY_EPISODE_SCHEMA_VERSION,
         episode_id: summary.episode_id,
         terminal_outcome: summary.outcome,
         terminal_classification: summary.classification,
+        terminal_code: terminal_safe_code(summary),
         winner: summary.winner,
         terminal_reward: summary.terminal_reward,
-        terminal_reason: summary.terminal_reason.clone(),
         decision_count: summary.decision_count,
     });
 }
@@ -1525,6 +1803,69 @@ fn card_ref(state: &GameState, id: ObjectId) -> Result<CardStableRefV1> {
         zone: object.zone,
         zone_change_count: object.zone_change_count,
     })
+}
+
+fn visible_card_ref(
+    state: &GameState,
+    id: ObjectId,
+    acting_player: PlayerId,
+) -> Result<Option<CardStableRefV1>> {
+    let object = state
+        .objects
+        .try_get(id)
+        .ok_or_else(|| RlContractError(format!("object id {} missing", id.0)))?;
+    let visible = match object.zone {
+        Zone::Battlefield | Zone::Graveyard | Zone::Exile | Zone::Stack | Zone::Command => true,
+        Zone::Hand => object.owner == acting_player,
+        Zone::Library => false,
+    };
+    if visible {
+        Ok(Some(card_ref(state, id)?))
+    } else {
+        Ok(None)
+    }
+}
+
+fn visible_card_refs(
+    state: &GameState,
+    ids: &[ObjectId],
+    acting_player: PlayerId,
+) -> Result<Vec<CardStableRefV1>> {
+    let mut out = Vec::new();
+    for &id in ids {
+        if let Some(card) = visible_card_ref(state, id, acting_player)? {
+            out.push(card);
+        }
+    }
+    Ok(out)
+}
+
+fn target_ref_visible(
+    state: &GameState,
+    target: Target,
+    acting_player: PlayerId,
+) -> Result<Option<TargetRefV1>> {
+    match target {
+        Target::Player(player) => Ok(Some(TargetRefV1::Player {
+            player: player.into(),
+        })),
+        Target::Object(object) => Ok(visible_card_ref(state, object, acting_player)?
+            .map(|object| TargetRefV1::Object { object })),
+    }
+}
+
+fn target_refs_visible(
+    state: &GameState,
+    targets: &[Target],
+    acting_player: PlayerId,
+) -> Result<Vec<TargetRefV1>> {
+    let mut out = Vec::new();
+    for &target in targets {
+        if let Some(target) = target_ref_visible(state, target, acting_player)? {
+            out.push(target);
+        }
+    }
+    Ok(out)
 }
 
 fn public_card(state: &GameState, id: ObjectId) -> Result<CardPublicV1> {
@@ -1648,7 +1989,10 @@ fn combat_public_v2(state: &GameState) -> Result<CombatStatePublicV2> {
     })
 }
 
-fn continuous_effects_public_v2(state: &GameState) -> Result<Vec<ContinuousEffectPublicV2>> {
+fn continuous_effects_public_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+) -> Result<Vec<ContinuousEffectPublicV2>> {
     let mut out = Vec::new();
     for effect in &state.engine.until_end_of_turn {
         match effect {
@@ -1665,11 +2009,12 @@ fn continuous_effects_public_v2(state: &GameState) -> Result<Vec<ContinuousEffec
                 let duration = match duration {
                     engine::EffectDuration::EndOfTurn => EffectDurationV2::EndOfTurn,
                 };
+                let affected_objects = visible_card_refs(state, object_ids, acting_player)?;
+                if affected_objects.is_empty() {
+                    continue;
+                }
                 out.push(ContinuousEffectPublicV2 {
-                    affected_objects: object_ids
-                        .iter()
-                        .map(|&id| card_ref(state, id))
-                        .collect::<Result<Vec<_>>>()?,
+                    affected_objects,
                     layers: layer.0,
                     timestamp: *timestamp,
                     duration,
@@ -1710,16 +2055,309 @@ fn exile_play_permissions_public_v2(state: &GameState) -> Result<Vec<ExilePlayPe
     Ok(out)
 }
 
-fn stack_public(state: &GameState) -> Result<Vec<StackItemPublicV1>> {
+fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<EngineContextV2> {
+    let current_stage = if state.engine.halted.is_some() {
+        EngineDecisionStageV2::Halted
+    } else if state.engine.pending_cast.is_some() {
+        EngineDecisionStageV2::PendingCast
+    } else if state.engine.pending_activation.is_some() {
+        EngineDecisionStageV2::PendingActivation
+    } else if state.engine.pending_discard.is_some() {
+        EngineDecisionStageV2::PendingDiscard
+    } else if state.engine.pending_optional_cost.is_some() {
+        EngineDecisionStageV2::PendingOptionalCost
+    } else if state.engine.pending_optional_cost_sacrifice.is_some() {
+        EngineDecisionStageV2::PendingOptionalCostSacrifice
+    } else if !state.engine.pending_triggers.is_empty() {
+        EngineDecisionStageV2::PendingTriggers
+    } else {
+        EngineDecisionStageV2::Priority
+    };
+
+    Ok(EngineContextV2 {
+        priority_passes: state.engine.priority_passes,
+        stack_nonempty: !state.stack.is_empty(),
+        stack_activity_since_priority_boundary: state.stack.len()
+            != state.engine.stack_len_at_round_open,
+        mana_activity_since_priority_boundary: state.engine.last_mana_ability_activator.is_some(),
+        last_mana_ability_activator: state.engine.last_mana_ability_activator.map(Into::into),
+        current_stage,
+        pending_cast: state
+            .engine
+            .pending_cast
+            .as_ref()
+            .map(|p| pending_cast_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_activation: state
+            .engine
+            .pending_activation
+            .as_ref()
+            .map(|p| pending_activation_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_discard: state
+            .engine
+            .pending_discard
+            .as_ref()
+            .map(|p| pending_discard_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_optional_cost: state
+            .engine
+            .pending_optional_cost
+            .as_ref()
+            .map(|p| pending_optional_cost_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_optional_cost_sacrifice: state
+            .engine
+            .pending_optional_cost_sacrifice
+            .as_ref()
+            .map(|p| pending_optional_cost_sacrifice_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_triggers: state
+            .engine
+            .pending_triggers
+            .iter()
+            .map(|p| {
+                Ok(PendingTriggerSemanticV2 {
+                    source: visible_card_ref(state, p.source, acting_player)?,
+                    controller: p.controller.into(),
+                    trigger_kind: if p.is_madness_offer {
+                        PendingTriggerKindV2::MadnessOffer
+                    } else {
+                        PendingTriggerKindV2::TriggeredAbility
+                    },
+                    kicked: p.kicked,
+                })
+            })
+            .collect::<Result<Vec<_>>>()?,
+    })
+}
+
+fn pending_cast_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingCast,
+) -> Result<PendingCastSemanticV2> {
+    Ok(PendingCastSemanticV2 {
+        source: visible_card_ref(state, p.spell, acting_player)?,
+        controller: p.controller.into(),
+        chosen_targets: target_refs_visible(state, &p.targets_chosen, acting_player)?,
+        is_flashback: p.is_flashback,
+        cast_mode: p.cast_mode,
+        additional_cost_discarded: match &p.additional_cost_discarded {
+            Some(ids) => Some(visible_card_refs(state, ids, acting_player)?),
+            None => None,
+        },
+        mode_chosen: p.mode_chosen,
+        origin_zone: p.origin_zone,
+        sacrifice_chosen: visible_card_refs(state, &p.sacrifice_chosen, acting_player)?,
+        kicked: p.kicked,
+    })
+}
+
+fn pending_activation_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingActivation,
+) -> Result<PendingActivationSemanticV2> {
+    Ok(PendingActivationSemanticV2 {
+        source: visible_card_ref(state, p.source, acting_player)?,
+        controller: p.controller.into(),
+        ability_index: p.ability_index,
+        chosen_targets: target_refs_visible(state, &p.targets_chosen, acting_player)?,
+        cost_discard_paid: match &p.cost_discard_paid {
+            Some(ids) => Some(visible_card_refs(state, ids, acting_player)?),
+            None => None,
+        },
+    })
+}
+
+fn pending_discard_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingDiscard,
+) -> Result<PendingDiscardSemanticV2> {
+    let (resume_stage, resume_source) = match &p.resume {
+        engine::DiscardResume::None => (DiscardResumeSemanticV2::None, None),
+        engine::DiscardResume::FinishCast => (DiscardResumeSemanticV2::FinishCast, None),
+        engine::DiscardResume::FinishActivation => {
+            (DiscardResumeSemanticV2::FinishActivation, None)
+        }
+        engine::DiscardResume::FinishSpellResolution { source, .. } => (
+            DiscardResumeSemanticV2::FinishSpellResolution,
+            visible_card_ref(state, *source, acting_player)?,
+        ),
+        engine::DiscardResume::FinishOptionalCost { source, .. } => (
+            DiscardResumeSemanticV2::FinishOptionalCost,
+            visible_card_ref(state, *source, acting_player)?,
+        ),
+    };
+    Ok(PendingDiscardSemanticV2 {
+        player: p.player.into(),
+        count: p.count,
+        resume_stage,
+        resume_source,
+    })
+}
+
+fn pending_optional_cost_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingOptionalCost,
+) -> Result<PendingOptionalCostSemanticV2> {
+    let (spell_resume_source, spell_resume_zone) = match p.spell_resume {
+        Some((source, zone)) => (visible_card_ref(state, source, acting_player)?, Some(zone)),
+        None => (None, None),
+    };
+    Ok(PendingOptionalCostSemanticV2 {
+        player: p.player.into(),
+        source: visible_card_ref(state, p.source, acting_player)?,
+        discard_cards: p.discard,
+        sacrifice_lands: p.sacrifice_lands,
+        discard_payable: p.discard_payable,
+        sacrifice_payable: p.sacrifice_payable,
+        spell_resume_source,
+        spell_resume_zone,
+    })
+}
+
+fn pending_optional_cost_sacrifice_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingOptionalCostSacrifice,
+) -> Result<PendingOptionalCostSacrificeSemanticV2> {
+    let (spell_resume_source, spell_resume_zone) = match p.spell_resume {
+        Some((source, zone)) => (visible_card_ref(state, source, acting_player)?, Some(zone)),
+        None => (None, None),
+    };
+    Ok(PendingOptionalCostSacrificeSemanticV2 {
+        player: p.player.into(),
+        source: visible_card_ref(state, p.source, acting_player)?,
+        remaining: p.remaining,
+        chosen: visible_card_refs(state, &p.chosen, acting_player)?,
+        spell_resume_source,
+        spell_resume_zone,
+    })
+}
+
+fn surface_context_v2(
+    state: &GameState,
+    surface: &crate::surface_v2::HarnessSurfaceV2,
+    acting_player: PlayerId,
+) -> Result<HarnessSurfaceContextV2> {
+    let raw = surface.public_context();
+    let current_stage = if raw.blockers.is_some() {
+        SurfaceDecisionStageV2::DeclareBlockersForAttacker
+    } else if raw.discard.is_some() {
+        SurfaceDecisionStageV2::DiscardPick
+    } else if let Some(optional) = raw.optional_cost.as_ref() {
+        match optional.stage {
+            crate::surface_v2::OptionalCostStagePublicV2::Use => {
+                SurfaceDecisionStageV2::OptionalCostUse
+            }
+            crate::surface_v2::OptionalCostStagePublicV2::Which => {
+                SurfaceDecisionStageV2::OptionalCostWhich
+            }
+        }
+    } else {
+        SurfaceDecisionStageV2::Priority
+    };
+    let private_blockers = match raw.blockers.as_ref() {
+        Some(blockers) if acting_player == state.active_player.opponent() => {
+            Some(private_blockers_context_v2(state, blockers)?)
+        }
+        _ => None,
+    };
+    let private_discard = match raw.discard.as_ref() {
+        Some(discard) if acting_player == discard.player => Some(PrivateDiscardContextV2 {
+            chosen: visible_card_refs(state, &discard.chosen, acting_player)?,
+            remaining_choices: visible_card_refs(state, &discard.remaining_choices, acting_player)?,
+            remaining_needed: discard.remaining_needed,
+        }),
+        _ => None,
+    };
+    let private_optional_cost = match raw.optional_cost.as_ref() {
+        Some(optional) if acting_player == optional.player => Some(PrivateOptionalCostContextV2 {
+            discard_payable: optional.discard_payable,
+            sacrifice_payable: optional.sacrifice_payable,
+            stage: match optional.stage {
+                crate::surface_v2::OptionalCostStagePublicV2::Use => {
+                    SurfaceDecisionStageV2::OptionalCostUse
+                }
+                crate::surface_v2::OptionalCostStagePublicV2::Which => {
+                    SurfaceDecisionStageV2::OptionalCostWhich
+                }
+            },
+        }),
+        _ => None,
+    };
+
+    Ok(HarnessSurfaceContextV2 {
+        current_stage,
+        combat_priority_spent: raw.combat_priority_spent,
+        combat_priority_rearmed_by_stack_activity: state.stack.len()
+            != raw.combat_priority_stack_len_seen,
+        combat_priority_rearmed_by_mana_activity: state.engine.mana_ability_activations
+            != raw.combat_priority_mana_count_seen,
+        stack_activity_since_round_open: state.stack.len() > raw.round_opening_stack_len,
+        mana_activity_since_round_open: state.engine.mana_ability_activations
+            != raw.combat_round_opening_mana_count,
+        stack_length_changed_since_observed: raw
+            .last_seen_stack_len
+            .map(|last_len| last_len != state.stack.len()),
+        mana_activity_since_last_stack_change: state.engine.mana_ability_activations
+            != raw.mana_count_at_last_stack_change,
+        madness_cast_reprompt_source: match raw.madness_cast_reprompt_exemption {
+            Some(source) => visible_card_ref(state, source, acting_player)?,
+            None => None,
+        },
+        private_blockers,
+        private_discard,
+        private_optional_cost,
+    })
+}
+
+fn private_blockers_context_v2(
+    state: &GameState,
+    blockers: &crate::surface_v2::BlockersReshapePublicV2,
+) -> Result<PrivateBlockersContextV2> {
+    Ok(PrivateBlockersContextV2 {
+        current_attacker: blockers
+            .current_attacker
+            .map(|id| card_ref(state, id))
+            .transpose()?,
+        accumulated: blockers
+            .accumulated
+            .iter()
+            .map(|(attacker, blocker)| {
+                Ok((card_ref(state, *attacker)?, card_ref(state, *blocker)?))
+            })
+            .collect::<Result<Vec<_>>>()?,
+        remaining: blockers
+            .remaining
+            .iter()
+            .map(|(attacker, legal_blockers)| {
+                Ok((
+                    card_ref(state, *attacker)?,
+                    legal_blockers
+                        .iter()
+                        .map(|&blocker| card_ref(state, blocker))
+                        .collect::<Result<Vec<_>>>()?,
+                ))
+            })
+            .collect::<Result<Vec<_>>>()?,
+    })
+}
+
+fn stack_public_v1(state: &GameState) -> Result<Vec<StackItemPublicV1>> {
     state
         .stack
         .iter()
         .enumerate()
-        .map(|(stack_index, item)| stack_item_public(state, stack_index as u32, item))
+        .map(|(stack_index, item)| stack_item_public_v1(state, stack_index as u32, item))
         .collect()
 }
 
-fn stack_item_public(
+fn stack_item_public_v1(
     state: &GameState,
     stack_index: u32,
     item: &StackItem,
@@ -1734,6 +2372,36 @@ fn stack_item_public(
             .map(|&target| target_ref(state, target))
             .collect::<Result<Vec<_>>>()?,
         is_trigger_or_ability: item.inline_effect.is_some(),
+        is_flashback: item.is_flashback,
+        mode_chosen: item.mode_chosen,
+        madness_offer: item.madness_offer,
+        kicked: item.kicked,
+    })
+}
+
+fn stack_public_v2(state: &GameState, acting_player: PlayerId) -> Result<Vec<StackItemPublicV2>> {
+    state
+        .stack
+        .iter()
+        .enumerate()
+        .map(|(stack_index, item)| {
+            stack_item_public_v2(state, acting_player, stack_index as u32, item)
+        })
+        .collect()
+}
+
+fn stack_item_public_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    stack_index: u32,
+    item: &StackItem,
+) -> Result<StackItemPublicV2> {
+    Ok(StackItemPublicV2 {
+        stack_index,
+        source: card_ref(state, item.source)?,
+        controller: item.controller.into(),
+        targets: target_refs_visible(state, &item.targets, acting_player)?,
+        stack_item_kind: item.kind.into(),
         is_flashback: item.is_flashback,
         mode_chosen: item.mode_chosen,
         madness_offer: item.madness_offer,

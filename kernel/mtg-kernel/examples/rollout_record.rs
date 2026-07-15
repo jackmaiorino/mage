@@ -45,7 +45,7 @@ fn main() {
                 std::process::exit(1);
             }
         };
-    let manifest = build_run_manifest(
+    let manifest = match build_run_manifest(
         args.games,
         args.seed,
         DEFAULT_MAX_DECISIONS,
@@ -53,7 +53,13 @@ fn main() {
         &args.out,
         &summaries,
         git_metadata(),
-    );
+    ) {
+        Ok(manifest) => manifest,
+        Err(err) => {
+            eprintln!("manifest validation failed: {err}");
+            std::process::exit(1);
+        }
+    };
     if let Err(err) = write_rollout_artifacts(&args.out, &audit_records, &policy_records, &manifest)
     {
         eprintln!("artifact write failed: {err}");
