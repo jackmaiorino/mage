@@ -869,7 +869,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                             return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
                         check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
-                        learn_token_ids(&mut ctx, &state, rec, player);
+                        learn_token_ids(&mut ctx, &state, rec, player, Some(player));
                         apply_cast_spell_or_pass(surface, &mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &plot_actions, &ctx.id_map)?;
                         ctx.advance(player);
                         outcome.decisions_consumed += 1;
@@ -886,7 +886,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
-                learn_token_ids(&mut ctx, &state, rec, player);
+                learn_token_ids(&mut ctx, &state, rec, player, None);
                 apply_choose_targets(surface, &mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -904,7 +904,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     return Err(format!("decision-kind-mismatch:ChooseCostTargets-vs-{}", rec.action_type));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
-                learn_token_ids(&mut ctx, &state, rec, player);
+                learn_token_ids(&mut ctx, &state, rec, player, Some(player));
                 apply_choose_cost_targets(surface, &mut state, rec, &candidates, &ctx.id_map)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -916,7 +916,7 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                     return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
-                learn_token_ids(&mut ctx, &state, rec, player);
+                learn_token_ids(&mut ctx, &state, rec, player, Some(player));
                 apply_declare_attackers(surface, &mut state, rec, &eligible, &ctx.id_map)?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
@@ -1184,9 +1184,12 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
 
 /// Learns a fresh (token) object's uuid the first time it's seen in any
 /// candidate/chosen list. Trace text with an authoritative source identity
-/// (currently Blood's unique activation) narrows by token kind and deciding
-/// player; otherwise the legacy fallback binds the lowest-`ObjectId`
-/// currently-unbound post-pregame object.
+/// (a token's own name, or Blood's unique activation text) narrows by token
+/// kind. Decision kinds whose objects must be controlled by the deciding
+/// player also supply that controller. Creation order remains the final
+/// tie-break within the narrowed class. Target labels (`(you)` or a seat
+/// name) and blocker-pair position provide the same controller evidence
+/// when either side's token UUID first appears there.
 ///
 /// Root-caused (Sol #90, increment 11) against
 /// `game_20260713_002147_0002.txt` decision 159: a player's own seat uuid
@@ -1205,7 +1208,34 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
 /// and empty-string cases already were.
 const BLOOD_TOKEN_ACTIVATION_TEXT: &str = "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.";
 
-fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord, player: PlayerId) {
+fn token_identity_hint(text: &str, rec_player: &str, deciding_player: PlayerId) -> (Option<&'static str>, Option<PlayerId>) {
+    if text == BLOOD_TOKEN_ACTIVATION_TEXT {
+        return (Some("Blood Token"), None);
+    }
+    let (name, controller) = match text.strip_suffix(')').and_then(|without_close| without_close.rsplit_once(" (")) {
+        Some((name, "you")) => (name, Some(deciding_player)),
+        Some((name, "opponent")) => (name, Some(deciding_player.opponent())),
+        Some((name, label)) if label == rec_player => (name, Some(deciding_player)),
+        Some((name, _other_player_name)) => (name, Some(deciding_player.opponent())),
+        None => (text, None),
+    };
+    let Some(id) = card_def::card_id_by_name(name) else {
+        return (None, None);
+    };
+    if CARD_DEFS[id as usize].is_token {
+        (Some(CARD_DEFS[id as usize].name), controller)
+    } else {
+        (None, None)
+    }
+}
+
+fn learn_token_ids(
+    ctx: &mut ReplayCtx,
+    state: &GameState,
+    rec: &DecisionRecord,
+    deciding_player: PlayerId,
+    expected_controller: Option<PlayerId>,
+) {
     let candidate_observations = rec.candidate_object_ids.iter().enumerate().map(|(i, raw)| {
         (raw, rec.candidate_texts.get(i).map(String::as_str).unwrap_or(""))
     });
@@ -1214,7 +1244,8 @@ fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord,
     });
     let observations = candidate_observations.chain(chosen_observations);
     for (raw, text) in observations {
-        for uuid in raw.split("->") {
+        let is_block_pair = raw.contains("->");
+        for (part, uuid) in raw.split("->").enumerate() {
             if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) || ctx.seat_uuid.iter().any(|s| s.as_deref() == Some(uuid)) {
                 continue;
             }
@@ -1223,26 +1254,28 @@ fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord,
             // includes that token in a decision. Creation order alone is
             // insufficient: an older opponent token may never have been a
             // candidate, so "lowest unbound ObjectId" can bind this UUID to
-            // the wrong controller or even the wrong token kind. Blood's
-            // activation text is an authoritative semantic name hint, and
-            // ACTIVATE_ABILITY_OR_SPELL only offers sources controlled by
-            // the deciding player. Keep the legacy creation-order fallback
-            // for trace shapes that carry no such hint.
-            let next = if text == BLOOD_TOKEN_ACTIVATION_TEXT {
-                state.objects.iter().find_map(|(id, object)| {
-                    (id.0 >= ctx.pregame_object_count
-                        && !bound.contains(&id)
-                        && object.name == "Blood Token"
-                        && object.controller == player)
-                        .then_some(id)
-                })
+            // the wrong controller or even the wrong token kind. Direct
+            // token names and Blood's activation text are authoritative
+            // semantic hints. Decision-local controller constraints then
+            // distinguish otherwise-identical objects owned by opposite
+            // players. Trace shapes that carry neither hint retain the
+            // legacy creation-order behavior.
+            let (expected_name, text_controller) = if part == 0 {
+                token_identity_hint(text, &rec.player, deciding_player)
             } else {
-                state
-                    .objects
-                    .iter()
-                    .map(|(id, _)| id)
-                    .find(|id| id.0 >= ctx.pregame_object_count && !bound.contains(id))
+                (None, None)
             };
+            let pair_controller = is_block_pair.then_some(if part == 0 { deciding_player } else { deciding_player.opponent() });
+            let next = state.objects.iter().find_map(|(id, object)| {
+                (id.0 >= ctx.pregame_object_count
+                    && !bound.contains(&id)
+                    && [expected_controller, pair_controller, text_controller]
+                        .into_iter()
+                        .flatten()
+                        .all(|controller| object.controller == controller)
+                    && expected_name.is_none_or(|name| object.name == name && object.zone == Zone::Battlefield))
+                    .then_some(id)
+            });
             let Some(next) = next else {
                 continue;
             };
@@ -1750,6 +1783,30 @@ fn apply_declare_attackers(surface: &mut HarnessSurfaceV2, state: &mut GameState
     trace_keys.sort();
 
     if kernel_keys != trace_keys {
+        if std::env::var("REPLAY_DEBUG").is_ok() {
+            eprintln!(
+                "ATTACKER MISMATCH decision_number={} kernel={:?} trace={:?} eligible={:?} translated={:?} trace_texts={:?}",
+                rec.decision_number,
+                kernel_keys,
+                trace_keys,
+                eligible
+                    .iter()
+                    .map(|&id| format!("{}({})", state.objects.get(id).name, id.0))
+                    .collect::<Vec<_>>(),
+                trace_candidates
+                    .iter()
+                    .flatten()
+                    .map(|&id| format!(
+                        "{}({})/{:?}/{:?}",
+                        state.objects.get(id).name,
+                        id.0,
+                        state.objects.get(id).zone,
+                        state.objects.get(id).controller
+                    ))
+                    .collect::<Vec<_>>(),
+                rec.candidate_texts,
+            );
+        }
         return Err("candidate-multiset-mismatch:DeclareAttackers".to_string());
     }
 
@@ -1800,7 +1857,7 @@ fn apply_declare_blockers_for_attacker(
         return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
     }
     check_state(state, player, rec, p0_name, p1_name, ctx)?;
-    learn_token_ids(ctx, state, rec, player);
+    learn_token_ids(ctx, state, rec, player, None);
 
     let mut kernel_keys: Vec<String> = legal_blockers.iter().map(|b| format!("{}->{}", b.0, attacker.0)).collect();
     kernel_keys.push("DONE".to_string());
@@ -1883,7 +1940,7 @@ fn apply_discard(
             return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
         }
         check_state(state, player, rec, p0_name, p1_name, ctx)?;
-        learn_token_ids(ctx, state, rec, player);
+        learn_token_ids(ctx, state, rec, player, Some(player));
 
         let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
         kernel_names.sort_unstable();
@@ -2162,13 +2219,95 @@ mod tests {
             "",
         );
         let mut ctx = empty_ctx();
-        learn_token_ids(&mut ctx, &state, &rec, PlayerId::P1);
+        learn_token_ids(&mut ctx, &state, &rec, PlayerId::P1, Some(PlayerId::P1));
 
         assert_eq!(
             ctx.id_map.get("trace-blood"),
             Some(&ObjectId(2)),
             "must skip lower-id Samurai and opponent Blood tokens"
         );
+    }
+
+    #[test]
+    fn attacker_token_uuid_learning_uses_candidate_name_within_controller() {
+        let samurai = card_def::card_id_by_name("Samurai Token").unwrap();
+        let human = card_def::card_id_by_name("Human Soldier Token").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[samurai],
+            &[human, human],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            0,
+        );
+        for id in [ObjectId(0), ObjectId(1), ObjectId(2)] {
+            state.objects.get_mut(id).zone = Zone::Battlefield;
+        }
+
+        let rec = decision_record_ex(
+            "DECLARE_ATTACKS",
+            &["Human Soldier Token", "Human Soldier Token", "DONE"],
+            &["trace-human-a", "trace-human-b", DONE],
+            &[2],
+            "",
+        );
+        let mut ctx = empty_ctx();
+        learn_token_ids(&mut ctx, &state, &rec, PlayerId::P1, Some(PlayerId::P1));
+
+        assert_eq!(ctx.id_map.get("trace-human-a"), Some(&ObjectId(1)));
+        assert_eq!(ctx.id_map.get("trace-human-b"), Some(&ObjectId(2)));
+    }
+
+    #[test]
+    fn target_token_uuid_learning_understands_you_qualifier() {
+        let human = card_def::card_id_by_name("Human Soldier Token").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[human],
+            &[human],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            0,
+        );
+        for id in [ObjectId(0), ObjectId(1)] {
+            state.objects.get_mut(id).zone = Zone::Battlefield;
+        }
+
+        let rec = decision_record_ex(
+            "SELECT_TARGETS",
+            &["Human Soldier Token (you)"],
+            &["trace-own-human"],
+            &[0],
+            "",
+        );
+        let mut ctx = empty_ctx();
+        learn_token_ids(&mut ctx, &state, &rec, PlayerId::P1, None);
+
+        assert_eq!(ctx.id_map.get("trace-own-human"), Some(&ObjectId(1)));
+    }
+
+    #[test]
+    fn blocker_pair_uuid_learning_applies_text_hint_only_to_blocker() {
+        let human = card_def::card_id_by_name("Human Soldier Token").unwrap();
+        let samurai = card_def::card_id_by_name("Samurai Token").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[human],
+            &[samurai],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            0,
+        );
+        for id in [ObjectId(0), ObjectId(1)] {
+            state.objects.get_mut(id).zone = Zone::Battlefield;
+        }
+
+        let rec = decision_record_ex(
+            "DECLARE_BLOCKS",
+            &["Human Soldier Token", "DONE"],
+            &["trace-blocker->trace-attacker", DONE],
+            &[1],
+            "",
+        );
+        let mut ctx = empty_ctx();
+        learn_token_ids(&mut ctx, &state, &rec, PlayerId::P0, None);
+
+        assert_eq!(ctx.id_map.get("trace-blocker"), Some(&ObjectId(0)));
+        assert_eq!(ctx.id_map.get("trace-attacker"), Some(&ObjectId(1)));
     }
 
     fn parse_fixture(text: &str) -> GoldenTrace {
