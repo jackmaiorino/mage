@@ -678,14 +678,6 @@ fn rl_contract_semantic_flags_change_hash_but_raw_priority_counter_offset_does_n
         pass_obs.visible_projection_hash
     );
 
-    let mut mana_actor_changed = base.clone();
-    mana_actor_changed.engine.last_mana_ability_activator = Some(PlayerId::P1);
-    let mana_actor_obs = observe_for_test(&mana_actor_changed, PlayerId::P0, 20);
-    assert_ne!(
-        base_obs.visible_projection_hash,
-        mana_actor_obs.visible_projection_hash
-    );
-
     let mut raw_counter_offset = base.clone();
     raw_counter_offset.engine.priority_round += 99;
     raw_counter_offset.engine.next_effect_timestamp += 99;
@@ -695,6 +687,161 @@ fn rl_contract_semantic_flags_change_hash_but_raw_priority_counter_offset_does_n
         serde_json::to_vec(&raw_counter_obs).unwrap(),
         "irrelevant raw monotonic counters must not affect serialized ObservationV2"
     );
+}
+
+#[test]
+fn rl_contract_mana_activity_context_is_priority_boundary_scoped() {
+    let mut state = empty_state();
+    let mountain = make_object(&mut state, PlayerId::P0, "Mountain", Zone::Battlefield);
+    state.step = Step::Main1;
+    state.active_player = PlayerId::P0;
+    state.priority_player = PlayerId::P0;
+
+    let initial = observe_for_test(&state, PlayerId::P0, 1);
+    assert!(
+        !initial
+            .projection
+            .engine_context
+            .mana_activity_since_priority_boundary
+    );
+    assert_eq!(
+        initial
+            .projection
+            .engine_context
+            .last_mana_ability_activator_since_priority_boundary,
+        None
+    );
+
+    engine::step(&mut state, Action::ActivateManaAbility(mountain)).unwrap();
+    let after_mana = observe_for_test(&state, PlayerId::P0, 2);
+    assert!(
+        after_mana
+            .projection
+            .engine_context
+            .mana_activity_since_priority_boundary
+    );
+    assert_eq!(
+        after_mana
+            .projection
+            .engine_context
+            .last_mana_ability_activator_since_priority_boundary,
+        Some(PlayerSeatV1::P0)
+    );
+
+    engine::step(&mut state, Action::Pass).unwrap();
+    engine::step(&mut state, Action::Pass).unwrap();
+    let _ = engine::advance_until_decision(&mut state);
+    assert_eq!(state.engine.mana_ability_activations, 1);
+    assert_eq!(state.engine.mana_ability_count_at_round_open, 1);
+    assert_eq!(state.engine.last_mana_ability_activator, Some(PlayerId::P0));
+
+    let after_boundary = observe_for_test(&state, PlayerId::P0, 3);
+    assert!(
+        !after_boundary
+            .projection
+            .engine_context
+            .mana_activity_since_priority_boundary
+    );
+    assert_eq!(
+        after_boundary
+            .projection
+            .engine_context
+            .last_mana_ability_activator_since_priority_boundary,
+        None
+    );
+}
+
+#[test]
+fn rl_contract_mana_boundary_projection_ignores_absolute_counter_offsets() {
+    let mut base = empty_state();
+    base.engine.mana_ability_activations = 17;
+    base.engine.mana_ability_count_at_round_open = 17;
+    base.engine.last_mana_ability_activator = Some(PlayerId::P1);
+
+    let mut offset = base.clone();
+    offset.engine.mana_ability_activations += 1_000;
+    offset.engine.mana_ability_count_at_round_open += 1_000;
+
+    let base_obs = observe_for_test(&base, PlayerId::P0, 20);
+    let offset_obs = observe_for_test(&offset, PlayerId::P0, 20);
+    assert_eq!(
+        serde_json::to_vec(&base_obs).unwrap(),
+        serde_json::to_vec(&offset_obs).unwrap(),
+        "absolute mana count and boundary baseline offsets must not affect serialized ObservationV2"
+    );
+    assert!(
+        !base_obs
+            .projection
+            .engine_context
+            .mana_activity_since_priority_boundary
+    );
+    assert_eq!(
+        base_obs
+            .projection
+            .engine_context
+            .last_mana_ability_activator_since_priority_boundary,
+        None
+    );
+}
+
+#[test]
+fn rl_contract_mana_boundary_delta_changes_visible_projection_hash() {
+    let mut base = empty_state();
+    base.engine.mana_ability_activations = 17;
+    base.engine.mana_ability_count_at_round_open = 17;
+    base.engine.last_mana_ability_activator = Some(PlayerId::P1);
+
+    let mut delta = base.clone();
+    delta.engine.mana_ability_activations += 1;
+
+    let base_obs = observe_for_test(&base, PlayerId::P0, 20);
+    let delta_obs = observe_for_test(&delta, PlayerId::P0, 20);
+    assert_ne!(
+        base_obs.visible_projection_hash,
+        delta_obs.visible_projection_hash
+    );
+    assert!(
+        delta_obs
+            .projection
+            .engine_context
+            .mana_activity_since_priority_boundary
+    );
+    assert_eq!(
+        delta_obs
+            .projection
+            .engine_context
+            .last_mana_ability_activator_since_priority_boundary,
+        Some(PlayerSeatV1::P1)
+    );
+}
+
+#[test]
+fn rl_contract_observation_v2_uses_exact_boundary_semantic_field_names() {
+    let obs = observe_for_test(&empty_state(), PlayerId::P0, 20);
+    let value = serde_json::to_value(&obs).unwrap();
+    let engine_context = value["projection"]["engine_context"]
+        .as_object()
+        .expect("engine_context must be an object");
+    assert!(engine_context.contains_key("mana_activity_since_priority_boundary"));
+    assert!(engine_context.contains_key("last_mana_ability_activator_since_priority_boundary"));
+    for forbidden in [
+        "last_mana_ability_activator",
+        "mana_ability_activations",
+        "mana_ability_count_at_round_open",
+        "priority_round",
+        "stack_len_at_round_open",
+    ] {
+        assert!(
+            !contains_key(&value, forbidden),
+            "ObservationV2 must not serialize raw or misleading engine field {forbidden}"
+        );
+    }
+
+    let surface_context = value["projection"]["surface_context"]
+        .as_object()
+        .expect("surface_context must be an object");
+    assert!(surface_context.contains_key("stack_grew_since_round_open"));
+    assert!(!surface_context.contains_key("stack_activity_since_round_open"));
 }
 
 #[test]

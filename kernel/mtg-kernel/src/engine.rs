@@ -160,6 +160,11 @@ pub struct EngineState {
     /// and silently force-passed everyone straight through the rest of
     /// combat, reaching `Main2` a full combat phase early.
     pub mana_ability_activations: u64,
+    /// `mana_ability_activations` at the exact instant `reset_priority`
+    /// last ran. This is the boundary-scoped baseline for RL observation
+    /// fields that claim "since priority boundary" semantics; the lifetime
+    /// counter and last activator remain separate internal H2 signals.
+    pub mana_ability_count_at_round_open: u64,
     /// Single-shot, cleared-every-time signal from a just-finished
     /// resolution to the trigger-collection pass that always immediately
     /// follows it: `Some(source)` iff the stack item that just resolved had
@@ -1707,6 +1712,7 @@ fn reset_priority(state: &mut GameState) {
     // this is a diagnostic boundary snapshot, not the surface suppression's
     // deliberately later first-observation baseline.
     state.engine.stack_len_at_round_open = state.stack.len();
+    state.engine.mana_ability_count_at_round_open = state.engine.mana_ability_activations;
 }
 
 fn collect_and_queue_triggers(state: &mut GameState) {

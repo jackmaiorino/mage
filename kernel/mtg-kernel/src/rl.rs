@@ -383,7 +383,7 @@ pub struct EngineContextV2 {
     pub stack_nonempty: bool,
     pub stack_activity_since_priority_boundary: bool,
     pub mana_activity_since_priority_boundary: bool,
-    pub last_mana_ability_activator: Option<PlayerSeatV1>,
+    pub last_mana_ability_activator_since_priority_boundary: Option<PlayerSeatV1>,
     pub current_stage: EngineDecisionStageV2,
     pub pending_cast: Option<PendingCastSemanticV2>,
     pub pending_activation: Option<PendingActivationSemanticV2>,
@@ -430,7 +430,7 @@ pub struct HarnessSurfaceContextV2 {
     pub combat_priority_spent: [bool; 2],
     pub combat_priority_rearmed_by_stack_activity: bool,
     pub combat_priority_rearmed_by_mana_activity: bool,
-    pub stack_activity_since_round_open: bool,
+    pub stack_grew_since_round_open: bool,
     pub mana_activity_since_round_open: bool,
     pub stack_length_changed_since_observed: Option<bool>,
     pub mana_activity_since_last_stack_change: bool,
@@ -2074,13 +2074,21 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
         EngineDecisionStageV2::Priority
     };
 
+    let mana_activity_since_priority_boundary =
+        state.engine.mana_ability_activations != state.engine.mana_ability_count_at_round_open;
+
     Ok(EngineContextV2 {
         priority_passes: state.engine.priority_passes,
         stack_nonempty: !state.stack.is_empty(),
         stack_activity_since_priority_boundary: state.stack.len()
             != state.engine.stack_len_at_round_open,
-        mana_activity_since_priority_boundary: state.engine.last_mana_ability_activator.is_some(),
-        last_mana_ability_activator: state.engine.last_mana_ability_activator.map(Into::into),
+        mana_activity_since_priority_boundary,
+        last_mana_ability_activator_since_priority_boundary:
+            if mana_activity_since_priority_boundary {
+                state.engine.last_mana_ability_activator.map(Into::into)
+            } else {
+                None
+            },
         current_stage,
         pending_cast: state
             .engine
@@ -2298,7 +2306,7 @@ fn surface_context_v2(
             != raw.combat_priority_stack_len_seen,
         combat_priority_rearmed_by_mana_activity: state.engine.mana_ability_activations
             != raw.combat_priority_mana_count_seen,
-        stack_activity_since_round_open: state.stack.len() > raw.round_opening_stack_len,
+        stack_grew_since_round_open: state.stack.len() > raw.round_opening_stack_len,
         mana_activity_since_round_open: state.engine.mana_ability_activations
             != raw.combat_round_opening_mana_count,
         stack_length_changed_since_observed: raw
