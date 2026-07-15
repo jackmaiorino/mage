@@ -60,12 +60,12 @@ fn main() {
     }
 
     println!(
-        "wrote {} records for {} games to {} (wins={} losses={} draws={} halted={} decisions={})",
+        "wrote {} records for {} games to {} (p0_wins={} p1_wins={} draws={} halted={} decisions={})",
         records.len(),
         args.games,
         args.out.display(),
-        manifest.aggregate.wins,
-        manifest.aggregate.losses,
+        manifest.aggregate.p0_wins,
+        manifest.aggregate.p1_wins,
         manifest.aggregate.draws,
         manifest.aggregate.halted,
         manifest.aggregate.total_decisions

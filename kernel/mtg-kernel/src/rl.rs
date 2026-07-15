@@ -9,8 +9,9 @@ use crate::card_def::{card_id_by_name, CARD_DEFS, KERNEL_CARDDB_HASH};
 use crate::engine::{Action, CastMode, CostKind, Decision, OptionalCostChoice};
 use crate::event::{self, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
+use crate::rl_session::{RlEpisodeSessionV1, RlSessionResponseV1};
 use crate::state::{GameObject, GameState, SplitMix64, StackItem, Target, Zone};
-use crate::surface_v2::{HarnessSurfaceV2, SurfaceAction, SurfaceDecision, H2_PREDICATE_VERSION};
+use crate::surface_v2::{SurfaceAction, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
@@ -197,8 +198,6 @@ pub struct ObservationV1 {
     pub step_index: u64,
     pub projection: PublicObservationProjectionV1,
     pub own_hand: Vec<CardPrivateV1>,
-    pub diagnostic_state_hash_includes_hidden_state: bool,
-    pub diagnostic_state_hash: u64,
     pub visible_projection_hash: u64,
 }
 
@@ -321,8 +320,8 @@ pub struct LibrarySetupV1 {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum TerminalOutcomeV1 {
-    Win,
-    Loss,
+    P0Win,
+    P1Win,
     Draw,
     Halted,
 }
@@ -423,8 +422,8 @@ pub struct GitMetadataV1 {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RunAggregateV1 {
-    pub wins: u64,
-    pub losses: u64,
+    pub p0_wins: u64,
+    pub p1_wins: u64,
     pub draws: u64,
     pub halted: u64,
     pub total_decisions: u64,
@@ -570,8 +569,6 @@ pub fn observe_v1(
         step_index,
         projection,
         own_hand,
-        diagnostic_state_hash_includes_hidden_state: true,
-        diagnostic_state_hash: state.state_hash(),
         visible_projection_hash: 0,
     };
     obs.visible_projection_hash = visible_projection_hash(&obs)?;
@@ -942,8 +939,7 @@ pub fn record_burn_mirror_episode(
     policy_seed: u64,
     max_decisions: u64,
 ) -> Result<EpisodeRunV1> {
-    let mut state = build_burn_mirror_state(env_seed);
-    let mut surface = HarnessSurfaceV2::new();
+    let mut session = RlEpisodeSessionV1::reset(episode_id, env_seed, max_decisions);
     let mut policy_rng = SplitMix64::seed(policy_seed);
     let deck_hash = burn_deck_hash();
     let mut records = vec![EpisodeRecordV1::Header {
@@ -967,108 +963,35 @@ pub fn record_burn_mirror_episode(
             deck_hashes: [deck_hash, deck_hash],
         },
     }];
-    let mut decision_count = 0u64;
     loop {
-        let surfaced = surface.next_decision(&mut state);
-        match &surfaced {
-            SurfaceDecision::Decision(Decision::GameOver { winner }) => {
-                let summary =
-                    terminal_summary(episode_id, *winner, "game_over".to_string(), decision_count);
-                push_terminal(&mut records, &summary, state.state_hash());
+        match session.current_response() {
+            RlSessionResponseV1::Decision(decision) => {
+                let selected_index = rng_below(&mut policy_rng, decision.legal_actions.len());
+                let selected_action_id = decision.legal_actions[selected_index].stable_id.clone();
+                records.push(EpisodeRecordV1::Decision {
+                    schema_version: EPISODE_SCHEMA_VERSION,
+                    episode_id,
+                    step: decision.step,
+                    acting_player: decision.acting_player,
+                    observation_projection_hash: decision.observation.visible_projection_hash,
+                    diagnostic_state_hash: session.diagnostic_state_hash(),
+                    observation: *decision.observation,
+                    legal_actions: decision.legal_actions,
+                    selected_index: selected_index as u32,
+                    selected_action_id: selected_action_id.clone(),
+                    reward: [0, 0],
+                });
+                session.step(selected_index as u32, &selected_action_id)?;
+            }
+            RlSessionResponseV1::Terminal(terminal) => {
+                let summary = terminal.into();
+                push_terminal(&mut records, &summary, session.diagnostic_state_hash());
                 return Ok(EpisodeRunV1 {
                     records,
                     terminal: summary,
                 });
             }
-            SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
-                let reason = format!("engine_halted:{mechanic:?}:source:{}", source.0);
-                let summary = halted_summary(episode_id, reason, decision_count);
-                push_terminal(&mut records, &summary, state.state_hash());
-                return Ok(EpisodeRunV1 {
-                    records,
-                    terminal: summary,
-                });
-            }
-            _ => {}
         }
-        if decision_count >= max_decisions {
-            let summary = halted_summary(
-                episode_id,
-                format!("decision_cap_reached:{max_decisions}"),
-                decision_count,
-            );
-            push_terminal(&mut records, &summary, state.state_hash());
-            return Ok(EpisodeRunV1 {
-                records,
-                terminal: summary,
-            });
-        }
-        let Some(actor) = acting_player_for_surface_decision(&surfaced, &state) else {
-            let summary = halted_summary(
-                episode_id,
-                "fail_closed:nonterminal decision without acting player".to_string(),
-                decision_count,
-            );
-            push_terminal(&mut records, &summary, state.state_hash());
-            return Ok(EpisodeRunV1 {
-                records,
-                terminal: summary,
-            });
-        };
-        let observation = observe_v1(&state, actor, decision_count)?;
-        let candidates = match legal_action_candidates_v1(&surfaced, &state) {
-            Ok(candidates) => candidates,
-            Err(err) => {
-                let summary =
-                    halted_summary(episode_id, format!("fail_closed:{err}"), decision_count);
-                push_terminal(&mut records, &summary, state.state_hash());
-                return Ok(EpisodeRunV1 {
-                    records,
-                    terminal: summary,
-                });
-            }
-        };
-        if candidates.is_empty() {
-            let summary = halted_summary(
-                episode_id,
-                "fail_closed:nonterminal decision produced zero legal actions".to_string(),
-                decision_count,
-            );
-            push_terminal(&mut records, &summary, state.state_hash());
-            return Ok(EpisodeRunV1 {
-                records,
-                terminal: summary,
-            });
-        }
-        let selected_index = rng_below(&mut policy_rng, candidates.len());
-        let selected = &candidates[selected_index];
-        validate_selected_action(&candidates, selected_index, &selected.record.stable_id)?;
-        records.push(EpisodeRecordV1::Decision {
-            schema_version: EPISODE_SCHEMA_VERSION,
-            episode_id,
-            step: decision_count,
-            acting_player: actor.into(),
-            observation_projection_hash: observation.visible_projection_hash,
-            diagnostic_state_hash: observation.diagnostic_state_hash,
-            observation,
-            legal_actions: candidates.iter().map(|c| c.record.clone()).collect(),
-            selected_index: selected_index as u32,
-            selected_action_id: selected.record.stable_id.clone(),
-            reward: [0, 0],
-        });
-        if let Err(err) = surface.apply(&mut state, selected.surface_action.clone()) {
-            let summary = halted_summary(
-                episode_id,
-                format!("fail_closed:surface_apply:{err}"),
-                decision_count + 1,
-            );
-            push_terminal(&mut records, &summary, state.state_hash());
-            return Ok(EpisodeRunV1 {
-                records,
-                terminal: summary,
-            });
-        }
-        decision_count += 1;
     }
 }
 
@@ -1210,8 +1133,8 @@ fn deck_identifiers() -> [String; 2] {
 
 fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1 {
     let mut aggregate = RunAggregateV1 {
-        wins: 0,
-        losses: 0,
+        p0_wins: 0,
+        p1_wins: 0,
         draws: 0,
         halted: 0,
         total_decisions: 0,
@@ -1219,50 +1142,13 @@ fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1
     for summary in summaries {
         aggregate.total_decisions += summary.decision_count;
         match summary.outcome {
-            TerminalOutcomeV1::Win => aggregate.wins += 1,
-            TerminalOutcomeV1::Loss => aggregate.losses += 1,
+            TerminalOutcomeV1::P0Win => aggregate.p0_wins += 1,
+            TerminalOutcomeV1::P1Win => aggregate.p1_wins += 1,
             TerminalOutcomeV1::Draw => aggregate.draws += 1,
             TerminalOutcomeV1::Halted => aggregate.halted += 1,
         }
     }
     aggregate
-}
-
-fn terminal_summary(
-    episode_id: u64,
-    winner: Option<PlayerId>,
-    terminal_reason: String,
-    decision_count: u64,
-) -> EpisodeTerminalSummaryV1 {
-    let (outcome, terminal_reward) = match winner {
-        Some(PlayerId::P0) => (TerminalOutcomeV1::Win, [1, -1]),
-        Some(PlayerId::P1) => (TerminalOutcomeV1::Loss, [-1, 1]),
-        None => (TerminalOutcomeV1::Draw, [0, 0]),
-        Some(other) => panic!("unsupported winner player id {}", other.0),
-    };
-    EpisodeTerminalSummaryV1 {
-        episode_id,
-        outcome,
-        winner: winner.map(Into::into),
-        terminal_reward,
-        terminal_reason,
-        decision_count,
-    }
-}
-
-fn halted_summary(
-    episode_id: u64,
-    terminal_reason: String,
-    decision_count: u64,
-) -> EpisodeTerminalSummaryV1 {
-    EpisodeTerminalSummaryV1 {
-        episode_id,
-        outcome: TerminalOutcomeV1::Halted,
-        winner: None,
-        terminal_reward: [0, 0],
-        terminal_reason,
-        decision_count,
-    }
 }
 
 fn push_terminal(

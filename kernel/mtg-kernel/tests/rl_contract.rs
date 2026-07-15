@@ -1,14 +1,16 @@
 use mtg_kernel::card_def::card_id_by_name;
 use mtg_kernel::ids::PlayerId;
 use mtg_kernel::rl::{
-    burn_deck_hash, card_name, derive_env_seed, derive_policy_seed, legal_action_candidates_v1,
-    make_legal_action_v1, observe_v1, record_burn_mirror_episode, ActionSemanticV1, LegalActionV1,
-    PlayerSeatV1, LEGAL_ACTION_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION,
+    build_run_manifest, burn_deck_hash, card_name, derive_env_seed, derive_policy_seed,
+    legal_action_candidates_v1, make_legal_action_v1, observe_v1, record_burn_mirror_episode,
+    ActionSemanticV1, EpisodeTerminalSummaryV1, GitDirtyFlagV1, GitMetadataV1, LegalActionV1,
+    PlayerSeatV1, TerminalOutcomeV1, LEGAL_ACTION_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION,
 };
 use mtg_kernel::state::GameState;
 use mtg_kernel::surface_v2::HarnessSurfaceV2;
 use serde_json::Value;
 use std::collections::BTreeSet;
+use std::path::Path;
 
 fn ids(names: &[&str]) -> Vec<u16> {
     names
@@ -20,8 +22,12 @@ fn ids(names: &[&str]) -> Vec<u16> {
 }
 
 fn hidden_information_state() -> GameState {
+    hidden_information_state_with_p1(&["Fiery Temper", "Lava Dart", "Highway Robbery"])
+}
+
+fn hidden_information_state_with_p1(p1_names: &[&str]) -> GameState {
     let p0 = ids(&["Lightning Bolt", "Mountain", "Fireblast"]);
-    let p1 = ids(&["Fiery Temper", "Lava Dart", "Highway Robbery"]);
+    let p1 = ids(p1_names);
     let mut state = GameState::new_from_libraries(&p0, &p1, card_name, 123);
     state.draw_card(PlayerId::P0);
     state.draw_card(PlayerId::P1);
@@ -68,7 +74,6 @@ fn rl_contract_serde_roundtrip_and_schema_versions() {
         mtg_kernel::surface_v2::H2_PREDICATE_VERSION
     );
     assert_eq!(obs.card_db_hash, mtg_kernel::card_def::KERNEL_CARDDB_HASH);
-    assert!(obs.diagnostic_state_hash_includes_hidden_state);
     assert_ne!(obs.visible_projection_hash, 0);
 
     let json = serde_json::to_string(&obs).unwrap();
@@ -87,6 +92,35 @@ fn rl_contract_serde_roundtrip_and_schema_versions() {
         serde_json::from_str(&serde_json::to_string(&action).unwrap()).unwrap();
     assert_eq!(action_roundtrip, action);
     assert_ne!(burn_deck_hash(), 0);
+}
+
+#[test]
+fn rl_contract_observation_is_byte_invariant_to_opponent_hidden_identities() {
+    let a = hidden_information_state_with_p1(&["Fiery Temper", "Lava Dart", "Highway Robbery"]);
+    let b = hidden_information_state_with_p1(&["Grab the Prize", "Fireblast", "Mountain"]);
+
+    assert_eq!(a.turn, b.turn);
+    assert_eq!(a.active_player, b.active_player);
+    assert_eq!(a.priority_player, b.priority_player);
+    assert_eq!(a.step, b.step);
+    assert_eq!(a.players[0].hand.len(), b.players[0].hand.len());
+    assert_eq!(a.players[1].hand.len(), b.players[1].hand.len());
+    assert_eq!(a.players[0].library.len(), b.players[0].library.len());
+    assert_eq!(a.players[1].library.len(), b.players[1].library.len());
+    assert_ne!(
+        a.state_hash(),
+        b.state_hash(),
+        "internal full-state hash must still detect hidden identity/order changes"
+    );
+
+    let obs_a = observe_v1(&a, PlayerId::P0, 11).unwrap();
+    let obs_b = observe_v1(&b, PlayerId::P0, 11).unwrap();
+    assert_eq!(obs_a.visible_projection_hash, obs_b.visible_projection_hash);
+    assert_eq!(
+        serde_json::to_vec(&obs_a).unwrap(),
+        serde_json::to_vec(&obs_b).unwrap(),
+        "serialized policy observation must be byte-identical"
+    );
 }
 
 #[test]
@@ -213,4 +247,65 @@ fn rl_contract_invalid_ambiguous_action_representation_fails_closed() {
     assert!(err
         .to_string()
         .contains("ambiguous legal action representation refused"));
+}
+
+#[test]
+fn rl_contract_p0_p1_outcome_accounting_is_explicit() {
+    let summaries = vec![
+        EpisodeTerminalSummaryV1 {
+            episode_id: 0,
+            outcome: TerminalOutcomeV1::P0Win,
+            winner: Some(PlayerSeatV1::P0),
+            terminal_reward: [1, -1],
+            terminal_reason: "game_over".to_string(),
+            decision_count: 10,
+        },
+        EpisodeTerminalSummaryV1 {
+            episode_id: 1,
+            outcome: TerminalOutcomeV1::P1Win,
+            winner: Some(PlayerSeatV1::P1),
+            terminal_reward: [-1, 1],
+            terminal_reason: "game_over".to_string(),
+            decision_count: 11,
+        },
+        EpisodeTerminalSummaryV1 {
+            episode_id: 2,
+            outcome: TerminalOutcomeV1::Draw,
+            winner: None,
+            terminal_reward: [0, 0],
+            terminal_reason: "game_over".to_string(),
+            decision_count: 12,
+        },
+        EpisodeTerminalSummaryV1 {
+            episode_id: 3,
+            outcome: TerminalOutcomeV1::Halted,
+            winner: None,
+            terminal_reward: [0, 0],
+            terminal_reason: "decision_cap_reached:12".to_string(),
+            decision_count: 12,
+        },
+    ];
+    let manifest = build_run_manifest(
+        4,
+        5151,
+        12,
+        vec![],
+        Path::new("local-training/kernel_rl/test"),
+        &summaries,
+        GitMetadataV1 {
+            commit: "test".to_string(),
+            dirty: GitDirtyFlagV1::Clean,
+        },
+    );
+    assert_eq!(manifest.aggregate.p0_wins, 1);
+    assert_eq!(manifest.aggregate.p1_wins, 1);
+    assert_eq!(manifest.aggregate.draws, 1);
+    assert_eq!(manifest.aggregate.halted, 1);
+    assert_eq!(manifest.aggregate.total_decisions, 45);
+
+    let value = serde_json::to_value(&manifest).unwrap();
+    assert!(value["aggregate"].get("wins").is_none());
+    assert!(value["aggregate"].get("losses").is_none());
+    assert_eq!(value["aggregate"]["p0_wins"], 1);
+    assert_eq!(value["aggregate"]["p1_wins"], 1);
 }

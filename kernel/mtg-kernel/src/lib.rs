@@ -20,6 +20,7 @@ pub mod event;
 pub mod ids;
 pub mod mana;
 pub mod rl;
+pub mod rl_session;
 pub mod snapshot;
 pub mod state;
 pub mod surface;
