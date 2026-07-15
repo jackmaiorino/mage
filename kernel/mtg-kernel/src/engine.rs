@@ -577,11 +577,15 @@ pub struct CombatState {
     pub attackers_declared: bool,
     pub blockers_declared: bool,
     pub attackers: Vec<ObjectId>,
-    /// Attacker -> blockers, in the attacking player's damage-assignment
-    /// order (509.2). This increment always sorts by `ObjectId` --
-    /// deterministic, but a stand-in for a real
-    /// `Decision::AssignDamageOrder` a future increment can slot in here
-    /// without changing `blocked_by`'s shape.
+    /// Attacker -> blockers, preserving the defender's declaration order.
+    /// XMage's `ComputerPlayerRL.selectBlockers` calls `declareBlocker` in
+    /// its sequential-pick order, `CombatGroup.blockerDamage` walks that
+    /// insertion order, and its default `Outcome.Damage` allocation assigns
+    /// lethal from first to last. The replay trace's ordered
+    /// `chosen_indices` therefore already carries the reference's effective
+    /// damage-assignment order; sorting these ids changes combat outcomes.
+    /// This is reference-AI behavior, not a rules-level ordering guarantee;
+    /// a future surface can carry an explicit damage allocation instead.
     pub blocked_by: Vec<(ObjectId, Vec<ObjectId>)>,
 }
 
@@ -2696,10 +2700,6 @@ fn apply_declare_blockers(state: &mut GameState, blocks: Vec<(ObjectId, ObjectId
             None => blocked_by.push((attacker, vec![blocker])),
         }
     }
-    for (_, bs) in blocked_by.iter_mut() {
-        bs.sort_unstable();
-    }
-
     state.engine.combat.blocked_by = blocked_by;
     state.engine.combat.blockers_declared = true;
     collect_and_queue_triggers(state);
@@ -3492,6 +3492,31 @@ mod tests {
             }
             other => panic!("expected DeclareBlockers, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn declare_blockers_preserves_sequential_pick_order_for_damage_assignment() {
+        let mut state = empty_game();
+        let raider = put_on_battlefield(&mut state, PlayerId::P0, "Goblin Tomb Raider");
+        put_on_battlefield(&mut state, PlayerId::P0, "Great Furnace");
+        // Create Epicure first so ObjectId sorting would reverse the actual
+        // Samurai-then-Epicure sequential pick below.
+        let epicure = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        let samurai = put_on_battlefield(&mut state, PlayerId::P1, "Samurai Token");
+        assert!(epicure.0 < samurai.0);
+        assert_eq!(effective_power(&state, raider), 2, "the controlled artifact turns Tomb Raider into a 2/2");
+
+        state.active_player = PlayerId::P0;
+        state.step = Step::DeclareBlockers;
+        state.engine.combat.attackers = vec![raider];
+        state.engine.combat.attackers_declared = true;
+        apply_declare_blockers(&mut state, vec![(samurai, raider), (epicure, raider)]).unwrap();
+
+        assert_eq!(state.engine.combat.blocked_by, vec![(raider, vec![samurai, epicure])]);
+        deal_combat_damage(&mut state);
+
+        assert_eq!(state.objects.get(epicure).zone, Zone::Battlefield, "Tomb Raider's 2 damage is all assigned to the first 2-toughness blocker");
+        assert!(!state.players[PlayerId::P1.index()].battlefield.contains(&samurai), "the first blocker takes lethal damage and the token ceases to exist");
     }
 
     // ================================================================
