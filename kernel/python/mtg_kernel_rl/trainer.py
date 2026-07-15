@@ -81,6 +81,7 @@ HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 GENERATION_RE = re.compile(r"^update-(\d{8})\.(json|pt)$")
 TEMP_RE = re.compile(r"^\..+\.\d+\.\d+\.tmp$")
 TRANSACTION_RE = re.compile(r"^update-(\d{8})-[0-9a-f]+$")
+TRANSACTION_TEMP_RE = re.compile(r"^\.(update\.json|sidecar\.json)\.\d+\.\d+\.tmp$")
 
 
 @dataclasses.dataclass
@@ -719,18 +720,26 @@ def _validate_orphan_generation_file(path: Path, *, update: int, kind: str, run_
 
 def _validate_transaction_tree(out_dir: Path, transaction_dir: Path, *, head_update: int) -> None:
     _validate_path_contained(out_dir, transaction_dir)
+    if transaction_dir.is_symlink():
+        raise ValueError(f"transaction staging directory must not be a link: {transaction_dir.name}")
     match = TRANSACTION_RE.fullmatch(transaction_dir.name)
     if match is None:
         raise ValueError(f"unknown transaction staging directory name: {transaction_dir.name}")
     update = int(match.group(1))
-    if update <= head_update:
-        raise ValueError("staging directory targets a reachable generation")
+    if update < 0 or update > MAX_UPDATES:
+        raise ValueError("staging directory update out of bounds")
     allowed = {"checkpoint.pt", "update.json", "sidecar.json"}
     for child in transaction_dir.rglob("*"):
         _validate_path_contained(out_dir, child)
+        if child.is_symlink():
+            raise ValueError(f"transaction staging entry must not be a link: {child.name}")
         if child.is_dir():
-            continue
-        if child.name not in allowed and TEMP_RE.fullmatch(child.name) is None:
+            raise ValueError(f"unexpected nested transaction directory: {child.name}")
+        if not child.is_file():
+            raise ValueError(f"unknown transaction staging entry: {child.name}")
+        if child.parent != transaction_dir:
+            raise ValueError(f"unexpected nested transaction file: {child.name}")
+        if child.name not in allowed and TRANSACTION_TEMP_RE.fullmatch(child.name) is None:
             raise ValueError(f"unknown transaction staging file: {child.name}")
 
 
@@ -744,7 +753,11 @@ def _reconcile_uncommitted_artifacts(
     out_dir.mkdir(parents=True, exist_ok=True)
     transactions = out_dir / ".transactions"
     if transactions.exists():
+        if not transactions.is_dir() or transactions.is_symlink():
+            raise ValueError(".transactions must be a real directory")
         for child in list(transactions.iterdir()):
+            if child.is_symlink():
+                raise ValueError(f"unknown transaction entry link: {child.name}")
             if not child.is_dir():
                 raise ValueError(f"unknown transaction entry: {child.name}")
             _validate_transaction_tree(out_dir, child, head_update=head_update)

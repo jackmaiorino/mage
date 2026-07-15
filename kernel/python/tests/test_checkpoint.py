@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import random
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,6 +12,8 @@ import torch
 from mtg_kernel_rl.checkpoint import (
     MAX_CHECKPOINT_COLLECTION_ITEMS,
     MAX_CHECKPOINT_TENSOR_ELEMENTS,
+    assert_model_finite,
+    assert_optimizer_finite,
     build_checkpoint_payload,
     create_adam,
     export_adam_state,
@@ -20,6 +23,8 @@ from mtg_kernel_rl.checkpoint import (
     save_checkpoint_file,
     validate_checkpoint_payload,
     validate_model_state,
+    validate_python_rng_state,
+    validate_torch_rng_state,
 )
 import mtg_kernel_rl.checkpoint as checkpoint_mod
 from mtg_kernel_rl.determinism import TrainerSeedDerivation, configure_torch_determinism, derive_model_init_seed
@@ -62,6 +67,42 @@ class CheckpointTest(unittest.TestCase):
             compatibility=compatibility,
         )
         return payload, model, optimizer, compatibility
+
+    def assert_payload_equal(self, left: object, right: object, context: str = "$") -> None:
+        if isinstance(left, torch.Tensor) or isinstance(right, torch.Tensor):
+            self.assertIsInstance(left, torch.Tensor, context)
+            self.assertIsInstance(right, torch.Tensor, context)
+            self.assertTrue(torch.equal(left, right), context)
+            return
+        if isinstance(left, dict) or isinstance(right, dict):
+            self.assertIsInstance(left, dict, context)
+            self.assertIsInstance(right, dict, context)
+            self.assertEqual(set(left), set(right), context)
+            for key in left:
+                self.assert_payload_equal(left[key], right[key], f"{context}.{key}")
+            return
+        if isinstance(left, list) or isinstance(right, list):
+            self.assertIsInstance(left, list, context)
+            self.assertIsInstance(right, list, context)
+            self.assertEqual(len(left), len(right), context)
+            for index, (a, b) in enumerate(zip(left, right)):
+                self.assert_payload_equal(a, b, f"{context}[{index}]")
+            return
+        self.assertEqual(left, right, context)
+
+    def assert_optimizer_payload_rejected(self, payload: dict, model: KernelPolicyValueNet, compatibility: dict) -> None:
+        with self.assertRaises(ValueError):
+            validate_checkpoint_payload(payload, run_digest="r" * 64, compatibility=compatibility)
+        restored = KernelPolicyValueNet(model.config, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
+        optimizer = create_adam(restored, 0.001)
+        with self.assertRaises(ValueError):
+            load_adam_state(
+                optimizer,
+                restored,
+                payload["optimizer_state"],
+                0.001,
+                expected_step_count=payload["optimizer_step_count"],
+            )
 
     def test_checkpoint_roundtrip_restores_model_optimizer_and_rng(self) -> None:
         payload, model, optimizer, compatibility = self.make_payload()
@@ -138,6 +179,104 @@ class CheckpointTest(unittest.TestCase):
                 0.001,
                 expected_step_count=payload["optimizer_step_count"],
             )
+
+    def test_adam_step_tensor_adversarial_forms_are_rejected_before_install(self) -> None:
+        payload, model, _optimizer, compatibility = self.make_payload()
+        first_name = payload["optimizer_state"]["param_names"][0]
+        cases = {
+            "rank1_singleton": torch.tensor([1.0], dtype=torch.float32),
+            "bool": torch.tensor(True),
+            "integer": torch.tensor(1, dtype=torch.int64),
+            "float64": torch.tensor(1.0, dtype=torch.float64),
+            "fractional": torch.tensor(1.5, dtype=torch.float32),
+            "negative": torch.tensor(-1.0, dtype=torch.float32),
+            "nonfinite": torch.tensor(float("inf"), dtype=torch.float32),
+            "over_bound": torch.tensor(float(checkpoint_mod.MAX_ADAM_STEP + 1), dtype=torch.float32),
+        }
+        for name, step in cases.items():
+            with self.subTest(name=name):
+                bad = copy.deepcopy(payload)
+                bad["optimizer_state"]["state"][first_name]["step"] = step
+                self.assert_optimizer_payload_rejected(bad, model, compatibility)
+
+    def test_adam_moment_metadata_and_negative_second_moment_are_rejected(self) -> None:
+        payload, model, _optimizer, compatibility = self.make_payload()
+        first_name = payload["optimizer_state"]["param_names"][0]
+        negative = copy.deepcopy(payload)
+        negative["optimizer_state"]["state"][first_name]["exp_avg_sq"] = negative["optimizer_state"]["state"][first_name]["exp_avg_sq"].clone()
+        negative["optimizer_state"]["state"][first_name]["exp_avg_sq"].reshape(-1)[0] = -1.0
+        self.assert_optimizer_payload_rejected(negative, model, compatibility)
+
+        load_only_cases = {}
+        shape_bad = copy.deepcopy(payload)
+        shape_bad["optimizer_state"]["state"][first_name]["exp_avg"] = torch.zeros(1, dtype=torch.float32)
+        load_only_cases["shape"] = shape_bad
+        dtype_bad = copy.deepcopy(payload)
+        dtype_bad["optimizer_state"]["state"][first_name]["exp_avg"] = dtype_bad["optimizer_state"]["state"][first_name]["exp_avg"].double()
+        load_only_cases["dtype"] = dtype_bad
+        contiguous_bad = copy.deepcopy(payload)
+        source = contiguous_bad["optimizer_state"]["state"][first_name]["exp_avg"]
+        expanded = torch.zeros(tuple(dim * 2 for dim in source.shape), dtype=source.dtype)
+        slices = tuple(slice(None, None, 2) for _ in source.shape)
+        contiguous_bad["optimizer_state"]["state"][first_name]["exp_avg"] = expanded[slices]
+        self.assertFalse(contiguous_bad["optimizer_state"]["state"][first_name]["exp_avg"].is_contiguous())
+        load_only_cases["noncontiguous"] = contiguous_bad
+        for name, bad in load_only_cases.items():
+            with self.subTest(name=name):
+                validate_checkpoint_payload(bad, run_digest="r" * 64, compatibility=compatibility)
+                restored = KernelPolicyValueNet(model.config, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
+                optimizer = create_adam(restored, 0.001)
+                with self.assertRaises(ValueError):
+                    load_adam_state(
+                        optimizer,
+                        restored,
+                        bad["optimizer_state"],
+                        0.001,
+                        expected_step_count=bad["optimizer_step_count"],
+                    )
+
+    def test_valid_loaded_adam_state_can_step_without_mutating_source_payload(self) -> None:
+        payload, model, _optimizer, compatibility = self.make_payload()
+        validate_checkpoint_payload(payload, run_digest="r" * 64, compatibility=compatibility)
+        source_copy = copy.deepcopy(payload)
+        restored = KernelPolicyValueNet(model.config, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
+        restored.load_state_dict(validate_model_state(restored, payload["model_state"]), strict=True)
+        optimizer = create_adam(restored, 0.001)
+        load_adam_state(optimizer, restored, payload["optimizer_state"], 0.001, expected_step_count=payload["optimizer_step_count"])
+        encoded = encode_decision(observation(), legal_actions())
+        logits, value = restored(encoded)
+        loss = logits.square().mean() + value.square().mean()
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        optimizer.step()
+        assert_model_finite(restored)
+        assert_optimizer_finite(optimizer)
+        export_adam_state(optimizer, restored, 0.001)
+        self.assert_payload_equal(payload, source_copy)
+
+    def test_rng_validators_reject_unrestorable_states_and_do_not_touch_globals(self) -> None:
+        payload, _model, _optimizer, compatibility = self.make_payload()
+        py_global = random.getstate()
+        torch_global = torch.random.get_rng_state().clone()
+        validate_python_rng_state(payload["python_rng_state"])
+        validate_torch_rng_state(payload["torch_cpu_rng_state"])
+        bad_py = copy.deepcopy(payload["python_rng_state"])
+        bad_py["state"][-1] = 625
+        with self.assertRaises(ValueError):
+            validate_python_rng_state(bad_py)
+        bad_torch = torch.zeros_like(payload["torch_cpu_rng_state"])
+        with self.assertRaises(ValueError):
+            validate_torch_rng_state(bad_torch)
+        checkpoint_bad_py = copy.deepcopy(payload)
+        checkpoint_bad_py["python_rng_state"] = bad_py
+        with self.assertRaises(ValueError):
+            validate_checkpoint_payload(checkpoint_bad_py, run_digest="r" * 64, compatibility=compatibility)
+        checkpoint_bad_torch = copy.deepcopy(payload)
+        checkpoint_bad_torch["torch_cpu_rng_state"] = bad_torch
+        with self.assertRaises(ValueError):
+            validate_checkpoint_payload(checkpoint_bad_torch, run_digest="r" * 64, compatibility=compatibility)
+        self.assertEqual(py_global, random.getstate())
+        self.assertTrue(torch.equal(torch_global, torch.random.get_rng_state()))
 
     def test_safe_load_incompatibility_never_calls_unsafe_torch_load(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

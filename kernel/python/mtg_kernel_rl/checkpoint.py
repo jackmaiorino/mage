@@ -40,6 +40,8 @@ MAX_CHECKPOINT_TENSOR_BYTES = 256 * 1024 * 1024
 MAX_CHECKPOINT_COLLECTION_ITEMS = 4096
 MAX_CHECKPOINT_DEPTH = 16
 MAX_TORCH_RNG_BYTES = 65536
+EXPECTED_TORCH_CPU_RNG_STATE_BYTES = int(torch.random.get_rng_state().numel())
+MAX_ADAM_STEP = 1_000_000
 ALLOWED_LOGICAL_TENSOR_DTYPES = {
     torch.float32,
     torch.float64,
@@ -93,6 +95,12 @@ def _require_cpu_strided_tensor(tensor: torch.Tensor, name: str) -> None:
         raise ValueError(f"{name} tensor has too many elements")
     if tensor.numel() * tensor.element_size() > MAX_CHECKPOINT_TENSOR_BYTES:
         raise ValueError(f"{name} tensor has too many bytes")
+
+
+def _require_contiguous_cpu_strided_tensor(tensor: torch.Tensor, name: str) -> None:
+    _require_cpu_strided_tensor(tensor, name)
+    if not tensor.is_contiguous():
+        raise ValueError(f"{name} must be contiguous")
 
 
 def _validate_tensor_values(tensor: torch.Tensor, name: str) -> None:
@@ -173,11 +181,11 @@ def export_adam_state(optimizer: torch.optim.Adam, model: KernelPolicyValueNet, 
         for key, value in slot.items():
             if not isinstance(value, torch.Tensor):
                 raise ValueError(f"Adam slot {name}.{key} must be tensor")
-            tensor = _clone_validated_tensor(value.detach(), f"optimizer_state.{name}.{key}")
-            if key in {"exp_avg", "exp_avg_sq"} and (tensor.dtype != param.dtype or tuple(tensor.shape) != tuple(param.shape)):
-                raise ValueError(f"Adam slot {name}.{key} shape mismatch")
             if key == "step":
-                step_values.add(_validate_adam_step_tensor(tensor, f"optimizer_state.{name}.step"))
+                step_values.add(_validate_adam_step_tensor(value, f"optimizer_state.{name}.step"))
+                tensor = value.detach().contiguous().clone()
+            else:
+                tensor = _clone_validated_adam_moment(value, param, f"optimizer_state.{name}.{key}", nonnegative=(key == "exp_avg_sq"))
             out_slot[key] = tensor
         if out_slot:
             nonempty_slots += 1
@@ -195,18 +203,37 @@ def export_adam_state(optimizer: torch.optim.Adam, model: KernelPolicyValueNet, 
 
 
 def _validate_adam_step_tensor(tensor: torch.Tensor, name: str) -> int:
-    _require_cpu_strided_tensor(tensor, name)
-    if tensor.numel() != 1 or tensor.ndim > 1:
-        raise ValueError(f"{name} must be scalar")
+    _require_contiguous_cpu_strided_tensor(tensor, name)
+    if tensor.dtype != torch.float32:
+        raise ValueError(f"{name} must be torch.float32")
+    if tensor.ndim != 0:
+        raise ValueError(f"{name} must be rank-0 scalar")
     if not torch.isfinite(tensor).all():
         raise ValueError(f"{name} contains non-finite values")
     raw = float(tensor.item())
     if raw < 0.0 or not raw.is_integer():
         raise ValueError(f"{name} must be a finite nonnegative integer")
-    return int(raw)
+    value = int(raw)
+    if value > MAX_ADAM_STEP:
+        raise ValueError(f"{name} exceeds maximum supported Adam step")
+    return value
+
+
+def _clone_validated_adam_moment(tensor: torch.Tensor, param: torch.nn.Parameter, name: str, *, nonnegative: bool) -> torch.Tensor:
+    _validate_tensor_values(tensor, name)
+    _require_contiguous_cpu_strided_tensor(tensor, name)
+    if tensor.dtype != param.dtype or tuple(tensor.shape) != tuple(param.shape) or tensor.device != param.device or tensor.layout != param.layout:
+        raise ValueError(f"Adam slot {name} metadata mismatch")
+    if nonnegative and torch.any(tensor < 0):
+        raise ValueError(f"Adam slot {name} contains negative values")
+    return tensor.detach().contiguous().clone()
 
 
 def _validate_adam_state_metadata(state: Any, *, learning_rate: float | None, optimizer_step_count: int | None) -> None:
+    if optimizer_step_count is not None and (
+        type(optimizer_step_count) is not int or optimizer_step_count < 0 or optimizer_step_count > MAX_ADAM_STEP
+    ):
+        raise ValueError("optimizer_step_count out of supported range")
     if not isinstance(state, dict):
         raise ValueError("optimizer_state must be a dict")
     if set(state) != {"schema", "config", "param_names", "state"}:
@@ -259,6 +286,8 @@ def _validate_adam_state_metadata(state: Any, *, learning_rate: float | None, op
             if not isinstance(value, torch.Tensor):
                 raise ValueError(f"optimizer slot {name}.{key} must be tensor")
             _validate_tensor_values(value, f"optimizer_state.{name}.{key}")
+            if key == "exp_avg_sq" and torch.any(value < 0):
+                raise ValueError(f"optimizer slot {name}.{key} contains negative values")
     if optimizer_step_count == 0 and nonempty_slots:
         raise ValueError("optimizer state must be empty when optimizer_step_count is zero")
     if optimizer_step_count is not None and optimizer_step_count > 0 and nonempty_slots != len(param_names):
@@ -279,15 +308,24 @@ def load_adam_state(
     if state.get("param_names") != names:
         raise ValueError("optimizer_state param order mismatch")
     state_by_name = state.get("state")
-    optimizer.state.clear()
+    prepared: list[tuple[torch.nn.Parameter, dict[str, torch.Tensor]]] = []
     for name, param in named:
         raw_slot = state_by_name[name]
         slot: dict[str, torch.Tensor] = {}
         for key, value in raw_slot.items():
-            tensor = _clone_validated_tensor(value.detach(), f"optimizer_state.{name}.{key}")
-            if key != "step" and (tensor.dtype != param.dtype or tuple(tensor.shape) != tuple(param.shape)):
-                raise ValueError(f"optimizer slot {name}.{key} shape mismatch")
-            slot[key] = tensor
+            if key == "step":
+                _validate_adam_step_tensor(value, f"optimizer_state.{name}.step")
+                slot[key] = value.detach().contiguous().clone()
+            else:
+                slot[key] = _clone_validated_adam_moment(
+                    value,
+                    param,
+                    f"optimizer_state.{name}.{key}",
+                    nonnegative=(key == "exp_avg_sq"),
+                )
+        prepared.append((param, slot))
+    optimizer.state.clear()
+    for param, slot in prepared:
         if slot:
             optimizer.state[param] = slot
     export_adam_state(optimizer, model, learning_rate)
@@ -300,9 +338,14 @@ def assert_optimizer_finite(optimizer: torch.optim.Adam) -> None:
         for key, value in slot.items():
             if not isinstance(value, torch.Tensor):
                 raise ValueError(f"optimizer slot {key} must be tensor")
-            _require_cpu_strided_tensor(value, f"optimizer slot {key}")
+            if key == "step":
+                _validate_adam_step_tensor(value, f"optimizer slot {key}")
+                continue
+            _require_contiguous_cpu_strided_tensor(value, f"optimizer slot {key}")
             if not torch.isfinite(value).all():
                 raise ValueError(f"optimizer slot {key} contains non-finite values")
+            if key == "exp_avg_sq" and torch.any(value < 0):
+                raise ValueError(f"optimizer slot {key} contains negative values")
 
 
 def capture_python_rng_state() -> dict[str, Any]:
@@ -326,9 +369,18 @@ def validate_python_rng_state(value: Any) -> None:
         or not all(type(item) is int and 0 <= item <= 0xFFFF_FFFF for item in value["state"])
     ):
         raise ValueError("invalid Python RNG vector")
+    index = value["state"][-1]
+    if index < 0 or index > 624:
+        raise ValueError("invalid Python RNG index")
     gauss = value["gauss"]
     if gauss is not None and (type(gauss) is not float or not math.isfinite(gauss)):
         raise ValueError("invalid Python RNG gaussian cache")
+    isolated = random.Random()
+    try:
+        isolated.setstate((value["version"], tuple(value["state"]), gauss))
+        isolated.random()
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Python RNG state is not restorable") from exc
 
 
 def capture_torch_rng_state() -> torch.Tensor:
@@ -338,8 +390,19 @@ def capture_torch_rng_state() -> torch.Tensor:
 def validate_torch_rng_state(value: Any) -> None:
     if not isinstance(value, torch.Tensor) or value.dtype != torch.uint8 or value.ndim != 1 or value.device.type != "cpu":
         raise ValueError("invalid Torch CPU RNG state")
-    if value.numel() <= 0 or value.numel() > MAX_TORCH_RNG_BYTES:
+    _require_contiguous_cpu_strided_tensor(value, "Torch CPU RNG state")
+    if value.numel() != EXPECTED_TORCH_CPU_RNG_STATE_BYTES or value.numel() > MAX_TORCH_RNG_BYTES:
         raise ValueError("invalid Torch CPU RNG state size")
+    if not torch.any(value != 0):
+        raise ValueError("Torch CPU RNG state must not be all zero")
+    generator = torch.Generator(device="cpu")
+    try:
+        generator.set_state(value.detach().clone())
+        probe = torch.rand(1, generator=generator)
+    except RuntimeError as exc:
+        raise ValueError("Torch CPU RNG state is not restorable") from exc
+    if not torch.isfinite(probe).all():
+        raise ValueError("Torch CPU RNG state produced non-finite sample")
 
 
 def restore_torch_rng_state(value: Any) -> None:
