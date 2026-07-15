@@ -396,6 +396,12 @@ pub struct HarnessSurfaceV2 {
     /// version of this fix regressing the corpus from 21/40 to 6/40
     /// complete traces before this field was added.
     combat_round_opening_mana_count: u64,
+    /// Stack length when this surface first observes the current
+    /// `priority_round`. The lazy timing is semantic: resolution-created
+    /// triggers are already present and therefore belong to the baseline
+    /// (Java resets passed flags after resolution), while casts and their
+    /// cast-time triggers grow the stack later in the same round and remain
+    /// covered by the originating `act()` call's trailing force-pass.
     round_opening_stack_len: usize,
     stack_len_round_seen: Option<u64>,
     /// `state.stack.len()` as of the last time the plain (non-combat)
@@ -2241,38 +2247,15 @@ mod tests {
         );
     }
 
-    /// Investigation checkpoint, NOT a reproduction (ReferenceRules v2
-    /// grind, Sol #107 continuation -- see `rally/coverage_ledger.md`'s own
-    /// entry for the full writeup). `rally_mirror_v2`/`rally_vs_burn_v2`'s
-    /// dominant remaining divergence class is a sorcery-speed card the trace
-    /// shows being cast but the kernel reports `castable_spells: []` for --
-    /// sampled cases all show a triggered ability (Goblin Bushwhacker's
-    /// kicked ETB, or once Clockwork Percussionist's death trigger) still
-    /// sitting on `state.stack` at that exact decision, which Java's own
-    /// game would already have resolved by then (`sorcery_speed_timing_ok`
-    /// requires `state.stack.is_empty()`).
-    ///
-    /// This test drives the minimal possible version of that shape (P0
-    /// casts Bushwhacker kicked; P1 has a single live Mountain -- a real,
-    /// non-empty `mana_abilities` option every time they're asked, matching
-    /// every sampled corpus divergence's own `kernel_mana` field, not a
-    /// totally inert opponent with nothing to ever choose but Pass) through
-    /// `HarnessSurfaceV2` (the layer the real replay driver uses, not the
-    /// raw `engine` layer `engine::tests::goblin_bushwhacker_kicked_pumps_
-    /// the_team_and_grants_haste` already confirms is fine) and checks that
-    /// a second sorcery-speed card becomes castable afterward. **It passes**
-    /// -- both with a totally inert P1 and with this mana-active P1, ruling
-    /// out both "the surface layer just cannot ever resolve a trigger" and
-    /// "an opponent with a real option to consider is the missing
-    /// ingredient." The real corpus divergence needs something neither
-    /// variant has: most plausibly something specific to surviving a combat
-    /// phase transition, a second/cascading trigger (Clockwork
-    /// Percussionist's case is a death trigger, a materially different
-    /// shape from an ETB), or the opponent having a real CAST option (not
-    /// just a mana ability) to consider mid-resolution -- none of those
-    /// tested here. Kept as a documented negative result and a ready-made
-    /// scaffold for whoever extends this next, not evidence the bug is
-    /// fixed.
+    /// Kicked-path guard retained from the ReferenceRules v2 investigation.
+    /// The original corpus diagnosis was wrong: in
+    /// `game_20260714_200336_0016.txt`, Java's log says `Pay Kicker {R} ? ...
+    /// decision=NO`. Java's intervening-if gate therefore creates no
+    /// Bushwhacker trigger at all, while the kernel used to create one and
+    /// defer the Kicker check until its effect resolved. The actual fix is
+    /// `trigger::TriggeredAbilityDef::intervening_if_kicked`; this test still
+    /// proves that the distinct, genuinely kicked path resolves normally
+    /// through the surface even when the opponent has a live mana option.
     #[test]
     fn goblin_bushwhacker_kicked_trigger_resolves_in_the_minimal_single_active_player_case() {
         let mut state = empty_game();

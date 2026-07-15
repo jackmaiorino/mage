@@ -71,34 +71,18 @@ pub struct EngineState {
     /// those two steps) without re-deriving round boundaries from stack
     /// length or step identity, both of which are ambiguous across turns.
     pub priority_round: u64,
-    /// `state.stack.len()` at the exact instant `reset_priority` last ran --
-    /// i.e. the stack length as of the true start of the CURRENT
-    /// `priority_round`, captured before anything else in the same
-    /// `advance_until_decision` loop iteration can grow it further.
-    ///
-    /// Exists for `HarnessSurfaceV2`'s `round_opening_stack_len` (Sol #107,
-    /// ReferenceRules v2 grind): that field's own capture used to be lazy
-    /// ("the first time I observe this round, whatever `state.stack.len()`
-    /// is *then* must be its opening length") -- which is wrong whenever a
-    /// stack resolution's own trigger-collection immediately re-grows the
-    /// stack via `push_trigger_onto_stack` (deliberately *not* itself a
-    /// round boundary, see this struct's own `priority_round` doc) before
-    /// the surface ever gets a chance to observe the round with an empty
-    /// stack. Root-caused against `rally_mirror_v2/game_20260714_200336_
-    /// 0016.txt` decision 64 (`REPLAY_DEBUG_SURFACE_WALK=1`, `rally/
-    /// coverage_ledger.md`'s "castability-gap" entries): Goblin Bushwhacker
-    /// resolves into its own kicked ETB trigger inside one `advance_until_
-    /// decision` call (`resolve_top_of_stack` -> `collect_and_queue_
-    /// triggers` -> `reset_priority` bumps the round -> loop continues ->
-    /// `drain_pending_triggers_or_decide` pushes the trigger, same round,
-    /// no further bump) -- the surface's first observation of the new round
-    /// already has the trigger on the stack, so its lazily-captured
-    /// baseline was `1`, not `0`, permanently defeating `stack_top_is_
-    /// fresh_own_item`'s `len() > round_opening_stack_len` check for that
-    /// exact trigger and leaving it stuck unresolved (both players silently
-    /// pass the *next* round instead, never reaching the two-consecutive-
-    /// real-passes-on-this-item that would resolve it). This field gives
-    /// the surface the correct, eagerly-captured value instead.
+    /// `state.stack.len()` at the exact instant `reset_priority` last ran.
+    /// Kept as a diagnostic distinction between the rules-level round
+    /// boundary and the surface's deliberately lazy first-observation
+    /// baseline. `HarnessSurfaceV2` must not use this value for its ordinary
+    /// own-cast suppression: Java resets every player's passed flag after a
+    /// resolution, then places any resolution-created triggers before the
+    /// next priority ask, so those triggers need real priority windows. By
+    /// contrast, a cast and its cast-time triggers happen without a
+    /// `reset_priority` boundary and remain covered by the cast's trailing
+    /// `ComputerPlayerRL.act()` force-pass. Eagerly using this snapshot for
+    /// both cases regresses legitimate resolution ETBs such as Voldaren
+    /// Epicure.
     pub stack_len_at_round_open: usize,
     /// A spell that has been announced (601.2a: already moved to the stack
     /// by `begin_cast`) but not yet finished being targeted, mode-chosen,
@@ -1519,12 +1503,10 @@ fn reset_priority(state: &mut GameState) {
     state.engine.priority_passes = [false, false];
     state.priority_player = state.active_player;
     state.engine.priority_round += 1;
-    // Captured HERE, before this same `advance_until_decision` loop
-    // iteration can possibly continue on to `drain_pending_triggers_or_
-    // decide` and grow the stack again via a same-round trigger push --
-    // see `EngineState::stack_len_at_round_open`'s doc for why the exact
-    // timing of this snapshot (not merely computing `state.stack.len()`
-    // wherever it's later read) is the entire point.
+    // Captured here before this `advance_until_decision` iteration can
+    // continue into a resolution-created trigger push. See the field's doc:
+    // this is a diagnostic boundary snapshot, not the surface suppression's
+    // deliberately later first-observation baseline.
     state.engine.stack_len_at_round_open = state.stack.len();
 }
 
