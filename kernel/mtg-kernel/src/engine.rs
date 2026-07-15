@@ -4348,6 +4348,47 @@ mod tests {
         assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "expires at the owner's next turn's own cleanup");
     }
 
+    #[test]
+    fn combat_lethal_damage_queues_clockwork_percussionist_dies_trigger_immediately() {
+        let mut state = empty_game();
+        let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
+        let blocker = put_on_battlefield(&mut state, PlayerId::P1, "Human Soldier Token");
+        state.engine.combat.attackers = vec![percussionist];
+        state.engine.combat.blocked_by = vec![(percussionist, vec![blocker])];
+
+        deal_combat_damage(&mut state);
+
+        assert_eq!(state.objects.get(percussionist).zone, Zone::Graveyard);
+        assert_eq!(state.engine.pending_triggers.len(), 1, "the SBA-created death event must be collected before the next priority window");
+        assert_eq!(state.engine.pending_triggers[0].source, percussionist);
+    }
+
+    #[test]
+    fn trigger_collection_preserves_pre_sba_etb_and_collects_sba_created_death_together() {
+        let mut state = empty_game();
+        let epicure = put_in_hand(&mut state, PlayerId::P1, "Voldaren Epicure");
+        event::propose_and_commit(&mut state, ProposedEvent::zone_change(epicure, Zone::Battlefield));
+        let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
+
+        // Model two creatures that are lethal at the next SBA check. The
+        // Epicure's ETB event already happened, so that trigger must survive
+        // even though the source leaves the battlefield during the check.
+        // Percussionist's dies event, by contrast, is created by the check
+        // itself and must still be collected before the next priority window.
+        let epicure_toughness = effective_toughness(&state, epicure) as u16;
+        let percussionist_toughness = effective_toughness(&state, percussionist) as u16;
+        state.objects.get_mut(epicure).damage = epicure_toughness;
+        state.objects.get_mut(percussionist).damage = percussionist_toughness;
+
+        collect_and_queue_triggers(&mut state);
+
+        assert_eq!(state.objects.get(epicure).zone, Zone::Graveyard);
+        assert_eq!(state.objects.get(percussionist).zone, Zone::Graveyard);
+        assert_eq!(state.engine.pending_triggers.len(), 2);
+        assert_eq!(state.engine.pending_triggers[0].source, percussionist, "the active player's SBA-created dies trigger is ordered first");
+        assert_eq!(state.engine.pending_triggers[1].source, epicure, "the nonactive player's pre-SBA ETB trigger survives its source dying and is ordered second");
+    }
+
     // ================== external-review corrections ==================
 
     #[test]

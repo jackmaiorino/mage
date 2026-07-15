@@ -2,11 +2,11 @@
 //!
 //! After every resolution (a spell/ability resolving, a land entering, a
 //! turn-based draw -- anything that produced `CommittedEvent`s), the engine
-//! calls `collect_and_process`: it drains the event log, matches triggered
-//! abilities, runs SBAs to a fixed point, and returns any newly-pending
-//! triggers in APNAP order for `engine.rs` to place on the stack (or, if
-//! 2+ share a controller, to ask that controller to order via
-//! `engine::Decision::OrderTriggers`).
+//! calls `collect_and_process`: it matches the already-committed events,
+//! runs SBAs to a fixed point, then matches any events those SBAs created.
+//! The combined newly-pending triggers are returned in APNAP order for
+//! `engine.rs` to place on the stack (or, if 2+ share a controller, to ask
+//! that controller to order via `engine::Decision::OrderTriggers`).
 
 use crate::effect::{EffectCond, EffectOp, PlayerRef, TargetRef};
 use crate::event::CommittedEvent;
@@ -254,12 +254,12 @@ pub fn sba_fixed_point(state: &mut GameState) {
     }
 }
 
-/// Drains `state.engine.event_log`, matches triggers, runs SBAs to a fixed
-/// point, and returns any newly-triggered abilities in APNAP order (active
-/// player's triggers first).
+/// Matches the events already in `state.engine.event_log`, runs SBAs to a
+/// fixed point, then matches any events created by those SBAs. Returns the
+/// combined newly-triggered abilities in APNAP order (active player's
+/// triggers first).
 pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     let events: Vec<CommittedEvent> = state.engine.event_log.drain(..).collect();
-    let draws_this_turn_at = draws_this_turn_snapshot(&events, state);
     // Single-shot: `engine::resolve_top_of_stack` set this immediately
     // before the resolution whose events we're about to match, explicitly
     // (`Some`/`None`) every single time -- taking it here means it can never
@@ -267,6 +267,27 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     // `EngineState::pending_kicked_source`'s doc).
     let kicked_source = state.engine.pending_kicked_source.take();
 
+    // Trigger conditions are evaluated at the moment their event happens,
+    // before the following SBA check (603.2/704.3). In particular, an ETB
+    // trigger must not disappear merely because its source dies during that
+    // check, so match the pre-SBA batch while its sources still occupy the
+    // zones from which their abilities function.
+    let mut new_triggers = triggers_from_events(state, &events, kicked_source);
+
+    // Conversely, SBAs can create new trigger events themselves. Lethal
+    // combat damage, for example, moves Clockwork Percussionist to the
+    // graveyard here; its dies trigger belongs to this same trigger-placement
+    // checkpoint, not some later action. Match that second batch only after
+    // the fixed point, then order both batches together under 603.3b.
+    sba_fixed_point(state);
+    let sba_events: Vec<CommittedEvent> = state.engine.event_log.drain(..).collect();
+    new_triggers.extend(triggers_from_events(state, &sba_events, None));
+
+    order_apnap(new_triggers, state.active_player)
+}
+
+fn triggers_from_events(state: &GameState, events: &[CommittedEvent], kicked_source: Option<ObjectId>) -> Vec<PendingTrigger> {
+    let draws_this_turn_at = draws_this_turn_snapshot(events, state);
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
         for def in triggers_for(obj.card_def) {
@@ -291,9 +312,7 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
         }
     }
 
-    sba_fixed_point(state);
-
-    order_apnap(new_triggers, state.active_player)
+    new_triggers
 }
 
 /// For each event in `events` (already committed, in commit order), the
