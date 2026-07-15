@@ -15,9 +15,9 @@ OPERATIONAL_ONLY = "operational_only"
 FORBIDDEN = "forbidden"
 CLASSIFICATIONS = (MODEL_INPUT, OPERATIONAL_ONLY, FORBIDDEN)
 
-FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-4"
-FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-4"
-ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-4"
+FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-5"
+FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-5"
+ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-5"
 
 STATE_HASH_DIM = 96
 ACTION_HASH_DIM = 96
@@ -186,6 +186,20 @@ PRIVATE_CONTEXT_SUBROLES = [
     ("private_discard", "remaining_choices", "[]"),
 ]
 CONTEXT_SUBROLE_IDS = {path: i for i, path in enumerate(PENDING_CONTEXT_SUBROLES + PRIVATE_CONTEXT_SUBROLES)}
+DETACHED_CONTEXT_REF_ALLOWLIST = {
+    # rl.rs::pending_discard_semantic_v2 can expose a resolving spell source
+    # after resolve_top_of_stack has popped the public stack item but before
+    # apply_discard moves the object out of Stack.
+    ("pending_discard", "resume_source"): frozenset({"Stack"}),
+    # effect.rs::MayPayCostThen is staged from the resolving item's ExecCtx
+    # after resolve_top_of_stack has popped that item from the public stack
+    # vector; engine.rs keeps the source object in Zone::Stack until the
+    # optional-cost branch completes and performs the deferred zone move.
+    ("pending_optional_cost", "source"): frozenset({"Stack"}),
+    ("pending_optional_cost", "spell_resume_source"): frozenset({"Stack"}),
+    ("pending_optional_cost_sacrifice", "source"): frozenset({"Stack"}),
+    ("pending_optional_cost_sacrifice", "spell_resume_source"): frozenset({"Stack"}),
+}
 
 # Derived from rl.rs::engine_context_v2 priority order and
 # surface_v2.rs::next_decision_inner reshape order. Keep fail-closed: a new
@@ -1310,10 +1324,13 @@ class _NodeRegistry:
         features, token = _card_public_features(_blank_public_from_ref(ref, source_kind), self.actor, order, source_kind, self.current_turn)
         return self._add_node(key, features, token, group)
 
-    def resolve_or_add_ref_node(self, ref: dict[str, Any], group: str, order: int, source_kind: str) -> int:
+    def resolve_context_ref_node(self, ref: dict[str, Any], group: str, order: int, source_kind: str, path: tuple[str, ...]) -> int:
         key = self.validate_ref(ref)
         if key in self._node_by_key:
             return self._node_by_key[key]
+        allowed_zones = DETACHED_CONTEXT_REF_ALLOWLIST.get(path)
+        if allowed_zones is None or ref["zone"] not in allowed_zones:
+            raise FeatureSchemaError(f"context stable reference does not resolve to an observed object node: {'.'.join(path)}")
         return self.add_ref_node(ref, group, order, source_kind)
 
     def _add_node(self, key: tuple[int, int], features: list[float], token: int, group: str) -> int:
@@ -1395,7 +1412,7 @@ def _context_ref_edges(
         order_counter[0] += 1
         group = "pending_context" if role == "pending_context" else "private_context"
         source_kind = "pending" if role == "pending_context" else "private"
-        node = registry.resolve_or_add_ref_node(value, group, order, source_kind)
+        node = registry.resolve_context_ref_node(value, group, order, source_kind, normalized)
         _append_edge(edge_rows, edge_sources, edge_targets, node, node, role, order, subrole)
         return
     if isinstance(spec, OptionalSpec):
@@ -1625,6 +1642,30 @@ def _validate_order_trigger_semantic(semantic: dict[str, Any]) -> None:
         raise FeatureSchemaError("order_triggers.order must be a permutation of pending source indexes")
 
 
+def _require_ref(ref: dict[str, Any] | None, label: str) -> dict[str, Any]:
+    if ref is None:
+        raise FeatureSchemaError(f"{label} must be visible in this active Rust branch")
+    return ref
+
+
+def _require_ref_zone(ref: dict[str, Any] | None, label: str, zones: Iterable[str]) -> dict[str, Any]:
+    value = _require_ref(ref, label)
+    allowed = tuple(zones)
+    if value["zone"] not in allowed:
+        raise FeatureSchemaError(f"{label} has zone {value['zone']!r}, expected one of {allowed}")
+    return value
+
+
+def _require_ref_controller(ref: dict[str, Any], controller: str, label: str) -> None:
+    if ref["controller"] != controller:
+        raise FeatureSchemaError(f"{label} controller does not match Rust decision owner")
+
+
+def _require_actor(actor: str, owner: str, label: str) -> None:
+    if actor != owner:
+        raise FeatureSchemaError(f"acting_player does not match Rust decision owner for {label}")
+
+
 def _validate_engine_context(engine: dict[str, Any]) -> None:
     pending_keys = (
         "pending_cast",
@@ -1666,6 +1707,15 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             if engine["pending_discard"]["resume_stage"] != expected_resume:
                 raise FeatureSchemaError("pending_discard resume_stage does not match paused engine context")
 
+    pending_cast = engine["pending_cast"]
+    if pending_cast is not None:
+        source = _require_ref_zone(pending_cast["source"], "pending_cast.source", ("Stack",))
+        _require_ref_controller(source, pending_cast["controller"], "pending_cast.source")
+    pending_activation = engine["pending_activation"]
+    if pending_activation is not None:
+        source = _require_ref_zone(pending_activation["source"], "pending_activation.source", ("Battlefield",))
+        _require_ref_controller(source, pending_activation["controller"], "pending_activation.source")
+
     pending_discard = engine["pending_discard"]
     if pending_discard is not None:
         resume_stage = pending_discard["resume_stage"]
@@ -1674,15 +1724,22 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             raise FeatureSchemaError("pending_discard resume_source must be absent for this resume_stage")
         if resume_stage in ("finish_spell_resolution", "finish_optional_cost") and resume_source is None:
             raise FeatureSchemaError("pending_discard resume_source is required for this resume_stage")
+        if resume_source is not None and resume_source["zone"] != "Stack":
+            raise FeatureSchemaError("pending_discard resume_source must still be in Stack until the deferred resume finishes")
 
     for key in ("pending_optional_cost", "pending_optional_cost_sacrifice"):
         pending = engine[key]
         if pending is None:
             continue
+        source = _require_ref_zone(pending["source"], f"{key}.source", ("Stack",))
+        _require_ref_controller(source, pending["player"], f"{key}.source")
         source_present = pending["spell_resume_source"] is not None
         zone_present = pending["spell_resume_zone"] is not None
         if source_present != zone_present:
             raise FeatureSchemaError(f"{key} spell_resume_source and spell_resume_zone must be both present or both absent")
+        if pending["spell_resume_source"] is not None:
+            spell_resume_source = _require_ref_zone(pending["spell_resume_source"], f"{key}.spell_resume_source", ("Stack",))
+            _require_ref_controller(spell_resume_source, pending["player"], f"{key}.spell_resume_source")
     optional = engine["pending_optional_cost"]
     if optional is not None and not (optional["discard_payable"] or optional["sacrifice_payable"]):
         raise FeatureSchemaError("pending_optional_cost must have at least one payable branch")
@@ -1707,8 +1764,20 @@ def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any
             raise FeatureSchemaError("declare_blockers private context leaked to non-defending actor")
         if present != ["private_blockers"]:
             raise FeatureSchemaError("declare_blockers stage requires only private_blockers")
-        if private_blockers["current_attacker"] is None:
+        current_attacker = private_blockers["current_attacker"]
+        if current_attacker is None:
             raise FeatureSchemaError("declare_blockers stage requires current_attacker")
+        if current_attacker["controller"] != projection["active_player"]:
+            raise FeatureSchemaError("declare_blockers current_attacker must be controlled by the active player")
+        for attacker, blocker in private_blockers["accumulated"]:
+            if attacker["controller"] != projection["active_player"] or blocker["controller"] != actor:
+                raise FeatureSchemaError("declare_blockers accumulated tuple has impossible attacker/blocker ownership")
+        for attacker, blockers in private_blockers["remaining"]:
+            if attacker["controller"] != projection["active_player"]:
+                raise FeatureSchemaError("declare_blockers remaining attacker must be controlled by the active player")
+            for blocker in blockers:
+                if blocker["controller"] != actor:
+                    raise FeatureSchemaError("declare_blockers remaining blocker must be controlled by the defending actor")
         return
     if stage == "discard_pick":
         if present != ["private_discard"]:
@@ -1727,19 +1796,37 @@ def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any
     raise FeatureSchemaError(f"unknown surface stage {stage!r}")
 
 
-def _validate_engine_surface_tuple(engine: dict[str, Any], surface: dict[str, Any], actor: str) -> None:
+def _validate_engine_surface_tuple(projection: dict[str, Any], engine: dict[str, Any], surface: dict[str, Any], actor: str) -> None:
     engine_stage = engine["current_stage"]
     surface_stage = surface["current_stage"]
     if surface_stage == "priority":
-        if engine_stage in ("priority", "halted", "pending_triggers", "pending_optional_cost_sacrifice"):
+        if engine_stage in ("priority", "halted"):
             return
         if engine_stage in ("pending_cast", "pending_activation") and engine["pending_discard"] is None:
+            pending_key = engine_stage
+            _require_actor(actor, engine[pending_key]["controller"], engine_stage)
+            return
+        if engine_stage == "pending_optional_cost_sacrifice":
+            _require_actor(actor, engine["pending_optional_cost_sacrifice"]["player"], engine_stage)
+            return
+        if engine_stage == "pending_triggers":
+            pending_triggers = engine["pending_triggers"]
+            if len(pending_triggers) < 2 or pending_triggers[1]["controller"] != pending_triggers[0]["controller"]:
+                raise FeatureSchemaError("pending_triggers priority tuple requires a same-controller first trigger group")
+            _require_actor(actor, pending_triggers[0]["controller"], engine_stage)
             return
         raise FeatureSchemaError("engine/surface tuple is impossible for Rust priority projection")
 
     if surface_stage == "declare_blockers_for_attacker":
         if engine_stage != "priority":
             raise FeatureSchemaError("blockers surface reshape must sit over engine priority")
+        private_blockers = surface["private_blockers"]
+        current_attacker = private_blockers["current_attacker"]
+        if current_attacker is None:
+            raise FeatureSchemaError("blockers surface reshape requires a current attacker")
+        if current_attacker["controller"] != projection["active_player"]:
+            raise FeatureSchemaError("blockers current attacker must match active player")
+        _require_actor(actor, "p1" if current_attacker["controller"] == "p0" else "p0", surface_stage)
         return
 
     if surface_stage == "discard_pick":
@@ -1787,7 +1874,7 @@ def _validate_observation_semantics(observation: dict[str, Any]) -> None:
             raise FeatureSchemaError("stack_index must match recorded stack position")
     _validate_engine_context(p["engine_context"])
     _validate_surface_context(p["surface_context"], p, observation["acting_player"])
-    _validate_engine_surface_tuple(p["engine_context"], p["surface_context"], observation["acting_player"])
+    _validate_engine_surface_tuple(p, p["engine_context"], p["surface_context"], observation["acting_player"])
     for permission in p["exile_play_permissions"]:
         if permission["zone_change_generation"] != permission["object"]["zone_change_count"]:
             raise FeatureSchemaError("permission zone_change_generation does not match object incarnation")

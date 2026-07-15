@@ -245,16 +245,18 @@ class FeatureEncodingTest(unittest.TestCase):
         p0_creature = base["projection"]["battlefield"][0][0]["stable"]
         p0_land = base["projection"]["battlefield"][0][1]["stable"]
         p1_creature = base["projection"]["battlefield"][1][0]["stable"]
+        stack_source = base["projection"]["stack"][0]["source"]
         hand0 = base["own_hand"][0]["stable"]
         hand1 = base["own_hand"][1]["stable"]
         trigger_pair = [
             {"source": p0_creature, "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
-            {"source": p1_creature, "controller": "p1", "trigger_kind": "madness_offer", "kicked": True},
+            {"source": p0_land, "controller": "p0", "trigger_kind": "madness_offer", "kicked": True},
+            {"source": p1_creature, "controller": "p1", "trigger_kind": "triggered_ability", "kicked": False},
         ]
 
         def pending_cast_payload():
             return {
-                "source": hand0,
+                "source": stack_source,
                 "controller": "p0",
                 "chosen_targets": [{"target_kind": "object", "object": p1_creature}],
                 "is_flashback": False,
@@ -272,13 +274,13 @@ class FeatureEncodingTest(unittest.TestCase):
         def pending_optional_payload(discard_payable=True, sacrifice_payable=True):
             return {
                 "player": "p0",
-                "source": hand0,
+                "source": stack_source,
                 "discard_cards": 1,
                 "sacrifice_lands": 1,
                 "discard_payable": discard_payable,
                 "sacrifice_payable": sacrifice_payable,
-                "spell_resume_source": hand0,
-                "spell_resume_zone": "Hand",
+                "spell_resume_source": stack_source,
+                "spell_resume_zone": "Graveyard",
             }
 
         def set_discard_surface(obs, chosen=None, remaining=None):
@@ -321,7 +323,7 @@ class FeatureEncodingTest(unittest.TestCase):
         for label, resume_stage, resume_source in (
             ("direct discard", "none", None),
             ("spell-resolution discard", "finish_spell_resolution", detached_stack_source),
-            ("optional-cost discard", "finish_optional_cost", hand0),
+            ("optional-cost discard", "finish_optional_cost", detached_stack_source),
         ):
             obs = complete_observation()
             obs["projection"]["engine_context"]["current_stage"] = "pending_discard"
@@ -352,11 +354,11 @@ class FeatureEncodingTest(unittest.TestCase):
         sacrifice["projection"]["engine_context"]["current_stage"] = "pending_optional_cost_sacrifice"
         sacrifice["projection"]["engine_context"]["pending_optional_cost_sacrifice"] = {
             "player": "p0",
-            "source": hand0,
+            "source": stack_source,
             "remaining": 2,
             "chosen": [p0_land],
-            "spell_resume_source": hand0,
-            "spell_resume_zone": "Hand",
+            "spell_resume_source": stack_source,
+            "spell_resume_zone": "Graveyard",
         }
         valid.append(("sacrifice with priority", sacrifice))
         triggers = complete_observation()
@@ -445,6 +447,283 @@ class FeatureEncodingTest(unittest.TestCase):
         )
         with self.assertRaises(FeatureSchemaError):
             assert_observation_classified(bad)
+
+    def test_pending_context_decision_owner_rules_fail_closed(self) -> None:
+        base = complete_observation()
+        stack_source = base["projection"]["stack"][0]["source"]
+        p0_land = base["projection"]["battlefield"][0][1]["stable"]
+        p1_creature = base["projection"]["battlefield"][1][0]["stable"]
+        hand0 = base["own_hand"][0]["stable"]
+
+        def discard_surface(obs: dict) -> None:
+            obs["projection"]["surface_context"].update(
+                {"current_stage": "discard_pick", "private_discard": {"chosen": [], "remaining_choices": [hand0], "remaining_needed": 1}}
+            )
+
+        def optional_surface(obs: dict) -> None:
+            obs["projection"]["surface_context"].update(
+                {"current_stage": "optional_cost_use", "private_optional_cost": {"discard_payable": True, "sacrifice_payable": False, "stage": "optional_cost_use"}}
+            )
+
+        cases = []
+        pending_cast = complete_observation()
+        pending_cast["acting_player"] = "p1"
+        pending_cast["projection"]["engine_context"]["current_stage"] = "pending_cast"
+        pending_cast["projection"]["engine_context"]["pending_cast"] = {
+            "source": stack_source,
+            "controller": "p0",
+            "chosen_targets": [],
+            "is_flashback": False,
+            "cast_mode": None,
+            "additional_cost_discarded": None,
+            "mode_chosen": None,
+            "origin_zone": "Hand",
+            "sacrifice_chosen": [],
+            "kicked": None,
+        }
+        cases.append(("pending cast owner", pending_cast))
+
+        pending_activation = complete_observation()
+        pending_activation["acting_player"] = "p1"
+        pending_activation["projection"]["engine_context"]["current_stage"] = "pending_activation"
+        pending_activation["projection"]["engine_context"]["pending_activation"] = {
+            "source": p0_land,
+            "controller": "p0",
+            "ability_index": 0,
+            "chosen_targets": [],
+            "cost_discard_paid": [],
+        }
+        cases.append(("pending activation owner", pending_activation))
+
+        pending_discard = complete_observation()
+        pending_discard["acting_player"] = "p1"
+        pending_discard["projection"]["engine_context"]["current_stage"] = "pending_discard"
+        pending_discard["projection"]["engine_context"]["pending_discard"] = {"player": "p0", "count": 1, "resume_stage": "none", "resume_source": None}
+        discard_surface(pending_discard)
+        cases.append(("pending discard owner", pending_discard))
+
+        optional = complete_observation()
+        optional["acting_player"] = "p1"
+        optional["projection"]["engine_context"]["current_stage"] = "pending_optional_cost"
+        optional["projection"]["engine_context"]["pending_optional_cost"] = {
+            "player": "p0",
+            "source": stack_source,
+            "discard_cards": 1,
+            "sacrifice_lands": 0,
+            "discard_payable": True,
+            "sacrifice_payable": False,
+            "spell_resume_source": stack_source,
+            "spell_resume_zone": "Graveyard",
+        }
+        optional_surface(optional)
+        cases.append(("optional cost owner", optional))
+
+        sacrifice = complete_observation()
+        sacrifice["acting_player"] = "p1"
+        sacrifice["projection"]["engine_context"]["current_stage"] = "pending_optional_cost_sacrifice"
+        sacrifice["projection"]["engine_context"]["pending_optional_cost_sacrifice"] = {
+            "player": "p0",
+            "source": stack_source,
+            "remaining": 1,
+            "chosen": [],
+            "spell_resume_source": stack_source,
+            "spell_resume_zone": "Graveyard",
+        }
+        cases.append(("optional sacrifice owner", sacrifice))
+
+        trigger_order = complete_observation()
+        trigger_order["acting_player"] = "p1"
+        trigger_order["projection"]["engine_context"]["current_stage"] = "pending_triggers"
+        trigger_order["projection"]["engine_context"]["pending_triggers"] = [
+            {"source": stack_source, "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
+            {"source": p0_land, "controller": "p0", "trigger_kind": "madness_offer", "kicked": False},
+        ]
+        cases.append(("trigger order owner", trigger_order))
+
+        trigger_singleton_group = complete_observation()
+        trigger_singleton_group["projection"]["engine_context"]["current_stage"] = "pending_triggers"
+        trigger_singleton_group["projection"]["engine_context"]["pending_triggers"] = [
+            {"source": stack_source, "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
+            {"source": p1_creature, "controller": "p1", "trigger_kind": "triggered_ability", "kicked": False},
+        ]
+        cases.append(("trigger singleton group", trigger_singleton_group))
+
+        blockers = complete_observation()
+        blockers["acting_player"] = "p1"
+        blockers["projection"]["active_player"] = "p1"
+        blockers["projection"]["surface_context"].update(
+            {
+                "current_stage": "declare_blockers_for_attacker",
+                "private_blockers": {"current_attacker": p1_creature, "accumulated": [], "remaining": [[p1_creature, [base["projection"]["battlefield"][0][0]["stable"]]]]},
+            }
+        )
+        cases.append(("blocker defender owner", blockers))
+
+        for label, obs in cases:
+            with self.subTest(label=label):
+                with self.assertRaises(FeatureSchemaError):
+                    assert_observation_classified(obs)
+
+        assert_observation_classified(complete_observation())
+        halted = complete_observation()
+        halted["projection"]["engine_context"]["current_stage"] = "halted"
+        assert_observation_classified(halted)
+
+    def test_active_pending_source_shapes_fail_closed(self) -> None:
+        base = complete_observation()
+        stack_source = base["projection"]["stack"][0]["source"]
+        battlefield_source = base["projection"]["battlefield"][0][1]["stable"]
+
+        def cast_obs(source):
+            obs = complete_observation()
+            obs["projection"]["engine_context"]["current_stage"] = "pending_cast"
+            obs["projection"]["engine_context"]["pending_cast"] = {
+                "source": source,
+                "controller": "p0",
+                "chosen_targets": [],
+                "is_flashback": False,
+                "cast_mode": None,
+                "additional_cost_discarded": None,
+                "mode_chosen": None,
+                "origin_zone": "Hand",
+                "sacrifice_chosen": [],
+                "kicked": None,
+            }
+            return obs
+
+        def activation_obs(source):
+            obs = complete_observation()
+            obs["projection"]["engine_context"]["current_stage"] = "pending_activation"
+            obs["projection"]["engine_context"]["pending_activation"] = {
+                "source": source,
+                "controller": "p0",
+                "ability_index": 0,
+                "chosen_targets": [],
+                "cost_discard_paid": [],
+            }
+            return obs
+
+        assert_observation_classified(cast_obs(stack_source))
+        assert_observation_classified(activation_obs(battlefield_source))
+        bad_cast_sources = [
+            None,
+            {**stack_source, "zone": "Hand"},
+            {**stack_source, "controller": "p1"},
+        ]
+        bad_activation_sources = [
+            None,
+            {**battlefield_source, "zone": "Stack"},
+            {**battlefield_source, "controller": "p1"},
+        ]
+        for source in bad_cast_sources:
+            with self.subTest(kind="cast", source=source):
+                with self.assertRaises(FeatureSchemaError):
+                    assert_observation_classified(cast_obs(source))
+        for source in bad_activation_sources:
+            with self.subTest(kind="activation", source=source):
+                with self.assertRaises(FeatureSchemaError):
+                    assert_observation_classified(activation_obs(source))
+
+    def test_detached_context_ref_allowlist_is_narrow(self) -> None:
+        base = complete_observation()
+        hand0 = base["own_hand"][0]["stable"]
+        observed_stack = base["projection"]["stack"][0]["source"]
+        detached_same_card_stack = stable_ref(68, observed_stack["card_db_id"], "p0", "Stack")
+
+        admitted = complete_observation()
+        admitted["projection"]["engine_context"]["current_stage"] = "pending_discard"
+        admitted["projection"]["engine_context"]["pending_discard"] = {"player": "p0", "count": 1, "resume_stage": "finish_spell_resolution", "resume_source": detached_same_card_stack}
+        admitted["projection"]["surface_context"].update(
+            {"current_stage": "discard_pick", "private_discard": {"chosen": [], "remaining_choices": [hand0], "remaining_needed": 1}}
+        )
+        admitted_encoded = encode_decision(admitted, complete_legal_actions())
+
+        observed_resume = deep_copy(admitted)
+        observed_resume["projection"]["engine_context"]["pending_discard"]["resume_source"] = observed_stack
+        observed_encoded = encode_decision(observed_resume, complete_legal_actions())
+        self.assertNotEqual(encoded_digest(admitted_encoded), encoded_digest(observed_encoded))
+
+        cases = []
+        wrong_zone_resume = deep_copy(admitted)
+        wrong_zone_resume["projection"]["engine_context"]["pending_discard"]["resume_source"] = stable_ref(69, observed_stack["card_db_id"], "p0", "Graveyard")
+        cases.append(("wrong-zone resume source", wrong_zone_resume, complete_legal_actions()))
+
+        optional_detached = complete_observation()
+        optional_detached["projection"]["engine_context"]["current_stage"] = "pending_optional_cost"
+        optional_detached["projection"]["engine_context"]["pending_optional_cost"] = {
+            "player": "p0",
+            "source": detached_same_card_stack,
+            "discard_cards": 1,
+            "sacrifice_lands": 0,
+            "discard_payable": True,
+            "sacrifice_payable": False,
+            "spell_resume_source": detached_same_card_stack,
+            "spell_resume_zone": "Graveyard",
+        }
+        optional_detached["projection"]["surface_context"].update(
+            {"current_stage": "optional_cost_use", "private_optional_cost": {"discard_payable": True, "sacrifice_payable": False, "stage": "optional_cost_use"}}
+        )
+        encode_decision(optional_detached, complete_legal_actions())
+
+        optional_sacrifice_unresolved_chosen = complete_observation()
+        optional_sacrifice_unresolved_chosen["projection"]["engine_context"]["current_stage"] = "pending_optional_cost_sacrifice"
+        optional_sacrifice_unresolved_chosen["projection"]["engine_context"]["pending_optional_cost_sacrifice"] = {
+            "player": "p0",
+            "source": detached_same_card_stack,
+            "remaining": 2,
+            "chosen": [stable_ref(98, hand0["card_db_id"], "p0", "Battlefield")],
+            "spell_resume_source": detached_same_card_stack,
+            "spell_resume_zone": "Graveyard",
+        }
+        cases.append(("unresolved optional sacrifice choice", optional_sacrifice_unresolved_chosen, complete_legal_actions()))
+
+        private_discard = complete_observation()
+        private_discard["projection"]["engine_context"]["current_stage"] = "pending_discard"
+        private_discard["projection"]["engine_context"]["pending_discard"] = {"player": "p0", "count": 1, "resume_stage": "none", "resume_source": None}
+        private_discard["projection"]["surface_context"].update(
+            {
+                "current_stage": "discard_pick",
+                "private_discard": {"chosen": [], "remaining_choices": [stable_ref(99, hand0["card_db_id"], "p0", "Hand")], "remaining_needed": 1},
+            }
+        )
+        cases.append(("unresolved private discard choice", private_discard, complete_legal_actions()))
+
+        private_blocker = complete_observation()
+        private_blocker["projection"]["active_player"] = "p1"
+        p1_attacker = private_blocker["projection"]["battlefield"][1][0]["stable"]
+        private_blocker["projection"]["surface_context"].update(
+            {
+                "current_stage": "declare_blockers_for_attacker",
+                "private_blockers": {"current_attacker": p1_attacker, "accumulated": [], "remaining": [[p1_attacker, [stable_ref(100, hand0["card_db_id"], "p0", "Battlefield")]]]},
+            }
+        )
+        cases.append(("unresolved private blocker", private_blocker, complete_legal_actions()))
+
+        pending_target = complete_observation()
+        pending_target["projection"]["engine_context"]["current_stage"] = "pending_cast"
+        pending_target["projection"]["engine_context"]["pending_cast"] = {
+            "source": observed_stack,
+            "controller": "p0",
+            "chosen_targets": [{"target_kind": "object", "object": stable_ref(101, hand0["card_db_id"], "p1", "Battlefield")}],
+            "is_flashback": False,
+            "cast_mode": None,
+            "additional_cost_discarded": None,
+            "mode_chosen": None,
+            "origin_zone": "Hand",
+            "sacrifice_chosen": [],
+            "kicked": None,
+        }
+        cases.append(("unresolved pending target", pending_target, complete_legal_actions()))
+
+        unresolved_action_target = complete_observation()
+        bad_actions = complete_legal_actions()
+        bad_actions[1]["semantic"]["target"]["object"] = stable_ref(102, hand0["card_db_id"], "p1", "Battlefield")
+        cases.append(("unresolved action target", unresolved_action_target, bad_actions))
+
+        for label, obs, actions in cases:
+            with self.subTest(label=label):
+                with self.assertRaises(FeatureSchemaError):
+                    encode_decision(obs, actions)
 
     def test_names_display_stable_ids_hashes_do_not_change_features_or_logits(self) -> None:
         obs = complete_observation()
@@ -608,7 +887,7 @@ class FeatureEncodingTest(unittest.TestCase):
         trigger_obs["projection"]["engine_context"]["current_stage"] = "pending_triggers"
         trigger_obs["projection"]["engine_context"]["pending_triggers"] = [
             {"source": trigger_obs["projection"]["battlefield"][0][0]["stable"], "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
-            {"source": trigger_obs["projection"]["battlefield"][1][0]["stable"], "controller": "p1", "trigger_kind": "madness_offer", "kicked": True},
+            {"source": trigger_obs["projection"]["battlefield"][0][1]["stable"], "controller": "p0", "trigger_kind": "madness_offer", "kicked": True},
         ]
         reversed_triggers = deep_copy(trigger_obs)
         reversed_triggers["projection"]["engine_context"]["pending_triggers"] = list(reversed(reversed_triggers["projection"]["engine_context"]["pending_triggers"]))
@@ -727,7 +1006,21 @@ class FeatureEncodingTest(unittest.TestCase):
 
     def test_json_object_key_permutation_invariant_and_named_context_roles_sensitive(self) -> None:
         obs = complete_observation()
-        first = obs["own_hand"][0]["stable"]
+        first = obs["projection"]["stack"][0]["source"]
+        second_stack = stable_ref(68, first["card_db_id"], "p0", "Stack")
+        obs["projection"]["stack"].append(
+            {
+                "stack_index": 1,
+                "source": second_stack,
+                "controller": "p0",
+                "targets": [],
+                "stack_item_kind": "spell",
+                "is_flashback": False,
+                "mode_chosen": 0,
+                "madness_offer": False,
+                "kicked": False,
+            }
+        )
         second = obs["own_hand"][1]["stable"]
         second["card_db_id"] = first["card_db_id"]
         obs["projection"]["engine_context"]["current_stage"] = "pending_cast"
@@ -752,10 +1045,9 @@ class FeatureEncodingTest(unittest.TestCase):
         model = KernelPolicyValueNet.from_encoded(a)
         self.assertTrue(torch.equal(model(a)[0], model(b)[0]))
 
-        swapped_roles = deep_copy(obs)
-        swapped_roles["projection"]["engine_context"]["pending_cast"]["source"] = second
-        swapped_roles["projection"]["engine_context"]["pending_cast"]["additional_cost_discarded"] = [first]
-        self.assertNotEqual(encoded_digest(a), encoded_digest(encode_decision(swapped_roles, actions)))
+        same_card_other_stack_copy = deep_copy(obs)
+        same_card_other_stack_copy["projection"]["engine_context"]["pending_cast"]["source"] = second_stack
+        self.assertNotEqual(encoded_digest(a), encoded_digest(encode_decision(same_card_other_stack_copy, actions)))
 
     def test_distinct_action_semantics_do_not_collide(self) -> None:
         obs = complete_observation()
