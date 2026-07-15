@@ -60,6 +60,8 @@ def main() -> int:
                 del resp["reward"]
             elif scenario == "bool_int":
                 resp["schema_version"] = True
+            elif scenario == "u64_overflow":
+                resp["episode_id"] = 18446744073709551616
             elif scenario == "episode_drift":
                 resp["episode_id"] = req["episode_id"] + 1
             elif scenario == "step_drift":
@@ -107,6 +109,8 @@ def main() -> int:
                 resp["winner"] = None
                 resp["terminal_reward"] = [0, 0]
                 emit(resp)
+            elif scenario == "terminal_jump":
+                emit(terminal_response(req["request_id"], req["episode_id"], req["expected_step"] + 2))
             else:
                 emit(terminal_response(req["request_id"], req["episode_id"], req["expected_step"] + 1))
     return 0

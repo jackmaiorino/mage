@@ -15,9 +15,9 @@ OPERATIONAL_ONLY = "operational_only"
 FORBIDDEN = "forbidden"
 CLASSIFICATIONS = (MODEL_INPUT, OPERATIONAL_ONLY, FORBIDDEN)
 
-FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-2"
-FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-2"
-ENCODING_CONTRACT_VERSION = "actor-relative-hash-plus-role-refs-2"
+FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-3"
+FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-3"
+ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-3"
 
 STATE_HASH_DIM = 96
 ACTION_HASH_DIM = 96
@@ -96,6 +96,16 @@ OBJECT_GROUPS = [
     "pending_context",
     "private_context",
 ]
+EDGE_ROLES = [
+    "attachment",
+    "stack_target",
+    "combat_attacker",
+    "combat_blocker",
+    "effect_affected",
+    "permission",
+    "pending_context",
+    "private_context",
+]
 ACTION_REF_ROLES = [
     "source",
     "candidate",
@@ -120,20 +130,14 @@ PLAYER_INDEXED_LISTS = {
     ("observation", "projection", "surface_context", "combat_priority_spent"),
 }
 
-UNORDERED_LISTS = {
-    ("observation", "own_hand"),
-    ("observation", "projection", "battlefield", "[]"),
-    ("observation", "projection", "graveyards", "[]"),
-    ("observation", "projection", "exile"),
-    ("observation", "projection", "continuous_effects"),
+SET_LIKE_LISTS = {
     ("observation", "projection", "continuous_effects", "[]", "affected_objects"),
     ("observation", "projection", "exile_play_permissions"),
-    ("observation", "projection", "surface_context", "private_discard", "chosen"),
-    ("observation", "projection", "surface_context", "private_discard", "remaining_choices"),
     ("legal_action", "semantic", "cards"),
     ("legal_action", "semantic", "attackers"),
     ("legal_action", "semantic", "blockers"),
 }
+UNORDERED_LISTS = SET_LIKE_LISTS
 
 
 class FeatureSchemaError(ValueError):
@@ -148,6 +152,7 @@ class FeatureSchema:
     encoding_digest: str
     state_dim: int
     object_feature_dim: int
+    edge_feature_dim: int
     action_feature_dim: int
     object_group_count: int
     action_ref_feature_dim: int
@@ -160,10 +165,15 @@ class EncodedDecision:
     object_features: torch.Tensor
     object_card_ids: torch.Tensor
     object_groups: torch.Tensor
+    object_node_ids: torch.Tensor
+    edge_features: torch.Tensor
+    edge_source_indices: torch.Tensor
+    edge_target_indices: torch.Tensor
     action_features: torch.Tensor
     action_ref_features: torch.Tensor
     action_ref_card_ids: torch.Tensor
     action_ref_action_indices: torch.Tensor
+    action_ref_node_indices: torch.Tensor
 
 
 class Spec:
@@ -384,6 +394,8 @@ U8 = 255
 U16 = 65_535
 U32 = 4_294_967_295
 U64 = 18_446_744_073_709_551_615
+I32_MIN = -2_147_483_648
+I32_MAX = 2_147_483_647
 
 CARD_STABLE_REF = ObjectSpec(
     {
@@ -418,10 +430,10 @@ KEYWORDS = ObjectSpec(
 CHARACTERISTICS = ObjectSpec(
     {
         "type_flags": TYPE_FLAGS,
-        "base_power": Opt(I(MODEL_INPUT, minimum=None)),
-        "base_toughness": Opt(I(MODEL_INPUT, minimum=None)),
-        "effective_power": Opt(I(MODEL_INPUT, minimum=None)),
-        "effective_toughness": Opt(I(MODEL_INPUT, minimum=None)),
+        "base_power": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "base_toughness": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "effective_power": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "effective_toughness": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
         "effective_keywords": KEYWORDS,
     }
 )
@@ -433,7 +445,7 @@ CARD_PUBLIC = ObjectSpec(
         "summoning_sick": B(MODEL_INPUT),
         "damage": I(MODEL_INPUT, maximum=U16),
         "counters": COUNTERS,
-        "attachments": ListSpec(I(MODEL_INPUT, maximum=U32)),
+        "attachments": ListSpec(I(OPERATIONAL_ONLY, maximum=U32)),
         "plotted_turn": Opt(I(MODEL_INPUT, maximum=U32)),
         "characteristics": CHARACTERISTICS,
     }
@@ -450,7 +462,7 @@ TARGET_REF = VariantSpec(
 )
 STACK_ITEM = ObjectSpec(
     {
-        "stack_index": I(MODEL_INPUT, maximum=U32),
+        "stack_index": I(OPERATIONAL_ONLY, maximum=U32),
         "source": CARD_STABLE_REF,
         "controller": Seat(),
         "targets": ListSpec(TARGET_REF),
@@ -483,8 +495,8 @@ EFFECT = ObjectSpec(
         "layers": I(MODEL_INPUT, maximum=U8),
         "timestamp": I(OPERATIONAL_ONLY, maximum=U64),
         "duration": E(EFFECT_DURATIONS),
-        "power_delta": I(MODEL_INPUT, minimum=None),
-        "toughness_delta": I(MODEL_INPUT, minimum=None),
+        "power_delta": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
+        "toughness_delta": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
         "grants_haste": B(MODEL_INPUT),
     }
 )
@@ -501,7 +513,7 @@ PERMISSION = ObjectSpec(
         "object": CARD_STABLE_REF,
         "holder": Seat(),
         "play_or_cast": E(PLAY_OR_CAST),
-        "zone_change_generation": I(MODEL_INPUT, maximum=U32),
+        "zone_change_generation": I(OPERATIONAL_ONLY, maximum=U32),
         "expiry": EXPIRY,
     }
 )
@@ -621,14 +633,14 @@ SURFACE_CONTEXT = ObjectSpec(
 )
 PROJECTION = ObjectSpec(
     {
-        "turn": I(MODEL_INPUT, maximum=U32),
+        "turn": I(OPERATIONAL_ONLY, maximum=U32),
         "phase": E(PHASES),
         "active_player": Seat(),
         "priority_player": Seat(),
-        "life_totals": ListSpec(I(MODEL_INPUT, minimum=None), length=2),
+        "life_totals": ListSpec(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX), length=2),
         "mana_pools": ListSpec(ListSpec(I(MODEL_INPUT, maximum=U8), length=6), length=2),
-        "hand_counts": ListSpec(I(MODEL_INPUT), length=2),
-        "library_counts": ListSpec(I(MODEL_INPUT), length=2),
+        "hand_counts": ListSpec(I(MODEL_INPUT, maximum=U64), length=2),
+        "library_counts": ListSpec(I(MODEL_INPUT, maximum=U64), length=2),
         "player_status": ListSpec(PLAYER_STATUS, length=2),
         "battlefield": ListSpec(ListSpec(CARD_PUBLIC), length=2),
         "graveyards": ListSpec(ListSpec(CARD_PUBLIC), length=2),
@@ -673,7 +685,7 @@ ACTION_VARIANTS = {
     "discard": ObjectSpec({"action_kind": E(["discard"]), "actor": Seat(), "cards": ListSpec(CARD_STABLE_REF)}),
     "declare_attackers": ObjectSpec({"action_kind": E(["declare_attackers"]), "actor": Seat(), "attackers": ListSpec(CARD_STABLE_REF)}),
     "declare_blockers_for_attacker": ObjectSpec({"action_kind": E(["declare_blockers_for_attacker"]), "actor": Seat(), "attacker": CARD_STABLE_REF, "blockers": ListSpec(CARD_STABLE_REF)}),
-    "order_triggers": ObjectSpec({"action_kind": E(["order_triggers"]), "actor": Seat(), "pending_sources": ListSpec(CARD_STABLE_REF), "order": ListSpec(I(MODEL_INPUT))}),
+    "order_triggers": ObjectSpec({"action_kind": E(["order_triggers"]), "actor": Seat(), "pending_sources": ListSpec(CARD_STABLE_REF), "order": ListSpec(I(MODEL_INPUT, maximum=U64))}),
 }
 ACTION_SEMANTIC = VariantSpec("action_kind", ACTION_VARIANTS, MODEL_INPUT)
 LEGAL_ACTION_SPEC = ObjectSpec(
@@ -703,13 +715,24 @@ def _encoding_payload() -> dict[str, Any]:
         "state_hash_dim": STATE_HASH_DIM,
         "action_hash_dim": ACTION_HASH_DIM,
         "player_indexed_lists": [".".join(path) for path in sorted(PLAYER_INDEXED_LISTS)],
-        "unordered_lists": [".".join(path) for path in sorted(UNORDERED_LISTS)],
+        "set_like_lists": [".".join(path) for path in sorted(SET_LIKE_LISTS)],
+        "ordered_lists_contract": [
+            "own_hand_oldest_first",
+            "battlefield_entry_order",
+            "graveyard_recorded_order_last_is_top",
+            "exile_recorded_order",
+            "stack_bottom_to_top_last_is_top",
+            "combat_attackers_and_blockers_recorded_order",
+            "target_pending_private_trigger_sequences",
+        ],
         "object_groups": OBJECT_GROUPS,
+        "edge_roles": EDGE_ROLES,
         "action_ref_roles": ACTION_REF_ROLES,
         "action_kinds": ACTION_KINDS,
         "stack_kinds": STACK_KINDS,
         "surface_stages": SURFACE_STAGES,
         "engine_stages": ENGINE_STAGES,
+        "node_registry": "per_decision_keys_arena_id_zone_change_count_handles_from_actor_relative_order",
     }
 
 
@@ -727,7 +750,7 @@ def encoding_contract_fingerprint() -> str:
 
 
 def model_contract_fingerprint(schema: FeatureSchema) -> str:
-    return _sha256_json({"model_contract_version": "kernel-policy-value-net-2", "feature_schema": schema.__dict__})
+    return _sha256_json({"model_contract_version": "kernel-policy-value-net-3", "feature_schema": schema.__dict__})
 
 
 def classification_registry() -> dict[str, str]:
@@ -835,27 +858,44 @@ def _card_ref_features(stable: dict[str, Any] | None, actor: str) -> list[float]
 class _CanonicalContext:
     def __init__(self, actor: str, observation: dict[str, Any] | None = None) -> None:
         self.actor = actor
-        self._arena_order: dict[int, int] = {}
-        self._arena_keys: dict[int, Any] = {}
+        self.turn = 0
+        self._arena_handles: dict[int, int] = {}
+        self._ref_keys: dict[tuple[int, int], Any] = {}
         if observation is not None:
+            self.turn = observation.get("projection", {}).get("turn", 0)
             for ref in _iter_card_refs(observation):
                 arena = ref.get("arena_id")
-                if type(arena) is int and arena not in self._arena_order:
-                    self._arena_order[arena] = len(self._arena_order) + 1
-                    self._arena_keys[arena] = {
-                        "card_db_id": ref.get("card_db_id"),
-                        "owner": _relative_seat(ref.get("owner"), actor) if ref.get("owner") in SEATS else ref.get("owner"),
-                        "controller": _relative_seat(ref.get("controller"), actor) if ref.get("controller") in SEATS else ref.get("controller"),
-                        "zone": ref.get("zone"),
-                    }
-
-    def arena_id(self, raw: int) -> int:
-        if raw not in self._arena_order:
-            self._arena_order[raw] = len(self._arena_order) + 1
-        return self._arena_order[raw]
+                generation = ref.get("zone_change_count")
+                if type(arena) is int and arena not in self._arena_handles:
+                    self._arena_handles[arena] = len(self._arena_handles)
+                if type(arena) is int and type(generation) is int:
+                    key = (arena, generation)
+                    self._ref_keys.setdefault(
+                        key,
+                        {
+                            "handle": self._arena_handles[arena],
+                            "card_db_id": ref.get("card_db_id"),
+                            "owner": _relative_seat(ref.get("owner"), actor) if ref.get("owner") in SEATS else ref.get("owner"),
+                            "controller": _relative_seat(ref.get("controller"), actor) if ref.get("controller") in SEATS else ref.get("controller"),
+                            "zone": ref.get("zone"),
+                        },
+                    )
 
     def arena_key(self, raw: int) -> Any:
-        return self._arena_keys.get(raw, {"unresolved_attachment": True})
+        if raw not in self._arena_handles:
+            raise FeatureSchemaError("attachment reference does not resolve to an observed arena id")
+        return {"handle": self._arena_handles[raw]}
+
+    def plotted_relation(self, value: int) -> str:
+        if type(value) is not int:
+            raise FeatureSchemaError("plotted_turn must be an integer when present")
+        if type(self.turn) is not int:
+            raise FeatureSchemaError("projection.turn must be an integer")
+        if value > self.turn:
+            raise FeatureSchemaError("plotted_turn cannot be in the future relative to projection.turn")
+        if value == self.turn:
+            return "this_turn"
+        return "earlier_turn"
 
 
 def _iter_card_refs(value: Any) -> Iterable[dict[str, Any]]:
@@ -880,8 +920,8 @@ def _canonical_model_value(value: Any, spec: Spec, path: tuple[str, ...], ctx: _
             return _OMIT
         if spec.kind == "seat":
             return _relative_seat(value, ctx.actor)
-        if spec.kind == "int" and "attachments" in path:
-            return ctx.arena_key(value)
+        if spec.kind == "int" and path and path[-1] == "plotted_turn":
+            return ctx.plotted_relation(value)
         return value
     if isinstance(spec, OptionalSpec):
         if value is None:
@@ -935,7 +975,20 @@ def _digest_features(namespace: str, canonical: Any, dims: int) -> list[float]:
     return out
 
 
-def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0, source_kind: str = "card") -> tuple[list[float], int]:
+def _plotted_turn_features(card: dict[str, Any], current_turn: int) -> list[float]:
+    plotted_turn = card.get("plotted_turn")
+    if plotted_turn is None:
+        return [1.0, 0.0, 0.0]
+    if type(plotted_turn) is not int or type(current_turn) is not int:
+        raise FeatureSchemaError("plotted_turn and projection.turn must be integers")
+    if plotted_turn > current_turn:
+        raise FeatureSchemaError("plotted_turn cannot be in the future relative to projection.turn")
+    if plotted_turn == current_turn:
+        return [0.0, 1.0, 0.0]
+    return [0.0, 0.0, 1.0]
+
+
+def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0, source_kind: str = "card", current_turn: int = 0) -> tuple[list[float], int]:
     stable = card["stable"]
     characteristics = card.get("characteristics", {})
     type_flags = characteristics.get("type_flags", {})
@@ -949,8 +1002,8 @@ def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0
             _number(card.get("damage", 0), 20.0),
             _number(card.get("counters", {}).get("plus1_plus1", 0), 10.0),
             _number(len(card.get("attachments", [])), 8.0),
-            0.0 if card.get("plotted_turn") is None else 1.0,
         ]
+        + _plotted_turn_features(card, current_turn)
         + [_flag(type_flags.get(name, False)) for name in ("land", "creature", "instant", "sorcery", "artifact", "enchantment")]
         + [
             _number(characteristics.get("base_power"), 20.0),
@@ -1021,7 +1074,7 @@ def _private_card_features(card: dict[str, Any], actor: str) -> tuple[list[float
 def _state_features(obs: dict[str, Any]) -> list[float]:
     actor = obs["acting_player"]
     p = obs["projection"]
-    state: list[float] = [_number(p["turn"], 20.0)]
+    state: list[float] = []
     state += _one_hot(p["phase"], PHASES)
     state += _seat_features(p["active_player"], actor)
     state += _seat_features(p["priority_player"], actor)
@@ -1090,123 +1143,210 @@ def _group_id(name: str) -> int:
     return OBJECT_GROUPS.index(name)
 
 
-def _append_object(rows: list[list[float]], tokens: list[int], groups: list[int], features: list[float], token: int, group: str) -> None:
-    rows.append(features)
-    tokens.append(token)
-    groups.append(_group_id(group))
+def _edge_role_id(name: str) -> int:
+    return EDGE_ROLES.index(name)
 
 
-def _arena_public_map(obs: dict[str, Any]) -> dict[int, dict[str, Any]]:
-    p = obs["projection"]
-    out: dict[int, dict[str, Any]] = {}
-    for zone_cards in p["battlefield"] + p["graveyards"] + [p["exile"]]:
-        for card in zone_cards:
-            out[card["stable"]["arena_id"]] = card
-    for card in obs["own_hand"]:
-        out[card["stable"]["arena_id"]] = _blank_public_from_ref(card["stable"])
-    return out
+def _stable_key(ref: dict[str, Any]) -> tuple[int, int]:
+    arena = ref.get("arena_id")
+    generation = ref.get("zone_change_count")
+    if type(arena) is not int or type(generation) is not int:
+        raise FeatureSchemaError("card reference must carry integer arena_id and zone_change_count")
+    return arena, generation
 
 
-def _append_ref_object(rows: list[list[float]], tokens: list[int], groups: list[int], ref: dict[str, Any], actor: str, group: str, order: int, source_kind: str, extra: list[float] | None = None) -> None:
-    features, token = _card_public_features(_blank_public_from_ref(ref, source_kind), actor, order, source_kind)
+def _stable_identity(ref: dict[str, Any]) -> tuple[int, str, str, str]:
+    return (ref["card_db_id"], ref["owner"], ref["controller"], ref["zone"])
+
+
+@dataclass
+class _NodeRegistry:
+    actor: str
+    current_turn: int
+
+    def __post_init__(self) -> None:
+        self.rows: list[list[float]] = []
+        self.tokens: list[int] = []
+        self.groups: list[int] = []
+        self.node_ids: list[int] = []
+        self._node_by_key: dict[tuple[int, int], int] = {}
+        self._identity_by_key: dict[tuple[int, int], tuple[int, str, str, str]] = {}
+        self._node_by_arena: dict[int, int] = {}
+
+    def validate_ref(self, ref: dict[str, Any]) -> tuple[int, int]:
+        key = _stable_key(ref)
+        identity = _stable_identity(ref)
+        previous = self._identity_by_key.get(key)
+        if previous is not None and previous != identity:
+            raise FeatureSchemaError("inconsistent repeated stable reference for same incarnation")
+        self._identity_by_key[key] = identity
+        return key
+
+    def add_card(self, card: dict[str, Any], group: str, order: int, source_kind: str = "card") -> int:
+        stable = card["stable"]
+        key = self.validate_ref(stable)
+        features, token = _card_public_features(card, self.actor, order, source_kind, self.current_turn)
+        return self._add_node(key, features, token, group)
+
+    def add_ref_node(self, ref: dict[str, Any], group: str, order: int, source_kind: str) -> int:
+        key = self.validate_ref(ref)
+        features, token = _card_public_features(_blank_public_from_ref(ref, source_kind), self.actor, order, source_kind, self.current_turn)
+        return self._add_node(key, features, token, group)
+
+    def _add_node(self, key: tuple[int, int], features: list[float], token: int, group: str) -> int:
+        if key in self._node_by_key:
+            return self._node_by_key[key]
+        arena = key[0]
+        if arena in self._node_by_arena:
+            raise FeatureSchemaError("multiple visible incarnations share one arena_id in a single decision")
+        node_id = len(self.rows)
+        self._node_by_key[key] = node_id
+        self._node_by_arena[arena] = node_id
+        self.rows.append(features)
+        self.tokens.append(token)
+        self.groups.append(_group_id(group))
+        self.node_ids.append(node_id)
+        return node_id
+
+    def resolve(self, ref: dict[str, Any]) -> int:
+        key = self.validate_ref(ref)
+        if key not in self._node_by_key:
+            raise FeatureSchemaError("visible stable reference does not resolve to a registered object node")
+        return self._node_by_key[key]
+
+    def resolve_attachment_arena(self, raw: int) -> int:
+        if type(raw) is not int:
+            raise FeatureSchemaError("attachment id must be an integer")
+        if raw not in self._node_by_arena:
+            raise FeatureSchemaError("attachment reference does not resolve to a registered object node")
+        return self._node_by_arena[raw]
+
+
+def _edge_row(role: str, primary_order: int = 0, secondary_order: int = 0, associated_order: int = 0, extra: list[float] | None = None) -> list[float]:
+    row = _one_hot(role, EDGE_ROLES) + [_number(primary_order, 64.0), _number(secondary_order, 64.0), _number(associated_order, 64.0)]
     if extra:
-        features += extra
-    _append_object(rows, tokens, groups, features, token, group)
+        row += extra
+    return row
 
 
-def _pending_ref_rows(rows: list[list[float]], tokens: list[int], groups: list[int], value: Any, actor: str, role_index: int = 0) -> None:
+def _append_edge(
+    edge_rows: list[list[float]],
+    edge_sources: list[int],
+    edge_targets: list[int],
+    source_node: int,
+    target_node: int,
+    role: str,
+    primary_order: int = 0,
+    secondary_order: int = 0,
+    associated_order: int = 0,
+    extra: list[float] | None = None,
+) -> None:
+    edge_rows.append(_edge_row(role, primary_order, secondary_order, associated_order, extra))
+    edge_sources.append(source_node)
+    edge_targets.append(target_node)
+
+
+def _context_ref_edges(
+    registry: _NodeRegistry,
+    edge_rows: list[list[float]],
+    edge_sources: list[int],
+    edge_targets: list[int],
+    value: Any,
+    role: str,
+    order_counter: list[int],
+) -> None:
     if isinstance(value, dict):
         if {"arena_id", "card_db_id", "owner", "controller", "zone", "zone_change_count"}.issubset(value):
-            _append_ref_object(rows, tokens, groups, value, actor, "pending_context", role_index, "pending", [_number(role_index, 32.0)])
+            node = registry.resolve(value)
+            order = order_counter[0]
+            order_counter[0] += 1
+            _append_edge(edge_rows, edge_sources, edge_targets, node, node, role, order)
             return
         for child in value.values():
-            _pending_ref_rows(rows, tokens, groups, child, actor, role_index + 1)
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, role, order_counter)
     elif isinstance(value, list):
-        for i, child in enumerate(value):
-            _pending_ref_rows(rows, tokens, groups, child, actor, role_index + i)
+        for child in value:
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, role, order_counter)
 
 
-def _objects(obs: dict[str, Any]) -> tuple[list[list[float]], list[int], list[int]]:
+def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], list[int], list[int], list[int], list[list[float]], list[int], list[int]]:
     actor = obs["acting_player"]
     p = obs["projection"]
-    rows: list[list[float]] = []
-    tokens: list[int] = []
-    groups: list[int] = []
-    public_by_arena = _arena_public_map(obs)
-    for card in sorted(obs["own_hand"], key=lambda c: (c["stable"]["card_db_id"], c["stable"]["owner"], c["stable"]["zone"], c["stable"]["arena_id"])):
-        features, token = _private_card_features(card, actor)
-        _append_object(rows, tokens, groups, features, token, "self_hand")
+    registry = _NodeRegistry(actor, p["turn"])
+    edge_rows: list[list[float]] = []
+    edge_sources: list[int] = []
+    edge_targets: list[int] = []
+
+    for i, card in enumerate(obs["own_hand"]):
+        registry.add_card(_blank_public_from_ref(card["stable"]), "self_hand", i, "card")
     seat_order = [actor, "p1" if actor == "p0" else "p0"]
     for seat in seat_order:
         seat_idx = 0 if seat == "p0" else 1
-        cards = sorted(p["battlefield"][seat_idx], key=lambda c: (c["stable"]["card_db_id"], c["stable"]["controller"], c["stable"]["arena_id"]))
         group = "self_battlefield" if seat == actor else "opponent_battlefield"
-        for card in cards:
-            features, token = _card_public_features(card, actor)
-            _append_object(rows, tokens, groups, features, token, group)
-            for attach_order, attachment_arena in enumerate(sorted(card["attachments"])):
-                attached = public_by_arena.get(attachment_arena)
-                if attached is not None:
-                    afeatures, atoken = _card_public_features(attached, actor, attach_order, "attachment")
-                    afeatures += _card_ref_features(card["stable"], actor)
-                    _append_object(rows, tokens, groups, afeatures, atoken, "attachment")
+        for i, card in enumerate(p["battlefield"][seat_idx]):
+            registry.add_card(card, group, i)
     for seat in seat_order:
         seat_idx = 0 if seat == "p0" else 1
-        cards = sorted(p["graveyards"][seat_idx], key=lambda c: (c["stable"]["card_db_id"], c["stable"]["controller"], c["stable"]["arena_id"]))
         group = "self_graveyard" if seat == actor else "opponent_graveyard"
-        for card in cards:
-            features, token = _card_public_features(card, actor)
-            _append_object(rows, tokens, groups, features, token, group)
-    for card in sorted(p["exile"], key=lambda c: (c["stable"]["card_db_id"], c["stable"]["controller"], c["stable"]["arena_id"])):
-        features, token = _card_public_features(card, actor)
-        _append_object(rows, tokens, groups, features, token, "exile")
+        for i, card in enumerate(p["graveyards"][seat_idx]):
+            registry.add_card(card, group, i)
+    for i, card in enumerate(p["exile"]):
+        registry.add_card(card, "exile", i)
     for i, item in enumerate(p["stack"]):
-        features, token = _card_public_features(_blank_public_from_ref(item["source"], "stack"), actor, i, "stack")
-        features += (
-            _seat_features(item["controller"], actor)
-            + _one_hot(item["stack_item_kind"], STACK_KINDS)
-            + [_flag(item["is_flashback"]), _number(item["mode_chosen"], 8.0), _flag(item["madness_offer"]), _flag(item["kicked"])]
-        )
-        _append_object(rows, tokens, groups, features, token, "stack")
+        registry.add_ref_node(item["source"], "stack", i, "stack")
+
+    for card in [c for zone in p["battlefield"] + p["graveyards"] for c in zone] + list(p["exile"]):
+        host = registry.resolve(card["stable"])
+        attachment_nodes = [registry.resolve_attachment_arena(raw) for raw in card["attachments"]]
+        for attach_order, attachment in enumerate(sorted(attachment_nodes)):
+            _append_edge(edge_rows, edge_sources, edge_targets, host, attachment, "attachment", attach_order)
+    for i, item in enumerate(p["stack"]):
+        source = registry.resolve(item["source"])
         for target_index, target in enumerate(item["targets"]):
             if target["target_kind"] == "object":
-                extra = _card_ref_features(item["source"], actor) + _one_hot("object", TARGET_KINDS) + [_number(target_index, 16.0)]
-                _append_ref_object(rows, tokens, groups, target["object"], actor, "stack_target", target_index, "target", extra)
-            else:
-                extra = _card_ref_features(item["source"], actor) + _one_hot("player", TARGET_KINDS) + _seat_features(target["player"], actor) + [_number(target_index, 16.0)]
-                _append_object(rows, tokens, groups, [0.0] * _object_feature_dim_probe() + extra, 0, "stack_target")
+                target_node = registry.resolve(target["object"])
+                _append_edge(edge_rows, edge_sources, edge_targets, source, target_node, "stack_target", i, target_index)
     for i, ref in enumerate(p["combat"]["ordered_attackers"]):
-        _append_ref_object(rows, tokens, groups, ref, actor, "combat", i, "combat", [_number(i, 16.0)])
+        node = registry.resolve(ref)
+        _append_edge(edge_rows, edge_sources, edge_targets, node, node, "combat_attacker", i)
     for attacker_order, pair in enumerate(p["combat"]["attacker_to_ordered_blockers"]):
         attacker, blockers = pair
+        attacker_node = registry.resolve(attacker)
         for blocker_order, blocker in enumerate(blockers):
-            extra = _card_ref_features(attacker, actor) + [_number(attacker_order, 16.0), _number(blocker_order, 16.0)]
-            _append_ref_object(rows, tokens, groups, blocker, actor, "combat_block", blocker_order, "combat", extra)
-    for effect in p["continuous_effects"]:
-        for ref in effect["affected_objects"]:
-            extra = [_number(effect["layers"], 16.0), _number(effect["power_delta"], 20.0), _number(effect["toughness_delta"], 20.0), _flag(effect["grants_haste"])] + _one_hot(effect["duration"], EFFECT_DURATIONS)
-            _append_ref_object(rows, tokens, groups, ref, actor, "effect", 0, "effect", extra)
+            blocker_node = registry.resolve(blocker)
+            _append_edge(edge_rows, edge_sources, edge_targets, attacker_node, blocker_node, "combat_blocker", attacker_order, blocker_order)
+    for effect_order, effect in enumerate(p["continuous_effects"]):
+        affected = sorted(registry.resolve(ref) for ref in effect["affected_objects"])
+        extra = [_number(effect["layers"], 16.0), _number(effect["power_delta"], 20.0), _number(effect["toughness_delta"], 20.0), _flag(effect["grants_haste"])] + _one_hot(effect["duration"], EFFECT_DURATIONS)
+        for affected_order, node in enumerate(affected):
+            _append_edge(edge_rows, edge_sources, edge_targets, node, node, "effect_affected", effect_order, affected_order, extra=extra)
+    permission_edges: list[tuple[int, list[float]]] = []
     for permission in p["exile_play_permissions"]:
-        extra = _seat_features(permission["holder"], actor) + _one_hot(permission["play_or_cast"], PLAY_OR_CAST) + [_number(permission["zone_change_generation"], 8.0)]
+        obj = permission["object"]
+        if permission["zone_change_generation"] != obj["zone_change_count"]:
+            raise FeatureSchemaError("permission zone_change_generation does not match object incarnation")
+        node = registry.resolve(obj)
+        extra = _seat_features(permission["holder"], actor) + _one_hot(permission["play_or_cast"], PLAY_OR_CAST)
         expiry = permission["expiry"]
         extra += _one_hot(expiry["expiry_kind"], EXPIRY_KINDS)
         extra += [_flag(expiry.get("holder_turn_started", False))]
-        _append_ref_object(rows, tokens, groups, permission["object"], actor, "permission", 0, "permission", extra)
+        permission_edges.append((node, extra))
+    for permission_order, (node, extra) in enumerate(sorted(permission_edges, key=lambda item: (item[0], item[1]))):
+        _append_edge(edge_rows, edge_sources, edge_targets, node, node, "permission", permission_order, extra=extra)
     engine = p["engine_context"]
+    pending_order = [0]
     for key in ("pending_cast", "pending_activation", "pending_discard", "pending_optional_cost", "pending_optional_cost_sacrifice"):
         if engine[key] is not None:
-            _pending_ref_rows(rows, tokens, groups, engine[key], actor)
-    _pending_ref_rows(rows, tokens, groups, engine["pending_triggers"], actor)
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, engine[key], "pending_context", pending_order)
+    _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, engine["pending_triggers"], "pending_context", pending_order)
     surface = p["surface_context"]
+    private_order = [0]
     for key in ("madness_cast_reprompt_source", "private_blockers", "private_discard"):
         if surface[key] is not None:
-            before = len(rows)
-            _pending_ref_rows(rows, tokens, groups, surface[key], actor)
-            for j in range(before, len(rows)):
-                groups[j] = _group_id("private_context")
-    width = max((len(row) for row in rows), default=_object_feature_dim_probe())
-    padded = [row + [0.0] * (width - len(row)) for row in rows]
-    return padded, tokens, groups
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, surface[key], "private_context", private_order)
+    width = max((len(row) for row in registry.rows), default=_object_feature_dim_probe())
+    padded = [row + [0.0] * (width - len(row)) for row in registry.rows]
+    return registry, padded, registry.tokens, registry.groups, registry.node_ids, edge_rows, edge_sources, edge_targets
 
 
 def _object_feature_dim_probe() -> int:
@@ -1252,20 +1392,22 @@ def _semantic_actor(action: dict[str, Any]) -> str:
     return action["semantic"]["actor"]
 
 
-def _action_card_refs(semantic: dict[str, Any]) -> list[tuple[str, int, dict[str, Any], int]]:
-    refs: list[tuple[str, int, dict[str, Any], int]] = []
+def _action_card_refs(semantic: dict[str, Any], registry: _NodeRegistry) -> list[tuple[str, int, dict[str, Any], int, int]]:
+    refs: list[tuple[str, int, dict[str, Any], int, int]] = []
     for role in ("source", "candidate", "card", "attacker"):
         if role in semantic:
-            refs.append((role, 0, semantic[role], 0))
+            refs.append((role, 0, semantic[role], 0, registry.resolve(semantic[role])))
     if "target" in semantic and semantic["target"]["target_kind"] == "object":
-        refs.append(("target_object", 0, semantic["target"]["object"], 0))
+        target = semantic["target"]["object"]
+        refs.append(("target_object", 0, target, 0, registry.resolve(target)))
     for role in ("cards", "attackers", "blockers"):
-        for i, ref in enumerate(sorted(semantic.get(role, []), key=lambda r: (r["card_db_id"], r["owner"], r["controller"], r["zone"], r["arena_id"]))):
-            refs.append((role, i, ref, 0))
+        sorted_refs = sorted(((registry.resolve(ref), ref) for ref in semantic.get(role, [])), key=lambda item: item[0])
+        for i, (node_id, ref) in enumerate(sorted_refs):
+            refs.append((role, i, ref, 0, node_id))
     if semantic.get("action_kind") == "order_triggers":
         order = semantic["order"]
         for i, ref in enumerate(semantic["pending_sources"]):
-            refs.append(("pending_sources", i, ref, int(order[i])))
+            refs.append(("pending_sources", i, ref, int(order[i]), registry.resolve(ref)))
     return refs
 
 
@@ -1274,7 +1416,7 @@ def _action_ref_row(role: str, order_index: int, ref: dict[str, Any], actor: str
     return features, _card_token(ref)
 
 
-def _action_features(action: dict[str, Any], actor: str) -> tuple[list[float], list[list[float]], list[int]]:
+def _action_features(action: dict[str, Any], actor: str, registry: _NodeRegistry) -> tuple[list[float], list[list[float]], list[int], list[int]]:
     assert_action_classified(action)
     semantic = action["semantic"]
     kind = semantic["action_kind"]
@@ -1309,14 +1451,16 @@ def _action_features(action: dict[str, Any], actor: str) -> tuple[list[float], l
     features += _digest_features("legal-action", canonical, ACTION_HASH_DIM)
     ref_rows: list[list[float]] = []
     ref_tokens: list[int] = []
-    for role, order_index, ref, associated_order in _action_card_refs(semantic):
+    ref_nodes: list[int] = []
+    for role, order_index, ref, associated_order, node_id in _action_card_refs(semantic, registry):
         row, token = _action_ref_row(role, order_index, ref, actor, associated_order)
         ref_rows.append(row)
         ref_tokens.append(token)
-    return features, ref_rows, ref_tokens
+        ref_nodes.append(node_id)
+    return features, ref_rows, ref_tokens, ref_nodes
 
 
-def _schema(state_dim: int, object_dim: int, action_dim: int, action_ref_dim: int) -> FeatureSchema:
+def _schema(state_dim: int, object_dim: int, edge_dim: int, action_dim: int, action_ref_dim: int) -> FeatureSchema:
     return FeatureSchema(
         version=FEATURE_SCHEMA_VERSION,
         registry_version=FEATURE_REGISTRY_VERSION,
@@ -1324,6 +1468,7 @@ def _schema(state_dim: int, object_dim: int, action_dim: int, action_ref_dim: in
         encoding_digest=encoding_contract_fingerprint(),
         state_dim=state_dim,
         object_feature_dim=object_dim,
+        edge_feature_dim=edge_dim,
         action_feature_dim=action_dim,
         object_group_count=len(OBJECT_GROUPS),
         action_ref_feature_dim=action_ref_dim,
@@ -1341,8 +1486,115 @@ def _validate_order_trigger_semantic(semantic: dict[str, Any]) -> None:
         raise FeatureSchemaError("order_triggers.order must be a permutation of pending source indexes")
 
 
+def _validate_engine_context(engine: dict[str, Any]) -> None:
+    pending_keys = (
+        "pending_cast",
+        "pending_activation",
+        "pending_discard",
+        "pending_optional_cost",
+        "pending_optional_cost_sacrifice",
+        "pending_triggers",
+    )
+    rust_stage_order = pending_keys
+    present = []
+    for key in rust_stage_order:
+        if key == "pending_triggers":
+            if engine[key]:
+                present.append(key)
+        elif engine[key] is not None:
+            present.append(key)
+    stage = engine["current_stage"]
+    if stage in ("priority", "halted"):
+        if present:
+            raise FeatureSchemaError("engine priority/halted stage cannot carry pending contexts")
+    else:
+        expected_stage = present[0] if present else None
+        if expected_stage != stage:
+            raise FeatureSchemaError("engine current_stage does not match Rust pending-context priority")
+        extras = present[1:]
+        allowed_extras = {
+            "pending_cast": {(), ("pending_discard",)},
+            "pending_activation": {(), ("pending_discard",)},
+            "pending_discard": {(), ("pending_triggers",)},
+            "pending_optional_cost": {()},
+            "pending_optional_cost_sacrifice": {()},
+            "pending_triggers": {()},
+        }
+        if tuple(extras) not in allowed_extras[stage]:
+            raise FeatureSchemaError("engine pending contexts do not match a permitted Rust coexistence shape")
+        if extras == ["pending_discard"]:
+            expected_resume = "finish_cast" if stage == "pending_cast" else "finish_activation"
+            if engine["pending_discard"]["resume_stage"] != expected_resume:
+                raise FeatureSchemaError("pending_discard resume_stage does not match paused engine context")
+
+    pending_discard = engine["pending_discard"]
+    if pending_discard is not None:
+        resume_stage = pending_discard["resume_stage"]
+        resume_source = pending_discard["resume_source"]
+        if resume_stage in ("none", "finish_cast", "finish_activation") and resume_source is not None:
+            raise FeatureSchemaError("pending_discard resume_source must be absent for this resume_stage")
+        if resume_stage in ("finish_spell_resolution", "finish_optional_cost") and resume_source is None:
+            raise FeatureSchemaError("pending_discard resume_source is required for this resume_stage")
+
+    for key in ("pending_optional_cost", "pending_optional_cost_sacrifice"):
+        pending = engine[key]
+        if pending is None:
+            continue
+        source_present = pending["spell_resume_source"] is not None
+        zone_present = pending["spell_resume_zone"] is not None
+        if source_present != zone_present:
+            raise FeatureSchemaError(f"{key} spell_resume_source and spell_resume_zone must be both present or both absent")
+
+
+def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any], actor: str) -> None:
+    stage = surface["current_stage"]
+    private_blockers = surface["private_blockers"]
+    private_discard = surface["private_discard"]
+    private_optional = surface["private_optional_cost"]
+    present = [name for name, value in (("private_blockers", private_blockers), ("private_discard", private_discard), ("private_optional_cost", private_optional)) if value is not None]
+    if stage == "priority":
+        if present:
+            raise FeatureSchemaError("surface priority stage cannot carry private contexts")
+        return
+    if stage == "declare_blockers_for_attacker":
+        defender = "p1" if projection["active_player"] == "p0" else "p0"
+        if actor != defender:
+            raise FeatureSchemaError("declare_blockers private context leaked to non-defending actor")
+        if present != ["private_blockers"]:
+            raise FeatureSchemaError("declare_blockers stage requires only private_blockers")
+        if private_blockers["current_attacker"] is None:
+            raise FeatureSchemaError("declare_blockers stage requires current_attacker")
+        return
+    if stage == "discard_pick":
+        if present != ["private_discard"]:
+            raise FeatureSchemaError("discard_pick stage requires only private_discard")
+        if private_discard["remaining_needed"] <= 0:
+            raise FeatureSchemaError("discard_pick remaining_needed must be positive")
+        return
+    if stage in ("optional_cost_use", "optional_cost_which"):
+        if present != ["private_optional_cost"]:
+            raise FeatureSchemaError("optional cost stage requires only private_optional_cost")
+        if private_optional["stage"] != stage:
+            raise FeatureSchemaError("private_optional_cost.stage must match surface current_stage")
+        return
+    raise FeatureSchemaError(f"unknown surface stage {stage!r}")
+
+
+def _validate_observation_semantics(observation: dict[str, Any]) -> None:
+    p = observation["projection"]
+    for i, item in enumerate(p["stack"]):
+        if item["stack_index"] != i:
+            raise FeatureSchemaError("stack_index must match recorded stack position")
+    _validate_engine_context(p["engine_context"])
+    _validate_surface_context(p["surface_context"], p, observation["acting_player"])
+    for permission in p["exile_play_permissions"]:
+        if permission["zone_change_generation"] != permission["object"]["zone_change_count"]:
+            raise FeatureSchemaError("permission zone_change_generation does not match object incarnation")
+
+
 def assert_observation_classified(observation: dict[str, Any]) -> None:
     OBSERVATION_SPEC.validate(observation, ("observation",))
+    _validate_observation_semantics(observation)
 
 
 def assert_action_classified(action: dict[str, Any]) -> None:
@@ -1382,54 +1634,77 @@ def encode_decision(observation: dict[str, Any], legal_actions: list[dict[str, A
     validate_legal_actions_contract(legal_actions, observation["acting_player"])
     actor = observation["acting_player"]
     state = _state_features(observation)
-    object_rows, object_tokens, object_groups = _objects(observation)
+    registry, object_rows, object_tokens, object_groups, object_node_ids, edge_rows, edge_sources, edge_targets = _objects(observation)
     action_rows: list[list[float]] = []
     action_ref_rows: list[list[float]] = []
     action_ref_tokens: list[int] = []
     action_ref_indices: list[int] = []
+    action_ref_nodes: list[int] = []
     for action_index, action in enumerate(legal_actions):
-        row, ref_rows, ref_tokens = _action_features(action, actor)
+        row, ref_rows, ref_tokens, ref_nodes = _action_features(action, actor, registry)
         action_rows.append(row)
-        for row_ref, token_ref in zip(ref_rows, ref_tokens):
+        for row_ref, token_ref, node_ref in zip(ref_rows, ref_tokens, ref_nodes):
             action_ref_rows.append(row_ref)
             action_ref_tokens.append(token_ref)
             action_ref_indices.append(action_index)
+            action_ref_nodes.append(node_ref)
     object_dim = max((len(row) for row in object_rows), default=_object_feature_dim_probe())
+    edge_dim = max((len(row) for row in edge_rows), default=len(EDGE_ROLES) + 3)
     action_dim = max(len(row) for row in action_rows)
     action_ref_dim = max((len(row) for row in action_ref_rows), default=len(ACTION_REF_ROLES) + 6 + len(ZONES) + 2)
     object_rows = [row + [0.0] * (object_dim - len(row)) for row in object_rows]
+    edge_rows = [row + [0.0] * (edge_dim - len(row)) for row in edge_rows]
     action_rows = [row + [0.0] * (action_dim - len(row)) for row in action_rows]
     action_ref_rows = [row + [0.0] * (action_ref_dim - len(row)) for row in action_ref_rows]
     if not object_rows:
         object_rows = [[0.0] * object_dim]
         object_tokens = [0]
         object_groups = [0]
+        object_node_ids = [0]
+    if not edge_rows:
+        edge_rows_tensor = torch.empty((0, edge_dim), dtype=torch.float32)
+        edge_source_tensor = torch.empty((0,), dtype=torch.long)
+        edge_target_tensor = torch.empty((0,), dtype=torch.long)
+    else:
+        edge_rows_tensor = torch.tensor(edge_rows, dtype=torch.float32)
+        edge_source_tensor = torch.tensor(edge_sources, dtype=torch.long)
+        edge_target_tensor = torch.tensor(edge_targets, dtype=torch.long)
     if not action_ref_rows:
         action_ref_rows = torch.empty((0, action_ref_dim), dtype=torch.float32)
         action_ref_tokens_tensor = torch.empty((0,), dtype=torch.long)
         action_ref_indices_tensor = torch.empty((0,), dtype=torch.long)
+        action_ref_nodes_tensor = torch.empty((0,), dtype=torch.long)
     else:
         action_ref_rows = torch.tensor(action_ref_rows, dtype=torch.float32)
         action_ref_tokens_tensor = torch.tensor(action_ref_tokens, dtype=torch.long)
         action_ref_indices_tensor = torch.tensor(action_ref_indices, dtype=torch.long)
-    schema = _schema(len(state), object_dim, action_dim, action_ref_dim)
+        action_ref_nodes_tensor = torch.tensor(action_ref_nodes, dtype=torch.long)
+    schema = _schema(len(state), object_dim, edge_dim, action_dim, action_ref_dim)
     return EncodedDecision(
         schema=schema,
         state=torch.tensor(state, dtype=torch.float32),
         object_features=torch.tensor(object_rows, dtype=torch.float32),
         object_card_ids=torch.tensor(object_tokens, dtype=torch.long),
         object_groups=torch.tensor(object_groups, dtype=torch.long),
+        object_node_ids=torch.tensor(object_node_ids, dtype=torch.long),
+        edge_features=edge_rows_tensor,
+        edge_source_indices=edge_source_tensor,
+        edge_target_indices=edge_target_tensor,
         action_features=torch.tensor(action_rows, dtype=torch.float32),
         action_ref_features=action_ref_rows if isinstance(action_ref_rows, torch.Tensor) else torch.tensor(action_ref_rows, dtype=torch.float32),
         action_ref_card_ids=action_ref_tokens_tensor,
         action_ref_action_indices=action_ref_indices_tensor,
+        action_ref_node_indices=action_ref_nodes_tensor,
     )
 
 
-def every_action_variant_fixture(base_ref: dict[str, Any]) -> list[dict[str, Any]]:
+def every_action_variant_fixture(base_ref: dict[str, Any], target_ref: dict[str, Any] | None = None, second_ref: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     target_player = {"target_kind": "player", "player": "p1"}
-    target_object = {"target_kind": "object", "object": {**base_ref, "arena_id": base_ref["arena_id"] + 1, "card_db_id": base_ref["card_db_id"] + 1}}
-    second_ref = {**base_ref, "arena_id": base_ref["arena_id"] + 2, "card_db_id": base_ref["card_db_id"] + 2}
+    if target_ref is None:
+        target_ref = {**base_ref, "arena_id": base_ref["arena_id"] + 1, "card_db_id": base_ref["card_db_id"] + 1}
+    if second_ref is None:
+        second_ref = {**base_ref, "arena_id": base_ref["arena_id"] + 2, "card_db_id": base_ref["card_db_id"] + 2}
+    target_object = {"target_kind": "object", "object": target_ref}
     return [
         {"schema_version": 2, "selected_index": i, "stable_id": f"fixture-{i}", "display_text": f"text-{i}", "semantic": semantic}
         for i, semantic in enumerate(

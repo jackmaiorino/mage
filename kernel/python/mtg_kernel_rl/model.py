@@ -19,8 +19,8 @@ from .features import (
     feature_contract_fingerprint,
 )
 
-MODEL_CONFIG_SCHEMA_VERSION = 1
-MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-2"
+MODEL_CONFIG_SCHEMA_VERSION = 2
+MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-3"
 
 
 @dataclass(frozen=True)
@@ -36,6 +36,7 @@ class ModelConfig:
     hidden_dim: int = 64
     state_dim: int = 0
     object_feature_dim: int = 0
+    edge_feature_dim: int = 0
     action_feature_dim: int = 0
     object_group_count: int = 15
     action_ref_feature_dim: int = 0
@@ -59,6 +60,7 @@ class ModelConfig:
             "hidden_dim",
             "state_dim",
             "object_feature_dim",
+            "edge_feature_dim",
             "action_feature_dim",
             "object_group_count",
             "action_ref_feature_dim",
@@ -99,6 +101,7 @@ class ModelConfig:
             "hidden_dim": self.hidden_dim,
             "state_dim": self.state_dim,
             "object_feature_dim": self.object_feature_dim,
+            "edge_feature_dim": self.edge_feature_dim,
             "action_feature_dim": self.action_feature_dim,
             "object_group_count": self.object_group_count,
             "action_ref_feature_dim": self.action_ref_feature_dim,
@@ -126,6 +129,18 @@ class KernelPolicyValueNet(nn.Module):
             nn.Tanh(),
         )
         pooled_dim = config.hidden_dim * config.object_group_count
+        self.edge_encoder = nn.Sequential(
+            nn.Linear(config.edge_feature_dim + config.hidden_dim * 2, config.hidden_dim),
+            nn.Tanh(),
+            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Tanh(),
+        )
+        self.node_update = nn.Sequential(
+            nn.Linear(config.hidden_dim * 2, config.hidden_dim),
+            nn.Tanh(),
+            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Tanh(),
+        )
         self.state_encoder = nn.Sequential(
             nn.Linear(config.state_dim + pooled_dim, config.hidden_dim),
             nn.Tanh(),
@@ -133,7 +148,7 @@ class KernelPolicyValueNet(nn.Module):
             nn.Tanh(),
         )
         self.action_ref_encoder = nn.Sequential(
-            nn.Linear(config.action_ref_feature_dim + config.card_embedding_dim, config.hidden_dim),
+            nn.Linear(config.action_ref_feature_dim + config.hidden_dim, config.hidden_dim),
             nn.Tanh(),
             nn.Linear(config.hidden_dim, config.hidden_dim),
             nn.Tanh(),
@@ -161,6 +176,7 @@ class KernelPolicyValueNet(nn.Module):
             hidden_dim=hidden_dim,
             state_dim=encoded.schema.state_dim,
             object_feature_dim=encoded.schema.object_feature_dim,
+            edge_feature_dim=encoded.schema.edge_feature_dim,
             action_feature_dim=encoded.schema.action_feature_dim,
             object_group_count=encoded.schema.object_group_count,
             action_ref_feature_dim=encoded.schema.action_ref_feature_dim,
@@ -186,7 +202,21 @@ class KernelPolicyValueNet(nn.Module):
         self._validate_encoded(encoded)
         object_card = self.card_embedding(encoded.object_card_ids)
         object_input = torch.cat([encoded.object_features, object_card], dim=-1)
-        object_hidden = self.object_encoder(object_input)
+        object_base_hidden = self.object_encoder(object_input)
+        edge_pooled = torch.zeros_like(object_base_hidden)
+        if encoded.edge_features.shape[0] > 0:
+            edge_input = torch.cat(
+                [
+                    encoded.edge_features,
+                    object_base_hidden[encoded.edge_source_indices],
+                    object_base_hidden[encoded.edge_target_indices],
+                ],
+                dim=-1,
+            )
+            edge_hidden = self.edge_encoder(edge_input)
+            edge_pooled.index_add_(0, encoded.edge_source_indices, edge_hidden)
+            edge_pooled.index_add_(0, encoded.edge_target_indices, edge_hidden)
+        object_hidden = self.node_update(torch.cat([object_base_hidden, edge_pooled], dim=-1))
         pooled = torch.zeros(
             self.config.object_group_count,
             self.config.hidden_dim,
@@ -206,14 +236,14 @@ class KernelPolicyValueNet(nn.Module):
             device=encoded.action_features.device,
         )
         if encoded.action_ref_features.shape[0] > 0:
-            action_ref_emb = self.card_embedding(encoded.action_ref_card_ids)
-            action_ref_input = torch.cat([encoded.action_ref_features, action_ref_emb], dim=-1)
-            action_ref_hidden = self.action_ref_encoder(action_ref_input)
+            action_ref_nodes = object_hidden[encoded.action_ref_node_indices]
+            action_ref_input = torch.cat([encoded.action_ref_features, action_ref_nodes], dim=-1)
+            action_ref_hidden = _apply_rowwise(self.action_ref_encoder, action_ref_input)
             action_ref_pooled.index_add_(0, encoded.action_ref_action_indices, action_ref_hidden)
         action_input = torch.cat([encoded.action_features, action_ref_pooled], dim=-1)
-        action_hidden = self.action_encoder(action_input)
+        action_hidden = _apply_rowwise(self.action_encoder, action_input)
         repeated_state = state_hidden.unsqueeze(0).expand(action_hidden.shape[0], -1)
-        logits = self.scorer(torch.cat([repeated_state, action_hidden], dim=-1)).squeeze(-1)
+        logits = _apply_rowwise(self.scorer, torch.cat([repeated_state, action_hidden], dim=-1)).squeeze(-1)
         value = self.value_head(state_hidden).squeeze(-1)
         if not torch.isfinite(logits).all():
             raise ValueError("model produced non-finite logits")
@@ -235,6 +265,8 @@ class KernelPolicyValueNet(nn.Module):
             raise ValueError("encoded state_dim mismatch")
         if schema.object_feature_dim != self.config.object_feature_dim:
             raise ValueError("encoded object_feature_dim mismatch")
+        if schema.edge_feature_dim != self.config.edge_feature_dim:
+            raise ValueError("encoded edge_feature_dim mismatch")
         if schema.action_feature_dim != self.config.action_feature_dim:
             raise ValueError("encoded action_feature_dim mismatch")
         if schema.object_group_count != self.config.object_group_count:
@@ -245,12 +277,21 @@ class KernelPolicyValueNet(nn.Module):
         _check_float_matrix(encoded.object_features, "object_features", self.config.object_feature_dim, min_rows=1)
         _check_long_vector(encoded.object_card_ids, "object_card_ids", encoded.object_features.shape[0], upper=self.config.card_vocab_size)
         _check_long_vector(encoded.object_groups, "object_groups", encoded.object_features.shape[0], upper=self.config.object_group_count)
+        object_count = encoded.object_features.shape[0]
+        _check_long_vector(encoded.object_node_ids, "object_node_ids", object_count, upper=object_count)
+        if not torch.equal(encoded.object_node_ids, torch.arange(object_count, dtype=torch.long, device=encoded.object_node_ids.device)):
+            raise ValueError("object_node_ids must be contiguous local handles")
+        _check_float_matrix(encoded.edge_features, "edge_features", self.config.edge_feature_dim, min_rows=0)
+        edge_count = encoded.edge_features.shape[0]
+        _check_long_vector(encoded.edge_source_indices, "edge_source_indices", edge_count, upper=object_count)
+        _check_long_vector(encoded.edge_target_indices, "edge_target_indices", edge_count, upper=object_count)
         _check_float_matrix(encoded.action_features, "action_features", self.config.action_feature_dim, min_rows=1)
         action_count = encoded.action_features.shape[0]
         _check_float_matrix(encoded.action_ref_features, "action_ref_features", self.config.action_ref_feature_dim, min_rows=0)
         ref_count = encoded.action_ref_features.shape[0]
         _check_long_vector(encoded.action_ref_card_ids, "action_ref_card_ids", ref_count, upper=self.config.card_vocab_size)
         _check_long_vector(encoded.action_ref_action_indices, "action_ref_action_indices", ref_count, upper=action_count)
+        _check_long_vector(encoded.action_ref_node_indices, "action_ref_node_indices", ref_count, upper=object_count)
 
 
 def _max_card_token(encoded: EncodedDecision) -> int:
@@ -260,6 +301,12 @@ def _max_card_token(encoded: EncodedDecision) -> int:
     if encoded.action_ref_card_ids.numel() > 0:
         values.append(int(torch.max(encoded.action_ref_card_ids).item()))
     return max(values)
+
+
+def _apply_rowwise(module: nn.Module, tensor: torch.Tensor) -> torch.Tensor:
+    if tensor.shape[0] == 0:
+        raise ValueError("row-wise module input must be nonempty")
+    return torch.cat([module(tensor[i : i + 1]) for i in range(tensor.shape[0])], dim=0)
 
 
 def _check_float_tensor(tensor: torch.Tensor, name: str, shape: tuple[int, ...]) -> None:

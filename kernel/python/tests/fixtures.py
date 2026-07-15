@@ -17,14 +17,14 @@ PROVENANCE = {
 }
 
 
-def stable_ref(arena_id: int, card_db_id: int, owner: str = "p0", zone: str = "Hand") -> dict[str, Any]:
+def stable_ref(arena_id: int, card_db_id: int, owner: str = "p0", zone: str = "Hand", zone_change_count: int = 0, controller: str | None = None) -> dict[str, Any]:
     return {
         "arena_id": arena_id,
         "card_db_id": card_db_id,
         "owner": owner,
-        "controller": owner,
+        "controller": owner if controller is None else controller,
         "zone": zone,
-        "zone_change_count": 0,
+        "zone_change_count": zone_change_count,
     }
 
 
@@ -77,6 +77,7 @@ def complete_observation() -> dict[str, Any]:
     attachment = public_card(10, 41, "p0")
     p["battlefield"][0].append(attachment)
     p0_creature["attachments"] = [attachment["stable"]["arena_id"]]
+    p["exile"][0]["stable"]["zone_change_count"] = 2
     p["stack"][0]["controller"] = "p1"
     p["stack"][0]["targets"] = [
         {"target_kind": "player", "player": "p1"},
@@ -100,84 +101,17 @@ def complete_observation() -> dict[str, Any]:
     ]
     p["exile_play_permissions"] = [
         {
-            "object": stable_ref(9, 40, "p0", "Exile"),
+            "object": stable_ref(9, 40, "p0", "Exile", zone_change_count=2),
             "holder": "p0",
             "play_or_cast": "cast",
             "zone_change_generation": 2,
             "expiry": {"expiry_kind": "until_holders_next_turn", "holder_turn_started": False},
         }
     ]
-    p["engine_context"].update(
-        {
-            "pending_cast": {
-                "source": obs["own_hand"][0]["stable"],
-                "controller": "p0",
-                "chosen_targets": [{"target_kind": "object", "object": p1_creature["stable"]}],
-                "is_flashback": False,
-                "cast_mode": "Alternative",
-                "additional_cost_discarded": [obs["own_hand"][0]["stable"]],
-                "mode_chosen": 1,
-                "origin_zone": "Hand",
-                "sacrifice_chosen": [p0_land["stable"]],
-                "kicked": True,
-            },
-            "pending_activation": {
-                "source": p0_land["stable"],
-                "controller": "p0",
-                "ability_index": 2,
-                "chosen_targets": [{"target_kind": "player", "player": "p1"}],
-                "cost_discard_paid": [obs["own_hand"][0]["stable"]],
-            },
-            "pending_discard": {
-                "player": "p0",
-                "count": 1,
-                "resume_stage": "finish_cast",
-                "resume_source": obs["own_hand"][0]["stable"],
-            },
-            "pending_optional_cost": {
-                "player": "p0",
-                "source": obs["own_hand"][0]["stable"],
-                "discard_cards": 1,
-                "sacrifice_lands": 1,
-                "discard_payable": True,
-                "sacrifice_payable": True,
-                "spell_resume_source": obs["own_hand"][0]["stable"],
-                "spell_resume_zone": "Hand",
-            },
-            "pending_optional_cost_sacrifice": {
-                "player": "p0",
-                "source": obs["own_hand"][0]["stable"],
-                "remaining": 1,
-                "chosen": [p0_land["stable"]],
-                "spell_resume_source": obs["own_hand"][0]["stable"],
-                "spell_resume_zone": "Hand",
-            },
-            "pending_triggers": [
-                {"source": p0_creature["stable"], "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
-                {"source": p1_creature["stable"], "controller": "p1", "trigger_kind": "madness_offer", "kicked": True},
-            ],
-        }
-    )
     p["surface_context"].update(
         {
-            "current_stage": "declare_blockers_for_attacker",
             "stack_length_changed_since_observed": True,
             "madness_cast_reprompt_source": obs["own_hand"][0]["stable"],
-            "private_blockers": {
-                "current_attacker": p0_creature["stable"],
-                "accumulated": [[p0_creature["stable"], p1_creature["stable"]]],
-                "remaining": [[p0_land["stable"], [p1_land["stable"]]]],
-            },
-            "private_discard": {
-                "chosen": [obs["own_hand"][0]["stable"]],
-                "remaining_choices": [stable_ref(11, 31, "p0", "Hand")],
-                "remaining_needed": 1,
-            },
-            "private_optional_cost": {
-                "discard_payable": True,
-                "sacrifice_payable": True,
-                "stage": "optional_cost_which",
-            },
         }
     )
     return obs
@@ -185,10 +119,12 @@ def complete_observation() -> dict[str, Any]:
 
 def observation() -> dict[str, Any]:
     self_hand = {"stable": stable_ref(1, 30, "p0", "Hand"), "card_name": "Lightning Bolt"}
+    second_hand = {"stable": stable_ref(12, 31, "p0", "Hand"), "card_name": "Lava Dart"}
     p0_creature = public_card(2, 20, "p0")
     p0_land = public_card(3, 10, "p0")
     p1_creature = public_card(4, 21, "p1")
     p1_land = public_card(5, 11, "p1")
+    exile_card = public_card(9, 40, "p0", "Exile")
     return {
         "schema_version": 2,
         "kernel_version": PROVENANCE["kernel_version"],
@@ -203,7 +139,7 @@ def observation() -> dict[str, Any]:
             "priority_player": "p0",
             "life_totals": [20, 18],
             "mana_pools": [[0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0]],
-            "hand_counts": [1, 2],
+            "hand_counts": [2, 2],
             "library_counts": [53, 53],
             "player_status": [
                 {"has_lost": False, "lands_played_this_turn": 0, "drew_from_empty": False, "draws_this_turn": 1},
@@ -211,7 +147,7 @@ def observation() -> dict[str, Any]:
             ],
             "battlefield": [[p0_creature, p0_land], [p1_creature, p1_land]],
             "graveyards": [[public_card(6, 31, "p0", "Graveyard")], [public_card(7, 32, "p1", "Graveyard")]],
-            "exile": [],
+            "exile": [exile_card],
             "stack": [
                 {
                     "stack_index": 0,
@@ -280,7 +216,7 @@ def observation() -> dict[str, Any]:
                 "private_optional_cost": None,
             },
         },
-        "own_hand": [self_hand],
+        "own_hand": [self_hand, second_hand],
         "visible_projection_hash": 123456,
     }
 

@@ -16,6 +16,10 @@ SCHEMA_VERSION = 2
 PROTOCOL_NAME = "kernel_rl_jsonl"
 PROTOCOL_VERSION = 2
 MAX_LINE_BYTES = 8 * 1024 * 1024
+U32 = 4_294_967_295
+U64 = 18_446_744_073_709_551_615
+I32_MIN = -2_147_483_648
+I32_MAX = 2_147_483_647
 
 
 class KernelRlError(Exception):
@@ -116,11 +120,13 @@ def _keys(value: dict[str, Any], expected: Iterable[str], context: str) -> None:
         raise ProtocolError(f"{context} fields mismatch: missing={sorted(missing)} extra={sorted(extra)}")
 
 
-def _int(value: Any, context: str, *, minimum: int | None = None) -> int:
+def _int(value: Any, context: str, *, minimum: int | None = None, maximum: int | None = None) -> int:
     if type(value) is not int:
         raise ProtocolError(f"{context} must be an integer, got {type(value).__name__}")
     if minimum is not None and value < minimum:
         raise ProtocolError(f"{context} must be >= {minimum}")
+    if maximum is not None and value > maximum:
+        raise ProtocolError(f"{context} must be <= {maximum}")
     return value
 
 
@@ -170,13 +176,13 @@ def _validate_provenance(value: Any, expected: dict[str, Any] | None) -> dict[st
     _keys(value, ["protocol", "protocol_version", "schema_version", "kernel_version", "surface_version", "card_db_hash"], "provenance")
     if value["protocol"] != PROTOCOL_NAME:
         raise ProtocolError("unexpected protocol name")
-    if _int(value["protocol_version"], "provenance.protocol_version") != PROTOCOL_VERSION:
+    if _int(value["protocol_version"], "provenance.protocol_version", minimum=0, maximum=U32) != PROTOCOL_VERSION:
         raise ProtocolError("unexpected protocol version")
-    if _int(value["schema_version"], "provenance.schema_version") != SCHEMA_VERSION:
+    if _int(value["schema_version"], "provenance.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
         raise ProtocolError("unexpected provenance schema version")
     _str(value["kernel_version"], "provenance.kernel_version")
-    _int(value["surface_version"], "provenance.surface_version", minimum=0)
-    _int(value["card_db_hash"], "provenance.card_db_hash", minimum=0)
+    _int(value["surface_version"], "provenance.surface_version", minimum=0, maximum=U32)
+    _int(value["card_db_hash"], "provenance.card_db_hash", minimum=0, maximum=U64)
     if expected is not None and value != expected:
         raise ProtocolError("provenance drifted within process")
     return value
@@ -199,19 +205,19 @@ def _validate_observation(value: Any, response: dict[str, Any], provenance: dict
         ["schema_version", "kernel_version", "surface_version", "card_db_hash", "acting_player", "step_index", "projection", "own_hand", "visible_projection_hash"],
         "observation",
     )
-    if _int(value["schema_version"], "observation.schema_version") != SCHEMA_VERSION:
+    if _int(value["schema_version"], "observation.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
         raise ProtocolError("observation schema mismatch")
     if value["kernel_version"] != provenance["kernel_version"]:
         raise ProtocolError("observation kernel_version drift")
-    if _int(value["surface_version"], "observation.surface_version") != provenance["surface_version"]:
+    if _int(value["surface_version"], "observation.surface_version", minimum=0, maximum=U32) != provenance["surface_version"]:
         raise ProtocolError("observation surface_version drift")
-    if _int(value["card_db_hash"], "observation.card_db_hash") != provenance["card_db_hash"]:
+    if _int(value["card_db_hash"], "observation.card_db_hash", minimum=0, maximum=U64) != provenance["card_db_hash"]:
         raise ProtocolError("observation card_db_hash drift")
     if _seat(value["acting_player"], "observation.acting_player") != response["acting_player"]:
         raise ProtocolError("observation acting_player mismatch")
-    if _int(value["step_index"], "observation.step_index", minimum=0) != response["step"]:
+    if _int(value["step_index"], "observation.step_index", minimum=0, maximum=U64) != response["step"]:
         raise ProtocolError("observation step_index mismatch")
-    _int(value["visible_projection_hash"], "observation.visible_projection_hash", minimum=0)
+    _int(value["visible_projection_hash"], "observation.visible_projection_hash", minimum=0, maximum=U64)
     from .features import assert_observation_classified
     from .features import FeatureSchemaError
 
@@ -224,7 +230,7 @@ def _validate_observation(value: Any, response: dict[str, Any], provenance: dict
 
 def _validate_reward(value: Any, context: str) -> list[int]:
     reward = _list(value, context, length=2)
-    out = [_int(reward[0], f"{context}[0]"), _int(reward[1], f"{context}[1]")]
+    out = [_int(reward[0], f"{context}[0]", minimum=I32_MIN, maximum=I32_MAX), _int(reward[1], f"{context}[1]", minimum=I32_MIN, maximum=I32_MAX)]
     return out
 
 
@@ -334,15 +340,15 @@ class KernelRlClient:
         return f"py-{self._request_counter:012d}"
 
     def reset(self, *, episode_id: int, env_seed: int, max_decisions: int) -> Decision:
-        self._episode_id = _int(episode_id, "episode_id", minimum=0)
+        self._episode_id = _int(episode_id, "episode_id", minimum=0, maximum=U64)
         self._expected_step = 0
         request = {
             "request_type": "reset",
             "schema_version": SCHEMA_VERSION,
             "request_id": self._next_request_id(),
             "episode_id": episode_id,
-            "env_seed": _int(env_seed, "env_seed", minimum=0),
-            "max_decisions": _int(max_decisions, "max_decisions", minimum=0),
+            "env_seed": _int(env_seed, "env_seed", minimum=0, maximum=U64),
+            "max_decisions": _int(max_decisions, "max_decisions", minimum=0, maximum=U64),
         }
         response = self._exchange(request)
         if not isinstance(response, Decision):
@@ -358,7 +364,7 @@ class KernelRlClient:
             "request_id": self._next_request_id(),
             "episode_id": self._episode_id,
             "expected_step": self._expected_step,
-            "selected_index": _int(selected_index, "selected_index", minimum=0),
+            "selected_index": _int(selected_index, "selected_index", minimum=0, maximum=U32),
             "selected_action_id": _str(selected_action_id, "selected_action_id"),
         }
         return self._exchange(request)
@@ -393,7 +399,7 @@ class KernelRlClient:
         response_type = _str(response.get("response_type"), "response_type")
         if response_type == "error":
             _keys(response, ["response_type", "schema_version", "request_id", "error"], "error response")
-            if _int(response["schema_version"], "error.schema_version") != SCHEMA_VERSION:
+            if _int(response["schema_version"], "error.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
                 raise ProtocolError("error schema mismatch")
             if _str(response["request_id"], "error.request_id") != request["request_id"]:
                 raise ProtocolError("error request_id mismatch")
@@ -407,16 +413,16 @@ class KernelRlClient:
             raise ProtocolError(f"environment error {code}: {sanitized}")
         if response_type == "decision":
             _keys(response, ["response_type", "schema_version", "request_id", "provenance", "episode_id", "step", "acting_player", "observation", "legal_actions", "reward"], "decision response")
-            if _int(response["schema_version"], "decision.schema_version") != SCHEMA_VERSION:
+            if _int(response["schema_version"], "decision.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
                 raise ProtocolError("decision schema mismatch")
             if _str(response["request_id"], "decision.request_id") != request["request_id"]:
                 raise ProtocolError("decision request_id mismatch")
             provenance = _validate_provenance(response["provenance"], self._provenance)
             self._provenance = provenance
-            episode_id = _int(response["episode_id"], "decision.episode_id", minimum=0)
+            episode_id = _int(response["episode_id"], "decision.episode_id", minimum=0, maximum=U64)
             if episode_id != request["episode_id"]:
                 raise ProtocolError("decision episode_id mismatch")
-            step = _int(response["step"], "decision.step", minimum=0)
+            step = _int(response["step"], "decision.step", minimum=0, maximum=U64)
             expected_step = 0 if request["request_type"] == "reset" else request["expected_step"] + 1
             if step != expected_step:
                 raise ProtocolError(f"decision step drift: expected {expected_step}, got {step}")
@@ -440,19 +446,19 @@ class KernelRlClient:
                 ["response_type", "schema_version", "request_id", "provenance", "episode_id", "terminal_outcome", "terminal_classification", "terminal_code", "winner", "terminal_reward", "terminal_reason", "decision_count"],
                 "terminal response",
             )
-            if _int(response["schema_version"], "terminal.schema_version") != SCHEMA_VERSION:
+            if _int(response["schema_version"], "terminal.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
                 raise ProtocolError("terminal schema mismatch")
             if _str(response["request_id"], "terminal.request_id") != request["request_id"]:
                 raise ProtocolError("terminal request_id mismatch")
             provenance = _validate_provenance(response["provenance"], self._provenance)
             self._provenance = provenance
-            episode_id = _int(response["episode_id"], "terminal.episode_id", minimum=0)
+            episode_id = _int(response["episode_id"], "terminal.episode_id", minimum=0, maximum=U64)
             if episode_id != request["episode_id"]:
                 raise ProtocolError("terminal episode_id mismatch")
-            decision_count = _int(response["decision_count"], "terminal.decision_count", minimum=0)
-            minimum_count = 0 if request["request_type"] == "reset" else request["expected_step"] + 1
-            if decision_count < minimum_count:
-                raise ProtocolError("terminal decision_count regressed")
+            decision_count = _int(response["decision_count"], "terminal.decision_count", minimum=0, maximum=U64)
+            expected_count = 0 if request["request_type"] == "reset" else request["expected_step"] + 1
+            if decision_count != expected_count:
+                raise ProtocolError(f"terminal decision_count mismatch: expected {expected_count}, got {decision_count}")
             outcome = _str(response["terminal_outcome"], "terminal.terminal_outcome")
             classification = _str(response["terminal_classification"], "terminal.terminal_classification")
             code = _str(response["terminal_code"], "terminal.terminal_code")

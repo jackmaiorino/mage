@@ -68,6 +68,7 @@ class ClientStrictnessTest(unittest.TestCase):
 
     def test_bool_as_int_rejected(self) -> None:
         self.assert_reset_protocol_error("bool_int")
+        self.assert_reset_protocol_error("u64_overflow")
 
     def test_episode_and_step_drift_rejected(self) -> None:
         self.assert_reset_protocol_error("episode_drift")
@@ -92,7 +93,7 @@ class ClientStrictnessTest(unittest.TestCase):
             self.tmp.cleanup()
 
     def test_invalid_halted_and_truncated_terminal_rejected(self) -> None:
-        for scenario in ("invalid_terminal", "halted_terminal", "truncated_terminal"):
+        for scenario in ("invalid_terminal", "halted_terminal", "truncated_terminal", "terminal_jump"):
             client = self.make_client(scenario)
             try:
                 decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
@@ -102,6 +103,16 @@ class ClientStrictnessTest(unittest.TestCase):
             finally:
                 client.close()
                 self.tmp.cleanup()
+
+    def test_selected_index_overflow_rejected_before_step(self) -> None:
+        client = self.make_client("valid")
+        try:
+            client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            with self.assertRaises(ProtocolError):
+                client.step(4_294_967_296, "legal-action-v2:a")
+        finally:
+            client.close()
+            self.tmp.cleanup()
 
     def test_natural_terminal_is_admitted_and_sequential_reset_supported(self) -> None:
         client = self.make_client("valid")
