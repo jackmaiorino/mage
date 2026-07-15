@@ -221,12 +221,13 @@ def observation() -> dict[str, Any]:
     }
 
 
-def legal_actions() -> list[dict[str, Any]]:
-    src = stable_ref(1, 30, "p0", "Hand")
+def legal_actions(actor: str = "p0") -> list[dict[str, Any]]:
+    src = stable_ref(1 if actor == "p0" else 101, 30, actor, "Hand")
+    opponent = "p1" if actor == "p0" else "p0"
     return [
-        {"schema_version": 2, "selected_index": 0, "stable_id": "legal-action-v2:a", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"},
-        {"schema_version": 2, "selected_index": 1, "stable_id": "legal-action-v2:b", "semantic": {"action_kind": "cast_spell", "actor": "p0", "source": src}, "display_text": "Cast Lightning Bolt"},
-        {"schema_version": 2, "selected_index": 2, "stable_id": "legal-action-v2:c", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "player", "player": "p1"}}, "display_text": "Target opponent"},
+        {"schema_version": 2, "selected_index": 0, "stable_id": f"legal-action-v2:{actor}:a", "semantic": {"action_kind": "pass", "actor": actor}, "display_text": "Pass"},
+        {"schema_version": 2, "selected_index": 1, "stable_id": f"legal-action-v2:{actor}:b", "semantic": {"action_kind": "cast_spell", "actor": actor, "source": src}, "display_text": "Cast Lightning Bolt"},
+        {"schema_version": 2, "selected_index": 2, "stable_id": f"legal-action-v2:{actor}:c", "semantic": {"action_kind": "choose_target", "actor": actor, "source": src, "remaining": 1, "target": {"target_kind": "player", "player": opponent}}, "display_text": "Target opponent"},
     ]
 
 
@@ -243,9 +244,20 @@ def complete_legal_actions() -> list[dict[str, Any]]:
     ]
 
 
-def decision_response(request_id: str = "r0", episode_id: int = 0, step: int = 0) -> dict[str, Any]:
+def actor_observation(actor: str, step: int = 0) -> dict[str, Any]:
     obs = observation()
+    obs["acting_player"] = actor
     obs["step_index"] = step
+    obs["projection"]["priority_player"] = actor
+    obs["own_hand"] = [
+        {"stable": stable_ref(1 if actor == "p0" else 101, 30, actor, "Hand"), "card_name": "Lightning Bolt"},
+        {"stable": stable_ref(12 if actor == "p0" else 112, 31, actor, "Hand"), "card_name": "Lava Dart"},
+    ]
+    return obs
+
+
+def decision_response(request_id: str = "r0", episode_id: int = 0, step: int = 0, actor: str = "p0") -> dict[str, Any]:
+    obs = actor_observation(actor, step)
     return {
         "response_type": "decision",
         "schema_version": 2,
@@ -253,25 +265,36 @@ def decision_response(request_id: str = "r0", episode_id: int = 0, step: int = 0
         "provenance": copy.deepcopy(PROVENANCE),
         "episode_id": episode_id,
         "step": step,
-        "acting_player": obs["acting_player"],
+        "acting_player": actor,
         "observation": obs,
-        "legal_actions": legal_actions(),
+        "legal_actions": legal_actions(actor),
         "reward": [0, 0],
     }
 
 
-def terminal_response(request_id: str = "r1", episode_id: int = 0, decisions: int = 1) -> dict[str, Any]:
+def terminal_response(request_id: str = "r1", episode_id: int = 0, decisions: int = 1, outcome: str = "p0_win") -> dict[str, Any]:
+    if outcome == "p0_win":
+        winner: str | None = "p0"
+        reward = [1, -1]
+    elif outcome == "p1_win":
+        winner = "p1"
+        reward = [-1, 1]
+    elif outcome == "draw":
+        winner = None
+        reward = [0, 0]
+    else:
+        raise ValueError(outcome)
     return {
         "response_type": "terminal",
         "schema_version": 2,
         "request_id": request_id,
         "provenance": copy.deepcopy(PROVENANCE),
         "episode_id": episode_id,
-        "terminal_outcome": "p0_win",
+        "terminal_outcome": outcome,
         "terminal_classification": "natural",
         "terminal_code": "natural_game_over",
-        "winner": "p0",
-        "terminal_reward": [1, -1],
+        "winner": winner,
+        "terminal_reward": reward,
         "terminal_reason": "game_over",
         "decision_count": decisions,
     }

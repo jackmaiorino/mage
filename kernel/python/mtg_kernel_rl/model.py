@@ -30,6 +30,8 @@ MODEL_CONFIG_SCHEMA_VERSION = 3
 MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-4"
 MODEL_CARD_EMBEDDING_DIM = 16
 MODEL_HIDDEN_DIM = 64
+INITIALIZER_RUNNER_FIXED_V1 = "runner-fixed-v1"
+INITIALIZER_TRAINER_SEEDED_V1 = "trainer-seeded-v1"
 
 
 @dataclass(frozen=True)
@@ -125,11 +127,18 @@ class ModelConfig:
 
 
 class KernelPolicyValueNet(nn.Module):
-    def __init__(self, config: ModelConfig) -> None:
+    def __init__(
+        self,
+        config: ModelConfig,
+        *,
+        initializer: str = INITIALIZER_RUNNER_FIXED_V1,
+        initializer_seed: int | None = None,
+    ) -> None:
         super().__init__()
         configure_torch_determinism()
         config.validate()
         self.config = config
+        rng_state = torch.random.get_rng_state()
         self.card_embedding = nn.Embedding(config.card_vocab_size, config.card_embedding_dim, padding_idx=0)
         self.object_encoder = nn.Sequential(
             nn.Linear(config.object_feature_dim + config.card_embedding_dim, config.hidden_dim),
@@ -174,7 +183,15 @@ class KernelPolicyValueNet(nn.Module):
             nn.Linear(config.hidden_dim, 1),
         )
         self.value_head = nn.Sequential(nn.Linear(config.hidden_dim, config.hidden_dim), nn.Tanh(), nn.Linear(config.hidden_dim, 1))
-        self.reset_deterministic_parameters()
+        if initializer == INITIALIZER_RUNNER_FIXED_V1:
+            self.reset_deterministic_parameters()
+        elif initializer == INITIALIZER_TRAINER_SEEDED_V1:
+            if initializer_seed is None:
+                raise ValueError("trainer seeded initializer requires initializer_seed")
+            self.reset_seeded_parameters(initializer_seed)
+        else:
+            raise ValueError(f"unsupported model initializer {initializer}")
+        torch.random.set_rng_state(rng_state)
 
     @classmethod
     def from_encoded(
@@ -185,20 +202,11 @@ class KernelPolicyValueNet(nn.Module):
         card_embedding_dim: int = MODEL_CARD_EMBEDDING_DIM,
         hidden_dim: int = MODEL_HIDDEN_DIM,
     ) -> "KernelPolicyValueNet":
-        cfg = ModelConfig(
+        cfg = model_config_from_encoded(
+            encoded,
             card_vocab_size=card_vocab_size,
             card_embedding_dim=card_embedding_dim,
             hidden_dim=hidden_dim,
-            state_dim=encoded.schema.state_dim,
-            object_feature_dim=encoded.schema.object_feature_dim,
-            edge_feature_dim=encoded.schema.edge_feature_dim,
-            action_feature_dim=encoded.schema.action_feature_dim,
-            object_group_count=encoded.schema.object_group_count,
-            action_ref_feature_dim=encoded.schema.action_ref_feature_dim,
-            feature_schema_version=encoded.schema.version,
-            feature_registry_version=encoded.schema.registry_version,
-            feature_contract_digest=encoded.schema.contract_digest,
-            feature_encoding_digest=encoded.schema.encoding_digest,
         )
         return cls(cfg)
 
@@ -211,6 +219,21 @@ class KernelPolicyValueNet(nn.Module):
                     values = torch.arange(param.numel(), dtype=param.dtype)
                     values = ((values % 31) - 15) / 200.0
                 param.copy_(values.reshape_as(param))
+            self.card_embedding.weight[0].zero_()
+
+    def reset_seeded_parameters(self, seed: int) -> None:
+        if type(seed) is not int or seed < 0:
+            raise ValueError("initializer seed must be a nonnegative integer and not bool")
+        generator = torch.Generator(device="cpu")
+        generator.manual_seed(seed)
+        with torch.no_grad():
+            for _name, param in self.named_parameters():
+                if param.ndim >= 2:
+                    values = torch.empty_like(param)
+                    torch.nn.init.xavier_uniform_(values, generator=generator)
+                else:
+                    values = torch.rand(param.shape, dtype=param.dtype, generator=generator) * 0.02 - 0.01
+                param.copy_(values)
             self.card_embedding.weight[0].zero_()
 
     def forward(self, encoded: EncodedDecision) -> tuple[torch.Tensor, torch.Tensor]:
@@ -316,6 +339,30 @@ def _max_card_token(encoded: EncodedDecision) -> int:
     if encoded.action_ref_card_ids.numel() > 0:
         values.append(int(torch.max(encoded.action_ref_card_ids).item()))
     return max(values)
+
+
+def model_config_from_encoded(
+    encoded: EncodedDecision,
+    *,
+    card_vocab_size: int = CARD_TOKEN_VOCAB_SIZE,
+    card_embedding_dim: int = MODEL_CARD_EMBEDDING_DIM,
+    hidden_dim: int = MODEL_HIDDEN_DIM,
+) -> ModelConfig:
+    return ModelConfig(
+        card_vocab_size=card_vocab_size,
+        card_embedding_dim=card_embedding_dim,
+        hidden_dim=hidden_dim,
+        state_dim=encoded.schema.state_dim,
+        object_feature_dim=encoded.schema.object_feature_dim,
+        edge_feature_dim=encoded.schema.edge_feature_dim,
+        action_feature_dim=encoded.schema.action_feature_dim,
+        object_group_count=encoded.schema.object_group_count,
+        action_ref_feature_dim=encoded.schema.action_ref_feature_dim,
+        feature_schema_version=encoded.schema.version,
+        feature_registry_version=encoded.schema.registry_version,
+        feature_contract_digest=encoded.schema.contract_digest,
+        feature_encoding_digest=encoded.schema.encoding_digest,
+    )
 
 
 def _apply_rowwise(module: nn.Module, tensor: torch.Tensor) -> torch.Tensor:

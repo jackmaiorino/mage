@@ -21,6 +21,7 @@ def main() -> int:
     if scenario == "eof_nonzero":
         return 17
     count = 0
+    episode_steps: dict[int, int] = {}
     for line in sys.stdin:
         req = json.loads(line)
         count += 1
@@ -53,7 +54,13 @@ def main() -> int:
             emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
             continue
         if req["request_type"] == "reset":
-            resp = decision_response(req["request_id"], req["episode_id"], 0)
+            episode_steps[req["episode_id"]] = 0
+            if scenario == "train_zero_learner":
+                learner = "p0" if req["episode_id"] % 2 == 0 else "p1"
+                actor = "p1" if learner == "p0" else "p0"
+            else:
+                actor = "p0"
+            resp = decision_response(req["request_id"], req["episode_id"], 0, actor=actor)
             if scenario == "extra_field":
                 resp["extra"] = True
             elif scenario == "missing_field":
@@ -85,7 +92,29 @@ def main() -> int:
                 resp["reward"] = [1, 0]
             emit(resp)
         else:
-            if scenario == "provenance_drift":
+            expected_step = req["expected_step"] + 1
+            episode_steps[req["episode_id"]] = expected_step
+            if scenario == "train_pair":
+                if expected_step == 1:
+                    emit(decision_response(req["request_id"], req["episode_id"], expected_step, actor="p1"))
+                else:
+                    outcomes = ["p0_win", "p1_win", "draw"]
+                    emit(terminal_response(req["request_id"], req["episode_id"], expected_step, outcome=outcomes[req["episode_id"] % 3]))
+            elif scenario == "train_zero_learner":
+                outcomes = ["p0_win", "p1_win", "draw"]
+                emit(terminal_response(req["request_id"], req["episode_id"], expected_step, outcome=outcomes[req["episode_id"] % 3]))
+            elif scenario == "train_late_fault":
+                if req["episode_id"] == 1:
+                    resp = terminal_response(req["request_id"], req["episode_id"], expected_step)
+                    resp["terminal_outcome"] = "halted"
+                    resp["terminal_classification"] = "halted"
+                    resp["terminal_code"] = "fail_closed"
+                    resp["winner"] = None
+                    resp["terminal_reward"] = [0, 0]
+                    emit(resp)
+                else:
+                    emit(terminal_response(req["request_id"], req["episode_id"], expected_step))
+            elif scenario == "provenance_drift":
                 resp = decision_response(req["request_id"], req["episode_id"], req["expected_step"] + 1)
                 resp["provenance"]["card_db_hash"] += 1
                 emit(resp)
