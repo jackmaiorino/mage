@@ -15,9 +15,9 @@ OPERATIONAL_ONLY = "operational_only"
 FORBIDDEN = "forbidden"
 CLASSIFICATIONS = (MODEL_INPUT, OPERATIONAL_ONLY, FORBIDDEN)
 
-FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-3"
-FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-3"
-ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-3"
+FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-4"
+FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-4"
+ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-4"
 
 STATE_HASH_DIM = 96
 ACTION_HASH_DIM = 96
@@ -118,6 +118,26 @@ ACTION_REF_ROLES = [
     "pending_sources",
 ]
 
+OBJECT_SOURCE_KINDS = ["card", "stack", "combat", "effect", "permission", "attachment", "target", "pending", "private"]
+CARD_REF_FEATURE_DIM = 6 + len(ZONES)
+OBJECT_FEATURE_DIM = CARD_REF_FEATURE_DIM + 5 + 3 + 6 + 4 + 10 + len(OBJECT_SOURCE_KINDS) + 1
+EDGE_FEATURE_DIM = len(EDGE_ROLES) + 3 + 8
+ACTION_REF_FEATURE_DIM = len(ACTION_REF_ROLES) + CARD_REF_FEATURE_DIM + 2
+ACTION_FEATURE_DIM = (
+    len(ACTION_KINDS)
+    + 3
+    + CARD_REF_FEATURE_DIM
+    + len(TARGET_KINDS)
+    + 3
+    + 12
+    + len(CAST_MODES)
+    + len(COST_KINDS)
+    + len(OPTIONAL_COST_CHOICES)
+    + ACTION_HASH_DIM
+)
+STATE_FEATURE_DIM = len(PHASES) + 6 + (2 * 13) + 7 + 22 + len(SURFACE_STAGES) + 2 + 10 + STATE_HASH_DIM
+CARD_TOKEN_VOCAB_SIZE = 65_537
+
 PLAYER_INDEXED_LISTS = {
     ("observation", "projection", "life_totals"),
     ("observation", "projection", "mana_pools"),
@@ -138,6 +158,52 @@ SET_LIKE_LISTS = {
     ("legal_action", "semantic", "blockers"),
 }
 UNORDERED_LISTS = SET_LIKE_LISTS
+
+PENDING_CONTEXT_SUBROLES = [
+    ("pending_cast", "source"),
+    ("pending_cast", "chosen_targets", "[]", "object"),
+    ("pending_cast", "additional_cost_discarded", "[]"),
+    ("pending_cast", "sacrifice_chosen", "[]"),
+    ("pending_activation", "source"),
+    ("pending_activation", "chosen_targets", "[]", "object"),
+    ("pending_activation", "cost_discard_paid", "[]"),
+    ("pending_discard", "resume_source"),
+    ("pending_optional_cost", "source"),
+    ("pending_optional_cost", "spell_resume_source"),
+    ("pending_optional_cost_sacrifice", "source"),
+    ("pending_optional_cost_sacrifice", "chosen", "[]"),
+    ("pending_optional_cost_sacrifice", "spell_resume_source"),
+    ("pending_triggers", "[]", "source"),
+]
+PRIVATE_CONTEXT_SUBROLES = [
+    ("madness_cast_reprompt_source",),
+    ("private_blockers", "current_attacker"),
+    ("private_blockers", "accumulated", "[]", "0"),
+    ("private_blockers", "accumulated", "[]", "1"),
+    ("private_blockers", "remaining", "[]", "0"),
+    ("private_blockers", "remaining", "[]", "1", "[]"),
+    ("private_discard", "chosen", "[]"),
+    ("private_discard", "remaining_choices", "[]"),
+]
+CONTEXT_SUBROLE_IDS = {path: i for i, path in enumerate(PENDING_CONTEXT_SUBROLES + PRIVATE_CONTEXT_SUBROLES)}
+
+# Derived from rl.rs::engine_context_v2 priority order and
+# surface_v2.rs::next_decision_inner reshape order. Keep fail-closed: a new
+# emitted pairing must be added here with a Rust citation before Python accepts it.
+ENGINE_SURFACE_TUPLE_CONTRACT = [
+    "priority+priority: ordinary priority, declare attackers, or direct engine decisions without a surface reshape",
+    "priority+declare_blockers_for_attacker: HarnessSurfaceV2 blockers reshape over engine DeclareBlockers",
+    "pending_cast+priority: cast target/mode/cost-target/kicker subdecision",
+    "pending_cast+discard_pick: cast paused by additional-cost discard",
+    "pending_activation+priority: activation target subdecision",
+    "pending_activation+discard_pick: activation paused by discard cost",
+    "pending_discard+discard_pick: direct cleanup/effect/optional-cost discard, optionally with queued triggers",
+    "pending_optional_cost+optional_cost_use: optional-cost use gate",
+    "pending_optional_cost+optional_cost_which: optional-cost discard-vs-sacrifice gate when both are payable",
+    "pending_optional_cost_sacrifice+priority: sacrifice-land cost-target subdecision",
+    "pending_triggers+priority: trigger ordering subdecision",
+    "halted+priority: halted engine branch with no surface reshape",
+]
 
 
 class FeatureSchemaError(ValueError):
@@ -631,6 +697,20 @@ SURFACE_CONTEXT = ObjectSpec(
         "private_optional_cost": Opt(PRIVATE_OPTIONAL_COST),
     }
 )
+PENDING_CONTEXT_ROOTS = (
+    ("pending_cast", PENDING_CAST, ("pending_cast",)),
+    ("pending_activation", PENDING_ACTIVATION, ("pending_activation",)),
+    ("pending_discard", PENDING_DISCARD, ("pending_discard",)),
+    ("pending_optional_cost", PENDING_OPTIONAL_COST, ("pending_optional_cost",)),
+    ("pending_optional_cost_sacrifice", PENDING_OPTIONAL_COST_SAC, ("pending_optional_cost_sacrifice",)),
+    ("pending_triggers", ListSpec(PENDING_TRIGGER), ("pending_triggers",)),
+)
+PRIVATE_CONTEXT_ROOTS = (
+    ("madness_cast_reprompt_source", CARD_STABLE_REF, ("madness_cast_reprompt_source",)),
+    ("private_blockers", PRIVATE_BLOCKERS, ("private_blockers",)),
+    ("private_discard", PRIVATE_DISCARD, ("private_discard",)),
+    ("private_optional_cost", PRIVATE_OPTIONAL_COST, ("private_optional_cost",)),
+)
 PROJECTION = ObjectSpec(
     {
         "turn": I(OPERATIONAL_ONLY, maximum=U32),
@@ -728,6 +808,16 @@ def _encoding_payload() -> dict[str, Any]:
         "object_groups": OBJECT_GROUPS,
         "edge_roles": EDGE_ROLES,
         "action_ref_roles": ACTION_REF_ROLES,
+        "fixed_dimensions": {
+            "state_dim": STATE_FEATURE_DIM,
+            "object_feature_dim": OBJECT_FEATURE_DIM,
+            "edge_feature_dim": EDGE_FEATURE_DIM,
+            "action_feature_dim": ACTION_FEATURE_DIM,
+            "action_ref_feature_dim": ACTION_REF_FEATURE_DIM,
+        },
+        "card_token_vocab_size": CARD_TOKEN_VOCAB_SIZE,
+        "context_subroles": [".".join(path) for path in PENDING_CONTEXT_SUBROLES + PRIVATE_CONTEXT_SUBROLES],
+        "engine_surface_tuple_contract": ENGINE_SURFACE_TUPLE_CONTRACT,
         "action_kinds": ACTION_KINDS,
         "stack_kinds": STACK_KINDS,
         "surface_stages": SURFACE_STAGES,
@@ -750,7 +840,7 @@ def encoding_contract_fingerprint() -> str:
 
 
 def model_contract_fingerprint(schema: FeatureSchema) -> str:
-    return _sha256_json({"model_contract_version": "kernel-policy-value-net-3", "feature_schema": schema.__dict__})
+    return _sha256_json({"model_contract_version": "kernel-policy-value-net-4", "feature_schema": schema.__dict__})
 
 
 def classification_registry() -> dict[str, str]:
@@ -844,8 +934,8 @@ def _card_token(stable: dict[str, Any] | None) -> int:
     if not stable:
         return 0
     card_db_id = stable.get("card_db_id")
-    if type(card_db_id) is not int or card_db_id < 0:
-        raise FeatureSchemaError("card_db_id must be a nonnegative integer token")
+    if type(card_db_id) is not int or card_db_id < 0 or card_db_id > U16:
+        raise FeatureSchemaError("card_db_id must be inside the admitted u16 domain")
     return card_db_id + 1
 
 
@@ -863,7 +953,7 @@ class _CanonicalContext:
         self._ref_keys: dict[tuple[int, int], Any] = {}
         if observation is not None:
             self.turn = observation.get("projection", {}).get("turn", 0)
-            for ref in _iter_card_refs(observation):
+            for ref in _iter_card_refs_by_schema(observation, OBSERVATION_SPEC):
                 arena = ref.get("arena_id")
                 generation = ref.get("zone_change_count")
                 if type(arena) is int and arena not in self._arena_handles:
@@ -907,6 +997,33 @@ def _iter_card_refs(value: Any) -> Iterable[dict[str, Any]]:
     elif isinstance(value, list):
         for child in value:
             yield from _iter_card_refs(child)
+
+
+def _iter_card_refs_by_schema(value: Any, spec: Spec) -> Iterable[dict[str, Any]]:
+    if value is None:
+        return
+    if spec is CARD_STABLE_REF:
+        yield value
+        return
+    if isinstance(spec, OptionalSpec):
+        if value is not None:
+            yield from _iter_card_refs_by_schema(value, spec.item)
+        return
+    if isinstance(spec, ListSpec):
+        for child in value:
+            yield from _iter_card_refs_by_schema(child, spec.item)
+        return
+    if isinstance(spec, TupleSpec):
+        for child_spec, child in zip(spec.items, value):
+            yield from _iter_card_refs_by_schema(child, child_spec)
+        return
+    if isinstance(spec, ObjectSpec):
+        for key, child_spec in spec.fields.items():
+            yield from _iter_card_refs_by_schema(value[key], child_spec)
+        return
+    if isinstance(spec, VariantSpec):
+        yield from _iter_card_refs_by_schema(value, spec.variants[value[spec.tag]])
+        return
 
 
 def _sort_key(value: Any) -> str:
@@ -993,7 +1110,7 @@ def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0
     characteristics = card.get("characteristics", {})
     type_flags = characteristics.get("type_flags", {})
     keywords = characteristics.get("effective_keywords", {})
-    source_flags = [1.0 if source_kind == kind else 0.0 for kind in ("card", "stack", "combat", "effect", "permission", "attachment", "target", "pending", "private")]
+    source_flags = [1.0 if source_kind == kind else 0.0 for kind in OBJECT_SOURCE_KINDS]
     features = (
         _card_ref_features(stable, actor)
         + [
@@ -1193,6 +1310,12 @@ class _NodeRegistry:
         features, token = _card_public_features(_blank_public_from_ref(ref, source_kind), self.actor, order, source_kind, self.current_turn)
         return self._add_node(key, features, token, group)
 
+    def resolve_or_add_ref_node(self, ref: dict[str, Any], group: str, order: int, source_kind: str) -> int:
+        key = self.validate_ref(ref)
+        if key in self._node_by_key:
+            return self._node_by_key[key]
+        return self.add_ref_node(ref, group, order, source_kind)
+
     def _add_node(self, key: tuple[int, int], features: list[float], token: int, group: str) -> int:
         if key in self._node_by_key:
             return self._node_by_key[key]
@@ -1226,6 +1349,9 @@ def _edge_row(role: str, primary_order: int = 0, secondary_order: int = 0, assoc
     row = _one_hot(role, EDGE_ROLES) + [_number(primary_order, 64.0), _number(secondary_order, 64.0), _number(associated_order, 64.0)]
     if extra:
         row += extra
+    if len(row) > EDGE_FEATURE_DIM:
+        raise FeatureSchemaError("edge feature row exceeds fixed contract width")
+    row += [0.0] * (EDGE_FEATURE_DIM - len(row))
     return row
 
 
@@ -1252,21 +1378,45 @@ def _context_ref_edges(
     edge_sources: list[int],
     edge_targets: list[int],
     value: Any,
+    spec: Spec,
+    path: tuple[str, ...],
     role: str,
     order_counter: list[int],
 ) -> None:
-    if isinstance(value, dict):
-        if {"arena_id", "card_db_id", "owner", "controller", "zone", "zone_change_count"}.issubset(value):
-            node = registry.resolve(value)
-            order = order_counter[0]
-            order_counter[0] += 1
-            _append_edge(edge_rows, edge_sources, edge_targets, node, node, role, order)
-            return
-        for child in value.values():
-            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, role, order_counter)
-    elif isinstance(value, list):
+    if value is None:
+        return
+    if spec is CARD_STABLE_REF:
+        normalized = path
+        try:
+            subrole = CONTEXT_SUBROLE_IDS[normalized]
+        except KeyError as exc:
+            raise FeatureSchemaError(f"context card reference path is not declared for edge encoding: {'.'.join(normalized)}") from exc
+        order = order_counter[0]
+        order_counter[0] += 1
+        group = "pending_context" if role == "pending_context" else "private_context"
+        source_kind = "pending" if role == "pending_context" else "private"
+        node = registry.resolve_or_add_ref_node(value, group, order, source_kind)
+        _append_edge(edge_rows, edge_sources, edge_targets, node, node, role, order, subrole)
+        return
+    if isinstance(spec, OptionalSpec):
+        if value is not None:
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, value, spec.item, path, role, order_counter)
+        return
+    if isinstance(spec, ListSpec):
         for child in value:
-            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, role, order_counter)
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, spec.item, path + ("[]",), role, order_counter)
+        return
+    if isinstance(spec, TupleSpec):
+        for i, (child_spec, child) in enumerate(zip(spec.items, value)):
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, child, child_spec, path + (str(i),), role, order_counter)
+        return
+    if isinstance(spec, ObjectSpec):
+        for key, child_spec in spec.fields.items():
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, value[key], child_spec, path + (key,), role, order_counter)
+        return
+    if isinstance(spec, VariantSpec):
+        _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, value, spec.variants[value[spec.tag]], path, role, order_counter)
+        return
 
 
 def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], list[int], list[int], list[int], list[list[float]], list[int], list[int]]:
@@ -1295,11 +1445,21 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
     for i, item in enumerate(p["stack"]):
         registry.add_ref_node(item["source"], "stack", i, "stack")
 
-    for card in [c for zone in p["battlefield"] + p["graveyards"] for c in zone] + list(p["exile"]):
+    attachment_edges: list[tuple[int, int]] = []
+    actor_relative_zones = []
+    for seat in seat_order:
+        seat_idx = 0 if seat == "p0" else 1
+        actor_relative_zones.append(p["battlefield"][seat_idx])
+    for seat in seat_order:
+        seat_idx = 0 if seat == "p0" else 1
+        actor_relative_zones.append(p["graveyards"][seat_idx])
+    actor_relative_zones.append(p["exile"])
+    for card in [c for zone in actor_relative_zones for c in zone]:
         host = registry.resolve(card["stable"])
-        attachment_nodes = [registry.resolve_attachment_arena(raw) for raw in card["attachments"]]
-        for attach_order, attachment in enumerate(sorted(attachment_nodes)):
-            _append_edge(edge_rows, edge_sources, edge_targets, host, attachment, "attachment", attach_order)
+        for attachment in [registry.resolve_attachment_arena(raw) for raw in card["attachments"]]:
+            attachment_edges.append((host, attachment))
+    for attach_order, (host, attachment) in enumerate(sorted(attachment_edges)):
+        _append_edge(edge_rows, edge_sources, edge_targets, host, attachment, "attachment", attach_order)
     for i, item in enumerate(p["stack"]):
         source = registry.resolve(item["source"])
         for target_index, target in enumerate(item["targets"]):
@@ -1335,53 +1495,19 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
         _append_edge(edge_rows, edge_sources, edge_targets, node, node, "permission", permission_order, extra=extra)
     engine = p["engine_context"]
     pending_order = [0]
-    for key in ("pending_cast", "pending_activation", "pending_discard", "pending_optional_cost", "pending_optional_cost_sacrifice"):
+    for key, spec, path in PENDING_CONTEXT_ROOTS:
         if engine[key] is not None:
-            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, engine[key], "pending_context", pending_order)
-    _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, engine["pending_triggers"], "pending_context", pending_order)
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, engine[key], spec, path, "pending_context", pending_order)
     surface = p["surface_context"]
     private_order = [0]
-    for key in ("madness_cast_reprompt_source", "private_blockers", "private_discard"):
+    for key, spec, path in PRIVATE_CONTEXT_ROOTS:
         if surface[key] is not None:
-            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, surface[key], "private_context", private_order)
-    width = max((len(row) for row in registry.rows), default=_object_feature_dim_probe())
-    padded = [row + [0.0] * (width - len(row)) for row in registry.rows]
-    return registry, padded, registry.tokens, registry.groups, registry.node_ids, edge_rows, edge_sources, edge_targets
+            _context_ref_edges(registry, edge_rows, edge_sources, edge_targets, surface[key], spec, path, "private_context", private_order)
+    return registry, registry.rows, registry.tokens, registry.groups, registry.node_ids, edge_rows, edge_sources, edge_targets
 
 
 def _object_feature_dim_probe() -> int:
-    dummy = {
-        "stable": {"arena_id": 0, "card_db_id": 0, "owner": "p0", "controller": "p0", "zone": "Hand", "zone_change_count": 0},
-        "tapped": False,
-        "summoning_sick": False,
-        "damage": 0,
-        "counters": {"plus1_plus1": 0},
-        "attachments": [],
-        "plotted_turn": None,
-        "characteristics": {
-            "type_flags": {name: False for name in ("land", "creature", "instant", "sorcery", "artifact", "enchantment")},
-            "base_power": None,
-            "base_toughness": None,
-            "effective_power": None,
-            "effective_toughness": None,
-            "effective_keywords": {
-                name: False
-                for name in (
-                    "flying",
-                    "reach",
-                    "haste",
-                    "vigilance",
-                    "trample",
-                    "first_strike",
-                    "double_strike",
-                    "deathtouch",
-                    "menace",
-                    "defender",
-                )
-            },
-        },
-    }
-    return len(_card_public_features(dummy, "p0")[0]) + 24
+    return OBJECT_FEATURE_DIM
 
 
 def _action_kind(action: dict[str, Any]) -> str:
@@ -1461,6 +1587,10 @@ def _action_features(action: dict[str, Any], actor: str, registry: _NodeRegistry
 
 
 def _schema(state_dim: int, object_dim: int, edge_dim: int, action_dim: int, action_ref_dim: int) -> FeatureSchema:
+    expected = (STATE_FEATURE_DIM, OBJECT_FEATURE_DIM, EDGE_FEATURE_DIM, ACTION_FEATURE_DIM, ACTION_REF_FEATURE_DIM)
+    actual = (state_dim, object_dim, edge_dim, action_dim, action_ref_dim)
+    if actual != expected:
+        raise FeatureSchemaError(f"encoded schema dimensions drifted from contract: expected={expected} actual={actual}")
     return FeatureSchema(
         version=FEATURE_SCHEMA_VERSION,
         registry_version=FEATURE_REGISTRY_VERSION,
@@ -1473,6 +1603,15 @@ def _schema(state_dim: int, object_dim: int, edge_dim: int, action_dim: int, act
         object_group_count=len(OBJECT_GROUPS),
         action_ref_feature_dim=action_ref_dim,
     )
+
+
+def _pad_rows(rows: list[list[float]], width: int, name: str) -> list[list[float]]:
+    out: list[list[float]] = []
+    for row in rows:
+        if len(row) > width:
+            raise FeatureSchemaError(f"{name} row exceeds fixed contract width")
+        out.append(row + [0.0] * (width - len(row)))
+    return out
 
 
 def _validate_order_trigger_semantic(semantic: dict[str, Any]) -> None:
@@ -1544,6 +1683,12 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
         zone_present = pending["spell_resume_zone"] is not None
         if source_present != zone_present:
             raise FeatureSchemaError(f"{key} spell_resume_source and spell_resume_zone must be both present or both absent")
+    optional = engine["pending_optional_cost"]
+    if optional is not None and not (optional["discard_payable"] or optional["sacrifice_payable"]):
+        raise FeatureSchemaError("pending_optional_cost must have at least one payable branch")
+    optional_sacrifice = engine["pending_optional_cost_sacrifice"]
+    if optional_sacrifice is not None and len(optional_sacrifice["chosen"]) >= optional_sacrifice["remaining"]:
+        raise FeatureSchemaError("pending_optional_cost_sacrifice must still need a land choice")
 
 
 def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any], actor: str) -> None:
@@ -1576,8 +1721,63 @@ def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any
             raise FeatureSchemaError("optional cost stage requires only private_optional_cost")
         if private_optional["stage"] != stage:
             raise FeatureSchemaError("private_optional_cost.stage must match surface current_stage")
+        if stage == "optional_cost_which" and not (private_optional["discard_payable"] and private_optional["sacrifice_payable"]):
+            raise FeatureSchemaError("optional_cost_which requires both branches to be payable")
         return
     raise FeatureSchemaError(f"unknown surface stage {stage!r}")
+
+
+def _validate_engine_surface_tuple(engine: dict[str, Any], surface: dict[str, Any], actor: str) -> None:
+    engine_stage = engine["current_stage"]
+    surface_stage = surface["current_stage"]
+    if surface_stage == "priority":
+        if engine_stage in ("priority", "halted", "pending_triggers", "pending_optional_cost_sacrifice"):
+            return
+        if engine_stage in ("pending_cast", "pending_activation") and engine["pending_discard"] is None:
+            return
+        raise FeatureSchemaError("engine/surface tuple is impossible for Rust priority projection")
+
+    if surface_stage == "declare_blockers_for_attacker":
+        if engine_stage != "priority":
+            raise FeatureSchemaError("blockers surface reshape must sit over engine priority")
+        return
+
+    if surface_stage == "discard_pick":
+        discard = engine["pending_discard"]
+        if discard is None:
+            raise FeatureSchemaError("discard surface reshape requires engine pending_discard")
+        if actor != discard["player"]:
+            raise FeatureSchemaError("discard surface actor must be the pending discard player")
+        if engine_stage == "pending_cast":
+            pending_cast = engine["pending_cast"]
+            if pending_cast is None or discard["resume_stage"] != "finish_cast" or discard["player"] != pending_cast["controller"]:
+                raise FeatureSchemaError("paused cast discard tuple does not match Rust FinishCast shape")
+            return
+        if engine_stage == "pending_activation":
+            pending_activation = engine["pending_activation"]
+            if pending_activation is None or discard["resume_stage"] != "finish_activation" or discard["player"] != pending_activation["controller"]:
+                raise FeatureSchemaError("paused activation discard tuple does not match Rust FinishActivation shape")
+            return
+        if engine_stage == "pending_discard":
+            if discard["resume_stage"] in ("finish_cast", "finish_activation"):
+                raise FeatureSchemaError("FinishCast/FinishActivation discard must coexist with its paused engine context")
+            return
+        raise FeatureSchemaError("discard surface reshape cannot coexist with this engine stage")
+
+    if surface_stage in ("optional_cost_use", "optional_cost_which"):
+        optional = engine["pending_optional_cost"]
+        private_optional = surface["private_optional_cost"]
+        if engine_stage != "pending_optional_cost" or optional is None:
+            raise FeatureSchemaError("optional-cost surface reshape requires engine pending_optional_cost")
+        if actor != optional["player"]:
+            raise FeatureSchemaError("optional-cost surface actor must be the pending optional-cost player")
+        if private_optional["discard_payable"] != optional["discard_payable"] or private_optional["sacrifice_payable"] != optional["sacrifice_payable"]:
+            raise FeatureSchemaError("surface optional-cost payable flags must match engine pending_optional_cost")
+        if surface_stage == "optional_cost_which" and not (optional["discard_payable"] and optional["sacrifice_payable"]):
+            raise FeatureSchemaError("optional_cost_which is only emitted when both costs are payable")
+        return
+
+    raise FeatureSchemaError(f"unknown surface stage {surface_stage!r}")
 
 
 def _validate_observation_semantics(observation: dict[str, Any]) -> None:
@@ -1587,6 +1787,7 @@ def _validate_observation_semantics(observation: dict[str, Any]) -> None:
             raise FeatureSchemaError("stack_index must match recorded stack position")
     _validate_engine_context(p["engine_context"])
     _validate_surface_context(p["surface_context"], p, observation["acting_player"])
+    _validate_engine_surface_tuple(p["engine_context"], p["surface_context"], observation["acting_player"])
     for permission in p["exile_play_permissions"]:
         if permission["zone_change_generation"] != permission["object"]["zone_change_count"]:
             raise FeatureSchemaError("permission zone_change_generation does not match object incarnation")
@@ -1648,14 +1849,14 @@ def encode_decision(observation: dict[str, Any], legal_actions: list[dict[str, A
             action_ref_tokens.append(token_ref)
             action_ref_indices.append(action_index)
             action_ref_nodes.append(node_ref)
-    object_dim = max((len(row) for row in object_rows), default=_object_feature_dim_probe())
-    edge_dim = max((len(row) for row in edge_rows), default=len(EDGE_ROLES) + 3)
-    action_dim = max(len(row) for row in action_rows)
-    action_ref_dim = max((len(row) for row in action_ref_rows), default=len(ACTION_REF_ROLES) + 6 + len(ZONES) + 2)
-    object_rows = [row + [0.0] * (object_dim - len(row)) for row in object_rows]
-    edge_rows = [row + [0.0] * (edge_dim - len(row)) for row in edge_rows]
-    action_rows = [row + [0.0] * (action_dim - len(row)) for row in action_rows]
-    action_ref_rows = [row + [0.0] * (action_ref_dim - len(row)) for row in action_ref_rows]
+    object_dim = OBJECT_FEATURE_DIM
+    edge_dim = EDGE_FEATURE_DIM
+    action_dim = ACTION_FEATURE_DIM
+    action_ref_dim = ACTION_REF_FEATURE_DIM
+    object_rows = _pad_rows(object_rows, object_dim, "object_features")
+    edge_rows = _pad_rows(edge_rows, edge_dim, "edge_features")
+    action_rows = _pad_rows(action_rows, action_dim, "action_features")
+    action_ref_rows = _pad_rows(action_ref_rows, action_ref_dim, "action_ref_features")
     if not object_rows:
         object_rows = [[0.0] * object_dim]
         object_tokens = [0]

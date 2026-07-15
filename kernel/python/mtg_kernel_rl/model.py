@@ -12,15 +12,24 @@ from torch import nn
 
 from .determinism import configure_torch_determinism
 from .features import (
+    ACTION_FEATURE_DIM,
+    ACTION_REF_FEATURE_DIM,
+    CARD_TOKEN_VOCAB_SIZE,
+    EDGE_FEATURE_DIM,
     EncodedDecision,
     FEATURE_REGISTRY_VERSION,
     FEATURE_SCHEMA_VERSION,
+    OBJECT_FEATURE_DIM,
+    OBJECT_GROUPS,
+    STATE_FEATURE_DIM,
     encoding_contract_fingerprint,
     feature_contract_fingerprint,
 )
 
-MODEL_CONFIG_SCHEMA_VERSION = 2
-MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-3"
+MODEL_CONFIG_SCHEMA_VERSION = 3
+MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-4"
+MODEL_CARD_EMBEDDING_DIM = 16
+MODEL_HIDDEN_DIM = 64
 
 
 @dataclass(frozen=True)
@@ -31,15 +40,15 @@ class ModelConfig:
     feature_registry_version: str = FEATURE_REGISTRY_VERSION
     feature_contract_digest: str = feature_contract_fingerprint()
     feature_encoding_digest: str = encoding_contract_fingerprint()
-    card_vocab_size: int = 4096
-    card_embedding_dim: int = 16
-    hidden_dim: int = 64
-    state_dim: int = 0
-    object_feature_dim: int = 0
-    edge_feature_dim: int = 0
-    action_feature_dim: int = 0
-    object_group_count: int = 15
-    action_ref_feature_dim: int = 0
+    card_vocab_size: int = CARD_TOKEN_VOCAB_SIZE
+    card_embedding_dim: int = MODEL_CARD_EMBEDDING_DIM
+    hidden_dim: int = MODEL_HIDDEN_DIM
+    state_dim: int = STATE_FEATURE_DIM
+    object_feature_dim: int = OBJECT_FEATURE_DIM
+    edge_feature_dim: int = EDGE_FEATURE_DIM
+    action_feature_dim: int = ACTION_FEATURE_DIM
+    object_group_count: int = len(OBJECT_GROUPS)
+    action_ref_feature_dim: int = ACTION_REF_FEATURE_DIM
 
     def to_dict(self) -> dict[str, int | str]:
         return dict(self.__dict__)
@@ -95,20 +104,20 @@ class ModelConfig:
             raise ValueError("feature contract digest mismatch")
         if self.feature_encoding_digest != encoding_contract_fingerprint():
             raise ValueError("feature encoding digest mismatch")
-        positive = {
-            "card_vocab_size": self.card_vocab_size,
-            "card_embedding_dim": self.card_embedding_dim,
-            "hidden_dim": self.hidden_dim,
-            "state_dim": self.state_dim,
-            "object_feature_dim": self.object_feature_dim,
-            "edge_feature_dim": self.edge_feature_dim,
-            "action_feature_dim": self.action_feature_dim,
-            "object_group_count": self.object_group_count,
-            "action_ref_feature_dim": self.action_ref_feature_dim,
+        exact_ints = {
+            "card_vocab_size": (self.card_vocab_size, CARD_TOKEN_VOCAB_SIZE),
+            "card_embedding_dim": (self.card_embedding_dim, MODEL_CARD_EMBEDDING_DIM),
+            "hidden_dim": (self.hidden_dim, MODEL_HIDDEN_DIM),
+            "state_dim": (self.state_dim, STATE_FEATURE_DIM),
+            "object_feature_dim": (self.object_feature_dim, OBJECT_FEATURE_DIM),
+            "edge_feature_dim": (self.edge_feature_dim, EDGE_FEATURE_DIM),
+            "action_feature_dim": (self.action_feature_dim, ACTION_FEATURE_DIM),
+            "object_group_count": (self.object_group_count, len(OBJECT_GROUPS)),
+            "action_ref_feature_dim": (self.action_ref_feature_dim, ACTION_REF_FEATURE_DIM),
         }
-        for key, raw in positive.items():
-            if type(raw) is not int or raw <= 0:
-                raise ValueError(f"ModelConfig.{key} must be a positive int")
+        for key, (raw, expected) in exact_ints.items():
+            if type(raw) is not int or raw != expected:
+                raise ValueError(f"ModelConfig.{key} must equal contract value {expected}")
 
     def contract_fingerprint(self) -> str:
         payload = self.to_dict()
@@ -168,10 +177,16 @@ class KernelPolicyValueNet(nn.Module):
         self.reset_deterministic_parameters()
 
     @classmethod
-    def from_encoded(cls, encoded: EncodedDecision, *, card_vocab_size: int = 4096, card_embedding_dim: int = 16, hidden_dim: int = 64) -> "KernelPolicyValueNet":
-        max_card_token = _max_card_token(encoded)
+    def from_encoded(
+        cls,
+        encoded: EncodedDecision,
+        *,
+        card_vocab_size: int = CARD_TOKEN_VOCAB_SIZE,
+        card_embedding_dim: int = MODEL_CARD_EMBEDDING_DIM,
+        hidden_dim: int = MODEL_HIDDEN_DIM,
+    ) -> "KernelPolicyValueNet":
         cfg = ModelConfig(
-            card_vocab_size=max(card_vocab_size, max_card_token + 1),
+            card_vocab_size=card_vocab_size,
             card_embedding_dim=card_embedding_dim,
             hidden_dim=hidden_dim,
             state_dim=encoded.schema.state_dim,

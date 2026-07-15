@@ -37,11 +37,7 @@ class InMemoryModelPolicy:
 
     def logits_value(self, encoded: EncodedDecision) -> tuple[torch.Tensor, torch.Tensor]:
         if self.model is None:
-            token_tensors = [encoded.object_card_ids]
-            if encoded.action_ref_card_ids.numel() > 0:
-                token_tensors.append(encoded.action_ref_card_ids)
-            max_card_token = int(torch.max(torch.cat(token_tensors)).item())
-            self.model = KernelPolicyValueNet.from_encoded(encoded, card_vocab_size=max(4096, max_card_token + 8))
+            self.model = KernelPolicyValueNet.from_encoded(encoded)
         self.model.eval()
         with torch.no_grad():
             return self.model(encoded)
