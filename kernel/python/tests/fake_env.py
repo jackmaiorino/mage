@@ -92,9 +92,17 @@ def main() -> int:
                 resp["reward"] = [1, 0]
             emit(resp)
         else:
+            if scenario == "train_pair_assert_latest0" and count == 2:
+                latest_path = os.environ.get("FAKE_EXPECT_LATEST_JSON")
+                if not latest_path:
+                    raise RuntimeError("FAKE_EXPECT_LATEST_JSON not set")
+                with open(latest_path, "r", encoding="utf-8") as fh:
+                    latest = json.load(fh)
+                if latest.get("update") != 0:
+                    raise RuntimeError(f"latest.json update was not 0 before first action: {latest!r}")
             expected_step = req["expected_step"] + 1
             episode_steps[req["episode_id"]] = expected_step
-            if scenario == "train_pair":
+            if scenario in ("train_pair", "train_pair_assert_latest0"):
                 if expected_step == 1:
                     emit(decision_response(req["request_id"], req["episode_id"], expected_step, actor="p1"))
                 else:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import dataclasses
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,6 +9,8 @@ from pathlib import Path
 import torch
 
 from mtg_kernel_rl.checkpoint import (
+    MAX_CHECKPOINT_COLLECTION_ITEMS,
+    MAX_CHECKPOINT_TENSOR_ELEMENTS,
     build_checkpoint_payload,
     create_adam,
     export_adam_state,
@@ -18,6 +21,7 @@ from mtg_kernel_rl.checkpoint import (
     validate_checkpoint_payload,
     validate_model_state,
 )
+import mtg_kernel_rl.checkpoint as checkpoint_mod
 from mtg_kernel_rl.determinism import TrainerSeedDerivation, configure_torch_determinism, derive_model_init_seed
 from mtg_kernel_rl.features import encode_decision
 from mtg_kernel_rl.model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet
@@ -50,7 +54,10 @@ class CheckpointTest(unittest.TestCase):
             optimizer=optimizer,
             learning_rate=0.001,
             base_seed=71501,
-            seed_derivation={"schema": "test", "namespaces": list(TrainerSeedDerivation().namespaces)},
+            seed_derivation={
+                **dataclasses.asdict(TrainerSeedDerivation()),
+                "namespaces": list(TrainerSeedDerivation().namespaces),
+            },
             provenance={"protocol": "kernel_rl_jsonl", "protocol_version": 2, "schema_version": 2, "kernel_version": "0.0.1-spike", "surface_version": 2, "card_db_hash": 1},
             compatibility=compatibility,
         )
@@ -97,6 +104,7 @@ class CheckpointTest(unittest.TestCase):
         mutated_rng["torch_cpu_rng_state"] = mutated_rng["torch_cpu_rng_state"].clone()
         mutated_rng["torch_cpu_rng_state"][0] ^= 1
         self.assertNotEqual(base, logical_state_hash(mutated_rng))
+        self.assertNotEqual(logical_state_hash({"x": [1, 2]}), logical_state_hash({"x": (1, 2)}))
 
     def test_malicious_optimizer_metadata_rejected(self) -> None:
         payload, _model, _optimizer, compatibility = self.make_payload()
@@ -104,10 +112,68 @@ class CheckpointTest(unittest.TestCase):
         bad["optimizer_state"]["param_names"].append("evil")
         with self.assertRaises(ValueError):
             validate_checkpoint_payload(bad, run_digest="r" * 64, compatibility=compatibility)
-            encoded = encode_decision(observation(), legal_actions())
-            model = KernelPolicyValueNet.from_encoded(encoded)
-            optimizer = create_adam(model, 0.001)
-            load_adam_state(optimizer, model, bad["optimizer_state"], 0.001)
+
+    def test_malformed_adam_slots_are_rejected(self) -> None:
+        payload, model, _optimizer, compatibility = self.make_payload()
+        first_name = payload["optimizer_state"]["param_names"][0]
+        bad_partial = copy.deepcopy(payload)
+        del bad_partial["optimizer_state"]["state"][first_name]["exp_avg_sq"]
+        with self.assertRaises(ValueError):
+            validate_checkpoint_payload(bad_partial, run_digest="r" * 64, compatibility=compatibility)
+        bad_amsgrad = copy.deepcopy(payload)
+        bad_amsgrad["optimizer_state"]["state"][first_name]["max_exp_avg_sq"] = torch.zeros_like(
+            bad_amsgrad["optimizer_state"]["state"][first_name]["exp_avg"]
+        )
+        with self.assertRaises(ValueError):
+            validate_checkpoint_payload(bad_amsgrad, run_digest="r" * 64, compatibility=compatibility)
+        bad_step = copy.deepcopy(payload)
+        bad_step["optimizer_state"]["state"][first_name]["step"] += 1
+        restored = KernelPolicyValueNet(model.config, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
+        optimizer = create_adam(restored, 0.001)
+        with self.assertRaises(ValueError):
+            load_adam_state(
+                optimizer,
+                restored,
+                bad_step["optimizer_state"],
+                0.001,
+                expected_step_count=payload["optimizer_step_count"],
+            )
+
+    def test_safe_load_incompatibility_never_calls_unsafe_torch_load(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "bad.pt"
+            path.write_bytes(b"not a checkpoint")
+            called = {"value": False}
+            original = checkpoint_mod.torch.load
+
+            def unsafe_load(path, map_location=None):  # type: ignore[no-untyped-def]
+                called["value"] = True
+                return {}
+
+            checkpoint_mod.torch.load = unsafe_load  # type: ignore[assignment]
+            try:
+                with self.assertRaises(RuntimeError):
+                    load_checkpoint_file(path)
+            finally:
+                checkpoint_mod.torch.load = original  # type: ignore[assignment]
+            self.assertFalse(called["value"])
+
+    def test_loaded_checkpoint_tree_bounds_reject_oversized_tensors_and_collections(self) -> None:
+        original_elements = checkpoint_mod.MAX_CHECKPOINT_TENSOR_ELEMENTS
+        original_items = checkpoint_mod.MAX_CHECKPOINT_COLLECTION_ITEMS
+        try:
+            checkpoint_mod.MAX_CHECKPOINT_TENSOR_ELEMENTS = 1
+            with self.assertRaises(ValueError):
+                logical_state_hash({"x": torch.zeros(2, dtype=torch.float32)})
+            checkpoint_mod.MAX_CHECKPOINT_COLLECTION_ITEMS = 1
+            with tempfile.TemporaryDirectory() as tmp_name:
+                path = Path(tmp_name) / "oversized.pt"
+                torch.save({"a": 1, "b": 2}, path)
+                with self.assertRaises(ValueError):
+                    load_checkpoint_file(path)
+        finally:
+            checkpoint_mod.MAX_CHECKPOINT_TENSOR_ELEMENTS = original_elements
+            checkpoint_mod.MAX_CHECKPOINT_COLLECTION_ITEMS = original_items
 
 
 if __name__ == "__main__":

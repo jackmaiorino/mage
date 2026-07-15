@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import dataclasses
+import copy
 import math
 import os
 import platform
 import random
+import re
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -20,17 +23,22 @@ from .artifacts import (
     canonical_json_bytes,
     fsync_dir,
     generation_paths,
+    inject_fault,
     latest_path,
     read_json_file,
     rebuild_derived_caches,
     require_new_or_empty_dir,
     sha256_bytes,
     sha256_file,
+    validate_training_json_privacy,
     write_json_atomic,
 )
 from .checkpoint import (
+    CHECKPOINT_SCHEMA,
     LATEST_SCHEMA,
+    SIDECAR_SCHEMA,
     UPDATE_RECORD_SCHEMA,
+    adam_config,
     build_checkpoint_payload,
     build_latest,
     build_sidecar,
@@ -45,6 +53,7 @@ from .checkpoint import (
     update_record_hash,
     validate_checkpoint_payload,
     validate_model_state,
+    validate_torch_rng_state,
 )
 from .client import Decision, KernelRlClient, Terminal
 from .determinism import (
@@ -61,15 +70,22 @@ from .determinism import (
 from .features import encode_decision
 from .model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet, ModelConfig, model_config_from_encoded
 
-RUN_SCHEMA = "kernel_rl_train_run/v1"
+RUN_SCHEMA = "kernel_rl_train_run/v2"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
 MAX_DECISIONS = 10_000_000
+EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v1"
+SUMMARY_SCHEMA = "kernel_rl_train_summary/v1"
+HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+GENERATION_RE = re.compile(r"^update-(\d{8})\.(json|pt)$")
+TEMP_RE = re.compile(r"^\..+\.\d+\.\d+\.tmp$")
+TRANSACTION_RE = re.compile(r"^update-(\d{8})-[0-9a-f]+$")
 
 
 @dataclasses.dataclass
 class TrainState:
+    out_dir: Path
     run: dict[str, Any]
     run_digest: str
     model: KernelPolicyValueNet
@@ -81,15 +97,15 @@ class TrainState:
     learner_decisions_by_seat: dict[str, int]
     records: list[dict[str, Any]]
     parent_head: str | None
+    head_payload: dict[str, Any]
 
 
 def _finite_positive_float(value: Any, name: str) -> float:
-    if type(value) not in (float, int) or isinstance(value, bool):
+    if type(value) is not float:
         raise TypeError(f"{name} must be a positive finite number")
-    out = float(value)
-    if not math.isfinite(out) or out <= 0.0:
+    if not math.isfinite(value) or value <= 0.0:
         raise ValueError(f"{name} must be positive and finite")
-    return out
+    return value
 
 
 def _validate_batch_episodes(value: Any) -> int:
@@ -123,17 +139,21 @@ def _env_seed_for_episode(base_seed: int, episode: int) -> int:
 
 def _compatibility_tuple() -> dict[str, Any]:
     configure_torch_determinism()
+    torch_config_digest = sha256_bytes(str(torch.__config__.show()).encode("utf-8"))
+    if torch.empty(0).device.type != "cpu":
+        raise RuntimeError("Torch default tensor device is not CPU")
     return {
         "python_implementation": platform.python_implementation(),
         "python_version": platform.python_version(),
         "python_byteorder": sys.byteorder,
         "torch_version": str(torch.__version__),
-        "torch_build": str(torch.__config__.show()),
+        "torch_config_sha256": torch_config_digest,
         "os_system": platform.system(),
         "os_release": platform.release(),
         "machine": platform.machine(),
         "architecture": platform.architecture()[0],
         "cpu_only": True,
+        "default_device": "cpu",
         "default_dtype": str(torch.get_default_dtype()),
         "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
         "num_threads": torch.get_num_threads(),
@@ -145,6 +165,108 @@ def _seed_derivation_dict() -> dict[str, Any]:
     data = dataclasses.asdict(TrainerSeedDerivation())
     data["namespaces"] = list(data["namespaces"])
     return data
+
+
+def _artifact_schemas() -> dict[str, str]:
+    return {
+        "run": RUN_SCHEMA,
+        "latest": LATEST_SCHEMA,
+        "update_record": UPDATE_RECORD_SCHEMA,
+        "checkpoint": CHECKPOINT_SCHEMA,
+        "sidecar": SIDECAR_SCHEMA,
+        "episode_summary": EPISODE_SUMMARY_SCHEMA,
+        "summary": SUMMARY_SCHEMA,
+    }
+
+
+def _run_manifest_from_config(
+    *,
+    env_sha: str,
+    provenance: dict[str, Any],
+    model_config: dict[str, Any],
+    base_seed: int,
+    batch_episodes: int,
+    learning_rate: float,
+    value_coef: float,
+    max_decisions: int,
+    compatibility: dict[str, Any],
+) -> dict[str, Any]:
+    cfg = ModelConfig.from_dict(model_config)
+    optimizer = adam_config(learning_rate)
+    return {
+        "schema": RUN_SCHEMA,
+        "package": {"name": "mtg-kernel-rl", "version": __version__},
+        "algorithm": {
+            "name": ALGORITHM_NAME,
+            "loss": (
+                "loss = (sum(-log_prob(selected) * (terminal_return - value.detach())) "
+                "+ value_coef * sum((value - terminal_return)^2)) / learner_decision_count"
+            ),
+            "discount": None,
+            "entropy_bonus": None,
+            "bootstrap": None,
+        },
+        "environment": {"binary_sha256": env_sha},
+        "protocol": {"schema_version": 2, "protocol": "kernel_rl_jsonl", "protocol_version": 2},
+        "protocol_provenance": provenance,
+        "feature_contract": {
+            "feature_schema_version": model_config["feature_schema_version"],
+            "feature_registry_version": model_config["feature_registry_version"],
+            "feature_contract_digest": model_config["feature_contract_digest"],
+            "feature_encoding_digest": model_config["feature_encoding_digest"],
+        },
+        "model": {"config": model_config, "contract_fingerprint": cfg.contract_fingerprint()},
+        "initializer": {
+            "name": INITIALIZER_TRAINER_SEEDED_V1,
+            "seed": derive_model_init_seed(base_seed),
+            "namespace": "model-init/base_seed",
+        },
+        "optimizer": optimizer,
+        "samplers": {
+            "learner": {
+                "algorithm": "torch.multinomial(softmax(logits), replacement=false, generator=actor-local-cpu)",
+                "seed_namespace": "train-learner-action/base_seed/episode_index/learner_decision_index",
+                "global_python_rng": "unused",
+                "global_torch_rng": "unused",
+            },
+            "opponent": {
+                "algorithm": "uniform-index = train-opponent-action-seed % legal_action_count",
+                "seed_namespace": "train-opponent-action/base_seed/episode_index/opponent_decision_index",
+                "counter_scope": "actor-local opponent decisions within episode",
+            },
+        },
+        "schedule": {
+            "learner_seat": "p0 for even global episodes, p1 for odd global episodes",
+            "paired_env_seed": "episodes 2k and 2k+1 share train-env/base_seed/pair_index",
+            "batch_episodes": batch_episodes,
+        },
+        "trainer": {
+            "base_seed": base_seed,
+            "value_coef": value_coef,
+            "max_decisions": max_decisions,
+            "terminal_returns": {"learner_win": 1, "draw": 0, "learner_loss": -1},
+        },
+        "seed_derivation": _seed_derivation_dict(),
+        "compatibility": compatibility,
+        "artifact_schemas": _artifact_schemas(),
+        "privacy_contract": {
+            "forbidden_raw_fields": [
+                "absolute_path",
+                "arena_id",
+                "card_name",
+                "display_text",
+                "host",
+                "hostname",
+                "legal_actions",
+                "observation",
+                "own_hand",
+                "path",
+                "stable",
+                "stable_id",
+                "timestamp",
+            ],
+        },
+    }
 
 
 def _run_manifest(
@@ -160,62 +282,123 @@ def _run_manifest(
     compatibility: dict[str, Any],
 ) -> dict[str, Any]:
     model_config = model.config.to_dict()
-    return {
-        "schema": RUN_SCHEMA,
-        "package": {"name": "mtg-kernel-rl", "version": __version__},
-        "algorithm": {
-            "name": ALGORITHM_NAME,
-            "loss": "policy_sum + value_coef * value_sum over complete paired terminal batches",
-            "discount": None,
-            "entropy_bonus": None,
-            "bootstrap": None,
-        },
-        "environment": {"binary_sha256": env_sha},
-        "protocol": {"schema_version": 2, "protocol": "kernel_rl_jsonl", "protocol_version": 2},
-        "protocol_provenance": provenance,
-        "feature_contract": {
-            "feature_schema_version": model_config["feature_schema_version"],
-            "feature_registry_version": model_config["feature_registry_version"],
-            "feature_contract_digest": model_config["feature_contract_digest"],
-            "feature_encoding_digest": model_config["feature_encoding_digest"],
-        },
-        "model": {"config": model_config, "contract_fingerprint": model.config.contract_fingerprint()},
-        "initializer": {
-            "name": INITIALIZER_TRAINER_SEEDED_V1,
-            "seed": derive_model_init_seed(base_seed),
-            "namespace": "model-init/base_seed",
-        },
-        "optimizer": {
-            "algorithm": "adam/torch-cpu-canonical-v1",
-            "lr": learning_rate,
-            "betas": [0.9, 0.999],
-            "eps": 1e-8,
-            "weight_decay": 0.0,
-            "amsgrad": False,
-            "foreach": False,
-            "fused": False,
-        },
-        "schedule": {
-            "learner_seat": "p0 for even global episodes, p1 for odd global episodes",
-            "paired_env_seed": "episodes 2k and 2k+1 share train-env/base_seed/pair_index",
-            "batch_episodes": batch_episodes,
-        },
-        "trainer": {
-            "base_seed": base_seed,
-            "value_coef": value_coef,
-            "max_decisions": max_decisions,
-            "terminal_returns": {"learner_win": 1, "draw": 0, "learner_loss": -1},
-        },
-        "seed_derivation": _seed_derivation_dict(),
-        "compatibility": compatibility,
-    }
+    return _run_manifest_from_config(
+        env_sha=env_sha,
+        provenance=provenance,
+        model_config=model_config,
+        base_seed=base_seed,
+        batch_episodes=batch_episodes,
+        learning_rate=learning_rate,
+        value_coef=value_coef,
+        max_decisions=max_decisions,
+        compatibility=compatibility,
+    )
 
 
 def _write_run_json(out_dir: Path, run: dict[str, Any]) -> str:
+    validate_training_json_privacy(run)
     path = out_dir / "run.json"
     if path.exists():
         raise FileExistsError("run.json already exists")
     return write_json_atomic(path, run)
+
+
+def _is_hex64(value: Any) -> bool:
+    return type(value) is str and HEX64_RE.fullmatch(value) is not None
+
+
+def _validate_hash(value: Any, name: str) -> str:
+    if not _is_hex64(value):
+        raise ValueError(f"{name} must be a lowercase SHA-256 hex digest")
+    return value
+
+
+def _validate_provenance(value: Any) -> None:
+    required = {"protocol", "protocol_version", "schema_version", "kernel_version", "surface_version", "card_db_hash"}
+    if not isinstance(value, dict) or set(value) != required:
+        raise ValueError("run provenance keys mismatch")
+    if value["protocol"] != "kernel_rl_jsonl":
+        raise ValueError("run provenance protocol mismatch")
+    for key in ("protocol_version", "schema_version", "surface_version"):
+        if type(value[key]) is not int or value[key] < 0:
+            raise ValueError(f"run provenance {key} must be a nonnegative int")
+    if type(value["kernel_version"]) is not str or not value["kernel_version"]:
+        raise ValueError("run provenance kernel_version must be nonempty")
+    if type(value["card_db_hash"]) is not int or value["card_db_hash"] < 0 or value["card_db_hash"] > 0xFFFF_FFFF_FFFF_FFFF:
+        raise ValueError("run provenance card_db_hash out of range")
+
+
+def _validate_run_manifest(run: Any, *, env_sha: str, compatibility: dict[str, Any]) -> dict[str, Any]:
+    required = {
+        "schema",
+        "package",
+        "algorithm",
+        "environment",
+        "protocol",
+        "protocol_provenance",
+        "feature_contract",
+        "model",
+        "initializer",
+        "optimizer",
+        "samplers",
+        "schedule",
+        "trainer",
+        "seed_derivation",
+        "compatibility",
+        "artifact_schemas",
+        "privacy_contract",
+    }
+    if not isinstance(run, dict) or set(run) != required:
+        raise ValueError("run.json keys mismatch")
+    if run["schema"] != RUN_SCHEMA:
+        raise ValueError("run.json schema mismatch")
+    validate_training_json_privacy(run)
+    _validate_hash(run.get("environment", {}).get("binary_sha256"), "run environment binary_sha256")
+    if run["environment"]["binary_sha256"] != env_sha:
+        raise ValueError("environment executable SHA-256 drift")
+    if run["compatibility"] != compatibility:
+        raise ValueError("runtime compatibility tuple drift")
+    _validate_provenance(run["protocol_provenance"])
+    model_entry = run["model"]
+    if not isinstance(model_entry, dict) or set(model_entry) != {"config", "contract_fingerprint"}:
+        raise ValueError("run model keys mismatch")
+    model_config = ModelConfig.from_dict(model_entry["config"]).to_dict()
+    base_seed = validate_uint63(run.get("trainer", {}).get("base_seed"), "base_seed")
+    batch_episodes = _validate_batch_episodes(run.get("schedule", {}).get("batch_episodes"))
+    learning_rate = _finite_positive_float(run.get("optimizer", {}).get("lr"), "learning_rate")
+    value_coef = _finite_positive_float(run.get("trainer", {}).get("value_coef"), "value_coef")
+    max_decisions = _validate_max_decisions(run.get("trainer", {}).get("max_decisions"))
+    expected = _run_manifest_from_config(
+        env_sha=env_sha,
+        provenance=run["protocol_provenance"],
+        model_config=model_config,
+        base_seed=base_seed,
+        batch_episodes=batch_episodes,
+        learning_rate=learning_rate,
+        value_coef=value_coef,
+        max_decisions=max_decisions,
+        compatibility=compatibility,
+    )
+    if run != expected:
+        raise ValueError("run.json training contract drift")
+    return run
+
+
+def _validate_resume_overrides(
+    *,
+    base_seed: int | None,
+    batch_episodes: int | None,
+    learning_rate: float | None,
+    value_coef: float | None,
+    max_decisions: int | None,
+) -> tuple[int | None, int | None, float | None, float | None, int | None]:
+    return (
+        None if base_seed is None else validate_uint63(base_seed, "base_seed"),
+        None if batch_episodes is None else _validate_batch_episodes(batch_episodes),
+        None if learning_rate is None else _finite_positive_float(learning_rate, "learning_rate"),
+        None if value_coef is None else _finite_positive_float(value_coef, "value_coef"),
+        None if max_decisions is None else _validate_max_decisions(max_decisions),
+    )
 
 
 def _assert_run_matches_options(
@@ -229,12 +412,7 @@ def _assert_run_matches_options(
     max_decisions: int | None,
     compatibility: dict[str, Any],
 ) -> None:
-    if run.get("schema") != RUN_SCHEMA:
-        raise ValueError("run.json schema mismatch")
-    if run["environment"]["binary_sha256"] != env_sha:
-        raise ValueError("environment executable SHA-256 drift")
-    if run["compatibility"] != compatibility:
-        raise ValueError("runtime compatibility tuple drift")
+    _validate_run_manifest(run, env_sha=env_sha, compatibility=compatibility)
     checks = {
         "base_seed": (base_seed, run["trainer"]["base_seed"]),
         "batch_episodes": (batch_episodes, run["schedule"]["batch_episodes"]),
@@ -262,15 +440,196 @@ def _assert_first_decision_matches_run(run: dict[str, Any], decision: Decision) 
         raise ValueError("feature encoding drift on first decision")
 
 
-def _validate_update_record(record: dict[str, Any], update: int, run_digest: str, parent_head: str | None) -> None:
-    if record.get("schema") != UPDATE_RECORD_SCHEMA:
+def _validate_latest(latest: Any, *, run_digest: str) -> dict[str, Any]:
+    if not isinstance(latest, dict) or set(latest) != {"schema", "update", "run_digest", "head"}:
+        raise ValueError("latest.json keys mismatch")
+    validate_training_json_privacy(latest)
+    if latest["schema"] != LATEST_SCHEMA or latest["run_digest"] != run_digest:
+        raise ValueError("latest.json schema or run digest mismatch")
+    head_update = latest["update"]
+    if type(head_update) is not int or head_update < 0 or head_update > MAX_UPDATES:
+        raise ValueError("latest update out of bounds")
+    _validate_hash(latest["head"], "latest head")
+    return latest
+
+
+def _validate_loss_fields(loss: Any, *, optimizer_step: bool) -> None:
+    if not isinstance(loss, dict) or set(loss) != {"policy_sum_hex", "value_sum_hex", "loss_hex"}:
+        raise ValueError("loss field keys mismatch")
+    if not optimizer_step:
+        if loss != {"policy_sum_hex": None, "value_sum_hex": None, "loss_hex": None}:
+            raise ValueError("non-step loss fields must be null")
+        return
+    for key, value in loss.items():
+        if type(value) is not str:
+            raise ValueError(f"{key} must be a float hex string")
+        parsed = float.fromhex(value)
+        if not math.isfinite(parsed):
+            raise ValueError(f"{key} must be finite")
+
+
+def _validate_episode_summary(summary: Any, *, expected_episode: int, base_seed: int) -> dict[str, Any]:
+    required = {
+        "schema",
+        "episode",
+        "env_seed",
+        "learner_seat",
+        "terminal_outcome",
+        "winner",
+        "learner_return",
+        "decision_count",
+        "learner_decision_count",
+        "opponent_decision_count",
+        "trajectory_digest",
+    }
+    if not isinstance(summary, dict) or set(summary) != required:
+        raise ValueError("episode summary keys mismatch")
+    validate_training_json_privacy(summary)
+    if summary["schema"] != EPISODE_SUMMARY_SCHEMA:
+        raise ValueError("episode summary schema mismatch")
+    if summary["episode"] != expected_episode:
+        raise ValueError("episode summary index mismatch")
+    if summary["env_seed"] != _env_seed_for_episode(base_seed, expected_episode):
+        raise ValueError("episode env seed mismatch")
+    learner = _learner_seat(expected_episode)
+    if summary["learner_seat"] != learner:
+        raise ValueError("episode learner seat mismatch")
+    outcome = summary["terminal_outcome"]
+    winner = summary["winner"]
+    if outcome == "draw":
+        if winner is not None:
+            raise ValueError("draw episode winner must be null")
+        derived_return = 0
+    elif outcome == "p0_win":
+        if winner != "p0":
+            raise ValueError("p0_win winner mismatch")
+        derived_return = 1 if learner == "p0" else -1
+    elif outcome == "p1_win":
+        if winner != "p1":
+            raise ValueError("p1_win winner mismatch")
+        derived_return = 1 if learner == "p1" else -1
+    else:
+        raise ValueError("episode terminal outcome must be natural win/draw")
+    if summary["learner_return"] != derived_return:
+        raise ValueError("episode learner return mismatch")
+    for key in ("decision_count", "learner_decision_count", "opponent_decision_count"):
+        if type(summary[key]) is not int or summary[key] < 0:
+            raise ValueError(f"episode {key} must be a nonnegative int")
+    if summary["decision_count"] != summary["learner_decision_count"] + summary["opponent_decision_count"]:
+        raise ValueError("episode decision count mismatch")
+    _validate_hash(summary["trajectory_digest"], "episode trajectory_digest")
+    return summary
+
+
+def _validate_update_record(
+    record: Any,
+    *,
+    update: int,
+    run: dict[str, Any],
+    run_digest: str,
+    parent_head: str | None,
+    previous_payload: dict[str, Any] | None,
+    payload: dict[str, Any],
+    logical_hash: str,
+) -> dict[str, Any]:
+    required = {
+        "schema",
+        "run_digest",
+        "update",
+        "parent_head",
+        "episode_start",
+        "episode_count",
+        "episode_end_exclusive",
+        "optimizer_step",
+        "learner_decision_count",
+        "loss",
+        "episode_summaries",
+        "post_update_logical_sha256",
+    }
+    if not isinstance(record, dict) or set(record) != required:
+        raise ValueError("update record keys mismatch")
+    validate_training_json_privacy(record)
+    if record["schema"] != UPDATE_RECORD_SCHEMA:
         raise ValueError("update record schema mismatch")
-    if record.get("update") != update:
+    if record["update"] != update:
         raise ValueError("update record index mismatch")
-    if record.get("run_digest") != run_digest:
+    if record["run_digest"] != run_digest:
         raise ValueError("update record run digest mismatch")
-    if record.get("parent_head") != parent_head:
+    if record["parent_head"] != parent_head:
         raise ValueError("update record parent mismatch")
+    if record["post_update_logical_sha256"] != logical_hash:
+        raise ValueError("update record logical digest mismatch")
+    if type(record["optimizer_step"]) is not bool:
+        raise ValueError("optimizer_step must be bool")
+    if type(record["learner_decision_count"]) is not int or record["learner_decision_count"] < 0:
+        raise ValueError("learner_decision_count must be a nonnegative int")
+    if not isinstance(record["episode_summaries"], list):
+        raise ValueError("episode summaries must be a list")
+
+    if update == 0:
+        if previous_payload is not None:
+            raise ValueError("update 0 must not have a previous payload")
+        if record["parent_head"] is not None or record["episode_start"] != 0 or record["episode_count"] != 0:
+            raise ValueError("update 0 record range mismatch")
+        if record["episode_end_exclusive"] != 0 or record["optimizer_step"] or record["learner_decision_count"] != 0:
+            raise ValueError("update 0 record counters mismatch")
+        if record["episode_summaries"]:
+            raise ValueError("update 0 must not contain episodes")
+        _validate_loss_fields(record["loss"], optimizer_step=False)
+        if payload["completed_update"] != 0 or payload["optimizer_step_count"] != 0 or payload["next_episode"] != 0:
+            raise ValueError("update 0 checkpoint counters mismatch")
+        expected_outcomes = {"p0": {"win": 0, "loss": 0, "draw": 0}, "p1": {"win": 0, "loss": 0, "draw": 0}}
+        if payload["outcomes_by_learner_seat"] != expected_outcomes or payload["learner_decisions_by_seat"] != {"p0": 0, "p1": 0}:
+            raise ValueError("update 0 checkpoint aggregates mismatch")
+        return record
+
+    if previous_payload is None:
+        raise ValueError("trained update requires previous payload")
+    if payload["completed_update"] != previous_payload["completed_update"] + 1 or payload["completed_update"] != update:
+        raise ValueError("checkpoint completed update mismatch")
+    episode_start = previous_payload["next_episode"]
+    batch_episodes = run["schedule"]["batch_episodes"]
+    if type(record["episode_start"]) is not int or record["episode_start"] != episode_start:
+        raise ValueError("update episode_start mismatch")
+    if record["episode_start"] % 2 != 0:
+        raise ValueError("update episode_start must be pair-aligned")
+    if record["episode_count"] != batch_episodes or record["episode_end_exclusive"] != episode_start + batch_episodes:
+        raise ValueError("update episode range mismatch")
+    if payload["next_episode"] != record["episode_end_exclusive"]:
+        raise ValueError("checkpoint next_episode mismatch")
+    if len(record["episode_summaries"]) != batch_episodes:
+        raise ValueError("episode summary count mismatch")
+
+    expected_outcomes = {
+        "p0": dict(previous_payload["outcomes_by_learner_seat"]["p0"]),
+        "p1": dict(previous_payload["outcomes_by_learner_seat"]["p1"]),
+    }
+    expected_decisions = dict(previous_payload["learner_decisions_by_seat"])
+    learner_decision_total = 0
+    for offset, summary in enumerate(record["episode_summaries"]):
+        row = _validate_episode_summary(summary, expected_episode=episode_start + offset, base_seed=run["trainer"]["base_seed"])
+        learner_decision_total += row["learner_decision_count"]
+        seat = row["learner_seat"]
+        if row["learner_return"] == 1:
+            expected_outcomes[seat]["win"] += 1
+        elif row["learner_return"] == -1:
+            expected_outcomes[seat]["loss"] += 1
+        elif row["learner_return"] == 0:
+            expected_outcomes[seat]["draw"] += 1
+        expected_decisions[seat] += row["learner_decision_count"]
+    if learner_decision_total != record["learner_decision_count"]:
+        raise ValueError("learner decision total mismatch")
+    if record["optimizer_step"] != (learner_decision_total > 0):
+        raise ValueError("optimizer step flag mismatch")
+    _validate_loss_fields(record["loss"], optimizer_step=record["optimizer_step"])
+    expected_step_count = previous_payload["optimizer_step_count"] + (1 if record["optimizer_step"] else 0)
+    if payload["optimizer_step_count"] != expected_step_count:
+        raise ValueError("checkpoint optimizer_step_count mismatch")
+    if payload["outcomes_by_learner_seat"] != expected_outcomes:
+        raise ValueError("checkpoint outcome aggregates mismatch")
+    if payload["learner_decisions_by_seat"] != expected_decisions:
+        raise ValueError("checkpoint learner decision aggregates mismatch")
+    return record
 
 
 def _strict_validate_checkpoint_for_model(
@@ -285,50 +644,221 @@ def _strict_validate_checkpoint_for_model(
     model = KernelPolicyValueNet(cfg, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
     model.load_state_dict(validate_model_state(model, payload["model_state"]), strict=True)
     optimizer = create_adam(model, learning_rate)
-    load_adam_state(optimizer, model, payload["optimizer_state"], learning_rate)
+    load_adam_state(
+        optimizer,
+        model,
+        payload["optimizer_state"],
+        learning_rate,
+        expected_step_count=payload["optimizer_step_count"],
+    )
 
 
-def _commit_generation(
-    *,
+def _staged_generation_paths(transaction_dir: Path) -> dict[str, Path]:
+    return {
+        "update": transaction_dir / "update.json",
+        "checkpoint": transaction_dir / "checkpoint.pt",
+        "sidecar": transaction_dir / "sidecar.json",
+    }
+
+
+def _new_transaction_dir(out_dir: Path, update: int) -> Path:
+    root = out_dir / ".transactions"
+    root.mkdir(parents=True, exist_ok=True)
+    path = root / f"update-{update:08d}-{os.getpid():x}{time.monotonic_ns():x}"
+    path.mkdir(mode=0o700)
+    return path
+
+
+def _validate_path_contained(root: Path, path: Path) -> Path:
+    root_resolved = root.resolve()
+    path_resolved = path.resolve()
+    try:
+        path_resolved.relative_to(root_resolved)
+    except ValueError as exc:
+        raise ValueError(f"path escapes artifact root: {path}") from exc
+    return path_resolved
+
+
+def _quarantine_file(out_dir: Path, path: Path, reason: str) -> None:
+    _validate_path_contained(out_dir, path)
+    rel = path.resolve().relative_to(out_dir.resolve())
+    quarantine = out_dir / ".quarantine" / f"{reason}-{time.monotonic_ns()}" / rel
+    quarantine.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(path), str(quarantine))
+
+
+def _quarantine_tree(out_dir: Path, path: Path, reason: str) -> None:
+    _validate_path_contained(out_dir, path)
+    rel = path.resolve().relative_to(out_dir.resolve())
+    quarantine = out_dir / ".quarantine" / f"{reason}-{time.monotonic_ns()}" / rel
+    quarantine.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(path), str(quarantine))
+
+
+def _validate_orphan_generation_file(path: Path, *, update: int, kind: str, run_digest: str, compatibility: dict[str, Any]) -> None:
+    if kind == "update":
+        record = read_json_file(path)
+        if record.get("schema") != UPDATE_RECORD_SCHEMA or record.get("update") != update or record.get("run_digest") != run_digest:
+            raise ValueError(f"uncommitted update record schema mismatch: {path}")
+        validate_training_json_privacy(record)
+        return
+    if kind == "sidecar":
+        sidecar = read_json_file(path)
+        if sidecar.get("schema") != SIDECAR_SCHEMA or sidecar.get("update") != update or sidecar.get("run_digest") != run_digest:
+            raise ValueError(f"uncommitted sidecar schema mismatch: {path}")
+        validate_training_json_privacy(sidecar)
+        return
+    if kind == "checkpoint":
+        payload = load_checkpoint_file(path)
+        validate_checkpoint_payload(payload, run_digest=run_digest, compatibility=compatibility)
+        if payload["completed_update"] != update:
+            raise ValueError(f"uncommitted checkpoint update mismatch: {path}")
+        return
+    raise AssertionError(kind)
+
+
+def _validate_transaction_tree(out_dir: Path, transaction_dir: Path, *, head_update: int) -> None:
+    _validate_path_contained(out_dir, transaction_dir)
+    match = TRANSACTION_RE.fullmatch(transaction_dir.name)
+    if match is None:
+        raise ValueError(f"unknown transaction staging directory name: {transaction_dir.name}")
+    update = int(match.group(1))
+    if update <= head_update:
+        raise ValueError("staging directory targets a reachable generation")
+    allowed = {"checkpoint.pt", "update.json", "sidecar.json"}
+    for child in transaction_dir.rglob("*"):
+        _validate_path_contained(out_dir, child)
+        if child.is_dir():
+            continue
+        if child.name not in allowed and TEMP_RE.fullmatch(child.name) is None:
+            raise ValueError(f"unknown transaction staging file: {child.name}")
+
+
+def _reconcile_uncommitted_artifacts(
     out_dir: Path,
-    payload: dict[str, Any],
-    update_record: dict[str, Any],
+    *,
+    head_update: int,
+    run_digest: str,
+    compatibility: dict[str, Any],
+) -> None:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    transactions = out_dir / ".transactions"
+    if transactions.exists():
+        for child in list(transactions.iterdir()):
+            if not child.is_dir():
+                raise ValueError(f"unknown transaction entry: {child.name}")
+            _validate_transaction_tree(out_dir, child, head_update=head_update)
+            _quarantine_tree(out_dir, child, "staging")
+        if transactions.exists() and not any(transactions.iterdir()):
+            transactions.rmdir()
+
+    for direct_name in (".latest.json", ".episodes.jsonl", ".updates.jsonl", ".summary.json"):
+        for temp in out_dir.glob(f"{direct_name}.*.tmp"):
+            if TEMP_RE.fullmatch(temp.name) is None:
+                raise ValueError(f"unknown temp file: {temp.name}")
+            _quarantine_file(out_dir, temp, "temp")
+
+    for directory_name, mapping in (
+        ("updates", {"json": "update"}),
+        ("checkpoints", {"pt": "checkpoint", "json": "sidecar"}),
+    ):
+        directory = out_dir / directory_name
+        directory.mkdir(parents=True, exist_ok=True)
+        for path in list(directory.iterdir()):
+            _validate_path_contained(out_dir, path)
+            if path.is_dir():
+                raise ValueError(f"unknown directory under {directory_name}: {path.name}")
+            if TEMP_RE.fullmatch(path.name):
+                _quarantine_file(out_dir, path, "temp")
+                continue
+            match = GENERATION_RE.fullmatch(path.name)
+            if match is None:
+                raise ValueError(f"unknown generation artifact name: {path.name}")
+            update = int(match.group(1))
+            suffix = match.group(2)
+            kind = mapping.get(suffix)
+            if kind is None:
+                raise ValueError(f"generation artifact in wrong directory: {path.name}")
+            if update <= head_update:
+                continue
+            _validate_orphan_generation_file(path, update=update, kind=kind, run_digest=run_digest, compatibility=compatibility)
+            _quarantine_file(out_dir, path, "uncommitted")
+
+
+def _validate_generation_bundle(
+    *,
+    paths: dict[str, Path],
+    update: int,
+    run: dict[str, Any],
     run_digest: str,
     parent_head: str | None,
+    previous_payload: dict[str, Any] | None,
     compatibility: dict[str, Any],
     learning_rate: float,
-) -> tuple[str, list[dict[str, Any]]]:
-    update = payload["completed_update"]
-    paths = generation_paths(out_dir, update)
+) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     for path in paths.values():
-        if path.exists():
-            raise FileExistsError(f"immutable generation already exists: {path}")
+        _validate_path_contained(Path(run["_artifact_root"]), path)
+        if not path.is_file():
+            raise FileNotFoundError(path)
+    record_raw = read_json_file(paths["update"])
+    sidecar = read_json_file(paths["sidecar"])
+    if not isinstance(sidecar, dict) or set(sidecar) != {
+        "schema",
+        "update",
+        "run_digest",
+        "parent_head",
+        "checkpoint_sha256",
+        "logical_state_sha256",
+        "update_record_sha256",
+        "head",
+    }:
+        raise ValueError("sidecar keys mismatch")
+    validate_training_json_privacy(sidecar)
+    if sidecar["schema"] != SIDECAR_SCHEMA or sidecar["update"] != update or sidecar["run_digest"] != run_digest:
+        raise ValueError("sidecar generation mismatch")
+    if sidecar["parent_head"] != parent_head:
+        raise ValueError("sidecar parent mismatch")
+    checkpoint_hash = sha256_file(paths["checkpoint"])
+    if sidecar["checkpoint_sha256"] != checkpoint_hash:
+        raise ValueError("checkpoint byte hash mismatch")
+    _validate_hash(sidecar["checkpoint_sha256"], "sidecar checkpoint_sha256")
+    _validate_hash(sidecar["logical_state_sha256"], "sidecar logical_state_sha256")
+    _validate_hash(sidecar["update_record_sha256"], "sidecar update_record_sha256")
+    _validate_hash(sidecar["head"], "sidecar head")
 
-    checkpoint_tmp = paths["checkpoint"].with_name(f".{paths['checkpoint'].name}.{os.getpid()}.{time.monotonic_ns()}.tmp")
-    try:
-        save_checkpoint_file(checkpoint_tmp, payload)
-        loaded = load_checkpoint_file(checkpoint_tmp)
-        _strict_validate_checkpoint_for_model(
-            loaded,
-            run_digest=run_digest,
-            compatibility=compatibility,
-            learning_rate=learning_rate,
-        )
-        logical_hash = logical_state_hash(loaded)
-        checkpoint_hash = sha256_file(checkpoint_tmp)
-        atomic_replace(checkpoint_tmp, paths["checkpoint"])
-        fsync_dir(paths["checkpoint"].parent)
-    finally:
-        if checkpoint_tmp.exists():
-            try:
-                checkpoint_tmp.unlink()
-            except OSError:
-                pass
-
-    update_hash = write_json_atomic(paths["update"], update_record)
-    if update_hash != update_record_hash(update_record):
-        raise ValueError("update record canonical hash mismatch")
-    sidecar = build_sidecar(
+    payload = load_checkpoint_file(paths["checkpoint"])
+    _strict_validate_checkpoint_for_model(
+        payload,
+        run_digest=run_digest,
+        compatibility=compatibility,
+        learning_rate=learning_rate,
+    )
+    if payload["base_seed"] != run["trainer"]["base_seed"]:
+        raise ValueError("checkpoint base_seed mismatch")
+    if payload["seed_derivation"] != run["seed_derivation"]:
+        raise ValueError("checkpoint seed derivation mismatch")
+    if payload["provenance"] != run["protocol_provenance"]:
+        raise ValueError("checkpoint provenance mismatch")
+    if payload["model_config"] != run["model"]["config"]:
+        raise ValueError("checkpoint model config mismatch")
+    validate_torch_rng_state(payload["torch_cpu_rng_state"])
+    logical_hash = logical_state_hash(payload)
+    if sidecar["logical_state_sha256"] != logical_hash:
+        raise ValueError("logical state hash mismatch")
+    record = _validate_update_record(
+        record_raw,
+        update=update,
+        run=run,
+        run_digest=run_digest,
+        parent_head=parent_head,
+        previous_payload=previous_payload,
+        payload=payload,
+        logical_hash=logical_hash,
+    )
+    update_hash = update_record_hash(record)
+    if sidecar["update_record_sha256"] != update_hash:
+        raise ValueError("update record hash mismatch")
+    expected_sidecar = build_sidecar(
         update=update,
         run_digest=run_digest,
         parent_head=parent_head,
@@ -336,15 +866,97 @@ def _commit_generation(
         logical_hash=logical_hash,
         update_hash=update_hash,
     )
-    write_json_atomic(paths["sidecar"], sidecar)
-    parsed_sidecar = read_json_file(paths["sidecar"])
-    if parsed_sidecar != sidecar:
-        raise ValueError("sidecar roundtrip mismatch")
-    latest = build_latest(update=update, run_digest=run_digest, head=sidecar["head"])
-    write_json_atomic(latest_path(out_dir), latest)
-    records = _records_through(out_dir, update)
-    rebuild_derived_caches(out_dir, records, latest)
-    return sidecar["head"], records
+    if sidecar != expected_sidecar:
+        raise ValueError("sidecar content mismatch")
+    records = _records_through(Path(run["_artifact_root"]), update) if paths == generation_paths(Path(run["_artifact_root"]), update) else []
+    return sidecar["head"], records, payload
+
+
+def _commit_generation(
+    *,
+    out_dir: Path,
+    run: dict[str, Any],
+    payload: dict[str, Any],
+    update_record: dict[str, Any],
+    run_digest: str,
+    parent_head: str | None,
+    previous_payload: dict[str, Any] | None,
+    compatibility: dict[str, Any],
+    learning_rate: float,
+) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+    update = payload["completed_update"]
+    paths = generation_paths(out_dir, update)
+    for path in paths.values():
+        if path.exists():
+            raise FileExistsError(f"immutable generation already exists: {path}")
+
+    tx_dir = _new_transaction_dir(out_dir, update)
+    staged = _staged_generation_paths(tx_dir)
+    try:
+        save_checkpoint_file(staged["checkpoint"], payload)
+        loaded = load_checkpoint_file(staged["checkpoint"])
+        _strict_validate_checkpoint_for_model(loaded, run_digest=run_digest, compatibility=compatibility, learning_rate=learning_rate)
+        logical_hash = logical_state_hash(loaded)
+        checkpoint_hash = sha256_file(staged["checkpoint"])
+        update_hash = write_json_atomic(staged["update"], update_record)
+        if update_hash != update_record_hash(update_record):
+            raise ValueError("update record canonical hash mismatch")
+        sidecar = build_sidecar(
+            update=update,
+            run_digest=run_digest,
+            parent_head=parent_head,
+            checkpoint_sha256=checkpoint_hash,
+            logical_hash=logical_hash,
+            update_hash=update_hash,
+        )
+        write_json_atomic(staged["sidecar"], sidecar)
+        run_for_validation = dict(run)
+        run_for_validation["_artifact_root"] = str(out_dir)
+        _validate_generation_bundle(
+            paths=staged,
+            update=update,
+            run=run_for_validation,
+            run_digest=run_digest,
+            parent_head=parent_head,
+            previous_payload=previous_payload,
+            compatibility=compatibility,
+            learning_rate=learning_rate,
+        )
+        inject_fault("generation_validate", tx_dir)
+
+        for key in ("checkpoint", "update", "sidecar"):
+            inject_fault(f"final_replace_{key}_before", staged[key])
+            atomic_replace(staged[key], paths[key])
+            fsync_dir(paths[key].parent)
+            inject_fault(f"final_replace_{key}_after", paths[key])
+        final_head, _unused_records, final_payload = _validate_generation_bundle(
+            paths=paths,
+            update=update,
+            run=run_for_validation,
+            run_digest=run_digest,
+            parent_head=parent_head,
+            previous_payload=previous_payload,
+            compatibility=compatibility,
+            learning_rate=learning_rate,
+        )
+        latest = build_latest(update=update, run_digest=run_digest, head=final_head)
+        validate_training_json_privacy(latest)
+        inject_fault("latest_replace_before", latest_path(out_dir))
+        write_json_atomic(latest_path(out_dir), latest)
+        inject_fault("latest_replace_after", latest_path(out_dir))
+        records = _records_through(out_dir, update)
+        rebuild_derived_caches(out_dir, records, latest)
+        return final_head, records, final_payload
+    finally:
+        if tx_dir.exists():
+            shutil.rmtree(tx_dir, ignore_errors=True)
+        root = out_dir / ".transactions"
+        if root.exists():
+            try:
+                if not any(root.iterdir()):
+                    root.rmdir()
+            except OSError:
+                pass
 
 
 def _records_through(out_dir: Path, update: int) -> list[dict[str, Any]]:
@@ -368,6 +980,19 @@ def _load_chain(
     run_path = out_dir / "run.json"
     run = read_json_file(run_path)
     run_digest = sha256_file(run_path)
+    (
+        base_seed,
+        batch_episodes,
+        learning_rate,
+        value_coef,
+        max_decisions,
+    ) = _validate_resume_overrides(
+        base_seed=base_seed,
+        batch_episodes=batch_episodes,
+        learning_rate=learning_rate,
+        value_coef=value_coef,
+        max_decisions=max_decisions,
+    )
     _assert_run_matches_options(
         run,
         env_sha=env_sha,
@@ -379,54 +1004,29 @@ def _load_chain(
         compatibility=compatibility,
     )
     latest = read_json_file(latest_path(out_dir))
-    if latest.get("schema") != LATEST_SCHEMA or latest.get("run_digest") != run_digest:
-        raise ValueError("latest.json schema or run digest mismatch")
-    head_update = latest.get("update")
-    if type(head_update) is not int or head_update < 0 or head_update > MAX_UPDATES:
-        raise ValueError("latest update out of bounds")
+    latest = _validate_latest(latest, run_digest=run_digest)
+    head_update = latest["update"]
+    _reconcile_uncommitted_artifacts(out_dir, head_update=head_update, run_digest=run_digest, compatibility=compatibility)
     parent_head: str | None = None
     records: list[dict[str, Any]] = []
     head_payload: dict[str, Any] | None = None
     for update in range(head_update + 1):
         paths = generation_paths(out_dir, update)
-        record = read_json_file(paths["update"])
-        _validate_update_record(record, update, run_digest, parent_head)
-        sidecar = read_json_file(paths["sidecar"])
-        if sidecar.get("schema") != "kernel_rl_train_checkpoint_sidecar/v1":
-            raise ValueError("sidecar schema mismatch")
-        if sidecar.get("update") != update or sidecar.get("run_digest") != run_digest:
-            raise ValueError("sidecar generation mismatch")
-        if sidecar.get("parent_head") != parent_head:
-            raise ValueError("sidecar parent mismatch")
-        update_hash = update_record_hash(record)
-        if sidecar.get("update_record_sha256") != update_hash:
-            raise ValueError("update record hash mismatch")
-        if sha256_file(paths["checkpoint"]) != sidecar.get("checkpoint_sha256"):
-            raise ValueError("checkpoint byte hash mismatch")
-        payload = load_checkpoint_file(paths["checkpoint"])
-        _strict_validate_checkpoint_for_model(
-            payload,
+        run_for_validation = dict(run)
+        run_for_validation["_artifact_root"] = str(out_dir)
+        expected_head, _unused_records, payload = _validate_generation_bundle(
+            paths=paths,
+            update=update,
+            run=run_for_validation,
             run_digest=run_digest,
+            parent_head=parent_head,
+            previous_payload=head_payload,
             compatibility=compatibility,
             learning_rate=run["optimizer"]["lr"],
         )
-        if payload["completed_update"] != update:
-            raise ValueError("checkpoint update mismatch")
-        logical_hash = logical_state_hash(payload)
-        if sidecar.get("logical_state_sha256") != logical_hash:
-            raise ValueError("logical state hash mismatch")
-        expected_head = build_sidecar(
-            update=update,
-            run_digest=run_digest,
-            parent_head=parent_head,
-            checkpoint_sha256=sidecar["checkpoint_sha256"],
-            logical_hash=logical_hash,
-            update_hash=update_hash,
-        )["head"]
-        if sidecar.get("head") != expected_head:
-            raise ValueError("sidecar head mismatch")
+        record = read_json_file(paths["update"])
         records.append(record)
-        parent_head = sidecar["head"]
+        parent_head = expected_head
         head_payload = payload
     if parent_head != latest.get("head"):
         raise ValueError("latest head mismatch")
@@ -441,10 +1041,17 @@ def _load_chain(
     )
     model.load_state_dict(validate_model_state(model, head_payload["model_state"]), strict=True)
     optimizer = create_adam(model, run["optimizer"]["lr"])
-    load_adam_state(optimizer, model, head_payload["optimizer_state"], run["optimizer"]["lr"])
+    load_adam_state(
+        optimizer,
+        model,
+        head_payload["optimizer_state"],
+        run["optimizer"]["lr"],
+        expected_step_count=head_payload["optimizer_step_count"],
+    )
     restore_python_rng_state(head_payload["python_rng_state"])
     restore_torch_rng_state(head_payload["torch_cpu_rng_state"])
     return TrainState(
+        out_dir=out_dir,
         run=run,
         run_digest=run_digest,
         model=model,
@@ -452,10 +1059,11 @@ def _load_chain(
         completed_update=head_payload["completed_update"],
         optimizer_step_count=head_payload["optimizer_step_count"],
         next_episode=head_payload["next_episode"],
-        outcomes_by_learner_seat=head_payload["outcomes_by_learner_seat"],
-        learner_decisions_by_seat=head_payload["learner_decisions_by_seat"],
+        outcomes_by_learner_seat=copy.deepcopy(head_payload["outcomes_by_learner_seat"]),
+        learner_decisions_by_seat=copy.deepcopy(head_payload["learner_decisions_by_seat"]),
         records=records,
         parent_head=parent_head,
+        head_payload=head_payload,
     )
 
 
@@ -518,12 +1126,98 @@ def _bootstrap_fresh(
             compatibility=compatibility,
         )
         update0 = _update_record_zero(run_digest, logical_state_hash(payload))
-        head, records = _commit_generation(
+        _head, _records, _payload = _commit_generation(
             out_dir=out_dir,
+            run=run,
             payload=payload,
             update_record=update0,
             run_digest=run_digest,
             parent_head=None,
+            previous_payload=None,
+            compatibility=compatibility,
+            learning_rate=learning_rate,
+        )
+        reloaded = _load_chain(
+            out_dir=out_dir,
+            env_sha=env_sha,
+            base_seed=base_seed,
+            batch_episodes=batch_episodes,
+            learning_rate=learning_rate,
+            value_coef=value_coef,
+            max_decisions=max_decisions,
+            compatibility=compatibility,
+        )
+        return reloaded, client, first
+    except Exception:
+        client.close()
+        raise
+
+
+def _bootstrap_incomplete_fresh(
+    *,
+    env_bin: Path,
+    out_dir: Path,
+    base_seed: int,
+    batch_episodes: int,
+    learning_rate: float,
+    value_coef: float,
+    max_decisions: int,
+    compatibility: dict[str, Any],
+) -> tuple[TrainState, KernelRlClient, Decision]:
+    env_sha = sha256_file(env_bin)
+    run_path = out_dir / "run.json"
+    run = read_json_file(run_path)
+    run_digest = sha256_file(run_path)
+    _assert_run_matches_options(
+        run,
+        env_sha=env_sha,
+        base_seed=base_seed,
+        batch_episodes=batch_episodes,
+        learning_rate=learning_rate,
+        value_coef=value_coef,
+        max_decisions=max_decisions,
+        compatibility=compatibility,
+    )
+    _reconcile_uncommitted_artifacts(out_dir, head_update=-1, run_digest=run_digest, compatibility=compatibility)
+    client = KernelRlClient(env_bin, timeout_s=10.0)
+    try:
+        first = client.reset(episode_id=0, env_seed=_env_seed_for_episode(base_seed, 0), max_decisions=max_decisions)
+        _assert_first_decision_matches_run(run, first)
+        cfg = ModelConfig.from_dict(run["model"]["config"])
+        random.seed(run["initializer"]["seed"])
+        torch.manual_seed(run["initializer"]["seed"])
+        model = KernelPolicyValueNet(
+            cfg,
+            initializer=INITIALIZER_TRAINER_SEEDED_V1,
+            initializer_seed=run["initializer"]["seed"],
+        )
+        optimizer = create_adam(model, learning_rate)
+        outcomes = {"p0": {"win": 0, "loss": 0, "draw": 0}, "p1": {"win": 0, "loss": 0, "draw": 0}}
+        decisions = {"p0": 0, "p1": 0}
+        payload = build_checkpoint_payload(
+            run_digest=run_digest,
+            completed_update=0,
+            optimizer_step_count=0,
+            next_episode=0,
+            outcomes_by_learner_seat=outcomes,
+            learner_decisions_by_seat=decisions,
+            model=model,
+            optimizer=optimizer,
+            learning_rate=learning_rate,
+            base_seed=base_seed,
+            seed_derivation=run["seed_derivation"],
+            provenance=run["protocol_provenance"],
+            compatibility=compatibility,
+        )
+        update0 = _update_record_zero(run_digest, logical_state_hash(payload))
+        _commit_generation(
+            out_dir=out_dir,
+            run=run,
+            payload=payload,
+            update_record=update0,
+            run_digest=run_digest,
+            parent_head=None,
+            previous_payload=None,
             compatibility=compatibility,
             learning_rate=learning_rate,
         )
@@ -631,6 +1325,8 @@ def _run_episode(
         if current.acting_player == learner:
             encoded = encode_decision(current.observation, current.legal_actions)
             logits, value = state.model(encoded)
+            if logits.device.type != "cpu" or value.device.type != "cpu":
+                raise ValueError("model outputs must remain on CPU")
             if not torch.isfinite(logits).all() or not torch.isfinite(value).all():
                 raise ValueError("model produced non-finite learner output")
             probabilities = torch.softmax(logits, dim=0)
@@ -714,6 +1410,8 @@ def _compute_loss_tensors(
     policy_terms = []
     value_terms = []
     for log_prob, value, terminal_return in terms:
+        if value.device.type != "cpu" or log_prob.device.type != "cpu":
+            raise ValueError("loss tensors must remain on CPU")
         target = torch.tensor(float(terminal_return), dtype=value.dtype)
         advantage = target - value.detach()
         policy_terms.append(-log_prob * advantage)
@@ -759,6 +1457,7 @@ def _train_until(
     while state.completed_update < until_update:
         if state.next_episode % 2 != 0:
             raise ValueError("next episode is not pair-aligned")
+        previous_payload = state.head_payload
         episode_start = state.next_episode
         batch_summaries: list[dict[str, Any]] = []
         terms: list[tuple[torch.Tensor, torch.Tensor, int]] = []
@@ -812,17 +1511,20 @@ def _train_until(
             "episode_summaries": batch_summaries,
             "post_update_logical_sha256": logical,
         }
-        head, records = _commit_generation(
-            out_dir=Path(state.run["_out_dir"]),
+        head, records, committed_payload = _commit_generation(
+            out_dir=state.out_dir,
+            run=state.run,
             payload=payload,
             update_record=record,
             run_digest=state.run_digest,
             parent_head=state.parent_head,
+            previous_payload=previous_payload,
             compatibility=state.run["compatibility"],
             learning_rate=state.run["optimizer"]["lr"],
         )
         state.parent_head = head
         state.records = records
+        state.head_payload = committed_payload
     return state
 
 
@@ -849,22 +1551,42 @@ def train(
     if resume is None:
         if None in (base_seed, batch_episodes, learning_rate, value_coef, max_decisions):
             raise ValueError("fresh train requires base_seed, batch_episodes, learning_rate, value_coef, and max_decisions")
-        base_seed = validate_uint63(base_seed, "base_seed")
-        batch_episodes = _validate_batch_episodes(batch_episodes)
-        learning_rate = _finite_positive_float(learning_rate, "learning_rate")
-        value_coef = _finite_positive_float(value_coef, "value_coef")
-        max_decisions = _validate_max_decisions(max_decisions)
-        state, client, first_decision = _bootstrap_fresh(
-            env_bin=env_path,
-            out_dir=out_path,
+        base_seed, batch_episodes, learning_rate, value_coef, max_decisions = _validate_resume_overrides(
             base_seed=base_seed,
             batch_episodes=batch_episodes,
             learning_rate=learning_rate,
             value_coef=value_coef,
             max_decisions=max_decisions,
-            compatibility=compatibility,
         )
-        state.run["_out_dir"] = str(out_path)
+        if out_path.exists() and not out_path.is_dir():
+            require_new_or_empty_dir(out_path)
+            raise AssertionError("unreachable")
+        if out_path.exists() and any(out_path.iterdir()):
+            if (out_path / "run.json").is_file() and not latest_path(out_path).exists():
+                state, client, first_decision = _bootstrap_incomplete_fresh(
+                    env_bin=env_path,
+                    out_dir=out_path,
+                    base_seed=base_seed,
+                    batch_episodes=batch_episodes,
+                    learning_rate=learning_rate,
+                    value_coef=value_coef,
+                    max_decisions=max_decisions,
+                    compatibility=compatibility,
+                )
+            else:
+                require_new_or_empty_dir(out_path)
+                raise AssertionError("unreachable")
+        else:
+            state, client, first_decision = _bootstrap_fresh(
+                env_bin=env_path,
+                out_dir=out_path,
+                base_seed=base_seed,
+                batch_episodes=batch_episodes,
+                learning_rate=learning_rate,
+                value_coef=value_coef,
+                max_decisions=max_decisions,
+                compatibility=compatibility,
+            )
         try:
             state = _train_until(state=state, client=client, until_update=until_update, first_decision=first_decision)
         finally:
@@ -883,7 +1605,6 @@ def train(
         max_decisions=max_decisions,
         compatibility=compatibility,
     )
-    state.run["_out_dir"] = str(out_path)
     if until_update < state.completed_update:
         raise ValueError("until_update must be at least the committed update")
     if until_update == state.completed_update:

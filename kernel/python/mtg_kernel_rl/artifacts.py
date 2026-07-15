@@ -9,9 +9,31 @@ import math
 import os
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .client import ProtocolError, _reject_duplicate_keys, _reject_constant, _parse_float
+
+FaultInjector = Callable[[str, Path | None], None]
+_FAULT_INJECTOR: FaultInjector | None = None
+
+FORBIDDEN_TRAINING_JSON_KEYS = {
+    "absolute_path",
+    "arena_id",
+    "card_name",
+    "created_at",
+    "display_text",
+    "host",
+    "hostname",
+    "legal_actions",
+    "observation",
+    "own_hand",
+    "path",
+    "stable",
+    "stable_id",
+    "timestamp",
+    "ts",
+    "updated_at",
+}
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -45,6 +67,42 @@ def _validate_json_tree(value: Any, context: str = "$") -> None:
             _validate_json_tree(value[key], f"{context}.{key}")
         return
     raise TypeError(f"unsupported JSON artifact type at {context}: {type(value).__name__}")
+
+
+def set_fault_injector(injector: FaultInjector | None) -> FaultInjector | None:
+    global _FAULT_INJECTOR
+    previous = _FAULT_INJECTOR
+    _FAULT_INJECTOR = injector
+    return previous
+
+
+def inject_fault(boundary: str, path: str | Path | None = None) -> None:
+    if _FAULT_INJECTOR is not None:
+        _FAULT_INJECTOR(boundary, None if path is None else Path(path))
+
+
+def validate_training_json_privacy(value: Any, context: str = "$") -> None:
+    if value is None or type(value) in (str, bool, int, float):
+        if type(value) is str:
+            normalized = value.replace("\\", "/")
+            if (
+                len(value) >= 3
+                and value[1] == ":"
+                and value[2] in ("\\", "/")
+                and value[0].isalpha()
+            ) or normalized.startswith(("/home/", "/Users/", "/mnt/", "/scratch/", "/tmp/")):
+                raise ValueError(f"forbidden absolute path string in training artifact at {context}")
+        return
+    if isinstance(value, list):
+        for i, item in enumerate(value):
+            validate_training_json_privacy(item, f"{context}[{i}]")
+        return
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key in FORBIDDEN_TRAINING_JSON_KEYS:
+                raise ValueError(f"forbidden training artifact field {key!r} at {context}")
+            validate_training_json_privacy(item, f"{context}.{key}")
+        return
 
 
 def canonical_json_bytes(value: dict[str, Any]) -> bytes:
@@ -107,8 +165,11 @@ def write_bytes_atomic(path: str | Path, data: bytes) -> None:
     try:
         with tmp.open("xb") as fh:
             fh.write(data)
+            inject_fault("json_save", tmp)
             fh.flush()
+            inject_fault("json_flush", tmp)
             os.fsync(fh.fileno())
+            inject_fault("json_fsync", tmp)
         atomic_replace(tmp, path)
         fsync_dir(path.parent)
     finally:
@@ -155,6 +216,9 @@ def latest_path(out_dir: str | Path) -> Path:
 
 def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], latest: dict[str, Any]) -> None:
     out = Path(out_dir)
+    validate_training_json_privacy(latest)
+    for record in records:
+        validate_training_json_privacy(record)
     episode_rows: list[dict[str, Any]] = []
     update_rows: list[dict[str, Any]] = []
     summary = {
@@ -162,7 +226,8 @@ def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], l
         "run_digest": latest["run_digest"],
         "head_update": latest["update"],
         "head": latest["head"],
-        "updates": 0,
+        "generations": 0,
+        "completed_training_updates": latest["update"],
         "episodes": 0,
         "learner_wins": 0,
         "learner_losses": 0,
@@ -172,7 +237,7 @@ def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], l
     }
     for record in records:
         update_rows.append(record)
-        summary["updates"] += 1
+        summary["generations"] += 1
         if record.get("optimizer_step") is True:
             summary["optimizer_steps"] += 1
         summary["learner_decisions"] += int(record.get("learner_decision_count", 0))
@@ -189,6 +254,7 @@ def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], l
                 raise ValueError("invalid learner_return in update record")
     episodes_text = b"".join(canonical_json_bytes(row) for row in episode_rows)
     updates_text = b"".join(canonical_json_bytes(row) for row in update_rows)
+    validate_training_json_privacy(summary)
     write_bytes_atomic(out / "episodes.jsonl", episodes_text)
     write_bytes_atomic(out / "updates.jsonl", updates_text)
     write_json_atomic(out / "summary.json", summary)

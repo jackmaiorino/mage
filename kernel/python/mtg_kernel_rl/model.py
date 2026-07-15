@@ -372,6 +372,8 @@ def _apply_rowwise(module: nn.Module, tensor: torch.Tensor) -> torch.Tensor:
 
 
 def _check_float_tensor(tensor: torch.Tensor, name: str, shape: tuple[int, ...]) -> None:
+    if tensor.device.type != "cpu":
+        raise ValueError(f"{name} must be a CPU tensor")
     if tensor.dtype != torch.float32:
         raise ValueError(f"{name} must have dtype torch.float32")
     if tuple(tensor.shape) != shape:
@@ -381,6 +383,8 @@ def _check_float_tensor(tensor: torch.Tensor, name: str, shape: tuple[int, ...])
 
 
 def _check_float_matrix(tensor: torch.Tensor, name: str, width: int, *, min_rows: int) -> None:
+    if tensor.device.type != "cpu":
+        raise ValueError(f"{name} must be a CPU tensor")
     if tensor.dtype != torch.float32:
         raise ValueError(f"{name} must have dtype torch.float32")
     if tensor.ndim != 2 or tensor.shape[1] != width:
@@ -392,6 +396,8 @@ def _check_float_matrix(tensor: torch.Tensor, name: str, width: int, *, min_rows
 
 
 def _check_long_vector(tensor: torch.Tensor, name: str, length: int, *, upper: int) -> None:
+    if tensor.device.type != "cpu":
+        raise ValueError(f"{name} must be a CPU tensor")
     if tensor.dtype != torch.long:
         raise ValueError(f"{name} must have dtype torch.long")
     if tensor.ndim != 1 or tensor.shape[0] != length:

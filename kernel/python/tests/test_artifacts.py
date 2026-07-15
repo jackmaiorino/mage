@@ -90,6 +90,8 @@ class ArtifactTest(unittest.TestCase):
             rebuild_derived_caches(tmp, records, latest)
             self.assertIn('"episode":0', (tmp / "episodes.jsonl").read_text(encoding="utf-8"))
             summary = read_json_file(tmp / "summary.json")
+            self.assertEqual(summary["generations"], 2)
+            self.assertEqual(summary["completed_training_updates"], 1)
             self.assertEqual(summary["episodes"], 1)
             self.assertEqual(summary["learner_wins"], 1)
             self.assertEqual(summary["optimizer_steps"], 1)

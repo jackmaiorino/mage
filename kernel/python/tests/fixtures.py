@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import os
 import stat
 import sys
@@ -300,14 +301,20 @@ def terminal_response(request_id: str = "r1", episode_id: int = 0, decisions: in
     }
 
 
-def fake_launcher(tmp: Path, scenario: str) -> Path:
+def fake_launcher(tmp: Path, scenario: str, extra_env: dict[str, str] | None = None) -> Path:
     script = Path(__file__).with_name("fake_env.py")
+    extra_env = extra_env or {}
     if os.name == "nt":
         launcher = tmp / f"fake_{scenario}.cmd"
-        launcher.write_text(f"@echo off\nset FAKE_SCENARIO={scenario}\n\"{sys.executable}\" \"{script}\"\n", encoding="utf-8")
+        lines = ["@echo off", f"set FAKE_SCENARIO={scenario}"]
+        for key, value in extra_env.items():
+            lines.append(f"set {key}={value}")
+        lines.append(f"\"{sys.executable}\" \"{script}\"")
+        launcher.write_text("\n".join(lines) + "\n", encoding="utf-8")
     else:
         launcher = tmp / f"fake_{scenario}.sh"
-        launcher.write_text(f"#!/usr/bin/env sh\nFAKE_SCENARIO={scenario} exec \"{sys.executable}\" \"{script}\"\n", encoding="utf-8")
+        exports = " ".join(f"{key}={json.dumps(value)}" for key, value in {"FAKE_SCENARIO": scenario, **extra_env}.items())
+        launcher.write_text(f"#!/usr/bin/env sh\n{exports} exec \"{sys.executable}\" \"{script}\"\n", encoding="utf-8")
         launcher.chmod(launcher.stat().st_mode | stat.S_IXUSR)
     return launcher
 
