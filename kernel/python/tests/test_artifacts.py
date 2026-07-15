@@ -12,6 +12,7 @@ from mtg_kernel_rl.artifacts import (
     sha256_bytes,
     write_json_atomic,
 )
+from mtg_kernel_rl.artifact_io import MAX_SMALL_JSON_BYTES, read_authoritative_json, validate_training_json_privacy
 
 
 class ArtifactTest(unittest.TestCase):
@@ -44,7 +45,7 @@ class ArtifactTest(unittest.TestCase):
             tmp = Path(tmp_name)
             records = [
                 {
-                    "schema": "kernel_rl_train_update_record/v1",
+                    "schema": "kernel_rl_train_update_record/v2",
                     "run_digest": "r",
                     "update": 0,
                     "parent_head": None,
@@ -58,7 +59,7 @@ class ArtifactTest(unittest.TestCase):
                     "post_update_logical_sha256": "h0",
                 },
                 {
-                    "schema": "kernel_rl_train_update_record/v1",
+                    "schema": "kernel_rl_train_update_record/v2",
                     "run_digest": "r",
                     "update": 1,
                     "parent_head": "h0",
@@ -70,7 +71,7 @@ class ArtifactTest(unittest.TestCase):
                     "loss": {"policy_sum_hex": "0x1.0p+0", "value_sum_hex": "0x1.0p+0", "loss_hex": "0x1.0p+0"},
                     "episode_summaries": [
                         {
-                            "schema": "kernel_rl_train_episode_summary/v1",
+                            "schema": "kernel_rl_train_episode_summary/v2",
                             "episode": 0,
                             "env_seed": 1,
                             "learner_seat": "p0",
@@ -86,7 +87,7 @@ class ArtifactTest(unittest.TestCase):
                     "post_update_logical_sha256": "h1",
                 },
             ]
-            latest = {"schema": "kernel_rl_train_latest/v1", "update": 1, "run_digest": "r", "head": "head"}
+            latest = {"schema": "kernel_rl_train_latest/v2", "update": 1, "run_digest": "r", "head": "head"}
             rebuild_derived_caches(tmp, records, latest)
             self.assertIn('"episode":0', (tmp / "episodes.jsonl").read_text(encoding="utf-8"))
             summary = read_json_file(tmp / "summary.json")
@@ -95,6 +96,48 @@ class ArtifactTest(unittest.TestCase):
             self.assertEqual(summary["episodes"], 1)
             self.assertEqual(summary["learner_wins"], 1)
             self.assertEqual(summary["optimizer_steps"], 1)
+
+    def test_authoritative_json_rejects_oversized_noncanonical_duplicate_and_huge_int(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            path = tmp / "latest.json"
+            path.write_bytes(b'{"schema":"x","schema":"y"}\n')
+            with self.assertRaises(ValueError):
+                read_authoritative_json(path, "latest")
+            path.write_bytes(b'{ "schema":"x" }\n')
+            with self.assertRaises(ValueError):
+                read_authoritative_json(path, "latest")
+            path.write_bytes(b'{"n":' + b"9" * 200 + b"}\n")
+            with self.assertRaises(ValueError):
+                read_json_file(path)
+            path.write_bytes(b'{"x":"' + b"a" * (MAX_SMALL_JSON_BYTES + 1) + b'"}\n')
+            with self.assertRaises(ValueError):
+                read_authoritative_json(path, "latest")
+
+    def test_privacy_scan_rejects_cross_platform_absolute_paths_without_version_false_positives(self) -> None:
+        positives = [
+            "/home/jack/mage",
+            "prefix /tmp/run/root",
+            "C:\\Users\\Jack\\IdeaProjects\\mage",
+            "\\Users\\Jack\\IdeaProjects\\mage",
+            "\\\\server\\share\\run",
+            "\\\\?\\C:\\Users\\Jack",
+            "file:///C:/Users/Jack/run",
+        ]
+        for value in positives:
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({"metadata": value})
+        negatives = [
+            "terminal_reinforce_value/v1",
+            "https://example.test/path",
+            "loss = a / b",
+            "b48d972b8f2fc56c330c815223c7cb7ef663a2cc45072a203a13e3f00b253f61",
+            "train-learner-action/base_seed/episode_index",
+        ]
+        for value in negatives:
+            with self.subTest(value=value):
+                validate_training_json_privacy({"metadata": value})
 
 
 if __name__ == "__main__":

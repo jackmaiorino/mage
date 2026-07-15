@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import io
+import zipfile
 import random
 import tempfile
 import unittest
@@ -19,6 +21,7 @@ from mtg_kernel_rl.checkpoint import (
     export_adam_state,
     load_adam_state,
     load_checkpoint_file,
+    load_checkpoint_file_with_digest,
     logical_state_hash,
     save_checkpoint_file,
     validate_checkpoint_payload,
@@ -26,6 +29,7 @@ from mtg_kernel_rl.checkpoint import (
     validate_python_rng_state,
     validate_torch_rng_state,
 )
+from mtg_kernel_rl.artifact_io import sha256_bytes
 import mtg_kernel_rl.checkpoint as checkpoint_mod
 from mtg_kernel_rl.determinism import TrainerSeedDerivation, configure_torch_determinism, derive_model_init_seed
 from mtg_kernel_rl.features import encode_decision
@@ -109,7 +113,10 @@ class CheckpointTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_name:
             path = Path(tmp_name) / "checkpoint.pt"
             save_checkpoint_file(path, payload)
-            loaded = load_checkpoint_file(path)
+            loaded_with_digest = load_checkpoint_file_with_digest(path)
+            self.assertEqual(loaded_with_digest.sha256, sha256_bytes(path.read_bytes()))
+            self.assertGreater(loaded_with_digest.preflight.storage_entries, 0)
+            loaded = loaded_with_digest.payload
         validate_checkpoint_payload(loaded, run_digest="r" * 64, compatibility=compatibility)
         restored = KernelPolicyValueNet(model.config, initializer=INITIALIZER_TRAINER_SEEDED_V1, initializer_seed=0)
         restored.load_state_dict(validate_model_state(restored, loaded["model_state"]), strict=True)
@@ -313,6 +320,98 @@ class CheckpointTest(unittest.TestCase):
         finally:
             checkpoint_mod.MAX_CHECKPOINT_TENSOR_ELEMENTS = original_elements
             checkpoint_mod.MAX_CHECKPOINT_COLLECTION_ITEMS = original_items
+
+    def _write_zip(self, path: Path, members: list[tuple[str, bytes, int]]) -> None:
+        with zipfile.ZipFile(path, "w") as zf:
+            for name, data, compression in members:
+                zf.writestr(name, data, compress_type=compression)
+
+    def test_checkpoint_zip_preflight_rejects_raw_pickle_and_archive_abuse(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            raw = tmp / "raw.pt"
+            torch.save({"x": torch.tensor([1])}, raw, _use_new_zipfile_serialization=False)
+            with self.assertRaises(RuntimeError):
+                load_checkpoint_file(raw)
+
+            compressed = tmp / "compressed.pt"
+            self._write_zip(compressed, [("archive/data.pkl", b"\x80\x02}q\x00.", zipfile.ZIP_DEFLATED)])
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(compressed)
+
+            traversal = tmp / "traversal.pt"
+            self._write_zip(traversal, [("archive/../data.pkl", b"\x80\x02}q\x00.", zipfile.ZIP_STORED)])
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(traversal)
+
+            bad_global = tmp / "bad_global.pt"
+            self._write_zip(bad_global, [("archive/data.pkl", b"cos\nsystem\n.", zipfile.ZIP_STORED)])
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(bad_global)
+
+            too_many = tmp / "too_many.pt"
+            members = [("archive/data.pkl", b"\x80\x02}q\x00.", zipfile.ZIP_STORED)]
+            members.extend((f"archive/data/{i}", b"x", zipfile.ZIP_STORED) for i in range(513))
+            self._write_zip(too_many, members)
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(too_many)
+
+            oversized_pkl = tmp / "oversized_pkl.pt"
+            self._write_zip(oversized_pkl, [("archive/data.pkl", b"x" * (2 * 1024 * 1024 + 1), zipfile.ZIP_STORED)])
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(oversized_pkl)
+
+    def test_checkpoint_zip_preflight_rejects_duplicate_members_and_bad_crc(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            duplicate = tmp / "duplicate.pt"
+            with zipfile.ZipFile(duplicate, "w") as zf:
+                zf.writestr("archive/data.pkl", b"\x80\x02}q\x00.")
+                zf.writestr("archive/data.pkl", b"\x80\x02}q\x00.")
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(duplicate)
+
+            bad_crc = tmp / "bad_crc.pt"
+            payload = b"unique-crc-payload"
+            self._write_zip(bad_crc, [("archive/data.pkl", payload, zipfile.ZIP_STORED)])
+            raw = bad_crc.read_bytes()
+            raw = raw.replace(payload, b"Unique-crc-payload", 1)
+            bad_crc.write_bytes(raw)
+            with self.assertRaises((RuntimeError, zipfile.BadZipFile, ValueError)):
+                load_checkpoint_file(bad_crc)
+
+    def test_checkpoint_postload_rejects_views_aliases_cycles_and_repeated_references(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            view_path = tmp / "view.pt"
+            base = torch.arange(8, dtype=torch.float32)
+            torch.save({"view": base[:2]}, view_path)
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(view_path)
+
+            alias_path = tmp / "alias.pt"
+            shared = torch.ones(2)
+            torch.save({"a": shared, "b": shared}, alias_path)
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(alias_path)
+
+            repeated_container = tmp / "repeated_container.pt"
+            child = [1]
+            torch.save({"a": child, "b": child}, repeated_container)
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(repeated_container)
+
+            cycle = tmp / "cycle.pt"
+            loop: list[object] = []
+            loop.append(loop)
+            torch.save({"loop": loop}, cycle)
+            with self.assertRaises(ValueError):
+                load_checkpoint_file(cycle)
+
+    def test_logical_hash_uses_raw_contiguous_tensor_bytes(self) -> None:
+        tensor = torch.arange(1024, dtype=torch.float32).reshape(128, 8)
+        self.assertEqual(logical_state_hash({"x": tensor}), logical_state_hash({"x": tensor.clone()}))
+        self.assertEqual(logical_state_hash({"x": tensor[:, :4]}), logical_state_hash({"x": tensor[:, :4].contiguous()}))
 
 
 if __name__ == "__main__":

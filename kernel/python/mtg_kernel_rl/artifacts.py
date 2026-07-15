@@ -3,71 +3,24 @@
 from __future__ import annotations
 
 import errno
-import hashlib
-import json
-import math
 import os
 import time
 from pathlib import Path
 from typing import Any, Callable
 
-from .client import ProtocolError, _reject_duplicate_keys, _reject_constant, _parse_float
+from .artifact_io import (
+    FORBIDDEN_TRAINING_JSON_KEYS,
+    canonical_json_bytes,
+    read_authoritative_json,
+    read_json_file,
+    sha256_bytes,
+    sha256_file,
+    validate_training_json_privacy,
+)
+from .path_safety import mkdir_no_follow, scandir_no_follow
 
 FaultInjector = Callable[[str, Path | None], None]
 _FAULT_INJECTOR: FaultInjector | None = None
-
-FORBIDDEN_TRAINING_JSON_KEYS = {
-    "absolute_path",
-    "arena_id",
-    "card_name",
-    "created_at",
-    "display_text",
-    "host",
-    "hostname",
-    "legal_actions",
-    "observation",
-    "own_hand",
-    "path",
-    "stable",
-    "stable_id",
-    "timestamp",
-    "ts",
-    "updated_at",
-}
-
-
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def sha256_file(path: str | Path) -> str:
-    h = hashlib.sha256()
-    with Path(path).open("rb") as fh:
-        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
-            h.update(chunk)
-    return h.hexdigest()
-
-
-def _validate_json_tree(value: Any, context: str = "$") -> None:
-    if value is None or type(value) in (str, bool, int):
-        return
-    if type(value) is float:
-        if not math.isfinite(value):
-            raise ValueError(f"non-finite float in JSON artifact at {context}")
-        return
-    if isinstance(value, list):
-        for i, item in enumerate(value):
-            _validate_json_tree(item, f"{context}[{i}]")
-        return
-    if isinstance(value, dict):
-        for key in value:
-            if type(key) is not str:
-                raise TypeError(f"JSON object key at {context} must be str")
-        for key in sorted(value):
-            _validate_json_tree(value[key], f"{context}.{key}")
-        return
-    raise TypeError(f"unsupported JSON artifact type at {context}: {type(value).__name__}")
-
 
 def set_fault_injector(injector: FaultInjector | None) -> FaultInjector | None:
     global _FAULT_INJECTOR
@@ -79,54 +32,6 @@ def set_fault_injector(injector: FaultInjector | None) -> FaultInjector | None:
 def inject_fault(boundary: str, path: str | Path | None = None) -> None:
     if _FAULT_INJECTOR is not None:
         _FAULT_INJECTOR(boundary, None if path is None else Path(path))
-
-
-def validate_training_json_privacy(value: Any, context: str = "$") -> None:
-    if value is None or type(value) in (str, bool, int, float):
-        if type(value) is str:
-            normalized = value.replace("\\", "/")
-            if (
-                len(value) >= 3
-                and value[1] == ":"
-                and value[2] in ("\\", "/")
-                and value[0].isalpha()
-            ) or normalized.startswith(("/home/", "/Users/", "/mnt/", "/scratch/", "/tmp/")):
-                raise ValueError(f"forbidden absolute path string in training artifact at {context}")
-        return
-    if isinstance(value, list):
-        for i, item in enumerate(value):
-            validate_training_json_privacy(item, f"{context}[{i}]")
-        return
-    if isinstance(value, dict):
-        for key, item in value.items():
-            if key in FORBIDDEN_TRAINING_JSON_KEYS:
-                raise ValueError(f"forbidden training artifact field {key!r} at {context}")
-            validate_training_json_privacy(item, f"{context}.{key}")
-        return
-
-
-def canonical_json_bytes(value: dict[str, Any]) -> bytes:
-    _validate_json_tree(value)
-    return json.dumps(value, ensure_ascii=True, allow_nan=False, sort_keys=True, separators=(",", ":")).encode("utf-8") + b"\n"
-
-
-def read_json_file(path: str | Path) -> dict[str, Any]:
-    text = Path(path).read_text(encoding="utf-8")
-    try:
-        value = json.loads(
-            text,
-            object_pairs_hook=_reject_duplicate_keys,
-            parse_constant=_reject_constant,
-            parse_float=_parse_float,
-        )
-    except ProtocolError as exc:
-        raise ValueError(f"invalid JSON artifact {path}: {exc}") from exc
-    except json.JSONDecodeError as exc:
-        raise ValueError(f"invalid JSON artifact {path}: {exc}") from exc
-    if not isinstance(value, dict):
-        raise ValueError(f"JSON artifact {path} is not an object")
-    _validate_json_tree(value)
-    return value
 
 
 def fsync_dir(path: str | Path) -> None:
@@ -192,11 +97,12 @@ def write_json_atomic(path: str | Path, value: dict[str, Any]) -> str:
 def require_new_or_empty_dir(path: str | Path) -> Path:
     path = Path(path)
     if path.exists():
-        if not path.is_dir():
+        if path.is_symlink() or not path.is_dir():
             raise FileExistsError(f"{path} exists and is not a directory")
-        if any(path.iterdir()):
+        if any(scandir_no_follow(path)):
             raise FileExistsError("fresh training output directory must be new or empty")
     path.mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(path, parents=False, exist_ok=True)
     return path
 
 
@@ -222,7 +128,7 @@ def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], l
     episode_rows: list[dict[str, Any]] = []
     update_rows: list[dict[str, Any]] = []
     summary = {
-        "schema": "kernel_rl_train_summary/v1",
+        "schema": "kernel_rl_train_summary/v2",
         "run_digest": latest["run_digest"],
         "head_update": latest["update"],
         "head": latest["head"],

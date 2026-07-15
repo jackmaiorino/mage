@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import inspect
 import math
 import random
 import copy
@@ -12,14 +11,20 @@ from typing import Any
 
 import torch
 
-from .artifacts import canonical_json_bytes, inject_fault, sha256_bytes, sha256_file
+from .artifacts import canonical_json_bytes, inject_fault, sha256_bytes
+from .artifact_io import validate_training_json_privacy, walk_checkpoint_scalar_metadata
+from .checkpoint_io import (
+    LoadedCheckpoint,
+    MAX_CHECKPOINT_FILE_BYTES,
+    load_torch_zip_checkpoint,
+)
 from .determinism import TrainerSeedDerivation, validate_uint63
 from .model import KernelPolicyValueNet, ModelConfig
 
-CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v1"
-SIDECAR_SCHEMA = "kernel_rl_train_checkpoint_sidecar/v1"
-UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v1"
-LATEST_SCHEMA = "kernel_rl_train_latest/v1"
+CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v2"
+SIDECAR_SCHEMA = "kernel_rl_train_checkpoint_sidecar/v2"
+UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v2"
+LATEST_SCHEMA = "kernel_rl_train_latest/v2"
 ADAM_ALGORITHM = "adam/torch-cpu-canonical-v1"
 ADAM_SETTINGS = {
     "lr": None,
@@ -33,11 +38,16 @@ ADAM_SETTINGS = {
     "capturable": False,
     "differentiable": False,
 }
-MAX_CHECKPOINT_FILE_BYTES = 64 * 1024 * 1024
 MAX_CHECKPOINT_TENSORS = 512
 MAX_CHECKPOINT_TENSOR_ELEMENTS = 20_000_000
-MAX_CHECKPOINT_TENSOR_BYTES = 256 * 1024 * 1024
+MAX_CHECKPOINT_TENSOR_BYTES = 64 * 1024 * 1024
+MAX_CHECKPOINT_TOTAL_TENSOR_ELEMENTS = 20_000_000
+MAX_CHECKPOINT_TOTAL_TENSOR_BYTES = 64 * 1024 * 1024
+MAX_CHECKPOINT_TOTAL_STORAGE_BYTES = 64 * 1024 * 1024
 MAX_CHECKPOINT_COLLECTION_ITEMS = 4096
+MAX_CHECKPOINT_TOTAL_ITEMS = 100_000
+MAX_CHECKPOINT_NODES = 100_000
+MAX_CHECKPOINT_STRING_BYTES = 4 * 1024 * 1024
 MAX_CHECKPOINT_DEPTH = 16
 MAX_TORCH_RNG_BYTES = 65536
 EXPECTED_TORCH_CPU_RNG_STATE_BYTES = int(torch.random.get_rng_state().numel())
@@ -85,6 +95,8 @@ def _named_parameters(model: KernelPolicyValueNet) -> list[tuple[str, torch.nn.P
 
 
 def _require_cpu_strided_tensor(tensor: torch.Tensor, name: str) -> None:
+    if type(tensor) is not torch.Tensor:
+        raise ValueError(f"{name} must be a plain torch.Tensor")
     if tensor.device.type != "cpu":
         raise ValueError(f"{name} must be a CPU tensor")
     if tensor.layout != torch.strided:
@@ -110,6 +122,28 @@ def _validate_tensor_values(tensor: torch.Tensor, name: str) -> None:
     if torch.is_floating_point(tensor) or torch.is_complex(tensor):
         if not torch.isfinite(tensor).all():
             raise ValueError(f"{name} contains non-finite values")
+
+
+def _tensor_logical_bytes(tensor: torch.Tensor, name: str, *, strict_storage: bool = False) -> memoryview:
+    _validate_tensor_values(tensor, name)
+    if strict_storage and not tensor.is_contiguous():
+        raise ValueError(f"{name} must be contiguous")
+    if strict_storage and tensor.storage_offset() != 0:
+        raise ValueError(f"{name} must not have a nonzero storage offset")
+    if strict_storage and any(stride <= 0 for stride in tensor.stride()):
+        raise ValueError(f"{name} has unsupported strides")
+    contiguous = tensor.detach().contiguous()
+    logical_bytes = contiguous.numel() * contiguous.element_size()
+    if strict_storage:
+        storage_bytes = int(tensor.untyped_storage().nbytes())
+        if storage_bytes != logical_bytes:
+            raise ValueError(f"{name} storage size does not match logical tensor bytes")
+    if logical_bytes > MAX_CHECKPOINT_TENSOR_BYTES:
+        raise ValueError(f"{name} tensor has too many bytes")
+    if contiguous.numel() == 0:
+        return memoryview(b"")
+    byte_tensor = contiguous.reshape(-1).view(torch.uint8).reshape(-1)
+    return memoryview(byte_tensor.numpy())
 
 
 def _clone_validated_tensor(tensor: torch.Tensor, name: str) -> torch.Tensor:
@@ -493,7 +527,15 @@ def validate_checkpoint_payload(payload: Any, *, run_digest: str, compatibility:
     )
     validate_python_rng_state(payload["python_rng_state"])
     validate_torch_rng_state(payload["torch_cpu_rng_state"])
+    validate_checkpoint_metadata_privacy(payload)
     return payload
+
+
+def validate_checkpoint_metadata_privacy(payload: Any) -> None:
+    def visitor(value: str, context: str) -> None:
+        validate_training_json_privacy(value, context)
+
+    walk_checkpoint_scalar_metadata(payload, visitor)
 
 
 def _validate_seed_derivation(value: Any) -> None:
@@ -539,23 +581,16 @@ def _validate_counter_map(value: Any, nested_keys: set[str] | None) -> None:
                 raise ValueError("nested seat counter must be a nonnegative int")
 
 
-def load_checkpoint_file(path: str | Path) -> dict[str, Any]:
-    path = Path(path)
-    size = path.stat().st_size
-    if size <= 0 or size > MAX_CHECKPOINT_FILE_BYTES:
-        raise ValueError("checkpoint file size out of bounds")
-    try:
-        signature = inspect.signature(torch.load)
-    except (TypeError, ValueError) as exc:
-        raise RuntimeError("Torch safe checkpoint loading is unavailable") from exc
-    supports_weights_only = "weights_only" in signature.parameters
-    if not supports_weights_only:
-        raise RuntimeError("Torch safe checkpoint loading is unavailable")
-    loaded = torch.load(path, map_location="cpu", weights_only=True)
-    _validate_loaded_checkpoint_tree(loaded)
-    if not isinstance(loaded, dict):
+def load_checkpoint_file_with_digest(path: str | Path) -> LoadedCheckpoint:
+    loaded = load_torch_zip_checkpoint(path)
+    _validate_loaded_checkpoint_tree(loaded.payload)
+    if not isinstance(loaded.payload, dict):
         raise ValueError("checkpoint root must be a dict")
     return loaded
+
+
+def load_checkpoint_file(path: str | Path) -> dict[str, Any]:
+    return load_checkpoint_file_with_digest(path).payload
 
 
 def save_checkpoint_file(path: str | Path, payload: dict[str, Any]) -> None:
@@ -573,39 +608,109 @@ def save_checkpoint_file(path: str | Path, payload: dict[str, Any]) -> None:
 
 
 def _validate_loaded_checkpoint_tree(value: Any) -> None:
-    counters = {"tensors": 0}
+    counters = {
+        "nodes": 0,
+        "items": 0,
+        "strings": 0,
+        "tensors": 0,
+        "tensor_elements": 0,
+        "tensor_bytes": 0,
+        "storage_bytes": 0,
+    }
+    seen_containers: set[int] = set()
+    seen_tensors: set[int] = set()
+    seen_storages: set[int] = set()
 
     def walk(item: Any, depth: int, context: str) -> None:
+        counters["nodes"] += 1
+        if counters["nodes"] > MAX_CHECKPOINT_NODES:
+            raise ValueError("checkpoint object graph has too many nodes")
         if depth > MAX_CHECKPOINT_DEPTH:
             raise ValueError("checkpoint object nesting is too deep")
         if item is None or type(item) in (bool, int, float, str):
             if type(item) is float and not math.isfinite(item):
                 raise ValueError(f"checkpoint non-finite float at {context}")
+            if type(item) is str:
+                counters["strings"] += len(item.encode("utf-8"))
+                if counters["strings"] > MAX_CHECKPOINT_STRING_BYTES:
+                    raise ValueError("checkpoint has too many string bytes")
             return
         if isinstance(item, torch.Tensor):
+            if type(item) is not torch.Tensor:
+                raise ValueError(f"checkpoint tensor subclass is not allowed at {context}")
+            item_id = id(item)
+            if item_id in seen_tensors:
+                raise ValueError("checkpoint repeats a tensor object identity")
+            seen_tensors.add(item_id)
             counters["tensors"] += 1
             if counters["tensors"] > MAX_CHECKPOINT_TENSORS:
                 raise ValueError("checkpoint has too many tensors")
             _validate_tensor_values(item, context)
+            if not item.is_contiguous():
+                raise ValueError(f"checkpoint tensor must be contiguous at {context}")
+            if item.storage_offset() != 0:
+                raise ValueError(f"checkpoint tensor has nonzero storage offset at {context}")
+            if any(stride <= 0 for stride in item.stride()):
+                raise ValueError(f"checkpoint tensor has unsupported stride at {context}")
+            logical_bytes = item.numel() * item.element_size()
+            storage = item.untyped_storage()
+            storage_bytes = int(storage.nbytes())
+            if storage_bytes != logical_bytes:
+                raise ValueError(f"checkpoint tensor storage/logical byte mismatch at {context}")
+            storage_id = int(getattr(storage, "_cdata", 0)) or id(storage)
+            if storage_bytes > 0:
+                if storage_id in seen_storages:
+                    raise ValueError("checkpoint has shared or aliased tensor storage")
+                seen_storages.add(storage_id)
+            counters["tensor_elements"] += item.numel()
+            counters["tensor_bytes"] += logical_bytes
+            counters["storage_bytes"] += storage_bytes
+            if counters["tensor_elements"] > MAX_CHECKPOINT_TOTAL_TENSOR_ELEMENTS:
+                raise ValueError("checkpoint tensor element aggregate exceeds limit")
+            if counters["tensor_bytes"] > MAX_CHECKPOINT_TOTAL_TENSOR_BYTES:
+                raise ValueError("checkpoint tensor byte aggregate exceeds limit")
+            if counters["storage_bytes"] > MAX_CHECKPOINT_TOTAL_STORAGE_BYTES:
+                raise ValueError("checkpoint tensor storage aggregate exceeds limit")
             return
-        if isinstance(item, list):
+        if type(item) is list:
+            if id(item) in seen_containers:
+                raise ValueError("checkpoint repeats a container object identity")
+            seen_containers.add(id(item))
             if len(item) > MAX_CHECKPOINT_COLLECTION_ITEMS:
                 raise ValueError(f"checkpoint list too large at {context}")
+            counters["items"] += len(item)
+            if counters["items"] > MAX_CHECKPOINT_TOTAL_ITEMS:
+                raise ValueError("checkpoint collection aggregate exceeds limit")
             for index, child in enumerate(item):
                 walk(child, depth + 1, f"{context}[{index}]")
             return
-        if isinstance(item, tuple):
+        if type(item) is tuple:
+            if id(item) in seen_containers:
+                raise ValueError("checkpoint repeats a container object identity")
+            seen_containers.add(id(item))
             if len(item) > MAX_CHECKPOINT_COLLECTION_ITEMS:
                 raise ValueError(f"checkpoint tuple too large at {context}")
+            counters["items"] += len(item)
+            if counters["items"] > MAX_CHECKPOINT_TOTAL_ITEMS:
+                raise ValueError("checkpoint collection aggregate exceeds limit")
             for index, child in enumerate(item):
                 walk(child, depth + 1, f"{context}({index})")
             return
-        if isinstance(item, dict):
+        if type(item) is dict:
+            if id(item) in seen_containers:
+                raise ValueError("checkpoint repeats a container object identity")
+            seen_containers.add(id(item))
             if len(item) > MAX_CHECKPOINT_COLLECTION_ITEMS:
                 raise ValueError(f"checkpoint dict too large at {context}")
+            counters["items"] += len(item)
+            if counters["items"] > MAX_CHECKPOINT_TOTAL_ITEMS:
+                raise ValueError("checkpoint collection aggregate exceeds limit")
             for key, child in item.items():
                 if type(key) is not str:
                     raise ValueError(f"checkpoint dict key must be str at {context}")
+                counters["strings"] += len(key.encode("utf-8"))
+                if counters["strings"] > MAX_CHECKPOINT_STRING_BYTES:
+                    raise ValueError("checkpoint has too many string bytes")
                 walk(child, depth + 1, f"{context}.{key}")
             return
         raise ValueError(f"unsupported checkpoint object type at {context}: {type(item).__name__}")
@@ -639,21 +744,21 @@ def _logical_update(hasher: Any, value: Any) -> None:
         _hash_atom(hasher, "str", value.encode("utf-8"))
     elif isinstance(value, torch.Tensor):
         _validate_tensor_values(value, "logical_hash.tensor")
-        tensor = value.detach().contiguous()
+        tensor = value.detach()
         _hash_atom(hasher, "tensor-dtype", str(tensor.dtype).encode("ascii"))
         shape = b"".join(int(dim).to_bytes(8, "big") for dim in tensor.shape)
         _hash_atom(hasher, "tensor-shape", shape)
-        raw = b"" if tensor.numel() == 0 else bytes(tensor.reshape(-1).view(torch.uint8).reshape(-1).tolist())
+        raw = _tensor_logical_bytes(tensor, "logical_hash.tensor")
         _hash_atom(hasher, "tensor-bytes", raw)
-    elif isinstance(value, list):
+    elif type(value) is list:
         _hash_atom(hasher, "list-len", len(value).to_bytes(8, "big"))
         for item in value:
             _logical_update(hasher, item)
-    elif isinstance(value, tuple):
+    elif type(value) is tuple:
         _hash_atom(hasher, "tuple-len", len(value).to_bytes(8, "big"))
         for item in value:
             _logical_update(hasher, item)
-    elif isinstance(value, dict):
+    elif type(value) is dict:
         for key in value:
             if type(key) is not str:
                 raise TypeError("logical hash only supports string dict keys")

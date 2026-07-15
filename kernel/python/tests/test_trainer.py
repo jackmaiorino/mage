@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import math
 import os
+import json
 import random
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -14,6 +16,7 @@ import torch
 
 from mtg_kernel_rl.artifacts import read_json_file, set_fault_injector, write_json_atomic
 from mtg_kernel_rl.checkpoint import load_checkpoint_file, save_checkpoint_file
+from mtg_kernel_rl.output_lock import OutputLock, OutputLockError
 from mtg_kernel_rl.model import KernelPolicyValueNet
 from mtg_kernel_rl.trainer import _compute_loss_tensors, train
 import mtg_kernel_rl.trainer as trainer_mod
@@ -54,10 +57,12 @@ def _subprocess_env() -> dict[str, str]:
     return env
 
 
-def _run_hard_kill_child(tmp: Path, out: Path, launcher: Path, boundary: str, target_fragment: str = "-") -> subprocess.CompletedProcess:
+def _run_hard_kill_child(tmp: Path, out: Path, launcher: Path, boundary: str, target_fragment: str = "-") -> tuple[subprocess.CompletedProcess, Path]:
     script = tmp / f"hard_kill_{boundary}_{target_fragment.replace('-', 'none').replace('.', '_')}.py"
+    marker = script.with_suffix(".marker.json")
     script.write_text(
         """
+import json
 import os
 import sys
 from pathlib import Path
@@ -69,6 +74,7 @@ boundary = sys.argv[1]
 target_fragment = sys.argv[2]
 out = Path(sys.argv[3])
 launcher = Path(sys.argv[4])
+marker = Path(sys.argv[5])
 
 def injector(name, path):
     if name != boundary:
@@ -76,6 +82,7 @@ def injector(name, path):
     if target_fragment != "-":
         if path is None or target_fragment not in Path(path).name:
             return
+    marker.write_text(json.dumps({"boundary": name, "path": None if path is None else Path(path).name}, sort_keys=True), encoding="utf-8")
     os._exit(73)
 
 set_fault_injector(injector)
@@ -83,14 +90,22 @@ train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
 """,
         encoding="utf-8",
     )
-    return subprocess.run(
-        [sys.executable, str(script), boundary, target_fragment, str(out), str(launcher)],
+    completed = subprocess.run(
+        [sys.executable, str(script), boundary, target_fragment, str(out), str(launcher), str(marker)],
         cwd=Path.cwd(),
         env=_subprocess_env(),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
         check=False,
     )
+    return completed, marker
+
+
+def _assert_hard_kill_fired(test: unittest.TestCase, child: subprocess.CompletedProcess, marker: Path, boundary: str) -> None:
+    test.assertEqual(child.returncode, 73)
+    test.assertTrue(marker.is_file(), f"missing marker for {boundary}")
+    data = json.loads(marker.read_text(encoding="utf-8"))
+    test.assertEqual(data["boundary"], boundary)
 
 
 class TrainerTest(unittest.TestCase):
@@ -400,8 +415,8 @@ class TrainerTest(unittest.TestCase):
                 value_coef=0.5,
                 max_decisions=8,
             )
-            child = _run_hard_kill_child(tmp, out, launcher, "latest_replace_after")
-            self.assertNotEqual(child.returncode, 0)
+            child, marker = _run_hard_kill_child(tmp, out, launcher, "latest_replace_after")
+            _assert_hard_kill_fired(self, child, marker, "latest_replace_after")
             self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
             transactions = out / ".transactions"
             self.assertTrue(transactions.is_dir())
@@ -429,13 +444,19 @@ class TrainerTest(unittest.TestCase):
             ("json_save", "sidecar.json", 0),
             ("json_flush", "sidecar.json", 0),
             ("json_fsync", "sidecar.json", 0),
+            ("generation_validate", "-", 0),
             ("final_replace_checkpoint_before", "-", 0),
             ("final_replace_checkpoint_after", "-", 0),
             ("final_replace_update_before", "-", 0),
             ("final_replace_update_after", "-", 0),
             ("final_replace_sidecar_before", "-", 0),
             ("final_replace_sidecar_after", "-", 0),
+            ("json_save", "latest.json", 0),
+            ("json_flush", "latest.json", 0),
+            ("json_fsync", "latest.json", 0),
             ("latest_replace_before", "-", 0),
+            ("latest_replace_after", "-", 1),
+            ("post_latest_cleanup_before", "-", 1),
         ]
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -464,8 +485,8 @@ class TrainerTest(unittest.TestCase):
                         value_coef=0.5,
                         max_decisions=8,
                     )
-                    child = _run_hard_kill_child(tmp, out, launcher, boundary, target)
-                    self.assertNotEqual(child.returncode, 0)
+                    child, marker = _run_hard_kill_child(tmp, out, launcher, boundary, target)
+                    _assert_hard_kill_fired(self, child, marker, boundary)
                     self.assertEqual(read_json_file(out / "latest.json")["update"], expected_head)
                     recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=expected_head)
                     self.assertEqual(recovered["completed_update"], expected_head)
@@ -539,6 +560,67 @@ class TrainerTest(unittest.TestCase):
                 malformed_case("escaping_transaction_link", escaping_link)
             except unittest.SkipTest:
                 pass
+
+    def test_no_follow_rejects_artifact_links_and_preserves_external_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            source = tmp / "source"
+            outside = tmp / "outside"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-sentinel")
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+
+            def run_case(name: str, mutator) -> None:  # type: ignore[no-untyped-def]
+                target = tmp / name
+                shutil.copytree(source, target)
+                mutator(target)
+                with self.subTest(name=name):
+                    with self.assertRaises((ValueError, FileNotFoundError, RuntimeError)):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+
+            if hasattr(os, "symlink"):
+                def latest_symlink(p: Path) -> None:
+                    (p / "latest.json").unlink()
+                    os.symlink(sentinel, p / "latest.json")
+
+                try:
+                    run_case("latest_symlink", latest_symlink)
+                except (OSError, NotImplementedError):
+                    pass
+
+            def latest_hardlink(p: Path) -> None:
+                outside_latest = outside / "latest-hardlink.json"
+                outside_latest.write_bytes((p / "latest.json").read_bytes())
+                (p / "latest.json").unlink()
+                os.link(outside_latest, p / "latest.json")
+
+            run_case("latest_hardlink", latest_hardlink)
+
+            if os.name == "nt":
+                def updates_junction(p: Path) -> None:
+                    shutil.rmtree(p / "updates")
+                    completed = subprocess.run(
+                        ["cmd", "/c", "mklink", "/J", str(p / "updates"), str(outside)],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        check=False,
+                    )
+                    if completed.returncode != 0:
+                        self.fail("Windows junction coverage could not create mklink /J")
+
+                run_case("updates_junction", updates_junction)
 
     def test_malformed_rng_cannot_be_committed_or_loaded(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -655,6 +737,7 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
+            case("old_v2_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v2"}))
             case(
                 "checkpoint_counter_drift",
                 lambda p: (
@@ -747,6 +830,98 @@ class TrainerTest(unittest.TestCase):
             )
             self.assertEqual(clean_result, noisy_result)
             self.assertEqual((clean / "updates.jsonl").read_text(encoding="utf-8"), (noisy / "updates.jsonl").read_text(encoding="utf-8"))
+
+    def test_output_lock_alias_distinct_exception_and_noninheritance(self) -> None:
+        with tempfile.TemporaryDirectory(dir=Path.cwd()) as tmp_name:
+            tmp = Path(tmp_name)
+            root = tmp / "run"
+            alias = Path(os.path.relpath(root, Path.cwd()))
+            with OutputLock(root) as lock:
+                self.assertTrue(lock.path.is_file())
+                with self.assertRaises(OutputLockError):
+                    with OutputLock(alias):
+                        pass
+                with OutputLock(tmp / "other"):
+                    pass
+
+            script = tmp / "owner.py"
+            marker = tmp / "owner.marker"
+            script.write_text(
+                """
+import os
+import sys
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLock
+
+root = Path(sys.argv[1])
+marker = Path(sys.argv[2])
+with OutputLock(root) as lock:
+    marker.write_text(str(lock.path), encoding="utf-8")
+    os._exit(73)
+""",
+                encoding="utf-8",
+            )
+            child = subprocess.run([sys.executable, str(script), str(root), str(marker)], cwd=Path.cwd(), env=_subprocess_env(), check=False)
+            self.assertEqual(child.returncode, 73)
+            lock_path = Path(marker.read_text(encoding="utf-8"))
+            self.assertTrue(lock_path.is_file())
+            with OutputLock(root):
+                pass
+
+            noninherit = tmp / "noninherit.py"
+            noninherit_marker = tmp / "noninherit.marker"
+            noninherit.write_text(
+                """
+import subprocess
+import sys
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLock
+
+root = Path(sys.argv[1])
+marker = Path(sys.argv[2])
+with OutputLock(root):
+    child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(5)"], close_fds=False)
+    marker.write_text(str(child.pid), encoding="utf-8")
+""",
+                encoding="utf-8",
+            )
+            subprocess.check_call([sys.executable, str(noninherit), str(root), str(noninherit_marker)], cwd=Path.cwd(), env=_subprocess_env())
+            with OutputLock(root):
+                pass
+
+    def test_same_root_concurrent_trainers_exclude_loser_without_second_chain(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            launcher = fake_launcher(tmp, "train_pair_slow")
+            env = _subprocess_env()
+            common = [
+                sys.executable,
+                "-m",
+                "mtg_kernel_rl",
+                "train",
+                "--env-bin",
+                str(launcher),
+                "--out-dir",
+                str(out),
+                "--base-seed",
+                "71501",
+                "--batch-episodes",
+                "2",
+                "--learning-rate",
+                "0.001",
+                "--value-coef",
+                "0.5",
+                "--max-decisions",
+                "8",
+            ]
+            owner = subprocess.Popen([*common, "--until-update", "0"], cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            time.sleep(0.25)
+            loser = subprocess.run([*common, "--until-update", "0"], cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+            owner_code = owner.wait(timeout=30)
+            self.assertEqual(owner_code, 0)
+            self.assertNotEqual(loser.returncode, 0)
+            self.assertEqual(read_json_file(out / "latest.json")["update"], 0)
 
 
 if __name__ == "__main__":

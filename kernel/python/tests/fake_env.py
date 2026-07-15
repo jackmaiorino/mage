@@ -55,6 +55,8 @@ def main() -> int:
             continue
         if req["request_type"] == "reset":
             episode_steps[req["episode_id"]] = 0
+            if scenario == "train_pair_slow":
+                time.sleep(2.0)
             if scenario == "train_zero_learner":
                 learner = "p0" if req["episode_id"] % 2 == 0 else "p1"
                 actor = "p1" if learner == "p0" else "p0"
@@ -102,7 +104,7 @@ def main() -> int:
                     raise RuntimeError(f"latest.json update was not 0 before first action: {latest!r}")
             expected_step = req["expected_step"] + 1
             episode_steps[req["episode_id"]] = expected_step
-            if scenario in ("train_pair", "train_pair_assert_latest0"):
+            if scenario in ("train_pair", "train_pair_assert_latest0", "train_pair_slow"):
                 if expected_step == 1:
                     emit(decision_response(req["request_id"], req["episode_id"], expected_step, actor="p1"))
                 else:

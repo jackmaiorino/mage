@@ -9,7 +9,6 @@ import os
 import platform
 import random
 import re
-import shutil
 import sys
 import time
 from pathlib import Path
@@ -25,7 +24,7 @@ from .artifacts import (
     generation_paths,
     inject_fault,
     latest_path,
-    read_json_file,
+    read_authoritative_json,
     rebuild_derived_caches,
     require_new_or_empty_dir,
     sha256_bytes,
@@ -47,6 +46,7 @@ from .checkpoint import (
     logical_state_hash,
     load_adam_state,
     load_checkpoint_file,
+    load_checkpoint_file_with_digest,
     restore_python_rng_state,
     restore_torch_rng_state,
     save_checkpoint_file,
@@ -69,14 +69,25 @@ from .determinism import (
 )
 from .features import encode_decision
 from .model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet, ModelConfig, model_config_from_encoded
+from .output_lock import OutputLock
+from .path_safety import (
+    atomic_quarantine,
+    ensure_no_follow_path,
+    ensure_real_child_dir,
+    ensure_real_file,
+    mkdir_no_follow,
+    remove_tree_no_follow,
+    same_lexical_path,
+    scandir_no_follow,
+)
 
-RUN_SCHEMA = "kernel_rl_train_run/v2"
+RUN_SCHEMA = "kernel_rl_train_run/v3"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
 MAX_DECISIONS = 10_000_000
-EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v1"
-SUMMARY_SCHEMA = "kernel_rl_train_summary/v1"
+EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v2"
+SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 GENERATION_RE = re.compile(r"^update-(\d{8})\.(json|pt)$")
 TEMP_RE = re.compile(r"^\..+\.\d+\.\d+\.tmp$")
@@ -180,6 +191,83 @@ def _artifact_schemas() -> dict[str, str]:
     }
 
 
+def _artifact_boundary_contract() -> dict[str, Any]:
+    from . import checkpoint as checkpoint_contract
+    from . import checkpoint_io as zip_contract
+    from . import artifact_io as json_contract
+
+    return {
+        "schema": "kernel_rl_artifact_boundary/v1",
+        "format": {
+            "checkpoint_container": "torch-zip",
+            "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
+            "authoritative_json": "canonical-sorted-ascii-json-lf",
+        },
+        "safe_load": {
+            "checkpoint_read": "single bounded regular non-link file read",
+            "torch_load": "io.BytesIO(captured_bytes), map_location=cpu, weights_only=True",
+            "residual": "bounded local Torch weights-only ZIP pickle is not an arbitrary hostile-pickle sandbox",
+        },
+        "byte_limits": {
+            "checkpoint_file": zip_contract.MAX_CHECKPOINT_FILE_BYTES,
+            "zip_entries": zip_contract.MAX_TORCH_ZIP_ENTRIES,
+            "zip_uncompressed": zip_contract.MAX_TORCH_ZIP_UNCOMPRESSED_BYTES,
+            "zip_storage": zip_contract.MAX_TORCH_ZIP_STORAGE_BYTES,
+            "data_pkl": zip_contract.MAX_TORCH_DATA_PKL_BYTES,
+            "run_json": json_contract.MAX_RUN_JSON_BYTES,
+            "latest_json": json_contract.MAX_SMALL_JSON_BYTES,
+            "sidecar_json": json_contract.MAX_SMALL_JSON_BYTES,
+            "update_json": json_contract.MAX_UPDATE_JSON_BYTES,
+        },
+        "pickle_limits": {
+            "opcodes": zip_contract.MAX_PICKLE_OPCODES,
+            "memo_writes": zip_contract.MAX_PICKLE_MEMO_WRITES,
+            "allowed_globals": sorted(zip_contract.ALLOWED_PICKLE_GLOBALS),
+        },
+        "json_limits": {
+            "depth": json_contract.MAX_JSON_DEPTH,
+            "nodes": json_contract.MAX_JSON_NODES,
+            "items": json_contract.MAX_JSON_ITEMS,
+            "string_bytes": json_contract.MAX_JSON_STRING_BYTES,
+            "one_string_bytes": json_contract.MAX_JSON_ONE_STRING_BYTES,
+            "numeric_digits": json_contract.MAX_JSON_NUMERIC_DIGITS,
+            "integer_bits": json_contract.MAX_JSON_INTEGER_BITS,
+        },
+        "object_limits": {
+            "depth": checkpoint_contract.MAX_CHECKPOINT_DEPTH,
+            "nodes": checkpoint_contract.MAX_CHECKPOINT_NODES,
+            "items": checkpoint_contract.MAX_CHECKPOINT_TOTAL_ITEMS,
+            "string_bytes": checkpoint_contract.MAX_CHECKPOINT_STRING_BYTES,
+        },
+        "tensor_limits": {
+            "count": checkpoint_contract.MAX_CHECKPOINT_TENSORS,
+            "one_tensor_elements": checkpoint_contract.MAX_CHECKPOINT_TENSOR_ELEMENTS,
+            "one_tensor_bytes": checkpoint_contract.MAX_CHECKPOINT_TENSOR_BYTES,
+            "total_elements": checkpoint_contract.MAX_CHECKPOINT_TOTAL_TENSOR_ELEMENTS,
+            "total_bytes": checkpoint_contract.MAX_CHECKPOINT_TOTAL_TENSOR_BYTES,
+            "total_storage_bytes": checkpoint_contract.MAX_CHECKPOINT_TOTAL_STORAGE_BYTES,
+            "policy": "plain CPU dense contiguous tensors only; no subclasses, views, aliases, shared storage, or nonzero offsets",
+        },
+        "lock": {
+            "algorithm": "per-output SHA256 canonical-identity sibling file OS exclusive lock",
+            "windows": "msvcrt.locking LK_NBLCK on persistent one-byte regular file",
+            "posix": "fcntl.flock LOCK_EX|LOCK_NB on persistent regular file",
+            "lifecycle": "held for complete train call including client lifetime, commit, recovery, no-op resume, and shutdown",
+            "file_policy": "persistent lock file is never unlinked or truncated; descriptor is non-inheritable",
+        },
+        "path_policy": {
+            "containment": "lexical artifact-root containment",
+            "links": "reject symlink and Windows reparse components, including dangling or in-root links",
+            "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename",
+            "resume": "resume path must lexically equal selected latest.json",
+        },
+        "privacy": {
+            "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
+            "rejects": "posix absolute, windows drive-root, windows root-relative, UNC, device/extended, file URI, and embedded absolute path fragments",
+        },
+    }
+
+
 def _run_manifest_from_config(
     *,
     env_sha: str,
@@ -250,6 +338,7 @@ def _run_manifest_from_config(
         "seed_derivation": _seed_derivation_dict(),
         "compatibility": compatibility,
         "artifact_schemas": _artifact_schemas(),
+        "artifact_boundary": _artifact_boundary_contract(),
         "privacy_contract": {
             "forbidden_raw_fields": [
                 "absolute_path",
@@ -299,7 +388,12 @@ def _run_manifest(
 def _write_run_json(out_dir: Path, run: dict[str, Any]) -> str:
     validate_training_json_privacy(run)
     path = out_dir / "run.json"
-    if path.exists():
+    try:
+        path.lstat()
+        exists = True
+    except FileNotFoundError:
+        exists = False
+    if exists:
         raise FileExistsError("run.json already exists")
     return write_json_atomic(path, run)
 
@@ -347,6 +441,7 @@ def _validate_run_manifest(run: Any, *, env_sha: str, compatibility: dict[str, A
         "seed_derivation",
         "compatibility",
         "artifact_schemas",
+        "artifact_boundary",
         "privacy_contract",
     }
     if not isinstance(run, dict) or set(run) != required:
@@ -664,47 +759,33 @@ def _staged_generation_paths(transaction_dir: Path) -> dict[str, Path]:
 
 def _new_transaction_dir(out_dir: Path, update: int) -> Path:
     root = out_dir / ".transactions"
-    root.mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(root, parents=True, exist_ok=True)
     path = root / f"update-{update:08d}-{os.getpid():x}{time.monotonic_ns():x}"
-    path.mkdir(mode=0o700)
+    mkdir_no_follow(path, mode=0o700)
     return path
 
 
 def _validate_path_contained(root: Path, path: Path) -> Path:
-    root_resolved = root.resolve()
-    path_resolved = path.resolve()
-    try:
-        path_resolved.relative_to(root_resolved)
-    except ValueError as exc:
-        raise ValueError(f"path escapes artifact root: {path}") from exc
-    return path_resolved
+    return ensure_no_follow_path(root, path, expected="any")
 
 
 def _quarantine_file(out_dir: Path, path: Path, reason: str) -> None:
-    _validate_path_contained(out_dir, path)
-    rel = path.resolve().relative_to(out_dir.resolve())
-    quarantine = out_dir / ".quarantine" / f"{reason}-{time.monotonic_ns()}" / rel
-    quarantine.parent.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(path), str(quarantine))
+    atomic_quarantine(out_dir, path, reason)
 
 
 def _quarantine_tree(out_dir: Path, path: Path, reason: str) -> None:
-    _validate_path_contained(out_dir, path)
-    rel = path.resolve().relative_to(out_dir.resolve())
-    quarantine = out_dir / ".quarantine" / f"{reason}-{time.monotonic_ns()}" / rel
-    quarantine.parent.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(path), str(quarantine))
+    atomic_quarantine(out_dir, path, reason)
 
 
 def _validate_orphan_generation_file(path: Path, *, update: int, kind: str, run_digest: str, compatibility: dict[str, Any]) -> None:
     if kind == "update":
-        record = read_json_file(path)
+        record = read_authoritative_json(path, "update")
         if record.get("schema") != UPDATE_RECORD_SCHEMA or record.get("update") != update or record.get("run_digest") != run_digest:
             raise ValueError(f"uncommitted update record schema mismatch: {path}")
         validate_training_json_privacy(record)
         return
     if kind == "sidecar":
-        sidecar = read_json_file(path)
+        sidecar = read_authoritative_json(path, "sidecar")
         if sidecar.get("schema") != SIDECAR_SCHEMA or sidecar.get("update") != update or sidecar.get("run_digest") != run_digest:
             raise ValueError(f"uncommitted sidecar schema mismatch: {path}")
         validate_training_json_privacy(sidecar)
@@ -719,9 +800,7 @@ def _validate_orphan_generation_file(path: Path, *, update: int, kind: str, run_
 
 
 def _validate_transaction_tree(out_dir: Path, transaction_dir: Path, *, head_update: int) -> None:
-    _validate_path_contained(out_dir, transaction_dir)
-    if transaction_dir.is_symlink():
-        raise ValueError(f"transaction staging directory must not be a link: {transaction_dir.name}")
+    ensure_real_child_dir(out_dir, transaction_dir)
     match = TRANSACTION_RE.fullmatch(transaction_dir.name)
     if match is None:
         raise ValueError(f"unknown transaction staging directory name: {transaction_dir.name}")
@@ -729,13 +808,12 @@ def _validate_transaction_tree(out_dir: Path, transaction_dir: Path, *, head_upd
     if update < 0 or update > MAX_UPDATES:
         raise ValueError("staging directory update out of bounds")
     allowed = {"checkpoint.pt", "update.json", "sidecar.json"}
-    for child in transaction_dir.rglob("*"):
+    for entry in scandir_no_follow(transaction_dir):
+        child = Path(entry.path)
         _validate_path_contained(out_dir, child)
-        if child.is_symlink():
-            raise ValueError(f"transaction staging entry must not be a link: {child.name}")
-        if child.is_dir():
+        if entry.is_dir(follow_symlinks=False):
             raise ValueError(f"unexpected nested transaction directory: {child.name}")
-        if not child.is_file():
+        if not entry.is_file(follow_symlinks=False):
             raise ValueError(f"unknown transaction staging entry: {child.name}")
         if child.parent != transaction_dir:
             raise ValueError(f"unexpected nested transaction file: {child.name}")
@@ -750,25 +828,28 @@ def _reconcile_uncommitted_artifacts(
     run_digest: str,
     compatibility: dict[str, Any],
 ) -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(out_dir, parents=True, exist_ok=True)
     transactions = out_dir / ".transactions"
     if transactions.exists():
-        if not transactions.is_dir() or transactions.is_symlink():
-            raise ValueError(".transactions must be a real directory")
-        for child in list(transactions.iterdir()):
-            if child.is_symlink():
-                raise ValueError(f"unknown transaction entry link: {child.name}")
-            if not child.is_dir():
+        ensure_real_child_dir(out_dir, transactions)
+        for entry in list(scandir_no_follow(transactions)):
+            child = Path(entry.path)
+            if not entry.is_dir(follow_symlinks=False):
                 raise ValueError(f"unknown transaction entry: {child.name}")
             _validate_transaction_tree(out_dir, child, head_update=head_update)
             _quarantine_tree(out_dir, child, "staging")
-        if transactions.exists() and not any(transactions.iterdir()):
+        if transactions.exists() and not any(scandir_no_follow(transactions)):
             transactions.rmdir()
 
     for direct_name in (".latest.json", ".episodes.jsonl", ".updates.jsonl", ".summary.json"):
-        for temp in out_dir.glob(f"{direct_name}.*.tmp"):
+        for entry in list(scandir_no_follow(out_dir)):
+            temp = Path(entry.path)
+            if not temp.name.startswith(f"{direct_name}.") or not temp.name.endswith(".tmp"):
+                continue
             if TEMP_RE.fullmatch(temp.name) is None:
                 raise ValueError(f"unknown temp file: {temp.name}")
+            if not entry.is_file(follow_symlinks=False):
+                raise ValueError(f"temp artifact is not a file: {temp.name}")
             _quarantine_file(out_dir, temp, "temp")
 
     for directory_name, mapping in (
@@ -776,12 +857,16 @@ def _reconcile_uncommitted_artifacts(
         ("checkpoints", {"pt": "checkpoint", "json": "sidecar"}),
     ):
         directory = out_dir / directory_name
-        directory.mkdir(parents=True, exist_ok=True)
-        for path in list(directory.iterdir()):
+        mkdir_no_follow(directory, parents=True, exist_ok=True)
+        ensure_real_child_dir(out_dir, directory)
+        for entry in list(scandir_no_follow(directory)):
+            path = Path(entry.path)
             _validate_path_contained(out_dir, path)
-            if path.is_dir():
+            if entry.is_dir(follow_symlinks=False):
                 raise ValueError(f"unknown directory under {directory_name}: {path.name}")
             if TEMP_RE.fullmatch(path.name):
+                if not entry.is_file(follow_symlinks=False):
+                    raise ValueError(f"temp artifact is not a file: {path.name}")
                 _quarantine_file(out_dir, path, "temp")
                 continue
             match = GENERATION_RE.fullmatch(path.name)
@@ -792,6 +877,8 @@ def _reconcile_uncommitted_artifacts(
             kind = mapping.get(suffix)
             if kind is None:
                 raise ValueError(f"generation artifact in wrong directory: {path.name}")
+            if not entry.is_file(follow_symlinks=False):
+                raise ValueError(f"generation artifact is not a file: {path.name}")
             if update <= head_update:
                 continue
             _validate_orphan_generation_file(path, update=update, kind=kind, run_digest=run_digest, compatibility=compatibility)
@@ -810,11 +897,9 @@ def _validate_generation_bundle(
     learning_rate: float,
 ) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     for path in paths.values():
-        _validate_path_contained(Path(run["_artifact_root"]), path)
-        if not path.is_file():
-            raise FileNotFoundError(path)
-    record_raw = read_json_file(paths["update"])
-    sidecar = read_json_file(paths["sidecar"])
+        ensure_real_file(Path(run["_artifact_root"]), path)
+    record_raw = read_authoritative_json(paths["update"], "update")
+    sidecar = read_authoritative_json(paths["sidecar"], "sidecar")
     if not isinstance(sidecar, dict) or set(sidecar) != {
         "schema",
         "update",
@@ -831,7 +916,8 @@ def _validate_generation_bundle(
         raise ValueError("sidecar generation mismatch")
     if sidecar["parent_head"] != parent_head:
         raise ValueError("sidecar parent mismatch")
-    checkpoint_hash = sha256_file(paths["checkpoint"])
+    loaded_checkpoint = load_checkpoint_file_with_digest(paths["checkpoint"])
+    checkpoint_hash = loaded_checkpoint.sha256
     if sidecar["checkpoint_sha256"] != checkpoint_hash:
         raise ValueError("checkpoint byte hash mismatch")
     _validate_hash(sidecar["checkpoint_sha256"], "sidecar checkpoint_sha256")
@@ -839,7 +925,7 @@ def _validate_generation_bundle(
     _validate_hash(sidecar["update_record_sha256"], "sidecar update_record_sha256")
     _validate_hash(sidecar["head"], "sidecar head")
 
-    payload = load_checkpoint_file(paths["checkpoint"])
+    payload = loaded_checkpoint.payload
     _strict_validate_checkpoint_for_model(
         payload,
         run_digest=run_digest,
@@ -900,17 +986,24 @@ def _commit_generation(
     update = payload["completed_update"]
     paths = generation_paths(out_dir, update)
     for path in paths.values():
-        if path.exists():
+        ensure_no_follow_path(out_dir, path.parent, expected="dir")
+        try:
+            path.lstat()
+            exists = True
+        except FileNotFoundError:
+            exists = False
+        if exists:
             raise FileExistsError(f"immutable generation already exists: {path}")
 
     tx_dir = _new_transaction_dir(out_dir, update)
     staged = _staged_generation_paths(tx_dir)
     try:
         save_checkpoint_file(staged["checkpoint"], payload)
-        loaded = load_checkpoint_file(staged["checkpoint"])
+        loaded_checkpoint = load_checkpoint_file_with_digest(staged["checkpoint"])
+        loaded = loaded_checkpoint.payload
         _strict_validate_checkpoint_for_model(loaded, run_digest=run_digest, compatibility=compatibility, learning_rate=learning_rate)
         logical_hash = logical_state_hash(loaded)
-        checkpoint_hash = sha256_file(staged["checkpoint"])
+        checkpoint_hash = loaded_checkpoint.sha256
         update_hash = write_json_atomic(staged["update"], update_record)
         if update_hash != update_record_hash(update_record):
             raise ValueError("update record canonical hash mismatch")
@@ -938,6 +1031,13 @@ def _commit_generation(
         inject_fault("generation_validate", tx_dir)
 
         for key in ("checkpoint", "update", "sidecar"):
+            ensure_real_file(out_dir, staged[key])
+            ensure_no_follow_path(out_dir, paths[key].parent, expected="dir")
+            try:
+                paths[key].lstat()
+                raise FileExistsError(f"immutable generation already exists: {paths[key]}")
+            except FileNotFoundError:
+                pass
             inject_fault(f"final_replace_{key}_before", staged[key])
             atomic_replace(staged[key], paths[key])
             fsync_dir(paths[key].parent)
@@ -959,14 +1059,15 @@ def _commit_generation(
         inject_fault("latest_replace_after", latest_path(out_dir))
         records = _records_through(out_dir, update)
         rebuild_derived_caches(out_dir, records, latest)
+        inject_fault("post_latest_cleanup_before", tx_dir)
         return final_head, records, final_payload
     finally:
         if tx_dir.exists():
-            shutil.rmtree(tx_dir, ignore_errors=True)
+            remove_tree_no_follow(tx_dir)
         root = out_dir / ".transactions"
         if root.exists():
             try:
-                if not any(root.iterdir()):
+                if not any(scandir_no_follow(root)):
                     root.rmdir()
             except OSError:
                 pass
@@ -975,7 +1076,7 @@ def _commit_generation(
 def _records_through(out_dir: Path, update: int) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for i in range(update + 1):
-        records.append(read_json_file(generation_paths(out_dir, i)["update"]))
+        records.append(read_authoritative_json(generation_paths(out_dir, i)["update"], "update"))
     return records
 
 
@@ -991,8 +1092,8 @@ def _load_chain(
     compatibility: dict[str, Any],
 ) -> TrainState:
     run_path = out_dir / "run.json"
-    run = read_json_file(run_path)
-    run_digest = sha256_file(run_path)
+    run = read_authoritative_json(run_path, "run")
+    run_digest = sha256_file(run_path, max_bytes=256 * 1024, allow_empty=False)
     (
         base_seed,
         batch_episodes,
@@ -1016,7 +1117,7 @@ def _load_chain(
         max_decisions=max_decisions,
         compatibility=compatibility,
     )
-    latest = read_json_file(latest_path(out_dir))
+    latest = read_authoritative_json(latest_path(out_dir), "latest")
     latest = _validate_latest(latest, run_digest=run_digest)
     head_update = latest["update"]
     _reconcile_uncommitted_artifacts(out_dir, head_update=head_update, run_digest=run_digest, compatibility=compatibility)
@@ -1037,7 +1138,7 @@ def _load_chain(
             compatibility=compatibility,
             learning_rate=run["optimizer"]["lr"],
         )
-        record = read_json_file(paths["update"])
+        record = read_authoritative_json(paths["update"], "update")
         records.append(record)
         parent_head = expected_head
         head_payload = payload
@@ -1092,8 +1193,8 @@ def _bootstrap_fresh(
     compatibility: dict[str, Any],
 ) -> tuple[TrainState, KernelRlClient, Decision]:
     require_new_or_empty_dir(out_dir)
-    (out_dir / "updates").mkdir(parents=True, exist_ok=True)
-    (out_dir / "checkpoints").mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(out_dir / "updates", parents=True, exist_ok=True)
+    mkdir_no_follow(out_dir / "checkpoints", parents=True, exist_ok=True)
     env_sha = sha256_file(env_bin)
     client = KernelRlClient(env_bin, timeout_s=10.0)
     try:
@@ -1119,7 +1220,7 @@ def _bootstrap_fresh(
             compatibility=compatibility,
         )
         run_digest = _write_run_json(out_dir, run)
-        if run_digest != sha256_file(out_dir / "run.json"):
+        if run_digest != sha256_file(out_dir / "run.json", max_bytes=256 * 1024, allow_empty=False):
             raise ValueError("run.json digest mismatch")
         outcomes = {"p0": {"win": 0, "loss": 0, "draw": 0}, "p1": {"win": 0, "loss": 0, "draw": 0}}
         decisions = {"p0": 0, "p1": 0}
@@ -1179,8 +1280,8 @@ def _bootstrap_incomplete_fresh(
 ) -> tuple[TrainState, KernelRlClient, Decision]:
     env_sha = sha256_file(env_bin)
     run_path = out_dir / "run.json"
-    run = read_json_file(run_path)
-    run_digest = sha256_file(run_path)
+    run = read_authoritative_json(run_path, "run")
+    run_digest = sha256_file(run_path, max_bytes=256 * 1024, allow_empty=False)
     _assert_run_matches_options(
         run,
         env_sha=env_sha,
@@ -1375,7 +1476,7 @@ def _run_episode(
     terminal_return = _terminal_return(current, learner)
     learner_terms = [(log_prob, value, terminal_return) for log_prob, value, _unused in learner_terms]
     summary = {
-        "schema": "kernel_rl_train_episode_summary/v1",
+        "schema": EPISODE_SUMMARY_SCHEMA,
         "episode": episode,
         "env_seed": env_seed,
         "learner_seat": learner,
@@ -1553,6 +1654,32 @@ def train(
     value_coef: float | None = None,
     max_decisions: int | None = None,
 ) -> dict[str, Any]:
+    with OutputLock(out_dir):
+        return _train_locked(
+            env_bin=env_bin,
+            out_dir=out_dir,
+            until_update=until_update,
+            resume=resume,
+            base_seed=base_seed,
+            batch_episodes=batch_episodes,
+            learning_rate=learning_rate,
+            value_coef=value_coef,
+            max_decisions=max_decisions,
+        )
+
+
+def _train_locked(
+    *,
+    env_bin: str | Path,
+    out_dir: str | Path,
+    until_update: int,
+    resume: str | Path | None = None,
+    base_seed: int | None = None,
+    batch_episodes: int | None = None,
+    learning_rate: float | None = None,
+    value_coef: float | None = None,
+    max_decisions: int | None = None,
+) -> dict[str, Any]:
     configure_torch_determinism()
     until_update = _validate_until_update(until_update)
     env_path = Path(env_bin)
@@ -1571,10 +1698,10 @@ def train(
             value_coef=value_coef,
             max_decisions=max_decisions,
         )
-        if out_path.exists() and not out_path.is_dir():
+        if out_path.exists() and (out_path.is_symlink() or not out_path.is_dir()):
             require_new_or_empty_dir(out_path)
             raise AssertionError("unreachable")
-        if out_path.exists() and any(out_path.iterdir()):
+        if out_path.exists() and any(scandir_no_follow(out_path)):
             if (out_path / "run.json").is_file() and not latest_path(out_path).exists():
                 state, client, first_decision = _bootstrap_incomplete_fresh(
                     env_bin=env_path,
@@ -1606,8 +1733,9 @@ def train(
             client.close()
         return _result(state)
 
-    if Path(resume).resolve() != latest_path(out_path).resolve():
+    if not same_lexical_path(Path(resume), latest_path(out_path)):
         raise ValueError("resume path must be exactly the selected out-dir latest.json")
+    ensure_real_file(out_path, latest_path(out_path))
     state = _load_chain(
         out_dir=out_path,
         env_sha=env_sha,
