@@ -9,8 +9,9 @@ use crate::engine::Decision;
 use crate::ids::PlayerId;
 use crate::rl::{
     acting_player_for_surface_decision, build_burn_mirror_state, legal_action_candidates_v1,
-    observe_v1, validate_selected_action, EpisodeTerminalSummaryV1, LegalActionCandidateV1,
-    LegalActionV1, ObservationV1, PlayerSeatV1, RlContractError, TerminalOutcomeV1,
+    observe_v2, validate_selected_action, EpisodeTerminalSummaryV1, LegalActionCandidateV1,
+    LegalActionV1, ObservationV2, PlayerSeatV1, RlContractError, TerminalClassificationV1,
+    TerminalOutcomeV1,
 };
 use crate::surface_v2::{HarnessSurfaceV2, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
@@ -19,7 +20,7 @@ use serde_json::Value;
 use std::fmt;
 
 pub const RL_SESSION_SCHEMA_VERSION: u32 = 1;
-pub const RL_SESSION_PROTOCOL_VERSION: u32 = 1;
+pub const RL_SESSION_PROTOCOL_VERSION: u32 = 2;
 pub const RL_SESSION_PROTOCOL_NAME: &str = "kernel_rl_jsonl";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -51,7 +52,7 @@ pub struct RlSessionDecisionV1 {
     pub episode_id: u64,
     pub step: u64,
     pub acting_player: PlayerSeatV1,
-    pub observation: Box<ObservationV1>,
+    pub observation: Box<ObservationV2>,
     pub legal_actions: Vec<LegalActionV1>,
     pub reward: [i32; 2],
 }
@@ -61,6 +62,7 @@ pub struct RlSessionTerminalV1 {
     pub schema_version: u32,
     pub episode_id: u64,
     pub terminal_outcome: TerminalOutcomeV1,
+    pub terminal_classification: TerminalClassificationV1,
     pub winner: Option<PlayerSeatV1>,
     pub terminal_reward: [i32; 2],
     pub terminal_reason: String,
@@ -72,6 +74,7 @@ impl From<RlSessionTerminalV1> for EpisodeTerminalSummaryV1 {
         EpisodeTerminalSummaryV1 {
             episode_id: value.episode_id,
             outcome: value.terminal_outcome,
+            classification: value.terminal_classification,
             winner: value.winner,
             terminal_reward: value.terminal_reward,
             terminal_reason: value.terminal_reason,
@@ -120,7 +123,7 @@ impl From<RlSessionError> for RlContractError {
 #[derive(Debug, Clone)]
 struct CurrentDecisionV1 {
     actor: PlayerId,
-    observation: ObservationV1,
+    observation: ObservationV2,
     candidates: Vec<LegalActionCandidateV1>,
 }
 
@@ -282,7 +285,7 @@ impl RlEpisodeSessionV1 {
             _ => {}
         }
         if self.decision_count >= self.max_decisions {
-            self.terminal = Some(halted_terminal(
+            self.terminal = Some(truncated_terminal(
                 self.episode_id,
                 format!("decision_cap_reached:{}", self.max_decisions),
                 self.decision_count,
@@ -297,7 +300,7 @@ impl RlEpisodeSessionV1 {
             ));
             return;
         };
-        let observation = match observe_v1(&self.state, actor, self.decision_count) {
+        let observation = match observe_v2(&self.state, &self.surface, actor, self.decision_count) {
             Ok(observation) => observation,
             Err(err) => {
                 self.terminal = Some(halted_terminal(
@@ -336,7 +339,7 @@ impl RlEpisodeSessionV1 {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
-#[serde(tag = "request_type", rename_all = "snake_case")]
+#[serde(tag = "request_type", rename_all = "snake_case", deny_unknown_fields)]
 pub enum KernelRlRequestV1 {
     Reset {
         schema_version: u32,
@@ -387,7 +390,7 @@ pub enum KernelRlResponseV1 {
         episode_id: u64,
         step: u64,
         acting_player: PlayerSeatV1,
-        observation: Box<ObservationV1>,
+        observation: Box<ObservationV2>,
         legal_actions: Vec<LegalActionV1>,
         reward: [i32; 2],
     },
@@ -397,6 +400,7 @@ pub enum KernelRlResponseV1 {
         provenance: RlSessionProvenanceV1,
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
+        terminal_classification: TerminalClassificationV1,
         winner: Option<PlayerSeatV1>,
         terminal_reward: [i32; 2],
         terminal_reason: String,
@@ -561,6 +565,7 @@ fn session_response_to_protocol(
             provenance: RlSessionProvenanceV1::current(),
             episode_id: terminal.episode_id,
             terminal_outcome: terminal.terminal_outcome,
+            terminal_classification: terminal.terminal_classification,
             winner: terminal.winner,
             terminal_reward: terminal.terminal_reward,
             terminal_reason: terminal.terminal_reason,
@@ -625,6 +630,7 @@ fn terminal_from_winner(
         schema_version: RL_SESSION_SCHEMA_VERSION,
         episode_id,
         terminal_outcome,
+        terminal_classification: TerminalClassificationV1::Natural,
         winner: winner.map(Into::into),
         terminal_reward,
         terminal_reason,
@@ -641,6 +647,24 @@ fn halted_terminal(
         schema_version: RL_SESSION_SCHEMA_VERSION,
         episode_id,
         terminal_outcome: TerminalOutcomeV1::Halted,
+        terminal_classification: TerminalClassificationV1::Halted,
+        winner: None,
+        terminal_reward: [0, 0],
+        terminal_reason,
+        decision_count,
+    }
+}
+
+fn truncated_terminal(
+    episode_id: u64,
+    terminal_reason: String,
+    decision_count: u64,
+) -> RlSessionTerminalV1 {
+    RlSessionTerminalV1 {
+        schema_version: RL_SESSION_SCHEMA_VERSION,
+        episode_id,
+        terminal_outcome: TerminalOutcomeV1::Truncated,
+        terminal_classification: TerminalClassificationV1::Truncated,
         winner: None,
         terminal_reward: [0, 0],
         terminal_reason,

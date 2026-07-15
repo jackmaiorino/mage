@@ -1,10 +1,12 @@
 use mtg_kernel::rl::{derive_env_seed, derive_policy_seed, record_burn_mirror_episode};
 use mtg_kernel::rl_session::{
     KernelRlJsonlServerV1, KernelRlResponseV1, RlEpisodeSessionV1, RlSessionErrorCode,
-    RlSessionResponseV1, RL_SESSION_SCHEMA_VERSION,
+    RlSessionResponseV1, RL_SESSION_PROTOCOL_VERSION, RL_SESSION_SCHEMA_VERSION,
 };
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
+use std::io::{BufRead, BufReader, Read, Write};
+use std::process::{Command, Stdio};
 
 fn reset_line(request_id: &str, max_decisions: u64) -> String {
     reset_line_for_episode(request_id, 0, max_decisions)
@@ -116,8 +118,14 @@ fn rl_session_terminal_response_has_provenance_and_no_diagnostic_hash() {
 
     assert_eq!(value["response_type"], "terminal");
     assert_eq!(value["request_id"], "terminal-provenance");
+    assert_eq!(value["terminal_outcome"], "truncated");
+    assert_eq!(value["terminal_classification"], "truncated");
+    assert_eq!(value["terminal_reward"], json!([0, 0]));
     assert_eq!(value["provenance"]["protocol"], "kernel_rl_jsonl");
-    assert_eq!(value["provenance"]["protocol_version"], 1);
+    assert_eq!(
+        value["provenance"]["protocol_version"],
+        RL_SESSION_PROTOCOL_VERSION
+    );
     assert_eq!(
         value["provenance"]["schema_version"],
         RL_SESSION_SCHEMA_VERSION
@@ -172,7 +180,8 @@ fn rl_session_deterministic_action_sequence_reaches_same_terminal() {
     assert_eq!(a, b);
     let terminal = parse_response(a.last().unwrap());
     assert_eq!(terminal["response_type"], "terminal");
-    assert_eq!(terminal["terminal_outcome"], "halted");
+    assert_eq!(terminal["terminal_outcome"], "truncated");
+    assert_eq!(terminal["terminal_classification"], "truncated");
     assert_eq!(terminal["terminal_reward"], json!([0, 0]));
     assert_eq!(terminal["decision_count"], 8);
 }
@@ -451,6 +460,52 @@ fn rl_session_step_before_reset_and_malformed_input_recover_cleanly() {
 }
 
 #[test]
+fn rl_session_unknown_request_fields_are_rejected_without_mutation() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let unknown_reset = json!({
+        "request_type": "reset",
+        "schema_version": RL_SESSION_SCHEMA_VERSION,
+        "request_id": "unknown-reset",
+        "episode_id": 99,
+        "env_seed": derive_env_seed(5151, 99),
+        "max_decisions": 16,
+        "misspelled_future_safety_field": true,
+    })
+    .to_string();
+    let rejected_reset = parse_response(&server.handle_line(&unknown_reset));
+    assert_eq!(rejected_reset["response_type"], "error");
+    assert_eq!(rejected_reset["error"]["code"], "malformed_request");
+
+    let reset = server.handle_line(&reset_line("strict-reset", 16));
+    let reset_value = parse_response(&reset);
+    let first_action = &reset_value["legal_actions"].as_array().unwrap()[0];
+    let unknown_step = json!({
+        "request_type": "step",
+        "schema_version": RL_SESSION_SCHEMA_VERSION,
+        "request_id": "unknown-step",
+        "episode_id": reset_value["episode_id"].as_u64().unwrap(),
+        "expected_step": reset_value["step"].as_u64().unwrap(),
+        "selected_index": first_action["selected_index"].as_u64().unwrap() as u32,
+        "selected_action_id": first_action["stable_id"].as_str().unwrap(),
+        "expected_stpe": reset_value["step"].as_u64().unwrap(),
+    })
+    .to_string();
+    let rejected_step = parse_response(&server.handle_line(&unknown_step));
+    assert_eq!(rejected_step["response_type"], "error");
+    assert_eq!(rejected_step["request_id"], "unknown-step");
+    assert_eq!(rejected_step["error"]["code"], "malformed_request");
+
+    let valid = server.handle_line(&step_line_from_decision(
+        "after-unknown-field",
+        &reset_value,
+        0,
+    ));
+    let valid_value = parse_response(&valid);
+    assert_ne!(valid_value["response_type"], "error");
+    assert_eq!(valid_value["step"], 1);
+}
+
+#[test]
 fn rl_session_batch_rollout_uses_session_path_and_stays_deterministic() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
@@ -458,12 +513,97 @@ fn rl_session_batch_rollout_uses_session_path_and_stays_deterministic() {
     let b = record_burn_mirror_episode(0, env_seed, policy_seed, 200_000).unwrap();
 
     assert_eq!(a, b);
-    let jsonl = a
-        .records
+    let audit_jsonl = a
+        .audit_records
         .iter()
         .map(|record| serde_json::to_string(record).unwrap())
         .collect::<Vec<_>>()
         .join("\n");
-    assert!(!jsonl.contains("diagnostic_state_hash_includes_hidden_state"));
-    assert!(jsonl.contains("diagnostic_state_hash"));
+    let policy_jsonl = a
+        .policy_records
+        .iter()
+        .map(|record| serde_json::to_string(record).unwrap())
+        .collect::<Vec<_>>()
+        .join("\n");
+    assert!(!audit_jsonl.contains("diagnostic_state_hash_includes_hidden_state"));
+    assert!(audit_jsonl.contains("diagnostic_state_hash"));
+    assert!(!policy_jsonl.contains("diagnostic_state_hash"));
+    assert!(!policy_jsonl.contains("env_seed"));
+    assert!(!policy_jsonl.contains("policy_seed"));
+}
+
+#[test]
+fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
+    let mut child = Command::new(env!("CARGO_BIN_EXE_kernel_rl_env"))
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .expect("spawn kernel_rl_env");
+    let mut stdin = child.stdin.take().unwrap();
+    let stdout = child.stdout.take().unwrap();
+    let mut reader = BufReader::new(stdout);
+
+    writeln!(stdin, "{}", reset_line("process-reset", 16)).unwrap();
+    stdin.flush().unwrap();
+    let mut first_line = String::new();
+    reader.read_line(&mut first_line).unwrap();
+    let first = parse_response(first_line.trim_end());
+    assert_eq!(first["response_type"], "decision");
+    assert_eq!(first["observation"]["schema_version"], 2);
+    assert!(first["observation"]["projection"].get("combat").is_some());
+    assert!(first["observation"]["projection"]
+        .get("engine_context")
+        .is_some());
+    assert!(first["observation"]["projection"]
+        .get("surface_context")
+        .is_some());
+    assert!(!contains_key(&first, "diagnostic_state_hash"));
+    assert!(!contains_key(&first, "state_hash"));
+
+    let action = &first["legal_actions"].as_array().unwrap()[0];
+    let unknown_step = json!({
+        "request_type": "step",
+        "schema_version": RL_SESSION_SCHEMA_VERSION,
+        "request_id": "process-unknown-step",
+        "episode_id": first["episode_id"].as_u64().unwrap(),
+        "expected_step": first["step"].as_u64().unwrap(),
+        "selected_index": action["selected_index"].as_u64().unwrap() as u32,
+        "selected_action_id": action["stable_id"].as_str().unwrap(),
+        "future_safety_typo": true,
+    })
+    .to_string();
+    writeln!(stdin, "{unknown_step}").unwrap();
+    stdin.flush().unwrap();
+    let mut error_line = String::new();
+    reader.read_line(&mut error_line).unwrap();
+    let error = parse_response(error_line.trim_end());
+    assert_eq!(error["response_type"], "error");
+    assert_eq!(error["error"]["code"], "malformed_request");
+
+    writeln!(
+        stdin,
+        "{}",
+        step_line_from_decision("process-valid-after-error", &first, 0)
+    )
+    .unwrap();
+    stdin.flush().unwrap();
+    let mut valid_line = String::new();
+    reader.read_line(&mut valid_line).unwrap();
+    let valid = parse_response(valid_line.trim_end());
+    assert_ne!(valid["response_type"], "error");
+    assert!(!contains_key(&valid, "diagnostic_state_hash"));
+    assert!(!contains_key(&valid, "state_hash"));
+
+    drop(stdin);
+    let status = child.wait().unwrap();
+    assert!(status.success());
+    let mut stderr = String::new();
+    child
+        .stderr
+        .take()
+        .unwrap()
+        .read_to_string(&mut stderr)
+        .unwrap();
+    assert!(stderr.trim().is_empty(), "unexpected stderr: {stderr}");
 }

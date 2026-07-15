@@ -2,7 +2,7 @@
 //!
 //! Run:
 //! cargo run -p mtg-kernel --example rollout_record --manifest-path kernel/Cargo.toml -- \
-//!   --matchup burn_mirror --games 4 --seed 5151 --out local-training/kernel_rl/smoke_v1
+//!   --matchup burn_mirror --games 4 --seed 5151 --out local-training/kernel_rl/smoke_v2
 
 use mtg_kernel::rl::{
     build_rollout_records, build_run_manifest, git_metadata, write_rollout_artifacts,
@@ -31,13 +31,13 @@ fn main() {
     };
     if args.matchup != BURN_MIRROR_MATCHUP {
         eprintln!(
-            "unsupported matchup {:?}; v1 supports exactly {:?}",
+            "unsupported matchup {:?}; v2 supports exactly {:?}",
             args.matchup, BURN_MIRROR_MATCHUP
         );
         std::process::exit(2);
     }
 
-    let (records, summaries) =
+    let (audit_records, policy_records, summaries) =
         match build_rollout_records(args.games, args.seed, DEFAULT_MAX_DECISIONS) {
             Ok(result) => result,
             Err(err) => {
@@ -54,19 +54,22 @@ fn main() {
         &summaries,
         git_metadata(),
     );
-    if let Err(err) = write_rollout_artifacts(&args.out, &records, &manifest) {
+    if let Err(err) = write_rollout_artifacts(&args.out, &audit_records, &policy_records, &manifest)
+    {
         eprintln!("artifact write failed: {err}");
         std::process::exit(1);
     }
 
     println!(
-        "wrote {} records for {} games to {} (p0_wins={} p1_wins={} draws={} halted={} decisions={})",
-        records.len(),
+        "wrote {} policy records and {} audit records for {} games to {} (p0_wins={} p1_wins={} draws={} truncated={} halted={} decisions={})",
+        policy_records.len(),
+        audit_records.len(),
         args.games,
         args.out.display(),
         manifest.aggregate.p0_wins,
         manifest.aggregate.p1_wins,
         manifest.aggregate.draws,
+        manifest.aggregate.truncated,
         manifest.aggregate.halted,
         manifest.aggregate.total_decisions
     );

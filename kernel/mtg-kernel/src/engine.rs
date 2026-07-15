@@ -356,6 +356,94 @@ pub struct PlayPermission {
     pub expiry: PlayPermissionExpiry,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct EnginePublicContextV2 {
+    pub priority_passes: [bool; 2],
+    pub priority_round: u64,
+    pub stack_len_at_round_open: usize,
+    pub mana_ability_activations: u64,
+    pub last_mana_ability_activator: Option<PlayerId>,
+    pub pending_cast: Option<PendingCastPublicV2>,
+    pub pending_activation: Option<PendingActivationPublicV2>,
+    pub pending_discard: Option<PendingDiscardPublicV2>,
+    pub pending_optional_cost: Option<PendingOptionalCostPublicV2>,
+    pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrificePublicV2>,
+    pub pending_triggers: Vec<PendingTriggerPublicV2>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingCastPublicV2 {
+    pub spell: ObjectId,
+    pub controller: PlayerId,
+    pub target_spec: TargetSpec,
+    pub targets_chosen: Vec<Target>,
+    pub is_flashback: bool,
+    pub cast_mode: Option<CastMode>,
+    pub additional_cost_discarded: Option<Vec<ObjectId>>,
+    pub mode_chosen: Option<u8>,
+    pub origin_zone: Zone,
+    pub sacrifice_chosen: Vec<ObjectId>,
+    pub kicked: Option<bool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingActivationPublicV2 {
+    pub source: ObjectId,
+    pub controller: PlayerId,
+    pub ability_index: u8,
+    pub target_spec: TargetSpec,
+    pub targets_chosen: Vec<Target>,
+    pub cost_discard_paid: Option<Vec<ObjectId>>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum DiscardResumePublicKindV2 {
+    None,
+    FinishCast,
+    FinishActivation,
+    FinishSpellResolution,
+    FinishOptionalCost,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingDiscardPublicV2 {
+    pub player: PlayerId,
+    pub count: u32,
+    pub resume_kind: DiscardResumePublicKindV2,
+    pub resume_source: Option<ObjectId>,
+    pub resume_controller: Option<PlayerId>,
+    pub resume_to_zone: Option<Zone>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCostPublicV2 {
+    pub player: PlayerId,
+    pub source: ObjectId,
+    pub discard: u8,
+    pub sacrifice_lands: u8,
+    pub discard_payable: bool,
+    pub sacrifice_payable: bool,
+    pub spell_resume: Option<(ObjectId, Zone)>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingOptionalCostSacrificePublicV2 {
+    pub player: PlayerId,
+    pub source: ObjectId,
+    pub remaining: u8,
+    pub chosen: Vec<ObjectId>,
+    pub spell_resume: Option<(ObjectId, Zone)>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingTriggerPublicV2 {
+    pub source: ObjectId,
+    pub controller: PlayerId,
+    pub is_madness_offer: bool,
+    pub kicked: bool,
+}
+
 /// A resolution this kernel cannot simulate faithfully because it would
 /// require a mechanic the kernel has no representation for at all. Distinct
 /// from "fail-closed" (an uncastable card, decided once at compile/data
@@ -1194,7 +1282,7 @@ fn castable_spells(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
 /// permission structurally unable to "come back to life" after `id` changes
 /// zones again for any reason (CR 400.7) rather than merely relying on this
 /// module remembering to remove it -- see `PlayPermission`'s doc.
-fn active_permission_for(
+pub(crate) fn active_permission_for(
     holder: PlayerId,
     id: ObjectId,
     state: &GameState,
@@ -1204,6 +1292,117 @@ fn active_permission_for(
             && p.holder == holder
             && p.zone_change_generation == state.objects.get(id).zone_change_count
     })
+}
+
+pub(crate) fn public_context_v2(state: &GameState) -> EnginePublicContextV2 {
+    EnginePublicContextV2 {
+        priority_passes: state.engine.priority_passes,
+        priority_round: state.engine.priority_round,
+        stack_len_at_round_open: state.engine.stack_len_at_round_open,
+        mana_ability_activations: state.engine.mana_ability_activations,
+        last_mana_ability_activator: state.engine.last_mana_ability_activator,
+        pending_cast: state
+            .engine
+            .pending_cast
+            .as_ref()
+            .map(|p| PendingCastPublicV2 {
+                spell: p.spell,
+                controller: p.controller,
+                target_spec: p.target_spec,
+                targets_chosen: p.targets_chosen.clone(),
+                is_flashback: p.is_flashback,
+                cast_mode: p.cast_mode,
+                additional_cost_discarded: p.additional_cost_discarded.clone(),
+                mode_chosen: p.mode_chosen,
+                origin_zone: p.origin_zone,
+                sacrifice_chosen: p.sacrifice_chosen.clone(),
+                kicked: p.kicked,
+            }),
+        pending_activation: state.engine.pending_activation.as_ref().map(|p| {
+            PendingActivationPublicV2 {
+                source: p.source,
+                controller: p.controller,
+                ability_index: p.ability_index,
+                target_spec: p.target_spec,
+                targets_chosen: p.targets_chosen.clone(),
+                cost_discard_paid: p.cost_discard_paid.clone(),
+            }
+        }),
+        pending_discard: state
+            .engine
+            .pending_discard
+            .as_ref()
+            .map(pending_discard_public_v2),
+        pending_optional_cost: state.engine.pending_optional_cost.as_ref().map(|p| {
+            PendingOptionalCostPublicV2 {
+                player: p.player,
+                source: p.source,
+                discard: p.discard,
+                sacrifice_lands: p.sacrifice_lands,
+                discard_payable: p.discard_payable,
+                sacrifice_payable: p.sacrifice_payable,
+                spell_resume: p.spell_resume,
+            }
+        }),
+        pending_optional_cost_sacrifice: state.engine.pending_optional_cost_sacrifice.as_ref().map(
+            |p| PendingOptionalCostSacrificePublicV2 {
+                player: p.player,
+                source: p.source,
+                remaining: p.remaining,
+                chosen: p.chosen.clone(),
+                spell_resume: p.spell_resume,
+            },
+        ),
+        pending_triggers: state
+            .engine
+            .pending_triggers
+            .iter()
+            .map(|p| PendingTriggerPublicV2 {
+                source: p.source,
+                controller: p.controller,
+                is_madness_offer: p.is_madness_offer,
+                kicked: p.kicked,
+            })
+            .collect(),
+    }
+}
+
+fn pending_discard_public_v2(p: &PendingDiscard) -> PendingDiscardPublicV2 {
+    let (resume_kind, resume_source, resume_controller, resume_to_zone) = match &p.resume {
+        DiscardResume::None => (DiscardResumePublicKindV2::None, None, None, None),
+        DiscardResume::FinishCast => (DiscardResumePublicKindV2::FinishCast, None, None, None),
+        DiscardResume::FinishActivation => (
+            DiscardResumePublicKindV2::FinishActivation,
+            None,
+            None,
+            None,
+        ),
+        DiscardResume::FinishSpellResolution { source, to_zone } => (
+            DiscardResumePublicKindV2::FinishSpellResolution,
+            Some(*source),
+            None,
+            Some(*to_zone),
+        ),
+        DiscardResume::FinishOptionalCost {
+            source,
+            controller,
+            spell_resume,
+            ..
+        } => (
+            DiscardResumePublicKindV2::FinishOptionalCost,
+            Some(*source),
+            Some(*controller),
+            spell_resume.map(|(_, zone)| zone),
+        ),
+    };
+    PendingDiscardPublicV2 {
+        player: p.player,
+        count: p.count,
+        resume_kind,
+        resume_source,
+        resume_controller,
+        resume_to_zone,
+    }
 }
 
 /// Sorcery-speed timing (508.1a's "any time you could cast a sorcery"),
@@ -2393,7 +2592,7 @@ pub(crate) fn static_self_boost_for(name: &str) -> Option<StaticSelfBoostDef> {
     }
 }
 
-pub(crate) fn effective_power(state: &GameState, id: ObjectId) -> i32 {
+pub fn effective_power(state: &GameState, id: ObjectId) -> i32 {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
     let mut power = def.power.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
@@ -2423,7 +2622,7 @@ pub(crate) fn effective_power(state: &GameState, id: ObjectId) -> i32 {
 /// stays a real, symmetric code path rather than a power-only shortcut so
 /// the next card that pumps toughness doesn't have to rediscover this
 /// shape.
-pub(crate) fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
+pub fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
     let mut toughness = def.toughness.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
@@ -2457,7 +2656,7 @@ pub(crate) fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
 /// Both boost sources route through this same query path (per external
 /// review: not a parallel mechanism) -- there is no combat- or SBA-specific
 /// shortcut anywhere else that reads power/toughness/keywords directly.
-pub(crate) fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keywords) -> bool {
+pub fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keywords) -> bool {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
     if def.keywords.has(kw) {

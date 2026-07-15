@@ -5,8 +5,11 @@
 //! records, and a deterministic Burn-mirror rollout helper. It does not make
 //! any learning or strength claim.
 
-use crate::card_def::{card_id_by_name, CARD_DEFS, KERNEL_CARDDB_HASH};
-use crate::engine::{Action, CastMode, CostKind, Decision, OptionalCostChoice};
+use crate::card_def::{card_id_by_name, CardType, Keywords, CARD_DEFS, KERNEL_CARDDB_HASH};
+use crate::engine::{
+    self, Action, CastMode, CostKind, Decision, OptionalCostChoice, PlayOrCast,
+    PlayPermissionExpiry, UntilEndOfTurnEffect,
+};
 use crate::event::{self, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
 use crate::rl_session::{RlEpisodeSessionV1, RlSessionResponseV1};
@@ -20,13 +23,15 @@ use std::fs::{self, File};
 use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 
-pub const OBSERVATION_SCHEMA_VERSION: u32 = 1;
+pub const OBSERVATION_SCHEMA_VERSION_V1: u32 = 1;
+pub const OBSERVATION_SCHEMA_VERSION: u32 = 2;
 pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 1;
 pub const EPISODE_SCHEMA_VERSION: u32 = 1;
 pub const MANIFEST_SCHEMA_VERSION: u32 = 1;
 pub const DEFAULT_MAX_DECISIONS: u64 = 200_000;
 pub const BURN_MIRROR_MATCHUP: &str = "burn_mirror";
-pub const EPISODE_JSONL_FILENAME: &str = "episodes.jsonl";
+pub const AUDIT_EPISODE_JSONL_FILENAME: &str = "audit_episodes.jsonl";
+pub const POLICY_EPISODE_JSONL_FILENAME: &str = "policy_episodes.jsonl";
 pub const MANIFEST_FILENAME: &str = "manifest.json";
 
 const MAX_SUBSET_OBJECTS: usize = 12;
@@ -108,6 +113,53 @@ pub struct CardPrivateV1 {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct CardTypeFlagsV2 {
+    pub land: bool,
+    pub creature: bool,
+    pub instant: bool,
+    pub sorcery: bool,
+    pub artifact: bool,
+    pub enchantment: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct KeywordFlagsV2 {
+    pub flying: bool,
+    pub reach: bool,
+    pub haste: bool,
+    pub vigilance: bool,
+    pub trample: bool,
+    pub first_strike: bool,
+    pub double_strike: bool,
+    pub deathtouch: bool,
+    pub menace: bool,
+    pub defender: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct CardCharacteristicsV2 {
+    pub type_flags: CardTypeFlagsV2,
+    pub base_power: Option<i32>,
+    pub base_toughness: Option<i32>,
+    pub effective_power: Option<i32>,
+    pub effective_toughness: Option<i32>,
+    pub effective_keywords: KeywordFlagsV2,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct CardPublicV2 {
+    pub stable: CardStableRefV1,
+    pub card_name: String,
+    pub tapped: bool,
+    pub summoning_sick: bool,
+    pub damage: u16,
+    pub counters: CountersV1,
+    pub attachments: Vec<u32>,
+    pub plotted_turn: Option<u32>,
+    pub characteristics: CardCharacteristicsV2,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(tag = "target_kind", rename_all = "snake_case")]
 pub enum TargetRefV1 {
     Player { player: PlayerSeatV1 },
@@ -150,6 +202,76 @@ pub struct PublicObservationProjectionV1 {
     pub graveyards: [Vec<CardPublicV1>; 2],
     pub exile: Vec<CardPublicV1>,
     pub stack: Vec<StackItemPublicV1>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct CombatStatePublicV2 {
+    pub attackers_declared: bool,
+    pub blockers_declared: bool,
+    pub ordered_attackers: Vec<CardStableRefV1>,
+    pub attacker_to_ordered_blockers: Vec<(CardStableRefV1, Vec<CardStableRefV1>)>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum EffectDurationV2 {
+    EndOfTurn,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ContinuousEffectPublicV2 {
+    pub affected_objects: Vec<CardStableRefV1>,
+    pub layers: u8,
+    pub timestamp: u64,
+    pub duration: EffectDurationV2,
+    pub power_delta: i32,
+    pub toughness_delta: i32,
+    pub grants_haste: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum PlayOrCastV2 {
+    Play,
+    Cast,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(tag = "expiry_kind", rename_all = "snake_case")]
+pub enum PlayPermissionExpiryV2 {
+    EndOfTurn,
+    UntilHoldersNextTurn { holder_turn_started: bool },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct ExilePlayPermissionPublicV2 {
+    pub object: CardStableRefV1,
+    pub holder: PlayerSeatV1,
+    pub play_or_cast: PlayOrCastV2,
+    pub zone_change_generation: u32,
+    pub expiry: PlayPermissionExpiryV2,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PublicObservationProjectionV2 {
+    pub turn: u32,
+    pub phase: ZoneIndependentStepV1,
+    pub active_player: PlayerSeatV1,
+    pub priority_player: PlayerSeatV1,
+    pub life_totals: [i32; 2],
+    pub mana_pools: [[u8; 6]; 2],
+    pub hand_counts: [usize; 2],
+    pub library_counts: [usize; 2],
+    pub player_status: [PlayerStatusV1; 2],
+    pub battlefield: [Vec<CardPublicV2>; 2],
+    pub graveyards: [Vec<CardPublicV2>; 2],
+    pub exile: Vec<CardPublicV2>,
+    pub stack: Vec<StackItemPublicV1>,
+    pub combat: CombatStatePublicV2,
+    pub continuous_effects: Vec<ContinuousEffectPublicV2>,
+    pub exile_play_permissions: Vec<ExilePlayPermissionPublicV2>,
+    pub engine_context: engine::EnginePublicContextV2,
+    pub surface_context: crate::surface_v2::HarnessSurfacePublicContextV2,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -197,6 +319,19 @@ pub struct ObservationV1 {
     pub acting_player: PlayerSeatV1,
     pub step_index: u64,
     pub projection: PublicObservationProjectionV1,
+    pub own_hand: Vec<CardPrivateV1>,
+    pub visible_projection_hash: u64,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ObservationV2 {
+    pub schema_version: u32,
+    pub kernel_version: String,
+    pub surface_version: u32,
+    pub card_db_hash: u64,
+    pub acting_player: PlayerSeatV1,
+    pub step_index: u64,
+    pub projection: PublicObservationProjectionV2,
     pub own_hand: Vec<CardPrivateV1>,
     pub visible_projection_hash: u64,
 }
@@ -297,6 +432,9 @@ pub enum ActionSemanticV1 {
 pub struct LegalActionV1 {
     pub schema_version: u32,
     pub selected_index: u32,
+    /// Per-decision semantic transport identifier. This is not a global
+    /// model action vocabulary and not a one-shot decision token; callers
+    /// bind it with `episode_id` and `expected_step`.
     pub stable_id: String,
     pub semantic: ActionSemanticV1,
     pub display_text: Option<String>,
@@ -323,6 +461,15 @@ pub enum TerminalOutcomeV1 {
     P0Win,
     P1Win,
     Draw,
+    Truncated,
+    Halted,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TerminalClassificationV1 {
+    Natural,
+    Truncated,
     Halted,
 }
 
@@ -331,6 +478,7 @@ pub enum TerminalOutcomeV1 {
 pub enum EpisodeRecordV1 {
     Header {
         schema_version: u32,
+        stream_safety: String,
         kernel_version: String,
         surface_version: u32,
         card_db_hash: u64,
@@ -347,7 +495,7 @@ pub enum EpisodeRecordV1 {
         episode_id: u64,
         step: u64,
         acting_player: PlayerSeatV1,
-        observation: ObservationV1,
+        observation: Box<ObservationV2>,
         observation_projection_hash: u64,
         diagnostic_state_hash: u64,
         legal_actions: Vec<LegalActionV1>,
@@ -359,6 +507,7 @@ pub enum EpisodeRecordV1 {
         schema_version: u32,
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
+        terminal_classification: TerminalClassificationV1,
         winner: Option<PlayerSeatV1>,
         terminal_reward: [i32; 2],
         terminal_reason: String,
@@ -368,9 +517,47 @@ pub enum EpisodeRecordV1 {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "record_type", rename_all = "snake_case")]
+pub enum PolicyEpisodeRecordV2 {
+    Header {
+        schema_version: u32,
+        stream_safety: String,
+        kernel_version: String,
+        surface_version: u32,
+        card_db_hash: u64,
+        matchup: String,
+        episode_id: u64,
+        game_id: String,
+        deck_identifiers: [String; 2],
+    },
+    Decision {
+        schema_version: u32,
+        episode_id: u64,
+        step: u64,
+        acting_player: PlayerSeatV1,
+        observation: Box<ObservationV2>,
+        legal_actions: Vec<LegalActionV1>,
+        selected_index: u32,
+        selected_action_id: String,
+        reward: [i32; 2],
+    },
+    Terminal {
+        schema_version: u32,
+        episode_id: u64,
+        terminal_outcome: TerminalOutcomeV1,
+        terminal_classification: TerminalClassificationV1,
+        winner: Option<PlayerSeatV1>,
+        terminal_reward: [i32; 2],
+        terminal_reason: String,
+        decision_count: u64,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EpisodeTerminalSummaryV1 {
     pub episode_id: u64,
     pub outcome: TerminalOutcomeV1,
+    pub classification: TerminalClassificationV1,
     pub winner: Option<PlayerSeatV1>,
     pub terminal_reward: [i32; 2],
     pub terminal_reason: String,
@@ -379,7 +566,8 @@ pub struct EpisodeTerminalSummaryV1 {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct EpisodeRunV1 {
-    pub records: Vec<EpisodeRecordV1>,
+    pub audit_records: Vec<EpisodeRecordV1>,
+    pub policy_records: Vec<PolicyEpisodeRecordV2>,
     pub terminal: EpisodeTerminalSummaryV1,
 }
 
@@ -394,7 +582,8 @@ pub struct SeedManifestV1 {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OutputFilesV1 {
-    pub episode_jsonl: String,
+    pub policy_episode_jsonl: String,
+    pub audit_episode_jsonl: String,
     pub manifest_json: String,
 }
 
@@ -425,8 +614,17 @@ pub struct RunAggregateV1 {
     pub p0_wins: u64,
     pub p1_wins: u64,
     pub draws: u64,
+    pub truncated: u64,
     pub halted: u64,
     pub total_decisions: u64,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct StreamManifestV1 {
+    pub filename: String,
+    pub policy_safe: bool,
+    pub contains_hidden_state_diagnostics: bool,
+    pub description: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -446,6 +644,7 @@ pub struct RunManifestV1 {
     pub cli_args: Vec<String>,
     pub seed: SeedManifestV1,
     pub output_files: OutputFilesV1,
+    pub streams: Vec<StreamManifestV1>,
     pub deck: DeckManifestV1,
     pub git: GitMetadataV1,
     pub aggregate: RunAggregateV1,
@@ -561,7 +760,7 @@ pub fn observe_v1(
         .map(|&id| private_card(state, id))
         .collect::<Result<Vec<_>>>()?;
     let mut obs = ObservationV1 {
-        schema_version: OBSERVATION_SCHEMA_VERSION,
+        schema_version: OBSERVATION_SCHEMA_VERSION_V1,
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
         card_db_hash: KERNEL_CARDDB_HASH,
@@ -572,6 +771,64 @@ pub fn observe_v1(
         visible_projection_hash: 0,
     };
     obs.visible_projection_hash = visible_projection_hash(&obs)?;
+    Ok(obs)
+}
+
+pub fn observe_v2(
+    state: &GameState,
+    surface: &crate::surface_v2::HarnessSurfaceV2,
+    acting_player: PlayerId,
+    step_index: u64,
+) -> Result<ObservationV2> {
+    let projection = PublicObservationProjectionV2 {
+        turn: state.turn,
+        phase: state.step.into(),
+        active_player: state.active_player.into(),
+        priority_player: state.priority_player.into(),
+        life_totals: [state.players[0].life, state.players[1].life],
+        mana_pools: [state.players[0].mana_pool, state.players[1].mana_pool],
+        hand_counts: [state.players[0].hand.len(), state.players[1].hand.len()],
+        library_counts: [
+            state.players[0].library.len(),
+            state.players[1].library.len(),
+        ],
+        player_status: [
+            player_status_v1(&state.players[0]),
+            player_status_v1(&state.players[1]),
+        ],
+        battlefield: [
+            public_cards_v2(state, &state.players[0].battlefield)?,
+            public_cards_v2(state, &state.players[1].battlefield)?,
+        ],
+        graveyards: [
+            public_cards_v2(state, &state.players[0].graveyard)?,
+            public_cards_v2(state, &state.players[1].graveyard)?,
+        ],
+        exile: public_cards_v2(state, &state.exile)?,
+        stack: stack_public(state)?,
+        combat: combat_public_v2(state)?,
+        continuous_effects: continuous_effects_public_v2(state)?,
+        exile_play_permissions: exile_play_permissions_public_v2(state)?,
+        engine_context: engine::public_context_v2(state),
+        surface_context: surface.public_context(),
+    };
+    let own_hand = state.players[acting_player.index()]
+        .hand
+        .iter()
+        .map(|&id| private_card(state, id))
+        .collect::<Result<Vec<_>>>()?;
+    let mut obs = ObservationV2 {
+        schema_version: OBSERVATION_SCHEMA_VERSION,
+        kernel_version: KERNEL_VERSION.to_string(),
+        surface_version: H2_PREDICATE_VERSION,
+        card_db_hash: KERNEL_CARDDB_HASH,
+        acting_player: acting_player.into(),
+        step_index,
+        projection,
+        own_hand,
+        visible_projection_hash: 0,
+    };
+    obs.visible_projection_hash = visible_projection_hash_v2(&obs)?;
     Ok(obs)
 }
 
@@ -942,16 +1199,17 @@ pub fn record_burn_mirror_episode(
     let mut session = RlEpisodeSessionV1::reset(episode_id, env_seed, max_decisions);
     let mut policy_rng = SplitMix64::seed(policy_seed);
     let deck_hash = burn_deck_hash();
-    let mut records = vec![EpisodeRecordV1::Header {
+    let game_id =
+        format!("burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{episode_id:06}");
+    let mut audit_records = vec![EpisodeRecordV1::Header {
         schema_version: EPISODE_SCHEMA_VERSION,
+        stream_safety: "privileged_audit_contains_hidden_state_diagnostics".to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
         card_db_hash: KERNEL_CARDDB_HASH,
         matchup: BURN_MIRROR_MATCHUP.to_string(),
         episode_id,
-        game_id: format!(
-            "burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{episode_id:06}"
-        ),
+        game_id: game_id.clone(),
         env_seed,
         policy_seed,
         deck_identifiers: deck_identifiers(),
@@ -963,20 +1221,44 @@ pub fn record_burn_mirror_episode(
             deck_hashes: [deck_hash, deck_hash],
         },
     }];
+    let mut policy_records = vec![PolicyEpisodeRecordV2::Header {
+        schema_version: OBSERVATION_SCHEMA_VERSION,
+        stream_safety: "policy_safe_model_visible_v2".to_string(),
+        kernel_version: KERNEL_VERSION.to_string(),
+        surface_version: H2_PREDICATE_VERSION,
+        card_db_hash: KERNEL_CARDDB_HASH,
+        matchup: BURN_MIRROR_MATCHUP.to_string(),
+        episode_id,
+        game_id,
+        deck_identifiers: deck_identifiers(),
+    }];
     loop {
         match session.current_response() {
             RlSessionResponseV1::Decision(decision) => {
                 let selected_index = rng_below(&mut policy_rng, decision.legal_actions.len());
                 let selected_action_id = decision.legal_actions[selected_index].stable_id.clone();
-                records.push(EpisodeRecordV1::Decision {
+                let legal_actions = decision.legal_actions.clone();
+                let observation = (*decision.observation).clone();
+                audit_records.push(EpisodeRecordV1::Decision {
                     schema_version: EPISODE_SCHEMA_VERSION,
                     episode_id,
                     step: decision.step,
                     acting_player: decision.acting_player,
-                    observation_projection_hash: decision.observation.visible_projection_hash,
+                    observation_projection_hash: observation.visible_projection_hash,
                     diagnostic_state_hash: session.diagnostic_state_hash(),
-                    observation: *decision.observation,
-                    legal_actions: decision.legal_actions,
+                    observation: Box::new(observation.clone()),
+                    legal_actions: legal_actions.clone(),
+                    selected_index: selected_index as u32,
+                    selected_action_id: selected_action_id.clone(),
+                    reward: [0, 0],
+                });
+                policy_records.push(PolicyEpisodeRecordV2::Decision {
+                    schema_version: OBSERVATION_SCHEMA_VERSION,
+                    episode_id,
+                    step: decision.step,
+                    acting_player: decision.acting_player,
+                    observation: Box::new(observation),
+                    legal_actions,
                     selected_index: selected_index as u32,
                     selected_action_id: selected_action_id.clone(),
                     reward: [0, 0],
@@ -990,9 +1272,15 @@ pub fn record_burn_mirror_episode(
             }
             RlSessionResponseV1::Terminal(terminal) => {
                 let summary = terminal.into();
-                push_terminal(&mut records, &summary, session.diagnostic_state_hash());
+                push_terminal(
+                    &mut audit_records,
+                    &summary,
+                    session.diagnostic_state_hash(),
+                );
+                push_policy_terminal(&mut policy_records, &summary);
                 return Ok(EpisodeRunV1 {
-                    records,
+                    audit_records,
+                    policy_records,
                     terminal: summary,
                 });
             }
@@ -1004,17 +1292,23 @@ pub fn build_rollout_records(
     games: u64,
     base_seed: u64,
     max_decisions: u64,
-) -> Result<(Vec<EpisodeRecordV1>, Vec<EpisodeTerminalSummaryV1>)> {
-    let mut all_records = Vec::new();
+) -> Result<(
+    Vec<EpisodeRecordV1>,
+    Vec<PolicyEpisodeRecordV2>,
+    Vec<EpisodeTerminalSummaryV1>,
+)> {
+    let mut audit_records = Vec::new();
+    let mut policy_records = Vec::new();
     let mut summaries = Vec::new();
     for episode_id in 0..games {
         let env_seed = derive_env_seed(base_seed, episode_id);
         let policy_seed = derive_policy_seed(base_seed, episode_id);
         let run = record_burn_mirror_episode(episode_id, env_seed, policy_seed, max_decisions)?;
-        all_records.extend(run.records);
+        audit_records.extend(run.audit_records);
+        policy_records.extend(run.policy_records);
         summaries.push(run.terminal);
     }
-    Ok((all_records, summaries))
+    Ok((audit_records, policy_records, summaries))
 }
 
 pub fn build_run_manifest(
@@ -1044,9 +1338,24 @@ pub fn build_run_manifest(
             policy_seeds: (0..games).map(|episode_id| derive_policy_seed(base_seed, episode_id)).collect(),
         },
         output_files: OutputFilesV1 {
-            episode_jsonl: EPISODE_JSONL_FILENAME.to_string(),
+            policy_episode_jsonl: POLICY_EPISODE_JSONL_FILENAME.to_string(),
+            audit_episode_jsonl: AUDIT_EPISODE_JSONL_FILENAME.to_string(),
             manifest_json: MANIFEST_FILENAME.to_string(),
         },
+        streams: vec![
+            StreamManifestV1 {
+                filename: POLICY_EPISODE_JSONL_FILENAME.to_string(),
+                policy_safe: true,
+                contains_hidden_state_diagnostics: false,
+                description: "model-visible v2 observations, ordered legal actions, selected transport action, rewards, and terminal records only".to_string(),
+            },
+            StreamManifestV1 {
+                filename: AUDIT_EPISODE_JSONL_FILENAME.to_string(),
+                policy_safe: false,
+                contains_hidden_state_diagnostics: true,
+                description: "privileged deterministic audit stream with env/policy seeds and hidden-state diagnostic hashes for parity debugging".to_string(),
+            },
+        ],
         deck: DeckManifestV1 {
             deck_identifiers: deck_identifiers(),
             deck_hashes: [deck_hash, deck_hash],
@@ -1090,11 +1399,13 @@ pub fn git_metadata() -> GitMetadataV1 {
 
 pub fn write_rollout_artifacts(
     out_dir: &Path,
-    records: &[EpisodeRecordV1],
+    audit_records: &[EpisodeRecordV1],
+    policy_records: &[PolicyEpisodeRecordV2],
     manifest: &RunManifestV1,
 ) -> Result<()> {
     fs::create_dir_all(out_dir)?;
-    write_jsonl_atomic(&out_dir.join(EPISODE_JSONL_FILENAME), records)?;
+    write_jsonl_atomic(&out_dir.join(AUDIT_EPISODE_JSONL_FILENAME), audit_records)?;
+    write_jsonl_atomic(&out_dir.join(POLICY_EPISODE_JSONL_FILENAME), policy_records)?;
     write_json_pretty_atomic(&out_dir.join(MANIFEST_FILENAME), manifest)?;
     Ok(())
 }
@@ -1141,6 +1452,7 @@ fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1
         p0_wins: 0,
         p1_wins: 0,
         draws: 0,
+        truncated: 0,
         halted: 0,
         total_decisions: 0,
     };
@@ -1150,6 +1462,7 @@ fn aggregate_summaries(summaries: &[EpisodeTerminalSummaryV1]) -> RunAggregateV1
             TerminalOutcomeV1::P0Win => aggregate.p0_wins += 1,
             TerminalOutcomeV1::P1Win => aggregate.p1_wins += 1,
             TerminalOutcomeV1::Draw => aggregate.draws += 1,
+            TerminalOutcomeV1::Truncated => aggregate.truncated += 1,
             TerminalOutcomeV1::Halted => aggregate.halted += 1,
         }
     }
@@ -1165,11 +1478,28 @@ fn push_terminal(
         schema_version: EPISODE_SCHEMA_VERSION,
         episode_id: summary.episode_id,
         terminal_outcome: summary.outcome,
+        terminal_classification: summary.classification,
         winner: summary.winner,
         terminal_reward: summary.terminal_reward,
         terminal_reason: summary.terminal_reason.clone(),
         decision_count: summary.decision_count,
         diagnostic_state_hash,
+    });
+}
+
+fn push_policy_terminal(
+    records: &mut Vec<PolicyEpisodeRecordV2>,
+    summary: &EpisodeTerminalSummaryV1,
+) {
+    records.push(PolicyEpisodeRecordV2::Terminal {
+        schema_version: OBSERVATION_SCHEMA_VERSION,
+        episode_id: summary.episode_id,
+        terminal_outcome: summary.outcome,
+        terminal_classification: summary.classification,
+        winner: summary.winner,
+        terminal_reward: summary.terminal_reward,
+        terminal_reason: summary.terminal_reason.clone(),
+        decision_count: summary.decision_count,
     });
 }
 
@@ -1216,8 +1546,32 @@ fn public_card(state: &GameState, id: ObjectId) -> Result<CardPublicV1> {
     })
 }
 
+fn public_card_v2(state: &GameState, id: ObjectId) -> Result<CardPublicV2> {
+    let object = state
+        .objects
+        .try_get(id)
+        .ok_or_else(|| RlContractError(format!("object id {} missing", id.0)))?;
+    Ok(CardPublicV2 {
+        stable: card_ref(state, id)?,
+        card_name: card_name(object.card_def),
+        tapped: object.tapped,
+        summoning_sick: object.summoning_sick,
+        damage: object.damage,
+        counters: CountersV1 {
+            plus1_plus1: object.counters.plus1_plus1,
+        },
+        attachments: object.attachments.iter().map(|id| id.0).collect(),
+        plotted_turn: object.plotted_turn,
+        characteristics: card_characteristics_v2(state, id),
+    })
+}
+
 fn public_cards(state: &GameState, ids: &[ObjectId]) -> Result<Vec<CardPublicV1>> {
     ids.iter().map(|&id| public_card(state, id)).collect()
+}
+
+fn public_cards_v2(state: &GameState, ids: &[ObjectId]) -> Result<Vec<CardPublicV2>> {
+    ids.iter().map(|&id| public_card_v2(state, id)).collect()
 }
 
 fn private_card(state: &GameState, id: ObjectId) -> Result<CardPrivateV1> {
@@ -1229,6 +1583,131 @@ fn private_card(state: &GameState, id: ObjectId) -> Result<CardPrivateV1> {
         stable: card_ref(state, id)?,
         card_name: card_name(object.card_def),
     })
+}
+
+fn card_characteristics_v2(state: &GameState, id: ObjectId) -> CardCharacteristicsV2 {
+    let object = state.objects.get(id);
+    let def = &CARD_DEFS[object.card_def as usize];
+    let base_power = def.power.map(i32::from);
+    let base_toughness = def.toughness.map(i32::from);
+    let has_pt = base_power.is_some() || base_toughness.is_some();
+    CardCharacteristicsV2 {
+        type_flags: CardTypeFlagsV2 {
+            land: def.has_type(CardType::Land),
+            creature: def.has_type(CardType::Creature),
+            instant: def.has_type(CardType::Instant),
+            sorcery: def.has_type(CardType::Sorcery),
+            artifact: def.has_type(CardType::Artifact),
+            enchantment: def.has_type(CardType::Enchantment),
+        },
+        base_power,
+        base_toughness,
+        effective_power: has_pt.then(|| engine::effective_power(state, id)),
+        effective_toughness: has_pt.then(|| engine::effective_toughness(state, id)),
+        effective_keywords: KeywordFlagsV2 {
+            flying: engine::has_effective_keyword(state, id, Keywords::FLYING),
+            reach: engine::has_effective_keyword(state, id, Keywords::REACH),
+            haste: engine::has_effective_keyword(state, id, Keywords::HASTE),
+            vigilance: engine::has_effective_keyword(state, id, Keywords::VIGILANCE),
+            trample: engine::has_effective_keyword(state, id, Keywords::TRAMPLE),
+            first_strike: engine::has_effective_keyword(state, id, Keywords::FIRST_STRIKE),
+            double_strike: engine::has_effective_keyword(state, id, Keywords::DOUBLE_STRIKE),
+            deathtouch: engine::has_effective_keyword(state, id, Keywords::DEATHTOUCH),
+            menace: engine::has_effective_keyword(state, id, Keywords::MENACE),
+            defender: engine::has_effective_keyword(state, id, Keywords::DEFENDER),
+        },
+    }
+}
+
+fn combat_public_v2(state: &GameState) -> Result<CombatStatePublicV2> {
+    Ok(CombatStatePublicV2 {
+        attackers_declared: state.engine.combat.attackers_declared,
+        blockers_declared: state.engine.combat.blockers_declared,
+        ordered_attackers: state
+            .engine
+            .combat
+            .attackers
+            .iter()
+            .map(|&id| card_ref(state, id))
+            .collect::<Result<Vec<_>>>()?,
+        attacker_to_ordered_blockers: state
+            .engine
+            .combat
+            .blocked_by
+            .iter()
+            .map(|(attacker, blockers)| {
+                Ok((
+                    card_ref(state, *attacker)?,
+                    blockers
+                        .iter()
+                        .map(|&id| card_ref(state, id))
+                        .collect::<Result<Vec<_>>>()?,
+                ))
+            })
+            .collect::<Result<Vec<_>>>()?,
+    })
+}
+
+fn continuous_effects_public_v2(state: &GameState) -> Result<Vec<ContinuousEffectPublicV2>> {
+    let mut out = Vec::new();
+    for effect in &state.engine.until_end_of_turn {
+        match effect {
+            UntilEndOfTurnEffect::SyntheticMarker(_) => {}
+            UntilEndOfTurnEffect::ResolvedSetEffect {
+                object_ids,
+                layer,
+                timestamp,
+                duration,
+                power,
+                toughness,
+                grant_haste,
+            } => {
+                let duration = match duration {
+                    engine::EffectDuration::EndOfTurn => EffectDurationV2::EndOfTurn,
+                };
+                out.push(ContinuousEffectPublicV2 {
+                    affected_objects: object_ids
+                        .iter()
+                        .map(|&id| card_ref(state, id))
+                        .collect::<Result<Vec<_>>>()?,
+                    layers: layer.0,
+                    timestamp: *timestamp,
+                    duration,
+                    power_delta: *power,
+                    toughness_delta: *toughness,
+                    grants_haste: *grant_haste,
+                });
+            }
+        }
+    }
+    Ok(out)
+}
+
+fn exile_play_permissions_public_v2(state: &GameState) -> Result<Vec<ExilePlayPermissionPublicV2>> {
+    let mut out = Vec::new();
+    for perm in &state.engine.exile_play_permissions {
+        if engine::active_permission_for(perm.holder, perm.object, state).is_none() {
+            continue;
+        }
+        out.push(ExilePlayPermissionPublicV2 {
+            object: card_ref(state, perm.object)?,
+            holder: perm.holder.into(),
+            play_or_cast: match perm.play_or_cast {
+                PlayOrCast::Play => PlayOrCastV2::Play,
+                PlayOrCast::Cast => PlayOrCastV2::Cast,
+            },
+            zone_change_generation: perm.zone_change_generation,
+            expiry: match perm.expiry {
+                PlayPermissionExpiry::EndOfTurn => PlayPermissionExpiryV2::EndOfTurn,
+                PlayPermissionExpiry::UntilHoldersNextTurn {
+                    holder_turn_started,
+                } => PlayPermissionExpiryV2::UntilHoldersNextTurn {
+                    holder_turn_started,
+                },
+            },
+        });
+    }
+    Ok(out)
 }
 
 fn stack_public(state: &GameState) -> Result<Vec<StackItemPublicV1>> {
@@ -1283,6 +1762,31 @@ fn visible_projection_hash(observation: &ObservationV1) -> Result<u64> {
         acting_player: PlayerSeatV1,
         step_index: u64,
         projection: &'a PublicObservationProjectionV1,
+        own_hand: &'a [CardPrivateV1],
+    }
+
+    stable_hash_json(&ObservationHashInput {
+        schema_version: observation.schema_version,
+        kernel_version: &observation.kernel_version,
+        surface_version: observation.surface_version,
+        card_db_hash: observation.card_db_hash,
+        acting_player: observation.acting_player,
+        step_index: observation.step_index,
+        projection: &observation.projection,
+        own_hand: &observation.own_hand,
+    })
+}
+
+fn visible_projection_hash_v2(observation: &ObservationV2) -> Result<u64> {
+    #[derive(Serialize)]
+    struct ObservationHashInput<'a> {
+        schema_version: u32,
+        kernel_version: &'a str,
+        surface_version: u32,
+        card_db_hash: u64,
+        acting_player: PlayerSeatV1,
+        step_index: u64,
+        projection: &'a PublicObservationProjectionV2,
         own_hand: &'a [CardPrivateV1],
     }
 
@@ -1388,7 +1892,7 @@ fn fnv1a64(bytes: &[u8]) -> u64 {
     hash
 }
 
-fn write_jsonl_atomic(path: &Path, records: &[EpisodeRecordV1]) -> Result<()> {
+fn write_jsonl_atomic<T: Serialize>(path: &Path, records: &[T]) -> Result<()> {
     write_atomic(path, |writer| {
         for record in records {
             serde_json::to_writer(&mut *writer, record)?;

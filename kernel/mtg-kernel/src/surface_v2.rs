@@ -77,6 +77,7 @@ use crate::state::{GameState, Step};
 pub use crate::surface::{
     harness_never_offers_priority, Suppression, SuppressionReason, SurfaceAction, SurfaceDecision,
 };
+use serde::{Deserialize, Serialize};
 
 /// Predicate version. `HarnessSurfaceV1` is version 1 (`H1_PREDICATE_VERSION`,
 /// `surface.rs`); this is the second, versioned independently per that
@@ -248,6 +249,53 @@ struct BlockersReshape {
     remaining: std::collections::VecDeque<(ObjectId, Vec<ObjectId>)>,
     accumulated: Vec<(ObjectId, ObjectId)>,
     current_attacker: Option<ObjectId>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct HarnessSurfacePublicContextV2 {
+    pub blockers: Option<BlockersReshapePublicV2>,
+    pub discard: Option<DiscardReshapePublicV2>,
+    pub optional_cost: Option<OptionalCostReshapePublicV2>,
+    pub combat_priority_spent: [bool; 2],
+    pub combat_priority_round_seen: Option<u64>,
+    pub combat_priority_stack_len_seen: usize,
+    pub combat_priority_mana_count_seen: u64,
+    pub combat_round_opening_mana_count: u64,
+    pub round_opening_stack_len: usize,
+    pub stack_len_round_seen: Option<u64>,
+    pub last_seen_stack_len: Option<usize>,
+    pub mana_count_at_last_stack_change: u64,
+    pub madness_cast_reprompt_exemption: Option<ObjectId>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct BlockersReshapePublicV2 {
+    pub current_attacker: Option<ObjectId>,
+    pub accumulated: Vec<(ObjectId, ObjectId)>,
+    pub remaining: Vec<(ObjectId, Vec<ObjectId>)>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct DiscardReshapePublicV2 {
+    pub player: PlayerId,
+    pub chosen: Vec<ObjectId>,
+    pub remaining_choices: Vec<ObjectId>,
+    pub remaining_needed: u32,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum OptionalCostStagePublicV2 {
+    Use,
+    Which,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct OptionalCostReshapePublicV2 {
+    pub player: PlayerId,
+    pub discard_payable: bool,
+    pub sacrifice_payable: bool,
+    pub stage: OptionalCostStagePublicV2,
 }
 
 /// H2's decomposition of the engine's one-shot `Decision::Discard { count,
@@ -579,6 +627,41 @@ fn walk_decision_tag(decision: &Decision) -> String {
 impl HarnessSurfaceV2 {
     pub fn new() -> HarnessSurfaceV2 {
         HarnessSurfaceV2::default()
+    }
+
+    pub fn public_context(&self) -> HarnessSurfacePublicContextV2 {
+        HarnessSurfacePublicContextV2 {
+            blockers: self.blockers.as_ref().map(|b| BlockersReshapePublicV2 {
+                current_attacker: b.current_attacker,
+                accumulated: b.accumulated.clone(),
+                remaining: b.remaining.iter().cloned().collect(),
+            }),
+            discard: self.discard.as_ref().map(|d| DiscardReshapePublicV2 {
+                player: d.player,
+                chosen: d.chosen.clone(),
+                remaining_choices: d.remaining_choices.clone(),
+                remaining_needed: d.remaining_needed,
+            }),
+            optional_cost: self.optional_cost.map(|o| OptionalCostReshapePublicV2 {
+                player: o.player,
+                discard_payable: o.discard_payable,
+                sacrifice_payable: o.sacrifice_payable,
+                stage: match o.stage {
+                    OptionalCostStage::Use => OptionalCostStagePublicV2::Use,
+                    OptionalCostStage::Which => OptionalCostStagePublicV2::Which,
+                },
+            }),
+            combat_priority_spent: self.combat_priority_spent,
+            combat_priority_round_seen: self.combat_priority_round_seen,
+            combat_priority_stack_len_seen: self.combat_priority_stack_len_seen,
+            combat_priority_mana_count_seen: self.combat_priority_mana_count_seen,
+            combat_round_opening_mana_count: self.combat_round_opening_mana_count,
+            round_opening_stack_len: self.round_opening_stack_len,
+            stack_len_round_seen: self.stack_len_round_seen,
+            last_seen_stack_len: self.last_seen_stack_len,
+            mana_count_at_last_stack_change: self.mana_count_at_last_stack_change,
+            madness_cast_reprompt_exemption: self.madness_cast_reprompt_exemption,
+        }
     }
 
     /// Every auto-resolution performed so far, in the order they happened.
