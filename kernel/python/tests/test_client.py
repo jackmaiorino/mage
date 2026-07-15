@@ -1,0 +1,105 @@
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+from mtg_kernel_rl.client import EnvProcessError, KernelRlClient, ProtocolError, strict_json_loads
+
+from fixtures import fake_launcher
+
+
+class ClientStrictnessTest(unittest.TestCase):
+    def make_client(self, scenario: str, timeout_s: float = 1.0) -> KernelRlClient:
+        self.tmp = tempfile.TemporaryDirectory()
+        launcher = fake_launcher(Path(self.tmp.name), scenario)
+        return KernelRlClient(launcher, timeout_s=timeout_s)
+
+    def assert_reset_protocol_error(self, scenario: str) -> None:
+        client = self.make_client(scenario, timeout_s=0.2 if scenario == "timeout" else 1.0)
+        try:
+            with self.assertRaises((ProtocolError, EnvProcessError)):
+                client.reset(episode_id=0, env_seed=1, max_decisions=8)
+        finally:
+            client.close()
+            self.tmp.cleanup()
+
+    def test_duplicate_keys_rejected(self) -> None:
+        with self.assertRaises(ProtocolError):
+            strict_json_loads('{"a":1,"a":2}')
+        self.assert_reset_protocol_error("duplicate_keys")
+
+    def test_nonfinite_json_rejected(self) -> None:
+        self.assert_reset_protocol_error("nonfinite_json")
+
+    def test_stdout_noise_rejected(self) -> None:
+        self.assert_reset_protocol_error("noise")
+
+    def test_timeout_rejected_and_cleanup_is_idempotent(self) -> None:
+        client = self.make_client("timeout", timeout_s=0.1)
+        with self.assertRaises(EnvProcessError):
+            client.reset(episode_id=0, env_seed=1, max_decisions=8)
+        client.close()
+        client.close()
+        self.tmp.cleanup()
+
+    def test_eof_nonzero_rejected(self) -> None:
+        self.assert_reset_protocol_error("eof_nonzero")
+
+    def test_extra_and_missing_fields_rejected(self) -> None:
+        self.assert_reset_protocol_error("extra_field")
+        self.assert_reset_protocol_error("missing_field")
+
+    def test_bool_as_int_rejected(self) -> None:
+        self.assert_reset_protocol_error("bool_int")
+
+    def test_episode_and_step_drift_rejected(self) -> None:
+        self.assert_reset_protocol_error("episode_drift")
+        self.assert_reset_protocol_error("step_drift")
+
+    def test_legal_action_integrity_rejected(self) -> None:
+        for scenario in ("empty_actions", "noncontiguous_actions", "duplicate_actions"):
+            self.assert_reset_protocol_error(scenario)
+
+    def test_nonzero_intermediate_reward_rejected(self) -> None:
+        self.assert_reset_protocol_error("nonzero_reward")
+
+    def test_provenance_drift_rejected(self) -> None:
+        client = self.make_client("provenance_drift")
+        try:
+            decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            action = decision.legal_actions[0]
+            with self.assertRaises(ProtocolError):
+                client.step(action["selected_index"], action["stable_id"])
+        finally:
+            client.close()
+            self.tmp.cleanup()
+
+    def test_invalid_halted_and_truncated_terminal_rejected(self) -> None:
+        for scenario in ("invalid_terminal", "halted_terminal", "truncated_terminal"):
+            client = self.make_client(scenario)
+            try:
+                decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
+                action = decision.legal_actions[0]
+                with self.assertRaises(ProtocolError):
+                    client.step(action["selected_index"], action["stable_id"])
+            finally:
+                client.close()
+                self.tmp.cleanup()
+
+    def test_natural_terminal_is_admitted_and_sequential_reset_supported(self) -> None:
+        client = self.make_client("valid")
+        try:
+            decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            terminal = client.step(decision.legal_actions[0]["selected_index"], decision.legal_actions[0]["stable_id"])
+            self.assertEqual(terminal.terminal_outcome, "p0_win")
+            decision2 = client.reset(episode_id=1, env_seed=2, max_decisions=8)
+            self.assertEqual(decision2.episode_id, 1)
+            self.assertEqual(decision2.step, 0)
+        finally:
+            client.close()
+            self.tmp.cleanup()
+
+
+if __name__ == "__main__":
+    unittest.main()

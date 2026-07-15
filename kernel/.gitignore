@@ -1,0 +1,6 @@
+/target/
+/.ruff_cache/
+/.mypy_cache/
+/.pytest_cache/
+/*.egg-info/
+python/*.egg-info/

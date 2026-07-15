@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mtg-kernel-rl"
+version = "0.1.0"
+description = "Strict Python RL client and deterministic runner for the MTG kernel JSONL environment"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.2,<3"]
+
+[project.scripts]
+mtg-kernel-rl = "mtg_kernel_rl.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "python"}
+
+[tool.setuptools.packages.find]
+where = ["python"]
+include = ["mtg_kernel_rl*"]
