@@ -90,20 +90,30 @@ fn main() {
 
     // --- Gate 1: corpus provenance (see this file's module doc, point 5) ---
     match load_manifest(&root) {
-        Some(manifest) => match mtg_kernel::surface_v2::verify_corpus_provenance(&manifest.java_oracle_commit) {
-            Ok(()) => println!(
-                "provenance check: PASS (manifest java_oracle_commit={} == H2_JAVA_ORACLE_COMMIT, corpus={} status={})",
-                manifest.java_oracle_commit, manifest.corpus, manifest.status
-            ),
-            Err(e) => {
-                eprintln!("PROVENANCE CHECK FAILED -- refusing to replay:\n{e}");
-                std::process::exit(1);
+        Some(manifest) => {
+            match mtg_kernel::surface_v2::verify_corpus_provenance(&manifest.java_oracle_commit) {
+                Ok(()) => println!(
+                    "provenance check: PASS (manifest java_oracle_commit={} == H2_JAVA_ORACLE_COMMIT, corpus={} status={})",
+                    manifest.java_oracle_commit, manifest.corpus, manifest.status
+                ),
+                Err(e) => {
+                    eprintln!("PROVENANCE CHECK FAILED -- refusing to replay:\n{e}");
+                    std::process::exit(1);
+                }
             }
-        },
+            let skip_compensation = manifest.reference_rules_version >= 2;
+            SKIP_V1_EXILED_EVER_COMPENSATION.store(skip_compensation, std::sync::atomic::Ordering::Relaxed);
+            println!(
+                "reference_rules_version={} -> v1 exiled_ever library-size compensation {}",
+                manifest.reference_rules_version,
+                if skip_compensation { "SKIPPED (v2 corpus)" } else { "APPLIED (v1/legacy corpus)" }
+            );
+        }
         None => {
             eprintln!(
                 "WARNING: no readable manifest.json at {}; skipping provenance check \
-                 (not a hard failure -- but replay results against an unverified corpus carry no provenance guarantee).",
+                 (not a hard failure -- but replay results against an unverified corpus carry no provenance guarantee). \
+                 reference_rules_version unknown -- defaulting to v1 exiled_ever compensation APPLIED.",
                 root.display()
             );
         }
@@ -291,6 +301,16 @@ struct CorpusManifest {
     java_oracle_commit: String,
     corpus: String,
     status: String,
+    /// `reference_rules_version` (ReferenceRules v2 addendum, Sol #106/#107).
+    /// Absent on every pre-v2 manifest (burn_mirror_v1-v5, rally_mirror_v1,
+    /// rally_vs_burn_v1, rallymirror_gen1-3) -- absence means `1` (bug-
+    /// compatible), per the addendum's own "safe default" rule. `2` means
+    /// the Java-side library zone-duplication bug (Sol #106) is fixed:
+    /// `rec.library`/`rec.library_size` now shrinks exactly when a real
+    /// zone-change effect (impulse-draw exile, mill, search) removes a card,
+    /// same instant, no lag -- see `SKIP_V1_EXILED_EVER_COMPENSATION`'s doc
+    /// for why this changes `check_state`'s library-size check.
+    reference_rules_version: i64,
 }
 
 fn load_manifest(root: &Path) -> Option<CorpusManifest> {
@@ -300,8 +320,42 @@ fn load_manifest(root: &Path) -> Option<CorpusManifest> {
         java_oracle_commit: v.get("java_oracle_commit")?.as_str()?.to_string(),
         corpus: v.get("corpus").and_then(|x| x.as_str()).unwrap_or("?").to_string(),
         status: v.get("status").and_then(|x| x.as_str()).unwrap_or("?").to_string(),
+        reference_rules_version: v.get("reference_rules_version").and_then(|x| x.as_i64()).unwrap_or(1),
     })
 }
+
+/// Set once in `main()` after reading the corpus's own `manifest.json`
+/// (defaults to `false`, i.e. v1 compensation ON, for every call path that
+/// never sets it -- unit tests in this file's own `tests` module construct
+/// `ReplayCtx` directly without going through `main()`'s manifest gate, and
+/// preserving their existing pre-v2 expectations is deliberate, not an
+/// oversight).
+///
+/// `check_state`'s `zone-size-mismatch:library` check compensates for a
+/// real, documented v1-era trace-format gap: `rec.library`/`rec.library_size`
+/// (the Java trace's own logged field) did not shrink when an impulse-draw
+/// effect exiled a card off the library, because the underlying Java bug
+/// (Sol #106, `reference_rules_v2_addendum.md`) left that card's recorded
+/// zone stuck at `Zone.OUTSIDE`, so `CardImpl.removeFromZone`'s `OUTSIDE`
+/// branch silently no-op'd the physical `Library.remove` call the trace's
+/// own zone-size logging depends on -- the card was gone from the kernel's
+/// count but Java's own logged `library_size` never dropped to match. `ctx.
+/// exiled_ever` compensates for exactly that gap by manually adding back
+/// what Java's trace failed to subtract.
+///
+/// Once the Java bug is fixed (`reference_rules_version: 2`), `rec.library`
+/// genuinely shrinks the instant a real zone-change effect removes a card --
+/// there is no more gap to compensate for. Applying the v1 compensation to a
+/// v2 corpus anyway DOUBLE-corrects: it adds back a count Java's own trace
+/// already subtracted, producing a `kernel_lib + exiled_ever` sum that is
+/// systematically too high by exactly the impulse-exiled count. Confirmed
+/// empirically this session: uncompensated `rally_mirror_v2` (skip=true)
+/// scores far closer to Burn-grade than compensated (skip=false) on the same
+/// corpus -- see `rally/coverage_ledger.md`'s ReferenceRules v2 entry for the
+/// exact before/after scoreboard. This is exactly the transition the
+/// addendum's own "New manifest.json field" section warned a v2-aware
+/// replay driver must make.
+static SKIP_V1_EXILED_EVER_COMPENSATION: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 // ==================== corpus invariant validation ====================
 
@@ -763,6 +817,9 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
     let lib0 = card_ids_for(opening0.hand.iter().chain(opening0.library.iter()))?;
     let lib1 = card_ids_for(opening1.hand.iter().chain(opening1.library.iter()))?;
 
+    if std::env::var("REPLAY_DEBUG").is_ok() {
+        eprintln!("=== TRACE {} ===", t.source_path);
+    }
     let mut state = GameState::new_from_libraries(&lib0, &lib1, |id| CARD_DEFS[id as usize].name.to_string(), t.header.seed);
     for _ in 0..opening0.hand.len() {
         state.draw_card(PlayerId::P0);
@@ -1283,16 +1340,28 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
     // source: a permission can be granted *and* expire between two
     // `check_state` polls with no decision for this player in between,
     // silently under-counting).
-    let player_exiled_ever = ctx.exiled_ever.iter().filter(|&&(_, owner)| owner == player).count();
+    // ReferenceRules v2 (Sol #106/#107): once the Java-side library
+    // zone-duplication bug is fixed, `rec.library` shrinks exactly when a
+    // real zone-change effect removes a card -- no more compensation needed,
+    // and applying the v1 compensation anyway double-corrects (adds back a
+    // count Java's own trace already subtracted). See
+    // `SKIP_V1_EXILED_EVER_COMPENSATION`'s doc for the full mechanism.
+    let skip_compensation = SKIP_V1_EXILED_EVER_COMPENSATION.load(std::sync::atomic::Ordering::Relaxed);
+    let player_exiled_ever = if skip_compensation {
+        0
+    } else {
+        ctx.exiled_ever.iter().filter(|&&(_, owner)| owner == player).count()
+    };
     if ps.library.len() + player_exiled_ever != rec.library.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
             eprintln!(
-                "LIBRARY MISMATCH decision_number={} player={} action={} kernel_lib={} kernel_exiled_ever_by_player={} trace_lib={} kernel_exile_now={:?} trace_hand={:?}",
+                "LIBRARY MISMATCH decision_number={} player={} action={} kernel_lib={} kernel_exiled_ever_by_player={} (compensation {}) trace_lib={} kernel_exile_now={:?} trace_hand={:?}",
                 rec.decision_number,
                 rec.player,
                 rec.action_type,
                 ps.library.len(),
                 player_exiled_ever,
+                if skip_compensation { "SKIPPED" } else { "APPLIED" },
                 rec.library.len(),
                 state.exile.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
                 rec.hand,
@@ -1475,18 +1544,23 @@ fn apply_cast_spell_or_pass(
 
     let trace_ids = translate_object_candidates(rec, id_map, "CastSpellOrPass")?;
     let mut trace_keys = Vec::with_capacity(trace_ids.len());
-    for (id, text) in trace_ids.iter().zip(rec.candidate_texts.iter()) {
+    for ((id, text), uuid) in trace_ids.iter().zip(rec.candidate_texts.iter()).zip(rec.candidate_object_ids.iter()) {
         let key = match id {
             None => "pass".to_string(),
             Some(oid) => candidate_key(state, *oid, text, land_drops, castable_spells, mana_abilities, activatable_abilities, plot_actions).ok_or_else(|| {
                 if std::env::var("REPLAY_DEBUG").is_ok() {
                     eprintln!(
-                        "NOT-IN-BUCKET decision_number={} text={text:?} object_name={:?} kernel_castable={:?} kernel_land={:?} kernel_mana={:?}",
+                        "NOT-IN-BUCKET decision_number={} text={text:?} trace_uuid={uuid} object_id={} object_name={:?} object_zone={:?} object_owner={:?} object_tapped={} exile_perms={:?} kernel_castable={:?} kernel_land={:?} kernel_mana={:?}",
                         rec.decision_number,
+                        oid.0,
                         state.objects.get(*oid).name,
-                        castable_spells.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
-                        land_drops.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
-                        mana_abilities.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
+                        state.objects.get(*oid).zone,
+                        state.objects.get(*oid).owner,
+                        state.objects.get(*oid).tapped,
+                        state.engine.exile_play_permissions.iter().map(|p| format!("{}({})=holder:{:?},expiry:{:?}", state.objects.get(p.object).name, p.object.0, p.holder, p.expiry)).collect::<Vec<_>>(),
+                        castable_spells.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
+                        land_drops.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
+                        mana_abilities.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
                     );
                 }
                 "trace-candidate-not-in-any-kernel-bucket:CastSpellOrPass".to_string()

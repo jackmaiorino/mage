@@ -152,14 +152,65 @@ pub const H2_PREDICATE_VERSION: u32 = 2;
 ///   checkpoint-reentry invariant. Read by no code this predicate or driver
 ///   depends on.
 ///
-/// This session's own uncommitted prerequisite diff on top of
+/// The prior session's own uncommitted prerequisite diff on top of
 /// `9e92e240193` (see `rally_mirror_v1/manifest.json`'s `working_tree_diff`:
 /// `ComputerPlayerRL.stableBattlefieldPosition`, a same-createOrder-batch
 /// tie-break fix in `sortTargetsForStableChoice`) is the same "determinism-
 /// improving, not decision-content-changing" category as `e3e29e92a48`
 /// above: it changes *which specific same-name candidate a tied index maps
 /// to* in a run-stable way, never what candidates are offered or how many.
-pub const H2_JAVA_ORACLE_COMMIT: &str = "9e92e240193170626ea4530ab048873889911b68";
+/// That diff was committed as part of `9e92e240193` itself (see its own
+/// commit body); nothing further to audit for it.
+///
+/// **Re-pinned again for ReferenceRules v2** (`burn_mirror_v6`,
+/// `local-training/kernel_oracle/burn_mirror_v6/manifest.json`'s
+/// `java_oracle_commit`: `0723fc0c2be922af47b0ef0539f28114cc23b998`, "Mage:
+/// zone-reconciliation fix + fail-fast invariants (Sol #106 / ReferenceRules
+/// v2)"). Unlike every prior re-pin above, this commit touches NONE of
+/// `ComputerPlayerRL.java`'s `chooseTarget`/`genericChoose`/`priorityPlay`/
+/// `selectAttackers`/`selectBlockers` (confirmed: `git log --format=%H -1 -1
+/// -- .../ComputerPlayerRL.java` from `9e92e240193` through this commit is
+/// unchanged at `9e92e240193` itself -- ComputerPlayerRL.java was not
+/// touched), so it would not even surface via this doc's usual audit method
+/// of walking that file's own history. It instead changes three core-engine
+/// files this predicate does NOT cite directly but whose correctness this
+/// driver silently assumes: `GameImpl.java` (a new `init()` reconciliation
+/// step that re-zones every physically-present, still-undrawn library card
+/// to `Zone.LIBRARY`, order-independent of `addPlayer`/`loadCards` call
+/// order), `ZonesHandler.java` (wires a new fail-fast check at the
+/// zone-change commit point), and the new `ZoneInvariants.java` (the
+/// fail-fast utility itself, diagnostic-only -- see its own doc). Root bug
+/// fixed: `GameState.addCard` zones every loaded card `OUTSIDE`, and nothing
+/// previously re-zoned an undrawn library card to `LIBRARY` before the RL
+/// harness's own (reversed, `addPlayer` then `loadCards`) call order left it
+/// stuck there; any zone-routed effect moving such a card out of the library
+/// (impulse-draw exile, mill, search-into-hand, land fetch) then hit
+/// `CardImpl.removeFromZone`'s `OUTSIDE` branch, which no-ops the physical
+/// container removal -- duplicating the card. Plain draws
+/// (`Library.drawFromTop`/`drawFromBottom`) never consult the recorded zone
+/// at all (direct `Deque.pollFirst()`/`pollLast()`, zone set to `HAND`
+/// explicitly afterward), so they were always immune regardless of this bug.
+///
+/// **Whether this re-pin is inert for THIS predicate is corpus-dependent, not
+/// universally true like the re-pins above** -- this is the one commit in
+/// this doc's history that can change decision content, for any deck whose
+/// pool contains a card that routes a library card out via `ZonesHandler`
+/// (see `local-training/kernel_oracle/reference_rules_v2_addendum.md`'s
+/// pool-wide static audit table). `burn_mirror_v6`'s own H2 replay-gate
+/// result (39/40 replayed clean, 1 pre-existing classified divergence,
+/// identical scoreboard shape to `burn_mirror_v5`) confirms it is inert for
+/// **Mono-Red Burn specifically**: that deck's pool has zero cards on the
+/// audit table's "Affected" list (no impulse-draw/mill/search-into-hand/land-
+/// fetch effect anywhere in `Deck - Mono-Red Burn.dek`), so the reconciled
+/// zone value is never queried before a card is drawn and this fix is a
+/// pure no-op for Burn's own decision stream. It is explicitly NOT expected
+/// to be inert for Mono Red Rally (Reckless Impulse, Experimental
+/// Synthesizer, Clockwork Percussionist all on the "Affected" list) --
+/// re-verify this predicate's citations again before trusting an H2 replay
+/// against any `rally_mirror_v2`/`rally_vs_burn_v2`-class corpus minted at
+/// this commit or later; do not assume this re-pin's Burn-clean result
+/// transfers.
+pub const H2_JAVA_ORACLE_COMMIT: &str = "0723fc0c2be922af47b0ef0539f28114cc23b998";
 
 /// Checks a corpus's own `manifest.json`-recorded `java_oracle_commit`
 /// against `H2_JAVA_ORACLE_COMMIT`, "failing loudly" (a descriptive `Err`,

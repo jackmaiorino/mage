@@ -477,6 +477,20 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                 let Some(&top) = state.players[ctx.controller.index()].library.first() else {
                     break; // library ran dry partway through -- not a draw, no loss condition
                 };
+                if std::env::var("REPLAY_DEBUG_IMPULSE").is_ok() {
+                    eprintln!(
+                        "IMPULSE_DRAW controller={:?} source={:?} exiling id={} name={:?} turn={} round_step={:?} lib_remaining_before={} hand_size={} priority_round={}",
+                        ctx.controller,
+                        state.objects.get(ctx.source).name,
+                        top.0,
+                        state.objects.get(top).name,
+                        state.turn,
+                        state.step,
+                        state.players[ctx.controller.index()].library.len(),
+                        state.players[ctx.controller.index()].hand.len(),
+                        state.engine.priority_round,
+                    );
+                }
                 event::propose_and_commit(state, event::ProposedEvent::zone_change(top, Zone::Exile));
                 let expiry = match duration {
                     ImpulseDuration::EndOfTurn => crate::engine::PlayPermissionExpiry::EndOfTurn,

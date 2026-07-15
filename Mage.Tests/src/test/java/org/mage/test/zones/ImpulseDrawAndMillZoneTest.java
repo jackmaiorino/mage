@@ -39,6 +39,15 @@ import java.util.UUID;
  * closest existing analog: 3 methods, ~35s total), so running this file (plus the
  * companion {@link ZoneReconciliationOrderingTest}) is the right-sized verification,
  * not a targeted-outside-Mage.Tests harness.
+ * <p>
+ * ReferenceRules v2 addendum (Sol #107): the pool-wide static audit in
+ * {@code reference_rules_v2_addendum.md} named two more affected mechanism families
+ * not yet covered above - reveal/select-to-hand (Winding Way / Lead the Stampede
+ * shape: reveal top N, split some to hand and the rest elsewhere) and library land
+ * fetch (Cleansing Wildfire shape: search library, put directly onto the
+ * battlefield, not hand). {@link #testWindingWayRevealSplitsCorrectlyBetweenHandAndGraveyard()}
+ * and {@link #testCleansingWildfireLandFetchLeavesNoLibraryDuplicate()} close those
+ * two families; impulse-draw exile and self-mill were already covered above.
  */
 public class ImpulseDrawAndMillZoneTest extends CardTestPlayerBase {
 
@@ -252,5 +261,82 @@ public class ImpulseDrawAndMillZoneTest extends CardTestPlayerBase {
             // restore, so assertAllCommandsUsed()/game teardown doesn't trip on it
             currentGame.getState().setZone(memnite.getId(), Zone.LIBRARY);
         }
+    }
+
+    /**
+     * "Reveal/select-to-hand" family (Winding Way shape, also Lead the Stampede's
+     * shape): revealing the top N library cards and routing a SUBSET to hand while
+     * the rest goes elsewhere is a single {@code WindingWayEffect.apply} call that
+     * issues two separate {@code player.moveCards(..., zone, ...)} calls against
+     * disjoint card subsets of the same reveal - exactly the "moves a library card
+     * out to a non-library zone" shape the bug's mechanism note calls out, on BOTH
+     * branches at once. Every one of the 4 revealed cards must leave the library
+     * exactly once, whichever branch (hand or graveyard) it lands in - none may stay
+     * behind as a duplicate.
+     */
+    @Test
+    public void testWindingWayRevealSplitsCorrectlyBetweenHandAndGraveyard() {
+        skipInitShuffling();
+        // top 4 revealed cards: 2 creatures (-> hand), 2 non-creature instants (-> graveyard).
+        // Deliberately NOT using basic land names here: CardTestPlayerBase pads a test
+        // deck's own library out with extra basic Mountains, so a library-count assertion
+        // on "Mountain"/other-basic-land names would silently count padding cards too
+        // (confirmed empirically this session - not a false pass, a wrong assertion).
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerA, "Counterspell", 1);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 1);
+        addCard(Zone.LIBRARY, playerA, "Elvish Mystic", 1); // top
+        addCard(Zone.HAND, playerA, "Winding Way", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Winding Way");
+        setChoice(playerA, "Yes"); // chooseUse(trueText="Creature", falseText="Land") -> choose Creature
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLibraryCount(playerA, "Elvish Mystic", 0);
+        assertLibraryCount(playerA, "Grizzly Bears", 0);
+        assertLibraryCount(playerA, "Lightning Bolt", 0);
+        assertLibraryCount(playerA, "Counterspell", 0);
+        assertHandCount(playerA, "Elvish Mystic", 1);
+        assertHandCount(playerA, "Grizzly Bears", 1);
+        assertGraveyardCount(playerA, "Lightning Bolt", 1);
+        assertGraveyardCount(playerA, "Counterspell", 1);
+    }
+
+    /**
+     * "Library land fetch" family (Cleansing Wildfire shape, also every Spy Combo
+     * fetch land - Land Grant, Gatecreeper Vine, Sagu Wildling): search the library
+     * for a card and move it directly onto the BATTLEFIELD, not hand - a different
+     * destination zone than every other test in this class, still routed through
+     * the same {@code ZonesHandler}-dispatched {@code player.moveCards} call. The
+     * searched card must leave the library exactly once and appear on the
+     * battlefield exactly once, never both.
+     */
+    @Test
+    public void testCleansingWildfireLandFetchLeavesNoLibraryDuplicate() {
+        skipInitShuffling();
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1); // target of the destroy half
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Cleansing Wildfire", 1);
+        addCard(Zone.LIBRARY, playerA, "Forest", 1); // the only basic land in the library - unambiguous search result
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 1); // control: untouched by this effect
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cleansing Wildfire");
+        addTarget(playerA, "Swamp"); // 1st target request: TargetLandPermanent (destroy)
+        setChoice(playerA, true); // "Search your library for a basic land card?" -> yes
+        addTarget(playerA, "Forest"); // 2nd target request: TargetCardInLibrary (the search itself)
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Swamp", 1);
+        assertPermanentCount(playerA, "Swamp", 0);
+        assertLibraryCount(playerA, "Forest", 0);
+        assertPermanentCount(playerA, "Forest", 1);
+        assertLibraryCount(playerA, "Grizzly Bears", 1);
     }
 }
