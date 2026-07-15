@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +15,7 @@ from mtg_kernel_rl.artifacts import (
     write_json_atomic,
 )
 from mtg_kernel_rl.artifact_io import MAX_SMALL_JSON_BYTES, read_authoritative_json, validate_training_json_privacy
+from mtg_kernel_rl.path_safety import atomic_quarantine, mkdir_no_follow
 
 
 class ArtifactTest(unittest.TestCase):
@@ -116,6 +119,14 @@ class ArtifactTest(unittest.TestCase):
 
     def test_privacy_scan_rejects_cross_platform_absolute_paths_without_version_false_positives(self) -> None:
         positives = [
+            "/",
+            "/a",
+            "/data/run",
+            "/gpfs/project/run",
+            "/lustre/project/run",
+            "/srv/mage/run",
+            "/Applications/My App/run",
+            "prefix /data/run/root",
             "/home/jack/mage",
             "prefix /tmp/run/root",
             "C:\\Users\\Jack\\IdeaProjects\\mage",
@@ -138,6 +149,69 @@ class ArtifactTest(unittest.TestCase):
         for value in negatives:
             with self.subTest(value=value):
                 validate_training_json_privacy({"metadata": value})
+
+    def test_quarantine_and_mkdir_no_follow_preserve_external_link_sentinels(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            root = tmp / "root"
+            outside = tmp / "outside"
+            root.mkdir()
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"unchanged")
+
+            def assert_sentinel() -> None:
+                self.assertEqual(sentinel.read_bytes(), b"unchanged")
+
+            if hasattr(os, "symlink"):
+                link = root / "link"
+                try:
+                    os.symlink(outside, link, target_is_directory=True)
+                except (OSError, NotImplementedError):
+                    link = None  # type: ignore[assignment]
+                if link is not None:
+                    with self.assertRaises(ValueError):
+                        mkdir_no_follow(link / "nested", parents=True, exist_ok=True)
+                    assert_sentinel()
+                    victim = root / "victim.txt"
+                    victim.write_bytes(b"x")
+                    q = root / ".quarantine"
+                    os.symlink(outside, q, target_is_directory=True)
+                    with self.assertRaises(ValueError):
+                        atomic_quarantine(root, victim, "reason")
+                    self.assertTrue(victim.exists())
+                    assert_sentinel()
+                    q.unlink()
+
+            if os.name == "nt":
+                junction = root / "junction"
+                completed = subprocess.run(
+                    ["cmd", "/c", "mklink", "/J", str(junction), str(outside)],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+                if completed.returncode != 0:
+                    self.fail("Windows junction coverage could not create mklink /J")
+                with self.assertRaises(ValueError):
+                    mkdir_no_follow(junction / "nested", parents=True, exist_ok=True)
+                assert_sentinel()
+                os.rmdir(junction)
+                victim = root / "victim-junction.txt"
+                victim.write_bytes(b"x")
+                q = root / ".quarantine"
+                completed = subprocess.run(
+                    ["cmd", "/c", "mklink", "/J", str(q), str(outside)],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+                if completed.returncode != 0:
+                    self.fail("Windows quarantine junction coverage could not create mklink /J")
+                with self.assertRaises(ValueError):
+                    atomic_quarantine(root, victim, "reason")
+                self.assertTrue(victim.exists())
+                assert_sentinel()
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import os
 import stat
 from pathlib import Path
 
-from .path_safety import canonical_identity
+from .path_safety import lock_file_path, physical_output_identity
 
 
 class OutputLockError(RuntimeError):
@@ -16,11 +16,11 @@ class OutputLockError(RuntimeError):
 
 class OutputLock:
     def __init__(self, out_dir: str | Path):
-        self.identity = canonical_identity(out_dir)
+        physical = physical_output_identity(out_dir)
+        self.identity = physical.identity
         self.digest = hashlib.sha256(self.identity.encode("utf-8")).hexdigest()
-        parent = Path(os.path.abspath(os.fspath(out_dir))).parent
-        parent.mkdir(parents=True, exist_ok=True)
-        self.path = parent / f".mtg-kernel-train-{self.digest}.lock"
+        self.display_path = physical.display_path
+        self.path = lock_file_path(physical.lock_parent, self.identity)
         self._fd: int | None = None
 
     def __enter__(self) -> "OutputLock":

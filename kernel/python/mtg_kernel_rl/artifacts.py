@@ -65,7 +65,7 @@ def _tmp_path(path: Path) -> Path:
 
 def write_bytes_atomic(path: str | Path, data: bytes) -> None:
     path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(path.parent, parents=True, exist_ok=True)
     tmp = _tmp_path(path)
     try:
         with tmp.open("xb") as fh:
@@ -75,8 +75,10 @@ def write_bytes_atomic(path: str | Path, data: bytes) -> None:
             inject_fault("json_flush", tmp)
             os.fsync(fh.fileno())
             inject_fault("json_fsync", tmp)
+        inject_fault("json_replace_before", path)
         atomic_replace(tmp, path)
         fsync_dir(path.parent)
+        inject_fault("json_replace_after", path)
     finally:
         if tmp.exists():
             try:
@@ -101,8 +103,7 @@ def require_new_or_empty_dir(path: str | Path) -> Path:
             raise FileExistsError(f"{path} exists and is not a directory")
         if any(scandir_no_follow(path)):
             raise FileExistsError("fresh training output directory must be new or empty")
-    path.mkdir(parents=True, exist_ok=True)
-    mkdir_no_follow(path, parents=False, exist_ok=True)
+    mkdir_no_follow(path, parents=True, exist_ok=True)
     return path
 
 

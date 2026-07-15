@@ -25,6 +25,7 @@ from .artifacts import (
     inject_fault,
     latest_path,
     read_authoritative_json,
+    read_json_file,
     rebuild_derived_caches,
     require_new_or_empty_dir,
     sha256_bytes,
@@ -81,7 +82,7 @@ from .path_safety import (
     scandir_no_follow,
 )
 
-RUN_SCHEMA = "kernel_rl_train_run/v3"
+RUN_SCHEMA = "kernel_rl_train_run/v4"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
@@ -197,7 +198,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
     from . import artifact_io as json_contract
 
     return {
-        "schema": "kernel_rl_artifact_boundary/v1",
+        "schema": "kernel_rl_artifact_boundary/v2",
         "format": {
             "checkpoint_container": "torch-zip",
             "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
@@ -205,12 +206,15 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         },
         "safe_load": {
             "checkpoint_read": "single bounded regular non-link file read",
-            "torch_load": "io.BytesIO(captured_bytes), map_location=cpu, weights_only=True",
-            "residual": "bounded local Torch weights-only ZIP pickle is not an arbitrary hostile-pickle sandbox",
+            "raw_zip": "EOCD/ZIP64 locator/ZIP64 EOCD and bounded central directory parsed from captured bytes before ZipFile",
+            "pickle_preflight": "restricted protocol/opcode interpreter validates storage persistent IDs and tensor rebuild metadata before torch.load",
+            "torch_load": "io.BytesIO(the same captured bytes), map_location=cpu, weights_only=True, never falling back",
+            "residual": "local trainer-artifact byte/object/tensor bounds, not a general arbitrary hostile-pickle sandbox",
         },
         "byte_limits": {
             "checkpoint_file": zip_contract.MAX_CHECKPOINT_FILE_BYTES,
             "zip_entries": zip_contract.MAX_TORCH_ZIP_ENTRIES,
+            "zip_central_directory": zip_contract.MAX_TORCH_CENTRAL_DIRECTORY_BYTES,
             "zip_uncompressed": zip_contract.MAX_TORCH_ZIP_UNCOMPRESSED_BYTES,
             "zip_storage": zip_contract.MAX_TORCH_ZIP_STORAGE_BYTES,
             "data_pkl": zip_contract.MAX_TORCH_DATA_PKL_BYTES,
@@ -222,7 +226,12 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         "pickle_limits": {
             "opcodes": zip_contract.MAX_PICKLE_OPCODES,
             "memo_writes": zip_contract.MAX_PICKLE_MEMO_WRITES,
+            "stack_depth": zip_contract.MAX_PICKLE_STACK_DEPTH,
+            "marks": zip_contract.MAX_PICKLE_MARKS,
+            "container_items": zip_contract.MAX_PICKLE_CONTAINER_ITEMS,
             "allowed_globals": sorted(zip_contract.ALLOWED_PICKLE_GLOBALS),
+            "storage": "BINPERSID must be ('storage', allowed CPU storage type, canonical unique decimal key, 'cpu', bounded element count) and exactly match archive/data/<key> bytes",
+            "tensor_rebuild": "_rebuild_tensor_v2 only; unique storage reference, zero offset, bounded nonnegative shape, exact positive contiguous strides, exact full-storage byte coverage, false requires_grad, empty OrderedDict metadata",
         },
         "json_limits": {
             "depth": json_contract.MAX_JSON_DEPTH,
@@ -249,7 +258,8 @@ def _artifact_boundary_contract() -> dict[str, Any]:
             "policy": "plain CPU dense contiguous tensors only; no subclasses, views, aliases, shared storage, or nonzero offsets",
         },
         "lock": {
-            "algorithm": "per-output SHA256 canonical-identity sibling file OS exclusive lock",
+            "algorithm": "per-output SHA256 physical-output-identity lock under a no-follow .mtg-kernel-train-locks directory",
+            "identity": "existing output uses resolved physical object dev/inode plus canonical final physical path; missing output uses nearest existing real physical ancestor plus normalized unresolved suffix",
             "windows": "msvcrt.locking LK_NBLCK on persistent one-byte regular file",
             "posix": "fcntl.flock LOCK_EX|LOCK_NB on persistent regular file",
             "lifecycle": "held for complete train call including client lifetime, commit, recovery, no-op resume, and shutdown",
@@ -258,12 +268,14 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         "path_policy": {
             "containment": "lexical artifact-root containment",
             "links": "reject symlink and Windows reparse components, including dangling or in-root links",
-            "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename",
+            "creation": "all output, transaction, quarantine, lock-parent, and generation-directory creation is component-wise no-follow",
+            "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename after destination parents validate",
             "resume": "resume path must lexically equal selected latest.json",
+            "pre_manifest_recovery": "under the output lock, fresh bootstrap may remove only empty real updates/checkpoints directories and canonical .run.json.<pid>.<n>.tmp files before run.json exists; unknown entries, nonempty directories, links, reparse points, and malformed temps fail closed",
         },
         "privacy": {
             "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
-            "rejects": "posix absolute, windows drive-root, windows root-relative, UNC, device/extended, file URI, and embedded absolute path fragments",
+            "rejects": "generic POSIX absolute roots including / plus Windows drive-root, Windows root-relative, UNC, device/extended, file URI, and embedded absolute path fragments",
         },
     }
 
@@ -984,6 +996,9 @@ def _commit_generation(
     learning_rate: float,
 ) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     update = payload["completed_update"]
+    mkdir_no_follow(out_dir, parents=True, exist_ok=True)
+    mkdir_no_follow(out_dir / "updates", parents=True, exist_ok=True)
+    mkdir_no_follow(out_dir / "checkpoints", parents=True, exist_ok=True)
     paths = generation_paths(out_dir, update)
     for path in paths.values():
         ensure_no_follow_path(out_dir, path.parent, expected="dir")
@@ -1193,8 +1208,6 @@ def _bootstrap_fresh(
     compatibility: dict[str, Any],
 ) -> tuple[TrainState, KernelRlClient, Decision]:
     require_new_or_empty_dir(out_dir)
-    mkdir_no_follow(out_dir / "updates", parents=True, exist_ok=True)
-    mkdir_no_follow(out_dir / "checkpoints", parents=True, exist_ok=True)
     env_sha = sha256_file(env_bin)
     client = KernelRlClient(env_bin, timeout_s=10.0)
     try:
@@ -1265,6 +1278,31 @@ def _bootstrap_fresh(
     except Exception:
         client.close()
         raise
+
+
+def _recover_pre_manifest_bootstrap(out_dir: Path) -> None:
+    ensure_real_child_dir(out_dir.parent, out_dir)
+    for entry in list(scandir_no_follow(out_dir)):
+        child = Path(entry.path)
+        if entry.name in {"updates", "checkpoints"}:
+            if not entry.is_dir(follow_symlinks=False):
+                raise ValueError(f"pre-manifest bootstrap debris is not a directory: {entry.name}")
+            ensure_real_child_dir(out_dir, child)
+            if any(scandir_no_follow(child)):
+                raise ValueError(f"pre-manifest bootstrap directory is not empty: {entry.name}")
+            child.rmdir()
+            continue
+        if entry.name.startswith(".run.json.") and entry.name.endswith(".tmp"):
+            if TEMP_RE.fullmatch(entry.name) is None or not entry.is_file(follow_symlinks=False):
+                raise ValueError(f"pre-manifest run.json temp is malformed: {entry.name}")
+            ensure_real_file(out_dir, child, reject_hardlinks=False)
+            temp_value = read_json_file(child, max_bytes=256 * 1024, require_canonical=True)
+            if not isinstance(temp_value, dict) or temp_value.get("schema") != RUN_SCHEMA:
+                raise ValueError(f"pre-manifest run.json temp content is malformed: {entry.name}")
+            validate_training_json_privacy(temp_value)
+            child.unlink()
+            continue
+        raise ValueError(f"unknown pre-manifest bootstrap debris: {entry.name}")
 
 
 def _bootstrap_incomplete_fresh(
@@ -1714,8 +1752,17 @@ def _train_locked(
                     compatibility=compatibility,
                 )
             else:
-                require_new_or_empty_dir(out_path)
-                raise AssertionError("unreachable")
+                _recover_pre_manifest_bootstrap(out_path)
+                state, client, first_decision = _bootstrap_fresh(
+                    env_bin=env_path,
+                    out_dir=out_path,
+                    base_seed=base_seed,
+                    batch_episodes=batch_episodes,
+                    learning_rate=learning_rate,
+                    value_coef=value_coef,
+                    max_decisions=max_decisions,
+                    compatibility=compatibility,
+                )
         else:
             state, client, first_decision = _bootstrap_fresh(
                 env_bin=env_path,

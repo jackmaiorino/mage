@@ -20,6 +20,7 @@ from .checkpoint_io import (
 )
 from .determinism import TrainerSeedDerivation, validate_uint63
 from .model import KernelPolicyValueNet, ModelConfig
+from .path_safety import mkdir_no_follow
 
 CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v2"
 SIDECAR_SCHEMA = "kernel_rl_train_checkpoint_sidecar/v2"
@@ -595,7 +596,7 @@ def load_checkpoint_file(path: str | Path) -> dict[str, Any]:
 
 def save_checkpoint_file(path: str | Path, payload: dict[str, Any]) -> None:
     path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
+    mkdir_no_follow(path.parent, parents=True, exist_ok=True)
     with path.open("wb") as fh:
         torch.save(payload, fh)
         inject_fault("checkpoint_save", path)

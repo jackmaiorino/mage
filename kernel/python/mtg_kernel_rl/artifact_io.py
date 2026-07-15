@@ -66,7 +66,7 @@ _WINDOWS_EXTENDED_RE = re.compile(r"(^|[\s\"'(<])(?:\\\\[.?]\\|\\\\\?\\|\\\?\\|\
 _WINDOWS_UNC_RE = re.compile(r"(^|[\s\"'(<])(?:\\\\|//)[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
 _WINDOWS_ROOT_REL_RE = re.compile(r"(^|[\s\"'(<])\\[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
 _POSIX_ABSOLUTE_RE = re.compile(
-    r"(^|[\s\"'(<:=,])/(?:home|Users|mnt|scratch|tmp|var|etc|opt|usr|root|private|Volumes|workspace)(?:/|$)"
+    r"(^|[\s\"'(<:=,])/(?:$|[A-Za-z0-9._+~-](?:[A-Za-z0-9._+~ -]*[A-Za-z0-9._+~-])?(?:/[A-Za-z0-9._+~-](?:[A-Za-z0-9._+~ -]*[A-Za-z0-9._+~-])?)*)"
 )
 _FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
 _NON_FILE_URI_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")

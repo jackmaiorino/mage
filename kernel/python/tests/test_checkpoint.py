@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import dataclasses
 import io
+import inspect
 import zipfile
 import random
 import tempfile
@@ -31,6 +32,7 @@ from mtg_kernel_rl.checkpoint import (
 )
 from mtg_kernel_rl.artifact_io import sha256_bytes
 import mtg_kernel_rl.checkpoint as checkpoint_mod
+import mtg_kernel_rl.checkpoint_io as checkpoint_io
 from mtg_kernel_rl.determinism import TrainerSeedDerivation, configure_torch_determinism, derive_model_init_seed
 from mtg_kernel_rl.features import encode_decision
 from mtg_kernel_rl.model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet
@@ -360,6 +362,110 @@ class CheckpointTest(unittest.TestCase):
             self._write_zip(oversized_pkl, [("archive/data.pkl", b"x" * (2 * 1024 * 1024 + 1), zipfile.ZIP_STORED)])
             with self.assertRaises(ValueError):
                 load_checkpoint_file(oversized_pkl)
+
+            called = {"zipfile": False}
+            original_zipfile = checkpoint_io.zipfile.ZipFile
+
+            def forbidden_zipfile(*args, **kwargs):  # type: ignore[no-untyped-def]
+                called["zipfile"] = True
+                raise AssertionError("ZipFile must not be called for raw entry-count rejection")
+
+            checkpoint_io.zipfile.ZipFile = forbidden_zipfile  # type: ignore[assignment]
+            try:
+                with self.assertRaises(ValueError):
+                    checkpoint_io.preflight_torch_zip(too_many.read_bytes())
+            finally:
+                checkpoint_io.zipfile.ZipFile = original_zipfile  # type: ignore[assignment]
+            self.assertFalse(called["zipfile"])
+
+    def test_checkpoint_raw_zip64_forgery_rejected_before_zipfile(self) -> None:
+        payload, _model, _optimizer, _compatibility = self.make_payload()
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "checkpoint.pt"
+            save_checkpoint_file(path, payload)
+            data = bytearray(path.read_bytes())
+            pos = data.index(b"PK\x06\x06")
+            # ZIP64 entries-total field in the ZIP64 EOCD record.
+            data[pos + 32 : pos + 40] = (checkpoint_io.MAX_TORCH_ZIP_ENTRIES + 1).to_bytes(8, "little")
+            called = {"zipfile": False}
+            original_zipfile = checkpoint_io.zipfile.ZipFile
+
+            def forbidden_zipfile(*args, **kwargs):  # type: ignore[no-untyped-def]
+                called["zipfile"] = True
+                raise AssertionError("ZipFile must not be called for forged ZIP64 rejection")
+
+            checkpoint_io.zipfile.ZipFile = forbidden_zipfile  # type: ignore[assignment]
+            try:
+                with self.assertRaises(ValueError):
+                    checkpoint_io.preflight_torch_zip(bytes(data))
+            finally:
+                checkpoint_io.zipfile.ZipFile = original_zipfile  # type: ignore[assignment]
+            self.assertFalse(called["zipfile"])
+
+    def test_checkpoint_pickle_storage_tensor_abuse_rejected_before_torch_load(self) -> None:
+        payload, _model, _optimizer, _compatibility = self.make_payload()
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            base = tmp / "base.pt"
+            save_checkpoint_file(base, payload)
+
+            def assert_before_torch_load(path: Path) -> None:
+                called = {"torch_load": False}
+                original = checkpoint_io.torch.load
+
+                def forbidden_load(*args, **kwargs):  # type: ignore[no-untyped-def]
+                    called["torch_load"] = True
+                    raise AssertionError("torch.load must not be called")
+
+                checkpoint_io.torch.load = forbidden_load  # type: ignore[assignment]
+                try:
+                    with self.assertRaises(ValueError):
+                        checkpoint_io.load_torch_zip_checkpoint(path)
+                finally:
+                    checkpoint_io.torch.load = original  # type: ignore[assignment]
+                self.assertFalse(called["torch_load"])
+
+            missing_storage = tmp / "missing_storage.pt"
+            with zipfile.ZipFile(base, "r") as zin, zipfile.ZipFile(missing_storage, "w") as zout:
+                for info in zin.infolist():
+                    if info.filename == "archive/data/0":
+                        continue
+                    zout.writestr(info, zin.read(info))
+            assert_before_torch_load(missing_storage)
+
+            view_path = tmp / "view.pt"
+            with view_path.open("wb") as fh:
+                torch.save({"view": torch.arange(8, dtype=torch.float32)[1:3]}, fh)
+            assert_before_torch_load(view_path)
+
+            alias_path = tmp / "alias.pt"
+            shared = torch.ones(2)
+            with alias_path.open("wb") as fh:
+                torch.save({"a": shared, "b": shared}, fh)
+            assert_before_torch_load(alias_path)
+
+    def test_checkpoint_same_captured_bytes_feed_digest_and_torch_load(self) -> None:
+        payload, _model, _optimizer, _compatibility = self.make_payload()
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "checkpoint.pt"
+            save_checkpoint_file(path, payload)
+            expected_sha = sha256_bytes(path.read_bytes())
+            seen = {"sha": None}
+            original = checkpoint_io.torch.load
+
+            def observing_load(buffer, *args, **kwargs):  # type: ignore[no-untyped-def]
+                data = buffer.getvalue()
+                seen["sha"] = sha256_bytes(data)
+                return original(io.BytesIO(data), *args, **kwargs)
+
+            observing_load.__signature__ = inspect.signature(original)  # type: ignore[attr-defined]
+            checkpoint_io.torch.load = observing_load  # type: ignore[assignment]
+            try:
+                loaded = checkpoint_io.load_torch_zip_checkpoint(path)
+            finally:
+                checkpoint_io.torch.load = original  # type: ignore[assignment]
+            self.assertEqual(loaded.sha256, expected_sha)
+            self.assertEqual(seen["sha"], expected_sha)
 
     def test_checkpoint_zip_preflight_rejects_duplicate_members_and_bad_crc(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
