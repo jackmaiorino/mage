@@ -4119,6 +4119,35 @@ mod tests {
     }
 
     #[test]
+    fn goblin_bushwhacker_declined_kicker_does_not_create_an_etb_trigger() {
+        let mut state = ready_game_in_main1(2);
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+
+        step(&mut state, Action::CastSpell(bushwhacker)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseKicker { .. } => step(&mut state, Action::ChooseKicker(false)).unwrap(),
+            other => panic!("expected ChooseKicker, got {other:?}"),
+        }
+
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { player, .. } => assert_eq!(player, PlayerId::P0),
+            other => panic!("expected P0 priority after the cast, got {other:?}"),
+        }
+        step(&mut state, Action::Pass).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { player, .. } => assert_eq!(player, PlayerId::P1),
+            other => panic!("expected P1 priority after P0 passes, got {other:?}"),
+        }
+        step(&mut state, Action::Pass).unwrap();
+
+        match advance_until_decision(&mut state) {
+            Decision::CastSpellOrPass { player, .. } => assert_eq!(player, PlayerId::P0),
+            other => panic!("expected fresh P0 priority after Bushwhacker resolves, got {other:?}"),
+        }
+        assert!(state.stack.is_empty(), "603.4: declining Kicker means Bushwhacker's intervening-if ability never triggers");
+    }
+
+    #[test]
     fn goblin_bushwhacker_declined_kicker_gets_no_pump_even_though_affordable() {
         let mut state = ready_game_in_main1(2);
         let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");

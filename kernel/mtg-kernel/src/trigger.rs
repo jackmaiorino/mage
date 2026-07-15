@@ -56,6 +56,11 @@ pub struct TriggeredAbilityDef {
     /// battlefield unless its reminder text says otherwise (like Sneaky
     /// Snacker's "from your graveyard").
     pub home_zone: Zone,
+    /// 603.4 intervening-if gate checked when the event happens. Goblin
+    /// Bushwhacker is the only card in this pool with one: an unkicked
+    /// Bushwhacker must not create a stack item at all (as opposed to
+    /// creating a trigger whose effect later resolves to a no-op).
+    pub intervening_if_kicked: bool,
     pub effect: fn() -> EffectOp,
 }
 
@@ -82,11 +87,11 @@ fn sneaky_snacker_effect() -> EffectOp {
 }
 
 const GUTTERSNIPE_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::CastInstantOrSorcery, home_zone: Zone::Battlefield, effect: guttersnipe_effect }];
+    [TriggeredAbilityDef { condition: TriggerCondition::CastInstantOrSorcery, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: guttersnipe_effect }];
 const VOLDAREN_EPICURE_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: voldaren_epicure_effect }];
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: voldaren_epicure_effect }];
 const SNEAKY_SNACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::DrawNth(3), home_zone: Zone::Graveyard, effect: sneaky_snacker_effect }];
+    [TriggeredAbilityDef { condition: TriggerCondition::DrawNth(3), home_zone: Zone::Graveyard, intervening_if_kicked: false, effect: sneaky_snacker_effect }];
 
 fn burning_tree_emissary_effect() -> EffectOp {
     // When Burning-Tree Emissary enters the battlefield, add {R}{G}.
@@ -123,22 +128,24 @@ fn goblin_bushwhacker_effect() -> EffectOp {
 }
 
 const BURNING_TREE_EMISSARY_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: burning_tree_emissary_effect }];
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: burning_tree_emissary_effect }];
 const CLOCKWORK_PERCUSSIONIST_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
     condition: TriggerCondition::LeftBattlefieldToGraveyard,
     home_zone: Zone::Graveyard,
+    intervening_if_kicked: false,
     effect: clockwork_percussionist_dies_effect,
 }];
 const EXPERIMENTAL_SYNTHESIZER_TRIGGERS: [TriggeredAbilityDef; 2] = [
-    TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: experimental_synthesizer_impulse_effect },
+    TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: experimental_synthesizer_impulse_effect },
     TriggeredAbilityDef {
         condition: TriggerCondition::LeftBattlefieldToGraveyard,
         home_zone: Zone::Graveyard,
+        intervening_if_kicked: false,
         effect: experimental_synthesizer_impulse_effect,
     },
 ];
 const GOBLIN_BUSHWHACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, effect: goblin_bushwhacker_effect }];
+    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: true, effect: goblin_bushwhacker_effect }];
 
 /// The Burn 16's and Mono Red Rally's real triggered abilities, matched by
 /// card name (ids are codegen-assigned from `cards_v1.json`'s array order
@@ -268,12 +275,16 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
             }
             for (i, ev) in events.iter().enumerate() {
                 if trigger_matches(def.condition, ev, id, obj.controller, state, draws_this_turn_at[i]) {
+                    let kicked = Some(id) == kicked_source;
+                    if def.intervening_if_kicked && !kicked {
+                        continue;
+                    }
                     new_triggers.push(PendingTrigger {
                         controller: obj.controller,
                         source: id,
                         effect: (def.effect)(),
                         is_madness_offer: false,
-                        kicked: Some(id) == kicked_source,
+                        kicked,
                     });
                 }
             }
