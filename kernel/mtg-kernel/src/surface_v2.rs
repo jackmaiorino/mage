@@ -500,6 +500,59 @@ pub struct HarnessSurfaceV2 {
     optional_cost: Option<OptionalCostReshape>,
 }
 
+/// `REPLAY_DEBUG_SURFACE_WALK=1` diagnostic (ReferenceRules v2 grind, Sol
+/// #107 continuation): every engine-state field relevant to the stuck-
+/// trigger investigation (`rally/coverage_ledger.md`'s "castability-gap"
+/// entries), in one line, so a full walk from a trigger landing to the
+/// eventual divergence can be read start to finish without cross-
+/// referencing multiple print sites by hand.
+fn walk_state_snapshot(state: &GameState) -> String {
+    format!(
+        "step={:?} turn={} active={:?} priority_player={:?} passes={:?} round={} stack_len={} stack={:?}",
+        state.step,
+        state.turn,
+        state.active_player,
+        state.priority_player,
+        state.engine.priority_passes,
+        state.engine.priority_round,
+        state.stack.len(),
+        state
+            .stack
+            .iter()
+            .map(|si| format!(
+                "{}({}) ctrl={:?} inline={} madness={}",
+                state.objects.get(si.source).name,
+                si.source.0,
+                si.controller,
+                si.inline_effect.is_some(),
+                si.madness_offer
+            ))
+            .collect::<Vec<_>>()
+    )
+}
+
+/// Short tag for `Decision`, for the same diagnostic -- a full `{:?}` on
+/// `Decision::CastSpellOrPass` dumps every candidate vector (castable
+/// spells, mana abilities, land drops, activatable abilities), which is
+/// unreadable noise at the "what KIND of decision, for whom" granularity
+/// this walk needs; the existing `NOT-IN-BUCKET` diagnostic already prints
+/// full candidate detail at the one specific point that needs it.
+fn walk_decision_tag(decision: &Decision) -> String {
+    match decision {
+        Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions } => format!(
+            "CastSpellOrPass player={player:?} castable={} mana={} land={} activatable={} plot={}",
+            castable_spells.len(),
+            mana_abilities.len(),
+            land_drops.len(),
+            activatable_abilities.len(),
+            plot_actions.len()
+        ),
+        Decision::DeclareAttackers { player, eligible } => format!("DeclareAttackers player={player:?} eligible={}", eligible.len()),
+        Decision::DeclareBlockers { player, attackers, .. } => format!("DeclareBlockers player={player:?} attackers={}", attackers.len()),
+        other => format!("{other:?}"),
+    }
+}
+
 impl HarnessSurfaceV2 {
     pub fn new() -> HarnessSurfaceV2 {
         HarnessSurfaceV2::default()
@@ -553,12 +606,42 @@ impl HarnessSurfaceV2 {
     }
 
     fn record(&mut self, reason: SuppressionReason, auto_action: impl Into<String>, before: u64, state: &GameState) {
-        self.suppressions.push(Suppression { reason, auto_action: auto_action.into(), state_hash_before: before, state_hash_after: state.state_hash() });
+        let auto_action = auto_action.into();
+        if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
+            eprintln!(
+                "SURFACE_WALK SUPPRESS reason={reason:?} auto_action={auto_action:?} {}",
+                walk_state_snapshot(state)
+            );
+        }
+        self.suppressions.push(Suppression { reason, auto_action, state_hash_before: before, state_hash_after: state.state_hash() });
     }
 
     /// See `HarnessSurfaceV1::next_decision` (`surface.rs`) -- identical
     /// logic, duplicated per this module's doc.
+    ///
+    /// Thin logging wrapper around `next_decision_inner` (ReferenceRules v2
+    /// grind, Sol #107 continuation): `REPLAY_DEBUG_SURFACE_WALK=1` logs the
+    /// raw `engine::advance_until_decision` result on every loop iteration
+    /// (via `next_decision_inner`'s own per-iteration print, see there) and
+    /// the final decision actually surfaced to the caller here -- together
+    /// with `record`'s own per-suppression logging, this gives a complete,
+    /// ordered walk of every internal engine decision the surface consumed
+    /// between any two calls, including which suppression rule (if any) ate
+    /// which one. Wrapping (rather than logging at every `return` site
+    /// inside `next_decision_inner`) is deliberate: that function has many
+    /// early returns (sub-decision reshapes, several suppression branches,
+    /// the final fall-through) and duplicating a log call at each one would
+    /// be exactly the kind of easy-to-miss-one-spot instrumentation this
+    /// investigation doesn't want.
     pub fn next_decision(&mut self, state: &mut GameState) -> SurfaceDecision {
+        let sd = self.next_decision_inner(state);
+        if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
+            eprintln!("SURFACE_WALK SURFACED {sd:?} {}", walk_state_snapshot(state));
+        }
+        sd
+    }
+
+    fn next_decision_inner(&mut self, state: &mut GameState) -> SurfaceDecision {
         loop {
             if let Some(sd) = self.next_blockers_subdecision(state) {
                 return sd;
@@ -572,6 +655,9 @@ impl HarnessSurfaceV2 {
 
             let before = state.state_hash();
             let decision = engine::advance_until_decision(state);
+            if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
+                eprintln!("SURFACE_WALK RAW_DECISION {} {}", walk_decision_tag(&decision), walk_state_snapshot(state));
+            }
 
             match &decision {
                 Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, .. } => {
@@ -857,8 +943,30 @@ impl HarnessSurfaceV2 {
                 // the two cases apart: only bump when the triggers being
                 // ordered right now are landing directly on top of the
                 // still-armed Madness-cast card itself.
+                //
+                // Also stamps `stack_len_round_seen` (Sol #107 fix, found
+                // while wiring up `EngineState::stack_len_at_round_open`):
+                // without this, the very next `CastSpellOrPass` ask's lazy
+                // `if self.stack_len_round_seen != Some(priority_round)`
+                // check in `next_decision_inner` still reads `stack_len_
+                // round_seen` as unset/stale for this round (a Madness cast
+                // never goes through `reset_priority`, so `priority_round`
+                // never actually changes across this whole sequence -- this
+                // is often the *first* `CastSpellOrPass` this surface has
+                // ever seen, so `round_opening_stack_len` was still sitting
+                // at its type default, not a real baseline) -- re-firing the
+                // general capture path and silently clobbering the bump this
+                // block just made. Root-caused via `madness_cast_reprompt_
+                // is_not_silently_suppressed_by_its_own_resulting_triggers`
+                // regressing the instant `stack_len_at_round_open` was wired
+                // in below: that field's own real value (correctly `0`,
+                // since `reset_priority` genuinely never ran yet) is a
+                // legitimate value for a *different* round, not a
+                // trustworthy fallback for a round this method has already
+                // hand-corrected.
                 if result.is_ok() && madness_exempt_card_still_on_top {
                     self.round_opening_stack_len = state.stack.len();
+                    self.stack_len_round_seen = Some(state.engine.priority_round);
                 }
                 result
             }
@@ -2130,6 +2238,127 @@ mod tests {
             1,
             "P0's immediate reprompt must still be suppressed exactly once, got {:?}",
             surface.suppressions()
+        );
+    }
+
+    /// Investigation checkpoint, NOT a reproduction (ReferenceRules v2
+    /// grind, Sol #107 continuation -- see `rally/coverage_ledger.md`'s own
+    /// entry for the full writeup). `rally_mirror_v2`/`rally_vs_burn_v2`'s
+    /// dominant remaining divergence class is a sorcery-speed card the trace
+    /// shows being cast but the kernel reports `castable_spells: []` for --
+    /// sampled cases all show a triggered ability (Goblin Bushwhacker's
+    /// kicked ETB, or once Clockwork Percussionist's death trigger) still
+    /// sitting on `state.stack` at that exact decision, which Java's own
+    /// game would already have resolved by then (`sorcery_speed_timing_ok`
+    /// requires `state.stack.is_empty()`).
+    ///
+    /// This test drives the minimal possible version of that shape (P0
+    /// casts Bushwhacker kicked; P1 has a single live Mountain -- a real,
+    /// non-empty `mana_abilities` option every time they're asked, matching
+    /// every sampled corpus divergence's own `kernel_mana` field, not a
+    /// totally inert opponent with nothing to ever choose but Pass) through
+    /// `HarnessSurfaceV2` (the layer the real replay driver uses, not the
+    /// raw `engine` layer `engine::tests::goblin_bushwhacker_kicked_pumps_
+    /// the_team_and_grants_haste` already confirms is fine) and checks that
+    /// a second sorcery-speed card becomes castable afterward. **It passes**
+    /// -- both with a totally inert P1 and with this mana-active P1, ruling
+    /// out both "the surface layer just cannot ever resolve a trigger" and
+    /// "an opponent with a real option to consider is the missing
+    /// ingredient." The real corpus divergence needs something neither
+    /// variant has: most plausibly something specific to surviving a combat
+    /// phase transition, a second/cascading trigger (Clockwork
+    /// Percussionist's case is a death trigger, a materially different
+    /// shape from an ETB), or the opponent having a real CAST option (not
+    /// just a mana ability) to consider mid-resolution -- none of those
+    /// tested here. Kept as a documented negative result and a ready-made
+    /// scaffold for whoever extends this next, not evidence the bug is
+    /// fixed.
+    #[test]
+    fn goblin_bushwhacker_kicked_trigger_resolves_in_the_minimal_single_active_player_case() {
+        let mut state = empty_game();
+        for _ in 0..4 {
+            put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        }
+        state.step = Step::Main1;
+        state.priority_player = PlayerId::P0;
+        state.active_player = PlayerId::P0;
+
+        let bushwhacker_def = card_def::card_id_by_name("Goblin Bushwhacker").unwrap();
+        let bushwhacker = state.objects.push(crate::state::GameObject {
+            card_def: bushwhacker_def,
+            name: "Goblin Bushwhacker".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+            zone_change_count: 0,
+        });
+        state.players[0].hand.push(bushwhacker);
+
+        let raider_def = card_def::card_id_by_name("Goblin Tomb Raider").unwrap();
+        let raider = state.objects.push(crate::state::GameObject {
+            card_def: raider_def,
+            name: "Goblin Tomb Raider".to_string(),
+            owner: PlayerId::P0,
+            controller: PlayerId::P0,
+            zone: Zone::Hand,
+            tapped: false,
+            summoning_sick: false,
+            damage: 0,
+            counters: Default::default(),
+            attachments: Vec::new(),
+            plotted_turn: None,
+            zone_change_count: 0,
+        });
+        state.players[0].hand.push(raider);
+        // A real P1 (a live Mountain, so `mana_abilities` is non-empty for
+        // them too) -- matches every sampled corpus divergence's own
+        // `kernel_mana` field always showing something, unlike a totally
+        // inert opponent with nothing to ever choose between but Pass.
+        put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
+
+        let mut surface = HarnessSurfaceV2::new();
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { castable_spells, .. }) => {
+                assert!(castable_spells.contains(&bushwhacker), "Bushwhacker should be castable turn 1 with 4 Mountains up");
+                surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bushwhacker))).unwrap();
+            }
+            other => panic!("expected CastSpellOrPass offering Bushwhacker, got {other:?}"),
+        }
+        match surface.next_decision(&mut state) {
+            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
+                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseKicker(true))).unwrap();
+            }
+            other => panic!("expected ChooseKicker, got {other:?}"),
+        }
+
+        let mut raider_became_castable = false;
+        let mut iterations = 0;
+        for _ in 0..40 {
+            iterations += 1;
+            match surface.next_decision(&mut state) {
+                SurfaceDecision::Decision(Decision::CastSpellOrPass { castable_spells, .. }) => {
+                    if castable_spells.contains(&raider) {
+                        raider_became_castable = true;
+                        break;
+                    }
+                    surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+                }
+                other => panic!("unexpected decision while draining priority: {other:?}"),
+            }
+        }
+
+        assert!(
+            raider_became_castable,
+            "stack never emptied after Bushwhacker's kicked ETB trigger after {iterations} Pass-only iterations \
+             -- stack len is now {} (contents: {:?}), i.e. the surface layer (not the raw engine) is where this gets stuck",
+            state.stack.len(),
+            state.stack.iter().map(|si| si.source).collect::<Vec<_>>()
         );
     }
 }

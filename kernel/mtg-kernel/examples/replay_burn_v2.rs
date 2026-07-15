@@ -1550,7 +1550,7 @@ fn apply_cast_spell_or_pass(
             Some(oid) => candidate_key(state, *oid, text, land_drops, castable_spells, mana_abilities, activatable_abilities, plot_actions).ok_or_else(|| {
                 if std::env::var("REPLAY_DEBUG").is_ok() {
                     eprintln!(
-                        "NOT-IN-BUCKET decision_number={} text={text:?} trace_uuid={uuid} object_id={} object_name={:?} object_zone={:?} object_owner={:?} object_tapped={} exile_perms={:?} kernel_castable={:?} kernel_land={:?} kernel_mana={:?}",
+                        "NOT-IN-BUCKET decision_number={} text={text:?} trace_uuid={uuid} object_id={} object_name={:?} object_zone={:?} object_owner={:?} object_tapped={} exile_perms={:?} kernel_castable={:?} kernel_land={:?} kernel_mana={:?} kernel_step={:?} kernel_turn={} kernel_active_player={:?} kernel_priority_player={:?} kernel_stack_len={} kernel_stack_contents={:?} trace_turn={} trace_phase={:?} trace_player={:?} trace_active_player={:?}",
                         rec.decision_number,
                         oid.0,
                         state.objects.get(*oid).name,
@@ -1561,6 +1561,20 @@ fn apply_cast_spell_or_pass(
                         castable_spells.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
                         land_drops.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
                         mana_abilities.iter().map(|&id| format!("{}({})", state.objects.get(id).name, id.0)).collect::<Vec<_>>(),
+                        state.step,
+                        state.turn,
+                        state.active_player,
+                        state.priority_player,
+                        state.stack.len(),
+                        state.stack.iter().map(|si| format!(
+                            "{}({}) ctrl={:?} inline={} flashback={} mode={}",
+                            state.objects.get(si.source).name, si.source.0, si.controller,
+                            si.inline_effect.is_some(), si.is_flashback, si.mode_chosen
+                        )).collect::<Vec<_>>(),
+                        rec.turn,
+                        rec.phase,
+                        rec.player,
+                        rec.active_player,
                     );
                 }
                 "trace-candidate-not-in-any-kernel-bucket:CastSpellOrPass".to_string()

@@ -71,6 +71,35 @@ pub struct EngineState {
     /// those two steps) without re-deriving round boundaries from stack
     /// length or step identity, both of which are ambiguous across turns.
     pub priority_round: u64,
+    /// `state.stack.len()` at the exact instant `reset_priority` last ran --
+    /// i.e. the stack length as of the true start of the CURRENT
+    /// `priority_round`, captured before anything else in the same
+    /// `advance_until_decision` loop iteration can grow it further.
+    ///
+    /// Exists for `HarnessSurfaceV2`'s `round_opening_stack_len` (Sol #107,
+    /// ReferenceRules v2 grind): that field's own capture used to be lazy
+    /// ("the first time I observe this round, whatever `state.stack.len()`
+    /// is *then* must be its opening length") -- which is wrong whenever a
+    /// stack resolution's own trigger-collection immediately re-grows the
+    /// stack via `push_trigger_onto_stack` (deliberately *not* itself a
+    /// round boundary, see this struct's own `priority_round` doc) before
+    /// the surface ever gets a chance to observe the round with an empty
+    /// stack. Root-caused against `rally_mirror_v2/game_20260714_200336_
+    /// 0016.txt` decision 64 (`REPLAY_DEBUG_SURFACE_WALK=1`, `rally/
+    /// coverage_ledger.md`'s "castability-gap" entries): Goblin Bushwhacker
+    /// resolves into its own kicked ETB trigger inside one `advance_until_
+    /// decision` call (`resolve_top_of_stack` -> `collect_and_queue_
+    /// triggers` -> `reset_priority` bumps the round -> loop continues ->
+    /// `drain_pending_triggers_or_decide` pushes the trigger, same round,
+    /// no further bump) -- the surface's first observation of the new round
+    /// already has the trigger on the stack, so its lazily-captured
+    /// baseline was `1`, not `0`, permanently defeating `stack_top_is_
+    /// fresh_own_item`'s `len() > round_opening_stack_len` check for that
+    /// exact trigger and leaving it stuck unresolved (both players silently
+    /// pass the *next* round instead, never reaching the two-consecutive-
+    /// real-passes-on-this-item that would resolve it). This field gives
+    /// the surface the correct, eagerly-captured value instead.
+    pub stack_len_at_round_open: usize,
     /// A spell that has been announced (601.2a: already moved to the stack
     /// by `begin_cast`) but not yet finished being targeted, mode-chosen,
     /// or cost-paid.
@@ -1490,6 +1519,13 @@ fn reset_priority(state: &mut GameState) {
     state.engine.priority_passes = [false, false];
     state.priority_player = state.active_player;
     state.engine.priority_round += 1;
+    // Captured HERE, before this same `advance_until_decision` loop
+    // iteration can possibly continue on to `drain_pending_triggers_or_
+    // decide` and grow the stack again via a same-round trigger push --
+    // see `EngineState::stack_len_at_round_open`'s doc for why the exact
+    // timing of this snapshot (not merely computing `state.stack.len()`
+    // wherever it's later read) is the entire point.
+    state.engine.stack_len_at_round_open = state.stack.len();
 }
 
 fn collect_and_queue_triggers(state: &mut GameState) {
