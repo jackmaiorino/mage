@@ -981,7 +981,12 @@ pub fn record_burn_mirror_episode(
                     selected_action_id: selected_action_id.clone(),
                     reward: [0, 0],
                 });
-                session.step(selected_index as u32, &selected_action_id)?;
+                session.step(
+                    episode_id,
+                    decision.step,
+                    selected_index as u32,
+                    &selected_action_id,
+                )?;
             }
             RlSessionResponseV1::Terminal(terminal) => {
                 let summary = terminal.into();

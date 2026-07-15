@@ -90,6 +90,8 @@ pub enum RlSessionResponseV1 {
 #[serde(rename_all = "snake_case")]
 pub enum RlSessionErrorCode {
     EpisodeAlreadyTerminal,
+    EpisodeIdMismatch,
+    ExpectedStepMismatch,
     SelectedIndexOutOfRange,
     SelectedActionIdMismatch,
     SelectedActionIdUnknown,
@@ -180,9 +182,23 @@ impl RlEpisodeSessionV1 {
 
     pub fn step(
         &mut self,
+        episode_id: u64,
+        expected_step: u64,
         selected_index: u32,
         selected_action_id: &str,
     ) -> Result<RlSessionResponseV1, RlSessionError> {
+        if episode_id != self.episode_id {
+            return Err(session_error(
+                RlSessionErrorCode::EpisodeIdMismatch,
+                "step request episode_id does not match the active episode",
+            ));
+        }
+        if expected_step != self.decision_count {
+            return Err(session_error(
+                RlSessionErrorCode::ExpectedStepMismatch,
+                "step request expected_step does not match the active decision step",
+            ));
+        }
         if self.terminal.is_some() {
             return Err(session_error(
                 RlSessionErrorCode::EpisodeAlreadyTerminal,
@@ -332,9 +348,27 @@ pub enum KernelRlRequestV1 {
     Step {
         schema_version: u32,
         request_id: String,
+        episode_id: u64,
+        expected_step: u64,
         selected_index: u32,
         selected_action_id: String,
     },
+}
+
+impl KernelRlRequestV1 {
+    fn request_id(&self) -> &str {
+        match self {
+            KernelRlRequestV1::Reset { request_id, .. }
+            | KernelRlRequestV1::Step { request_id, .. } => request_id,
+        }
+    }
+
+    fn schema_version(&self) -> u32 {
+        match self {
+            KernelRlRequestV1::Reset { schema_version, .. }
+            | KernelRlRequestV1::Step { schema_version, .. } => *schema_version,
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -360,6 +394,7 @@ pub enum KernelRlResponseV1 {
     Terminal {
         schema_version: u32,
         request_id: String,
+        provenance: RlSessionProvenanceV1,
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
         winner: Option<PlayerSeatV1>,
@@ -374,9 +409,20 @@ pub enum KernelRlResponseV1 {
     },
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct CachedProtocolExchangeV1 {
+    // Request ids are process-unique except for one immediate identical retry.
+    // The cache is deliberately one entry so stale-step safety comes from the
+    // episode_id/expected_step preconditions, not an unbounded replay table.
+    request_id: String,
+    request: KernelRlRequestV1,
+    response_line: String,
+}
+
 #[derive(Default)]
 pub struct KernelRlJsonlServerV1 {
     session: Option<RlEpisodeSessionV1>,
+    last_exchange: Option<CachedProtocolExchangeV1>,
 }
 
 impl KernelRlJsonlServerV1 {
@@ -385,28 +431,54 @@ impl KernelRlJsonlServerV1 {
     }
 
     pub fn handle_line(&mut self, line: &str) -> String {
-        let response = self.handle_value(line);
-        serde_json::to_string(&response).expect("protocol response serializes")
-    }
-
-    fn handle_value(&mut self, line: &str) -> KernelRlResponseV1 {
         let value = match serde_json::from_str::<Value>(line) {
             Ok(value) => value,
             Err(_) => {
-                return error_response(None, "malformed_json", "request line is not valid JSON")
+                return serialize_response(error_response(
+                    None,
+                    "malformed_json",
+                    "request line is not valid JSON",
+                ));
             }
         };
         let request_id = request_id_from_value(&value);
         let request = match serde_json::from_value::<KernelRlRequestV1>(value) {
             Ok(request) => request,
             Err(_) => {
-                return error_response(
+                return serialize_response(error_response(
                     request_id,
                     "malformed_request",
                     "request does not match the v1 protocol schema",
-                )
+                ));
             }
         };
+        if let Some(cached) = &self.last_exchange {
+            if cached.request_id == request.request_id() {
+                if cached.request == request {
+                    return cached.response_line.clone();
+                }
+                return serialize_response(error_response(
+                    Some(request.request_id().to_string()),
+                    "request_id_reuse_mismatch",
+                    "request_id was reused for a different immediate request payload",
+                ));
+            }
+        }
+        let should_cache = request.schema_version() == RL_SESSION_SCHEMA_VERSION;
+        let request_for_cache = request.clone();
+        let response = self.handle_request(request);
+        let response_line = serialize_response(response);
+        if should_cache {
+            self.last_exchange = Some(CachedProtocolExchangeV1 {
+                request_id: request_for_cache.request_id().to_string(),
+                request: request_for_cache,
+                response_line: response_line.clone(),
+            });
+        }
+        response_line
+    }
+
+    fn handle_request(&mut self, request: KernelRlRequestV1) -> KernelRlResponseV1 {
         match request {
             KernelRlRequestV1::Reset {
                 schema_version,
@@ -430,6 +502,8 @@ impl KernelRlJsonlServerV1 {
             KernelRlRequestV1::Step {
                 schema_version,
                 request_id,
+                episode_id,
+                expected_step,
                 selected_index,
                 selected_action_id,
             } => {
@@ -447,7 +521,12 @@ impl KernelRlJsonlServerV1 {
                         "step request received before reset",
                     );
                 };
-                match session.step(selected_index, &selected_action_id) {
+                match session.step(
+                    episode_id,
+                    expected_step,
+                    selected_index,
+                    &selected_action_id,
+                ) {
                     Ok(response) => session_response_to_protocol(request_id, response),
                     Err(err) => error_response(
                         Some(request_id),
@@ -479,6 +558,7 @@ fn session_response_to_protocol(
         RlSessionResponseV1::Terminal(terminal) => KernelRlResponseV1::Terminal {
             schema_version: RL_SESSION_SCHEMA_VERSION,
             request_id,
+            provenance: RlSessionProvenanceV1::current(),
             episode_id: terminal.episode_id,
             terminal_outcome: terminal.terminal_outcome,
             winner: terminal.winner,
@@ -487,6 +567,10 @@ fn session_response_to_protocol(
             decision_count: terminal.decision_count,
         },
     }
+}
+
+fn serialize_response(response: KernelRlResponseV1) -> String {
+    serde_json::to_string(&response).expect("protocol response serializes")
 }
 
 fn request_id_from_value(value: &Value) -> Option<String> {
@@ -517,6 +601,8 @@ fn session_error(code: RlSessionErrorCode, message: &str) -> RlSessionError {
 fn session_error_code(code: &RlSessionErrorCode) -> &'static str {
     match code {
         RlSessionErrorCode::EpisodeAlreadyTerminal => "episode_already_terminal",
+        RlSessionErrorCode::EpisodeIdMismatch => "episode_id_mismatch",
+        RlSessionErrorCode::ExpectedStepMismatch => "expected_step_mismatch",
         RlSessionErrorCode::SelectedIndexOutOfRange => "selected_index_out_of_range",
         RlSessionErrorCode::SelectedActionIdMismatch => "selected_action_id_mismatch",
         RlSessionErrorCode::SelectedActionIdUnknown => "selected_action_id_unknown",
