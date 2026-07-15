@@ -301,54 +301,51 @@ def validate_output_lock_file(path: str | Path) -> Path:
 def filesystem_file_identity(path: str | Path) -> tuple[Any, ...]:
     path_abs = _absolute_lexical(path)
     if os.name == "nt":
+        import ctypes
+        from ctypes import wintypes
+
+        class FILE_ID_128(ctypes.Structure):
+            _fields_ = [("Identifier", ctypes.c_ubyte * 16)]
+
+        class FILE_ID_INFO(ctypes.Structure):
+            _fields_ = [("VolumeSerialNumber", ctypes.c_ulonglong), ("FileId", FILE_ID_128)]
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        CreateFileW = kernel32.CreateFileW
+        CreateFileW.argtypes = [
+            wintypes.LPCWSTR,
+            wintypes.DWORD,
+            wintypes.DWORD,
+            wintypes.LPVOID,
+            wintypes.DWORD,
+            wintypes.DWORD,
+            wintypes.HANDLE,
+        ]
+        CreateFileW.restype = wintypes.HANDLE
+        GetFileInformationByHandleEx = kernel32.GetFileInformationByHandleEx
+        GetFileInformationByHandleEx.argtypes = [wintypes.HANDLE, wintypes.INT, wintypes.LPVOID, wintypes.DWORD]
+        GetFileInformationByHandleEx.restype = wintypes.BOOL
+        CloseHandle = kernel32.CloseHandle
+        CloseHandle.argtypes = [wintypes.HANDLE]
+        CloseHandle.restype = wintypes.BOOL
+        handle = CreateFileW(
+            str(path_abs),
+            0,
+            0x00000001 | 0x00000002 | 0x00000004,
+            None,
+            3,
+            0x02000000,
+            None,
+        )
+        if handle == wintypes.HANDLE(-1).value:
+            raise OSError(ctypes.get_last_error(), f"CreateFileW failed for {path_abs}")
         try:
-            import ctypes
-            from ctypes import wintypes
-
-            class FILE_ID_128(ctypes.Structure):
-                _fields_ = [("Identifier", ctypes.c_ubyte * 16)]
-
-            class FILE_ID_INFO(ctypes.Structure):
-                _fields_ = [("VolumeSerialNumber", ctypes.c_ulonglong), ("FileId", FILE_ID_128)]
-
-            kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-            CreateFileW = kernel32.CreateFileW
-            CreateFileW.argtypes = [
-                wintypes.LPCWSTR,
-                wintypes.DWORD,
-                wintypes.DWORD,
-                wintypes.LPVOID,
-                wintypes.DWORD,
-                wintypes.DWORD,
-                wintypes.HANDLE,
-            ]
-            CreateFileW.restype = wintypes.HANDLE
-            GetFileInformationByHandleEx = kernel32.GetFileInformationByHandleEx
-            GetFileInformationByHandleEx.argtypes = [wintypes.HANDLE, wintypes.INT, wintypes.LPVOID, wintypes.DWORD]
-            GetFileInformationByHandleEx.restype = wintypes.BOOL
-            CloseHandle = kernel32.CloseHandle
-            CloseHandle.argtypes = [wintypes.HANDLE]
-            CloseHandle.restype = wintypes.BOOL
-            handle = CreateFileW(
-                str(path_abs),
-                0,
-                0x00000001 | 0x00000002 | 0x00000004,
-                None,
-                3,
-                0x02000000,
-                None,
-            )
-            if handle == wintypes.HANDLE(-1).value:
-                raise OSError(ctypes.get_last_error(), f"CreateFileW failed for {path_abs}")
-            try:
-                info = FILE_ID_INFO()
-                if not GetFileInformationByHandleEx(handle, 18, ctypes.byref(info), ctypes.sizeof(info)):
-                    raise OSError(ctypes.get_last_error(), f"GetFileInformationByHandleEx failed for {path_abs}")
-                return ("windows-file-id", int(info.VolumeSerialNumber), bytes(info.FileId.Identifier).hex())
-            finally:
-                CloseHandle(handle)
-        except Exception:
-            pass
+            info = FILE_ID_INFO()
+            if not GetFileInformationByHandleEx(handle, 18, ctypes.byref(info), ctypes.sizeof(info)):
+                raise OSError(ctypes.get_last_error(), f"GetFileInformationByHandleEx failed for {path_abs}")
+            return ("windows-file-id", int(info.VolumeSerialNumber), bytes(info.FileId.Identifier).hex())
+        finally:
+            CloseHandle(handle)
     st = path_abs.stat()
     return ("stat", int(getattr(st, "st_dev", 0)), int(getattr(st, "st_ino", 0)))
 

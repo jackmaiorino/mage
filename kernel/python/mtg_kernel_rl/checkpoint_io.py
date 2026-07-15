@@ -5,6 +5,7 @@ from __future__ import annotations
 import dataclasses
 import inspect
 import io
+import math
 import pickletools
 import re
 import struct
@@ -28,7 +29,14 @@ MAX_PICKLE_OPCODES = 100_000
 MAX_PICKLE_MEMO_WRITES = 100_000
 MAX_PICKLE_STACK_DEPTH = 20_000
 MAX_PICKLE_MARKS = 4096
-MAX_PICKLE_CONTAINER_ITEMS = 100_000
+MAX_PICKLE_CONTAINER_ITEMS = 4096
+MAX_PICKLE_TOTAL_ITEMS = 100_000
+MAX_PICKLE_GRAPH_NODES = 100_000
+MAX_PICKLE_GRAPH_DEPTH = 16
+MAX_PICKLE_STRING_BYTES = 4 * 1024 * 1024
+MAX_PICKLE_TENSORS = 512
+MAX_PICKLE_TENSOR_RANK = 16
+MAX_PICKLE_TENSOR_ELEMENTS = 20_000_000
 TORCH_ZIP_ROOT = "archive"
 
 ALLOWED_PICKLE_GLOBALS = {
@@ -98,13 +106,28 @@ class LoadedCheckpoint:
 @dataclasses.dataclass(frozen=True)
 class _RawZipEntry:
     filename: str
+    filename_bytes: bytes
     member: str
+    version_needed: int
     flag_bits: int
     compress_type: int
+    mod_time: int
+    mod_date: int
     crc: int
     compress_size: int
     file_size: int
     header_offset: int
+
+
+@dataclasses.dataclass(frozen=True)
+class _LocalZipRecord:
+    start: int
+    header_end: int
+    data_start: int
+    data_end: int
+    descriptor_start: int
+    descriptor_end: int
+    end: int
 
 
 @dataclasses.dataclass(frozen=True)
@@ -240,18 +263,27 @@ def _raw_zip_preflight(data: bytes) -> _RawZipLayout:
     if disk_number != 0 or cd_start_disk != 0 or entries_this_disk != entries_total:
         raise ValueError("checkpoint ZIP multi-disk archives are not allowed")
     zip64_needed = entries_total == 0xFFFF or cd_size_32 == 0xFFFF_FFFF or cd_offset_32 == 0xFFFF_FFFF
+    zip64_present = eocd_pos >= 20 and data[eocd_pos - 20 : eocd_pos - 16] == b"PK\x06\x07"
     if zip64_needed:
-        entries_total, cd_size, cd_offset, cd_end_boundary = _read_zip64_eocd(data, eocd_pos)
+        entries_total, cd_size, cd_offset, cd_end_boundary = _read_zip64_eocd(
+            data,
+            eocd_pos,
+            classic_entries_total=entries_total,
+            classic_cd_size=cd_size_32,
+            classic_cd_offset=cd_offset_32,
+        )
+    elif zip64_present:
+        entries_total, cd_size, cd_offset, cd_end_boundary = _read_zip64_eocd(
+            data,
+            eocd_pos,
+            classic_entries_total=entries_total,
+            classic_cd_size=cd_size_32,
+            classic_cd_offset=cd_offset_32,
+        )
     else:
-        cd_size = cd_size_32
-        cd_offset = cd_offset_32
+        cd_size = int(cd_size_32)
+        cd_offset = int(cd_offset_32)
         cd_end_boundary = eocd_pos
-        cd_end = cd_offset + cd_size
-        if cd_end != eocd_pos and cd_end + 4 <= len(data) and data[cd_end : cd_end + 4] == b"PK\x06\x06":
-            z_entries_total, z_cd_size, z_cd_offset, z_boundary = _read_zip64_eocd(data, eocd_pos)
-            if z_entries_total != entries_total or z_cd_size != cd_size or z_cd_offset != cd_offset:
-                raise ValueError("checkpoint ZIP64 EOCD disagrees with ordinary EOCD")
-            cd_end_boundary = z_boundary
     if entries_total <= 0 or entries_total > MAX_TORCH_ZIP_ENTRIES:
         raise ValueError("checkpoint ZIP entry count out of bounds")
     if cd_size <= 0 or cd_size > MAX_TORCH_CENTRAL_DIRECTORY_BYTES:
@@ -281,7 +313,14 @@ def _find_single_eocd(data: bytes) -> int:
     return candidates[0]
 
 
-def _read_zip64_eocd(data: bytes, eocd_pos: int) -> tuple[int, int, int, int]:
+def _read_zip64_eocd(
+    data: bytes,
+    eocd_pos: int,
+    *,
+    classic_entries_total: int,
+    classic_cd_size: int,
+    classic_cd_offset: int,
+) -> tuple[int, int, int, int]:
     locator_pos = eocd_pos - 20
     if locator_pos < 0 or data[locator_pos : locator_pos + 4] != b"PK\x06\x07":
         raise ValueError("checkpoint ZIP64 EOCD locator is missing")
@@ -293,7 +332,7 @@ def _read_zip64_eocd(data: bytes, eocd_pos: int) -> tuple[int, int, int, int]:
     if data[zip64_offset : zip64_offset + 4] != b"PK\x06\x06":
         raise ValueError("checkpoint ZIP64 EOCD signature is missing")
     size = struct.unpack_from("<Q", data, zip64_offset + 4)[0]
-    if size < 44 or zip64_offset + 12 + size != locator_pos:
+    if size != 44 or zip64_offset + 12 + size != locator_pos:
         raise ValueError("checkpoint ZIP64 EOCD size is malformed")
     (
         _version_made,
@@ -307,6 +346,14 @@ def _read_zip64_eocd(data: bytes, eocd_pos: int) -> tuple[int, int, int, int]:
     ) = struct.unpack_from("<HHIIQQQQ", data, zip64_offset + 12)
     if disk_number != 0 or cd_start_disk != 0 or entries_this_disk != entries_total:
         raise ValueError("checkpoint ZIP64 multi-disk archives are not allowed")
+    if classic_entries_total != 0xFFFF and int(entries_total) != int(classic_entries_total):
+        raise ValueError("checkpoint ZIP64 entry count disagrees with ordinary EOCD")
+    if classic_cd_size != 0xFFFF_FFFF and int(cd_size) != int(classic_cd_size):
+        raise ValueError("checkpoint ZIP64 central directory size disagrees with ordinary EOCD")
+    if classic_cd_offset != 0xFFFF_FFFF and int(cd_offset) != int(classic_cd_offset):
+        raise ValueError("checkpoint ZIP64 central directory offset disagrees with ordinary EOCD")
+    if int(cd_offset) < 0 or int(cd_offset) + int(cd_size) != int(zip64_offset):
+        raise ValueError("checkpoint ZIP64 EOCD placement is malformed")
     return int(entries_total), int(cd_size), int(cd_offset), int(zip64_offset)
 
 
@@ -320,11 +367,11 @@ def _parse_central_directory(data: bytes, *, cd_offset: int, cd_size: int, expec
         fields = struct.unpack_from("<HHHHHHIIIHHHHHII", data, pos + 4)
         (
             _version_made,
-            _version_needed,
+            version_needed,
             flag_bits,
             compress_type,
-            _mod_time,
-            _mod_date,
+            mod_time,
+            mod_date,
             crc,
             compress_size_32,
             file_size_32,
@@ -350,29 +397,27 @@ def _parse_central_directory(data: bytes, *, cd_offset: int, cd_size: int, expec
             filename = name_bytes.decode("utf-8" if flag_bits & 0x800 else "cp437")
         except UnicodeDecodeError as exc:
             raise ValueError("checkpoint ZIP member name is not decodable") from exc
+        if flag_bits & ~(0x8 | 0x800):
+            raise ValueError("checkpoint ZIP member flags are not allowed")
+        if _has_zip64_extra(extra):
+            raise ValueError("checkpoint ZIP per-entry ZIP64 extras are not supported under trainer limits")
+        if compress_size_32 == 0xFFFF_FFFF or file_size_32 == 0xFFFF_FFFF or header_offset_32 == 0xFFFF_FFFF or disk_start == 0xFFFF:
+            raise ValueError("checkpoint ZIP per-entry ZIP64 values exceed trainer limits")
         compress_size = int(compress_size_32)
         file_size = int(file_size_32)
         header_offset = int(header_offset_32)
-        if compress_size_32 == 0xFFFF_FFFF or file_size_32 == 0xFFFF_FFFF or header_offset_32 == 0xFFFF_FFFF or disk_start == 0xFFFF:
-            compress_size, file_size, header_offset, disk_start = _read_zip64_extra(
-                extra,
-                need_compress=compress_size_32 == 0xFFFF_FFFF,
-                need_file=file_size_32 == 0xFFFF_FFFF,
-                need_offset=header_offset_32 == 0xFFFF_FFFF,
-                need_disk=disk_start == 0xFFFF,
-                compress_size=compress_size,
-                file_size=file_size,
-                header_offset=header_offset,
-                disk_start=disk_start,
-            )
         if disk_start != 0:
             raise ValueError("checkpoint ZIP member starts on a nonzero disk")
         entries.append(
             _RawZipEntry(
                 filename=filename,
+                filename_bytes=name_bytes,
                 member="/".join(filename.split("/")[1:]) if "/" in filename else "",
+                version_needed=int(version_needed),
                 flag_bits=flag_bits,
                 compress_type=compress_type,
+                mod_time=int(mod_time),
+                mod_date=int(mod_date),
                 crc=int(crc),
                 compress_size=compress_size,
                 file_size=file_size,
@@ -385,18 +430,7 @@ def _parse_central_directory(data: bytes, *, cd_offset: int, cd_size: int, expec
     return entries
 
 
-def _read_zip64_extra(
-    extra: bytes,
-    *,
-    need_compress: bool,
-    need_file: bool,
-    need_offset: bool,
-    need_disk: bool,
-    compress_size: int,
-    file_size: int,
-    header_offset: int,
-    disk_start: int,
-) -> tuple[int, int, int, int]:
+def _has_zip64_extra(extra: bytes) -> bool:
     pos = 0
     while pos + 4 <= len(extra):
         header_id, size = struct.unpack_from("<HH", extra, pos)
@@ -405,69 +439,54 @@ def _read_zip64_extra(
         if payload_end > len(extra):
             raise ValueError("checkpoint ZIP extra field is malformed")
         if header_id == 0x0001:
-            values_pos = payload_start
-            if need_file:
-                if values_pos + 8 > payload_end:
-                    raise ValueError("checkpoint ZIP64 file size is missing")
-                file_size = int(struct.unpack_from("<Q", extra, values_pos)[0])
-                values_pos += 8
-            if need_compress:
-                if values_pos + 8 > payload_end:
-                    raise ValueError("checkpoint ZIP64 compressed size is missing")
-                compress_size = int(struct.unpack_from("<Q", extra, values_pos)[0])
-                values_pos += 8
-            if need_offset:
-                if values_pos + 8 > payload_end:
-                    raise ValueError("checkpoint ZIP64 local header offset is missing")
-                header_offset = int(struct.unpack_from("<Q", extra, values_pos)[0])
-                values_pos += 8
-            if need_disk:
-                if values_pos + 4 > payload_end:
-                    raise ValueError("checkpoint ZIP64 disk start is missing")
-                disk_start = int(struct.unpack_from("<I", extra, values_pos)[0])
-            return compress_size, file_size, header_offset, disk_start
+            return True
         pos = payload_end
-    raise ValueError("checkpoint ZIP64 extra field is missing")
+    if pos != len(extra):
+        raise ValueError("checkpoint ZIP extra field has malformed residual bytes")
+    return False
 
 
 def _validate_local_member_layout(data: bytes, entries: list[_RawZipEntry], *, central_directory_offset: int) -> None:
-    ranges: list[tuple[int, int, str]] = []
+    records: list[tuple[int, int, str]] = []
     seen_names: set[str] = set()
     for entry in entries:
         if entry.filename in seen_names:
             raise ValueError("checkpoint ZIP contains duplicate member names")
         seen_names.add(entry.filename)
-        if entry.flag_bits & 0x1:
-            raise ValueError("checkpoint ZIP encryption is not allowed")
-        if entry.flag_bits & ~(0x8 | 0x800):
-            raise ValueError("checkpoint ZIP member flags are not allowed")
         if entry.compress_type != zipfile.ZIP_STORED or entry.compress_size != entry.file_size:
             raise ValueError("checkpoint ZIP compression is not allowed")
         if entry.compress_size < 0 or entry.file_size < 0:
             raise ValueError("checkpoint ZIP member size is negative")
-        data_start, data_end = _local_member_data_bounds(data, entry, central_directory_offset=central_directory_offset)
-        ranges.append((data_start, data_end, entry.filename))
-    ranges.sort()
+        record = _parse_local_member_record(data, entry, central_directory_offset=central_directory_offset)
+        records.append((record.start, record.end, entry.filename))
+    records.sort()
     previous_end = 0
-    for start, end, name in ranges:
-        if start < previous_end:
-            raise ValueError(f"checkpoint ZIP member data overlaps: {name}")
+    for start, end, name in records:
+        if start != previous_end:
+            raise ValueError(f"checkpoint ZIP local records are not contiguous before central directory: {name}")
         previous_end = end
+    if previous_end != central_directory_offset:
+        raise ValueError("checkpoint ZIP local records do not end at central directory")
 
 
 def _local_member_data_bounds(data: bytes, entry: _RawZipEntry, *, central_directory_offset: int) -> tuple[int, int]:
+    record = _parse_local_member_record(data, entry, central_directory_offset=central_directory_offset)
+    return record.data_start, record.data_end
+
+
+def _parse_local_member_record(data: bytes, entry: _RawZipEntry, *, central_directory_offset: int) -> _LocalZipRecord:
     off = entry.header_offset
     if off < 0 or off + 30 > central_directory_offset or data[off : off + 4] != b"PK\x03\x04":
         raise ValueError("checkpoint ZIP local header offset is malformed")
     (
-        _version_needed,
+        version_needed,
         local_flags,
         local_compress,
-        _mod_time,
-        _mod_date,
-        _crc,
-        _comp_size,
-        _file_size,
+        mod_time,
+        mod_date,
+        local_crc,
+        local_comp_size,
+        local_file_size,
         name_len,
         extra_len,
     ) = struct.unpack_from("<HHHHHIIIHH", data, off + 4)
@@ -477,13 +496,48 @@ def _local_member_data_bounds(data: bytes, entry: _RawZipEntry, *, central_direc
     data_end = data_start + entry.compress_size
     if data_end > central_directory_offset:
         raise ValueError("checkpoint ZIP member overlaps central directory")
-    try:
-        local_name = data[name_start:extra_start].decode("utf-8" if local_flags & 0x800 else "cp437")
-    except UnicodeDecodeError as exc:
-        raise ValueError("checkpoint ZIP local member name is not decodable") from exc
-    if local_name != entry.filename or local_compress != entry.compress_type:
+    local_name = data[name_start:extra_start]
+    if (
+        local_name != entry.filename_bytes
+        or int(version_needed) != entry.version_needed
+        or int(local_flags) != entry.flag_bits
+        or int(local_compress) != entry.compress_type
+        or int(mod_time) != entry.mod_time
+        or int(mod_date) != entry.mod_date
+    ):
         raise ValueError("checkpoint ZIP local header disagrees with central directory")
-    return data_start, data_end
+    if entry.flag_bits & 0x8:
+        if local_crc != 0 or local_comp_size != 0 or local_file_size != 0:
+            raise ValueError("checkpoint ZIP data-descriptor local header must have zero CRC and sizes")
+        descriptor_start = data_end
+        descriptor_end = descriptor_start + 16
+        if descriptor_end > central_directory_offset:
+            raise ValueError("checkpoint ZIP data descriptor is truncated")
+        if data[descriptor_start : descriptor_start + 4] != b"PK\x07\x08":
+            raise ValueError("checkpoint ZIP data descriptor signature is missing")
+        desc_crc, desc_comp_size, desc_file_size = struct.unpack_from("<III", data, descriptor_start + 4)
+        if int(desc_crc) != entry.crc or int(desc_comp_size) != entry.compress_size or int(desc_file_size) != entry.file_size:
+            raise ValueError("checkpoint ZIP data descriptor disagrees with central directory")
+        return _LocalZipRecord(
+            start=off,
+            header_end=data_start,
+            data_start=data_start,
+            data_end=data_end,
+            descriptor_start=descriptor_start,
+            descriptor_end=descriptor_end,
+            end=descriptor_end,
+        )
+    if local_crc != entry.crc or local_comp_size != entry.compress_size or local_file_size != entry.file_size:
+        raise ValueError("checkpoint ZIP local header CRC or sizes disagree with central directory")
+    return _LocalZipRecord(
+        start=off,
+        header_end=data_start,
+        data_start=data_start,
+        data_end=data_end,
+        descriptor_start=data_end,
+        descriptor_end=data_end,
+        end=data_end,
+    )
 
 
 def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> tuple[int, int, int]:
@@ -496,6 +550,7 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
     memo: dict[int, Any] = {}
     storage_decls: dict[str, _StorageRef] = {}
     storage_used: set[str] = set()
+    tensor_decl_ids: set[int] = set()
 
     def push(value: Any) -> None:
         stack.append(value)
@@ -534,6 +589,15 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
         if not (value is None or type(value) in (str, bool, int, float) or isinstance(value, _GlobalRef)):
             raise ValueError("checkpoint pickle memo read of mutable or special object is not allowed")
         return value
+
+    def dict_insert(target: dict[Any, Any], key: Any, value: Any) -> None:
+        if type(key) is not str:
+            raise ValueError("checkpoint pickle dict keys must be exact strings")
+        if key in target:
+            raise ValueError("checkpoint pickle duplicate dict key")
+        if len(target) + 1 > MAX_PICKLE_CONTAINER_ITEMS:
+            raise ValueError("checkpoint pickle dict exceeds limit")
+        target[key] = value
 
     for opcode, arg, pos in pickletools.genops(data):
         opcodes += 1
@@ -585,7 +649,8 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
             del stack[index:]
             push(items)
         elif name == "TUPLE1":
-            push((pop(),))
+            item = pop()
+            push((item,))
         elif name == "TUPLE2":
             b = pop()
             a = pop()
@@ -601,7 +666,7 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
             target = stack[-1] if stack else None
             if type(target) is not dict:
                 raise ValueError("checkpoint pickle SETITEM target is not a dict")
-            target[key] = value
+            dict_insert(target, key, value)
         elif name == "SETITEMS":
             index = mark_index()
             target = stack[index - 1] if index > 0 else None
@@ -610,16 +675,16 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
             items = stack[index + 1 :]
             if len(items) % 2 != 0:
                 raise ValueError("checkpoint pickle SETITEMS has odd item count")
-            if len(items) // 2 + len(target) > MAX_PICKLE_CONTAINER_ITEMS:
-                raise ValueError("checkpoint pickle dict exceeds limit")
             for i in range(0, len(items), 2):
-                target[items[i]] = items[i + 1]
+                dict_insert(target, items[i], items[i + 1])
             del stack[index:]
         elif name == "APPEND":
             value = pop()
             target = stack[-1] if stack else None
             if type(target) is not list:
                 raise ValueError("checkpoint pickle APPEND target is not a list")
+            if len(target) + 1 > MAX_PICKLE_CONTAINER_ITEMS:
+                raise ValueError("checkpoint pickle list exceeds limit")
             target.append(value)
         elif name == "APPENDS":
             index = mark_index()
@@ -648,8 +713,12 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
                     raise ValueError("checkpoint pickle OrderedDict reduce args mismatch")
                 push(_ORDERED_DICT)
             elif isinstance(func, _GlobalRef) and func.name == "torch._utils _rebuild_tensor_v2":
+                tensor = _validate_tensor_reduce(args, storage_decls, storage_used)
                 tensor_decls += 1
-                push(_validate_tensor_reduce(args, storage_decls, storage_used))
+                if tensor_decls > MAX_PICKLE_TENSORS:
+                    raise ValueError("checkpoint pickle has too many tensor declarations")
+                tensor_decl_ids.add(id(tensor))
+                push(tensor)
             else:
                 raise ValueError("checkpoint pickle REDUCE target is not allowed")
         elif name == "STOP":
@@ -657,6 +726,13 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
                 raise ValueError("checkpoint pickle STOP must be final byte")
             if len(stack) != 1:
                 raise ValueError("checkpoint pickle STOP with malformed stack")
+            _validate_pickle_root_graph(
+                stack[0],
+                tensor_decl_ids=tensor_decl_ids,
+                storage_used=storage_used,
+                storage_decls=storage_decls,
+                storage_member_sizes=storage_member_sizes,
+            )
             stop_seen = True
             break
         else:
@@ -670,6 +746,125 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
     if set(storage_used) != set(storage_decls):
         raise ValueError("checkpoint pickle storage declarations were not all consumed by tensors")
     return opcodes, memo_writes, tensor_decls
+
+
+def _validate_pickle_root_graph(
+    root: Any,
+    *,
+    tensor_decl_ids: set[int],
+    storage_used: set[str],
+    storage_decls: dict[str, _StorageRef],
+    storage_member_sizes: dict[str, int],
+) -> None:
+    if type(root) is not dict:
+        raise ValueError("checkpoint pickle root must be an exact plain dict")
+    counters = {
+        "nodes": 0,
+        "items": 0,
+        "strings": 0,
+        "tensors": 0,
+        "tensor_elements": 0,
+        "tensor_bytes": 0,
+        "storage_bytes": 0,
+    }
+    seen_containers: set[int] = set()
+    active_containers: set[int] = set()
+    reachable_tensor_ids: set[int] = set()
+    reachable_storage_keys: set[str] = set()
+    stack: list[tuple[Any, int, bool]] = [(root, 0, False)]
+    while stack:
+        item, depth, exiting = stack.pop()
+        if exiting:
+            active_containers.remove(id(item))
+            continue
+        counters["nodes"] += 1
+        if counters["nodes"] > MAX_PICKLE_GRAPH_NODES:
+            raise ValueError("checkpoint pickle object graph has too many nodes")
+        if depth > MAX_PICKLE_GRAPH_DEPTH:
+            raise ValueError("checkpoint pickle object graph is too deep")
+        if item is None or type(item) in (bool, int):
+            continue
+        if type(item) is float:
+            if not math.isfinite(item):
+                raise ValueError("checkpoint pickle has a non-finite float")
+            continue
+        if type(item) is str:
+            counters["strings"] += len(item.encode("utf-8"))
+            if counters["strings"] > MAX_PICKLE_STRING_BYTES:
+                raise ValueError("checkpoint pickle has too many string bytes")
+            continue
+        if type(item) is _TensorDecl:
+            tensor_id = id(item)
+            if tensor_id not in tensor_decl_ids:
+                raise ValueError("checkpoint pickle has an unknown tensor declaration")
+            if tensor_id in reachable_tensor_ids:
+                raise ValueError("checkpoint pickle repeats a tensor declaration")
+            reachable_tensor_ids.add(tensor_id)
+            reachable_storage_keys.add(item.storage_key)
+            counters["tensors"] += 1
+            if counters["tensors"] > MAX_PICKLE_TENSORS:
+                raise ValueError("checkpoint pickle has too many tensors")
+            counters["tensor_elements"] += _shape_product(item.shape)
+            counters["tensor_bytes"] += item.byte_count
+            storage = storage_decls.get(item.storage_key)
+            if storage is None:
+                raise ValueError("checkpoint pickle tensor references missing storage")
+            counters["storage_bytes"] += storage.byte_count
+            if counters["tensor_elements"] > MAX_PICKLE_TENSOR_ELEMENTS:
+                raise ValueError("checkpoint pickle tensor element aggregate exceeds limit")
+            if counters["tensor_bytes"] > MAX_TORCH_ZIP_STORAGE_BYTES:
+                raise ValueError("checkpoint pickle tensor byte aggregate exceeds limit")
+            if counters["storage_bytes"] > MAX_TORCH_ZIP_STORAGE_BYTES:
+                raise ValueError("checkpoint pickle tensor storage aggregate exceeds limit")
+            continue
+        if type(item) is dict:
+            container_id = id(item)
+            if container_id in active_containers:
+                raise ValueError("checkpoint pickle object graph contains a cycle")
+            if container_id in seen_containers:
+                raise ValueError("checkpoint pickle repeats a container object identity")
+            seen_containers.add(container_id)
+            active_containers.add(container_id)
+            if len(item) > MAX_PICKLE_CONTAINER_ITEMS:
+                raise ValueError("checkpoint pickle dict exceeds limit")
+            counters["items"] += len(item)
+            if counters["items"] > MAX_PICKLE_TOTAL_ITEMS:
+                raise ValueError("checkpoint pickle collection aggregate exceeds limit")
+            stack.append((item, depth, True))
+            for key, child in reversed(list(item.items())):
+                if type(key) is not str:
+                    raise ValueError("checkpoint pickle dict key must be an exact string")
+                counters["strings"] += len(key.encode("utf-8"))
+                if counters["strings"] > MAX_PICKLE_STRING_BYTES:
+                    raise ValueError("checkpoint pickle has too many string bytes")
+                stack.append((child, depth + 1, False))
+            continue
+        if type(item) is list or type(item) is tuple:
+            container_id = id(item)
+            if container_id in active_containers:
+                raise ValueError("checkpoint pickle object graph contains a cycle")
+            if container_id in seen_containers:
+                raise ValueError("checkpoint pickle repeats a container object identity")
+            seen_containers.add(container_id)
+            active_containers.add(container_id)
+            if len(item) > MAX_PICKLE_CONTAINER_ITEMS:
+                raise ValueError("checkpoint pickle container exceeds limit")
+            counters["items"] += len(item)
+            if counters["items"] > MAX_PICKLE_TOTAL_ITEMS:
+                raise ValueError("checkpoint pickle collection aggregate exceeds limit")
+            stack.append((item, depth, True))
+            for child in reversed(item):
+                stack.append((child, depth + 1, False))
+            continue
+        raise ValueError(f"checkpoint pickle object type is not allowed: {type(item).__name__}")
+    if tensor_decl_ids != reachable_tensor_ids:
+        raise ValueError("checkpoint pickle tensor declarations are not exactly reachable from root")
+    if reachable_storage_keys != set(storage_used):
+        raise ValueError("checkpoint pickle reachable tensor storage keys do not match constructed tensors")
+    if reachable_storage_keys != set(storage_decls):
+        raise ValueError("checkpoint pickle reachable tensor storage keys do not match storage declarations")
+    if reachable_storage_keys != set(storage_member_sizes):
+        raise ValueError("checkpoint pickle reachable tensor storage keys do not match ZIP storage members")
 
 
 def _validate_storage_persistent_id(
@@ -730,6 +925,8 @@ def _validate_tensor_reduce(
         raise ValueError("checkpoint pickle tensor storage offset must be zero")
     if type(shape) is not tuple or type(strides) is not tuple or len(shape) != len(strides):
         raise ValueError("checkpoint pickle tensor shape/stride mismatch")
+    if len(shape) > MAX_PICKLE_TENSOR_RANK:
+        raise ValueError("checkpoint pickle tensor rank exceeds limit")
     if requires_grad is not False:
         raise ValueError("checkpoint pickle tensor requires_grad must be false")
     if metadata is not _ORDERED_DICT:

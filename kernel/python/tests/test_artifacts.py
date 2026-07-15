@@ -166,11 +166,19 @@ class ArtifactTest(unittest.TestCase):
             "\\\\.\\C:\\Users\\Jack",
             "\\\\?\\C:\\Users\\Jack",
             "file:///C:/Users/Jack/run",
+            "https://example.test/path diagnostic=/home/jack/run",
+            "note;/data",
+            "note\uff1b/\u6570\u636e",
+            "note;\\\\server",
+            "note;\\Device\\HarddiskVolume1\\secret",
+            "/|secret",
         ]
         for value in positives:
             with self.subTest(value=value):
                 with self.assertRaises(ValueError):
                     validate_training_json_privacy({"metadata": value})
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({value: {"nested": value}})
         negatives = [
             "terminal_reinforce_value/v1",
             "https://example.test/path",

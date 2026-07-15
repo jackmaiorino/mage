@@ -14,6 +14,10 @@ def emit(value: dict) -> None:
 
 
 def main() -> int:
+    start_marker = os.environ.get("FAKE_START_MARKER")
+    if start_marker:
+        with open(start_marker, "w", encoding="utf-8") as fh:
+            fh.write("started\n")
     scenario = os.environ.get("FAKE_SCENARIO", "valid")
     if scenario == "timeout":
         time.sleep(60)

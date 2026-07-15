@@ -9,6 +9,7 @@ import math
 import os
 import re
 import stat
+import unicodedata
 from pathlib import Path
 from typing import Any, Callable
 
@@ -61,16 +62,8 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
     "updated_at",
 }
 
-_PATH_DELIM = r"[\s\"'(<:=,\[\{]"
-_WINDOWS_DRIVE_RE = re.compile(r"(^|[^A-Za-z0-9_])([A-Za-z]:[\\/](?:[^\\/\s\"'<>|]+[\\/]*)*)")
-_WINDOWS_EXTENDED_RE = re.compile(rf"(^|{_PATH_DELIM})(?:\\\\[.?]\\|\\\\\?\\|\\\?\\|\\Device\\|//[.?]/|//\?/)", re.IGNORECASE)
-_WINDOWS_UNC_RE = re.compile(rf"(^|{_PATH_DELIM})(?:\\\\|//)[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
-_WINDOWS_ROOT_REL_RE = re.compile(rf"(^|{_PATH_DELIM})\\(?![\\.?])[^\\/\s:\"'<>|]+(?:[\\/][^\\/\s:\"'<>|]+)*")
-_POSIX_ABSOLUTE_RE = re.compile(
-    rf"(^|{_PATH_DELIM})/(?!/)(?:$|[^\s\"'<>|\\]+(?:/[^\s\"'<>|\\]+)*)"
-)
+_URI_FULL_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://[^\s]+$")
 _FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
-_NON_FILE_URI_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -321,25 +314,92 @@ def read_authoritative_json(path: str | Path, kind: str) -> dict[str, Any]:
     return read_json_file(path, max_bytes=AUTHORITATIVE_JSON_LIMITS[kind], require_canonical=True)
 
 
+def _is_candidate_boundary(value: str, index: int) -> bool:
+    if index <= 0:
+        return True
+    category = unicodedata.category(value[index - 1])
+    return category[0] in {"Z", "P", "S"}
+
+
+def _is_slash(ch: str) -> bool:
+    return ch == "/" or ch == "\\"
+
+
+def _has_drive_root_at(value: str, index: int) -> bool:
+    return (
+        index + 2 < len(value)
+        and value[index].isalpha()
+        and value[index + 1] == ":"
+        and _is_slash(value[index + 2])
+        and _is_candidate_boundary(value, index)
+    )
+
+
+def _has_windows_extended_at(value: str, index: int) -> bool:
+    if not _is_candidate_boundary(value, index):
+        return False
+    tail = value[index:].casefold()
+    return (
+        tail.startswith("\\\\?\\")
+        or tail.startswith("\\\\.\\")
+        or tail.startswith("\\??\\")
+        or tail.startswith("\\device\\")
+        or tail.startswith("//?/")
+        or tail.startswith("//./")
+    )
+
+
+def _has_unc_at(value: str, index: int) -> bool:
+    if not _is_candidate_boundary(value, index) or index + 2 >= len(value):
+        return False
+    prefix = value[index : index + 2]
+    if prefix not in ("\\\\", "//"):
+        return False
+    if index + 2 < len(value) and value[index + 2] in ("\\", "/", ".", "?"):
+        return False
+    return True
+
+
+def _has_windows_root_relative_at(value: str, index: int) -> bool:
+    return (
+        _is_candidate_boundary(value, index)
+        and value[index] == "\\"
+        and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?", " "))
+    )
+
+
+def _has_posix_root_at(value: str, index: int) -> bool:
+    if not _is_candidate_boundary(value, index):
+        return False
+    if value[index] != "/" or (index + 1 < len(value) and value[index + 1] == "/"):
+        return False
+    if index > 0 and value[index - 1] == "#":
+        return False
+    if index + 1 < len(value) and value[index + 1].isspace():
+        return False
+    return True
+
+
 def _looks_like_absolute_path(value: str) -> bool:
     if not value:
         return False
     if _FILE_URI_RE.search(value):
         return True
-    if _NON_FILE_URI_RE.match(value):
+    if _URI_FULL_RE.fullmatch(value) and not value.casefold().startswith("file://"):
         return False
     if value in ("/", "\\"):
         return True
-    if _WINDOWS_EXTENDED_RE.search(value):
-        return True
-    if _WINDOWS_DRIVE_RE.search(value):
-        return True
-    if _WINDOWS_UNC_RE.search(value):
-        return True
-    if _WINDOWS_ROOT_REL_RE.search(value):
-        return True
-    if _POSIX_ABSOLUTE_RE.search(value):
-        return True
+    for index, ch in enumerate(value):
+        if _has_drive_root_at(value, index):
+            return True
+        if ch in ("/", "\\"):
+            if (
+                _has_windows_extended_at(value, index)
+                or _has_unc_at(value, index)
+                or _has_windows_root_relative_at(value, index)
+                or _has_posix_root_at(value, index)
+            ):
+                return True
     return False
 
 

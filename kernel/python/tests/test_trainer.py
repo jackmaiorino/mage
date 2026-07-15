@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import os
+import hashlib
 import json
 import random
 import shutil
@@ -69,6 +70,36 @@ def _subprocess_env() -> dict[str, str]:
     env = dict(os.environ)
     env["PYTHONPATH"] = os.pathsep.join(["kernel/python", "kernel/python/tests"])
     return env
+
+
+def _snapshot_tree(root: Path) -> dict[str, tuple[str, int, str | None, int, int, int, int]]:
+    out: dict[str, tuple[str, int, str | None, int, int, int, int]] = {}
+    for path in sorted([root, *root.rglob("*")], key=lambda item: str(item.relative_to(root))):
+        rel = str(path.relative_to(root))
+        st = path.lstat()
+        if path.is_symlink():
+            kind = "link"
+            digest = None
+            size = 0
+        elif path.is_dir():
+            kind = "dir"
+            digest = None
+            size = 0
+        else:
+            data = path.read_bytes()
+            kind = "file"
+            digest = hashlib.sha256(data).hexdigest()
+            size = len(data)
+        out[rel] = (
+            kind,
+            size,
+            digest,
+            int(getattr(st, "st_dev", 0)),
+            int(getattr(st, "st_ino", 0)),
+            int(getattr(st, "st_nlink", 1)),
+            int(getattr(st, "st_mtime_ns", int(st.st_mtime * 1_000_000_000))),
+        )
+    return out
 
 
 def _run_hard_kill_child(tmp: Path, out: Path, launcher: Path, boundary: str, target_fragment: str = "-") -> tuple[subprocess.CompletedProcess, Path]:
@@ -169,11 +200,19 @@ train(
     return completed, marker
 
 
-def _assert_hard_kill_fired(test: unittest.TestCase, child: subprocess.CompletedProcess, marker: Path, boundary: str) -> None:
+def _assert_hard_kill_fired(
+    test: unittest.TestCase,
+    child: subprocess.CompletedProcess,
+    marker: Path,
+    boundary: str,
+    target_fragment: str = "-",
+) -> None:
     test.assertEqual(child.returncode, 73)
     test.assertTrue(marker.is_file(), f"missing marker for {boundary}")
     data = json.loads(marker.read_text(encoding="utf-8"))
     test.assertEqual(data["boundary"], boundary)
+    if target_fragment != "-":
+        test.assertIn(target_fragment, data["path"])
 
 
 class TrainerTest(unittest.TestCase):
@@ -196,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v5")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v3")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v6")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v4")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -278,6 +317,56 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual((before.st_dev, before.st_ino, before.st_mtime_ns), (after.st_dev, after.st_ino, after.st_mtime_ns))
             self.assertTrue(known.is_dir())
 
+    def test_exact_atomic_temp_grammar_rejects_prefix_spoofs_without_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+
+            premanifest = tmp / "premanifest"
+            premanifest.mkdir()
+            with OutputLock(premanifest):
+                pass
+            (premanifest / ".run.json.evil.1.2.tmp").write_text("{}", encoding="utf-8")
+            before = _snapshot_tree(premanifest)
+            with self.assertRaises(ValueError):
+                train(
+                    env_bin=launcher,
+                    out_dir=premanifest,
+                    base_seed=71501,
+                    until_update=0,
+                    batch_episodes=2,
+                    learning_rate=0.001,
+                    value_coef=0.5,
+                    max_decisions=8,
+                )
+            self.assertEqual(_snapshot_tree(premanifest), before)
+
+            committed = tmp / "committed"
+            train(
+                env_bin=launcher,
+                out_dir=committed,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            for name in (".latest.json.evil.1.2.tmp", ".update.json.evil.1.2.tmp"):
+                target = tmp / f"case_{name.replace('.', '_')}"
+                shutil.copytree(committed, target)
+                if name.startswith(".update"):
+                    tx = target / ".transactions" / "update-00000001-deadbeef"
+                    tx.mkdir(parents=True)
+                    (tx / name).write_text("{}", encoding="utf-8")
+                else:
+                    (target / name).write_text("{}", encoding="utf-8")
+                before = _snapshot_tree(target)
+                with self.subTest(name=name):
+                    with self.assertRaises(ValueError):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertEqual(_snapshot_tree(target), before)
+
     def test_fresh_run_json_hard_death_reuses_same_output_path(self) -> None:
         cases = [
             ("json_save", "run.json"),
@@ -304,7 +393,7 @@ class TrainerTest(unittest.TestCase):
                 with self.subTest(boundary=boundary, target=target):
                     out = tmp / f"runjson_{index}"
                     child, marker = _run_hard_kill_fresh_child(tmp, out, launcher, boundary, target, until_update=0)
-                    _assert_hard_kill_fired(self, child, marker, boundary)
+                    _assert_hard_kill_fired(self, child, marker, boundary, target)
                     if (out / "latest.json").exists():
                         recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
                     else:
@@ -330,10 +419,12 @@ class TrainerTest(unittest.TestCase):
             ("json_save", "update.json", False),
             ("json_flush", "update.json", False),
             ("json_fsync", "update.json", False),
+            ("json_replace_before", "update.json", False),
             ("json_replace_after", "update.json", False),
             ("json_save", "sidecar.json", False),
             ("json_flush", "sidecar.json", False),
             ("json_fsync", "sidecar.json", False),
+            ("json_replace_before", "sidecar.json", False),
             ("json_replace_after", "sidecar.json", False),
             ("generation_validate", "-", False),
             ("final_replace_checkpoint_before", "-", False),
@@ -345,15 +436,39 @@ class TrainerTest(unittest.TestCase):
             ("json_save", "latest.json", False),
             ("json_flush", "latest.json", False),
             ("json_fsync", "latest.json", False),
+            ("json_replace_before", "latest.json", False),
             ("json_replace_after", "latest.json", True),
             ("latest_replace_before", "-", False),
             ("latest_replace_after", "-", True),
+            ("json_save", "episodes.jsonl", True),
+            ("json_flush", "episodes.jsonl", True),
+            ("json_fsync", "episodes.jsonl", True),
+            ("json_replace_before", "episodes.jsonl", True),
+            ("json_save", "updates.jsonl", True),
+            ("json_flush", "updates.jsonl", True),
+            ("json_fsync", "updates.jsonl", True),
+            ("json_replace_before", "updates.jsonl", True),
+            ("json_save", "summary.json", True),
+            ("json_flush", "summary.json", True),
+            ("json_fsync", "summary.json", True),
+            ("json_replace_before", "summary.json", True),
             ("post_latest_cleanup_before", "-", True),
         ]
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
             launcher = fake_launcher(tmp, "train_pair")
-            control = tmp / "control"
+            control0 = tmp / "control0"
+            train(
+                env_bin=launcher,
+                out_dir=control0,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            control = tmp / "control2"
             train(
                 env_bin=launcher,
                 out_dir=control,
@@ -368,23 +483,42 @@ class TrainerTest(unittest.TestCase):
                 with self.subTest(boundary=boundary, target=target):
                     out = tmp / f"update0_{index}"
                     child, marker = _run_hard_kill_fresh_child(tmp, out, launcher, boundary, target, until_update=0)
-                    _assert_hard_kill_fired(self, child, marker, boundary)
+                    _assert_hard_kill_fired(self, child, marker, boundary, target)
                     self.assertEqual((out / "latest.json").exists(), latest_exists)
                     if latest_exists:
-                        recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
+                        recovered0 = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=0)
                     else:
-                        recovered = train(
+                        recovered0 = train(
                             env_bin=launcher,
                             out_dir=out,
                             base_seed=71501,
-                            until_update=2,
+                            until_update=0,
                             batch_episodes=2,
                             learning_rate=0.001,
                             value_coef=0.5,
                             max_decisions=8,
                         )
-                    self.assertEqual(recovered["completed_update"], 2)
+                    self.assertEqual(recovered0["completed_update"], 0)
+                    self.assertEqual(read_json_file(out / "latest.json")["update"], 0)
+                    self.assertEqual((out / "episodes.jsonl").read_bytes(), (control0 / "episodes.jsonl").read_bytes())
+                    self.assertEqual((out / "updates.jsonl").read_bytes(), (control0 / "updates.jsonl").read_bytes())
+                    out_summary = read_json_file(out / "summary.json")
+                    control_summary = read_json_file(control0 / "summary.json")
+                    self.assertEqual(
+                        {key: value for key, value in out_summary.items() if key != "head"},
+                        {key: value for key, value in control_summary.items() if key != "head"},
+                    )
+                    self.assertEqual(out_summary["head"], read_json_file(out / "latest.json")["head"])
                     _assert_generation_logical_equal(self, out, control, 0)
+                    self.assertFalse((out / ".transactions").exists())
+                    self.assertFalse(
+                        any(
+                            path.name.endswith(".tmp") and ".quarantine" not in path.relative_to(out).parts
+                            for path in out.rglob("*")
+                        )
+                    )
+                    recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
+                    self.assertEqual(recovered["completed_update"], 2)
                     _assert_generation_logical_equal(self, out, control, 2)
 
     def test_terminal_loss_matches_hand_computation_and_detaches_advantage(self) -> None:
@@ -760,7 +894,7 @@ class TrainerTest(unittest.TestCase):
                         max_decisions=8,
                     )
                     child, marker = _run_hard_kill_child(tmp, out, launcher, boundary, target)
-                    _assert_hard_kill_fired(self, child, marker, boundary)
+                    _assert_hard_kill_fired(self, child, marker, boundary, target)
                     self.assertEqual(read_json_file(out / "latest.json")["update"], expected_head)
                     recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=expected_head)
                     self.assertEqual(recovered["completed_update"], expected_head)
@@ -835,6 +969,38 @@ class TrainerTest(unittest.TestCase):
             except unittest.SkipTest:
                 pass
 
+    def test_mixed_debris_and_committed_corruption_fails_without_recovery_mutation_or_env_launch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+            tx = out / ".transactions" / "update-00000002-deadbeef"
+            tx.mkdir(parents=True)
+            shutil.copy2(out / "checkpoints" / "update-00000001.pt", tx / "checkpoint.pt")
+            shutil.copy2(out / "updates" / "update-00000001.json", tx / "update.json")
+            shutil.copy2(out / "checkpoints" / "update-00000001.json", tx / "sidecar.json")
+            root_temp = out / ".latest.json.1.2.tmp"
+            root_temp.write_bytes((out / "latest.json").read_bytes())
+            (out / "updates" / "update-00000001.json").write_bytes(b"{}\n")
+            before = _snapshot_tree(out)
+            with self.assertRaises(ValueError):
+                train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
+            self.assertFalse(env_marker.exists())
+            self.assertEqual(_snapshot_tree(out), before)
+
     def test_no_follow_rejects_artifact_links_and_preserves_external_sentinel(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -895,6 +1061,54 @@ class TrainerTest(unittest.TestCase):
                         self.fail("Windows junction coverage could not create mklink /J")
 
                 run_case("updates_junction", updates_junction)
+
+    def test_authoritative_hardlink_matrix_fails_before_env_launch_and_preserves_alias(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+            outside = tmp / "outside"
+            outside.mkdir()
+
+            cases = {
+                "run": Path("run.json"),
+                "latest": Path("latest.json"),
+                "committed_update": Path("updates") / "update-00000000.json",
+                "checkpoint": Path("checkpoints") / "update-00000000.pt",
+                "sidecar": Path("checkpoints") / "update-00000000.json",
+                "episodes_cache": Path("episodes.jsonl"),
+                "updates_cache": Path("updates.jsonl"),
+                "summary_cache": Path("summary.json"),
+            }
+            for name, rel in cases.items():
+                target = tmp / f"hardlink_{name}"
+                shutil.copytree(source, target)
+                artifact = target / rel
+                outside_alias = outside / f"{name}.alias"
+                outside_alias.write_bytes(artifact.read_bytes())
+                artifact.unlink()
+                os.link(outside_alias, artifact)
+                before_tree = _snapshot_tree(target)
+                before_outside = _snapshot_tree(outside)
+                with self.subTest(name=name):
+                    with self.assertRaises(ValueError):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=1)
+                    self.assertFalse(env_marker.exists())
+                    self.assertEqual(_snapshot_tree(target), before_tree)
+                    self.assertEqual(_snapshot_tree(outside), before_outside)
 
     def test_malformed_rng_cannot_be_committed_or_loaded(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1011,16 +1225,16 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v4_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v4"}))
+            case("old_v5_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v5"}))
             case(
-                "old_v2_artifact_boundary_rejected",
+                "old_v3_artifact_boundary_rejected",
                 lambda p: write_json_atomic(
                     p / "run.json",
                     {
                         **read_json_file(p / "run.json"),
                         "artifact_boundary": {
                             **read_json_file(p / "run.json")["artifact_boundary"],
-                            "schema": "kernel_rl_artifact_boundary/v2",
+                            "schema": "kernel_rl_artifact_boundary/v3",
                         },
                     },
                 ),
@@ -1224,32 +1438,42 @@ with OutputLock(root):
                     capability.write_text(json.dumps({"short_name": "unavailable", "path": short_text}, sort_keys=True), encoding="utf-8")
                     self.assertIn("short_name", read_json_file(capability, require_canonical=False))
 
+    def test_output_lock_one_byte_creation_and_multibyte_rejection_preserve_identity(self) -> None:
+        with tempfile.TemporaryDirectory(dir=Path.cwd()) as tmp_name:
+            tmp = Path(tmp_name)
+            root = tmp / "run"
+            root.mkdir()
+            lock_path = root / ".mtg-kernel-train.lock"
+            lock_path.write_bytes(b"")
+            with OutputLock(root):
+                pass
+            self.assertEqual(lock_path.read_bytes(), b"\0")
+            identity = filesystem_file_identity(lock_path)
+            st = lock_path.stat()
+            first_state = (identity, st.st_size, int(st.st_mtime_ns), lock_path.read_bytes())
+            with OutputLock(root):
+                pass
+            st = lock_path.stat()
+            self.assertEqual((filesystem_file_identity(lock_path), st.st_size, int(st.st_mtime_ns), lock_path.read_bytes()), first_state)
+
+            bad_root = tmp / "bad_run"
+            bad_root.mkdir()
+            bad_lock = bad_root / ".mtg-kernel-train.lock"
+            bad_lock.write_bytes(b"xx")
+            bad_before = (filesystem_file_identity(bad_lock), bad_lock.stat().st_size, int(bad_lock.stat().st_mtime_ns), bad_lock.read_bytes())
+            with self.assertRaises(OutputLockError):
+                with OutputLock(bad_root):
+                    pass
+            bad_after = (filesystem_file_identity(bad_lock), bad_lock.stat().st_size, int(bad_lock.stat().st_mtime_ns), bad_lock.read_bytes())
+            self.assertEqual(bad_after, bad_before)
+
     def test_same_root_concurrent_trainers_exclude_loser_without_second_chain(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
             out = tmp / "run"
-            launcher = fake_launcher(tmp, "train_pair_slow")
+            env_marker = tmp / "loser-env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair_slow", {"FAKE_START_MARKER": str(env_marker)})
             env = _subprocess_env()
-            common = [
-                sys.executable,
-                "-m",
-                "mtg_kernel_rl",
-                "train",
-                "--env-bin",
-                str(launcher),
-                "--out-dir",
-                str(out),
-                "--base-seed",
-                "71501",
-                "--batch-episodes",
-                "2",
-                "--learning-rate",
-                "0.001",
-                "--value-coef",
-                "0.5",
-                "--max-decisions",
-                "8",
-            ]
             owner_script = tmp / "lock_owner.py"
             owner_marker = tmp / "lock_owner.marker"
             release_marker = tmp / "lock_owner.release"
@@ -1276,7 +1500,11 @@ with OutputLock(root) as lock:
                 while not owner_marker.exists() and time.time() < deadline:
                     time.sleep(0.05)
                 self.assertTrue(owner_marker.exists())
+                self.assertIsNone(owner.poll())
                 lock_path = Path(owner_marker.read_text(encoding="utf-8"))
+                lock_identity = filesystem_file_identity(lock_path)
+                alias_out = Path(os.path.relpath(out, Path.cwd()))
+                self.assertTrue(os.path.samefile(out, alias_out))
                 loser_marker = tmp / "loser_after_train.marker"
                 loser_script = tmp / "lock_loser.py"
                 loser_script.write_text(
@@ -1302,13 +1530,15 @@ try:
     )
 except OutputLockError:
     sys.exit(73)
+except Exception:
+    sys.exit(74)
 marker.write_text("launched", encoding="utf-8")
 sys.exit(0)
 """,
                     encoding="utf-8",
                 )
                 loser = subprocess.run(
-                    [sys.executable, str(loser_script), str(launcher), str(out), str(loser_marker)],
+                    [sys.executable, str(loser_script), str(launcher), str(alias_out), str(loser_marker)],
                     cwd=Path.cwd(),
                     env=env,
                     stdout=subprocess.DEVNULL,
@@ -1316,9 +1546,13 @@ sys.exit(0)
                     check=False,
                 )
                 self.assertEqual(loser.returncode, 73)
+                self.assertIsNone(owner.poll())
                 self.assertFalse(loser_marker.exists())
+                self.assertFalse(env_marker.exists())
                 self.assertFalse((out / "run.json").exists())
                 self.assertEqual(lock_path.name, ".mtg-kernel-train.lock")
+                self.assertEqual(len(list(out.glob(".mtg-kernel-train.lock"))), 1)
+                self.assertEqual(filesystem_file_identity(lock_path), lock_identity)
                 self.assertEqual(filesystem_file_identity(lock_path), filesystem_file_identity(out / ".mtg-kernel-train.lock"))
             finally:
                 release_marker.write_text("release", encoding="utf-8")

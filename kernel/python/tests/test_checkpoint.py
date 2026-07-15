@@ -4,6 +4,7 @@ import copy
 import dataclasses
 import io
 import inspect
+import struct
 import zipfile
 import random
 import tempfile
@@ -334,6 +335,89 @@ class CheckpointTest(unittest.TestCase):
             members.append((f"archive/data/{key}", payload, zipfile.ZIP_STORED))
         self._write_zip(path, members)
 
+    def _binunicode(self, value: str) -> bytes:
+        data = value.encode("utf-8")
+        return b"X" + len(data).to_bytes(4, "little") + data
+
+    def _small_int(self, value: int) -> bytes:
+        self.assertGreaterEqual(value, 0)
+        self.assertLessEqual(value, 255)
+        return b"K" + bytes([value])
+
+    def _pickle_tuple(self, items: list[bytes]) -> bytes:
+        if not items:
+            return b")"
+        return b"(" + b"".join(items) + b"t"
+
+    def _ordered_dict_marker(self) -> bytes:
+        return b"ccollections\nOrderedDict\n)R"
+
+    def _tensor_reduce_pickle(self, shape: tuple[int, ...]) -> bytes:
+        strides = []
+        running = 1
+        for dim in reversed(shape):
+            strides.append(running)
+            running *= max(dim, 1)
+        strides = list(reversed(strides))
+        storage = self._pickle_tuple(
+            [
+                self._binunicode("storage"),
+                b"ctorch\nFloatStorage\n",
+                self._binunicode("0"),
+                self._binunicode("cpu"),
+                self._small_int(max(1, running)),
+            ]
+        ) + b"Q"
+        args = self._pickle_tuple(
+            [
+                storage,
+                self._small_int(0),
+                self._pickle_tuple([self._small_int(dim) for dim in shape]),
+                self._pickle_tuple([self._small_int(stride) for stride in strides]),
+                b"\x89",
+                self._ordered_dict_marker(),
+            ]
+        )
+        return b"ctorch._utils\n_rebuild_tensor_v2\n" + args + b"R"
+
+    def _root_dict_pickle(self, pairs: list[tuple[str, bytes]], *, setitems: bool = False) -> bytes:
+        if setitems:
+            items: list[bytes] = []
+            for key, value in pairs:
+                items.extend([self._binunicode(key), value])
+            return b"\x80\x02}" + b"(" + b"".join(items) + b"u."
+        out = bytearray(b"\x80\x02}")
+        for key, value in pairs:
+            out.extend(self._binunicode(key))
+            out.extend(value)
+            out.extend(b"s")
+        out.extend(b".")
+        return bytes(out)
+
+    def _central_entry_pos(self, data: bytes, filename: bytes) -> int:
+        pos = data.find(b"PK\x01\x02")
+        while pos != -1:
+            name_len, extra_len, comment_len = struct.unpack_from("<HHH", data, pos + 28)
+            name_start = pos + 46
+            if data[name_start : name_start + name_len] == filename:
+                return pos
+            pos = data.find(b"PK\x01\x02", name_start + name_len + extra_len + comment_len)
+        raise AssertionError(f"central entry not found: {filename!r}")
+
+    def _local_entry_bounds(self, data: bytes, central_pos: int) -> tuple[int, int, int, int]:
+        local_off = struct.unpack_from("<I", data, central_pos + 42)[0]
+        name_len, extra_len = struct.unpack_from("<HH", data, local_off + 26)
+        data_start = local_off + 30 + name_len + extra_len
+        comp_size = struct.unpack_from("<I", data, central_pos + 20)[0]
+        return local_off, data_start, data_start + comp_size, comp_size
+
+    def _write_zipinfo_extra(self, path: Path, extra: bytes) -> None:
+        info = zipfile.ZipInfo("archive/data.pkl")
+        info.compress_type = zipfile.ZIP_STORED
+        info.extra = extra
+        with zipfile.ZipFile(path, "w") as zf:
+            zf.writestr(info, b"\x80\x02}.")
+
     def assert_rejected_before_zipfile_and_torch_load(self, path: Path, expected: type[BaseException] | tuple[type[BaseException], ...] = ValueError) -> None:
         called = {"zipfile": False, "torch_load": False}
         original_zipfile = checkpoint_io.zipfile.ZipFile
@@ -428,6 +512,17 @@ class CheckpointTest(unittest.TestCase):
             "disallowed_global": b"\x80\x02cos\nsystem\n.",
             "disallowed_reducer": b"\x80\x02ctorch\nFloatStorage\n)R.",
             "trailing_after_stop": b"\x80\x02}.x",
+            "none_root": b"\x80\x02N.",
+            "list_root": b"\x80\x02]q\x00.",
+            "tuple_root": b"\x80\x02).",
+            "ordered_dict_root": b"\x80\x02ccollections\nOrderedDict\n)R.",
+            "allowed_global_root": b"\x80\x02ctorch\nFloatStorage\n.",
+            "non_string_dict_key": b"\x80\x02}K\x01K\x02s.",
+            "duplicate_setitem_key": b"\x80\x02}X\x01\x00\x00\x00xK\x01sX\x01\x00\x00\x00xK\x02s.",
+            "duplicate_setitems_key": b"\x80\x02}(X\x01\x00\x00\x00xK\x01X\x01\x00\x00\x00xK\x02u.",
+            "nested_global": b"\x80\x02}X\x01\x00\x00\x00xctorch\nFloatStorage\ns.",
+            "nested_ordered_dict": b"\x80\x02}X\x01\x00\x00\x00xccollections\nOrderedDict\n)Rs.",
+            "nested_mark_sentinel": b"\x80\x02}X\x01\x00\x00\x00x(s.",
         }
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -454,6 +549,27 @@ class CheckpointTest(unittest.TestCase):
             )
             self._write_checkpoint_zip(storage_get, storage_pickle, {"0": b""})
             self.assert_rejected_before_zipfile_and_torch_load(storage_get)
+
+            tensor_root = tmp / "direct_tensor_root.pt"
+            self._write_checkpoint_zip(tensor_root, b"\x80\x02" + self._tensor_reduce_pickle(()) + b".", {"0": b"\0" * 4})
+            self.assert_rejected_before_zipfile_and_torch_load(tensor_root)
+
+            overwritten_tensor = tmp / "constructed_then_overwritten_tensor.pt"
+            data_pkl = self._root_dict_pickle(
+                [("x", self._tensor_reduce_pickle(())), ("x", self._small_int(1))],
+                setitems=False,
+            )
+            self._write_checkpoint_zip(overwritten_tensor, data_pkl, {"0": b"\0" * 4})
+            self.assert_rejected_before_zipfile_and_torch_load(overwritten_tensor)
+
+            rank17 = tmp / "rank17_tensor.pt"
+            rank17_shape = tuple(1 for _ in range(17))
+            self._write_checkpoint_zip(
+                rank17,
+                self._root_dict_pickle([("x", self._tensor_reduce_pickle(rank17_shape))]),
+                {"0": b"\0" * 4},
+            )
+            self.assert_rejected_before_zipfile_and_torch_load(rank17)
 
             comment = tmp / "comment.pt"
             with zipfile.ZipFile(comment, "w") as zf:
@@ -489,6 +605,103 @@ class CheckpointTest(unittest.TestCase):
             finally:
                 checkpoint_io.zipfile.ZipFile = original_zipfile  # type: ignore[assignment]
             self.assertFalse(called["zipfile"])
+
+    def test_checkpoint_raw_zip_local_record_abuse_rejected_before_zipfile_or_torch_load(self) -> None:
+        payload, _model, _optimizer, _compatibility = self.make_payload()
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            base = tmp / "base.pt"
+            save_checkpoint_file(base, payload)
+            base_data = base.read_bytes()
+            data_pkl_central = self._central_entry_pos(base_data, b"archive/data.pkl")
+            data_pkl_local, data_start, data_end, _size = self._local_entry_bounds(base_data, data_pkl_central)
+
+            def mutated(name: str, mutator) -> Path:  # type: ignore[no-untyped-def]
+                raw = bytearray(base_data)
+                mutator(raw)
+                path = tmp / f"{name}.pt"
+                path.write_bytes(bytes(raw))
+                return path
+
+            cases = {
+                "local_version_disagreement": lambda raw: struct.pack_into("<H", raw, data_pkl_local + 4, 19),
+                "local_flag_disagreement": lambda raw: struct.pack_into("<H", raw, data_pkl_local + 6, 0x0008),
+                "local_time_disagreement": lambda raw: struct.pack_into("<H", raw, data_pkl_local + 10, 1),
+                "local_name_disagreement": lambda raw: raw.__setitem__(data_pkl_local + 30, raw[data_pkl_local + 30] ^ 0x20),
+                "bit3_nonzero_local_crc": lambda raw: struct.pack_into("<I", raw, data_pkl_local + 14, 1),
+                "bit3_nonzero_local_compressed_size": lambda raw: struct.pack_into("<I", raw, data_pkl_local + 18, 1),
+                "bit3_nonzero_local_file_size": lambda raw: struct.pack_into("<I", raw, data_pkl_local + 22, 1),
+                "missing_descriptor_signature": lambda raw: raw.__setitem__(data_end, raw[data_end] ^ 0x01),
+                "wrong_descriptor_crc": lambda raw: struct.pack_into("<I", raw, data_end + 4, 1),
+                "wrong_descriptor_compressed_size": lambda raw: struct.pack_into("<I", raw, data_end + 8, 1),
+                "wrong_descriptor_file_size": lambda raw: struct.pack_into("<I", raw, data_end + 12, 1),
+                "payload_crc_corruption": lambda raw: raw.__setitem__(data_start, raw[data_start] ^ 0x01),
+            }
+            for name, mutator in cases.items():
+                with self.subTest(name=name):
+                    self.assert_rejected_before_zipfile_and_torch_load(mutated(name, mutator))
+
+            second_central = self._central_entry_pos(base_data, b"archive/byteorder")
+            first_local = struct.unpack_from("<I", base_data, data_pkl_central + 42)[0]
+            overlap = mutated(
+                "full_record_overlap",
+                lambda raw: struct.pack_into("<I", raw, second_central + 42, first_local),
+            )
+            self.assert_rejected_before_zipfile_and_torch_load(overlap)
+
+            eocd = base_data.rfind(b"PK\x05\x06")
+            self.assertNotEqual(eocd, -1)
+            zip64_disagree = mutated(
+                "zip64_classic_cd_size_disagreement",
+                lambda raw: struct.pack_into("<I", raw, eocd + 12, struct.unpack_from("<I", raw, eocd + 12)[0] + 1),
+            )
+            self.assert_rejected_before_zipfile_and_torch_load(zip64_disagree)
+
+            for name, extra in {
+                "duplicate_per_entry_zip64": b"\x01\x00\x00\x00\x01\x00\x00\x00",
+                "trailing_per_entry_zip64": b"\x01\x00\x08\x00" + (1).to_bytes(8, "little"),
+                "malformed_extra_residual": b"\x99\x99\x01",
+            }.items():
+                with self.subTest(name=name):
+                    path = tmp / f"{name}.pt"
+                    self._write_zipinfo_extra(path, extra)
+                    self.assert_rejected_before_zipfile_and_torch_load(path)
+
+    def test_checkpoint_positive_zip_writer_grammars(self) -> None:
+        payload, _model, _optimizer, _compatibility = self.make_payload()
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            bit3_clear = tmp / "bit3_clear.pt"
+            self._write_checkpoint_zip(bit3_clear, b"\x80\x02}.")
+            preflight = checkpoint_io.preflight_torch_zip(bit3_clear.read_bytes())
+            self.assertEqual(preflight.entries, 1)
+            self.assertEqual(preflight.storage_entries, 0)
+
+            torch_path = tmp / "torch.pt"
+            save_checkpoint_file(torch_path, payload)
+            data = torch_path.read_bytes()
+            layout = checkpoint_io._raw_zip_preflight(data)  # type: ignore[attr-defined]
+            self.assertGreater(layout.entries[0].header_offset, -1)
+            previous_end = 0
+            for entry in layout.entries:
+                self.assertEqual(entry.flag_bits, 0x0808)
+                self.assertEqual(entry.compress_type, zipfile.ZIP_STORED)
+                record = checkpoint_io._parse_local_member_record(  # type: ignore[attr-defined]
+                    data,
+                    entry,
+                    central_directory_offset=layout.central_directory_offset,
+                )
+                self.assertEqual(record.start, previous_end)
+                self.assertEqual(data[record.descriptor_start : record.descriptor_start + 4], b"PK\x07\x08")
+                self.assertEqual(record.data_start % 64, 0)
+                local_extra_len = struct.unpack_from("<H", data, record.start + 28)[0]
+                local_name_len = struct.unpack_from("<H", data, record.start + 26)[0]
+                local_extra = data[record.start + 30 + local_name_len : record.start + 30 + local_name_len + local_extra_len]
+                self.assertGreaterEqual(len(local_extra), 4)
+                self.assertEqual(local_extra[:2], b"FB")
+                self.assertTrue(all(ch == ord("Z") for ch in local_extra[4:]))
+                previous_end = record.end
+            self.assertEqual(previous_end, layout.central_directory_offset)
 
     def test_checkpoint_pickle_storage_tensor_abuse_rejected_before_torch_load(self) -> None:
         payload, _model, _optimizer, _compatibility = self.make_payload()
