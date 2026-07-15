@@ -1,0 +1,39 @@
+[
+  {
+    "profile": "Pauper-Rally-Anchor-Value",
+    "deck_path": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.rally_mirror_weighted.txt",
+    "active": true,
+    "train_enabled": true,
+    "target_winrate": 0.6,
+    "priority": 1,
+    "population_group": "ar-league",
+    "seed": 6301,
+    "train_env": {
+      "RL_AGENT_DECK_LIST": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek",
+      "MODEL_D_MODEL": "128",
+      "MODEL_NUM_LAYERS": "2",
+      "ENTROPY_START": "0.10",
+      "ENTROPY_END": "0.10",
+      "ENTROPY_DECAY_STEPS": "2500000",
+      "RL_ACTION_EPS_START": "0.05",
+      "RL_FULL_TURN_RANDOM_START": "0.10",
+      "TEMPERATURE_FLOOR": "0.10",
+      "ACTOR_LR": "2e-4",
+      "GAME_TIMEOUT_SEC": "900",
+      "AI_MAX_THREADS_FOR_SIMULATIONS": "24",
+      "USE_GAE": "0",
+      "GAE_AUTO_ENABLE": "1",
+      "PPO_GAMMA": "0.995",
+      "OPPONENT_SAMPLER": "league",
+      "EVAL_CP7_SKILL": "7",
+      "EVAL_GAMES_PER_DECK": "10",
+      "EVAL_AT_START": "0",
+      "MCTS_TRAINING_ENABLE": "0",
+      "ISMCTS_ENABLE": "0",
+      "ISMCTS_ROLLOUTS_PER_TURN": "0",
+      "RL_HEURISTIC_STEP_REWARDS": "0",
+      "DECK_LIST_FILE": "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/decklist.rally_mirror_weighted.txt"
+    },
+    "notes": "A/R league: Rally FRESH/weak (co-evolve foothold), higher LR to learn fast, terminal-only."
+  }
+]

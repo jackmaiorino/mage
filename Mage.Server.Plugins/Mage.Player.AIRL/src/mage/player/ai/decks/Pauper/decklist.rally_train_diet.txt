@@ -1,0 +1,24 @@
+# Rally dominance training diet (Codex #26: 60% soft / 30% maintenance).
+# Weighted by line repetition (loadDeckPool keeps duplicates, samples uniformly).
+# SOFT pool (Elves overweighted, then Terror/Faeries/mirror/Grixis):
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Mono-Blue Terror.dek
+Deck - Mono-Blue Terror.dek
+Deck - Mono-Blue Faeries.dek
+Deck - Mono-Blue Faeries.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+# MAINTENANCE pool (keep the 70-80% matchups from decaying):
+Deck - Mono-Red Burn.dek
+Deck - Mono-Red Burn.dek
+Deck - Caw-Gates.dek
+Deck - Caw-Gates.dek
+Deck - Jund Wildfire.dek
+Deck - Jund Wildfire.dek

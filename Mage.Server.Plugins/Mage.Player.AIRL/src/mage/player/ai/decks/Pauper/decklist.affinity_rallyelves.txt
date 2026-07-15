@@ -1,0 +1,4 @@
+# Slope/floor falsification (Codex #29): continue aggro-spec on ONLY Rally+Elves (the flat fast-aggro).
+# If still no monotonic lift after +9k dedicated eps (21k cumulative) while Burn/Caw controls hold -> STRUCTURAL.
+Deck - Mono Red Rally.dek
+Deck - Elves.dek

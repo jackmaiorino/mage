@@ -1,0 +1,3 @@
+# Mirror + skill-sweep opponent pool: Spy Winning (mirror) + Grixis (real matchup).
+Deck - Spy Winning.dek
+Deck - Grixis Affinity.dek

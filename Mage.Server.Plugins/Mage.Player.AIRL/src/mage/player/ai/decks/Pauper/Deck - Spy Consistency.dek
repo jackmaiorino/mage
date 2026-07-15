@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Mesmeric Fiend" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Balustrade Spy" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Dread Return" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Elves of Deep Shadow" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Gatecreeper Vine" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Generous Ent" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Land Grant" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lead the Stampede" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Lotleth Giant" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Masked Vandal" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Overgrown Battlement" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Sagu Wildling" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Saruli Caretaker" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Wall of Roots" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Winding Way" Annotation="0"/>
+</Deck>

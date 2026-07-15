@@ -1,0 +1,14 @@
+# Affinity curriculum: MIXED-DIFFICULTY red gradient (so the agent always has winnable red
+# games to learn from while being challenged toward the real clock) + maintenance.
+# Gradient: drastic (61% winnable, 0 burn) -> medium (6 burn) -> real (full burn).
+# The burn axis is the difficulty (gradient eval: drastic 61% / slow 22% / real 19%).
+Deck - Mono Red Rally DRASTIC.dek
+Deck - Mono Red Rally DRASTIC.dek
+Deck - Mono Red Rally MEDIUM.dek
+Deck - Mono Red Rally MEDIUM.dek
+Deck - Mono Red Rally MEDIUM.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Caw-Gates.dek
+Deck - Jund Wildfire.dek
+Deck - Grixis Affinity.dek

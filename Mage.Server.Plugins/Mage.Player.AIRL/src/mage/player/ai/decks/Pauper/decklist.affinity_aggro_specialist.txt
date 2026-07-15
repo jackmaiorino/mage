@@ -1,0 +1,9 @@
+# H7 Affinity AGGRO-SPECIALIST diet: ONLY aggro opponents (isolation test for interference).
+# If isolated aggro training lifts Rally/Terror/Elves (which full-diet FAILED to), interference is removable.
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono-Blue Terror.dek
+Deck - Mono-Blue Terror.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Mono-Red Burn.dek

@@ -1,0 +1,14 @@
+# Mirror-weighted opponent pool for the Rally mirror-fix arm: Rally overweighted (~36%
+# CP7 mirror) among the full gauntlet (breadth preservation). Opponent piloted by CP7
+# at LADDER_SKILLS=4 (first deep-search tier); agent always plays Rally.
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Grixis Affinity.dek
+Deck - Mono-Red Burn.dek
+Deck - Mono-Blue Faeries.dek
+Deck - Mono-Blue Terror.dek
+Deck - Jund Wildfire.dek
+Deck - Caw-Gates.dek
+Deck - Elves.dek

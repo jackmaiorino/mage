@@ -1,0 +1,18 @@
+# H1 hard-matchup-weighted diet (Codex #36): same FIXED gauntlet, oversample the hard
+# (sub-45%) matchups so gradients aren't dominated by the easy wins. Rally 3x, other
+# sub-45% (Terror/Grixis-mirror/Faeries/Elves) 2x, easy (Burn/Caw/Wildfire) 1x.
+# Eval is on the UNIFORM 8-deck mixture, NOT this weighted diet.
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono Red Rally.dek
+Deck - Mono-Blue Terror.dek
+Deck - Mono-Blue Terror.dek
+Deck - Grixis Affinity.dek
+Deck - Grixis Affinity.dek
+Deck - Mono-Blue Faeries.dek
+Deck - Mono-Blue Faeries.dek
+Deck - Elves.dek
+Deck - Elves.dek
+Deck - Mono-Red Burn.dek
+Deck - Caw-Gates.dek
+Deck - Jund Wildfire.dek
