@@ -2,17 +2,20 @@
 
 from __future__ import annotations
 
-import hashlib
 import os
+import re
 import shutil
 import stat
 import time
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 
 REPARSE_ATTRIBUTE = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+OUTPUT_LOCK_FILE_NAME = ".mtg-kernel-train.lock"
+_QUARANTINE_REASON_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{0,31}$")
 
 
 def _absolute_lexical(path: str | Path) -> Path:
@@ -32,8 +35,19 @@ class PhysicalOutputIdentity:
     """Stable lock identity for one output spelling after physical resolution."""
 
     identity: str
-    lock_parent: Path
+    lock_root: Path
     display_path: str
+
+
+@dataclass(frozen=True)
+class PathIdentity:
+    path: Path
+    mode: int
+    size: int
+    mtime_ns: int
+    dev: int
+    ino: int
+    nlink: int
 
 
 def _normalized_suffix(parts: tuple[str, ...]) -> str:
@@ -63,60 +77,40 @@ def _resolved_existing_path(path: Path) -> str:
     return resolved
 
 
-def _find_existing_physical_anchor(path_abs: Path) -> tuple[Path, tuple[str, ...]]:
-    missing: list[str] = []
-    current = path_abs
-    while True:
-        try:
-            st = current.lstat()
-        except FileNotFoundError:
-            missing.append(current.name)
-            parent = current.parent
-            if parent == current:
-                raise ValueError(f"could not find existing physical ancestor for {path_abs}")
-            current = parent
-            continue
-        if _is_reparse_or_symlink_stat(st):
-            resolved = Path(os.path.realpath(os.fspath(current)))
-            resolved_st = resolved.lstat()
-            if _is_reparse_or_symlink_stat(resolved_st) or not stat.S_ISDIR(resolved_st.st_mode):
-                raise ValueError(f"output path unresolved ancestor could not be resolved physically: {current}")
-            return resolved, tuple(reversed(missing))
-        if not stat.S_ISDIR(st.st_mode):
-            raise ValueError(f"nearest existing output ancestor must be a real directory: {current}")
-        return current, tuple(reversed(missing))
+def prepare_physical_output_root(path: str | Path) -> PhysicalOutputIdentity:
+    """Create and validate the real output root used as the lock namespace.
 
-
-def physical_output_identity(path: str | Path) -> PhysicalOutputIdentity:
-    """Return a stable lock identity that follows physical aliases for locking only.
-
-    Lexical artifact containment and resume validation remain separate and strict.
+    Ancestor aliases may converge on the same physical root for cooperating local
+    processes. The final output-root component itself must be a real directory,
+    not a link or reparse point. This helper intentionally does not defend
+    against a hostile concurrent namespace swap outside the cooperating-process
+    local-filesystem threat model; artifact reads still use strict no-follow
+    validation after the lock is held.
     """
 
     path_abs = _absolute_lexical(path)
     try:
         st_final = path_abs.lstat()
     except FileNotFoundError:
-        anchor, suffix = _find_existing_physical_anchor(path_abs)
-        anchor_stat = anchor.stat()
-        anchor_id = _stat_identity(anchor_stat)
-        anchor_real = _resolved_existing_path(anchor)
-        suffix_text = _normalized_suffix(suffix)
-        identity = f"missing-output:v2:anchor={anchor_id}:anchor_path={anchor_real}:suffix={suffix_text}"
-        return PhysicalOutputIdentity(identity=identity, lock_parent=anchor, display_path=f"{anchor_real}{os.sep}{suffix_text}")
+        os.makedirs(path_abs, exist_ok=True)
+        st_final = path_abs.lstat()
     if _is_reparse_or_symlink_stat(st_final):
         raise ValueError(f"output root must not be a direct link/reparse point: {path_abs}")
     if not stat.S_ISDIR(st_final.st_mode):
         raise ValueError(f"output root must be a real directory when it exists: {path_abs}")
-    final_stat = path_abs.stat()
+    real_root = Path(os.path.realpath(os.fspath(path_abs)))
+    real_lstat = real_root.lstat()
+    if _is_reparse_or_symlink_stat(real_lstat) or not stat.S_ISDIR(real_lstat.st_mode):
+        raise ValueError(f"resolved output root must be a real directory: {real_root}")
+    final_stat = real_root.stat()
     final_id = _stat_identity(final_stat)
-    final_real = _resolved_existing_path(path_abs)
-    parent = Path(os.path.realpath(os.fspath(path_abs.parent)))
-    parent_stat = parent.lstat()
-    if _is_reparse_or_symlink_stat(parent_stat) or not stat.S_ISDIR(parent_stat.st_mode):
-        raise ValueError(f"resolved output lock parent is not a real directory: {parent}")
-    identity = f"existing-output:v2:object={final_id}:real_path={final_real}"
-    return PhysicalOutputIdentity(identity=identity, lock_parent=parent, display_path=final_real)
+    final_real = _resolved_existing_path(real_root)
+    identity = f"output-root:v3:object={final_id}:real_path={final_real}"
+    return PhysicalOutputIdentity(identity=identity, lock_root=real_root, display_path=final_real)
+
+
+def physical_output_identity(path: str | Path) -> PhysicalOutputIdentity:
+    return prepare_physical_output_root(path)
 
 
 def same_lexical_path(left: str | Path, right: str | Path) -> bool:
@@ -250,10 +244,123 @@ def mkdir_no_follow(path: str | Path, *, mode: int = 0o777, parents: bool = Fals
     return path_abs
 
 
-def lock_file_path(lock_parent: str | Path, identity: str) -> Path:
-    parent = mkdir_no_follow(Path(lock_parent) / ".mtg-kernel-train-locks", mode=0o700, parents=True, exist_ok=True)
-    digest = hashlib.sha256(identity.encode("utf-8")).hexdigest()
-    return parent / f"{digest}.lock"
+def lock_file_path(lock_root: str | Path) -> Path:
+    root = ensure_real_dir(lock_root)
+    return root / OUTPUT_LOCK_FILE_NAME
+
+
+def _capture_lstat_identity(path: str | Path) -> PathIdentity:
+    path_abs = _absolute_lexical(path)
+    st = path_abs.lstat()
+    if _is_reparse_or_symlink_stat(st):
+        raise ValueError(f"artifact path must not be a link/reparse point: {path_abs}")
+    if not (stat.S_ISREG(st.st_mode) or stat.S_ISDIR(st.st_mode)):
+        raise ValueError(f"artifact path has unsupported file type: {path_abs}")
+    return PathIdentity(
+        path=path_abs,
+        mode=int(st.st_mode),
+        size=int(st.st_size),
+        mtime_ns=int(getattr(st, "st_mtime_ns", int(st.st_mtime * 1_000_000_000))),
+        dev=int(getattr(st, "st_dev", 0)),
+        ino=int(getattr(st, "st_ino", 0)),
+        nlink=int(getattr(st, "st_nlink", 1)),
+    )
+
+
+def revalidate_path_identity(identity: PathIdentity) -> None:
+    current = _capture_lstat_identity(identity.path)
+    if (
+        current.mode != identity.mode
+        or current.size != identity.size
+        or current.mtime_ns != identity.mtime_ns
+        or current.dev != identity.dev
+        or current.ino != identity.ino
+        or current.nlink != identity.nlink
+    ):
+        raise ValueError(f"artifact source changed before mutation: {identity.path}")
+
+
+def capture_path_identity(path: str | Path) -> PathIdentity:
+    return _capture_lstat_identity(path)
+
+
+def validate_output_lock_file(path: str | Path) -> Path:
+    path_abs = _absolute_lexical(path)
+    if path_abs.name != OUTPUT_LOCK_FILE_NAME:
+        raise ValueError(f"unexpected output lock file name: {path_abs.name}")
+    st = path_abs.lstat()
+    if _is_reparse_or_symlink_stat(st) or not stat.S_ISREG(st.st_mode):
+        raise ValueError(f"output lock path is not a regular non-link file: {path_abs}")
+    if int(getattr(st, "st_nlink", 1)) != 1:
+        raise ValueError(f"output lock file must not be hardlinked: {path_abs}")
+    if int(st.st_size) != 1:
+        raise ValueError(f"output lock file must be exactly one byte: {path_abs}")
+    return path_abs
+
+
+def filesystem_file_identity(path: str | Path) -> tuple[Any, ...]:
+    path_abs = _absolute_lexical(path)
+    if os.name == "nt":
+        try:
+            import ctypes
+            from ctypes import wintypes
+
+            class FILE_ID_128(ctypes.Structure):
+                _fields_ = [("Identifier", ctypes.c_ubyte * 16)]
+
+            class FILE_ID_INFO(ctypes.Structure):
+                _fields_ = [("VolumeSerialNumber", ctypes.c_ulonglong), ("FileId", FILE_ID_128)]
+
+            kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+            CreateFileW = kernel32.CreateFileW
+            CreateFileW.argtypes = [
+                wintypes.LPCWSTR,
+                wintypes.DWORD,
+                wintypes.DWORD,
+                wintypes.LPVOID,
+                wintypes.DWORD,
+                wintypes.DWORD,
+                wintypes.HANDLE,
+            ]
+            CreateFileW.restype = wintypes.HANDLE
+            GetFileInformationByHandleEx = kernel32.GetFileInformationByHandleEx
+            GetFileInformationByHandleEx.argtypes = [wintypes.HANDLE, wintypes.INT, wintypes.LPVOID, wintypes.DWORD]
+            GetFileInformationByHandleEx.restype = wintypes.BOOL
+            CloseHandle = kernel32.CloseHandle
+            CloseHandle.argtypes = [wintypes.HANDLE]
+            CloseHandle.restype = wintypes.BOOL
+            handle = CreateFileW(
+                str(path_abs),
+                0,
+                0x00000001 | 0x00000002 | 0x00000004,
+                None,
+                3,
+                0x02000000,
+                None,
+            )
+            if handle == wintypes.HANDLE(-1).value:
+                raise OSError(ctypes.get_last_error(), f"CreateFileW failed for {path_abs}")
+            try:
+                info = FILE_ID_INFO()
+                if not GetFileInformationByHandleEx(handle, 18, ctypes.byref(info), ctypes.sizeof(info)):
+                    raise OSError(ctypes.get_last_error(), f"GetFileInformationByHandleEx failed for {path_abs}")
+                return ("windows-file-id", int(info.VolumeSerialNumber), bytes(info.FileId.Identifier).hex())
+            finally:
+                CloseHandle(handle)
+        except Exception:
+            pass
+    st = path_abs.stat()
+    return ("stat", int(getattr(st, "st_dev", 0)), int(getattr(st, "st_ino", 0)))
+
+
+def is_verified_output_lock_entry(root: str | Path, entry: os.DirEntry[str] | Path) -> bool:
+    name = entry.name if isinstance(entry, os.DirEntry) else Path(entry).name
+    if name != OUTPUT_LOCK_FILE_NAME:
+        return False
+    path = Path(entry.path) if isinstance(entry, os.DirEntry) else Path(entry)
+    ensure_no_follow_path(root, path, expected="file", reject_hardlinks=True)
+    validate_output_lock_file(path)
+    return True
 
 
 def scandir_no_follow(path: str | Path) -> list[os.DirEntry[str]]:
@@ -266,16 +373,50 @@ def scandir_no_follow(path: str | Path) -> list[os.DirEntry[str]]:
     return entries
 
 
+def _validate_quarantine_reason(reason: str) -> str:
+    if type(reason) is not str or _QUARANTINE_REASON_RE.fullmatch(reason) is None:
+        raise ValueError("quarantine reason must be one safe ASCII component")
+    return reason
+
+
+def _snapshot_tree_no_follow(path: Path) -> tuple[PathIdentity, ...]:
+    root_identity = _capture_lstat_identity(path)
+    snapshots = [root_identity]
+    if stat.S_ISREG(root_identity.mode):
+        return tuple(snapshots)
+    entries = scandir_no_follow(path)
+    for entry in sorted(entries, key=lambda item: item.name):
+        child = Path(entry.path)
+        child_identity = _capture_lstat_identity(child)
+        if stat.S_ISDIR(child_identity.mode):
+            snapshots.extend(_snapshot_tree_no_follow(child))
+        elif stat.S_ISREG(child_identity.mode):
+            snapshots.append(child_identity)
+        else:
+            raise ValueError(f"quarantine source contains unsupported entry: {child}")
+    return tuple(snapshots)
+
+
+def _revalidate_tree_snapshot(snapshot: tuple[PathIdentity, ...]) -> None:
+    for identity in snapshot:
+        revalidate_path_identity(identity)
+
+
 def atomic_quarantine(root: str | Path, path: str | Path, reason: str) -> Path:
+    reason = _validate_quarantine_reason(reason)
     root_abs = ensure_real_dir(root)
     path_abs = ensure_no_follow_path(root_abs, path, expected="any", reject_hardlinks=False)
     rel = relative_to_root(root_abs, path_abs)
+    source_snapshot = _snapshot_tree_no_follow(path_abs)
     quarantine_root = root_abs / ".quarantine"
     mkdir_no_follow(quarantine_root, mode=0o700, parents=False, exist_ok=True)
     ensure_no_follow_path(root_abs, quarantine_root, expected="dir")
-    quarantine = quarantine_root / f"{reason}-{time.monotonic_ns()}" / rel
+    quarantine_batch = quarantine_root / f"{reason}-{time.monotonic_ns()}"
+    quarantine = quarantine_batch / rel
+    relative_to_root(quarantine_root, quarantine)
     mkdir_no_follow(quarantine.parent, parents=True, exist_ok=True)
-    ensure_no_follow_path(root_abs, quarantine.parent, expected="dir")
+    ensure_no_follow_path(quarantine_root, quarantine.parent, expected="dir")
+    _revalidate_tree_snapshot(source_snapshot)
     os.replace(path_abs, quarantine)
     return quarantine
 

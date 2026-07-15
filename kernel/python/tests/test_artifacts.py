@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import hashlib
 import subprocess
 import tempfile
 import unittest
@@ -16,6 +17,28 @@ from mtg_kernel_rl.artifacts import (
 )
 from mtg_kernel_rl.artifact_io import MAX_SMALL_JSON_BYTES, read_authoritative_json, validate_training_json_privacy
 from mtg_kernel_rl.path_safety import atomic_quarantine, mkdir_no_follow
+
+
+def _tree_snapshot(root: Path) -> dict[str, tuple[str, int, str | None, int, int, int]]:
+    out: dict[str, tuple[str, int, str | None, int, int, int]] = {}
+    for path in sorted([root, *root.rglob("*")], key=lambda item: str(item.relative_to(root.parent))):
+        rel = str(path.relative_to(root))
+        st = path.lstat()
+        if path.is_symlink():
+            kind = "link"
+            digest = None
+            size = 0
+        elif path.is_dir():
+            kind = "dir"
+            digest = None
+            size = 0
+        else:
+            kind = "file"
+            data = path.read_bytes()
+            digest = hashlib.sha256(data).hexdigest()
+            size = len(data)
+        out[rel] = (kind, size, digest, int(st.st_mtime_ns), int(getattr(st, "st_dev", 0)), int(getattr(st, "st_ino", 0)))
+    return out
 
 
 class ArtifactTest(unittest.TestCase):
@@ -125,13 +148,22 @@ class ArtifactTest(unittest.TestCase):
             "/gpfs/project/run",
             "/lustre/project/run",
             "/srv/mage/run",
+            "/@root/secret",
+            "/数据/run",
             "/Applications/My App/run",
             "prefix /data/run/root",
+            "artifact=/@root/secret",
+            "artifact:/数据/run",
+            '["/srv/run"]',
             "/home/jack/mage",
             "prefix /tmp/run/root",
             "C:\\Users\\Jack\\IdeaProjects\\mage",
             "\\Users\\Jack\\IdeaProjects\\mage",
+            "\\secret",
+            "value=\\secret",
             "\\\\server\\share\\run",
+            "x='\\\\server\\share\\run'",
+            "\\\\.\\C:\\Users\\Jack",
             "\\\\?\\C:\\Users\\Jack",
             "file:///C:/Users/Jack/run",
         ]
@@ -145,6 +177,8 @@ class ArtifactTest(unittest.TestCase):
             "loss = a / b",
             "b48d972b8f2fc56c330c815223c7cb7ef663a2cc45072a203a13e3f00b253f61",
             "train-learner-action/base_seed/episode_index",
+            "schema#/properties/run",
+            "ordinary prose with / separated words",
         ]
         for value in negatives:
             with self.subTest(value=value):
@@ -157,11 +191,24 @@ class ArtifactTest(unittest.TestCase):
             outside = tmp / "outside"
             root.mkdir()
             outside.mkdir()
+            (outside / "nested").mkdir()
             sentinel = outside / "sentinel.txt"
             sentinel.write_bytes(b"unchanged")
+            (outside / "nested" / "sentinel2.txt").write_bytes(b"unchanged2")
 
             def assert_sentinel() -> None:
-                self.assertEqual(sentinel.read_bytes(), b"unchanged")
+                self.assertEqual(_tree_snapshot(outside), outside_snapshot)
+
+            outside_snapshot = _tree_snapshot(outside)
+
+            victim_bad_reason = root / "victim-bad-reason.txt"
+            victim_bad_reason.write_bytes(b"x")
+            for reason in ("", ".", "..", "bad/path", "bad\\path", "C:bad", "\\\\server\\share", "原因"):
+                with self.subTest(reason=reason):
+                    with self.assertRaises(ValueError):
+                        atomic_quarantine(root, victim_bad_reason, reason)
+                    self.assertTrue(victim_bad_reason.exists())
+                    assert_sentinel()
 
             if hasattr(os, "symlink"):
                 link = root / "link"

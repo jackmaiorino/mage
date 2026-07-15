@@ -17,6 +17,7 @@ import torch
 from mtg_kernel_rl.artifacts import read_json_file, set_fault_injector, write_json_atomic
 from mtg_kernel_rl.checkpoint import load_checkpoint_file, save_checkpoint_file
 from mtg_kernel_rl.output_lock import OutputLock, OutputLockError
+from mtg_kernel_rl.path_safety import filesystem_file_identity
 from mtg_kernel_rl.model import KernelPolicyValueNet
 from mtg_kernel_rl.trainer import _compute_loss_tensors, train
 import mtg_kernel_rl.trainer as trainer_mod
@@ -195,8 +196,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v4")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v2")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v5")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v3")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -257,6 +258,9 @@ class TrainerTest(unittest.TestCase):
 
             unknown = tmp / "unknown_debris"
             unknown.mkdir()
+            known = unknown / "updates"
+            known.mkdir()
+            before = known.stat()
             (unknown / "unexpected.txt").write_text("x", encoding="utf-8")
             with self.assertRaises(ValueError):
                 train(
@@ -270,6 +274,9 @@ class TrainerTest(unittest.TestCase):
                     max_decisions=8,
                 )
             self.assertTrue((unknown / "unexpected.txt").exists())
+            after = known.stat()
+            self.assertEqual((before.st_dev, before.st_ino, before.st_mtime_ns), (after.st_dev, after.st_ino, after.st_mtime_ns))
+            self.assertTrue(known.is_dir())
 
     def test_fresh_run_json_hard_death_reuses_same_output_path(self) -> None:
         cases = [
@@ -693,9 +700,11 @@ class TrainerTest(unittest.TestCase):
             ("json_save", "update.json", 0),
             ("json_flush", "update.json", 0),
             ("json_fsync", "update.json", 0),
+            ("json_replace_before", "update.json", 0),
             ("json_save", "sidecar.json", 0),
             ("json_flush", "sidecar.json", 0),
             ("json_fsync", "sidecar.json", 0),
+            ("json_replace_before", "sidecar.json", 0),
             ("generation_validate", "-", 0),
             ("final_replace_checkpoint_before", "-", 0),
             ("final_replace_checkpoint_after", "-", 0),
@@ -706,8 +715,21 @@ class TrainerTest(unittest.TestCase):
             ("json_save", "latest.json", 0),
             ("json_flush", "latest.json", 0),
             ("json_fsync", "latest.json", 0),
+            ("json_replace_before", "latest.json", 0),
             ("latest_replace_before", "-", 0),
             ("latest_replace_after", "-", 1),
+            ("json_save", "episodes.jsonl", 0),
+            ("json_flush", "episodes.jsonl", 0),
+            ("json_fsync", "episodes.jsonl", 0),
+            ("json_replace_before", "episodes.jsonl", 0),
+            ("json_save", "updates.jsonl", 0),
+            ("json_flush", "updates.jsonl", 0),
+            ("json_fsync", "updates.jsonl", 0),
+            ("json_replace_before", "updates.jsonl", 0),
+            ("json_save", "summary.json", 0),
+            ("json_flush", "summary.json", 0),
+            ("json_fsync", "summary.json", 0),
+            ("json_replace_before", "summary.json", 0),
             ("post_latest_cleanup_before", "-", 1),
         ]
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -989,8 +1011,20 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v2_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v2"}))
-            case("historical_v3_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v3"}))
+            case("old_v4_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v4"}))
+            case(
+                "old_v2_artifact_boundary_rejected",
+                lambda p: write_json_atomic(
+                    p / "run.json",
+                    {
+                        **read_json_file(p / "run.json"),
+                        "artifact_boundary": {
+                            **read_json_file(p / "run.json")["artifact_boundary"],
+                            "schema": "kernel_rl_artifact_boundary/v2",
+                        },
+                    },
+                ),
+            )
             case(
                 "checkpoint_counter_drift",
                 lambda p: (
@@ -1118,8 +1152,10 @@ with OutputLock(root) as lock:
             self.assertEqual(child.returncode, 73)
             lock_path = Path(marker.read_text(encoding="utf-8"))
             self.assertTrue(lock_path.is_file())
+            hard_death_identity = filesystem_file_identity(lock_path)
             with OutputLock(root):
                 pass
+            self.assertEqual(filesystem_file_identity(lock_path), hard_death_identity)
 
             noninherit = tmp / "noninherit.py"
             noninherit_marker = tmp / "noninherit.marker"
@@ -1167,7 +1203,11 @@ with OutputLock(root):
                 with self.assertRaises(OutputLockError):
                     with OutputLock(physical_alias):
                         pass
-                self.assertEqual(lock.path, OutputLock(long_root).path)
+                alias_lock = OutputLock(physical_alias)
+                self.assertTrue(os.path.samefile(lock.path, alias_lock.path))
+                self.assertEqual(filesystem_file_identity(lock.path), filesystem_file_identity(alias_lock.path))
+                self.assertEqual(lock.path.name, ".mtg-kernel-train.lock")
+                self.assertEqual(len(list(long_root.glob(".mtg-kernel-train.lock"))), 1)
 
             if os.name == "nt":
                 cmd = f'for %I in ("{long_root}") do @echo %~sI'
@@ -1210,12 +1250,90 @@ with OutputLock(root):
                 "--max-decisions",
                 "8",
             ]
-            owner = subprocess.Popen([*common, "--until-update", "0"], cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            time.sleep(0.25)
-            loser = subprocess.run([*common, "--until-update", "0"], cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
-            owner_code = owner.wait(timeout=30)
+            owner_script = tmp / "lock_owner.py"
+            owner_marker = tmp / "lock_owner.marker"
+            release_marker = tmp / "lock_owner.release"
+            owner_script.write_text(
+                """
+import sys
+import time
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLock
+
+root = Path(sys.argv[1])
+marker = Path(sys.argv[2])
+release = Path(sys.argv[3])
+with OutputLock(root) as lock:
+    marker.write_text(str(lock.path), encoding="utf-8")
+    while not release.exists():
+        time.sleep(0.05)
+""",
+                encoding="utf-8",
+            )
+            owner = subprocess.Popen([sys.executable, str(owner_script), str(out), str(owner_marker), str(release_marker)], cwd=Path.cwd(), env=env)
+            try:
+                deadline = time.time() + 10
+                while not owner_marker.exists() and time.time() < deadline:
+                    time.sleep(0.05)
+                self.assertTrue(owner_marker.exists())
+                lock_path = Path(owner_marker.read_text(encoding="utf-8"))
+                loser_marker = tmp / "loser_after_train.marker"
+                loser_script = tmp / "lock_loser.py"
+                loser_script.write_text(
+                    """
+import sys
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLockError
+from mtg_kernel_rl.trainer import train
+
+launcher = Path(sys.argv[1])
+out = Path(sys.argv[2])
+marker = Path(sys.argv[3])
+try:
+    train(
+        env_bin=launcher,
+        out_dir=out,
+        base_seed=71501,
+        until_update=0,
+        batch_episodes=2,
+        learning_rate=0.001,
+        value_coef=0.5,
+        max_decisions=8,
+    )
+except OutputLockError:
+    sys.exit(73)
+marker.write_text("launched", encoding="utf-8")
+sys.exit(0)
+""",
+                    encoding="utf-8",
+                )
+                loser = subprocess.run(
+                    [sys.executable, str(loser_script), str(launcher), str(out), str(loser_marker)],
+                    cwd=Path.cwd(),
+                    env=env,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+                self.assertEqual(loser.returncode, 73)
+                self.assertFalse(loser_marker.exists())
+                self.assertFalse((out / "run.json").exists())
+                self.assertEqual(lock_path.name, ".mtg-kernel-train.lock")
+                self.assertEqual(filesystem_file_identity(lock_path), filesystem_file_identity(out / ".mtg-kernel-train.lock"))
+            finally:
+                release_marker.write_text("release", encoding="utf-8")
+                owner_code = owner.wait(timeout=30)
             self.assertEqual(owner_code, 0)
-            self.assertNotEqual(loser.returncode, 0)
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
             self.assertEqual(read_json_file(out / "latest.json")["update"], 0)
 
     def test_physical_alias_concurrent_trainers_exclude_loser_without_second_chain(self) -> None:

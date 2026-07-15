@@ -328,6 +328,36 @@ class CheckpointTest(unittest.TestCase):
             for name, data, compression in members:
                 zf.writestr(name, data, compress_type=compression)
 
+    def _write_checkpoint_zip(self, path: Path, data_pkl: bytes, storage: dict[str, bytes] | None = None) -> None:
+        members = [("archive/data.pkl", data_pkl, zipfile.ZIP_STORED)]
+        for key, payload in sorted((storage or {}).items()):
+            members.append((f"archive/data/{key}", payload, zipfile.ZIP_STORED))
+        self._write_zip(path, members)
+
+    def assert_rejected_before_zipfile_and_torch_load(self, path: Path, expected: type[BaseException] | tuple[type[BaseException], ...] = ValueError) -> None:
+        called = {"zipfile": False, "torch_load": False}
+        original_zipfile = checkpoint_io.zipfile.ZipFile
+        original_load = checkpoint_io.torch.load
+
+        def forbidden_zipfile(*args, **kwargs):  # type: ignore[no-untyped-def]
+            called["zipfile"] = True
+            raise AssertionError("ZipFile must not be called")
+
+        def forbidden_load(*args, **kwargs):  # type: ignore[no-untyped-def]
+            called["torch_load"] = True
+            raise AssertionError("torch.load must not be called")
+
+        checkpoint_io.zipfile.ZipFile = forbidden_zipfile  # type: ignore[assignment]
+        checkpoint_io.torch.load = forbidden_load  # type: ignore[assignment]
+        try:
+            with self.assertRaises(expected):
+                checkpoint_io.load_torch_zip_checkpoint(path)
+        finally:
+            checkpoint_io.zipfile.ZipFile = original_zipfile  # type: ignore[assignment]
+            checkpoint_io.torch.load = original_load  # type: ignore[assignment]
+        self.assertFalse(called["zipfile"])
+        self.assertFalse(called["torch_load"])
+
     def test_checkpoint_zip_preflight_rejects_raw_pickle_and_archive_abuse(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -378,6 +408,64 @@ class CheckpointTest(unittest.TestCase):
                 checkpoint_io.zipfile.ZipFile = original_zipfile  # type: ignore[assignment]
             self.assertFalse(called["zipfile"])
 
+    def test_checkpoint_protocol2_pickle_vm_rejects_adversarial_forms_before_zipfile_or_torch_load(self) -> None:
+        cases = {
+            "missing_proto": b"}.",
+            "late_proto": b"}\x80\x02.",
+            "duplicate_proto": b"\x80\x02\x80\x02}.",
+            "protocol0_unicode": b"\x80\x02Vabc\n.",
+            "protocol3": b"\x80\x03}.",
+            "protocol4": b"\x80\x04}.",
+            "protocol5": b"\x80\x05}.",
+            "memoize": b"\x80\x02}\x94.",
+            "sparse_memo": b"\x80\x02}q\x01.",
+            "overwritten_memo": b"\x80\x02}q\x00}q\x00.",
+            "missing_get": b"\x80\x02h\x00.",
+            "get_tuple": b"\x80\x02)q\x00h\x00.",
+            "get_list": b"\x80\x02]q\x00h\x00.",
+            "get_dict": b"\x80\x02}q\x00h\x00.",
+            "get_ordered_dict_hook": b"\x80\x02ccollections\nOrderedDict\n)Rq\x00h\x00.",
+            "disallowed_global": b"\x80\x02cos\nsystem\n.",
+            "disallowed_reducer": b"\x80\x02ctorch\nFloatStorage\n)R.",
+            "trailing_after_stop": b"\x80\x02}.x",
+        }
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            for name, data_pkl in cases.items():
+                with self.subTest(name=name):
+                    path = tmp / f"{name}.pt"
+                    self._write_checkpoint_zip(path, data_pkl)
+                    self.assert_rejected_before_zipfile_and_torch_load(path)
+
+            storage_get = tmp / "get_storage.pt"
+            storage_pickle = (
+                b"\x80\x02"
+                b"("
+                b"X\x07\x00\x00\x00storage"
+                b"ctorch\nFloatStorage\n"
+                b"X\x01\x00\x00\x000"
+                b"X\x03\x00\x00\x00cpu"
+                b"K\x00"
+                b"t"
+                b"Q"
+                b"q\x00"
+                b"h\x00"
+                b"."
+            )
+            self._write_checkpoint_zip(storage_get, storage_pickle, {"0": b""})
+            self.assert_rejected_before_zipfile_and_torch_load(storage_get)
+
+            comment = tmp / "comment.pt"
+            with zipfile.ZipFile(comment, "w") as zf:
+                zf.writestr("archive/data.pkl", b"\x80\x02}.", compress_type=zipfile.ZIP_STORED)
+                zf.comment = b"comment"
+            self.assert_rejected_before_zipfile_and_torch_load(comment, expected=RuntimeError)
+
+            trailing = tmp / "trailing.pt"
+            self._write_checkpoint_zip(trailing, b"\x80\x02}.")
+            trailing.write_bytes(trailing.read_bytes() + b"x")
+            self.assert_rejected_before_zipfile_and_torch_load(trailing, expected=RuntimeError)
+
     def test_checkpoint_raw_zip64_forgery_rejected_before_zipfile(self) -> None:
         payload, _model, _optimizer, _compatibility = self.make_payload()
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -409,40 +497,24 @@ class CheckpointTest(unittest.TestCase):
             base = tmp / "base.pt"
             save_checkpoint_file(base, payload)
 
-            def assert_before_torch_load(path: Path) -> None:
-                called = {"torch_load": False}
-                original = checkpoint_io.torch.load
-
-                def forbidden_load(*args, **kwargs):  # type: ignore[no-untyped-def]
-                    called["torch_load"] = True
-                    raise AssertionError("torch.load must not be called")
-
-                checkpoint_io.torch.load = forbidden_load  # type: ignore[assignment]
-                try:
-                    with self.assertRaises(ValueError):
-                        checkpoint_io.load_torch_zip_checkpoint(path)
-                finally:
-                    checkpoint_io.torch.load = original  # type: ignore[assignment]
-                self.assertFalse(called["torch_load"])
-
             missing_storage = tmp / "missing_storage.pt"
             with zipfile.ZipFile(base, "r") as zin, zipfile.ZipFile(missing_storage, "w") as zout:
                 for info in zin.infolist():
                     if info.filename == "archive/data/0":
                         continue
                     zout.writestr(info, zin.read(info))
-            assert_before_torch_load(missing_storage)
+            self.assert_rejected_before_zipfile_and_torch_load(missing_storage)
 
             view_path = tmp / "view.pt"
             with view_path.open("wb") as fh:
                 torch.save({"view": torch.arange(8, dtype=torch.float32)[1:3]}, fh)
-            assert_before_torch_load(view_path)
+            self.assert_rejected_before_zipfile_and_torch_load(view_path)
 
             alias_path = tmp / "alias.pt"
             shared = torch.ones(2)
             with alias_path.open("wb") as fh:
                 torch.save({"a": shared, "b": shared}, fh)
-            assert_before_torch_load(alias_path)
+            self.assert_rejected_before_zipfile_and_torch_load(alias_path)
 
     def test_checkpoint_same_captured_bytes_feed_digest_and_torch_load(self) -> None:
         payload, _model, _optimizer, _compatibility = self.make_payload()

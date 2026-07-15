@@ -17,7 +17,7 @@ from .artifact_io import (
     sha256_file,
     validate_training_json_privacy,
 )
-from .path_safety import mkdir_no_follow, scandir_no_follow
+from .path_safety import is_verified_output_lock_entry, mkdir_no_follow, scandir_no_follow
 
 FaultInjector = Callable[[str, Path | None], None]
 _FAULT_INJECTOR: FaultInjector | None = None
@@ -101,7 +101,7 @@ def require_new_or_empty_dir(path: str | Path) -> Path:
     if path.exists():
         if path.is_symlink() or not path.is_dir():
             raise FileExistsError(f"{path} exists and is not a directory")
-        if any(scandir_no_follow(path)):
+        if any(not is_verified_output_lock_entry(path, entry) for entry in scandir_no_follow(path)):
             raise FileExistsError("fresh training output directory must be new or empty")
     mkdir_no_follow(path, parents=True, exist_ok=True)
     return path

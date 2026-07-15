@@ -9,6 +9,7 @@ import pickletools
 import re
 import struct
 import zipfile
+import zlib
 from pathlib import Path
 from typing import Any
 
@@ -109,6 +110,7 @@ class _RawZipEntry:
 @dataclasses.dataclass(frozen=True)
 class _RawZipLayout:
     entries: list[_RawZipEntry]
+    central_directory_offset: int
     central_directory_bytes: int
 
 
@@ -158,76 +160,67 @@ def preflight_torch_zip(data: bytes) -> TorchZipPreflight:
     if len(data) <= 0 or len(data) > MAX_CHECKPOINT_FILE_BYTES:
         raise ValueError("checkpoint byte size out of bounds")
     layout = _raw_zip_preflight(data)
-    try:
-        with zipfile.ZipFile(io.BytesIO(data), "r") as zf:
-            infos = zf.infolist()
-            if not infos or len(infos) != len(layout.entries) or len(infos) > MAX_TORCH_ZIP_ENTRIES:
-                raise ValueError("checkpoint ZIP entry count out of bounds")
-            names = [info.filename for info in infos]
-            if len(set(names)) != len(names):
-                raise ValueError("checkpoint ZIP contains duplicate member names")
-            raw_by_name = {entry.filename: entry for entry in layout.entries}
-            if set(raw_by_name) != set(names):
-                raise ValueError("checkpoint ZIP central directory changed after raw preflight")
-            total_uncompressed = 0
-            total_storage = 0
-            storage_names: set[str] = set()
-            storage_member_sizes: dict[str, int] = {}
-            data_pkl: bytes | None = None
-            for info in infos:
-                raw = raw_by_name[info.filename]
-                if raw.file_size != info.file_size or raw.compress_size != info.compress_size:
-                    raise ValueError("checkpoint ZIP member sizes changed after raw preflight")
-                parts = info.filename.split("/")
-                if len(parts) < 2 or parts[0] != TORCH_ZIP_ROOT:
-                    raise ValueError("checkpoint ZIP root mismatch")
-                member = "/".join(parts[1:])
-                if not member or member.startswith("/") or "\\" in member:
-                    raise ValueError("checkpoint ZIP member path is not relative")
-                if any(part in ("", ".", "..") for part in member.split("/")):
-                    raise ValueError("checkpoint ZIP member path traverses")
-                if info.flag_bits & 0x1:
-                    raise ValueError("checkpoint ZIP encryption is not allowed")
-                if info.compress_type != zipfile.ZIP_STORED or info.compress_size != info.file_size:
-                    raise ValueError("checkpoint ZIP compression is not allowed")
-                total_uncompressed += int(info.file_size)
-                if total_uncompressed > MAX_TORCH_ZIP_UNCOMPRESSED_BYTES:
-                    raise ValueError("checkpoint ZIP aggregate bytes exceed limit")
-                storage_match = _STORAGE_MEMBER_RE.fullmatch(member)
-                if storage_match is not None:
-                    storage_name = storage_match.group(1)
-                    if storage_name in storage_names:
-                        raise ValueError("checkpoint ZIP duplicate storage member")
-                    storage_names.add(storage_name)
-                    storage_member_sizes[storage_name] = int(info.file_size)
-                    total_storage += int(info.file_size)
-                    if total_storage > MAX_TORCH_ZIP_STORAGE_BYTES:
-                        raise ValueError("checkpoint ZIP storage bytes exceed limit")
-                    continue
-                if member not in ALLOWED_METADATA_MEMBERS:
-                    raise ValueError(f"checkpoint ZIP member not in storage contract: {member}")
-                if member == "data.pkl":
-                    if info.file_size > MAX_TORCH_DATA_PKL_BYTES:
-                        raise ValueError("checkpoint data.pkl exceeds limit")
-                    data_pkl = zf.read(info)
-            if data_pkl is None:
-                raise ValueError("checkpoint ZIP missing data.pkl")
-            bad = zf.testzip()
-            if bad is not None:
-                raise ValueError(f"checkpoint ZIP CRC failed for {bad}")
-            pickle_counts = _preflight_pickle(data_pkl, storage_member_sizes=storage_member_sizes)
-            return TorchZipPreflight(
-                entries=len(infos),
-                storage_entries=len(storage_names),
-                tensor_declarations=pickle_counts[2],
-                central_directory_bytes=layout.central_directory_bytes,
-                total_uncompressed_bytes=total_uncompressed,
-                total_storage_bytes=total_storage,
-                data_pkl_bytes=len(data_pkl),
-                pickle_opcodes=pickle_counts[0],
-            )
-    except zipfile.BadZipFile as exc:
-        raise RuntimeError("checkpoint must use modern Torch ZIP serialization") from exc
+    entries = layout.entries
+    if not entries or len(entries) > MAX_TORCH_ZIP_ENTRIES:
+        raise ValueError("checkpoint ZIP entry count out of bounds")
+    names = [entry.filename for entry in entries]
+    if len(set(names)) != len(names):
+        raise ValueError("checkpoint ZIP contains duplicate member names")
+    total_uncompressed = 0
+    total_storage = 0
+    storage_names: set[str] = set()
+    storage_member_sizes: dict[str, int] = {}
+    data_pkl: bytes | None = None
+    for entry in entries:
+        parts = entry.filename.split("/")
+        if len(parts) < 2 or parts[0] != TORCH_ZIP_ROOT:
+            raise ValueError("checkpoint ZIP root mismatch")
+        member = "/".join(parts[1:])
+        if not member or member.startswith("/") or "\\" in member:
+            raise ValueError("checkpoint ZIP member path is not relative")
+        if any(part in ("", ".", "..") for part in member.split("/")):
+            raise ValueError("checkpoint ZIP member path traverses")
+        if entry.flag_bits & 0x1:
+            raise ValueError("checkpoint ZIP encryption is not allowed")
+        if entry.compress_type != zipfile.ZIP_STORED or entry.compress_size != entry.file_size:
+            raise ValueError("checkpoint ZIP compression is not allowed")
+        payload_start, payload_end = _local_member_data_bounds(data, entry, central_directory_offset=layout.central_directory_offset)
+        payload = data[payload_start:payload_end]
+        if zlib.crc32(payload) & 0xFFFF_FFFF != entry.crc:
+            raise ValueError(f"checkpoint ZIP CRC failed for {entry.filename}")
+        total_uncompressed += int(entry.file_size)
+        if total_uncompressed > MAX_TORCH_ZIP_UNCOMPRESSED_BYTES:
+            raise ValueError("checkpoint ZIP aggregate bytes exceed limit")
+        storage_match = _STORAGE_MEMBER_RE.fullmatch(member)
+        if storage_match is not None:
+            storage_name = storage_match.group(1)
+            if storage_name in storage_names:
+                raise ValueError("checkpoint ZIP duplicate storage member")
+            storage_names.add(storage_name)
+            storage_member_sizes[storage_name] = int(entry.file_size)
+            total_storage += int(entry.file_size)
+            if total_storage > MAX_TORCH_ZIP_STORAGE_BYTES:
+                raise ValueError("checkpoint ZIP storage bytes exceed limit")
+            continue
+        if member not in ALLOWED_METADATA_MEMBERS:
+            raise ValueError(f"checkpoint ZIP member not in storage contract: {member}")
+        if member == "data.pkl":
+            if entry.file_size > MAX_TORCH_DATA_PKL_BYTES:
+                raise ValueError("checkpoint data.pkl exceeds limit")
+            data_pkl = payload
+    if data_pkl is None:
+        raise ValueError("checkpoint ZIP missing data.pkl")
+    pickle_counts = _preflight_pickle(data_pkl, storage_member_sizes=storage_member_sizes)
+    return TorchZipPreflight(
+        entries=len(entries),
+        storage_entries=len(storage_names),
+        tensor_declarations=pickle_counts[2],
+        central_directory_bytes=layout.central_directory_bytes,
+        total_uncompressed_bytes=total_uncompressed,
+        total_storage_bytes=total_storage,
+        data_pkl_bytes=len(data_pkl),
+        pickle_opcodes=pickle_counts[0],
+    )
 
 
 def _raw_zip_preflight(data: bytes) -> _RawZipLayout:
@@ -267,7 +260,7 @@ def _raw_zip_preflight(data: bytes) -> _RawZipLayout:
         raise ValueError("checkpoint ZIP central directory layout is malformed")
     entries = _parse_central_directory(data, cd_offset=cd_offset, cd_size=cd_size, expected_count=entries_total)
     _validate_local_member_layout(data, entries, central_directory_offset=cd_offset)
-    return _RawZipLayout(entries=entries, central_directory_bytes=cd_size)
+    return _RawZipLayout(entries=entries, central_directory_offset=cd_offset, central_directory_bytes=cd_size)
 
 
 def _find_single_eocd(data: bytes) -> int:
@@ -278,7 +271,7 @@ def _find_single_eocd(data: bytes) -> int:
     while pos != -1:
         if pos + 22 <= len(data):
             comment_len = struct.unpack_from("<H", data, pos + 20)[0]
-            if pos + 22 + comment_len == len(data):
+            if comment_len == 0 and pos + 22 == len(data):
                 candidates.append(pos)
         pos = data.find(sig, pos + 1)
     if not candidates:
@@ -452,33 +445,7 @@ def _validate_local_member_layout(data: bytes, entries: list[_RawZipEntry], *, c
             raise ValueError("checkpoint ZIP compression is not allowed")
         if entry.compress_size < 0 or entry.file_size < 0:
             raise ValueError("checkpoint ZIP member size is negative")
-        off = entry.header_offset
-        if off < 0 or off + 30 > central_directory_offset or data[off : off + 4] != b"PK\x03\x04":
-            raise ValueError("checkpoint ZIP local header offset is malformed")
-        (
-            _version_needed,
-            local_flags,
-            local_compress,
-            _mod_time,
-            _mod_date,
-            _crc,
-            _comp_size,
-            _file_size,
-            name_len,
-            extra_len,
-        ) = struct.unpack_from("<HHHHHIIIHH", data, off + 4)
-        name_start = off + 30
-        extra_start = name_start + name_len
-        data_start = extra_start + extra_len
-        data_end = data_start + entry.compress_size
-        if data_end > central_directory_offset:
-            raise ValueError("checkpoint ZIP member overlaps central directory")
-        try:
-            local_name = data[name_start:extra_start].decode("utf-8" if local_flags & 0x800 else "cp437")
-        except UnicodeDecodeError as exc:
-            raise ValueError("checkpoint ZIP local member name is not decodable") from exc
-        if local_name != entry.filename or local_compress != entry.compress_type:
-            raise ValueError("checkpoint ZIP local header disagrees with central directory")
+        data_start, data_end = _local_member_data_bounds(data, entry, central_directory_offset=central_directory_offset)
         ranges.append((data_start, data_end, entry.filename))
     ranges.sort()
     previous_end = 0
@@ -488,10 +455,43 @@ def _validate_local_member_layout(data: bytes, entries: list[_RawZipEntry], *, c
         previous_end = end
 
 
+def _local_member_data_bounds(data: bytes, entry: _RawZipEntry, *, central_directory_offset: int) -> tuple[int, int]:
+    off = entry.header_offset
+    if off < 0 or off + 30 > central_directory_offset or data[off : off + 4] != b"PK\x03\x04":
+        raise ValueError("checkpoint ZIP local header offset is malformed")
+    (
+        _version_needed,
+        local_flags,
+        local_compress,
+        _mod_time,
+        _mod_date,
+        _crc,
+        _comp_size,
+        _file_size,
+        name_len,
+        extra_len,
+    ) = struct.unpack_from("<HHHHHIIIHH", data, off + 4)
+    name_start = off + 30
+    extra_start = name_start + name_len
+    data_start = extra_start + extra_len
+    data_end = data_start + entry.compress_size
+    if data_end > central_directory_offset:
+        raise ValueError("checkpoint ZIP member overlaps central directory")
+    try:
+        local_name = data[name_start:extra_start].decode("utf-8" if local_flags & 0x800 else "cp437")
+    except UnicodeDecodeError as exc:
+        raise ValueError("checkpoint ZIP local member name is not decodable") from exc
+    if local_name != entry.filename or local_compress != entry.compress_type:
+        raise ValueError("checkpoint ZIP local header disagrees with central directory")
+    return data_start, data_end
+
+
 def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> tuple[int, int, int]:
     opcodes = 0
     memo_writes = 0
     tensor_decls = 0
+    next_memo_index = 0
+    stop_seen = False
     stack: list[Any] = []
     memo: dict[int, Any] = {}
     storage_decls: dict[str, _StorageRef] = {}
@@ -514,24 +514,37 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
         raise ValueError("checkpoint pickle mark underflow")
 
     def memo_put(index: int) -> None:
-        nonlocal memo_writes
+        nonlocal memo_writes, next_memo_index
         if not stack:
             raise ValueError("checkpoint pickle memo write without stack value")
+        if index != next_memo_index:
+            raise ValueError("checkpoint pickle memo writes must be sequential from zero")
         if index in memo:
             raise ValueError("checkpoint pickle memo overwrite is not allowed")
         memo[index] = stack[-1]
+        next_memo_index += 1
         memo_writes += 1
         if memo_writes > MAX_PICKLE_MEMO_WRITES:
             raise ValueError("checkpoint pickle memo exceeds limit")
 
-    for opcode, arg, _pos in pickletools.genops(data):
+    def memo_get(index: int) -> Any:
+        if index not in memo:
+            raise ValueError("checkpoint pickle memo read before write")
+        value = memo[index]
+        if not (value is None or type(value) in (str, bool, int, float) or isinstance(value, _GlobalRef)):
+            raise ValueError("checkpoint pickle memo read of mutable or special object is not allowed")
+        return value
+
+    for opcode, arg, pos in pickletools.genops(data):
         opcodes += 1
         if opcodes > MAX_PICKLE_OPCODES:
             raise ValueError("checkpoint pickle has too many opcodes")
         name = opcode.name
+        if opcodes == 1 and (name != "PROTO" or pos != 0 or arg != 2):
+            raise ValueError("checkpoint pickle must start with exactly one PROTO 2")
         if name == "PROTO":
-            if arg not in (2, 3, 4, 5):
-                raise ValueError("checkpoint pickle protocol is unsupported")
+            if opcodes != 1 or pos != 0 or arg != 2:
+                raise ValueError("checkpoint pickle must start with exactly one PROTO 2")
         elif name == "GLOBAL":
             if arg not in ALLOWED_PICKLE_GLOBALS:
                 raise ValueError(f"checkpoint pickle global is not allowed: {arg}")
@@ -540,7 +553,7 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
             raise ValueError("checkpoint pickle STACK_GLOBAL is not allowed")
         elif name in {"INST", "OBJ", "NEWOBJ", "NEWOBJ_EX", "EXT1", "EXT2", "EXT4", "BUILD"}:
             raise ValueError(f"checkpoint pickle opcode is not allowed: {name}")
-        elif name in {"BINUNICODE", "SHORT_BINUNICODE", "UNICODE"}:
+        elif name == "BINUNICODE":
             push(str(arg))
         elif name in {"BININT", "BININT1", "BININT2", "LONG", "LONG1", "LONG4"}:
             if type(arg) is not int:
@@ -621,15 +634,9 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
         elif name in {"BINPUT", "LONG_BINPUT"}:
             memo_put(int(arg))
         elif name == "MEMOIZE":
-            memo_put(len(memo))
+            raise ValueError("checkpoint pickle MEMOIZE is not allowed")
         elif name in {"BINGET", "LONG_BINGET"}:
-            index = int(arg)
-            if index not in memo:
-                raise ValueError("checkpoint pickle memo read before write")
-            value = memo[index]
-            if isinstance(value, _TensorDecl):
-                raise ValueError("checkpoint pickle reuses a tensor object")
-            push(value)
+            push(memo_get(int(arg)))
         elif name == "BINPERSID":
             persistent_id = pop()
             push(_validate_storage_persistent_id(persistent_id, storage_member_sizes, storage_decls))
@@ -646,12 +653,17 @@ def _preflight_pickle(data: bytes, *, storage_member_sizes: dict[str, int]) -> t
             else:
                 raise ValueError("checkpoint pickle REDUCE target is not allowed")
         elif name == "STOP":
+            if pos != len(data) - 1:
+                raise ValueError("checkpoint pickle STOP must be final byte")
             if len(stack) != 1:
                 raise ValueError("checkpoint pickle STOP with malformed stack")
+            stop_seen = True
             break
         else:
             raise ValueError(f"checkpoint pickle opcode is not allowed: {name}")
     else:
+        raise ValueError("checkpoint pickle missing STOP")
+    if not stop_seen:
         raise ValueError("checkpoint pickle missing STOP")
     if set(storage_decls) != set(storage_member_sizes):
         raise ValueError("checkpoint pickle storage declarations do not match ZIP storage members")
@@ -764,7 +776,7 @@ def _contiguous_strides(shape: tuple[int, ...]) -> tuple[int, ...]:
     running = 1
     for dim in reversed(shape):
         out.append(running)
-        running *= dim
+        running *= max(dim, 1)
     return tuple(reversed(out))
 
 

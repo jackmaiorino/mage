@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import hashlib
 import os
 import stat
 from pathlib import Path
 
-from .path_safety import lock_file_path, physical_output_identity
+from .path_safety import lock_file_path, prepare_physical_output_root
 
 
 class OutputLockError(RuntimeError):
@@ -16,11 +15,10 @@ class OutputLockError(RuntimeError):
 
 class OutputLock:
     def __init__(self, out_dir: str | Path):
-        physical = physical_output_identity(out_dir)
+        physical = prepare_physical_output_root(out_dir)
         self.identity = physical.identity
-        self.digest = hashlib.sha256(self.identity.encode("utf-8")).hexdigest()
         self.display_path = physical.display_path
-        self.path = lock_file_path(physical.lock_parent, self.identity)
+        self.path = lock_file_path(physical.lock_root)
         self._fd: int | None = None
 
     def __enter__(self) -> "OutputLock":
@@ -28,10 +26,13 @@ class OutputLock:
         if hasattr(os, "O_NOFOLLOW"):
             flags |= os.O_NOFOLLOW
         try:
+            st_pre: os.stat_result | None = None
             try:
                 st_pre = self.path.lstat()
                 if _is_link_or_reparse(st_pre) or not stat.S_ISREG(st_pre.st_mode):
                     raise OutputLockError(f"output lock path is not a regular non-link file: {self.path}")
+                if getattr(st_pre, "st_nlink", 1) != 1:
+                    raise OutputLockError(f"output lock path must not be hardlinked: {self.path}")
             except FileNotFoundError:
                 pass
             fd = os.open(str(self.path), flags, 0o600)
@@ -40,10 +41,20 @@ class OutputLock:
             if _is_link_or_reparse(st) or not stat.S_ISREG(st.st_mode):
                 os.close(fd)
                 raise OutputLockError(f"output lock path is not a regular non-link file: {self.path}")
+            if st_pre is not None and hasattr(os.path, "samestat") and not os.path.samestat(st_pre, st):
+                os.close(fd)
+                raise OutputLockError(f"output lock path changed during open: {self.path}")
+            if getattr(st, "st_nlink", 1) != 1:
+                os.close(fd)
+                raise OutputLockError(f"output lock path must not be hardlinked: {self.path}")
             if st.st_size < 1:
                 os.lseek(fd, 0, os.SEEK_SET)
                 os.write(fd, b"\0")
                 os.fsync(fd)
+                st = os.fstat(fd)
+            if st.st_size != 1:
+                os.close(fd)
+                raise OutputLockError(f"output lock path must be exactly one byte: {self.path}")
             self._fd = fd
             self._lock_fd(fd)
             return self

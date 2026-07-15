@@ -61,12 +61,13 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
     "updated_at",
 }
 
+_PATH_DELIM = r"[\s\"'(<:=,\[\{]"
 _WINDOWS_DRIVE_RE = re.compile(r"(^|[^A-Za-z0-9_])([A-Za-z]:[\\/](?:[^\\/\s\"'<>|]+[\\/]*)*)")
-_WINDOWS_EXTENDED_RE = re.compile(r"(^|[\s\"'(<])(?:\\\\[.?]\\|\\\\\?\\|\\\?\\|\\Device\\|//[.?]/|//\?/)", re.IGNORECASE)
-_WINDOWS_UNC_RE = re.compile(r"(^|[\s\"'(<])(?:\\\\|//)[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
-_WINDOWS_ROOT_REL_RE = re.compile(r"(^|[\s\"'(<])\\[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
+_WINDOWS_EXTENDED_RE = re.compile(rf"(^|{_PATH_DELIM})(?:\\\\[.?]\\|\\\\\?\\|\\\?\\|\\Device\\|//[.?]/|//\?/)", re.IGNORECASE)
+_WINDOWS_UNC_RE = re.compile(rf"(^|{_PATH_DELIM})(?:\\\\|//)[^\\/\s:\"'<>|]+[\\/][^\\/\s:\"'<>|]+")
+_WINDOWS_ROOT_REL_RE = re.compile(rf"(^|{_PATH_DELIM})\\(?![\\.?])[^\\/\s:\"'<>|]+(?:[\\/][^\\/\s:\"'<>|]+)*")
 _POSIX_ABSOLUTE_RE = re.compile(
-    r"(^|[\s\"'(<:=,])/(?:$|[A-Za-z0-9._+~-](?:[A-Za-z0-9._+~ -]*[A-Za-z0-9._+~-])?(?:/[A-Za-z0-9._+~-](?:[A-Za-z0-9._+~ -]*[A-Za-z0-9._+~-])?)*)"
+    rf"(^|{_PATH_DELIM})/(?!/)(?:$|[^\s\"'<>|\\]+(?:/[^\s\"'<>|\\]+)*)"
 )
 _FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
 _NON_FILE_URI_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://")

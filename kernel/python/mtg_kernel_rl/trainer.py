@@ -33,6 +33,7 @@ from .artifacts import (
     validate_training_json_privacy,
     write_json_atomic,
 )
+from .artifact_io import FORBIDDEN_TRAINING_JSON_KEYS
 from .checkpoint import (
     CHECKPOINT_SCHEMA,
     LATEST_SCHEMA,
@@ -73,16 +74,19 @@ from .model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet, ModelCon
 from .output_lock import OutputLock
 from .path_safety import (
     atomic_quarantine,
+    capture_path_identity,
     ensure_no_follow_path,
     ensure_real_child_dir,
     ensure_real_file,
+    is_verified_output_lock_entry,
     mkdir_no_follow,
+    revalidate_path_identity,
     remove_tree_no_follow,
     same_lexical_path,
     scandir_no_follow,
 )
 
-RUN_SCHEMA = "kernel_rl_train_run/v4"
+RUN_SCHEMA = "kernel_rl_train_run/v5"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
@@ -198,7 +202,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
     from . import artifact_io as json_contract
 
     return {
-        "schema": "kernel_rl_artifact_boundary/v2",
+        "schema": "kernel_rl_artifact_boundary/v3",
         "format": {
             "checkpoint_container": "torch-zip",
             "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
@@ -258,12 +262,13 @@ def _artifact_boundary_contract() -> dict[str, Any]:
             "policy": "plain CPU dense contiguous tensors only; no subclasses, views, aliases, shared storage, or nonzero offsets",
         },
         "lock": {
-            "algorithm": "per-output SHA256 physical-output-identity lock under a no-follow .mtg-kernel-train-locks directory",
-            "identity": "existing output uses resolved physical object dev/inode plus canonical final physical path; missing output uses nearest existing real physical ancestor plus normalized unresolved suffix",
+            "algorithm": "one constant persistent child lock file at <physical-output-root>/.mtg-kernel-train.lock",
+            "identity": "component-create and validate the real output directory first; ancestor aliases converge through the resolved physical root while direct output-root links/reparse points are rejected",
             "windows": "msvcrt.locking LK_NBLCK on persistent one-byte regular file",
             "posix": "fcntl.flock LOCK_EX|LOCK_NB on persistent regular file",
             "lifecycle": "held for complete train call including client lifetime, commit, recovery, no-op resume, and shutdown",
             "file_policy": "persistent lock file is never unlinked or truncated; descriptor is non-inheritable",
+            "threat_boundary": "cooperating local processes on a local filesystem; hostile concurrent namespace swaps outside the validated output-root lock file are not claimed",
         },
         "path_policy": {
             "containment": "lexical artifact-root containment",
@@ -271,7 +276,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
             "creation": "all output, transaction, quarantine, lock-parent, and generation-directory creation is component-wise no-follow",
             "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename after destination parents validate",
             "resume": "resume path must lexically equal selected latest.json",
-            "pre_manifest_recovery": "under the output lock, fresh bootstrap may remove only empty real updates/checkpoints directories and canonical .run.json.<pid>.<n>.tmp files before run.json exists; unknown entries, nonempty directories, links, reparse points, and malformed temps fail closed",
+            "pre_manifest_recovery": "under the output lock, fresh bootstrap validates the entire root then may remove only empty real updates/checkpoints directories and canonical .run.json.<pid>.<n>.tmp files before run.json exists; unknown entries, nonempty directories, links, reparse points, malformed temps, and lock impostors fail closed with zero cleanup",
         },
         "privacy": {
             "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
@@ -352,21 +357,7 @@ def _run_manifest_from_config(
         "artifact_schemas": _artifact_schemas(),
         "artifact_boundary": _artifact_boundary_contract(),
         "privacy_contract": {
-            "forbidden_raw_fields": [
-                "absolute_path",
-                "arena_id",
-                "card_name",
-                "display_text",
-                "host",
-                "hostname",
-                "legal_actions",
-                "observation",
-                "own_hand",
-                "path",
-                "stable",
-                "stable_id",
-                "timestamp",
-            ],
+            "forbidden_raw_fields": sorted(FORBIDDEN_TRAINING_JSON_KEYS),
         },
     }
 
@@ -789,6 +780,30 @@ def _quarantine_tree(out_dir: Path, path: Path, reason: str) -> None:
     atomic_quarantine(out_dir, path, reason)
 
 
+def _entries_excluding_verified_lock(root: Path) -> list[os.DirEntry[str]]:
+    entries: list[os.DirEntry[str]] = []
+    for entry in scandir_no_follow(root):
+        if is_verified_output_lock_entry(root, entry):
+            continue
+        entries.append(entry)
+    return entries
+
+
+def _revalidate_then_unlink(identity: Any) -> None:
+    revalidate_path_identity(identity)
+    Path(identity.path).unlink()
+
+
+def _revalidate_then_rmdir(identity: Any) -> None:
+    revalidate_path_identity(identity)
+    Path(identity.path).rmdir()
+
+
+def _revalidate_then_quarantine(root: Path, identity: Any, reason: str) -> None:
+    revalidate_path_identity(identity)
+    atomic_quarantine(root, Path(identity.path), reason)
+
+
 def _validate_orphan_generation_file(path: Path, *, update: int, kind: str, run_digest: str, compatibility: dict[str, Any]) -> None:
     if kind == "update":
         record = read_authoritative_json(path, "update")
@@ -840,38 +855,58 @@ def _reconcile_uncommitted_artifacts(
     run_digest: str,
     compatibility: dict[str, Any],
 ) -> None:
-    mkdir_no_follow(out_dir, parents=True, exist_ok=True)
+    ensure_real_child_dir(out_dir.parent, out_dir)
+    mkdirs: list[Path] = []
+    quarantine_actions: list[tuple[Any, str]] = []
+    remove_dirs: list[Any] = []
     transactions = out_dir / ".transactions"
     if transactions.exists():
         ensure_real_child_dir(out_dir, transactions)
-        for entry in list(scandir_no_follow(transactions)):
+        transaction_entries = scandir_no_follow(transactions)
+        for entry in transaction_entries:
             child = Path(entry.path)
             if not entry.is_dir(follow_symlinks=False):
                 raise ValueError(f"unknown transaction entry: {child.name}")
             _validate_transaction_tree(out_dir, child, head_update=head_update)
-            _quarantine_tree(out_dir, child, "staging")
-        if transactions.exists() and not any(scandir_no_follow(transactions)):
-            transactions.rmdir()
+            quarantine_actions.append((capture_path_identity(child), "staging"))
+        if not transaction_entries:
+            remove_dirs.append(capture_path_identity(transactions))
 
-    for direct_name in (".latest.json", ".episodes.jsonl", ".updates.jsonl", ".summary.json"):
-        for entry in list(scandir_no_follow(out_dir)):
-            temp = Path(entry.path)
-            if not temp.name.startswith(f"{direct_name}.") or not temp.name.endswith(".tmp"):
-                continue
-            if TEMP_RE.fullmatch(temp.name) is None:
-                raise ValueError(f"unknown temp file: {temp.name}")
+    allowed_root_files = {"run.json", "latest.json", "episodes.jsonl", "updates.jsonl", "summary.json"}
+    allowed_root_dirs = {"updates", "checkpoints", ".transactions", ".quarantine"}
+    direct_temp_prefixes = (".latest.json", ".episodes.jsonl", ".updates.jsonl", ".summary.json")
+    for entry in _entries_excluding_verified_lock(out_dir):
+        path = Path(entry.path)
+        if entry.name in allowed_root_files:
             if not entry.is_file(follow_symlinks=False):
-                raise ValueError(f"temp artifact is not a file: {temp.name}")
-            _quarantine_file(out_dir, temp, "temp")
+                raise ValueError(f"root artifact is not a file: {entry.name}")
+            ensure_real_file(out_dir, path, reject_hardlinks=False)
+            continue
+        if entry.name in allowed_root_dirs:
+            if not entry.is_dir(follow_symlinks=False):
+                raise ValueError(f"root artifact directory is not a directory: {entry.name}")
+            ensure_real_child_dir(out_dir, path)
+            continue
+        if any(entry.name.startswith(f"{prefix}.") and entry.name.endswith(".tmp") for prefix in direct_temp_prefixes):
+            if TEMP_RE.fullmatch(entry.name) is None:
+                raise ValueError(f"unknown temp file: {entry.name}")
+            if not entry.is_file(follow_symlinks=False):
+                raise ValueError(f"temp artifact is not a file: {entry.name}")
+            ensure_real_file(out_dir, path, reject_hardlinks=False)
+            quarantine_actions.append((capture_path_identity(path), "temp"))
+            continue
+        raise ValueError(f"unknown root artifact entry: {entry.name}")
 
     for directory_name, mapping in (
         ("updates", {"json": "update"}),
         ("checkpoints", {"pt": "checkpoint", "json": "sidecar"}),
     ):
         directory = out_dir / directory_name
-        mkdir_no_follow(directory, parents=True, exist_ok=True)
+        if not directory.exists():
+            mkdirs.append(directory)
+            continue
         ensure_real_child_dir(out_dir, directory)
-        for entry in list(scandir_no_follow(directory)):
+        for entry in scandir_no_follow(directory):
             path = Path(entry.path)
             _validate_path_contained(out_dir, path)
             if entry.is_dir(follow_symlinks=False):
@@ -879,7 +914,7 @@ def _reconcile_uncommitted_artifacts(
             if TEMP_RE.fullmatch(path.name):
                 if not entry.is_file(follow_symlinks=False):
                     raise ValueError(f"temp artifact is not a file: {path.name}")
-                _quarantine_file(out_dir, path, "temp")
+                quarantine_actions.append((capture_path_identity(path), "temp"))
                 continue
             match = GENERATION_RE.fullmatch(path.name)
             if match is None:
@@ -894,7 +929,25 @@ def _reconcile_uncommitted_artifacts(
             if update <= head_update:
                 continue
             _validate_orphan_generation_file(path, update=update, kind=kind, run_digest=run_digest, compatibility=compatibility)
-            _quarantine_file(out_dir, path, "uncommitted")
+            quarantine_actions.append((capture_path_identity(path), "uncommitted"))
+    for directory in mkdirs:
+        mkdir_no_follow(directory, parents=True, exist_ok=True)
+    for identity, reason in quarantine_actions:
+        _revalidate_then_quarantine(out_dir, identity, reason)
+    for identity in remove_dirs:
+        try:
+            if not any(scandir_no_follow(Path(identity.path))):
+                _revalidate_then_rmdir(identity)
+        except OSError:
+            pass
+    if transactions.exists():
+        ensure_real_child_dir(out_dir, transactions)
+        try:
+            if not any(scandir_no_follow(transactions)):
+                identity = capture_path_identity(transactions)
+                _revalidate_then_rmdir(identity)
+        except OSError:
+            pass
 
 
 def _validate_generation_bundle(
@@ -1282,7 +1335,8 @@ def _bootstrap_fresh(
 
 def _recover_pre_manifest_bootstrap(out_dir: Path) -> None:
     ensure_real_child_dir(out_dir.parent, out_dir)
-    for entry in list(scandir_no_follow(out_dir)):
+    actions: list[tuple[str, Any]] = []
+    for entry in _entries_excluding_verified_lock(out_dir):
         child = Path(entry.path)
         if entry.name in {"updates", "checkpoints"}:
             if not entry.is_dir(follow_symlinks=False):
@@ -1290,7 +1344,7 @@ def _recover_pre_manifest_bootstrap(out_dir: Path) -> None:
             ensure_real_child_dir(out_dir, child)
             if any(scandir_no_follow(child)):
                 raise ValueError(f"pre-manifest bootstrap directory is not empty: {entry.name}")
-            child.rmdir()
+            actions.append(("rmdir", capture_path_identity(child)))
             continue
         if entry.name.startswith(".run.json.") and entry.name.endswith(".tmp"):
             if TEMP_RE.fullmatch(entry.name) is None or not entry.is_file(follow_symlinks=False):
@@ -1300,9 +1354,16 @@ def _recover_pre_manifest_bootstrap(out_dir: Path) -> None:
             if not isinstance(temp_value, dict) or temp_value.get("schema") != RUN_SCHEMA:
                 raise ValueError(f"pre-manifest run.json temp content is malformed: {entry.name}")
             validate_training_json_privacy(temp_value)
-            child.unlink()
+            actions.append(("unlink", capture_path_identity(child)))
             continue
         raise ValueError(f"unknown pre-manifest bootstrap debris: {entry.name}")
+    for action, identity in actions:
+        if action == "rmdir":
+            _revalidate_then_rmdir(identity)
+        elif action == "unlink":
+            _revalidate_then_unlink(identity)
+        else:
+            raise AssertionError(action)
 
 
 def _bootstrap_incomplete_fresh(
@@ -1739,7 +1800,7 @@ def _train_locked(
         if out_path.exists() and (out_path.is_symlink() or not out_path.is_dir()):
             require_new_or_empty_dir(out_path)
             raise AssertionError("unreachable")
-        if out_path.exists() and any(scandir_no_follow(out_path)):
+        if out_path.exists() and any(_entries_excluding_verified_lock(out_path)):
             if (out_path / "run.json").is_file() and not latest_path(out_path).exists():
                 state, client, first_decision = _bootstrap_incomplete_fresh(
                     env_bin=env_path,
