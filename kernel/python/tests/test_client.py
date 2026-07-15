@@ -30,7 +30,23 @@ class ClientStrictnessTest(unittest.TestCase):
         self.assert_reset_protocol_error("duplicate_keys")
 
     def test_nonfinite_json_rejected(self) -> None:
+        with self.assertRaises(ProtocolError):
+            strict_json_loads('{"a":1e999}')
         self.assert_reset_protocol_error("nonfinite_json")
+        self.assert_reset_protocol_error("nonfinite_overflow")
+
+    def test_error_response_schema_and_sanitized_message(self) -> None:
+        client = self.make_client("error_valid")
+        try:
+            with self.assertRaises(ProtocolError) as cm:
+                client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            self.assertIn("environment error bad_request", str(cm.exception))
+            self.assertNotIn("\n", str(cm.exception))
+        finally:
+            client.close()
+            self.tmp.cleanup()
+        for scenario in ("error_bad_schema", "error_bad_request_id", "error_empty_code"):
+            self.assert_reset_protocol_error(scenario)
 
     def test_stdout_noise_rejected(self) -> None:
         self.assert_reset_protocol_error("noise")
@@ -58,7 +74,7 @@ class ClientStrictnessTest(unittest.TestCase):
         self.assert_reset_protocol_error("step_drift")
 
     def test_legal_action_integrity_rejected(self) -> None:
-        for scenario in ("empty_actions", "noncontiguous_actions", "duplicate_actions"):
+        for scenario in ("empty_actions", "noncontiguous_actions", "duplicate_actions", "mismatched_action_actor", "mixed_action_actors"):
             self.assert_reset_protocol_error(scenario)
 
     def test_nonzero_intermediate_reward_rejected(self) -> None:

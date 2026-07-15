@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import queue
 import subprocess
@@ -64,12 +65,31 @@ def _reject_constant(value: str) -> None:
     raise ProtocolError(f"non-finite JSON constant rejected: {value}")
 
 
+def _parse_float(value: str) -> float:
+    parsed = float(value)
+    if not math.isfinite(parsed):
+        raise ProtocolError(f"non-finite JSON float rejected: {value}")
+    return parsed
+
+
+def _reject_nonfinite_tree(value: Any, context: str = "$") -> None:
+    if isinstance(value, float) and not math.isfinite(value):
+        raise ProtocolError(f"non-finite JSON float at {context}")
+    if isinstance(value, dict):
+        for key, child in value.items():
+            _reject_nonfinite_tree(child, f"{context}.{key}")
+    elif isinstance(value, list):
+        for i, child in enumerate(value):
+            _reject_nonfinite_tree(child, f"{context}[{i}]")
+
+
 def strict_json_loads(line: str) -> dict[str, Any]:
     try:
         value = json.loads(
             line,
             object_pairs_hook=_reject_duplicate_keys,
             parse_constant=_reject_constant,
+            parse_float=_parse_float,
         )
     except ProtocolError:
         raise
@@ -77,6 +97,7 @@ def strict_json_loads(line: str) -> dict[str, Any]:
         raise ProtocolError(f"stdout line is not strict JSON: {exc}") from exc
     if not isinstance(value, dict):
         raise ProtocolError("stdout response is not a JSON object")
+    _reject_nonfinite_tree(value)
     return value
 
 
@@ -107,6 +128,13 @@ def _str(value: Any, context: str) -> str:
     if type(value) is not str:
         raise ProtocolError(f"{context} must be a string")
     return value
+
+
+def _nonempty_str(value: Any, context: str) -> str:
+    text = _str(value, context)
+    if not text:
+        raise ProtocolError(f"{context} must be nonempty")
+    return text
 
 
 def _bool(value: Any, context: str) -> bool:
@@ -154,107 +182,13 @@ def _validate_provenance(value: Any, expected: dict[str, Any] | None) -> dict[st
     return value
 
 
-def _validate_card_ref(value: Any, context: str) -> None:
-    if not isinstance(value, dict):
-        raise ProtocolError(f"{context} must be an object")
-    _keys(value, ["arena_id", "card_db_id", "owner", "controller", "zone", "zone_change_count"], context)
-    _int(value["arena_id"], f"{context}.arena_id", minimum=0)
-    _int(value["card_db_id"], f"{context}.card_db_id", minimum=0)
-    _seat(value["owner"], f"{context}.owner")
-    _seat(value["controller"], f"{context}.controller")
-    _str(value["zone"], f"{context}.zone")
-    _int(value["zone_change_count"], f"{context}.zone_change_count", minimum=0)
-
-
-def _validate_target_ref(value: Any, context: str) -> None:
-    if not isinstance(value, dict):
-        raise ProtocolError(f"{context} must be an object")
-    kind = _str(value.get("target_kind"), f"{context}.target_kind")
-    if kind == "player":
-        _keys(value, ["target_kind", "player"], context)
-        _seat(value["player"], f"{context}.player")
-    elif kind == "object":
-        _keys(value, ["target_kind", "object"], context)
-        _validate_card_ref(value["object"], f"{context}.object")
-    else:
-        raise ProtocolError(f"unsupported target_kind {kind}")
-
-
-def _validate_action_semantic(value: Any, context: str) -> None:
-    if not isinstance(value, dict):
-        raise ProtocolError(f"{context} must be an object")
-    kind = _str(value.get("action_kind"), f"{context}.action_kind")
-    if kind == "ambiguous":
-        raise ProtocolError("ambiguous action semantic is not admissible")
-    fields = {
-        "pass": ["action_kind", "actor"],
-        "play_land": ["action_kind", "actor", "source"],
-        "cast_spell": ["action_kind", "actor", "source"],
-        "activate_mana_ability": ["action_kind", "actor", "source"],
-        "activate_ability": ["action_kind", "actor", "source", "ability_index"],
-        "plot_spell": ["action_kind", "actor", "source"],
-        "choose_target": ["action_kind", "actor", "source", "remaining", "target"],
-        "choose_cost_target": ["action_kind", "actor", "source", "cost_kind", "remaining", "candidate"],
-        "choose_cast_mode": ["action_kind", "actor", "source", "mode"],
-        "choose_kicker": ["action_kind", "actor", "source", "pay"],
-        "choose_spell_mode": ["action_kind", "actor", "source", "mode_index", "mode_count"],
-        "choose_optional_cost_use": ["action_kind", "actor", "use_cost"],
-        "choose_optional_cost_which": ["action_kind", "actor", "choice"],
-        "choose_madness_cast": ["action_kind", "actor", "card", "cast_it"],
-        "discard": ["action_kind", "actor", "cards"],
-        "declare_attackers": ["action_kind", "actor", "attackers"],
-        "declare_blockers_for_attacker": ["action_kind", "actor", "attacker", "blockers"],
-        "order_triggers": ["action_kind", "actor", "pending_sources", "order"],
-    }.get(kind)
-    if fields is None:
-        raise ProtocolError(f"unsupported action_kind {kind}")
-    _keys(value, fields, context)
-    _seat(value["actor"], f"{context}.actor")
-    for field in ("source", "candidate", "card", "attacker"):
-        if field in value:
-            _validate_card_ref(value[field], f"{context}.{field}")
-    if "target" in value:
-        _validate_target_ref(value["target"], f"{context}.target")
-    for field in ("cards", "attackers", "blockers", "pending_sources"):
-        if field in value:
-            for i, ref in enumerate(_list(value[field], f"{context}.{field}")):
-                _validate_card_ref(ref, f"{context}.{field}[{i}]")
-    if "order" in value:
-        for i, item in enumerate(_list(value["order"], f"{context}.order")):
-            _int(item, f"{context}.order[{i}]", minimum=0)
-    for field in ("ability_index", "remaining", "mode_index", "mode_count"):
-        if field in value:
-            _int(value[field], f"{context}.{field}", minimum=0)
-    for field in ("pay", "use_cost", "cast_it"):
-        if field in value:
-            _bool(value[field], f"{context}.{field}")
-    for field in ("mode", "cost_kind", "choice"):
-        if field in value:
-            _str(value[field], f"{context}.{field}")
-
-
 def _validate_legal_actions(actions: Any) -> list[dict[str, Any]]:
-    legal_actions = _list(actions, "legal_actions")
-    if not legal_actions:
-        raise ProtocolError("decision has no legal actions")
-    seen: set[str] = set()
-    for i, action in enumerate(legal_actions):
-        if not isinstance(action, dict):
-            raise ProtocolError("legal action must be an object")
-        _keys(action, ["schema_version", "selected_index", "stable_id", "semantic", "display_text"], f"legal_actions[{i}]")
-        if _int(action["schema_version"], f"legal_actions[{i}].schema_version") != SCHEMA_VERSION:
-            raise ProtocolError("legal action schema mismatch")
-        selected_index = _int(action["selected_index"], f"legal_actions[{i}].selected_index", minimum=0)
-        if selected_index != i:
-            raise ProtocolError("legal action selected_index is not contiguous")
-        stable_id = _str(action["stable_id"], f"legal_actions[{i}].stable_id")
-        if stable_id in seen:
-            raise ProtocolError("duplicate legal action stable_id")
-        seen.add(stable_id)
-        if action["display_text"] is not None:
-            _str(action["display_text"], f"legal_actions[{i}].display_text")
-        _validate_action_semantic(action["semantic"], f"legal_actions[{i}].semantic")
-    return legal_actions
+    from .features import FeatureSchemaError, validate_legal_actions_contract
+
+    try:
+        return validate_legal_actions_contract(actions)
+    except FeatureSchemaError as exc:
+        raise ProtocolError(str(exc)) from exc
 
 
 def _validate_observation(value: Any, response: dict[str, Any], provenance: dict[str, Any]) -> dict[str, Any]:
@@ -278,15 +212,13 @@ def _validate_observation(value: Any, response: dict[str, Any], provenance: dict
     if _int(value["step_index"], "observation.step_index", minimum=0) != response["step"]:
         raise ProtocolError("observation step_index mismatch")
     _int(value["visible_projection_hash"], "observation.visible_projection_hash", minimum=0)
-    for i, card in enumerate(_list(value["own_hand"], "observation.own_hand")):
-        if not isinstance(card, dict):
-            raise ProtocolError("own_hand card must be an object")
-        _keys(card, ["stable", "card_name"], f"observation.own_hand[{i}]")
-        _validate_card_ref(card["stable"], f"observation.own_hand[{i}].stable")
-        _str(card["card_name"], f"observation.own_hand[{i}].card_name")
     from .features import assert_observation_classified
+    from .features import FeatureSchemaError
 
-    assert_observation_classified(value)
+    try:
+        assert_observation_classified(value)
+    except FeatureSchemaError as exc:
+        raise ProtocolError(str(exc)) from exc
     return value
 
 
@@ -461,12 +393,18 @@ class KernelRlClient:
         response_type = _str(response.get("response_type"), "response_type")
         if response_type == "error":
             _keys(response, ["response_type", "schema_version", "request_id", "error"], "error response")
-            _int(response["schema_version"], "error.schema_version")
+            if _int(response["schema_version"], "error.schema_version") != SCHEMA_VERSION:
+                raise ProtocolError("error schema mismatch")
+            if _str(response["request_id"], "error.request_id") != request["request_id"]:
+                raise ProtocolError("error request_id mismatch")
             error = response["error"]
             if not isinstance(error, dict):
                 raise ProtocolError("error payload must be object")
             _keys(error, ["code", "message"], "error")
-            raise ProtocolError(f"environment error {error['code']}: {error['message']}")
+            code = _nonempty_str(error["code"], "error.code")
+            message = _nonempty_str(error["message"], "error.message")
+            sanitized = " ".join(message.split())[:240]
+            raise ProtocolError(f"environment error {code}: {sanitized}")
         if response_type == "decision":
             _keys(response, ["response_type", "schema_version", "request_id", "provenance", "episode_id", "step", "acting_player", "observation", "legal_actions", "reward"], "decision response")
             if _int(response["schema_version"], "decision.schema_version") != SCHEMA_VERSION:
@@ -485,6 +423,12 @@ class KernelRlClient:
             acting = _seat(response["acting_player"], "decision.acting_player")
             observation = _validate_observation(response["observation"], response, provenance)
             legal_actions = _validate_legal_actions(response["legal_actions"])
+            from .features import FeatureSchemaError, validate_legal_actions_contract
+
+            try:
+                legal_actions = validate_legal_actions_contract(legal_actions, acting)
+            except FeatureSchemaError as exc:
+                raise ProtocolError(str(exc)) from exc
             if _validate_reward(response["reward"], "decision.reward") != [0, 0]:
                 raise ProtocolError("intermediate decision reward must be [0, 0]")
             self._episode_id = episode_id

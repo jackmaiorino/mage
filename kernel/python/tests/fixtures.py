@@ -67,6 +67,122 @@ def public_card(arena_id: int, card_db_id: int, owner: str, zone: str = "Battlef
     }
 
 
+def complete_observation() -> dict[str, Any]:
+    obs = observation()
+    p = obs["projection"]
+    p0_creature = p["battlefield"][0][0]
+    p0_land = p["battlefield"][0][1]
+    p1_creature = p["battlefield"][1][0]
+    p1_land = p["battlefield"][1][1]
+    attachment = public_card(10, 41, "p0")
+    p["battlefield"][0].append(attachment)
+    p0_creature["attachments"] = [attachment["stable"]["arena_id"]]
+    p["stack"][0]["controller"] = "p1"
+    p["stack"][0]["targets"] = [
+        {"target_kind": "player", "player": "p1"},
+        {"target_kind": "object", "object": p1_creature["stable"]},
+    ]
+    p["combat"]["ordered_attackers"] = [p0_creature["stable"], p0_land["stable"]]
+    p["combat"]["attacker_to_ordered_blockers"] = [
+        [p0_creature["stable"], [p1_creature["stable"], p1_land["stable"]]],
+        [p0_land["stable"], []],
+    ]
+    p["continuous_effects"] = [
+        {
+            "affected_objects": [p0_creature["stable"], p1_creature["stable"]],
+            "layers": 7,
+            "timestamp": 42,
+            "duration": "end_of_turn",
+            "power_delta": 1,
+            "toughness_delta": -1,
+            "grants_haste": True,
+        }
+    ]
+    p["exile_play_permissions"] = [
+        {
+            "object": stable_ref(9, 40, "p0", "Exile"),
+            "holder": "p0",
+            "play_or_cast": "cast",
+            "zone_change_generation": 2,
+            "expiry": {"expiry_kind": "until_holders_next_turn", "holder_turn_started": False},
+        }
+    ]
+    p["engine_context"].update(
+        {
+            "pending_cast": {
+                "source": obs["own_hand"][0]["stable"],
+                "controller": "p0",
+                "chosen_targets": [{"target_kind": "object", "object": p1_creature["stable"]}],
+                "is_flashback": False,
+                "cast_mode": "Alternative",
+                "additional_cost_discarded": [obs["own_hand"][0]["stable"]],
+                "mode_chosen": 1,
+                "origin_zone": "Hand",
+                "sacrifice_chosen": [p0_land["stable"]],
+                "kicked": True,
+            },
+            "pending_activation": {
+                "source": p0_land["stable"],
+                "controller": "p0",
+                "ability_index": 2,
+                "chosen_targets": [{"target_kind": "player", "player": "p1"}],
+                "cost_discard_paid": [obs["own_hand"][0]["stable"]],
+            },
+            "pending_discard": {
+                "player": "p0",
+                "count": 1,
+                "resume_stage": "finish_cast",
+                "resume_source": obs["own_hand"][0]["stable"],
+            },
+            "pending_optional_cost": {
+                "player": "p0",
+                "source": obs["own_hand"][0]["stable"],
+                "discard_cards": 1,
+                "sacrifice_lands": 1,
+                "discard_payable": True,
+                "sacrifice_payable": True,
+                "spell_resume_source": obs["own_hand"][0]["stable"],
+                "spell_resume_zone": "Hand",
+            },
+            "pending_optional_cost_sacrifice": {
+                "player": "p0",
+                "source": obs["own_hand"][0]["stable"],
+                "remaining": 1,
+                "chosen": [p0_land["stable"]],
+                "spell_resume_source": obs["own_hand"][0]["stable"],
+                "spell_resume_zone": "Hand",
+            },
+            "pending_triggers": [
+                {"source": p0_creature["stable"], "controller": "p0", "trigger_kind": "triggered_ability", "kicked": False},
+                {"source": p1_creature["stable"], "controller": "p1", "trigger_kind": "madness_offer", "kicked": True},
+            ],
+        }
+    )
+    p["surface_context"].update(
+        {
+            "current_stage": "declare_blockers_for_attacker",
+            "stack_length_changed_since_observed": True,
+            "madness_cast_reprompt_source": obs["own_hand"][0]["stable"],
+            "private_blockers": {
+                "current_attacker": p0_creature["stable"],
+                "accumulated": [[p0_creature["stable"], p1_creature["stable"]]],
+                "remaining": [[p0_land["stable"], [p1_land["stable"]]]],
+            },
+            "private_discard": {
+                "chosen": [obs["own_hand"][0]["stable"]],
+                "remaining_choices": [stable_ref(11, 31, "p0", "Hand")],
+                "remaining_needed": 1,
+            },
+            "private_optional_cost": {
+                "discard_payable": True,
+                "sacrifice_payable": True,
+                "stage": "optional_cost_which",
+            },
+        }
+    )
+    return obs
+
+
 def observation() -> dict[str, Any]:
     self_hand = {"stable": stable_ref(1, 30, "p0", "Hand"), "card_name": "Lightning Bolt"}
     p0_creature = public_card(2, 20, "p0")
@@ -175,6 +291,19 @@ def legal_actions() -> list[dict[str, Any]]:
         {"schema_version": 2, "selected_index": 0, "stable_id": "legal-action-v2:a", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"},
         {"schema_version": 2, "selected_index": 1, "stable_id": "legal-action-v2:b", "semantic": {"action_kind": "cast_spell", "actor": "p0", "source": src}, "display_text": "Cast Lightning Bolt"},
         {"schema_version": 2, "selected_index": 2, "stable_id": "legal-action-v2:c", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "player", "player": "p1"}}, "display_text": "Target opponent"},
+    ]
+
+
+def complete_legal_actions() -> list[dict[str, Any]]:
+    base = stable_ref(1, 30, "p0", "Hand")
+    second = stable_ref(12, 31, "p0", "Hand")
+    blocker = stable_ref(4, 21, "p1", "Battlefield")
+    return [
+        {"schema_version": 2, "selected_index": 0, "stable_id": "a0", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"},
+        {"schema_version": 2, "selected_index": 1, "stable_id": "a1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": base, "remaining": 1, "target": {"target_kind": "object", "object": blocker}}, "display_text": "Target creature"},
+        {"schema_version": 2, "selected_index": 2, "stable_id": "a2", "semantic": {"action_kind": "declare_blockers_for_attacker", "actor": "p0", "attacker": base, "blockers": [blocker]}, "display_text": "Block"},
+        {"schema_version": 2, "selected_index": 3, "stable_id": "a3", "semantic": {"action_kind": "discard", "actor": "p0", "cards": [base, second]}, "display_text": "Discard two"},
+        {"schema_version": 2, "selected_index": 4, "stable_id": "a4", "semantic": {"action_kind": "order_triggers", "actor": "p0", "pending_sources": [base, second], "order": [1, 0]}, "display_text": "Order triggers"},
     ]
 
 

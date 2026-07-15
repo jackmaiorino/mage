@@ -32,9 +32,25 @@ def main() -> int:
             sys.stdout.write('{"response_type":"decision","schema_version":NaN}\n')
             sys.stdout.flush()
             continue
+        if scenario == "nonfinite_overflow":
+            sys.stdout.write('{"response_type":"decision","schema_version":1e999}\n')
+            sys.stdout.flush()
+            continue
         if scenario == "noise":
             sys.stdout.write("not json\n")
             sys.stdout.flush()
+            continue
+        if scenario == "error_valid":
+            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "line one\nline two"}})
+            continue
+        if scenario == "error_bad_schema":
+            emit({"response_type": "error", "schema_version": 1, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "bad"}})
+            continue
+        if scenario == "error_bad_request_id":
+            emit({"response_type": "error", "schema_version": 2, "request_id": "wrong", "error": {"code": "bad_request", "message": "bad"}})
+            continue
+        if scenario == "error_empty_code":
+            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
             continue
         if req["request_type"] == "reset":
             resp = decision_response(req["request_id"], req["episode_id"], 0)
@@ -55,6 +71,14 @@ def main() -> int:
                 resp["legal_actions"][1]["selected_index"] = 9
             elif scenario == "duplicate_actions":
                 resp["legal_actions"][1]["stable_id"] = resp["legal_actions"][0]["stable_id"]
+            elif scenario == "mismatched_action_actor":
+                resp["legal_actions"][1]["semantic"]["actor"] = "p1"
+            elif scenario == "mixed_action_actors":
+                resp["legal_actions"].append(resp["legal_actions"][1].copy())
+                resp["legal_actions"][3] = json.loads(json.dumps(resp["legal_actions"][3]))
+                resp["legal_actions"][3]["selected_index"] = 3
+                resp["legal_actions"][3]["stable_id"] = "legal-action-v2:d"
+                resp["legal_actions"][3]["semantic"]["actor"] = "p1"
             elif scenario == "nonzero_reward":
                 resp["reward"] = [1, 0]
             emit(resp)
