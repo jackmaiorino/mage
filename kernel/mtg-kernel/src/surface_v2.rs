@@ -74,7 +74,9 @@
 use crate::engine::{self, Action, Decision, OptionalCostChoice};
 use crate::ids::{ObjectId, PlayerId};
 use crate::state::{GameState, Step};
-pub use crate::surface::{harness_never_offers_priority, Suppression, SuppressionReason, SurfaceAction, SurfaceDecision};
+pub use crate::surface::{
+    harness_never_offers_priority, Suppression, SuppressionReason, SurfaceAction, SurfaceDecision,
+};
 
 /// Predicate version. `HarnessSurfaceV1` is version 1 (`H1_PREDICATE_VERSION`,
 /// `surface.rs`); this is the second, versioned independently per that
@@ -545,7 +547,14 @@ fn walk_state_snapshot(state: &GameState) -> String {
 /// full candidate detail at the one specific point that needs it.
 fn walk_decision_tag(decision: &Decision) -> String {
     match decision {
-        Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions } => format!(
+        Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            mana_abilities,
+            land_drops,
+            activatable_abilities,
+            plot_actions,
+        } => format!(
             "CastSpellOrPass player={player:?} castable={} mana={} land={} activatable={} plot={}",
             castable_spells.len(),
             mana_abilities.len(),
@@ -553,8 +562,16 @@ fn walk_decision_tag(decision: &Decision) -> String {
             activatable_abilities.len(),
             plot_actions.len()
         ),
-        Decision::DeclareAttackers { player, eligible } => format!("DeclareAttackers player={player:?} eligible={}", eligible.len()),
-        Decision::DeclareBlockers { player, attackers, .. } => format!("DeclareBlockers player={player:?} attackers={}", attackers.len()),
+        Decision::DeclareAttackers { player, eligible } => format!(
+            "DeclareAttackers player={player:?} eligible={}",
+            eligible.len()
+        ),
+        Decision::DeclareBlockers {
+            player, attackers, ..
+        } => format!(
+            "DeclareBlockers player={player:?} attackers={}",
+            attackers.len()
+        ),
         other => format!("{other:?}"),
     }
 }
@@ -587,7 +604,11 @@ impl HarnessSurfaceV2 {
     /// accessor is that real signal -- a pure read of engine state, not
     /// this surface's own bookkeeping, so it needs no `&self` at all.
     pub fn pending_optional_cost_payable(state: &GameState) -> Option<(bool, bool)> {
-        state.engine.pending_optional_cost.as_ref().map(|p| (p.discard_payable, p.sacrifice_payable))
+        state
+            .engine
+            .pending_optional_cost
+            .as_ref()
+            .map(|p| (p.discard_payable, p.sacrifice_payable))
     }
 
     /// The *total* number of cards a genuinely pending `Decision::Discard`
@@ -611,7 +632,13 @@ impl HarnessSurfaceV2 {
         state.engine.pending_discard.as_ref().map(|pd| pd.count)
     }
 
-    fn record(&mut self, reason: SuppressionReason, auto_action: impl Into<String>, before: u64, state: &GameState) {
+    fn record(
+        &mut self,
+        reason: SuppressionReason,
+        auto_action: impl Into<String>,
+        before: u64,
+        state: &GameState,
+    ) {
         let auto_action = auto_action.into();
         if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
             eprintln!(
@@ -619,7 +646,12 @@ impl HarnessSurfaceV2 {
                 walk_state_snapshot(state)
             );
         }
-        self.suppressions.push(Suppression { reason, auto_action, state_hash_before: before, state_hash_after: state.state_hash() });
+        self.suppressions.push(Suppression {
+            reason,
+            auto_action,
+            state_hash_before: before,
+            state_hash_after: state.state_hash(),
+        });
     }
 
     /// See `HarnessSurfaceV1::next_decision` (`surface.rs`) -- identical
@@ -642,7 +674,10 @@ impl HarnessSurfaceV2 {
     pub fn next_decision(&mut self, state: &mut GameState) -> SurfaceDecision {
         let sd = self.next_decision_inner(state);
         if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
-            eprintln!("SURFACE_WALK SURFACED {sd:?} {}", walk_state_snapshot(state));
+            eprintln!(
+                "SURFACE_WALK SURFACED {sd:?} {}",
+                walk_state_snapshot(state)
+            );
         }
         sd
     }
@@ -662,11 +697,22 @@ impl HarnessSurfaceV2 {
             let before = state.state_hash();
             let decision = engine::advance_until_decision(state);
             if std::env::var("REPLAY_DEBUG_SURFACE_WALK").is_ok() {
-                eprintln!("SURFACE_WALK RAW_DECISION {} {}", walk_decision_tag(&decision), walk_state_snapshot(state));
+                eprintln!(
+                    "SURFACE_WALK RAW_DECISION {} {}",
+                    walk_decision_tag(&decision),
+                    walk_state_snapshot(state)
+                );
             }
 
             match &decision {
-                Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, .. } => {
+                Decision::CastSpellOrPass {
+                    player,
+                    castable_spells,
+                    mana_abilities,
+                    land_drops,
+                    activatable_abilities,
+                    ..
+                } => {
                     if self.stack_len_round_seen != Some(state.engine.priority_round) {
                         self.round_opening_stack_len = state.stack.len();
                         self.stack_len_round_seen = Some(state.engine.priority_round);
@@ -713,11 +759,17 @@ impl HarnessSurfaceV2 {
                     // the reference's decision 201) expected it.
                     if self.last_seen_stack_len != Some(state.stack.len()) {
                         self.last_seen_stack_len = Some(state.stack.len());
-                        self.mana_count_at_last_stack_change = state.engine.mana_ability_activations;
+                        self.mana_count_at_last_stack_change =
+                            state.engine.mana_ability_activations;
                     }
-                    let mana_activity_since_stack_change = state.engine.mana_ability_activations != self.mana_count_at_last_stack_change;
-                    let stack_top_is_fresh_own_item = state.stack.len() > self.round_opening_stack_len
-                        && state.stack.last().is_some_and(|item| item.controller == *player)
+                    let mana_activity_since_stack_change = state.engine.mana_ability_activations
+                        != self.mana_count_at_last_stack_change;
+                    let stack_top_is_fresh_own_item = state.stack.len()
+                        > self.round_opening_stack_len
+                        && state
+                            .stack
+                            .last()
+                            .is_some_and(|item| item.controller == *player)
                         && !mana_activity_since_stack_change;
                     // One-shot madness-cast exemption -- see
                     // `madness_cast_reprompt_exemption`'s doc. Consumed
@@ -728,18 +780,25 @@ impl HarnessSurfaceV2 {
                     // leaves a *different* item exposed, which must still
                     // get ordinary suppression treatment, not a leaked
                     // exemption).
-                    let stack_top_is_fresh_own_item = match self.madness_cast_reprompt_exemption.take() {
-                        Some(card) if state.stack.last().is_some_and(|item| item.source == card) => false,
-                        _ => stack_top_is_fresh_own_item,
-                    };
+                    let stack_top_is_fresh_own_item =
+                        match self.madness_cast_reprompt_exemption.take() {
+                            Some(card)
+                                if state.stack.last().is_some_and(|item| item.source == card) =>
+                            {
+                                false
+                            }
+                            _ => stack_top_is_fresh_own_item,
+                        };
 
                     if matches!(state.step, Step::DeclareAttackers | Step::DeclareBlockers) {
                         if self.combat_priority_round_seen != Some(state.engine.priority_round) {
                             self.combat_priority_spent = [false, false];
                             self.combat_priority_round_seen = Some(state.engine.priority_round);
                             self.combat_priority_stack_len_seen = state.stack.len();
-                            self.combat_priority_mana_count_seen = state.engine.mana_ability_activations;
-                            self.combat_round_opening_mana_count = state.engine.mana_ability_activations;
+                            self.combat_priority_mana_count_seen =
+                                state.engine.mana_ability_activations;
+                            self.combat_round_opening_mana_count =
+                                state.engine.mana_ability_activations;
                         }
                         // The mana-ability analogue of `stack_top_is_fresh_
                         // own_item`, below: a mana ability never appears on
@@ -772,9 +831,11 @@ impl HarnessSurfaceV2 {
                         // player's `continue` also skips the stack-length
                         // re-arm block that would otherwise have corrected
                         // `combat_priority_stack_len_seen` for them.
-                        let mana_ability_is_fresh_own_action = state.engine.mana_ability_activations > self.combat_round_opening_mana_count
-                            && state.engine.last_mana_ability_activator == Some(*player)
-                            && state.stack.len() == self.combat_priority_stack_len_seen;
+                        let mana_ability_is_fresh_own_action =
+                            state.engine.mana_ability_activations
+                                > self.combat_round_opening_mana_count
+                                && state.engine.last_mana_ability_activator == Some(*player)
+                                && state.stack.len() == self.combat_priority_stack_len_seen;
                         // The acting player's own reopened window from a
                         // cast/activation that just landed on the stack this
                         // round is *always* silently suppressed here, same as
@@ -783,7 +844,8 @@ impl HarnessSurfaceV2 {
                         // never gets a chance to look "un-spent" for them
                         // (see `combat_priority_stack_len_seen`'s doc).
                         if stack_top_is_fresh_own_item || mana_ability_is_fresh_own_action {
-                            engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+                            engine::step(state, Action::Pass)
+                                .expect("Pass is always legal in an offered priority window");
                             self.record(
                                 SuppressionReason::StackTopIsCastersOwn,
                                 "Pass (forced: caster's own cast/activation/mana-ability still the last thing that happened this round)",
@@ -810,20 +872,29 @@ impl HarnessSurfaceV2 {
                         // `combat_priority_mana_count_seen`'s doc for the
                         // root-cause this second condition fixes.
                         if state.stack.len() != self.combat_priority_stack_len_seen
-                            || state.engine.mana_ability_activations != self.combat_priority_mana_count_seen
+                            || state.engine.mana_ability_activations
+                                != self.combat_priority_mana_count_seen
                         {
                             self.combat_priority_spent = [false, false];
                             self.combat_priority_stack_len_seen = state.stack.len();
-                            self.combat_priority_mana_count_seen = state.engine.mana_ability_activations;
+                            self.combat_priority_mana_count_seen =
+                                state.engine.mana_ability_activations;
                         }
                         if self.combat_priority_spent[player.index()] {
-                            engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
-                            self.record(SuppressionReason::CombatPriorityActionSpent, "Pass (forced: one action per round already taken)", before, state);
+                            engine::step(state, Action::Pass)
+                                .expect("Pass is always legal in an offered priority window");
+                            self.record(
+                                SuppressionReason::CombatPriorityActionSpent,
+                                "Pass (forced: one action per round already taken)",
+                                before,
+                                state,
+                            );
                             continue;
                         }
                         self.combat_priority_spent[player.index()] = true;
                     } else if stack_top_is_fresh_own_item {
-                        engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+                        engine::step(state, Action::Pass)
+                            .expect("Pass is always legal in an offered priority window");
                         self.record(
                             SuppressionReason::StackTopIsCastersOwn,
                             "Pass (forced: caster's own cast/activation still unresolved on the stack this round)",
@@ -832,18 +903,37 @@ impl HarnessSurfaceV2 {
                         );
                         continue;
                     }
-                    let no_real_option = castable_spells.is_empty() && mana_abilities.is_empty() && land_drops.is_empty() && activatable_abilities.is_empty();
+                    let no_real_option = castable_spells.is_empty()
+                        && mana_abilities.is_empty()
+                        && land_drops.is_empty()
+                        && activatable_abilities.is_empty();
                     let step_gated = harness_never_offers_priority(state.step);
                     if step_gated || no_real_option {
-                        engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
-                        self.record(if step_gated { SuppressionReason::StepGated } else { SuppressionReason::NoRealOption }, "Pass", before, state);
+                        engine::step(state, Action::Pass)
+                            .expect("Pass is always legal in an offered priority window");
+                        self.record(
+                            if step_gated {
+                                SuppressionReason::StepGated
+                            } else {
+                                SuppressionReason::NoRealOption
+                            },
+                            "Pass",
+                            before,
+                            state,
+                        );
                         continue;
                     }
                 }
                 Decision::DeclareAttackers { eligible, .. } => {
                     if eligible.is_empty() {
-                        engine::step(state, Action::DeclareAttackers(Vec::new())).expect("declaring zero attackers is always legal here");
-                        self.record(SuppressionReason::NoEligibleAttacker, "DeclareAttackers([])", before, state);
+                        engine::step(state, Action::DeclareAttackers(Vec::new()))
+                            .expect("declaring zero attackers is always legal here");
+                        self.record(
+                            SuppressionReason::NoEligibleAttacker,
+                            "DeclareAttackers([])",
+                            before,
+                            state,
+                        );
                         continue;
                     }
                 }
@@ -859,18 +949,35 @@ impl HarnessSurfaceV2 {
                     }
                     continue;
                 }
-                Decision::Discard { player, count, choices } => {
+                Decision::Discard {
+                    player,
+                    count,
+                    choices,
+                } => {
                     // See `DiscardReshape`'s doc: begin the per-card
                     // sequence; the loop's top-of-iteration check re-presents
                     // it (one card at a time) on the next pass.
-                    self.discard = Some(DiscardReshape { player: *player, remaining_choices: choices.clone(), chosen: Vec::new(), remaining_needed: *count });
+                    self.discard = Some(DiscardReshape {
+                        player: *player,
+                        remaining_choices: choices.clone(),
+                        chosen: Vec::new(),
+                        remaining_needed: *count,
+                    });
                     continue;
                 }
-                Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable } => {
+                Decision::ChooseOptionalCost {
+                    player,
+                    discard_payable,
+                    sacrifice_payable,
+                } => {
                     // See `OptionalCostReshape`'s doc: begin the two-stage
                     // sequence at the `Use` gate.
-                    self.optional_cost =
-                        Some(OptionalCostReshape { player: *player, discard_payable: *discard_payable, sacrifice_payable: *sacrifice_payable, stage: OptionalCostStage::Use });
+                    self.optional_cost = Some(OptionalCostReshape {
+                        player: *player,
+                        discard_payable: *discard_payable,
+                        sacrifice_payable: *sacrifice_payable,
+                        stage: OptionalCostStage::Use,
+                    });
                     continue;
                 }
                 _ => {}
@@ -891,7 +998,8 @@ impl HarnessSurfaceV2 {
                     // is guaranteed `Some` here: `apply_choose_madness_cast`
                     // (the `cast_it == true` branch) unconditionally calls
                     // `begin_cast_ex`, which always sets it.
-                    self.madness_cast_reprompt_exemption = state.engine.pending_cast.as_ref().map(|p| p.spell);
+                    self.madness_cast_reprompt_exemption =
+                        state.engine.pending_cast.as_ref().map(|p| p.spell);
                 }
                 result
             }
@@ -903,8 +1011,9 @@ impl HarnessSurfaceV2 {
                 // see the doc block right after this match arm for why an
                 // unconditional bump (every `OrderTriggers`, regardless of
                 // what it followed) regresses ordinary act()-driven casts.
-                let madness_exempt_card_still_on_top =
-                    self.madness_cast_reprompt_exemption.is_some_and(|card| state.stack.last().is_some_and(|item| item.source == card));
+                let madness_exempt_card_still_on_top = self
+                    .madness_cast_reprompt_exemption
+                    .is_some_and(|card| state.stack.last().is_some_and(|item| item.source == card));
                 let result = engine::step(state, Action::OrderTriggers(perm));
                 // A triggered ability landing on the stack (`engine::
                 // apply_order_triggers` -> `push_trigger_onto_stack`) never
@@ -984,8 +1093,14 @@ impl HarnessSurfaceV2 {
                 // remaining batch at once (every pre-existing H2 caller
                 // that predates this reshape and still constructs the
                 // engine's original, un-decomposed answer).
-                let reshape = self.discard.as_ref().ok_or("no Discard decision is pending")?;
-                if !picked.iter().all(|id| reshape.remaining_choices.contains(id)) {
+                let reshape = self
+                    .discard
+                    .as_ref()
+                    .ok_or("no Discard decision is pending")?;
+                if !picked
+                    .iter()
+                    .all(|id| reshape.remaining_choices.contains(id))
+                {
                     return Err("discarded card is not among the legal candidates".to_string());
                 }
                 let remaining_needed = reshape.remaining_needed;
@@ -1016,12 +1131,17 @@ impl HarnessSurfaceV2 {
                 engine::step(state, Action::ChooseOptionalCost(choice))
             }
             SurfaceAction::Action(Action::ChooseOptionalCostStage(use_it)) => {
-                let reshape = self.optional_cost.ok_or("no ChooseOptionalCost decision is pending")?;
+                let reshape = self
+                    .optional_cost
+                    .ok_or("no ChooseOptionalCost decision is pending")?;
                 match reshape.stage {
                     OptionalCostStage::Use => {
                         if !use_it {
                             self.optional_cost = None;
-                            return engine::step(state, Action::ChooseOptionalCost(OptionalCostChoice::Decline));
+                            return engine::step(
+                                state,
+                                Action::ChooseOptionalCost(OptionalCostChoice::Decline),
+                            );
                         }
                         match (reshape.discard_payable, reshape.sacrifice_payable) {
                             (true, true) => {
@@ -1040,7 +1160,11 @@ impl HarnessSurfaceV2 {
                         }
                     }
                     OptionalCostStage::Which => {
-                        let choice = if use_it { OptionalCostChoice::Discard } else { OptionalCostChoice::SacrificeLand };
+                        let choice = if use_it {
+                            OptionalCostChoice::Discard
+                        } else {
+                            OptionalCostChoice::SacrificeLand
+                        };
                         self.optional_cost = None;
                         engine::step(state, Action::ChooseOptionalCost(choice))
                     }
@@ -1048,8 +1172,14 @@ impl HarnessSurfaceV2 {
             }
             SurfaceAction::Action(a) => engine::step(state, a),
             SurfaceAction::DeclareBlockersForAttacker(blockers) => {
-                let reshape = self.blockers.as_mut().ok_or("no DeclareBlockersForAttacker decision is pending")?;
-                let attacker = reshape.current_attacker.take().ok_or("no DeclareBlockersForAttacker decision is pending")?;
+                let reshape = self
+                    .blockers
+                    .as_mut()
+                    .ok_or("no DeclareBlockersForAttacker decision is pending")?;
+                let attacker = reshape
+                    .current_attacker
+                    .take()
+                    .ok_or("no DeclareBlockersForAttacker decision is pending")?;
                 for b in blockers {
                     reshape.accumulated.push((b, attacker));
                 }
@@ -1061,16 +1191,30 @@ impl HarnessSurfaceV2 {
         }
     }
 
-    fn begin_blockers_reshape(&mut self, legal_blockers: Vec<(ObjectId, Vec<ObjectId>)>, before: u64, state: &GameState) {
+    fn begin_blockers_reshape(
+        &mut self,
+        legal_blockers: Vec<(ObjectId, Vec<ObjectId>)>,
+        before: u64,
+        state: &GameState,
+    ) {
         let mut remaining = std::collections::VecDeque::new();
         for (attacker, blockers) in legal_blockers {
             if blockers.is_empty() {
-                self.record(SuppressionReason::NoEligibleBlockersForAttacker, format!("skip attacker {attacker}"), before, state);
+                self.record(
+                    SuppressionReason::NoEligibleBlockersForAttacker,
+                    format!("skip attacker {attacker}"),
+                    before,
+                    state,
+                );
                 continue;
             }
             remaining.push_back((attacker, blockers));
         }
-        self.blockers = Some(BlockersReshape { remaining, accumulated: Vec::new(), current_attacker: None });
+        self.blockers = Some(BlockersReshape {
+            remaining,
+            accumulated: Vec::new(),
+            current_attacker: None,
+        });
     }
 
     /// Pops the next attacker with a *still-legal* blocker candidate,
@@ -1108,8 +1252,17 @@ impl HarnessSurfaceV2 {
                 self.finish_blockers_reshape(state);
                 return None;
             };
-            let already_used: Vec<ObjectId> = self.blockers.as_ref()?.accumulated.iter().map(|&(b, _)| b).collect();
-            let filtered: Vec<ObjectId> = legal_blockers.into_iter().filter(|b| !already_used.contains(b)).collect();
+            let already_used: Vec<ObjectId> = self
+                .blockers
+                .as_ref()?
+                .accumulated
+                .iter()
+                .map(|&(b, _)| b)
+                .collect();
+            let filtered: Vec<ObjectId> = legal_blockers
+                .into_iter()
+                .filter(|b| !already_used.contains(b))
+                .collect();
             if filtered.is_empty() {
                 let before = state.state_hash();
                 self.record(
@@ -1121,14 +1274,24 @@ impl HarnessSurfaceV2 {
                 continue;
             }
             self.blockers.as_mut()?.current_attacker = Some(attacker);
-            return Some(SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers: filtered });
+            return Some(SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers: filtered,
+            });
         }
     }
 
     fn finish_blockers_reshape(&mut self, state: &mut GameState) {
-        let reshape = self.blockers.take().expect("finish_blockers_reshape requires an in-progress reshape");
-        debug_assert!(reshape.remaining.is_empty(), "finish_blockers_reshape called before every attacker was asked");
-        engine::step(state, Action::DeclareBlockers(reshape.accumulated)).expect("accumulated blocks were already checked legal one attacker at a time");
+        let reshape = self
+            .blockers
+            .take()
+            .expect("finish_blockers_reshape requires an in-progress reshape");
+        debug_assert!(
+            reshape.remaining.is_empty(),
+            "finish_blockers_reshape called before every attacker was asked"
+        );
+        engine::step(state, Action::DeclareBlockers(reshape.accumulated))
+            .expect("accumulated blocks were already checked legal one attacker at a time");
     }
 
     /// See `DiscardReshape`'s doc. Re-presents the in-progress reshape's
@@ -1137,7 +1300,11 @@ impl HarnessSurfaceV2 {
     /// `next_decision`'s loop fall through to the engine as usual.
     fn next_discard_subdecision(&self) -> Option<SurfaceDecision> {
         let reshape = self.discard.as_ref()?;
-        Some(SurfaceDecision::Decision(Decision::Discard { player: reshape.player, count: 1, choices: reshape.remaining_choices.clone() }))
+        Some(SurfaceDecision::Decision(Decision::Discard {
+            player: reshape.player,
+            count: 1,
+            choices: reshape.remaining_choices.clone(),
+        }))
     }
 
     /// See `OptionalCostReshape`'s doc. Re-presents the in-progress
@@ -1149,7 +1316,11 @@ impl HarnessSurfaceV2 {
             OptionalCostStage::Use => (false, false),
             OptionalCostStage::Which => (true, true),
         };
-        Some(SurfaceDecision::Decision(Decision::ChooseOptionalCost { player: reshape.player, discard_payable, sacrifice_payable }))
+        Some(SurfaceDecision::Decision(Decision::ChooseOptionalCost {
+            player: reshape.player,
+            discard_payable,
+            sacrifice_payable,
+        }))
     }
 }
 
@@ -1165,7 +1336,8 @@ mod tests {
     }
 
     fn put_on_battlefield(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_def::card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id = card_def::card_id_by_name(card_name)
+            .unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -1178,7 +1350,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -1188,7 +1360,11 @@ mod tests {
     fn provenance_consts_are_pinned() {
         assert_eq!(H2_PREDICATE_VERSION, 2);
         assert_eq!(H2_JAVA_ORACLE_COMMIT.len(), 40, "should be a full git sha");
-        assert_ne!(H2_JAVA_ORACLE_COMMIT, crate::surface::H1_JAVA_ORACLE_COMMIT, "H2 must pin its own commit, not reuse H1's");
+        assert_ne!(
+            H2_JAVA_ORACLE_COMMIT,
+            crate::surface::H1_JAVA_ORACLE_COMMIT,
+            "H2 must pin its own commit, not reuse H1's"
+        );
     }
 
     #[test]
@@ -1200,7 +1376,10 @@ mod tests {
     fn verify_corpus_provenance_fails_loudly_on_mismatch() {
         let err = verify_corpus_provenance("deadbeef00000000000000000000000000000000").unwrap_err();
         assert!(err.contains("provenance mismatch"), "got: {err}");
-        assert!(err.contains(H2_JAVA_ORACLE_COMMIT), "error must name the pinned commit: {err}");
+        assert!(
+            err.contains(H2_JAVA_ORACLE_COMMIT),
+            "error must name the pinned commit: {err}"
+        );
     }
 
     /// Same shape as `surface::tests::step_gated_window_is_suppressed_not_surfaced`
@@ -1240,16 +1419,30 @@ mod tests {
         let mut surface = HarnessSurfaceV2::new();
         let decision = surface.next_decision(&mut state);
         match decision {
-            SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers } => {
+            SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers,
+            } => {
                 assert_eq!(attacker, attacker_a);
                 assert_eq!(legal_blockers, vec![blocker]);
             }
             other => panic!("expected DeclareBlockersForAttacker, got {other:?}"),
         }
 
-        surface.apply(&mut state, SurfaceAction::DeclareBlockersForAttacker(vec![blocker])).unwrap();
-        assert!(state.engine.combat.blockers_declared, "the combined DeclareBlockers action should have been applied automatically");
-        assert_eq!(state.engine.combat.blocked_by, vec![(attacker_a, vec![blocker])]);
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::DeclareBlockersForAttacker(vec![blocker]),
+            )
+            .unwrap();
+        assert!(
+            state.engine.combat.blockers_declared,
+            "the combined DeclareBlockers action should have been applied automatically"
+        );
+        assert_eq!(
+            state.engine.combat.blocked_by,
+            vec![(attacker_a, vec![blocker])]
+        );
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -1277,13 +1470,21 @@ mod tests {
         let mut surface = HarnessSurfaceV2::new();
         let first = surface.next_decision(&mut state);
         match first {
-            SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers } => {
+            SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers,
+            } => {
                 assert_eq!(attacker, attacker_a);
                 assert_eq!(legal_blockers, vec![blocker]);
             }
             other => panic!("expected DeclareBlockersForAttacker for attacker_a, got {other:?}"),
         }
-        surface.apply(&mut state, SurfaceAction::DeclareBlockersForAttacker(vec![blocker])).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::DeclareBlockersForAttacker(vec![blocker]),
+            )
+            .unwrap();
 
         // attacker_b's only legal blocker is already spoken for -- must be
         // silently skipped, landing straight on the post-blocks priority
@@ -1292,15 +1493,26 @@ mod tests {
         // legitimately auto-play all the way to a deck-out `GameOver` from
         // here) instead of a second (phantom) DeclareBlockersForAttacker.
         let second = surface.next_decision(&mut state);
-        assert!(!matches!(&second, SurfaceDecision::DeclareBlockersForAttacker { .. }), "attacker_b must not get a second real blockers ask, got {second:?}");
+        assert!(
+            !matches!(&second, SurfaceDecision::DeclareBlockersForAttacker { .. }),
+            "attacker_b must not get a second real blockers ask, got {second:?}"
+        );
         assert!(state.engine.combat.blockers_declared);
-        assert_eq!(state.engine.combat.blocked_by, vec![(attacker_a, vec![blocker])], "attacker_b must end up unblocked, not double-assigned the same blocker");
+        assert_eq!(
+            state.engine.combat.blocked_by,
+            vec![(attacker_a, vec![blocker])],
+            "attacker_b must end up unblocked, not double-assigned the same blocker"
+        );
 
-        let skipped = surface
-            .suppressions()
-            .iter()
-            .find(|s| s.reason == SuppressionReason::NoEligibleBlockersForAttacker && s.auto_action.contains(&attacker_b.to_string()));
-        assert!(skipped.is_some(), "expected a NoEligibleBlockersForAttacker suppression naming attacker_b, got {:?}", surface.suppressions());
+        let skipped = surface.suppressions().iter().find(|s| {
+            s.reason == SuppressionReason::NoEligibleBlockersForAttacker
+                && s.auto_action.contains(&attacker_b.to_string())
+        });
+        assert!(
+            skipped.is_some(),
+            "expected a NoEligibleBlockersForAttacker suppression naming attacker_b, got {:?}",
+            surface.suppressions()
+        );
     }
 
     #[test]
@@ -1314,7 +1526,10 @@ mod tests {
         surface.next_decision(&mut state);
 
         assert!(!surface.suppressions().is_empty());
-        assert_eq!(surface.suppressions()[0].reason, SuppressionReason::NoRealOption);
+        assert_eq!(
+            surface.suppressions()[0].reason,
+            SuppressionReason::NoRealOption
+        );
     }
 
     #[test]
@@ -1333,18 +1548,24 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         state.step = Step::Main1;
         state.priority_player = PlayerId::P0;
         state.active_player = PlayerId::P0;
 
         let mut surface = HarnessSurfaceV2::new();
         let decision = surface.next_decision(&mut state);
-        assert!(matches!(decision, SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })));
+        assert!(matches!(
+            decision,
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })
+        ));
         assert!(surface.suppressions().is_empty());
         let _ = CARD_DEFS;
         let _ = Target::Player(PlayerId::P0);
@@ -1368,18 +1589,24 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         state.step = Step::Main1;
         state.priority_player = PlayerId::P0;
         state.active_player = PlayerId::P0;
 
         let mut surface = HarnessSurfaceV2::new();
         let first = surface.next_decision(&mut state);
-        assert!(matches!(first, SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })));
+        assert!(matches!(
+            first,
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })
+        ));
         assert!(surface.suppressions().is_empty());
 
         state.players[0].hand.retain(|&h| h != id);
@@ -1398,7 +1625,11 @@ mod tests {
 
         let _second = surface.next_decision(&mut state);
         let suppressions = surface.suppressions();
-        assert_eq!(suppressions[0].reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
+        assert_eq!(
+            suppressions[0].reason,
+            SuppressionReason::StackTopIsCastersOwn,
+            "got {suppressions:?}"
+        );
         assert!(suppressions[0].auto_action.starts_with("Pass"));
     }
 
@@ -1430,11 +1661,14 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         let p0_second_mountain = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
         state.objects.get_mut(p0_second_mountain).tapped = false;
         let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
@@ -1447,32 +1681,75 @@ mod tests {
         let mut surface = HarnessSurfaceV2::new();
 
         let d0 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d0 else { panic!("expected CastSpellOrPass, got {d0:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            ..
+        }) = &d0
+        else {
+            panic!("expected CastSpellOrPass, got {d0:?}")
+        };
         assert_eq!(*player, PlayerId::P0);
         assert!(castable_spells.contains(&bolt_id));
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
 
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0),
+            "got {d1:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+            )
+            .unwrap();
 
         // P0's own immediate follow-up is silently suppressed (their own
         // fresh item); priority lands on P1 for a genuine ask.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
         assert!(mana_abilities.contains(&p1_mountain));
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain)),
+            )
+            .unwrap();
 
         // P1's mana ability resets *everyone's* passed flag (605.3b +
         // Java's unconditional `resetPassed()`), so P0 must now get a real,
         // un-suppressed ask -- even though Lightning Bolt is still their
         // own unresolved item on top of the stack.
         let d3 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d3 else { panic!("P0 must get a genuine fresh ask after P1's mana ability, got {d3:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d3
+        else {
+            panic!("P0 must get a genuine fresh ask after P1's mana ability, got {d3:?}")
+        };
         assert_eq!(*player, PlayerId::P0);
         assert!(mana_abilities.contains(&p0_second_mountain));
-        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P0 is asked");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Lightning Bolt must still be unresolved when P0 is asked"
+        );
 
         // P0's *immediate* first reprompt is suppressed exactly once
         // (`StackTopIsCastersOwn`) -- P1's own subsequent auto-pass
@@ -1480,7 +1757,10 @@ mod tests {
         // expected and irrelevant to what this test proves; the point is
         // that `StackTopIsCastersOwn` does not fire a *second* time for P0.
         let suppressions = surface.suppressions();
-        let stack_top_is_casters_own_count = suppressions.iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count();
+        let stack_top_is_casters_own_count = suppressions
+            .iter()
+            .filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn)
+            .count();
         assert_eq!(stack_top_is_casters_own_count, 1, "P0 must be suppressed exactly once (their immediate reprompt), not re-suppressed after P1's mana ability, got {suppressions:?}");
     }
 
@@ -1508,7 +1788,8 @@ mod tests {
     /// desynced SelfPlay's cursor by one record, letting the kernel resolve
     /// the Blood Token's `Draw a card` a full priority window early.
     #[test]
-    fn main_phase_reprompt_is_still_un_suppressed_after_the_casters_own_mana_activity_follows_the_opponents() {
+    fn main_phase_reprompt_is_still_un_suppressed_after_the_casters_own_mana_activity_follows_the_opponents(
+    ) {
         let mut state = empty_game();
         let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
         let bolt_id = state.objects.push(crate::state::GameObject {
@@ -1523,7 +1804,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         // P0: one Mountain pays for the bolt, a second and third stay
@@ -1552,44 +1833,108 @@ mod tests {
         // called (after the cast already grew the stack), wrongly
         // capturing the *post*-growth length as the baseline.
         let d0 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d0 else { panic!("expected CastSpellOrPass, got {d0:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            ..
+        }) = &d0
+        else {
+            panic!("expected CastSpellOrPass, got {d0:?}")
+        };
         assert_eq!(*player, PlayerId::P0);
         assert!(castable_spells.contains(&bolt_id));
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0),
+            "got {d1:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+            )
+            .unwrap();
 
         // P0's own immediate reprompt: suppressed. P1 asked next.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
         assert!(mana_abilities.contains(&p1_mountain));
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain)),
+            )
+            .unwrap();
 
         // P1's mana ability (opponent activity) legitimately un-suppresses
         // P0 -- already covered by the test above, re-established here as
         // this test's own starting point.
         let d3 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d3 else { panic!("expected a genuine ask for P0 after P1's mana activity, got {d3:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d3
+        else {
+            panic!("expected a genuine ask for P0 after P1's mana activity, got {d3:?}")
+        };
         assert_eq!(*player, PlayerId::P0);
-        assert_eq!(mana_abilities.len(), 2, "both of P0's remaining Mountains should be offered");
+        assert_eq!(
+            mana_abilities.len(),
+            2,
+            "both of P0's remaining Mountains should be offered"
+        );
         let p0_mountain_to_tap = mana_abilities[0];
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain_to_tap))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain_to_tap)),
+            )
+            .unwrap();
 
         // The critical assertion: P0's *own* mana tap must not withdraw the
         // un-suppression P1's earlier activity already earned -- P0's next
         // ask must still be genuine, with Lightning Bolt still unresolved.
         let d4 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d4
+        else {
             panic!("expected a genuine ask for P0 after their own mana tap, got {d4:?} -- StackTopIsCastersOwn must not re-arm merely because the most recent tap was P0's own")
         };
         assert_eq!(*player, PlayerId::P0);
-        assert_eq!(mana_abilities.len(), 1, "P0's one remaining Mountain should still be offered");
-        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved throughout");
+        assert_eq!(
+            mana_abilities.len(),
+            1,
+            "P0's one remaining Mountain should still be offered"
+        );
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Lightning Bolt must still be unresolved throughout"
+        );
 
         let suppressions = surface.suppressions();
-        let stack_top_is_casters_own_count = suppressions.iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count();
+        let stack_top_is_casters_own_count = suppressions
+            .iter()
+            .filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn)
+            .count();
         assert_eq!(stack_top_is_casters_own_count, 1, "P0 must be suppressed exactly once total (their immediate reprompt), got {suppressions:?}");
     }
 
@@ -1628,11 +1973,14 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
 
         state.step = Step::Main1;
         state.active_player = PlayerId::P0;
@@ -1646,25 +1994,66 @@ mod tests {
         // itself; the second Mountain is only there so this Pass is a real
         // choice, not a `NoRealOption` auto-pass indistinguishable from it).
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P1), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P1),
+            "got {d1:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain)),
+            )
+            .unwrap();
 
         let d1b = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d1b else { panic!("got {d1b:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d1b
+        else {
+            panic!("got {d1b:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
-        assert_eq!(mana_abilities, &[p1_second_mountain], "the tapped Mountain must no longer be offered");
-        surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+        assert_eq!(
+            mana_abilities,
+            &[p1_second_mountain],
+            "the tapped Mountain must no longer be offered"
+        );
+        surface
+            .apply(&mut state, SurfaceAction::Action(Action::Pass))
+            .unwrap();
 
         // Priority returns to P0, who casts Lightning Bolt at P1.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P0);
         assert!(castable_spells.contains(&bolt_id));
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
 
         let d3 = surface.next_decision(&mut state);
-        assert!(matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0), "got {d3:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+        assert!(
+            matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P0),
+            "got {d3:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+            )
+            .unwrap();
 
         // Nothing has happened *since* Lightning Bolt landed on the stack --
         // P1's only mana activity was earlier, before the cast -- so P0's
@@ -1672,15 +2061,30 @@ mod tests {
         // `same_caster_reprompt_after_own_cast_is_suppressed` establishes
         // for the no-intervening-activity case.
         let d4 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d4
+        else {
             panic!("priority must skip straight past P0's own reprompt to P1, got {d4:?}")
         };
         assert_eq!(*player, PlayerId::P1);
         assert!(mana_abilities.contains(&p1_second_mountain));
-        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P1 is asked");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Lightning Bolt must still be unresolved when P1 is asked"
+        );
         let suppressions = surface.suppressions();
-        let last = suppressions.last().expect("P0's own reprompt must have been suppressed");
-        assert_eq!(last.reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
+        let last = suppressions
+            .last()
+            .expect("P0's own reprompt must have been suppressed");
+        assert_eq!(
+            last.reason,
+            SuppressionReason::StackTopIsCastersOwn,
+            "got {suppressions:?}"
+        );
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -1698,7 +2102,10 @@ mod tests {
         // P0: a mana source only (no spell) -- enough to be a "real option"
         // (not `NoRealOption`) without giving them anything to cast.
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
 
         // P1: Lightning Bolt + a Mountain to cast it with.
         let bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
@@ -1714,11 +2121,14 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[1].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
-        state.objects.get_mut(state.players[1].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[1].battlefield[0])
+            .tapped = false;
 
         state.step = Step::DeclareAttackers;
         state.engine.combat.attackers_declared = true;
@@ -1729,19 +2139,44 @@ mod tests {
 
         // Round 1: P0 spends their one action (Pass)...
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0),
+            "got {d1:?}"
+        );
+        surface
+            .apply(&mut state, SurfaceAction::Action(Action::Pass))
+            .unwrap();
 
         // ...then P1 spends theirs by casting Lightning Bolt at P0.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
         assert!(castable_spells.contains(&bolt_id));
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
 
         let d3 = surface.next_decision(&mut state);
-        assert!(matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P1), "got {d3:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P0)))).unwrap();
+        assert!(
+            matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P1),
+            "got {d3:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P0))),
+            )
+            .unwrap();
 
         // Both players' `combat_priority_spent` flags are now stale-true
         // from round 1, but Lightning Bolt just landed on the stack this
@@ -1755,12 +2190,27 @@ mod tests {
             matches!(&d4, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0),
             "P0 must get a genuine fresh ask in response to P1's new spell, got {d4:?}"
         );
-        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P0 is asked");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Lightning Bolt must still be unresolved when P0 is asked"
+        );
 
         let suppressions = surface.suppressions();
-        let last = suppressions.last().expect("P1's own reprompt must have been suppressed");
-        assert_eq!(last.reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
-        assert!(!suppressions.iter().any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent), "got {suppressions:?}");
+        let last = suppressions
+            .last()
+            .expect("P1's own reprompt must have been suppressed");
+        assert_eq!(
+            last.reason,
+            SuppressionReason::StackTopIsCastersOwn,
+            "got {suppressions:?}"
+        );
+        assert!(
+            !suppressions
+                .iter()
+                .any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent),
+            "got {suppressions:?}"
+        );
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -1778,7 +2228,10 @@ mod tests {
     fn combat_throttle_regrants_the_other_player_a_fresh_ask_after_a_mid_round_mana_ability() {
         let mut state = empty_game();
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         let p1_mountain = put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
         state.objects.get_mut(p1_mountain).tapped = false;
 
@@ -1791,16 +2244,33 @@ mod tests {
 
         // Round 1: P0 spends their one action (Pass)...
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0),
+            "got {d1:?}"
+        );
+        surface
+            .apply(&mut state, SurfaceAction::Action(Action::Pass))
+            .unwrap();
 
         // ...then P1 spends theirs by tapping their Mountain for mana --
         // no cast, no stack growth at all.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
         assert!(mana_abilities.contains(&p1_mountain));
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p1_mountain)),
+            )
+            .unwrap();
 
         // Both players' `combat_priority_spent` flags are now stale-true
         // from round 1, and the stack is still empty (a mana ability never
@@ -1813,12 +2283,26 @@ mod tests {
             matches!(&d3, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0),
             "P0 must get a genuine fresh ask in response to P1's mana ability, got {d3:?}"
         );
-        assert!(state.stack.is_empty(), "a mana ability never puts anything on the stack");
+        assert!(
+            state.stack.is_empty(),
+            "a mana ability never puts anything on the stack"
+        );
 
         let suppressions = surface.suppressions();
-        let last = suppressions.last().expect("P1's own reprompt after their mana ability must have been suppressed");
-        assert_eq!(last.reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
-        assert!(!suppressions.iter().any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent), "got {suppressions:?}");
+        let last = suppressions
+            .last()
+            .expect("P1's own reprompt after their mana ability must have been suppressed");
+        assert_eq!(
+            last.reason,
+            SuppressionReason::StackTopIsCastersOwn,
+            "got {suppressions:?}"
+        );
+        assert!(
+            !suppressions
+                .iter()
+                .any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent),
+            "got {suppressions:?}"
+        );
     }
 
     /// Regression test for the increment-14 fix (root-caused against
@@ -1859,11 +2343,14 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[1].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P1, "Mountain");
-        state.objects.get_mut(state.players[1].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[1].battlefield[0])
+            .tapped = false;
 
         state.step = Step::DeclareAttackers;
         state.engine.combat.attackers_declared = true;
@@ -1876,34 +2363,76 @@ mod tests {
         // casting/passing) -- this is what stales `last_mana_ability_
         // activator` to P0.
         let d1 = surface.next_decision(&mut state);
-        assert!(matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0), "got {d1:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain))).unwrap();
+        assert!(
+            matches!(&d1, SurfaceDecision::Decision(Decision::CastSpellOrPass { player, .. }) if *player == PlayerId::P0),
+            "got {d1:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ActivateManaAbility(p0_mountain)),
+            )
+            .unwrap();
 
         // ...then P1 spends theirs by casting Lightning Bolt at P0 -- a
         // real, stack-landing action, *not* a mana ability.
         let d2 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) = &d2 else { panic!("expected CastSpellOrPass, got {d2:?}") };
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            castable_spells,
+            ..
+        }) = &d2
+        else {
+            panic!("expected CastSpellOrPass, got {d2:?}")
+        };
         assert_eq!(*player, PlayerId::P1);
         assert!(castable_spells.contains(&bolt_id));
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
 
         let d3 = surface.next_decision(&mut state);
-        assert!(matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P1), "got {d3:?}");
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P0)))).unwrap();
+        assert!(
+            matches!(&d3, SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) if *player == PlayerId::P1),
+            "got {d3:?}"
+        );
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P0))),
+            )
+            .unwrap();
 
         // P1's cast is a real, later reopening event -- P0's stale mana tap
         // must not keep them self-suppressed through this window; they must
         // get a genuine fresh ask, with Lightning Bolt still unresolved.
         let d4 = surface.next_decision(&mut state);
-        let SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) = &d4 else {
+        let SurfaceDecision::Decision(Decision::CastSpellOrPass {
+            player,
+            mana_abilities,
+            ..
+        }) = &d4
+        else {
             panic!("P0 must get a genuine fresh ask after P1's cast, not stay suppressed off their own stale mana tap, got {d4:?}")
         };
         assert_eq!(*player, PlayerId::P0);
         assert!(mana_abilities.contains(&p0_second_mountain));
-        assert_eq!(state.stack.len(), 1, "Lightning Bolt must still be unresolved when P0 is asked");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Lightning Bolt must still be unresolved when P0 is asked"
+        );
 
         let suppressions = surface.suppressions();
-        assert!(!suppressions.iter().any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent), "got {suppressions:?}");
+        assert!(
+            !suppressions
+                .iter()
+                .any(|s| s.reason == SuppressionReason::CombatPriorityActionSpent),
+            "got {suppressions:?}"
+        );
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -1932,7 +2461,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
 
         // A second real spell in hand, so the post-cast reprompt (if it
@@ -1951,7 +2480,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(lava_dart);
 
@@ -1982,13 +2511,27 @@ mod tests {
             }
             other => panic!("expected ChooseMadnessCast, got {other:?}"),
         }
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseMadnessCast(true)),
+            )
+            .unwrap();
 
         match surface.next_decision(&mut state) {
-            SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
+            SurfaceDecision::Decision(Decision::ChooseTargets {
+                player,
+                legal_targets,
+                ..
+            }) => {
                 assert_eq!(player, PlayerId::P0);
                 assert!(legal_targets.contains(&Target::Player(PlayerId::P1)));
-                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+                    )
+                    .unwrap();
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
         }
@@ -1998,18 +2541,34 @@ mod tests {
         // both still offered), not a silent forced Pass.
         let reprompt = surface.next_decision(&mut state);
         match &reprompt {
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) => {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                ..
+            }) => {
                 assert_eq!(*player, PlayerId::P0);
-                assert!(castable_spells.contains(&lava_dart), "expected Lava Dart still offered, got {reprompt:?}");
+                assert!(
+                    castable_spells.contains(&lava_dart),
+                    "expected Lava Dart still offered, got {reprompt:?}"
+                );
             }
-            other => panic!("expected a real CastSpellOrPass reprompt for the madness caster, got {other:?}"),
+            other => panic!(
+                "expected a real CastSpellOrPass reprompt for the madness caster, got {other:?}"
+            ),
         }
         assert!(
-            !surface.suppressions().iter().any(|s| s.reason == SuppressionReason::StackTopIsCastersOwn),
+            !surface
+                .suppressions()
+                .iter()
+                .any(|s| s.reason == SuppressionReason::StackTopIsCastersOwn),
             "the madness cast's own reprompt must not be silently suppressed, got {:?}",
             surface.suppressions()
         );
-        assert_eq!(state.stack.len(), 1, "Fiery Temper must still be unresolved on the stack at the reprompt");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "Fiery Temper must still be unresolved on the stack at the reprompt"
+        );
     }
 
     /// Regression test (increment 15) for the `Action::OrderTriggers`
@@ -2047,7 +2606,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
 
         let lava_dart_def = card_def::card_id_by_name("Lava Dart").unwrap();
@@ -2063,7 +2622,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(lava_dart);
 
@@ -2097,13 +2656,27 @@ mod tests {
             }
             other => panic!("expected ChooseMadnessCast, got {other:?}"),
         }
-        surface.apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(true))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::ChooseMadnessCast(true)),
+            )
+            .unwrap();
 
         match surface.next_decision(&mut state) {
-            SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
+            SurfaceDecision::Decision(Decision::ChooseTargets {
+                player,
+                legal_targets,
+                ..
+            }) => {
                 assert_eq!(player, PlayerId::P0);
                 assert!(legal_targets.contains(&Target::Player(PlayerId::P1)));
-                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+                    )
+                    .unwrap();
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
         }
@@ -2114,8 +2687,17 @@ mod tests {
         match surface.next_decision(&mut state) {
             SurfaceDecision::Decision(Decision::OrderTriggers { player, pending }) => {
                 assert_eq!(player, PlayerId::P0);
-                assert_eq!(pending.len(), 2, "both Guttersnipes' triggers must be in the same same-controller group");
-                surface.apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect()))).unwrap();
+                assert_eq!(
+                    pending.len(),
+                    2,
+                    "both Guttersnipes' triggers must be in the same same-controller group"
+                );
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())),
+                    )
+                    .unwrap();
             }
             other => panic!("expected OrderTriggers for both Guttersnipe triggers, got {other:?}"),
         }
@@ -2125,9 +2707,16 @@ mod tests {
         // resolved yet (both still sit on the stack, above Fiery Temper).
         let reprompt = surface.next_decision(&mut state);
         match &reprompt {
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) => {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                ..
+            }) => {
                 assert_eq!(*player, PlayerId::P0);
-                assert!(castable_spells.contains(&lava_dart), "expected Lava Dart still offered, got {reprompt:?}");
+                assert!(
+                    castable_spells.contains(&lava_dart),
+                    "expected Lava Dart still offered, got {reprompt:?}"
+                );
             }
             other => panic!("expected a real CastSpellOrPass reprompt for P0, got {other:?}"),
         }
@@ -2136,8 +2725,15 @@ mod tests {
             "P0's reprompt must not be silently suppressed by their own just-ordered triggers, got {:?}",
             surface.suppressions()
         );
-        assert_eq!(state.stack.len(), 3, "Fiery Temper plus both unresolved Guttersnipe triggers must still be on the stack");
-        assert_eq!(state.players[1].life, opponent_life_before, "neither Guttersnipe trigger may have resolved yet");
+        assert_eq!(
+            state.stack.len(),
+            3,
+            "Fiery Temper plus both unresolved Guttersnipe triggers must still be on the stack"
+        );
+        assert_eq!(
+            state.players[1].life, opponent_life_before,
+            "neither Guttersnipe trigger may have resolved yet"
+        );
     }
 
     /// Companion regression guard for the fix above -- root-caused against
@@ -2170,7 +2766,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(bolt_id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
@@ -2200,17 +2796,31 @@ mod tests {
         // skipping this wrongly captures the *post*-cast stack length as
         // the "round opened this tall" baseline.
         match surface.next_decision(&mut state) {
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, .. }) => {
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                ..
+            }) => {
                 assert_eq!(player, PlayerId::P0);
                 assert!(castable_spells.contains(&bolt_id));
             }
             other => panic!("expected CastSpellOrPass, got {other:?}"),
         }
-        surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bolt_id))).unwrap();
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::Action(Action::CastSpell(bolt_id)),
+            )
+            .unwrap();
         match surface.next_decision(&mut state) {
             SurfaceDecision::Decision(Decision::ChooseTargets { player, .. }) => {
                 assert_eq!(player, PlayerId::P0);
-                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1)))).unwrap();
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseTarget(Target::Player(PlayerId::P1))),
+                    )
+                    .unwrap();
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
         }
@@ -2219,7 +2829,12 @@ mod tests {
             SurfaceDecision::Decision(Decision::OrderTriggers { player, pending }) => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(pending.len(), 2);
-                surface.apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect()))).unwrap();
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())),
+                    )
+                    .unwrap();
             }
             other => panic!("expected OrderTriggers for both Guttersnipe triggers, got {other:?}"),
         }
@@ -2232,15 +2847,27 @@ mod tests {
         // not P0 again.
         let reprompt = surface.next_decision(&mut state);
         match &reprompt {
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, mana_abilities, .. }) => {
-                assert_eq!(*player, PlayerId::P1, "P0's reprompt must stay suppressed; P1 should be asked next");
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                mana_abilities,
+                ..
+            }) => {
+                assert_eq!(
+                    *player,
+                    PlayerId::P1,
+                    "P0's reprompt must stay suppressed; P1 should be asked next"
+                );
                 assert!(mana_abilities.contains(&p1_mountain));
             }
             other => panic!("expected a CastSpellOrPass ask for P1, got {other:?}"),
         }
         assert_eq!(state.stack.len(), 3, "Lightning Bolt plus both unresolved Guttersnipe triggers must still be on the stack when P1 is asked");
         assert_eq!(
-            surface.suppressions().iter().filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn).count(),
+            surface
+                .suppressions()
+                .iter()
+                .filter(|s| s.reason == SuppressionReason::StackTopIsCastersOwn)
+                .count(),
             1,
             "P0's immediate reprompt must still be suppressed exactly once, got {:?}",
             surface.suppressions()
@@ -2307,15 +2934,30 @@ mod tests {
 
         let mut surface = HarnessSurfaceV2::new();
         match surface.next_decision(&mut state) {
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { castable_spells, .. }) => {
-                assert!(castable_spells.contains(&bushwhacker), "Bushwhacker should be castable turn 1 with 4 Mountains up");
-                surface.apply(&mut state, SurfaceAction::Action(Action::CastSpell(bushwhacker))).unwrap();
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                castable_spells, ..
+            }) => {
+                assert!(
+                    castable_spells.contains(&bushwhacker),
+                    "Bushwhacker should be castable turn 1 with 4 Mountains up"
+                );
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::CastSpell(bushwhacker)),
+                    )
+                    .unwrap();
             }
             other => panic!("expected CastSpellOrPass offering Bushwhacker, got {other:?}"),
         }
         match surface.next_decision(&mut state) {
             SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
-                surface.apply(&mut state, SurfaceAction::Action(Action::ChooseKicker(true))).unwrap();
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseKicker(true)),
+                    )
+                    .unwrap();
             }
             other => panic!("expected ChooseKicker, got {other:?}"),
         }
@@ -2325,12 +2967,16 @@ mod tests {
         for _ in 0..40 {
             iterations += 1;
             match surface.next_decision(&mut state) {
-                SurfaceDecision::Decision(Decision::CastSpellOrPass { castable_spells, .. }) => {
+                SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                    castable_spells, ..
+                }) => {
                     if castable_spells.contains(&raider) {
                         raider_became_castable = true;
                         break;
                     }
-                    surface.apply(&mut state, SurfaceAction::Action(Action::Pass)).unwrap();
+                    surface
+                        .apply(&mut state, SurfaceAction::Action(Action::Pass))
+                        .unwrap();
                 }
                 other => panic!("unexpected decision while draining priority: {other:?}"),
             }

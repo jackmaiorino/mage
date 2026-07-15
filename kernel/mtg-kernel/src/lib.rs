@@ -19,6 +19,7 @@ pub mod engine;
 pub mod event;
 pub mod ids;
 pub mod mana;
+pub mod rl;
 pub mod snapshot;
 pub mod state;
 pub mod surface;

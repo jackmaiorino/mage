@@ -58,8 +58,7 @@ mod tests {
     fn mid_game_state() -> GameState {
         let lib0: Vec<u16> = (0..40).collect();
         let lib1: Vec<u16> = (0..40).collect();
-        let mut state =
-            GameState::new_from_libraries(&lib0, &lib1, |c| format!("card-{c}"), 123);
+        let mut state = GameState::new_from_libraries(&lib0, &lib1, |c| format!("card-{c}"), 123);
         for _ in 0..12 {
             if let Some(id) = state.draw_card(PlayerId::P0) {
                 if id.0 % 2 == 0 {
@@ -90,7 +89,10 @@ mod tests {
             std::hint::black_box(state.snapshot());
         }
         let per_call = start.elapsed() / iterations;
-        println!("snapshot clone: {per_call:?}/call over {iterations} iterations, {} objects", state.objects.len());
+        println!(
+            "snapshot clone: {per_call:?}/call over {iterations} iterations, {} objects",
+            state.objects.len()
+        );
 
         // Release-build budget from the design doc. Debug builds (no
         // inlining/LTO) are allowed a much looser bound so `cargo test`

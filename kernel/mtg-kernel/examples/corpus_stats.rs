@@ -7,9 +7,16 @@ use std::collections::BTreeMap;
 use std::path::PathBuf;
 
 fn main() {
-    let root = std::env::args().nth(1).map(PathBuf::from).expect("usage: corpus_stats <game_logs dir>");
+    let root = std::env::args()
+        .nth(1)
+        .map(PathBuf::from)
+        .expect("usage: corpus_stats <game_logs dir>");
     let (traces, errors) = trace::load_corpus(&root);
-    println!("traces parsed: {}   parse errors: {}", traces.len(), errors.len());
+    println!(
+        "traces parsed: {}   parse errors: {}",
+        traces.len(),
+        errors.len()
+    );
     for e in errors.iter().take(5) {
         println!("  ERR {e}");
     }
@@ -28,7 +35,11 @@ fn main() {
         for d in &t.decisions {
             *action_types.entry(d.action_type.clone()).or_default() += 1;
         }
-        assert!(t.opening_library().is_some(), "trace without opening library: {}", t.source_path);
+        assert!(
+            t.opening_library().is_some(),
+            "trace without opening library: {}",
+            t.source_path
+        );
     }
     println!("total decisions: {total_decisions}   traces with recorded winner: {with_winner}");
     println!("\nper matchup (games, decisions):");

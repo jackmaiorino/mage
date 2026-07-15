@@ -152,20 +152,35 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             | Decision::ChooseOptionalCost { .. }
             | Decision::ChooseMadnessCast { .. }
             | Decision::Halted { .. } => {
-                unreachable!("the burn goldfish's library has no card that can produce this decision")
+                unreachable!(
+                    "the burn goldfish's library has no card that can produce this decision"
+                )
             }
             Decision::DeclareAttackers { eligible, .. } => {
-                assert!(eligible.is_empty(), "neither player's library has a creature in it");
+                assert!(
+                    eligible.is_empty(),
+                    "neither player's library has a creature in it"
+                );
                 engine::step(state, Action::DeclareAttackers(Vec::new())).unwrap();
             }
-            Decision::ChooseTargets { player, spell: _, remaining, legal_targets } => {
+            Decision::ChooseTargets {
+                player,
+                spell: _,
+                remaining,
+                legal_targets,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(remaining, 1);
                 let target = Target::Player(PlayerId::P1);
                 assert!(legal_targets.contains(&target));
                 engine::step(state, Action::ChooseTarget(target)).unwrap();
             }
-            Decision::CastSpellOrPass { player, castable_spells, land_drops, .. } => {
+            Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                land_drops,
+                ..
+            } => {
                 if !land_drops.is_empty() {
                     engine::step(state, Action::PlayLand(land_drops[0])).unwrap();
                 } else if player == PlayerId::P0
@@ -174,7 +189,10 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
                     && bolt_in_hand(state, player, bolt_def).is_some()
                 {
                     let bolt = bolt_in_hand(state, player, bolt_def).unwrap();
-                    assert!(castable_spells.contains(&bolt), "bolt should be affordable off 1 untapped Mountain");
+                    assert!(
+                        castable_spells.contains(&bolt),
+                        "bolt should be affordable off 1 untapped Mountain"
+                    );
                     last_cast_turn = state.turn;
                     let stack_len_before = state.stack.len();
                     engine::step(state, Action::CastSpell(bolt)).unwrap();
@@ -211,25 +229,38 @@ const NARRATED_PREFIX: [Kind; 30] = {
     const P0: PlayerId = PlayerId::P0;
     const P1: PlayerId = PlayerId::P1;
     [
-        CastOrPass(P0), CastOrPass(P1), // Upkeep
-        CastOrPass(P0), CastOrPass(P1), // Draw (P0's first-turn draw skipped)
-        CastOrPass(P0), CastOrPass(P0), // Main1: P0 plays Mountain, then passes
-        CastOrPass(P1),                 // Main1: P1's response window, passes
-        CastOrPass(P0), CastOrPass(P1), // Begin Combat
-        DeclareAttackers(P0),           // Declare Attackers: P0 (active) declares nobody
-        CastOrPass(P0), CastOrPass(P1), // Declare Attackers step's own priority round
-        CastOrPass(P0), CastOrPass(P1), // End Combat (Declare Blockers/Combat Damage
-                                         // skipped: zero attackers were declared)
-        CastOrPass(P0), CastOrPass(P1), // Main2
-        CastOrPass(P0), CastOrPass(P1), // End step
+        CastOrPass(P0),
+        CastOrPass(P1), // Upkeep
+        CastOrPass(P0),
+        CastOrPass(P1), // Draw (P0's first-turn draw skipped)
+        CastOrPass(P0),
+        CastOrPass(P0), // Main1: P0 plays Mountain, then passes
+        CastOrPass(P1), // Main1: P1's response window, passes
+        CastOrPass(P0),
+        CastOrPass(P1),       // Begin Combat
+        DeclareAttackers(P0), // Declare Attackers: P0 (active) declares nobody
+        CastOrPass(P0),
+        CastOrPass(P1), // Declare Attackers step's own priority round
+        CastOrPass(P0),
+        CastOrPass(P1), // End Combat (Declare Blockers/Combat Damage
+        // skipped: zero attackers were declared)
+        CastOrPass(P0),
+        CastOrPass(P1), // Main2
+        CastOrPass(P0),
+        CastOrPass(P1), // End step
         // Cleanup + Untap grant no priority (no decisions), turn passes to P1.
-        CastOrPass(P1), CastOrPass(P0), // P1's Upkeep (active player first)
-        CastOrPass(P1), CastOrPass(P0), // P1's Draw (P1 does NOT skip its own first draw)
-        CastOrPass(P1), CastOrPass(P1), // Main1: P1 plays Mountain, then passes
-        CastOrPass(P0),                 // Main1: P0's response window, passes
-        CastOrPass(P1), CastOrPass(P0), // P1's Begin Combat
-        DeclareAttackers(P1),           // P1's Declare Attackers: declares nobody
-        CastOrPass(P1), CastOrPass(P0), // P1's Declare Attackers step's priority round
+        CastOrPass(P1),
+        CastOrPass(P0), // P1's Upkeep (active player first)
+        CastOrPass(P1),
+        CastOrPass(P0), // P1's Draw (P1 does NOT skip its own first draw)
+        CastOrPass(P1),
+        CastOrPass(P1), // Main1: P1 plays Mountain, then passes
+        CastOrPass(P0), // Main1: P0's response window, passes
+        CastOrPass(P1),
+        CastOrPass(P0),       // P1's Begin Combat
+        DeclareAttackers(P1), // P1's Declare Attackers: declares nobody
+        CastOrPass(P1),
+        CastOrPass(P0), // P1's Declare Attackers step's priority round
     ]
 };
 
@@ -273,16 +304,30 @@ fn burn_goldfish_kills_p1_via_repeated_lightning_bolt_through_faithful_priority(
     assert_eq!(count(Kind::ChooseTargets(PlayerId::P0)), 7);
     assert_eq!(count(Kind::GameOver), 1);
     assert_eq!(log.len(), 277);
-    assert_eq!(log.iter().filter(|d| matches!(d, Kind::ChooseTargets(PlayerId::P1))).count(), 0);
-    assert_eq!(log.iter().filter(|d| matches!(d, Kind::OrderTriggers(_))).count(), 0);
+    assert_eq!(
+        log.iter()
+            .filter(|d| matches!(d, Kind::ChooseTargets(PlayerId::P1)))
+            .count(),
+        0
+    );
+    assert_eq!(
+        log.iter()
+            .filter(|d| matches!(d, Kind::OrderTriggers(_)))
+            .count(),
+        0
+    );
 
     // ---- the specific claim in the design brief: P1 gets a real priority
     // window *before* every single resolution, not just the first one.
     // Split the log into the 7 segments between consecutive ChooseTargets
     // decisions (a cast finalizing) and confirm P1 was offered (and had
     // to explicitly pass) a CastSpellOrPass decision in every segment.
-    let choose_target_positions: Vec<usize> =
-        log.iter().enumerate().filter(|(_, d)| matches!(d, Kind::ChooseTargets(_))).map(|(i, _)| i).collect();
+    let choose_target_positions: Vec<usize> = log
+        .iter()
+        .enumerate()
+        .filter(|(_, d)| matches!(d, Kind::ChooseTargets(_)))
+        .map(|(i, _)| i)
+        .collect();
     assert_eq!(choose_target_positions.len(), 7);
     let mut segment_start = 0;
     for &pos in &choose_target_positions {
@@ -291,7 +336,9 @@ fn burn_goldfish_kills_p1_via_repeated_lightning_bolt_through_faithful_priority(
         // resolve); still true for segment 1, which covers P1's whole
         // first-turn priority windows.
         assert!(
-            segment.iter().any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))),
+            segment
+                .iter()
+                .any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))),
             "segment [{segment_start}..{pos}) never offered P1 a decision"
         );
         segment_start = pos + 1;
@@ -305,15 +352,48 @@ fn burn_goldfish_kills_p1_via_repeated_lightning_bolt_through_faithful_priority(
         .engine
         .event_history
         .iter()
-        .filter(|e| matches!(e, CommittedEvent::Damage { target: Target::Player(PlayerId::P1), amount: 3, .. }))
+        .filter(|e| {
+            matches!(
+                e,
+                CommittedEvent::Damage {
+                    target: Target::Player(PlayerId::P1),
+                    amount: 3,
+                    ..
+                }
+            )
+        })
         .collect();
-    assert_eq!(damage_to_p1.len(), 7, "exactly 7 Lightning Bolts should have dealt 3 damage to P1");
+    assert_eq!(
+        damage_to_p1.len(),
+        7,
+        "exactly 7 Lightning Bolts should have dealt 3 damage to P1"
+    );
 
-    let bolts_to_graveyard =
-        state.engine.event_history.iter().filter(|e| matches!(e, CommittedEvent::ZoneChange { to: mtg_kernel::state::Zone::Graveyard, .. })).count();
-    assert_eq!(bolts_to_graveyard, 7, "each resolved Lightning Bolt goes to the graveyard, nothing else dies");
+    let bolts_to_graveyard = state
+        .engine
+        .event_history
+        .iter()
+        .filter(|e| {
+            matches!(
+                e,
+                CommittedEvent::ZoneChange {
+                    to: mtg_kernel::state::Zone::Graveyard,
+                    ..
+                }
+            )
+        })
+        .count();
+    assert_eq!(
+        bolts_to_graveyard, 7,
+        "each resolved Lightning Bolt goes to the graveyard, nothing else dies"
+    );
 
-    let taps = state.engine.event_history.iter().filter(|e| matches!(e, CommittedEvent::Tap { .. })).count();
+    let taps = state
+        .engine
+        .event_history
+        .iter()
+        .filter(|e| matches!(e, CommittedEvent::Tap { .. }))
+        .count();
     assert_eq!(taps, 7, "each cast pays with exactly 1 Mountain");
 
     let p0_lands_played = state
@@ -322,7 +402,10 @@ fn burn_goldfish_kills_p1_via_repeated_lightning_bolt_through_faithful_priority(
         .iter()
         .filter(|e| matches!(e, CommittedEvent::ZoneChange { to: mtg_kernel::state::Zone::Battlefield, object, .. } if state.objects.get(*object).owner == PlayerId::P0))
         .count();
-    assert_eq!(p0_lands_played, 3, "P0's library only had 3 Mountains before the game ended");
+    assert_eq!(
+        p0_lands_played, 3,
+        "P0's library only had 3 Mountains before the game ended"
+    );
 
     // ---- final board: P0's battlefield has exactly the 3 Mountains it
     // played (Lightning Bolt never sticks around -- it's a spell, not a

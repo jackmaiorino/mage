@@ -102,28 +102,59 @@ pub enum ProposedEvent {
 
 impl ProposedEvent {
     pub fn damage(source: ObjectId, target: Target, amount: i32) -> ProposedEvent {
-        ProposedEvent::Damage(DamageProposed { source, target, amount, touched_by: Vec::new() })
+        ProposedEvent::Damage(DamageProposed {
+            source,
+            target,
+            amount,
+            touched_by: Vec::new(),
+        })
     }
     pub fn zone_change(object: ObjectId, to_zone: Zone) -> ProposedEvent {
-        ProposedEvent::ZoneChange(ZoneChangeProposed { object, to_zone, touched_by: Vec::new() })
+        ProposedEvent::ZoneChange(ZoneChangeProposed {
+            object,
+            to_zone,
+            touched_by: Vec::new(),
+        })
     }
     pub fn life_loss(player: PlayerId, amount: i32) -> ProposedEvent {
-        ProposedEvent::LifeLoss(LifeLossProposed { player, amount, touched_by: Vec::new() })
+        ProposedEvent::LifeLoss(LifeLossProposed {
+            player,
+            amount,
+            touched_by: Vec::new(),
+        })
     }
     pub fn life_gain(player: PlayerId, amount: i32) -> ProposedEvent {
-        ProposedEvent::LifeGain(LifeGainProposed { player, amount, touched_by: Vec::new() })
+        ProposedEvent::LifeGain(LifeGainProposed {
+            player,
+            amount,
+            touched_by: Vec::new(),
+        })
     }
     pub fn draw(player: PlayerId) -> ProposedEvent {
-        ProposedEvent::Draw(DrawProposed { player, touched_by: Vec::new() })
+        ProposedEvent::Draw(DrawProposed {
+            player,
+            touched_by: Vec::new(),
+        })
     }
     pub fn tap(object: ObjectId) -> ProposedEvent {
-        ProposedEvent::Tap(TapProposed { object, touched_by: Vec::new() })
+        ProposedEvent::Tap(TapProposed {
+            object,
+            touched_by: Vec::new(),
+        })
     }
     pub fn mana_add(player: PlayerId, colors: Vec<ManaColor>) -> ProposedEvent {
-        ProposedEvent::ManaAdd(ManaAddProposed { player, colors, touched_by: Vec::new() })
+        ProposedEvent::ManaAdd(ManaAddProposed {
+            player,
+            colors,
+            touched_by: Vec::new(),
+        })
     }
     pub fn create_token(token_def: u16, controller: PlayerId) -> ProposedEvent {
-        ProposedEvent::CreateToken(CreateTokenProposed { token_def, controller, touched_by: Vec::new() })
+        ProposedEvent::CreateToken(CreateTokenProposed {
+            token_def,
+            controller,
+            touched_by: Vec::new(),
+        })
     }
 
     fn touched_by(&self) -> &[ReplacementId] {
@@ -158,16 +189,42 @@ impl ProposedEvent {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum CommittedEvent {
-    Damage { source: ObjectId, target: Target, amount: i32 },
-    ZoneChange { object: ObjectId, from: Zone, to: Zone },
-    LifeLoss { player: PlayerId, amount: i32 },
-    LifeGain { player: PlayerId, amount: i32 },
+    Damage {
+        source: ObjectId,
+        target: Target,
+        amount: i32,
+    },
+    ZoneChange {
+        object: ObjectId,
+        from: Zone,
+        to: Zone,
+    },
+    LifeLoss {
+        player: PlayerId,
+        amount: i32,
+    },
+    LifeGain {
+        player: PlayerId,
+        amount: i32,
+    },
     /// `object` is `None` when the draw was attempted against an empty
     /// library; SBA picks that up as a loss condition (704.5c).
-    Draw { player: PlayerId, object: Option<ObjectId> },
-    Tap { object: ObjectId },
-    ManaAdded { player: PlayerId, colors: Vec<ManaColor> },
-    CreateToken { object: ObjectId, token_def: u16, controller: PlayerId },
+    Draw {
+        player: PlayerId,
+        object: Option<ObjectId>,
+    },
+    Tap {
+        object: ObjectId,
+    },
+    ManaAdded {
+        player: PlayerId,
+        colors: Vec<ManaColor>,
+    },
+    CreateToken {
+        object: ObjectId,
+        token_def: u16,
+        controller: PlayerId,
+    },
     /// Logged by `engine::finalize_cast` the moment a spell is placed on
     /// the stack (not routed through `propose_and_commit`: casting a spell
     /// is an engine action with no replaceable "cast" event in this
@@ -177,14 +234,20 @@ pub enum CommittedEvent {
     /// something to match against; it is still appended to both
     /// `event_log` (drained by `trigger::collect_and_process`) and
     /// `event_history` for consistency with every other committed event.
-    SpellCast { spell: ObjectId, controller: PlayerId },
+    SpellCast {
+        spell: ObjectId,
+        controller: PlayerId,
+    },
 }
 
 /// Runs the replace/prevent pass to a fixed point: repeatedly finds an
 /// active replacement that applies to `event` and hasn't already touched it
 /// (loop-prevention via `touched_by`), applies it, and marks it touched.
 /// Returns `None` if the event ends up fully prevented.
-pub fn apply_replacements(state: &mut GameState, mut proposed: ProposedEvent) -> Option<ProposedEvent> {
+pub fn apply_replacements(
+    state: &mut GameState,
+    mut proposed: ProposedEvent,
+) -> Option<ProposedEvent> {
     loop {
         let hit = state
             .engine
@@ -207,9 +270,10 @@ pub fn apply_replacements(state: &mut GameState, mut proposed: ProposedEvent) ->
 
 fn replacement_applies(repl: &ActiveReplacement, proposed: &ProposedEvent) -> bool {
     match (&repl.kind, proposed) {
-        (ReplacementEffectKind::PreventNextDamage { target, remaining }, ProposedEvent::Damage(d)) => {
-            *remaining > 0 && d.target == *target
-        }
+        (
+            ReplacementEffectKind::PreventNextDamage { target, remaining },
+            ProposedEvent::Damage(d),
+        ) => *remaining > 0 && d.target == *target,
         _ => false,
     }
 }
@@ -223,11 +287,19 @@ fn replacement_apply(
     state: &mut GameState,
 ) -> Option<ProposedEvent> {
     match (&repl.kind, proposed) {
-        (ReplacementEffectKind::PreventNextDamage { remaining, .. }, ProposedEvent::Damage(mut d)) => {
+        (
+            ReplacementEffectKind::PreventNextDamage { remaining, .. },
+            ProposedEvent::Damage(mut d),
+        ) => {
             let prevented = (*remaining).min(d.amount);
             d.amount -= prevented;
 
-            if let Some(slot) = state.engine.active_replacements.iter_mut().find(|r| r.id == repl.id) {
+            if let Some(slot) = state
+                .engine
+                .active_replacements
+                .iter_mut()
+                .find(|r| r.id == repl.id)
+            {
                 // Only variant today, but matched explicitly (rather than
                 // destructured directly) so this stays a real pattern match
                 // -- and a compile error, not a silent no-op -- the moment
@@ -272,20 +344,34 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                     state.players[p.index()].life -= d.amount;
                 }
             }
-            CommittedEvent::Damage { source: d.source, target: d.target, amount: d.amount }
+            CommittedEvent::Damage {
+                source: d.source,
+                target: d.target,
+                amount: d.amount,
+            }
         }
         ProposedEvent::ZoneChange(z) => {
             let from = state.objects.get(z.object).zone;
             commit_zone_change(state, z.object, z.to_zone);
-            CommittedEvent::ZoneChange { object: z.object, from, to: z.to_zone }
+            CommittedEvent::ZoneChange {
+                object: z.object,
+                from,
+                to: z.to_zone,
+            }
         }
         ProposedEvent::LifeLoss(l) => {
             state.players[l.player.index()].life -= l.amount;
-            CommittedEvent::LifeLoss { player: l.player, amount: l.amount }
+            CommittedEvent::LifeLoss {
+                player: l.player,
+                amount: l.amount,
+            }
         }
         ProposedEvent::LifeGain(g) => {
             state.players[g.player.index()].life += g.amount;
-            CommittedEvent::LifeGain { player: g.player, amount: g.amount }
+            CommittedEvent::LifeGain {
+                player: g.player,
+                amount: g.amount,
+            }
         }
         ProposedEvent::Draw(d) => {
             let empty_before = state.players[d.player.index()].library.is_empty();
@@ -296,7 +382,10 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
             if drawn.is_some() {
                 state.players[d.player.index()].draws_this_turn += 1;
             }
-            CommittedEvent::Draw { player: d.player, object: drawn }
+            CommittedEvent::Draw {
+                player: d.player,
+                object: drawn,
+            }
         }
         ProposedEvent::Tap(t) => {
             state.objects.get_mut(t.object).tapped = true;
@@ -306,10 +395,15 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
             for &c in &m.colors {
                 state.players[m.player.index()].mana_pool[c.pool_index()] += 1;
             }
-            CommittedEvent::ManaAdded { player: m.player, colors: m.colors }
+            CommittedEvent::ManaAdded {
+                player: m.player,
+                colors: m.colors,
+            }
         }
         ProposedEvent::CreateToken(t) => {
-            let name = crate::card_def::CARD_DEFS[t.token_def as usize].name.to_string();
+            let name = crate::card_def::CARD_DEFS[t.token_def as usize]
+                .name
+                .to_string();
             let object = state.objects.push(crate::state::GameObject {
                 card_def: t.token_def,
                 name,
@@ -335,7 +429,11 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 zone_change_count: 0,
             });
             state.players[t.controller.index()].battlefield.push(object);
-            CommittedEvent::CreateToken { object, token_def: t.token_def, controller: t.controller }
+            CommittedEvent::CreateToken {
+                object,
+                token_def: t.token_def,
+                controller: t.controller,
+            }
         }
     };
     state.engine.event_log.push(committed.clone());
@@ -351,7 +449,10 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
 /// / trigger collection exactly once after the whole batch (see
 /// `engine::deal_combat_damage`), not per event.
 pub fn propose_and_commit_batch(state: &mut GameState, events: Vec<ProposedEvent>) {
-    let survivors: Vec<ProposedEvent> = events.into_iter().filter_map(|e| apply_replacements(state, e)).collect();
+    let survivors: Vec<ProposedEvent> = events
+        .into_iter()
+        .filter_map(|e| apply_replacements(state, e))
+        .collect();
     for e in survivors {
         commit(state, e);
     }
@@ -471,11 +572,18 @@ mod tests {
     #[test]
     fn commit_damage_to_player_reduces_life() {
         let mut state = fresh_state();
-        propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 3));
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 3),
+        );
         assert_eq!(state.players[1].life, 17);
         assert_eq!(
             state.engine.event_log,
-            vec![CommittedEvent::Damage { source: ObjectId(0), target: Target::Player(PlayerId::P1), amount: 3 }]
+            vec![CommittedEvent::Damage {
+                source: ObjectId(0),
+                target: Target::Player(PlayerId::P1),
+                amount: 3
+            }]
         );
     }
 
@@ -483,7 +591,10 @@ mod tests {
     fn zone_change_moves_between_owner_zones_and_updates_object() {
         let mut state = fresh_state();
         let card = state.draw_card(PlayerId::P0).unwrap();
-        propose_and_commit(&mut state, ProposedEvent::zone_change(card, Zone::Battlefield));
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(card, Zone::Battlefield),
+        );
         assert_eq!(state.objects.get(card).zone, Zone::Battlefield);
         assert!(state.players[0].battlefield.contains(&card));
         assert!(!state.players[0].hand.contains(&card));
@@ -505,16 +616,28 @@ mod tests {
         state.engine.active_replacements.push(ActiveReplacement {
             id: 1,
             source: ObjectId(0),
-            kind: ReplacementEffectKind::PreventNextDamage { target: Target::Player(PlayerId::P1), remaining: 2 },
+            kind: ReplacementEffectKind::PreventNextDamage {
+                target: Target::Player(PlayerId::P1),
+                remaining: 2,
+            },
         });
 
         // First hit: 5 damage, shield absorbs 2 -> 3 gets through.
-        propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 5));
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 5),
+        );
         assert_eq!(state.players[1].life, 17);
-        assert!(state.engine.active_replacements.is_empty(), "shield should be fully consumed");
+        assert!(
+            state.engine.active_replacements.is_empty(),
+            "shield should be fully consumed"
+        );
 
         // Second hit: shield is gone, full damage applies.
-        propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 4));
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 4),
+        );
         assert_eq!(state.players[1].life, 13);
     }
 
@@ -524,14 +647,26 @@ mod tests {
         state.engine.active_replacements.push(ActiveReplacement {
             id: 7,
             source: ObjectId(0),
-            kind: ReplacementEffectKind::PreventNextDamage { target: Target::Player(PlayerId::P1), remaining: 10 },
+            kind: ReplacementEffectKind::PreventNextDamage {
+                target: Target::Player(PlayerId::P1),
+                remaining: 10,
+            },
         });
-        propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 3));
-        assert_eq!(state.players[1].life, 20, "fully prevented, no event should mutate life");
-        assert_eq!(state.engine.active_replacements[0].kind, ReplacementEffectKind::PreventNextDamage {
-            target: Target::Player(PlayerId::P1),
-            remaining: 7,
-        });
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 3),
+        );
+        assert_eq!(
+            state.players[1].life, 20,
+            "fully prevented, no event should mutate life"
+        );
+        assert_eq!(
+            state.engine.active_replacements[0].kind,
+            ReplacementEffectKind::PreventNextDamage {
+                target: Target::Player(PlayerId::P1),
+                remaining: 7,
+            }
+        );
     }
 
     #[test]
@@ -545,13 +680,22 @@ mod tests {
         state.engine.active_replacements.push(ActiveReplacement {
             id: 3,
             source: ObjectId(0),
-            kind: ReplacementEffectKind::PreventNextDamage { target: Target::Player(PlayerId::P1), remaining: 100 },
+            kind: ReplacementEffectKind::PreventNextDamage {
+                target: Target::Player(PlayerId::P1),
+                remaining: 100,
+            },
         });
-        propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 5));
+        propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Player(PlayerId::P1), 5),
+        );
         assert_eq!(state.players[1].life, 20);
-        assert_eq!(state.engine.active_replacements[0].kind, ReplacementEffectKind::PreventNextDamage {
-            target: Target::Player(PlayerId::P1),
-            remaining: 95,
-        });
+        assert_eq!(
+            state.engine.active_replacements[0].kind,
+            ReplacementEffectKind::PreventNextDamage {
+                target: Target::Player(PlayerId::P1),
+                remaining: 95,
+            }
+        );
     }
 }

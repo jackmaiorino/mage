@@ -153,9 +153,16 @@ fn main() {
     if std::env::var("REPLAY_DEBUG").is_err() {
         std::panic::set_hook(Box::new(|_| {}));
     }
-    let root = std::env::args().nth(1).map(PathBuf::from).expect("usage: replay_burn <corpus dir>");
+    let root = std::env::args()
+        .nth(1)
+        .map(PathBuf::from)
+        .expect("usage: replay_burn <corpus dir>");
     let (traces, errors) = trace::load_corpus(&root);
-    println!("traces parsed: {}   parse errors: {}", traces.len(), errors.len());
+    println!(
+        "traces parsed: {}   parse errors: {}",
+        traces.len(),
+        errors.len()
+    );
     for e in errors.iter().take(5) {
         println!("  ERR {e}");
     }
@@ -208,11 +215,23 @@ fn main() {
             }
         }
         let reason_for_triage = if outcome.reached_game_over {
-            if outcome.winner_matched { "COMPLETE:winner-matched".to_string() } else { "COMPLETE:winner-mismatch".to_string() }
+            if outcome.winner_matched {
+                "COMPLETE:winner-matched".to_string()
+            } else {
+                "COMPLETE:winner-mismatch".to_string()
+            }
         } else {
-            outcome.divergence.clone().unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
+            outcome
+                .divergence
+                .clone()
+                .unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
         };
-        triage.push((outcome.decisions_consumed, outcome.decisions_total, reason_for_triage, t.source_path.clone()));
+        triage.push((
+            outcome.decisions_consumed,
+            outcome.decisions_total,
+            reason_for_triage,
+            t.source_path.clone(),
+        ));
         if let Some(reason) = outcome.divergence {
             diverged += 1;
             *histogram.entry(reason.clone()).or_default() += 1;
@@ -224,7 +243,11 @@ fn main() {
         triage.sort_by(|a, b| b.0.cmp(&a.0));
         println!("\n--- triage (sorted by decisions_consumed desc) ---");
         for (consumed, total, reason, path) in &triage {
-            let pct = if *total > 0 { 100.0 * *consumed as f64 / *total as f64 } else { 0.0 };
+            let pct = if *total > 0 {
+                100.0 * *consumed as f64 / *total as f64
+            } else {
+                0.0
+            };
             println!("  {consumed:>4}/{total:<4} ({pct:>5.1}%)  {reason:<50} {path}");
         }
     }
@@ -260,7 +283,11 @@ fn main() {
     // A softer signal than the binary reached/diverged split: how much of
     // each trace's real decision stream validated cleanly before either
     // GameOver or the first divergence.
-    let pct = if decisions_total_total > 0 { 100.0 * decisions_consumed_total as f64 / decisions_total_total as f64 } else { 0.0 };
+    let pct = if decisions_total_total > 0 {
+        100.0 * decisions_consumed_total as f64 / decisions_total_total as f64
+    } else {
+        0.0
+    };
     println!(
         "real (non-mulligan) decisions gate-checked and applied before GameOver/divergence: {decisions_consumed_total} / {decisions_total_total} ({pct:.1}%)"
     );
@@ -357,12 +384,18 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
     // until it returns) -- acceptable: a panic is already the loudest,
     // least-ambiguous signal a trace can produce, and `REPLAY_DEBUG` plus
     // `REPLAY_TRACE_FILTER` narrows it down same as any other divergence.
-    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| run(t, &mut surface, &mut outcome)));
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        run(t, &mut surface, &mut outcome)
+    }));
     match result {
         Ok(Err(reason)) => outcome.divergence = Some(reason),
         Ok(Ok(())) => {}
         Err(payload) => {
-            let msg = payload.downcast_ref::<String>().cloned().or_else(|| payload.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_else(|| "<non-string panic payload>".to_string());
+            let msg = payload
+                .downcast_ref::<String>()
+                .cloned()
+                .or_else(|| payload.downcast_ref::<&str>().map(|s| s.to_string()))
+                .unwrap_or_else(|| "<non-string panic payload>".to_string());
             outcome.divergence = Some(format!("engine-panic:{msg}"));
         }
     }
@@ -374,9 +407,15 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
         match s.reason {
             SuppressionReason::StepGated => outcome.silent_window_step_gated += 1,
             SuppressionReason::NoRealOption => outcome.trace_exhausted_passes += 1,
-            SuppressionReason::NoEligibleAttacker => outcome.silent_window_no_eligible_attacker += 1,
-            SuppressionReason::NoEligibleBlockersForAttacker => outcome.declare_blocks_no_eligible_blockers += 1,
-            SuppressionReason::CombatPriorityActionSpent => outcome.combat_priority_action_spent += 1,
+            SuppressionReason::NoEligibleAttacker => {
+                outcome.silent_window_no_eligible_attacker += 1
+            }
+            SuppressionReason::NoEligibleBlockersForAttacker => {
+                outcome.declare_blocks_no_eligible_blockers += 1
+            }
+            SuppressionReason::CombatPriorityActionSpent => {
+                outcome.combat_priority_action_spent += 1
+            }
             SuppressionReason::StackTopIsCastersOwn => outcome.stack_top_is_casters_own += 1,
         }
     }
@@ -415,18 +454,31 @@ impl<'a> ReplayCtx<'a> {
     }
 }
 
-fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutcome) -> Result<(), String> {
+fn run(
+    t: &GoldenTrace,
+    surface: &mut HarnessSurfaceV1,
+    outcome: &mut ReplayOutcome,
+) -> Result<(), String> {
     if std::env::var("REPLAY_DEBUG").is_ok() {
         eprintln!("=== {} ===", t.source_path);
     }
     let (p0_name, p1_name) = seat_names(t)?;
-    let opening0 = t.opening_hand_for(&p0_name).ok_or("setup:no-opening-hand-record:p0")?;
-    let opening1 = t.opening_hand_for(&p1_name).ok_or("setup:no-opening-hand-record:p1")?;
+    let opening0 = t
+        .opening_hand_for(&p0_name)
+        .ok_or("setup:no-opening-hand-record:p0")?;
+    let opening1 = t
+        .opening_hand_for(&p1_name)
+        .ok_or("setup:no-opening-hand-record:p1")?;
 
     let lib0 = card_ids_for(opening0.hand.iter().chain(opening0.library.iter()))?;
     let lib1 = card_ids_for(opening1.hand.iter().chain(opening1.library.iter()))?;
 
-    let mut state = GameState::new_from_libraries(&lib0, &lib1, |id| CARD_DEFS[id as usize].name.to_string(), t.header.seed);
+    let mut state = GameState::new_from_libraries(
+        &lib0,
+        &lib1,
+        |id| CARD_DEFS[id as usize].name.to_string(),
+        t.header.seed,
+    );
     for _ in 0..opening0.hand.len() {
         state.draw_card(PlayerId::P0);
     }
@@ -439,9 +491,22 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
     let seat_uuid = find_player_uuids(t, &p0_name, &p1_name);
 
     let queue_for = |name: &str| -> Vec<&DecisionRecord> {
-        t.decisions.iter().filter(|d| d.player == name && d.action_type != "MULLIGAN" && d.action_type != "LONDON_MULLIGAN").collect()
+        t.decisions
+            .iter()
+            .filter(|d| {
+                d.player == name
+                    && d.action_type != "MULLIGAN"
+                    && d.action_type != "LONDON_MULLIGAN"
+            })
+            .collect()
     };
-    let mut ctx = ReplayCtx { id_map, pregame_object_count, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0] };
+    let mut ctx = ReplayCtx {
+        id_map,
+        pregame_object_count,
+        seat_uuid,
+        queues: [queue_for(&p0_name), queue_for(&p1_name)],
+        cursors: [0, 0],
+    };
     outcome.decisions_total = ctx.queues[0].len() + ctx.queues[1].len();
 
     loop {
@@ -452,41 +517,79 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
         match decision {
             SurfaceDecision::Decision(Decision::GameOver { winner }) => {
                 outcome.reached_game_over = true;
-                let winner_name = winner.map(|p| if p == PlayerId::P0 { p0_name.clone() } else { p1_name.clone() });
-                outcome.winner_matched = matches!((&winner_name, &t.winner), (Some(a), Some(b)) if a == b);
+                let winner_name = winner.map(|p| {
+                    if p == PlayerId::P0 {
+                        p0_name.clone()
+                    } else {
+                        p1_name.clone()
+                    }
+                });
+                outcome.winner_matched =
+                    matches!((&winner_name, &t.winner), (Some(a), Some(b)) if a == b);
                 return Ok(());
             }
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions }) => {
-                match ctx.next(player) {
-                    None => return Err("trace-exhausted:CastSpellOrPass-with-real-options".to_string()),
-                    Some(&rec) => {
-                        debug_verbose(t, &state, player, rec, "CastSpellOrPass");
-                        if rec.action_type != "ACTIVATE_ABILITY_OR_SPELL" {
-                            if std::env::var("REPLAY_DEBUG").is_ok() {
-                                eprintln!(
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                mana_abilities,
+                land_drops,
+                activatable_abilities,
+                plot_actions,
+            }) => match ctx.next(player) {
+                None => return Err("trace-exhausted:CastSpellOrPass-with-real-options".to_string()),
+                Some(&rec) => {
+                    debug_verbose(t, &state, player, rec, "CastSpellOrPass");
+                    if rec.action_type != "ACTIVATE_ABILITY_OR_SPELL" {
+                        if std::env::var("REPLAY_DEBUG").is_ok() {
+                            eprintln!(
                                     "KIND MISMATCH decision_number={} player={} expected=CastSpellOrPass got={} kernel_castable={:?} kernel_land={:?} kernel_mana={:?}",
                                     rec.decision_number, rec.player, rec.action_type, castable_spells, land_drops, mana_abilities
                                 );
-                            }
-                            return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
-                        check_state(&state, player, rec)?;
-                        learn_token_ids(&mut ctx, &state, rec);
-                        apply_cast_spell_or_pass(surface, &mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &plot_actions, &ctx.id_map)?;
-                        ctx.advance(player);
-                        outcome.decisions_consumed += 1;
+                        return Err(format!(
+                            "decision-kind-mismatch:CastSpellOrPass-vs-{}",
+                            rec.action_type
+                        ));
                     }
+                    check_state(&state, player, rec)?;
+                    learn_token_ids(&mut ctx, &state, rec);
+                    apply_cast_spell_or_pass(
+                        surface,
+                        &mut state,
+                        rec,
+                        &castable_spells,
+                        &mana_abilities,
+                        &land_drops,
+                        &activatable_abilities,
+                        &plot_actions,
+                        &ctx.id_map,
+                    )?;
+                    ctx.advance(player);
+                    outcome.decisions_consumed += 1;
                 }
-            }
-            SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
-                if let Some(winner) = java_reference_target_shortcut(&state, &legal_targets, &p0_name, &p1_name) {
+            },
+            SurfaceDecision::Decision(Decision::ChooseTargets {
+                player,
+                legal_targets,
+                ..
+            }) => {
+                if let Some(winner) =
+                    java_reference_target_shortcut(&state, &legal_targets, &p0_name, &p1_name)
+                {
                     surface
-                        .apply(&mut state, SurfaceAction::Action(Action::ChooseTarget(winner)))
-                        .map_err(|e| format!("engine-step-error:ChooseTargets-java-target-shortcut:{e}"))?;
+                        .apply(
+                            &mut state,
+                            SurfaceAction::Action(Action::ChooseTarget(winner)),
+                        )
+                        .map_err(|e| {
+                            format!("engine-step-error:ChooseTargets-java-target-shortcut:{e}")
+                        })?;
                     outcome.java_target_shortcut_applied += 1;
                     continue;
                 }
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseTargets");
                 if rec.action_type != "SELECT_TARGETS" {
                     if std::env::var("REPLAY_DEBUG").is_ok() {
@@ -499,7 +602,10 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                             legal_targets.iter().map(|tg| match tg { Target::Player(p) => format!("P{}", p.index()), Target::Object(id) => state.objects.get(*id).name.clone() }).collect::<Vec<_>>()
                         );
                     }
-                    return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseTargets-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 // 601.2a: the kernel now moves a cast spell (or, for
                 // flashback, the graveyard card) onto the stack at
@@ -508,15 +614,27 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 // no fudge factor needed (see `engine::begin_cast`).
                 check_state(&state, player, rec)?;
                 learn_token_ids(&mut ctx, &state, rec);
-                apply_choose_targets(surface, &mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
+                apply_choose_targets(
+                    surface,
+                    &mut state,
+                    rec,
+                    &legal_targets,
+                    &ctx.id_map,
+                    &ctx.seat_uuid,
+                )?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
             }
             SurfaceDecision::Decision(Decision::DeclareAttackers { player, eligible }) => {
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
                 debug_verbose(t, &state, player, rec, "DeclareAttackers");
                 if rec.action_type != "DECLARE_ATTACKS" {
-                    return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:DeclareAttackers-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 check_state(&state, player, rec)?;
                 learn_token_ids(&mut ctx, &state, rec);
@@ -524,15 +642,44 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
             }
-            SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers } => {
+            SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers,
+            } => {
                 let player = state.active_player.opponent();
-                apply_declare_blockers_for_attacker(surface, &mut state, t, &mut ctx, outcome, player, attacker, &legal_blockers)?;
+                apply_declare_blockers_for_attacker(
+                    surface,
+                    &mut state,
+                    t,
+                    &mut ctx,
+                    outcome,
+                    player,
+                    attacker,
+                    &legal_blockers,
+                )?;
             }
-            SurfaceDecision::Decision(Decision::Discard { player, count, choices }) => {
-                apply_discard(surface, &mut state, t, &mut ctx, outcome, player, count, &choices)?;
+            SurfaceDecision::Decision(Decision::Discard {
+                player,
+                count,
+                choices,
+            }) => {
+                apply_discard(
+                    surface, &mut state, t, &mut ctx, outcome, player, count, &choices,
+                )?;
             }
-            SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable }) => {
-                apply_choose_optional_cost(surface, &mut state, &mut ctx, player, discard_payable, sacrifice_payable)?;
+            SurfaceDecision::Decision(Decision::ChooseOptionalCost {
+                player,
+                discard_payable,
+                sacrifice_payable,
+            }) => {
+                apply_choose_optional_cost(
+                    surface,
+                    &mut state,
+                    &mut ctx,
+                    player,
+                    discard_payable,
+                    sacrifice_payable,
+                )?;
             }
             SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => {
                 // See `apply_choose_optional_cost`'s doc for the same
@@ -565,19 +712,31 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
                 // fall through to the graveyard, same as a non-Madness
                 // discard), so this is a safe, conservative default, not a
                 // guess that can desync anything further.
-                let mid_cost_payment = state.engine.pending_cast.is_some() || state.engine.pending_activation.is_some();
+                let mid_cost_payment = state.engine.pending_cast.is_some()
+                    || state.engine.pending_activation.is_some();
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(!mid_cost_payment)))
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseMadnessCast(!mid_cost_payment)),
+                    )
                     .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
             // Not observed anywhere in this corpus (verified by grep
             // across all 40 files); no sensible trace counterpart exists
             // to translate against, so this is a clean, named divergence
             // rather than a guess or a crash.
-            SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => return Err("unhandled-decision:ChooseCastMode".to_string()),
-            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => return Err("unhandled-decision:ChooseKicker".to_string()),
-            SurfaceDecision::Decision(Decision::Halted { .. }) => return Err("unhandled-decision:Halted".to_string()),
-            SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => return Err("unhandled-decision:OrderTriggers".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseCastMode { .. }) => {
+                return Err("unhandled-decision:ChooseCastMode".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
+                return Err("unhandled-decision:ChooseKicker".to_string())
+            }
+            SurfaceDecision::Decision(Decision::Halted { .. }) => {
+                return Err("unhandled-decision:Halted".to_string())
+            }
+            SurfaceDecision::Decision(Decision::OrderTriggers { .. }) => {
+                return Err("unhandled-decision:OrderTriggers".to_string())
+            }
             // `engine::Decision::ChooseCostTargets` is new as of increment
             // 11 (H2/v4 work, Sol #90 -- see that variant's doc), added to
             // the shared `engine.rs` so the sacrifice-cost-target picks
@@ -589,18 +748,25 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV1, outcome: &mut ReplayOutc
             // `engine::Decision`'s new shape; same clean-named-divergence
             // treatment as `ChooseCastMode`/`OrderTriggers` above, not a
             // change to H1's comparison logic.
-            SurfaceDecision::Decision(Decision::ChooseCostTargets { .. }) => return Err("unhandled-decision:ChooseCostTargets".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseCostTargets { .. }) => {
+                return Err("unhandled-decision:ChooseCostTargets".to_string())
+            }
             // Pyroblast/Red Elemental Blast are both sideboard-only for
             // this pool's maindeck -- unobserved in this corpus (same
             // reasoning as ChooseCastMode/OrderTriggers above).
-            SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => return Err("unhandled-decision:ChooseSpellMode".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => {
+                return Err("unhandled-decision:ChooseSpellMode".to_string())
+            }
             // `HarnessSurfaceV1::next_decision` always reshapes a raw
             // `Decision::DeclareBlockers` into `DeclareBlockersForAttacker`
             // sub-decisions before returning (see that module's doc) --
             // this arm only exists so the match stays exhaustive against
             // `engine::Decision`'s full shape.
             SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => {
-                return Err("unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface".to_string());
+                return Err(
+                    "unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface"
+                        .to_string(),
+                );
             }
         }
     }
@@ -648,16 +814,24 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
 /// discard's chosen cards are still in hand at this point, so this can't
 /// misfire on a genuine pending decision) -- consume it without a matching
 /// engine action, since the kernel already applied it internally.
-fn skip_stale_forced_discards(state: &GameState, ctx: &mut ReplayCtx, player: PlayerId, outcome: &mut ReplayOutcome) {
+fn skip_stale_forced_discards(
+    state: &GameState,
+    ctx: &mut ReplayCtx,
+    player: PlayerId,
+    outcome: &mut ReplayOutcome,
+) {
     loop {
         let Some(&rec) = ctx.next(player) else { return };
         if rec.action_type != "SELECT_CARD" || rec.chosen_object_ids.is_empty() {
             return;
         }
-        let already_applied = rec.chosen_object_ids.iter().all(|uuid| match ctx.id_map.get(uuid) {
-            Some(&id) => state.objects.get(id).zone == Zone::Graveyard,
-            None => false,
-        });
+        let already_applied = rec
+            .chosen_object_ids
+            .iter()
+            .all(|uuid| match ctx.id_map.get(uuid) {
+                Some(&id) => state.objects.get(id).zone == Zone::Graveyard,
+                None => false,
+            });
         if !already_applied {
             return;
         }
@@ -691,13 +865,30 @@ fn seat_names(t: &GoldenTrace) -> Result<(String, String), String> {
     if names.len() != 2 {
         return Err(format!("setup:player-name-count={}", names.len()));
     }
-    let p0 = t.decisions.first().ok_or_else(|| "setup:no-decisions".to_string())?.player.clone();
-    let p1 = names.into_iter().find(|&n| n != p0).ok_or_else(|| "setup:cannot-determine-p1-name".to_string())?.to_string();
+    let p0 = t
+        .decisions
+        .first()
+        .ok_or_else(|| "setup:no-decisions".to_string())?
+        .player
+        .clone();
+    let p1 = names
+        .into_iter()
+        .find(|&n| n != p0)
+        .ok_or_else(|| "setup:cannot-determine-p1-name".to_string())?
+        .to_string();
     Ok((p0, p1))
 }
 
-fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &DecisionRecord, kind: &str) {
-    let Ok(filter) = std::env::var("REPLAY_TRACE_FILTER") else { return };
+fn debug_verbose(
+    t: &GoldenTrace,
+    state: &GameState,
+    player: PlayerId,
+    rec: &DecisionRecord,
+    kind: &str,
+) {
+    let Ok(filter) = std::env::var("REPLAY_TRACE_FILTER") else {
+        return;
+    };
     if !t.source_path.contains(&filter) {
         return;
     }
@@ -717,19 +908,35 @@ fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &Dec
 }
 
 fn card_ids_for<'a>(names: impl Iterator<Item = &'a String>) -> Result<Vec<u16>, String> {
-    names.map(|n| card_def::card_id_by_name(n).ok_or_else(|| format!("setup:unknown-card-name:{n}"))).collect()
+    names
+        .map(|n| card_def::card_id_by_name(n).ok_or_else(|| format!("setup:unknown-card-name:{n}")))
+        .collect()
 }
 
 /// Zips each seat's `hand_object_ids ++ library_object_ids` (trace UUIDs)
 /// against the kernel `ObjectId`s `GameState::new_from_libraries` assigns
 /// in that same order (0..len(lib0) for P0, offset thereafter for P1 --
 /// see `state.rs`'s `new_from_libraries_assigns_ids_p0_first` test).
-fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0_object_count: u32) -> HashMap<String, ObjectId> {
+fn build_id_map(
+    opening0: &trace::OpeningHand,
+    opening1: &trace::OpeningHand,
+    p0_object_count: u32,
+) -> HashMap<String, ObjectId> {
     let mut id_map = HashMap::new();
-    for (i, uuid) in opening0.hand_object_ids.iter().chain(opening0.library_object_ids.iter()).enumerate() {
+    for (i, uuid) in opening0
+        .hand_object_ids
+        .iter()
+        .chain(opening0.library_object_ids.iter())
+        .enumerate()
+    {
         id_map.insert(uuid.clone(), ObjectId(i as u32));
     }
-    for (i, uuid) in opening1.hand_object_ids.iter().chain(opening1.library_object_ids.iter()).enumerate() {
+    for (i, uuid) in opening1
+        .hand_object_ids
+        .iter()
+        .chain(opening1.library_object_ids.iter())
+        .enumerate()
+    {
         id_map.insert(uuid.clone(), ObjectId(p0_object_count + i as u32));
     }
     id_map
@@ -765,13 +972,22 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
 /// token that can attack or block, but this keeps the scan correct instead
 /// of quietly relying on that.
 fn learn_token_ids(ctx: &mut ReplayCtx, state: &GameState, rec: &DecisionRecord) {
-    for raw in rec.candidate_object_ids.iter().chain(rec.chosen_object_ids.iter()) {
+    for raw in rec
+        .candidate_object_ids
+        .iter()
+        .chain(rec.chosen_object_ids.iter())
+    {
         for uuid in raw.split("->") {
             if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) {
                 continue;
             }
             let bound: std::collections::HashSet<ObjectId> = ctx.id_map.values().copied().collect();
-            let Some(next) = state.objects.iter().map(|(id, _)| id).find(|id| id.0 >= ctx.pregame_object_count && !bound.contains(id)) else {
+            let Some(next) = state
+                .objects
+                .iter()
+                .map(|(id, _)| id)
+                .find(|id| id.0 >= ctx.pregame_object_count && !bound.contains(id))
+            else {
                 continue; // kernel hasn't minted this many tokens (yet) -- leave untranslatable, a real divergence surfaces downstream.
             };
             ctx.id_map.insert(uuid.to_string(), next);
@@ -791,7 +1007,10 @@ fn find_player_uuids(t: &GoldenTrace, p0_name: &str, p1_name: &str) -> [Option<S
         }
         for (text, uuid) in d.candidate_texts.iter().zip(d.candidate_object_ids.iter()) {
             if (text == p0_name || text == p1_name) && !found.contains_key(text.as_str()) {
-                found.insert(if text == p0_name { p0_name } else { p1_name }, uuid.clone());
+                found.insert(
+                    if text == p0_name { p0_name } else { p1_name },
+                    uuid.clone(),
+                );
             }
         }
         if found.len() == 2 {
@@ -974,19 +1193,33 @@ fn apply_cast_spell_or_pass(
     let mut by_key: BTreeMap<String, KernelChoice> = BTreeMap::new();
     by_key.insert("pass".to_string(), KernelChoice::Pass);
     for &id in land_drops {
-        by_key.entry(format!("land:{}", state.objects.get(id).name)).or_insert(KernelChoice::PlayLand(id));
+        by_key
+            .entry(format!("land:{}", state.objects.get(id).name))
+            .or_insert(KernelChoice::PlayLand(id));
     }
     for &id in castable_spells {
-        by_key.entry(format!("cast:{}:{}", state.objects.get(id).name, cast_zone_tag(state, id))).or_insert(KernelChoice::CastSpell(id));
+        by_key
+            .entry(format!(
+                "cast:{}:{}",
+                state.objects.get(id).name,
+                cast_zone_tag(state, id)
+            ))
+            .or_insert(KernelChoice::CastSpell(id));
     }
     for &id in mana_abilities {
-        by_key.entry(format!("mana:{}", state.objects.get(id).name)).or_insert(KernelChoice::ActivateMana(id));
+        by_key
+            .entry(format!("mana:{}", state.objects.get(id).name))
+            .or_insert(KernelChoice::ActivateMana(id));
     }
     for &(id, idx) in activatable_abilities {
-        by_key.entry(format!("activate:{}:{idx}", state.objects.get(id).name)).or_insert(KernelChoice::ActivateAbility(id, idx));
+        by_key
+            .entry(format!("activate:{}:{idx}", state.objects.get(id).name))
+            .or_insert(KernelChoice::ActivateAbility(id, idx));
     }
     for &id in plot_actions {
-        by_key.entry(format!("plot:{}", state.objects.get(id).name)).or_insert(KernelChoice::PlotSpell(id));
+        by_key
+            .entry(format!("plot:{}", state.objects.get(id).name))
+            .or_insert(KernelChoice::PlotSpell(id));
     }
     let mut kernel_keys: Vec<String> = by_key.keys().cloned().collect();
     kernel_keys.sort();
@@ -1034,7 +1267,9 @@ fn apply_cast_spell_or_pass(
         return Err("unexpected-chosen-count:CastSpellOrPass".to_string());
     }
     let idx = rec.chosen_indices[0] as usize;
-    let chosen_key = trace_keys.get(idx).ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
+    let chosen_key = trace_keys
+        .get(idx)
+        .ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
 
     let action = match by_key.get(chosen_key) {
         Some(KernelChoice::Pass) => Action::Pass,
@@ -1045,7 +1280,9 @@ fn apply_cast_spell_or_pass(
         Some(KernelChoice::PlotSpell(id)) => Action::PlotSpell(*id),
         None => return Err("chosen-not-in-kernel-candidates:CastSpellOrPass".to_string()),
     };
-    surface.apply(state, SurfaceAction::Action(action)).map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))
+    surface
+        .apply(state, SurfaceAction::Action(action))
+        .map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))
 }
 
 /// Translates every `(candidate_texts[i], candidate_object_ids[i])` pair
@@ -1053,13 +1290,24 @@ fn apply_cast_spell_or_pass(
 /// (`None` = the implicit "Pass" candidate, `candidate_object_ids[i] ==
 /// ""`), in original candidate order (index-addressable, so
 /// `chosen_indices` can look items up directly).
-fn translate_object_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>, kind: &str) -> Result<Vec<Option<ObjectId>>, String> {
+fn translate_object_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+    kind: &str,
+) -> Result<Vec<Option<ObjectId>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_texts.len());
-    for (text, uuid) in rec.candidate_texts.iter().zip(rec.candidate_object_ids.iter()) {
+    for (text, uuid) in rec
+        .candidate_texts
+        .iter()
+        .zip(rec.candidate_object_ids.iter())
+    {
         if text == "Pass" && uuid.is_empty() {
             out.push(None);
         } else {
-            let id = id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:{kind}:{uuid}"))?;
+            let id = id_map
+                .get(uuid)
+                .copied()
+                .ok_or_else(|| format!("untranslatable-object-id:{kind}:{uuid}"))?;
             out.push(Some(id));
         }
     }
@@ -1089,7 +1337,9 @@ fn apply_choose_targets(
 
     let mut trace_targets: Vec<Target> = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
-        trace_targets.push(translate(uuid).ok_or_else(|| format!("untranslatable-target:ChooseTargets:{uuid}"))?);
+        trace_targets.push(
+            translate(uuid).ok_or_else(|| format!("untranslatable-target:ChooseTargets:{uuid}"))?,
+        );
     }
     let mut trace_keys: Vec<String> = trace_targets.iter().map(target_key).collect();
     trace_keys.sort();
@@ -1102,9 +1352,13 @@ fn apply_choose_targets(
         return Err("unexpected-chosen-count:ChooseTargets".to_string());
     }
     let idx = rec.chosen_indices[0] as usize;
-    let target = *trace_targets.get(idx).ok_or("chosen-index-out-of-range:ChooseTargets")?;
+    let target = *trace_targets
+        .get(idx)
+        .ok_or("chosen-index-out-of-range:ChooseTargets")?;
 
-    surface.apply(state, SurfaceAction::Action(Action::ChooseTarget(target))).map_err(|e| format!("engine-step-error:ChooseTargets:{e}"))
+    surface
+        .apply(state, SurfaceAction::Action(Action::ChooseTarget(target)))
+        .map_err(|e| format!("engine-step-error:ChooseTargets:{e}"))
 }
 
 fn target_key(t: &Target) -> String {
@@ -1175,8 +1429,15 @@ fn target_key(t: &Target) -> String {
 /// `SELECT_TARGETS` records for early-game direct-damage-to-a-player casts
 /// (no creatures on board yet), desyncing the trace cursor and spiking
 /// `decision-kind-mismatch:CastSpellOrPass-vs-SELECT_TARGETS` corpus-wide.
-fn java_reference_target_shortcut(state: &GameState, legal_targets: &[Target], p0_name: &str, p1_name: &str) -> Option<Target> {
-    if !legal_targets.contains(&Target::Player(PlayerId::P0)) || !legal_targets.contains(&Target::Player(PlayerId::P1)) {
+fn java_reference_target_shortcut(
+    state: &GameState,
+    legal_targets: &[Target],
+    p0_name: &str,
+    p1_name: &str,
+) -> Option<Target> {
+    if !legal_targets.contains(&Target::Player(PlayerId::P0))
+        || !legal_targets.contains(&Target::Player(PlayerId::P1))
+    {
         return None; // not this pool's AnyTarget shape
     }
     let mut creature_names: Vec<&str> = legal_targets
@@ -1191,7 +1452,11 @@ fn java_reference_target_shortcut(state: &GameState, legal_targets: &[Target], p
     if creature_names.len() != 1 {
         return None; // 0 creatures (firstName stays null) or 2+ distinct names (allSameName trips false) -- both are real decisions
     }
-    Some(if p0_name < p1_name { Target::Player(PlayerId::P0) } else { Target::Player(PlayerId::P1) })
+    Some(if p0_name < p1_name {
+        Target::Player(PlayerId::P0)
+    } else {
+        Target::Player(PlayerId::P1)
+    })
 }
 
 fn apply_declare_attackers(
@@ -1223,8 +1488,14 @@ fn apply_declare_attackers(
     // (including DONE), not a shrinking iterative pick list -- see the
     // module doc. The real applied attacking set is the prefix before the
     // first DONE.
-    let attackers = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareAttackers")?;
-    surface.apply(state, SurfaceAction::Action(Action::DeclareAttackers(attackers))).map_err(|e| format!("engine-step-error:DeclareAttackers:{e}"))
+    let attackers =
+        apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareAttackers")?;
+    surface
+        .apply(
+            state,
+            SurfaceAction::Action(Action::DeclareAttackers(attackers)),
+        )
+        .map_err(|e| format!("engine-step-error:DeclareAttackers:{e}"))
 }
 
 /// `chosen_indices` for `DECLARE_ATTACKS`/`DECLARE_BLOCKS` is a full
@@ -1233,10 +1504,17 @@ fn apply_declare_attackers(
 /// The real applied picks are the *prefix* up to (excluding) the first
 /// `None`; anything after it is unapplied ranking noise, not a second
 /// round of picks.
-fn apply_prefix_before_done<T: Copy>(chosen_indices: &[u32], candidates: &[Option<T>], kind: &str) -> Result<Vec<T>, String> {
+fn apply_prefix_before_done<T: Copy>(
+    chosen_indices: &[u32],
+    candidates: &[Option<T>],
+    kind: &str,
+) -> Result<Vec<T>, String> {
     let mut out = Vec::new();
     for &idx in chosen_indices {
-        match candidates.get(idx as usize).ok_or_else(|| format!("chosen-index-out-of-range:{kind}"))? {
+        match candidates
+            .get(idx as usize)
+            .ok_or_else(|| format!("chosen-index-out-of-range:{kind}"))?
+        {
             None => break,
             Some(v) => out.push(*v),
         }
@@ -1244,13 +1522,19 @@ fn apply_prefix_before_done<T: Copy>(chosen_indices: &[u32], candidates: &[Optio
     Ok(out)
 }
 
-fn translate_attacker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>) -> Result<Vec<Option<ObjectId>>, String> {
+fn translate_attacker_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<Vec<Option<ObjectId>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
         if uuid == DONE {
             out.push(None);
         } else {
-            let id = id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareAttackers:{uuid}"))?;
+            let id = id_map
+                .get(uuid)
+                .copied()
+                .ok_or_else(|| format!("untranslatable-object-id:DeclareAttackers:{uuid}"))?;
             out.push(Some(id));
         }
     }
@@ -1277,10 +1561,15 @@ fn apply_declare_blockers_for_attacker(
     attacker: ObjectId,
     legal_blockers: &[ObjectId],
 ) -> Result<(), String> {
-    let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
+    let &rec = ctx
+        .next(player)
+        .ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
     debug_verbose(t, state, player, rec, "DeclareBlockers");
     if rec.action_type != "DECLARE_BLOCKS" {
-        return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
+        return Err(format!(
+            "decision-kind-mismatch:DeclareBlockers-vs-{}",
+            rec.action_type
+        ));
     }
     check_state(state, player, rec)?;
     learn_token_ids(ctx, state, rec);
@@ -1289,7 +1578,10 @@ fn apply_declare_blockers_for_attacker(
     // "blockerUuid->attackerUuid" text convention, scoped to just this one
     // attacker (the kernel's `legal_blockers` was already attacker-major
     // before the surface split it apart).
-    let mut kernel_keys: Vec<String> = legal_blockers.iter().map(|b| format!("{}->{}", b.0, attacker.0)).collect();
+    let mut kernel_keys: Vec<String> = legal_blockers
+        .iter()
+        .map(|b| format!("{}->{}", b.0, attacker.0))
+        .collect();
     kernel_keys.push("DONE".to_string());
     kernel_keys.sort();
 
@@ -1298,7 +1590,10 @@ fn apply_declare_blockers_for_attacker(
     // exactly one attacker (0 of the v3 corpus's 37 records mix
     // attackers). A record naming a different attacker than the one the
     // surface expects next means this record doesn't belong here.
-    if trace_candidates.iter().any(|c| matches!(c, Some((_, a)) if a != &attacker)) {
+    if trace_candidates
+        .iter()
+        .any(|c| matches!(c, Some((_, a)) if a != &attacker))
+    {
         return Err("declare-blocks-attacker-mismatch".to_string());
     }
     let mut trace_keys: Vec<String> = trace_candidates
@@ -1315,13 +1610,17 @@ fn apply_declare_blockers_for_attacker(
     }
 
     // Same prefix-before-DONE rule as DeclareAttackers.
-    let picks = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
+    let picks =
+        apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
     let blockers_only: Vec<ObjectId> = picks.into_iter().map(|(blocker, _)| blocker).collect();
 
     ctx.advance(player);
     outcome.decisions_consumed += 1;
     surface
-        .apply(state, SurfaceAction::DeclareBlockersForAttacker(blockers_only))
+        .apply(
+            state,
+            SurfaceAction::DeclareBlockersForAttacker(blockers_only),
+        )
         .map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
 }
 
@@ -1367,17 +1666,28 @@ fn apply_discard(
             break;
         }
         debug_verbose(t, state, player, rec, "Discard(SELECT_TARGETS-prefix)");
-        let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard-SELECT_TARGETS-prefix")?;
-        let name = rec.candidate_texts.get(idx as usize).ok_or("chosen-index-out-of-range:Discard-SELECT_TARGETS-prefix")?;
+        let &idx = rec
+            .chosen_indices
+            .first()
+            .ok_or("unexpected-chosen-count:Discard-SELECT_TARGETS-prefix")?;
+        let name = rec
+            .candidate_texts
+            .get(idx as usize)
+            .ok_or("chosen-index-out-of-range:Discard-SELECT_TARGETS-prefix")?;
         names_from_targets_prefix.push(name.clone());
         ctx.advance(player);
         outcome.decisions_consumed += 1;
     }
 
-    let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
+    let &rec = ctx
+        .next(player)
+        .ok_or_else(|| "trace-exhausted:Discard".to_string())?;
     debug_verbose(t, state, player, rec, "Discard");
     if rec.action_type != "SELECT_CARD" {
-        return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
+        return Err(format!(
+            "decision-kind-mismatch:Discard-vs-{}",
+            rec.action_type
+        ));
     }
     if rec.chosen_indices.len() != count as usize {
         return Err("unexpected-chosen-count:Discard".to_string());
@@ -1387,13 +1697,21 @@ fn apply_discard(
     let chosen_names: Vec<String> = rec
         .chosen_indices
         .iter()
-        .map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard".to_string()))
+        .map(|&idx| {
+            rec.candidate_texts
+                .get(idx as usize)
+                .cloned()
+                .ok_or_else(|| "chosen-index-out-of-range:Discard".to_string())
+        })
         .collect::<Result<_, _>>()?;
     if !names_from_targets_prefix.is_empty() && names_from_targets_prefix != chosen_names {
         return Err("discard-select-targets-prefix-mismatch".to_string());
     }
 
-    let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
+    let mut kernel_names: Vec<&str> = choices
+        .iter()
+        .map(|&id| state.objects.get(id).name.as_str())
+        .collect();
     kernel_names.sort_unstable();
     let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
     trace_names.sort_unstable();
@@ -1404,13 +1722,18 @@ fn apply_discard(
     let mut pool: Vec<ObjectId> = choices.to_vec();
     let mut chosen: Vec<ObjectId> = Vec::with_capacity(chosen_names.len());
     for name in &chosen_names {
-        let pos = pool.iter().position(|&id| state.objects.get(id).name == *name).ok_or_else(|| format!("chosen-name-not-in-pool:Discard:{name}"))?;
+        let pos = pool
+            .iter()
+            .position(|&id| state.objects.get(id).name == *name)
+            .ok_or_else(|| format!("chosen-name-not-in-pool:Discard:{name}"))?;
         chosen.push(pool.remove(pos));
     }
 
     ctx.advance(player);
     outcome.decisions_consumed += 1;
-    surface.apply(state, SurfaceAction::Action(Action::Discard(chosen))).map_err(|e| format!("engine-step-error:Discard:{e}"))
+    surface
+        .apply(state, SurfaceAction::Action(Action::Discard(chosen)))
+        .map_err(|e| format!("engine-step-error:Discard:{e}"))
 }
 
 /// Highway Robbery's `Decision::ChooseOptionalCost` ("You may discard a
@@ -1449,22 +1772,42 @@ fn apply_choose_optional_cost(
     _sacrifice_payable: bool,
 ) -> Result<(), String> {
     let hand_len = state.players[player.index()].hand.len();
-    let looks_like_discard_pick =
-        discard_payable && matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == hand_len);
-    let choice = if looks_like_discard_pick { OptionalCostChoice::Discard } else { OptionalCostChoice::Decline };
-    surface.apply(state, SurfaceAction::Action(Action::ChooseOptionalCost(choice))).map_err(|e| format!("engine-step-error:ChooseOptionalCost:{e}"))
+    let looks_like_discard_pick = discard_payable
+        && matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == hand_len);
+    let choice = if looks_like_discard_pick {
+        OptionalCostChoice::Discard
+    } else {
+        OptionalCostChoice::Decline
+    };
+    surface
+        .apply(
+            state,
+            SurfaceAction::Action(Action::ChooseOptionalCost(choice)),
+        )
+        .map_err(|e| format!("engine-step-error:ChooseOptionalCost:{e}"))
 }
 
-fn translate_blocker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>) -> Result<Vec<Option<(ObjectId, ObjectId)>>, String> {
+fn translate_blocker_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<Vec<Option<(ObjectId, ObjectId)>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
         if uuid == DONE {
             out.push(None);
             continue;
         }
-        let (blocker_uuid, attacker_uuid) = uuid.split_once("->").ok_or_else(|| format!("malformed-block-pair:DeclareBlockers:{uuid}"))?;
-        let blocker = id_map.get(blocker_uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{blocker_uuid}"))?;
-        let attacker = id_map.get(attacker_uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{attacker_uuid}"))?;
+        let (blocker_uuid, attacker_uuid) = uuid
+            .split_once("->")
+            .ok_or_else(|| format!("malformed-block-pair:DeclareBlockers:{uuid}"))?;
+        let blocker = id_map
+            .get(blocker_uuid)
+            .copied()
+            .ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{blocker_uuid}"))?;
+        let attacker = id_map
+            .get(attacker_uuid)
+            .copied()
+            .ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{attacker_uuid}"))?;
         out.push(Some((blocker, attacker)));
     }
     Ok(out)
@@ -1477,7 +1820,12 @@ mod tests {
     /// Builds a `DecisionRecord` from just the fields each test cares
     /// about; every other field uses its `#[serde(default)]` (matching
     /// how sparsely-populated real records -- e.g. mulligan JSON -- look).
-    fn decision_record(action_type: &str, candidate_texts: &[&str], candidate_object_ids: &[&str], chosen_indices: &[u32]) -> DecisionRecord {
+    fn decision_record(
+        action_type: &str,
+        candidate_texts: &[&str],
+        candidate_object_ids: &[&str],
+        chosen_indices: &[u32],
+    ) -> DecisionRecord {
         let json = format!(
             "{{\"ordinal\":0,\"player\":\"P\",\"action_type\":\"{action_type}\",\"candidate_count\":{},\
              \"candidate_texts\":{},\"candidate_object_ids\":{},\"chosen_indices\":{:?}}}",
@@ -1501,7 +1849,11 @@ mod tests {
         // DONE first (index 2): nothing should be applied, regardless of
         // what follows it in the permutation.
         let picked = apply_prefix_before_done(&[2, 0, 1], &candidates, "test").unwrap();
-        assert_eq!(picked, Vec::<i32>::new(), "DONE first means no attackers, even though more picks follow it in the array");
+        assert_eq!(
+            picked,
+            Vec::<i32>::new(),
+            "DONE first means no attackers, even though more picks follow it in the array"
+        );
 
         // One real pick before DONE.
         let picked = apply_prefix_before_done(&[0, 2, 1], &candidates, "test").unwrap();
@@ -1525,7 +1877,12 @@ mod tests {
     fn translate_attacker_candidates_maps_the_done_sentinel_to_none() {
         let mut id_map = HashMap::new();
         id_map.insert("attacker-uuid".to_string(), ObjectId(7));
-        let rec = decision_record("DECLARE_ATTACKS", &["Guttersnipe", "DONE"], &["attacker-uuid", "sentinel:DONE"], &[0, 1]);
+        let rec = decision_record(
+            "DECLARE_ATTACKS",
+            &["Guttersnipe", "DONE"],
+            &["attacker-uuid", "sentinel:DONE"],
+            &[0, 1],
+        );
 
         let translated = translate_attacker_candidates(&rec, &id_map).unwrap();
         assert_eq!(translated, vec![Some(ObjectId(7)), None]);
@@ -1534,7 +1891,12 @@ mod tests {
     #[test]
     fn translate_attacker_candidates_reports_an_untranslatable_uuid() {
         let id_map = HashMap::new(); // empty: nothing translates
-        let rec = decision_record("DECLARE_ATTACKS", &["Guttersnipe", "DONE"], &["attacker-uuid", "sentinel:DONE"], &[0, 1]);
+        let rec = decision_record(
+            "DECLARE_ATTACKS",
+            &["Guttersnipe", "DONE"],
+            &["attacker-uuid", "sentinel:DONE"],
+            &[0, 1],
+        );
         let err = translate_attacker_candidates(&rec, &id_map).unwrap_err();
         assert!(err.contains("untranslatable-object-id:DeclareAttackers"));
     }
@@ -1544,10 +1906,19 @@ mod tests {
         let mut id_map = HashMap::new();
         id_map.insert("blocker-uuid".to_string(), ObjectId(3));
         id_map.insert("attacker-uuid".to_string(), ObjectId(9));
-        let rec = decision_record("DECLARE_BLOCKS", &["Guttersnipe", "DONE"], &["blocker-uuid->attacker-uuid", "sentinel:DONE"], &[0, 1]);
+        let rec = decision_record(
+            "DECLARE_BLOCKS",
+            &["Guttersnipe", "DONE"],
+            &["blocker-uuid->attacker-uuid", "sentinel:DONE"],
+            &[0, 1],
+        );
 
         let translated = translate_blocker_candidates(&rec, &id_map).unwrap();
-        assert_eq!(translated, vec![Some((ObjectId(3), ObjectId(9))), None], "must be (blocker, attacker), not (attacker, blocker)");
+        assert_eq!(
+            translated,
+            vec![Some((ObjectId(3), ObjectId(9))), None],
+            "must be (blocker, attacker), not (attacker, blocker)"
+        );
     }
 
     #[test]
@@ -1562,7 +1933,12 @@ mod tests {
 
     fn two_mountains_in_hand() -> (GameState, ObjectId, ObjectId) {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain, mountain], &[], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain, mountain],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         let a = state.draw_card(PlayerId::P0).unwrap();
         let b = state.draw_card(PlayerId::P0).unwrap();
         (state, a, b)
@@ -1572,8 +1948,10 @@ mod tests {
     fn candidate_key_gives_two_untapped_mountains_the_same_land_drop_key() {
         let (state, a, b) = two_mountains_in_hand();
         let land_drops = [a, b];
-        let key_a = candidate_key(&state, a, "Play Mountain", &land_drops, &[], &[], &[], &[]).unwrap();
-        let key_b = candidate_key(&state, b, "Play Mountain", &land_drops, &[], &[], &[], &[]).unwrap();
+        let key_a =
+            candidate_key(&state, a, "Play Mountain", &land_drops, &[], &[], &[], &[]).unwrap();
+        let key_b =
+            candidate_key(&state, b, "Play Mountain", &land_drops, &[], &[], &[], &[]).unwrap();
         assert_eq!(key_a, key_b, "two interchangeable Mountains must dedup to one ACTIVATE_ABILITY_OR_SPELL candidate, matching the reference engine's own display-layer dedup");
         assert_eq!(key_a, "land:Mountain");
     }
@@ -1582,7 +1960,10 @@ mod tests {
     fn candidate_key_is_none_for_an_object_not_in_any_current_bucket() {
         let (state, a, _b) = two_mountains_in_hand();
         // `a` isn't a member of any of these (empty) buckets.
-        assert_eq!(candidate_key(&state, a, "Play Mountain", &[], &[], &[], &[], &[]), None);
+        assert_eq!(
+            candidate_key(&state, a, "Play Mountain", &[], &[], &[], &[], &[]),
+            None
+        );
     }
 
     /// Regression test for a real divergence found against the v3 corpus:
@@ -1596,14 +1977,42 @@ mod tests {
     #[test]
     fn candidate_key_disambiguates_cast_vs_plot_for_the_same_plottable_card() {
         let robbery = card_def::card_id_by_name("Highway Robbery").unwrap();
-        let mut state = GameState::new_from_libraries(&[robbery], &[], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[robbery],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         let id = state.draw_card(PlayerId::P0).unwrap();
         let castable_spells = [id];
         let plot_actions = [id];
 
-        let cast_key = candidate_key(&state, id, "Cast Highway Robbery", &[], &castable_spells, &[], &[], &plot_actions).unwrap();
-        let plot_key = candidate_key(&state, id, "Plot {1}{R}", &[], &castable_spells, &[], &[], &plot_actions).unwrap();
-        assert_ne!(cast_key, plot_key, "casting and Plotting the same card must produce distinct candidate keys");
+        let cast_key = candidate_key(
+            &state,
+            id,
+            "Cast Highway Robbery",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &plot_actions,
+        )
+        .unwrap();
+        let plot_key = candidate_key(
+            &state,
+            id,
+            "Plot {1}{R}",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &plot_actions,
+        )
+        .unwrap();
+        assert_ne!(
+            cast_key, plot_key,
+            "casting and Plotting the same card must produce distinct candidate keys"
+        );
         assert_eq!(cast_key, "cast:Highway Robbery:hand");
         assert_eq!(plot_key, "plot:Highway Robbery");
     }
@@ -1615,8 +2024,14 @@ mod tests {
         // json turn -> "DECISION #N - Turn R (<player> turn)" cross-checks
         // recorded in the increment-4 report: 13<->7 (PlayerRL1), 23<->12
         // (PlayerRL1), 25<->13 (PlayerRL1), 26<->13 (SelfPlay).
-        for (json_turn, expected_round) in [(1u32, 1u32), (2, 1), (13, 7), (23, 12), (25, 13), (26, 13)] {
-            assert_eq!(json_turn.div_ceil(2), expected_round, "json_turn={json_turn}");
+        for (json_turn, expected_round) in
+            [(1u32, 1u32), (2, 1), (13, 7), (23, 12), (25, 13), (26, 13)]
+        {
+            assert_eq!(
+                json_turn.div_ceil(2),
+                expected_round,
+                "json_turn={json_turn}"
+            );
         }
     }
 }

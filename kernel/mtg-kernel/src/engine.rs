@@ -44,7 +44,7 @@ use crate::effect::{self, EffectOp, ExecCtx, ObjectRef};
 use crate::event::{self, ActiveReplacement, CommittedEvent, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
 use crate::mana::{self, Cost};
-use crate::state::{GameState, Step, StackItem, Target, Zone};
+use crate::state::{GameState, StackItem, Step, Target, Zone};
 use crate::trigger::{self, PendingTrigger};
 use serde::{Deserialize, Serialize};
 
@@ -502,7 +502,12 @@ pub enum DiscardResume {
     /// `spell_resume`, if `Some`, is `PendingOptionalCost::spell_resume`
     /// carried over -- the deferred move to apply once `then` runs (see
     /// that field's doc).
-    FinishOptionalCost { source: ObjectId, controller: PlayerId, then: Box<EffectOp>, spell_resume: Option<(ObjectId, Zone)> },
+    FinishOptionalCost {
+        source: ObjectId,
+        controller: PlayerId,
+        then: Box<EffectOp>,
+        spell_resume: Option<(ObjectId, Zone)>,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -848,18 +853,26 @@ fn target_count(spec: TargetSpec) -> u8 {
 
 fn is_blue(state: &GameState, id: ObjectId) -> bool {
     let def_idx = state.objects.get(id).card_def;
-    card_def::CARD_DEFS[def_idx as usize].colors.contains(&mana::ManaColor::U)
+    card_def::CARD_DEFS[def_idx as usize]
+        .colors
+        .contains(&mana::ManaColor::U)
 }
 
 fn battlefield_objects(state: &GameState) -> impl Iterator<Item = ObjectId> + '_ {
-    [PlayerId::P0, PlayerId::P1].into_iter().flat_map(|p| state.players[p.index()].battlefield.iter().copied())
+    [PlayerId::P0, PlayerId::P1]
+        .into_iter()
+        .flat_map(|p| state.players[p.index()].battlefield.iter().copied())
 }
 
 /// `targets_chosen` is the *already-picked* prefix for this same targeting
 /// pass -- needed for `PlayerThenTheirCreature`'s second, dependent pick
 /// (any other spec's legal pool doesn't vary with what's already chosen, so
 /// they simply ignore it).
-pub fn legal_targets_for(spec: TargetSpec, targets_chosen: &[Target], state: &GameState) -> Vec<Target> {
+pub fn legal_targets_for(
+    spec: TargetSpec,
+    targets_chosen: &[Target],
+    state: &GameState,
+) -> Vec<Target> {
     match spec {
         TargetSpec::None => Vec::new(),
         TargetSpec::AnyTarget => {
@@ -882,17 +895,33 @@ pub fn legal_targets_for(spec: TargetSpec, targets_chosen: &[Target], state: &Ga
                     .battlefield
                     .iter()
                     .copied()
-                    .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].has_type(CardType::Creature))
+                    .filter(|&id| {
+                        card_def::CARD_DEFS[state.objects.get(id).card_def as usize]
+                            .has_type(CardType::Creature)
+                    })
                     .map(Target::Object)
                     .collect()
             } else {
                 Vec::new()
             }
         }
-        TargetSpec::AnySpellOnStack => state.stack.iter().map(|item| Target::Object(item.source)).collect(),
-        TargetSpec::BlueSpellOnStack => state.stack.iter().map(|item| item.source).filter(|&id| is_blue(state, id)).map(Target::Object).collect(),
+        TargetSpec::AnySpellOnStack => state
+            .stack
+            .iter()
+            .map(|item| Target::Object(item.source))
+            .collect(),
+        TargetSpec::BlueSpellOnStack => state
+            .stack
+            .iter()
+            .map(|item| item.source)
+            .filter(|&id| is_blue(state, id))
+            .map(Target::Object)
+            .collect(),
         TargetSpec::AnyPermanent => battlefield_objects(state).map(Target::Object).collect(),
-        TargetSpec::BluePermanent => battlefield_objects(state).filter(|&id| is_blue(state, id)).map(Target::Object).collect(),
+        TargetSpec::BluePermanent => battlefield_objects(state)
+            .filter(|&id| is_blue(state, id))
+            .map(Target::Object)
+            .collect(),
     }
 }
 
@@ -925,7 +954,12 @@ pub(crate) fn count_controlled_lands(player: PlayerId, state: &GameState) -> u32
 /// where `source` is the spell being cast (still nominally in hand) or
 /// the permanent whose ability is being activated (on the battlefield --
 /// so the hand-exclusion below is a no-op for abilities).
-fn can_pay_components(components: &[CostComponent], player: PlayerId, source: ObjectId, state: &GameState) -> bool {
+fn can_pay_components(
+    components: &[CostComponent],
+    player: PlayerId,
+    source: ObjectId,
+    state: &GameState,
+) -> bool {
     for c in components {
         let ok = match c {
             CostComponent::Tap => {
@@ -939,7 +973,11 @@ fn can_pay_components(components: &[CostComponent], player: PlayerId, source: Ob
             }
             CostComponent::SacrificeSelf | CostComponent::ExileSelf => true,
             CostComponent::DiscardCards(n) => {
-                let hand_other = state.players[player.index()].hand.iter().filter(|&&id| id != source).count();
+                let hand_other = state.players[player.index()]
+                    .hand
+                    .iter()
+                    .filter(|&&id| id != source)
+                    .count();
                 hand_other >= *n as usize
             }
             CostComponent::SacrificeLands(n) => count_controlled_lands(player, state) >= *n as u32,
@@ -963,18 +1001,34 @@ fn can_pay_components(components: &[CostComponent], player: PlayerId, source: Ob
 /// activated-ability cost and every `additional_cost` in this pool), where
 /// the `debug_assert_eq!` below is the fail-loud guard against that
 /// assumption silently going stale.
-fn pay_cost_components(state: &mut GameState, player: PlayerId, source: ObjectId, components: &[CostComponent], sacrifice_chosen: &[ObjectId]) {
+fn pay_cost_components(
+    state: &mut GameState,
+    player: PlayerId,
+    source: ObjectId,
+    components: &[CostComponent],
+    sacrifice_chosen: &[ObjectId],
+) {
     for c in components {
         match c {
             CostComponent::Tap => event::propose_and_commit(state, ProposedEvent::tap(source)),
-            CostComponent::SacrificeSelf => event::propose_and_commit(state, ProposedEvent::zone_change(source, Zone::Graveyard)),
-            CostComponent::ExileSelf => event::propose_and_commit(state, ProposedEvent::zone_change(source, Zone::Exile)),
+            CostComponent::SacrificeSelf => event::propose_and_commit(
+                state,
+                ProposedEvent::zone_change(source, Zone::Graveyard),
+            ),
+            CostComponent::ExileSelf => {
+                event::propose_and_commit(state, ProposedEvent::zone_change(source, Zone::Exile))
+            }
             CostComponent::SacrificeLands(n) => {
-                debug_assert_eq!(sacrifice_chosen.len(), *n as usize, "sacrifice_chosen must be exactly this component's already-decided picks");
+                debug_assert_eq!(
+                    sacrifice_chosen.len(),
+                    *n as usize,
+                    "sacrifice_chosen must be exactly this component's already-decided picks"
+                );
                 commit_sacrifice(state, sacrifice_chosen);
             }
             CostComponent::Mana(cost) => {
-                let plan = mana::can_pay(cost, 0, player, state).expect("legality already checked by can_pay_components");
+                let plan = mana::can_pay(cost, 0, player, state)
+                    .expect("legality already checked by can_pay_components");
                 pay_plan(state, player, &plan);
             }
             CostComponent::DiscardCards(_) => {}
@@ -1022,12 +1076,19 @@ fn sacrifice_lands_needed(pending: &PendingCast, def: &card_def::CardDef) -> u8 
 /// been picked this same `Decision::ChooseCostTargets` sequence -- the
 /// candidate pool for the next pick (see that decision's doc for why a
 /// picked land disappears from the next ask's candidates).
-fn sacrificeable_lands(player: PlayerId, state: &GameState, already_chosen: &[ObjectId]) -> Vec<ObjectId> {
+fn sacrificeable_lands(
+    player: PlayerId,
+    state: &GameState,
+    already_chosen: &[ObjectId],
+) -> Vec<ObjectId> {
     state.players[player.index()]
         .battlefield
         .iter()
         .copied()
-        .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land && !already_chosen.contains(&id))
+        .filter(|&id| {
+            card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land
+                && !already_chosen.contains(&id)
+        })
         .collect()
 }
 
@@ -1053,20 +1114,30 @@ fn is_castable_now(player: PlayerId, id: ObjectId, is_flashback: bool, state: &G
     // kernel_step=Main1" divergence class -- both were this same gap, not a
     // step-tracking bug (state.step really was Combat; the timing check
     // just didn't consult it for this card's type).
-    let sorcery_speed_ok = if def.has_type(CardType::Instant) { true } else { sorcery_speed_timing_ok(player, state) };
+    let sorcery_speed_ok = if def.has_type(CardType::Instant) {
+        true
+    } else {
+        sorcery_speed_timing_ok(player, state)
+    };
     if !sorcery_speed_ok {
         return false;
     }
 
     if is_flashback {
-        let fb = def.flashback.as_ref().expect("caller only passes is_flashback=true for cards with a flashback cost");
+        let fb = def
+            .flashback
+            .as_ref()
+            .expect("caller only passes is_flashback=true for cards with a flashback cost");
         match fb.cost {
             FlashbackCost::Mana(cost) => mana::can_pay(&cost, 0, player, state).is_some(),
             FlashbackCost::SacrificeLands(n) => count_controlled_lands(player, state) >= n as u32,
         }
     } else {
         let normal_ok = mana::can_pay(&def.cost, 0, player, state).is_some();
-        let alt_ok = def.alt_cost.map(|c| can_pay_components(c, player, id, state)).unwrap_or(false);
+        let alt_ok = def
+            .alt_cost
+            .map(|c| can_pay_components(c, player, id, state))
+            .unwrap_or(false);
         if !normal_ok && !alt_ok {
             return false;
         }
@@ -1123,12 +1194,16 @@ fn castable_spells(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
 /// permission structurally unable to "come back to life" after `id` changes
 /// zones again for any reason (CR 400.7) rather than merely relying on this
 /// module remembering to remove it -- see `PlayPermission`'s doc.
-fn active_permission_for(holder: PlayerId, id: ObjectId, state: &GameState) -> Option<&PlayPermission> {
-    state
-        .engine
-        .exile_play_permissions
-        .iter()
-        .find(|p| p.object == id && p.holder == holder && p.zone_change_generation == state.objects.get(id).zone_change_count)
+fn active_permission_for(
+    holder: PlayerId,
+    id: ObjectId,
+    state: &GameState,
+) -> Option<&PlayPermission> {
+    state.engine.exile_play_permissions.iter().find(|p| {
+        p.object == id
+            && p.holder == holder
+            && p.zone_change_generation == state.objects.get(id).zone_change_count
+    })
 }
 
 /// Sorcery-speed timing (508.1a's "any time you could cast a sorcery"),
@@ -1156,7 +1231,9 @@ fn sorcery_speed_timing_ok(player: PlayerId, state: &GameState) -> bool {
 /// before its `spell_effect` is implemented.
 fn is_plotted_castable_now(player: PlayerId, id: ObjectId, state: &GameState) -> bool {
     let obj = state.objects.get(id);
-    let Some(plotted_turn) = obj.plotted_turn else { return false };
+    let Some(plotted_turn) = obj.plotted_turn else {
+        return false;
+    };
     if plotted_turn == state.turn {
         return false;
     }
@@ -1175,7 +1252,8 @@ fn plot_action_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> 
         .copied()
         .filter(|&id| {
             let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-            def.plot_cost.is_some_and(|cost| mana::can_pay(&cost, 0, player, state).is_some())
+            def.plot_cost
+                .is_some_and(|cost| mana::can_pay(&cost, 0, player, state).is_some())
         })
         .collect()
 }
@@ -1240,11 +1318,18 @@ fn land_drop_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
 fn can_attack(state: &GameState, id: ObjectId) -> bool {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
-    def.has_type(CardType::Creature) && !obj.tapped && (!obj.summoning_sick || has_effective_keyword(state, id, Keywords::HASTE))
+    def.has_type(CardType::Creature)
+        && !obj.tapped
+        && (!obj.summoning_sick || has_effective_keyword(state, id, Keywords::HASTE))
 }
 
 fn eligible_attackers(state: &GameState) -> Vec<ObjectId> {
-    state.players[state.active_player.index()].battlefield.iter().copied().filter(|&id| can_attack(state, id)).collect()
+    state.players[state.active_player.index()]
+        .battlefield
+        .iter()
+        .copied()
+        .filter(|&id| can_attack(state, id))
+        .collect()
 }
 
 /// Which of the defending player's untapped creatures may legally block
@@ -1253,7 +1338,9 @@ fn eligible_attackers(state: &GameState) -> Vec<ObjectId> {
 fn legal_blockers_for(state: &GameState, attacker: ObjectId) -> Vec<ObjectId> {
     let attacker_obj = state.objects.get(attacker);
     let defender = attacker_obj.controller.opponent();
-    let attacker_flying = card_def::CARD_DEFS[attacker_obj.card_def as usize].keywords.has(Keywords::FLYING);
+    let attacker_flying = card_def::CARD_DEFS[attacker_obj.card_def as usize]
+        .keywords
+        .has(Keywords::FLYING);
     state.players[defender.index()]
         .battlefield
         .iter()
@@ -1267,7 +1354,10 @@ fn legal_blockers_for(state: &GameState, attacker: ObjectId) -> Vec<ObjectId> {
             if !def.has_type(CardType::Creature) {
                 return false;
             }
-            if attacker_flying && !def.keywords.has(Keywords::FLYING) && !def.keywords.has(Keywords::REACH) {
+            if attacker_flying
+                && !def.keywords.has(Keywords::FLYING)
+                && !def.keywords.has(Keywords::REACH)
+            {
                 return false;
             }
             true
@@ -1278,8 +1368,12 @@ fn legal_blockers_for(state: &GameState, attacker: ObjectId) -> Vec<ObjectId> {
 fn check_game_over(state: &GameState) -> Option<Decision> {
     match (state.players[0].has_lost, state.players[1].has_lost) {
         (false, false) => None,
-        (true, false) => Some(Decision::GameOver { winner: Some(PlayerId::P1) }),
-        (false, true) => Some(Decision::GameOver { winner: Some(PlayerId::P0) }),
+        (true, false) => Some(Decision::GameOver {
+            winner: Some(PlayerId::P1),
+        }),
+        (false, true) => Some(Decision::GameOver {
+            winner: Some(PlayerId::P0),
+        }),
         (true, true) => Some(Decision::GameOver { winner: None }),
     }
 }
@@ -1356,7 +1450,10 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
         }
 
         if state.step == Step::DeclareAttackers && !state.engine.combat.attackers_declared {
-            return Decision::DeclareAttackers { player: state.active_player, eligible: eligible_attackers(state) };
+            return Decision::DeclareAttackers {
+                player: state.active_player,
+                eligible: eligible_attackers(state),
+            };
         }
         if state.step == Step::DeclareBlockers && !state.engine.combat.blockers_declared {
             // `ComputerPlayerRL.selectBlockers` explicitly sorts attackers by
@@ -1423,8 +1520,15 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             // report for the corpus-wide classification this backs.
             let mut attackers = state.engine.combat.attackers.clone();
             attackers.sort_by_key(|&id| std::cmp::Reverse(effective_power(state, id)));
-            let legal_blockers = attackers.iter().map(|&a| (a, legal_blockers_for(state, a))).collect();
-            return Decision::DeclareBlockers { player: state.active_player.opponent(), attackers, legal_blockers };
+            let legal_blockers = attackers
+                .iter()
+                .map(|&a| (a, legal_blockers_for(state, a)))
+                .collect();
+            return Decision::DeclareBlockers {
+                player: state.active_player.opponent(),
+                attackers,
+                legal_blockers,
+            };
         }
 
         // 500.4/514.3: the game never advances past a step/phase boundary
@@ -1481,7 +1585,10 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
                 // Token draw, which this model's silent immediate-resolve
                 // never gave a chance to happen).
                 if top.madness_offer {
-                    return Decision::ChooseMadnessCast { player: top.controller, card: top.source };
+                    return Decision::ChooseMadnessCast {
+                        player: top.controller,
+                        card: top.source,
+                    };
                 }
                 resolve_top_of_stack(state);
                 collect_and_queue_triggers(state);
@@ -1524,15 +1631,28 @@ fn collect_and_queue_triggers(state: &mut GameState) {
 /// `Decision::Discard`.
 fn drain_pending_discard_or_decide(state: &mut GameState) -> Option<Decision> {
     let pd = state.engine.pending_discard.clone()?;
-    let exclude = if pd.resume == DiscardResume::FinishCast { state.engine.pending_cast.as_ref().map(|p| p.spell) } else { None };
-    let choices: Vec<ObjectId> = state.players[pd.player.index()].hand.iter().copied().filter(|&id| Some(id) != exclude).collect();
+    let exclude = if pd.resume == DiscardResume::FinishCast {
+        state.engine.pending_cast.as_ref().map(|p| p.spell)
+    } else {
+        None
+    };
+    let choices: Vec<ObjectId> = state.players[pd.player.index()]
+        .hand
+        .iter()
+        .copied()
+        .filter(|&id| Some(id) != exclude)
+        .collect();
 
     if choices.len() <= pd.count as usize {
         state.engine.pending_discard = None;
         apply_discard(state, choices, pd.resume);
         return None;
     }
-    Some(Decision::Discard { player: pd.player, count: pd.count, choices })
+    Some(Decision::Discard {
+        player: pd.player,
+        count: pd.count,
+        choices,
+    })
 }
 
 fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardResume) {
@@ -1557,7 +1677,13 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             // discard time).
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
             let owner = state.objects.get(id).owner;
-            state.engine.pending_triggers.push(PendingTrigger { controller: owner, source: id, effect: EffectOp::Sequence(vec![]), is_madness_offer: true, kicked: false });
+            state.engine.pending_triggers.push(PendingTrigger {
+                controller: owner,
+                source: id,
+                effect: EffectOp::Sequence(vec![]),
+                is_madness_offer: true,
+                kicked: false,
+            });
         } else {
             event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Graveyard));
         }
@@ -1617,7 +1743,12 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
             event::propose_and_commit(state, ProposedEvent::zone_change(source, to_zone));
             collect_and_queue_triggers(state);
         }
-        DiscardResume::FinishOptionalCost { source, controller, then, spell_resume } => {
+        DiscardResume::FinishOptionalCost {
+            source,
+            controller,
+            then,
+            spell_resume,
+        } => {
             // See `EffectOp::MayPayCostThen`'s doc: the discard sub-cost
             // just landed, so run the effect it unlocked (Highway Robbery:
             // draw two cards).
@@ -1641,7 +1772,11 @@ fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardRe
 /// situation the way a forced discard or a single-affordable-cast-mode is.
 fn drain_pending_optional_cost_or_decide(state: &mut GameState) -> Option<Decision> {
     let poc = state.engine.pending_optional_cost.as_ref()?;
-    Some(Decision::ChooseOptionalCost { player: poc.player, discard_payable: poc.discard_payable, sacrifice_payable: poc.sacrifice_payable })
+    Some(Decision::ChooseOptionalCost {
+        player: poc.player,
+        discard_payable: poc.discard_payable,
+        sacrifice_payable: poc.sacrifice_payable,
+    })
 }
 
 /// If `Action::ChooseOptionalCost(SacrificeLand)` was just chosen, stages
@@ -1657,12 +1792,28 @@ fn drain_pending_optional_cost_sacrifice_or_decide(state: &mut GameState) -> Opt
         let candidates = sacrificeable_lands(pending.player, state, &pending.chosen);
         let remaining = pending.remaining - pending.chosen.len() as u8;
         if candidates.len() <= 1 {
-            state.engine.pending_optional_cost_sacrifice.as_mut().unwrap().chosen.extend(candidates);
+            state
+                .engine
+                .pending_optional_cost_sacrifice
+                .as_mut()
+                .unwrap()
+                .chosen
+                .extend(candidates);
             return drain_pending_optional_cost_sacrifice_or_decide(state);
         }
-        return Some(Decision::ChooseCostTargets { player: pending.player, source: pending.source, cost_kind: CostKind::SacrificeLands, remaining, candidates });
+        return Some(Decision::ChooseCostTargets {
+            player: pending.player,
+            source: pending.source,
+            cost_kind: CostKind::SacrificeLands,
+            remaining,
+            candidates,
+        });
     }
-    let pending = state.engine.pending_optional_cost_sacrifice.take().expect("checked Some above");
+    let pending = state
+        .engine
+        .pending_optional_cost_sacrifice
+        .take()
+        .expect("checked Some above");
     commit_sacrifice(state, &pending.chosen);
     let ctx = ExecCtx::no_targets(pending.source, pending.player);
     effect::execute(&pending.then, &ctx, state);
@@ -1705,9 +1856,14 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     // against `def.cost` (never `def.alt_cost`) is exhaustive here.
     if let Some(kicker_cost) = def.kicker_cost {
         if pending.kicked.is_none() {
-            let payable = mana::can_pay_combined(&[&def.cost, &kicker_cost], 0, pending.controller, state).is_some();
+            let payable =
+                mana::can_pay_combined(&[&def.cost, &kicker_cost], 0, pending.controller, state)
+                    .is_some();
             if payable {
-                return Some(Decision::ChooseKicker { player: pending.controller, spell: pending.spell });
+                return Some(Decision::ChooseKicker {
+                    player: pending.controller,
+                    spell: pending.spell,
+                });
             }
             state.engine.pending_cast.as_mut().unwrap().kicked = Some(false);
             return drain_pending_cast_or_decide(state);
@@ -1720,10 +1876,19 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     // regardless of the battlefield/stack; see `Decision::ChooseSpellMode`'s
     // doc).
     if def.mode2.is_some() && pending.mode_chosen.is_none() {
-        return Some(Decision::ChooseSpellMode { player: pending.controller, spell: pending.spell, mode_count: 2 });
+        return Some(Decision::ChooseSpellMode {
+            player: pending.controller,
+            spell: pending.spell,
+            mode_count: 2,
+        });
     }
     let active_target_spec = match pending.mode_chosen {
-        Some(1) => def.mode2.as_ref().expect("mode_chosen == 1 only when mode2 is Some").target_spec,
+        Some(1) => {
+            def.mode2
+                .as_ref()
+                .expect("mode_chosen == 1 only when mode2 is Some")
+                .target_spec
+        }
         _ => def.target_spec,
     };
 
@@ -1738,13 +1903,23 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     }
 
     if pending.cast_mode.is_none() {
-        let alt = def.alt_cost.expect("cast_mode is None only when begin_cast saw an alt_cost");
+        let alt = def
+            .alt_cost
+            .expect("cast_mode is None only when begin_cast saw an alt_cost");
         let normal_ok = mana::can_pay(&def.cost, 0, pending.controller, state).is_some();
         let alt_ok = can_pay_components(alt, pending.controller, pending.spell, state);
         if normal_ok && alt_ok {
-            return Some(Decision::ChooseCastMode { player: pending.controller, spell: pending.spell, options: vec![CastMode::Normal, CastMode::Alternative] });
+            return Some(Decision::ChooseCastMode {
+                player: pending.controller,
+                spell: pending.spell,
+                options: vec![CastMode::Normal, CastMode::Alternative],
+            });
         }
-        state.engine.pending_cast.as_mut().unwrap().cast_mode = Some(if normal_ok { CastMode::Normal } else { CastMode::Alternative });
+        state.engine.pending_cast.as_mut().unwrap().cast_mode = Some(if normal_ok {
+            CastMode::Normal
+        } else {
+            CastMode::Alternative
+        });
         return drain_pending_cast_or_decide(state);
     }
 
@@ -1776,21 +1951,44 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
             // `game_20260713_002152_0008.txt` decision 42: kernel skipped
             // straight past a real 2-candidate Fireblast sacrifice pick the
             // trace logs).
-            state.engine.pending_cast.as_mut().unwrap().sacrifice_chosen.extend(candidates);
+            state
+                .engine
+                .pending_cast
+                .as_mut()
+                .unwrap()
+                .sacrifice_chosen
+                .extend(candidates);
             return drain_pending_cast_or_decide(state);
         }
-        return Some(Decision::ChooseCostTargets { player: pending.controller, source: pending.spell, cost_kind: CostKind::SacrificeLands, remaining, candidates });
+        return Some(Decision::ChooseCostTargets {
+            player: pending.controller,
+            source: pending.spell,
+            cost_kind: CostKind::SacrificeLands,
+            remaining,
+            candidates,
+        });
     }
 
     if pending.additional_cost_discarded.is_none() {
-        let add = def.additional_cost.expect("additional_cost_discarded is None only when begin_cast saw an additional_cost");
+        let add = def.additional_cost.expect(
+            "additional_cost_discarded is None only when begin_cast saw an additional_cost",
+        );
         match discard_count_in(add) {
             Some(n) => {
-                state.engine.pending_discard = Some(PendingDiscard { player: pending.controller, count: n as u32, resume: DiscardResume::FinishCast });
+                state.engine.pending_discard = Some(PendingDiscard {
+                    player: pending.controller,
+                    count: n as u32,
+                    resume: DiscardResume::FinishCast,
+                });
                 return None; // let the caller's next loop pass see pending_discard
             }
             None => {
-                state.engine.pending_cast.as_mut().unwrap().additional_cost_discarded = Some(vec![]);
+                state
+                    .engine
+                    .pending_cast
+                    .as_mut()
+                    .unwrap()
+                    .additional_cost_discarded = Some(vec![]);
                 return drain_pending_cast_or_decide(state);
             }
         }
@@ -1816,8 +2014,14 @@ fn drain_pending_activation_or_decide(state: &mut GameState) -> Option<Decision>
     }
 
     if pending.cost_discard_paid.is_none() {
-        let n = discard_count_in(ability.cost).expect("cost_discard_paid is None only when begin_activation saw a DiscardCards component");
-        state.engine.pending_discard = Some(PendingDiscard { player: pending.controller, count: n as u32, resume: DiscardResume::FinishActivation });
+        let n = discard_count_in(ability.cost).expect(
+            "cost_discard_paid is None only when begin_activation saw a DiscardCards component",
+        );
+        state.engine.pending_discard = Some(PendingDiscard {
+            player: pending.controller,
+            count: n as u32,
+            resume: DiscardResume::FinishActivation,
+        });
         return None;
     }
 
@@ -1833,11 +2037,19 @@ fn drain_pending_triggers_or_decide(state: &mut GameState) -> Option<Decision> {
         return None;
     }
     let controller = state.engine.pending_triggers[0].controller;
-    let group_len = state.engine.pending_triggers.iter().take_while(|t| t.controller == controller).count();
+    let group_len = state
+        .engine
+        .pending_triggers
+        .iter()
+        .take_while(|t| t.controller == controller)
+        .count();
 
     if group_len >= 2 {
         let pending = state.engine.pending_triggers[..group_len].to_vec();
-        return Some(Decision::OrderTriggers { player: controller, pending });
+        return Some(Decision::OrderTriggers {
+            player: controller,
+            pending,
+        });
     }
 
     let group: Vec<_> = state.engine.pending_triggers.drain(..group_len).collect();
@@ -1857,7 +2069,11 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         // means asking `Decision::ChooseMadnessCast`
         // (`advance_until_decision`'s `top.madness_offer` check), not
         // executing an effect, so it carries no `inline_effect` at all.
-        inline_effect: if t.is_madness_offer { None } else { Some(t.effect) },
+        inline_effect: if t.is_madness_offer {
+            None
+        } else {
+            Some(t.effect)
+        },
         discarded: vec![],
         is_flashback: false,
         mode_chosen: 0,
@@ -1883,14 +2099,23 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
 /// happen inside `resolve_top_of_stack`'s `collect_and_queue_triggers`
 /// call; this just pops and executes.
 fn resolve_top_of_stack(state: &mut GameState) {
-    let item = state.stack.pop().expect("resolve_top_of_stack called with an empty stack");
+    let item = state
+        .stack
+        .pop()
+        .expect("resolve_top_of_stack called with an empty stack");
     // Single-shot signal to the trigger-collection pass that always
     // immediately follows this resolution (`collect_and_queue_triggers`,
     // called right after by every caller of `resolve_top_of_stack`) --
     // explicitly set every time (`Some` or `None`), never left stale from a
     // previous resolution. See `EngineState::pending_kicked_source`'s doc.
     state.engine.pending_kicked_source = if item.kicked { Some(item.source) } else { None };
-    let ctx = ExecCtx { source: item.source, controller: item.controller, targets: item.targets, discarded: item.discarded, kicked: item.kicked };
+    let ctx = ExecCtx {
+        source: item.source,
+        controller: item.controller,
+        targets: item.targets,
+        discarded: item.discarded,
+        kicked: item.kicked,
+    };
 
     if let Some(effect) = item.inline_effect {
         effect::execute(&effect, &ctx, state);
@@ -1918,7 +2143,11 @@ fn resolve_top_of_stack(state: &mut GameState) {
     // (702.10e). Creatures/artifacts/enchantments handle entering the
     // battlefield themselves, via their own MoveObject effect.
     if def.has_type(CardType::Instant) || def.has_type(CardType::Sorcery) {
-        let to_zone = if item.is_flashback { Zone::Exile } else { Zone::Graveyard };
+        let to_zone = if item.is_flashback {
+            Zone::Exile
+        } else {
+            Zone::Graveyard
+        };
         if let Some(pd) = state.engine.pending_discard.as_mut() {
             // The effect just resolved into `EffectOp::DiscardCards`
             // (Faithless Looting: "draw two, then discard two"), which
@@ -1928,7 +2157,10 @@ fn resolve_top_of_stack(state: &mut GameState) {
             // reach its post-resolution zone until that discard (part of
             // its own resolution) is done, so defer the move instead of
             // doing it here.
-            pd.resume = DiscardResume::FinishSpellResolution { source: item.source, to_zone };
+            pd.resume = DiscardResume::FinishSpellResolution {
+                source: item.source,
+                to_zone,
+            };
         } else if let Some(poc) = state.engine.pending_optional_cost.as_mut() {
             // Same 608.2m deferral, one layer further out: the effect
             // resolved into `EffectOp::MayPayCostThen` (Highway Robbery:
@@ -1980,7 +2212,10 @@ fn resolve_top_of_stack(state: &mut GameState) {
 /// obviously-combat-shaped divergence. See `Decision::DeclareAttackers`'s
 /// doc and the replay comparator's handling of an empty `eligible`.
 fn advance_step(state: &mut GameState) {
-    let cur_idx = STEP_ORDER.iter().position(|&s| s == state.step).expect("state.step is always a STEP_ORDER member");
+    let cur_idx = STEP_ORDER
+        .iter()
+        .position(|&s| s == state.step)
+        .expect("state.step is always a STEP_ORDER member");
     let mut next_idx = cur_idx + 1;
 
     if next_idx >= STEP_ORDER.len() {
@@ -2013,7 +2248,14 @@ fn advance_step(state: &mut GameState) {
     // kernel -- still holding the now-dead attacker's `ObjectId` in
     // `combat.attackers` -- entered `DeclareBlockers` for real and asked a
     // phantom post-block priority question.
-    if next == Step::DeclareBlockers && state.engine.combat.attackers.iter().all(|&id| !is_still_in_combat(state, id)) {
+    if next == Step::DeclareBlockers
+        && state
+            .engine
+            .combat
+            .attackers
+            .iter()
+            .all(|&id| !is_still_in_combat(state, id))
+    {
         next = Step::EndCombat;
     }
 
@@ -2044,7 +2286,10 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
             // re-armed on a later one.
             for perm in state.engine.exile_play_permissions.iter_mut() {
                 if perm.holder == p {
-                    if let PlayPermissionExpiry::UntilHoldersNextTurn { holder_turn_started } = &mut perm.expiry {
+                    if let PlayPermissionExpiry::UntilHoldersNextTurn {
+                        holder_turn_started,
+                    } = &mut perm.expiry
+                    {
                         *holder_turn_started = true;
                     }
                 }
@@ -2085,13 +2330,22 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
             // *holder's* own Cleanup, and only after their own Untap has
             // already opened this "next turn" -- see
             // `PlayPermissionExpiry`'s doc.
-            state.engine.exile_play_permissions.retain(|perm| match perm.expiry {
-                PlayPermissionExpiry::EndOfTurn => false,
-                PlayPermissionExpiry::UntilHoldersNextTurn { holder_turn_started } => !(perm.holder == p && holder_turn_started),
-            });
+            state
+                .engine
+                .exile_play_permissions
+                .retain(|perm| match perm.expiry {
+                    PlayPermissionExpiry::EndOfTurn => false,
+                    PlayPermissionExpiry::UntilHoldersNextTurn {
+                        holder_turn_started,
+                    } => !(perm.holder == p && holder_turn_started),
+                });
             let hand_size = state.players[p.index()].hand.len();
             if hand_size > 7 {
-                state.engine.pending_discard = Some(PendingDiscard { player: p, count: (hand_size - 7) as u32, resume: DiscardResume::None });
+                state.engine.pending_discard = Some(PendingDiscard {
+                    player: p,
+                    count: (hand_size - 7) as u32,
+                    resume: DiscardResume::None,
+                });
             }
         }
         _ => {}
@@ -2118,15 +2372,23 @@ pub struct StaticSelfBoostDef {
 }
 
 fn controls_an_artifact(controller: PlayerId, state: &GameState) -> bool {
-    state.players[controller.index()].battlefield.iter().any(|&id| {
-        let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-        def.has_type(CardType::Artifact)
-    })
+    state.players[controller.index()]
+        .battlefield
+        .iter()
+        .any(|&id| {
+            let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+            def.has_type(CardType::Artifact)
+        })
 }
 
 pub(crate) fn static_self_boost_for(name: &str) -> Option<StaticSelfBoostDef> {
     match name {
-        "Goblin Tomb Raider" => Some(StaticSelfBoostDef { condition: controls_an_artifact, power: 1, toughness: 0, grant_haste: true }),
+        "Goblin Tomb Raider" => Some(StaticSelfBoostDef {
+            condition: controls_an_artifact,
+            power: 1,
+            toughness: 0,
+            grant_haste: true,
+        }),
         _ => None,
     }
 }
@@ -2141,7 +2403,12 @@ pub(crate) fn effective_power(state: &GameState, id: ObjectId) -> i32 {
         }
     }
     for eff in &state.engine.until_end_of_turn {
-        if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, power: p, .. } = eff {
+        if let UntilEndOfTurnEffect::ResolvedSetEffect {
+            object_ids,
+            power: p,
+            ..
+        } = eff
+        {
             if object_ids.contains(&id) {
                 power += p;
             }
@@ -2166,7 +2433,12 @@ pub(crate) fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
         }
     }
     for eff in &state.engine.until_end_of_turn {
-        if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, toughness: t, .. } = eff {
+        if let UntilEndOfTurnEffect::ResolvedSetEffect {
+            object_ids,
+            toughness: t,
+            ..
+        } = eff
+        {
             if object_ids.contains(&id) {
                 toughness += t;
             }
@@ -2198,7 +2470,12 @@ pub(crate) fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keyword
             }
         }
         for eff in &state.engine.until_end_of_turn {
-            if let UntilEndOfTurnEffect::ResolvedSetEffect { object_ids, grant_haste, .. } = eff {
+            if let UntilEndOfTurnEffect::ResolvedSetEffect {
+                object_ids,
+                grant_haste,
+                ..
+            } = eff
+            {
                 if *grant_haste && object_ids.contains(&id) {
                     return true;
                 }
@@ -2220,7 +2497,14 @@ fn participates_in_wave(state: &GameState, id: ObjectId, first_strike_wave: bool
 }
 
 fn combat_has_first_or_double_strike(state: &GameState) -> bool {
-    let all_combatants = state.engine.combat.attackers.iter().copied().chain(state.engine.combat.blocked_by.iter().flat_map(|(_, bs)| bs.iter().copied()));
+    let all_combatants = state.engine.combat.attackers.iter().copied().chain(
+        state
+            .engine
+            .combat
+            .blocked_by
+            .iter()
+            .flat_map(|(_, bs)| bs.iter().copied()),
+    );
     all_combatants.into_iter().any(|id| {
         let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
         def.keywords.has(Keywords::FIRST_STRIKE) || def.keywords.has(Keywords::DOUBLE_STRIKE)
@@ -2273,7 +2557,9 @@ fn combat_damage_wave(state: &mut GameState, first_strike_wave: bool) {
     let mut events = Vec::new();
 
     for &attacker in &attackers {
-        if !is_still_in_combat(state, attacker) || !participates_in_wave(state, attacker, first_strike_wave) {
+        if !is_still_in_combat(state, attacker)
+            || !participates_in_wave(state, attacker, first_strike_wave)
+        {
             continue;
         }
         let power = effective_power(state, attacker);
@@ -2284,17 +2570,27 @@ fn combat_damage_wave(state: &mut GameState, first_strike_wave: bool) {
             assign_attacker_damage_to_blockers(state, attacker, power, blockers, &mut events);
         } else {
             let defender = state.objects.get(attacker).controller.opponent();
-            events.push(ProposedEvent::damage(attacker, Target::Player(defender), power));
+            events.push(ProposedEvent::damage(
+                attacker,
+                Target::Player(defender),
+                power,
+            ));
         }
     }
     for (attacker, blockers) in &blocked_by {
         for &blocker in blockers {
-            if !is_still_in_combat(state, blocker) || !participates_in_wave(state, blocker, first_strike_wave) {
+            if !is_still_in_combat(state, blocker)
+                || !participates_in_wave(state, blocker, first_strike_wave)
+            {
                 continue;
             }
             let power = effective_power(state, blocker);
             if power > 0 {
-                events.push(ProposedEvent::damage(blocker, Target::Object(*attacker), power));
+                events.push(ProposedEvent::damage(
+                    blocker,
+                    Target::Object(*attacker),
+                    power,
+                ));
             }
         }
     }
@@ -2312,9 +2608,19 @@ fn combat_damage_wave(state: &mut GameState, first_strike_wave: bool) {
 /// is `CombatState::blocked_by`'s fixed deterministic sort -- see that
 /// field's doc for why this is a stubbed decision point, not a real one,
 /// this increment.
-fn assign_attacker_damage_to_blockers(state: &GameState, attacker: ObjectId, power: i32, blockers: &[ObjectId], events: &mut Vec<ProposedEvent>) {
+fn assign_attacker_damage_to_blockers(
+    state: &GameState,
+    attacker: ObjectId,
+    power: i32,
+    blockers: &[ObjectId],
+    events: &mut Vec<ProposedEvent>,
+) {
     if blockers.len() == 1 {
-        events.push(ProposedEvent::damage(attacker, Target::Object(blockers[0]), power));
+        events.push(ProposedEvent::damage(
+            attacker,
+            Target::Object(blockers[0]),
+            power,
+        ));
         return;
     }
     let mut remaining = power;
@@ -2332,7 +2638,11 @@ fn assign_attacker_damage_to_blockers(state: &GameState, attacker: ObjectId, pow
             remaining.min(lethal_needed)
         };
         if assign > 0 {
-            events.push(ProposedEvent::damage(attacker, Target::Object(blocker), assign));
+            events.push(ProposedEvent::damage(
+                attacker,
+                Target::Object(blocker),
+                assign,
+            ));
         }
         remaining -= assign;
     }
@@ -2486,7 +2796,12 @@ fn pending_target_spec_and_chosen(state: &GameState) -> Option<(TargetSpec, Vec<
     if let Some(p) = &state.engine.pending_cast {
         let def = &card_def::CARD_DEFS[state.objects.get(p.spell).card_def as usize];
         let spec = match p.mode_chosen {
-            Some(1) => def.mode2.as_ref().expect("mode_chosen == 1 only when mode2 is Some").target_spec,
+            Some(1) => {
+                def.mode2
+                    .as_ref()
+                    .expect("mode_chosen == 1 only when mode2 is Some")
+                    .target_spec
+            }
             _ => p.target_spec,
         };
         return Some((spec, p.targets_chosen.clone()));
@@ -2508,10 +2823,18 @@ fn apply_choose_cost_target(state: &mut GameState, id: ObjectId) -> Result<(), S
         let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
         let needed = sacrifice_lands_needed(pending, def);
         if (pending.sacrifice_chosen.len() as u8) < needed {
-            if !sacrificeable_lands(pending.controller, state, &pending.sacrifice_chosen).contains(&id) {
+            if !sacrificeable_lands(pending.controller, state, &pending.sacrifice_chosen)
+                .contains(&id)
+            {
                 return Err(format!("{id} is not a legal cost-sacrifice candidate"));
             }
-            state.engine.pending_cast.as_mut().unwrap().sacrifice_chosen.push(id);
+            state
+                .engine
+                .pending_cast
+                .as_mut()
+                .unwrap()
+                .sacrifice_chosen
+                .push(id);
             return Ok(());
         }
     }
@@ -2520,7 +2843,13 @@ fn apply_choose_cost_target(state: &mut GameState, id: ObjectId) -> Result<(), S
             if !sacrificeable_lands(pending.player, state, &pending.chosen).contains(&id) {
                 return Err(format!("{id} is not a legal cost-sacrifice candidate"));
             }
-            state.engine.pending_optional_cost_sacrifice.as_mut().unwrap().chosen.push(id);
+            state
+                .engine
+                .pending_optional_cost_sacrifice
+                .as_mut()
+                .unwrap()
+                .chosen
+                .push(id);
             return Ok(());
         }
     }
@@ -2528,9 +2857,17 @@ fn apply_choose_cost_target(state: &mut GameState, id: ObjectId) -> Result<(), S
 }
 
 fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<(), String> {
-    let pd = state.engine.pending_discard.clone().ok_or("no discard is pending")?;
+    let pd = state
+        .engine
+        .pending_discard
+        .clone()
+        .ok_or("no discard is pending")?;
     if chosen.len() as u32 != pd.count {
-        return Err(format!("must discard exactly {} card(s), got {}", pd.count, chosen.len()));
+        return Err(format!(
+            "must discard exactly {} card(s), got {}",
+            pd.count,
+            chosen.len()
+        ));
     }
     let mut dedup = chosen.clone();
     dedup.sort_unstable();
@@ -2538,9 +2875,16 @@ fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<
     if dedup.len() != chosen.len() {
         return Err("duplicate card in discard selection".to_string());
     }
-    let exclude = if pd.resume == DiscardResume::FinishCast { state.engine.pending_cast.as_ref().map(|p| p.spell) } else { None };
+    let exclude = if pd.resume == DiscardResume::FinishCast {
+        state.engine.pending_cast.as_ref().map(|p| p.spell)
+    } else {
+        None
+    };
     let hand = &state.players[pd.player.index()].hand;
-    if !chosen.iter().all(|id| hand.contains(id) && Some(*id) != exclude) {
+    if !chosen
+        .iter()
+        .all(|id| hand.contains(id) && Some(*id) != exclude)
+    {
         return Err("illegal discard selection".to_string());
     }
     state.engine.pending_discard = None;
@@ -2548,8 +2892,15 @@ fn apply_discard_action(state: &mut GameState, chosen: Vec<ObjectId>) -> Result<
     Ok(())
 }
 
-fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice) -> Result<(), String> {
-    let poc = state.engine.pending_optional_cost.take().ok_or("no optional cost is pending")?;
+fn apply_choose_optional_cost(
+    state: &mut GameState,
+    choice: OptionalCostChoice,
+) -> Result<(), String> {
+    let poc = state
+        .engine
+        .pending_optional_cost
+        .take()
+        .ok_or("no optional cost is pending")?;
     match choice {
         OptionalCostChoice::Decline => {
             // See `PendingOptionalCost::spell_resume`'s doc: declining
@@ -2563,18 +2914,28 @@ fn apply_choose_optional_cost(state: &mut GameState, choice: OptionalCostChoice)
         }
         OptionalCostChoice::Discard => {
             if !poc.discard_payable {
-                return Err("discard is not currently a payable option for this optional cost".to_string());
+                return Err(
+                    "discard is not currently a payable option for this optional cost".to_string(),
+                );
             }
             state.engine.pending_discard = Some(PendingDiscard {
                 player: poc.player,
                 count: poc.discard as u32,
-                resume: DiscardResume::FinishOptionalCost { source: poc.source, controller: poc.player, then: Box::new(poc.then), spell_resume: poc.spell_resume },
+                resume: DiscardResume::FinishOptionalCost {
+                    source: poc.source,
+                    controller: poc.player,
+                    then: Box::new(poc.then),
+                    spell_resume: poc.spell_resume,
+                },
             });
             Ok(())
         }
         OptionalCostChoice::SacrificeLand => {
             if !poc.sacrifice_payable {
-                return Err("sacrificing a land is not currently a payable option for this optional cost".to_string());
+                return Err(
+                    "sacrificing a land is not currently a payable option for this optional cost"
+                        .to_string(),
+                );
             }
             state.engine.pending_optional_cost_sacrifice = Some(PendingOptionalCostSacrifice {
                 player: poc.player,
@@ -2627,7 +2988,10 @@ fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(),
     if !top.madness_offer {
         return Err("no Madness decision is pending".to_string());
     }
-    let item = state.stack.pop().expect("just confirmed the top of stack is a madness offer");
+    let item = state
+        .stack
+        .pop()
+        .expect("just confirmed the top of stack is a madness offer");
     let card = item.source;
     let owner = item.controller;
     if !cast_it {
@@ -2641,7 +3005,9 @@ fn apply_choose_madness_cast(state: &mut GameState, cast_it: bool) -> Result<(),
         return Ok(());
     }
     let def = &card_def::CARD_DEFS[state.objects.get(card).card_def as usize];
-    let cost = def.madness_cost.expect("only a Madness card's own offer is ever pushed as a madness_offer StackItem");
+    let cost = def
+        .madness_cost
+        .expect("only a Madness card's own offer is ever pushed as a madness_offer StackItem");
     begin_cast_ex(state, owner, card, Some(cost));
     Ok(())
 }
@@ -2674,7 +3040,10 @@ fn apply_declare_attackers(state: &mut GameState, attackers: Vec<ObjectId>) -> R
     Ok(())
 }
 
-fn apply_declare_blockers(state: &mut GameState, blocks: Vec<(ObjectId, ObjectId)>) -> Result<(), String> {
+fn apply_declare_blockers(
+    state: &mut GameState,
+    blocks: Vec<(ObjectId, ObjectId)>,
+) -> Result<(), String> {
     if state.step != Step::DeclareBlockers || state.engine.combat.blockers_declared {
         return Err("no declare-blockers decision is pending".to_string());
     }
@@ -2688,7 +3057,9 @@ fn apply_declare_blockers(state: &mut GameState, blocks: Vec<(ObjectId, ObjectId
             return Err(format!("{blocker} cannot legally block {attacker}"));
         }
         if used_blockers.contains(&blocker) {
-            return Err(format!("{blocker} is assigned to block more than one attacker"));
+            return Err(format!(
+                "{blocker} is assigned to block more than one attacker"
+            ));
         }
         used_blockers.push(blocker);
     }
@@ -2712,12 +3083,19 @@ fn apply_order_triggers(state: &mut GameState, perm: Vec<usize>) -> Result<(), S
         return Err("no pending triggers to order".to_string());
     }
     let controller = state.engine.pending_triggers[0].controller;
-    let group_len = state.engine.pending_triggers.iter().take_while(|t| t.controller == controller).count();
+    let group_len = state
+        .engine
+        .pending_triggers
+        .iter()
+        .take_while(|t| t.controller == controller)
+        .count();
 
     let mut sorted = perm.clone();
     sorted.sort_unstable();
     if sorted != (0..group_len).collect::<Vec<_>>() {
-        return Err(format!("OrderTriggers action must be a permutation of 0..{group_len}"));
+        return Err(format!(
+            "OrderTriggers action must be a permutation of 0..{group_len}"
+        ));
     }
 
     let group: Vec<_> = state.engine.pending_triggers.drain(..group_len).collect();
@@ -2729,7 +3107,14 @@ fn apply_order_triggers(state: &mut GameState, perm: Vec<usize>) -> Result<(), S
 
 fn play_land(state: &mut GameState, player: PlayerId, id: ObjectId) {
     let ctx = ExecCtx::no_targets(id, player);
-    effect::execute(&EffectOp::MoveObject { object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }, &ctx, state);
+    effect::execute(
+        &EffectOp::MoveObject {
+            object: ObjectRef::ThisSource,
+            to_zone: Zone::Battlefield,
+        },
+        &ctx,
+        state,
+    );
     state.players[player.index()].lands_played_this_turn += 1;
     collect_and_queue_triggers(state);
     state.engine.priority_passes = [false, false];
@@ -2743,8 +3128,11 @@ fn play_land(state: &mut GameState, player: PlayerId, id: ObjectId) {
 /// as `play_land`.
 fn plot_spell(state: &mut GameState, player: PlayerId, id: ObjectId) {
     let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-    let cost = def.plot_cost.expect("plot_action_candidates only offers cards with a plot_cost");
-    let plan = mana::can_pay(&cost, 0, player, state).expect("legality already checked by plot_action_candidates");
+    let cost = def
+        .plot_cost
+        .expect("plot_action_candidates only offers cards with a plot_cost");
+    let plan = mana::can_pay(&cost, 0, player, state)
+        .expect("legality already checked by plot_action_candidates");
     pay_plan(state, player, &plan);
     event::propose_and_commit(state, ProposedEvent::zone_change(id, Zone::Exile));
     state.objects.get_mut(id).plotted_turn = Some(state.turn);
@@ -2772,7 +3160,12 @@ fn begin_cast(state: &mut GameState, player: PlayerId, spell_id: ObjectId) {
 /// ordinary `Action::CastSpell`, where the cost (if overridden at all) is
 /// inferred from the spell's zone instead (`Cost::zero()` for a Plotted
 /// card cast from exile).
-fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, forced_cost_override: Option<Cost>) {
+fn begin_cast_ex(
+    state: &mut GameState,
+    player: PlayerId,
+    spell_id: ObjectId,
+    forced_cost_override: Option<Cost>,
+) {
     let origin_zone = state.objects.get(spell_id).zone;
     let is_flashback = forced_cost_override.is_none() && origin_zone == Zone::Graveyard;
     // A card sitting in Exile isn't necessarily Plotted any more: an
@@ -2783,14 +3176,28 @@ fn begin_cast_ex(state: &mut GameState, player: PlayerId, spell_id: ObjectId, fo
     // adding Reckless Impulse/Clockwork Percussionist/Experimental
     // Synthesizer: before this check, any impulse-exiled spell would have
     // been cast for `Cost::zero()`, same as a genuinely Plotted card.
-    let is_plotted = forced_cost_override.is_none() && origin_zone == Zone::Exile && state.objects.get(spell_id).plotted_turn.is_some();
+    let is_plotted = forced_cost_override.is_none()
+        && origin_zone == Zone::Exile
+        && state.objects.get(spell_id).plotted_turn.is_some();
     let def = &card_def::CARD_DEFS[state.objects.get(spell_id).card_def as usize];
     let target_spec = def.target_spec;
     let cost_override = forced_cost_override.or(if is_plotted { Some(Cost::zero()) } else { None });
-    let cast_mode = if is_flashback || cost_override.is_some() || def.alt_cost.is_none() { Some(CastMode::Normal) } else { None };
-    let additional_cost_discarded = if def.additional_cost.is_none() { Some(vec![]) } else { None };
+    let cast_mode = if is_flashback || cost_override.is_some() || def.alt_cost.is_none() {
+        Some(CastMode::Normal)
+    } else {
+        None
+    };
+    let additional_cost_discarded = if def.additional_cost.is_none() {
+        Some(vec![])
+    } else {
+        None
+    };
     let mode_chosen = if def.mode2.is_none() { Some(0) } else { None };
-    let kicked = if def.kicker_cost.is_none() { Some(false) } else { None };
+    let kicked = if def.kicker_cost.is_none() {
+        Some(false)
+    } else {
+        None
+    };
 
     move_to_stack(state, spell_id, origin_zone);
     state.stack.push(StackItem {
@@ -2836,7 +3243,11 @@ fn begin_activation(state: &mut GameState, player: PlayerId, source: ObjectId, a
         ability_index,
         target_spec: ability.target_spec,
         targets_chosen: vec![],
-        cost_discard_paid: if discard_count_in(ability.cost).is_none() { Some(vec![]) } else { None },
+        cost_discard_paid: if discard_count_in(ability.cost).is_none() {
+            Some(vec![])
+        } else {
+            None
+        },
     });
 }
 
@@ -2846,7 +3257,11 @@ fn begin_activation(state: &mut GameState, player: PlayerId, source: ObjectId, a
 /// pushed (601.2a put the spell there before this ran). 117.3c: the caster
 /// retains priority afterward.
 fn finalize_cast(state: &mut GameState) {
-    let pending = state.engine.pending_cast.take().expect("finalize_cast requires a pending cast");
+    let pending = state
+        .engine
+        .pending_cast
+        .take()
+        .expect("finalize_cast requires a pending cast");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
     let mut was_kicked = false;
 
@@ -2862,7 +3277,10 @@ fn finalize_cast(state: &mut GameState) {
         };
         pay_plan(state, pending.controller, &plan);
     } else if pending.is_flashback {
-        let fb = def.flashback.as_ref().expect("is_flashback implies CardDef::flashback is Some");
+        let fb = def
+            .flashback
+            .as_ref()
+            .expect("is_flashback implies CardDef::flashback is Some");
         match fb.cost {
             FlashbackCost::Mana(cost) => {
                 // 601.2h: legality (including affordability) is fully
@@ -2886,7 +3304,10 @@ fn finalize_cast(state: &mut GameState) {
             }
         }
     } else {
-        match pending.cast_mode.expect("resolved by drain_pending_cast_or_decide before finalize_cast is reached") {
+        match pending
+            .cast_mode
+            .expect("resolved by drain_pending_cast_or_decide before finalize_cast is reached")
+        {
             CastMode::Normal => {
                 let kicked = pending.kicked == Some(true);
                 let plan = if kicked {
@@ -2902,8 +3323,16 @@ fn finalize_cast(state: &mut GameState) {
                 was_kicked = kicked;
             }
             CastMode::Alternative => {
-                let alt = def.alt_cost.expect("Alternative mode only chosen when alt_cost is Some");
-                pay_cost_components(state, pending.controller, pending.spell, alt, &pending.sacrifice_chosen);
+                let alt = def
+                    .alt_cost
+                    .expect("Alternative mode only chosen when alt_cost is Some");
+                pay_cost_components(
+                    state,
+                    pending.controller,
+                    pending.spell,
+                    alt,
+                    &pending.sacrifice_chosen,
+                );
             }
         }
     }
@@ -2913,7 +3342,10 @@ fn finalize_cast(state: &mut GameState) {
 
     let discarded = pending.additional_cost_discarded.unwrap_or_default();
     let item = state.stack.last_mut().expect("begin_cast pushed this spell's StackItem and nothing can push another item while a cast is pending");
-    debug_assert_eq!(item.source, pending.spell, "the top of the stack must still be this cast's own placeholder");
+    debug_assert_eq!(
+        item.source, pending.spell,
+        "the top of the stack must still be this cast's own placeholder"
+    );
     item.targets = pending.targets_chosen;
     item.discarded = discarded;
     item.mode_chosen = pending.mode_chosen.unwrap_or(0);
@@ -2985,10 +3417,17 @@ fn finalize_cast(state: &mut GameState) {
 /// `priority_passes` untouched.
 fn abort_cast(state: &mut GameState, pending: PendingCast) {
     let item = state.stack.pop();
-    debug_assert!(item.is_some_and(|i| i.source == pending.spell), "abort_cast expects its spell's placeholder to be the top of the stack");
+    debug_assert!(
+        item.is_some_and(|i| i.source == pending.spell),
+        "abort_cast expects its spell's placeholder to be the top of the stack"
+    );
     let owner = state.objects.get(pending.spell).owner;
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
-    let to_zone = if pending.origin_zone == Zone::Exile && def.madness_cost.is_some() { Zone::Graveyard } else { pending.origin_zone };
+    let to_zone = if pending.origin_zone == Zone::Exile && def.madness_cost.is_some() {
+        Zone::Graveyard
+    } else {
+        pending.origin_zone
+    };
     match to_zone {
         Zone::Hand => state.players[owner.index()].hand.push(pending.spell),
         Zone::Graveyard => state.players[owner.index()].graveyard.push(pending.spell),
@@ -3009,7 +3448,11 @@ fn abort_cast(state: &mut GameState, pending: PendingCast) {
 /// at all (none in this pool, but not assumed away) still needs its cost
 /// paid at this point, same as always.
 fn finalize_activation(state: &mut GameState) {
-    let pending = state.engine.pending_activation.take().expect("finalize_activation requires a pending activation");
+    let pending = state
+        .engine
+        .pending_activation
+        .take()
+        .expect("finalize_activation requires a pending activation");
     let def = &card_def::CARD_DEFS[state.objects.get(pending.source).card_def as usize];
     let ability = &def.activated_abilities[pending.ability_index as usize];
     if discard_count_in(ability.cost).is_none() {
@@ -3079,7 +3522,8 @@ mod tests {
     }
 
     fn put_on_battlefield(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id =
+            card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -3092,14 +3536,15 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
     }
 
     fn put_in_hand(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id =
+            card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -3112,14 +3557,15 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].hand.push(obj_id);
         obj_id
     }
 
     fn put_in_graveyard(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id =
+            card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -3132,7 +3578,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].graveyard.push(obj_id);
         obj_id
@@ -3159,7 +3605,11 @@ mod tests {
         step(&mut state, Action::ChooseTarget(target)).unwrap();
 
         match advance_until_decision(&mut state) {
-            Decision::ChooseCastMode { player, spell, options } => {
+            Decision::ChooseCastMode {
+                player,
+                spell,
+                options,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(spell, fireblast);
                 assert_eq!(options, vec![CastMode::Normal, CastMode::Alternative]);
@@ -3170,12 +3620,22 @@ mod tests {
         step(&mut state, Action::ChooseCastMode(CastMode::Alternative)).unwrap();
 
         let first_pick = match advance_until_decision(&mut state) {
-            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+            Decision::ChooseCostTargets {
+                player,
+                source,
+                cost_kind,
+                remaining,
+                candidates,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(source, fireblast);
                 assert_eq!(cost_kind, CostKind::SacrificeLands);
                 assert_eq!(remaining, 2);
-                assert_eq!(candidates.len(), 6, "all 6 Mountains are candidates before any pick");
+                assert_eq!(
+                    candidates.len(),
+                    6,
+                    "all 6 Mountains are candidates before any pick"
+                );
                 candidates[0]
             }
             other => panic!("expected ChooseCostTargets, got {other:?}"),
@@ -3183,9 +3643,17 @@ mod tests {
         step(&mut state, Action::ChooseCostTarget(first_pick)).unwrap();
 
         let second_pick = match advance_until_decision(&mut state) {
-            Decision::ChooseCostTargets { remaining, candidates, .. } => {
+            Decision::ChooseCostTargets {
+                remaining,
+                candidates,
+                ..
+            } => {
                 assert_eq!(remaining, 1);
-                assert_eq!(candidates.len(), 5, "the first pick is excluded from the second ask");
+                assert_eq!(
+                    candidates.len(),
+                    5,
+                    "the first pick is excluded from the second ask"
+                );
                 assert!(!candidates.contains(&first_pick));
                 candidates[0]
             }
@@ -3194,14 +3662,24 @@ mod tests {
         step(&mut state, Action::ChooseCostTarget(second_pick)).unwrap();
 
         advance_until_decision(&mut state); // drives the remaining cast stages (cost payment, stack push)
-        // Alternative mode: exactly the 2 chosen Mountains sacrificed, no
-        // mana tapped, and (since none were tapped) all 6 Mountains minus
-        // the 2 sacrificed remain untapped.
-        assert_eq!(state.players[0].graveyard.len(), 2, "should have sacrificed exactly 2 Mountains");
+                                            // Alternative mode: exactly the 2 chosen Mountains sacrificed, no
+                                            // mana tapped, and (since none were tapped) all 6 Mountains minus
+                                            // the 2 sacrificed remain untapped.
+        assert_eq!(
+            state.players[0].graveyard.len(),
+            2,
+            "should have sacrificed exactly 2 Mountains"
+        );
         assert!(state.players[0].graveyard.contains(&first_pick));
         assert!(state.players[0].graveyard.contains(&second_pick));
         assert_eq!(state.players[0].battlefield.len(), 4);
-        assert!(state.players[0].battlefield.iter().all(|&id| !state.objects.get(id).tapped), "alt cost shouldn't tap any Mountain");
+        assert!(
+            state.players[0]
+                .battlefield
+                .iter()
+                .all(|&id| !state.objects.get(id).tapped),
+            "alt cost shouldn't tap any Mountain"
+        );
         assert_eq!(state.stack.len(), 1);
     }
 
@@ -3227,15 +3705,25 @@ mod tests {
         state.step = Step::Main1;
 
         step(&mut state, Action::CastSpell(fireblast)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
 
         // No ChooseCastMode decision (only the alt cost is affordable),
         // but a real ChooseCostTargets for the first of the 2 Mountains --
         // both are legal candidates even though both will end up
         // sacrificed either way.
         let first_pick = match advance_until_decision(&mut state) {
-            Decision::ChooseCastMode { .. } => panic!("only the alt cost is affordable, so there's nothing to choose"),
-            Decision::ChooseCostTargets { remaining, candidates, .. } => {
+            Decision::ChooseCastMode { .. } => {
+                panic!("only the alt cost is affordable, so there's nothing to choose")
+            }
+            Decision::ChooseCostTargets {
+                remaining,
+                candidates,
+                ..
+            } => {
                 assert_eq!(remaining, 2);
                 let mut sorted = candidates.clone();
                 sorted.sort_unstable();
@@ -3251,7 +3739,10 @@ mod tests {
         // The second (and final) pick is now forced to the one remaining
         // Mountain -- silently auto-resolved, no second ChooseCostTargets.
         let decision = advance_until_decision(&mut state);
-        assert!(!matches!(decision, Decision::ChooseCostTargets { .. }), "exactly 1 Mountain left for the last pick is no real choice");
+        assert!(
+            !matches!(decision, Decision::ChooseCostTargets { .. }),
+            "exactly 1 Mountain left for the last pick is no real choice"
+        );
         assert_eq!(state.players[0].graveyard.len(), 2);
         assert_eq!(state.stack.len(), 1);
     }
@@ -3271,10 +3762,20 @@ mod tests {
         state.step = Step::Main1;
 
         step(&mut state, Action::CastSpell(lava_dart)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
 
         let pick = match advance_until_decision(&mut state) {
-            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+            Decision::ChooseCostTargets {
+                player,
+                source,
+                cost_kind,
+                remaining,
+                candidates,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(source, lava_dart);
                 assert_eq!(cost_kind, CostKind::SacrificeLands);
@@ -3287,7 +3788,11 @@ mod tests {
         step(&mut state, Action::ChooseCostTarget(pick)).unwrap();
 
         advance_until_decision(&mut state); // drives the remaining cast stages (cost payment, stack push, exile-on-resolve)
-        assert_eq!(state.players[0].graveyard.len(), 1, "the sacrificed Mountain, not Lava Dart itself (flashback exiles on resolution)");
+        assert_eq!(
+            state.players[0].graveyard.len(),
+            1,
+            "the sacrificed Mountain, not Lava Dart itself (flashback exiles on resolution)"
+        );
         assert!(state.players[0].graveyard.contains(&pick));
         assert_eq!(state.players[0].battlefield.len(), 2);
         assert_eq!(state.stack.len(), 1);
@@ -3305,10 +3810,17 @@ mod tests {
         state.step = Step::Main1;
 
         step(&mut state, Action::CastSpell(lava_dart)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
 
         let decision = advance_until_decision(&mut state);
-        assert!(!matches!(decision, Decision::ChooseCostTargets { .. }), "exactly 1 Mountain for a 1-Mountain cost is no real choice");
+        assert!(
+            !matches!(decision, Decision::ChooseCostTargets { .. }),
+            "exactly 1 Mountain for a 1-Mountain cost is no real choice"
+        );
         assert_eq!(state.players[0].graveyard.len(), 1);
         assert_eq!(state.players[0].battlefield.len(), 0);
         assert_eq!(state.stack.len(), 1);
@@ -3328,14 +3840,20 @@ mod tests {
         state.engine.pending_triggers.push(PendingTrigger {
             controller: PlayerId::P0,
             source: ObjectId(0),
-            effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 1 },
+            effect: EffectOp::GainLife {
+                player: PlayerRef::Controller,
+                amount: 1,
+            },
             is_madness_offer: false,
             kicked: false,
         });
         state.engine.pending_triggers.push(PendingTrigger {
             controller: PlayerId::P0,
             source: ObjectId(1),
-            effect: EffectOp::GainLife { player: PlayerRef::Controller, amount: 2 },
+            effect: EffectOp::GainLife {
+                player: PlayerRef::Controller,
+                amount: 2,
+            },
             is_madness_offer: false,
             kicked: false,
         });
@@ -3363,8 +3881,20 @@ mod tests {
     #[test]
     fn order_triggers_rejects_a_non_permutation() {
         let mut state = empty_game();
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(0), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false });
-        state.engine.pending_triggers.push(PendingTrigger { controller: PlayerId::P0, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false });
+        state.engine.pending_triggers.push(PendingTrigger {
+            controller: PlayerId::P0,
+            source: ObjectId(0),
+            effect: EffectOp::Sequence(vec![]),
+            is_madness_offer: false,
+            kicked: false,
+        });
+        state.engine.pending_triggers.push(PendingTrigger {
+            controller: PlayerId::P0,
+            source: ObjectId(1),
+            effect: EffectOp::Sequence(vec![]),
+            is_madness_offer: false,
+            kicked: false,
+        });
         let err = step(&mut state, Action::OrderTriggers(vec![0, 0])).unwrap_err();
         assert!(err.contains("permutation"));
     }
@@ -3373,7 +3903,10 @@ mod tests {
     fn lethal_damage_kills_creature_via_sba() {
         let mut state = empty_game();
         let guttersnipe = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
-        event::propose_and_commit(&mut state, ProposedEvent::damage(ObjectId(0), Target::Object(guttersnipe), 2));
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::damage(ObjectId(0), Target::Object(guttersnipe), 2),
+        );
         trigger::sba_fixed_point(&mut state);
         assert_eq!(state.objects.get(guttersnipe).zone, Zone::Graveyard);
         assert!(!state.players[0].battlefield.contains(&guttersnipe));
@@ -3394,7 +3927,10 @@ mod tests {
     #[test]
     fn until_end_of_turn_effects_are_cleared_at_cleanup() {
         let mut state = empty_game();
-        state.engine.until_end_of_turn.push(UntilEndOfTurnEffect::SyntheticMarker(ObjectId(0)));
+        state
+            .engine
+            .until_end_of_turn
+            .push(UntilEndOfTurnEffect::SyntheticMarker(ObjectId(0)));
         run_step_entry_action(&mut state, Step::Cleanup);
         assert!(state.engine.until_end_of_turn.is_empty());
     }
@@ -3420,7 +3956,11 @@ mod tests {
         state.objects.get_mut(attacker).zone = Zone::Graveyard;
 
         advance_step(&mut state);
-        assert_eq!(state.step, Step::EndCombat, "a dead sole attacker must not keep DeclareBlockers alive");
+        assert_eq!(
+            state.step,
+            Step::EndCombat,
+            "a dead sole attacker must not keep DeclareBlockers alive"
+        );
     }
 
     /// Same fix, opposite polarity: a *surviving* declared attacker must
@@ -3444,7 +3984,10 @@ mod tests {
         let id = put_on_battlefield(&mut state, PlayerId::P0, "Masked Meower");
         state.objects.get_mut(id).summoning_sick = true; // just entered
         state.active_player = PlayerId::P0;
-        assert!(can_attack(&state, id), "haste creature should be able to attack despite summoning sickness");
+        assert!(
+            can_attack(&state, id),
+            "haste creature should be able to attack despite summoning sickness"
+        );
     }
 
     #[test]
@@ -3463,7 +4006,10 @@ mod tests {
         let _grounded_blocker = put_on_battlefield(&mut state, PlayerId::P1, "Guttersnipe");
         state.objects.get_mut(attacker).controller = PlayerId::P0;
         let legal = legal_blockers_for(&state, attacker);
-        assert!(legal.is_empty(), "a non-flying, non-reach creature should not be able to block a flyer");
+        assert!(
+            legal.is_empty(),
+            "a non-flying, non-reach creature should not be able to block a flyer"
+        );
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -3488,7 +4034,11 @@ mod tests {
 
         match advance_until_decision(&mut state) {
             Decision::DeclareBlockers { attackers, .. } => {
-                assert_eq!(attackers, vec![strong, weak], "higher-power attacker (Guttersnipe) must be ordered first");
+                assert_eq!(
+                    attackers,
+                    vec![strong, weak],
+                    "higher-power attacker (Guttersnipe) must be ordered first"
+                );
             }
             other => panic!("expected DeclareBlockers, got {other:?}"),
         }
@@ -3504,7 +4054,11 @@ mod tests {
         let epicure = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
         let samurai = put_on_battlefield(&mut state, PlayerId::P1, "Samurai Token");
         assert!(epicure.0 < samurai.0);
-        assert_eq!(effective_power(&state, raider), 2, "the controlled artifact turns Tomb Raider into a 2/2");
+        assert_eq!(
+            effective_power(&state, raider),
+            2,
+            "the controlled artifact turns Tomb Raider into a 2/2"
+        );
 
         state.active_player = PlayerId::P0;
         state.step = Step::DeclareBlockers;
@@ -3512,11 +4066,23 @@ mod tests {
         state.engine.combat.attackers_declared = true;
         apply_declare_blockers(&mut state, vec![(samurai, raider), (epicure, raider)]).unwrap();
 
-        assert_eq!(state.engine.combat.blocked_by, vec![(raider, vec![samurai, epicure])]);
+        assert_eq!(
+            state.engine.combat.blocked_by,
+            vec![(raider, vec![samurai, epicure])]
+        );
         deal_combat_damage(&mut state);
 
-        assert_eq!(state.objects.get(epicure).zone, Zone::Battlefield, "Tomb Raider's 2 damage is all assigned to the first 2-toughness blocker");
-        assert!(!state.players[PlayerId::P1.index()].battlefield.contains(&samurai), "the first blocker takes lethal damage and the token ceases to exist");
+        assert_eq!(
+            state.objects.get(epicure).zone,
+            Zone::Battlefield,
+            "Tomb Raider's 2 damage is all assigned to the first 2-toughness blocker"
+        );
+        assert!(
+            !state.players[PlayerId::P1.index()]
+                .battlefield
+                .contains(&samurai),
+            "the first blocker takes lethal damage and the token ceases to exist"
+        );
     }
 
     // ================================================================
@@ -3525,7 +4091,8 @@ mod tests {
     // ================================================================
 
     fn put_on_stack(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id =
+            card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -3538,9 +4105,19 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
-        state.stack.push(StackItem { source: obj_id, controller: player, targets: vec![], inline_effect: None, discarded: vec![], is_flashback: false, mode_chosen: 0, madness_offer: false, kicked: false });
+        state.stack.push(StackItem {
+            source: obj_id,
+            controller: player,
+            targets: vec![],
+            inline_effect: None,
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: false,
+            kicked: false,
+        });
         obj_id
     }
 
@@ -3557,7 +4134,9 @@ mod tests {
         loop {
             let decision = advance_until_decision(state);
             match &decision {
-                Decision::CastSpellOrPass { .. } if !state.stack.is_empty() => step(state, Action::Pass).unwrap(),
+                Decision::CastSpellOrPass { .. } if !state.stack.is_empty() => {
+                    step(state, Action::Pass).unwrap()
+                }
                 _ => return decision,
             }
         }
@@ -3596,19 +4175,42 @@ mod tests {
         let mut state = ready_game_in_main1(2);
         let robbery = put_in_hand(&mut state, PlayerId::P0, "Highway Robbery");
         step(&mut state, Action::CastSpell(robbery)).unwrap();
-        assert_eq!(state.players[0].hand.len(), 0, "Highway Robbery itself already left the hand once announced");
+        assert_eq!(
+            state.players[0].hand.len(),
+            0,
+            "Highway Robbery itself already left the hand once announced"
+        );
 
         match pass_until_stack_resolves(&mut state) {
-            Decision::ChooseOptionalCost { player, discard_payable, sacrifice_payable } => {
+            Decision::ChooseOptionalCost {
+                player,
+                discard_payable,
+                sacrifice_payable,
+            } => {
                 assert_eq!(player, PlayerId::P0);
-                assert!(!discard_payable, "hand is empty (only Highway Robbery was in it)");
+                assert!(
+                    !discard_payable,
+                    "hand is empty (only Highway Robbery was in it)"
+                );
                 assert!(sacrifice_payable, "2 Mountains are in play to sacrifice");
             }
             other => panic!("expected ChooseOptionalCost, got {other:?}"),
         }
-        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::Decline)).unwrap();
-        assert_eq!(state.players[0].hand.len(), 0, "declining pays nothing and draws nothing");
-        assert_eq!(state.players[0].battlefield.len(), 2, "declining doesn't sacrifice a land either");
+        step(
+            &mut state,
+            Action::ChooseOptionalCost(OptionalCostChoice::Decline),
+        )
+        .unwrap();
+        assert_eq!(
+            state.players[0].hand.len(),
+            0,
+            "declining pays nothing and draws nothing"
+        );
+        assert_eq!(
+            state.players[0].battlefield.len(),
+            2,
+            "declining doesn't sacrifice a land either"
+        );
     }
 
     #[test]
@@ -3623,11 +4225,25 @@ mod tests {
         let _lightning_bolt = put_in_hand(&mut state, PlayerId::P0, "Lightning Bolt");
         step(&mut state, Action::CastSpell(robbery)).unwrap();
         let decision = pass_until_stack_resolves(&mut state);
-        assert!(matches!(decision, Decision::ChooseOptionalCost { discard_payable: true, .. }));
-        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::Discard)).unwrap();
+        assert!(matches!(
+            decision,
+            Decision::ChooseOptionalCost {
+                discard_payable: true,
+                ..
+            }
+        ));
+        step(
+            &mut state,
+            Action::ChooseOptionalCost(OptionalCostChoice::Discard),
+        )
+        .unwrap();
 
         match advance_until_decision(&mut state) {
-            Decision::Discard { player, count, choices } => {
+            Decision::Discard {
+                player,
+                count,
+                choices,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(count, 1);
                 assert_eq!(choices.len(), 2);
@@ -3641,7 +4257,11 @@ mod tests {
         // "you may... if you do" text triggered -- so the discarded card
         // lands in the graveyard first, Highway Robbery itself second (see
         // `PendingOptionalCost::spell_resume`'s doc).
-        assert_eq!(state.players[0].graveyard, vec![lava_dart, robbery], "the discarded card, then Highway Robbery itself, in that order");
+        assert_eq!(
+            state.players[0].graveyard,
+            vec![lava_dart, robbery],
+            "the discarded card, then Highway Robbery itself, in that order"
+        );
         assert_eq!(state.players[0].hand.len(), 1, "the undiscarded Lightning Bolt is still in hand; the 2 drawn cards came from an empty library");
     }
 
@@ -3658,14 +4278,30 @@ mod tests {
 
         step(&mut state, Action::CastSpell(robbery)).unwrap();
         let decision = pass_until_stack_resolves(&mut state);
-        assert!(matches!(decision, Decision::ChooseOptionalCost { sacrifice_payable: true, .. }));
-        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand)).unwrap();
+        assert!(matches!(
+            decision,
+            Decision::ChooseOptionalCost {
+                sacrifice_payable: true,
+                ..
+            }
+        ));
+        step(
+            &mut state,
+            Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand),
+        )
+        .unwrap();
 
         // 2 Mountains for a 1-Mountain cost is a real choice (candidates >
         // 1) -- see `sacrifice_lands_needed`'s doc for the per-pick
         // auto-resolve rule this is *not* hitting.
         let picked = match advance_until_decision(&mut state) {
-            Decision::ChooseCostTargets { player, source, cost_kind, remaining, candidates } => {
+            Decision::ChooseCostTargets {
+                player,
+                source,
+                cost_kind,
+                remaining,
+                candidates,
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(source, robbery);
                 assert_eq!(cost_kind, CostKind::SacrificeLands);
@@ -3678,9 +4314,17 @@ mod tests {
         step(&mut state, Action::ChooseCostTarget(picked)).unwrap();
         advance_until_decision(&mut state); // drives the sacrifice + "draw two" resolution
 
-        assert_eq!(state.players[0].battlefield.len(), 1, "exactly 1 of the 2 Mountains should have been sacrificed");
+        assert_eq!(
+            state.players[0].battlefield.len(),
+            1,
+            "exactly 1 of the 2 Mountains should have been sacrificed"
+        );
         assert!(state.players[0].graveyard.contains(&picked));
-        assert_eq!(state.players[0].graveyard.len(), 2, "Highway Robbery + the sacrificed Mountain");
+        assert_eq!(
+            state.players[0].graveyard.len(),
+            2,
+            "Highway Robbery + the sacrificed Mountain"
+        );
     }
 
     /// Regression test for the increment-14 fix (root-caused against
@@ -3727,8 +4371,18 @@ mod tests {
 
         step(&mut state, Action::CastSpell(robbery)).unwrap();
         let decision = pass_until_stack_resolves(&mut state);
-        assert!(matches!(decision, Decision::ChooseOptionalCost { sacrifice_payable: true, .. }));
-        step(&mut state, Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand)).unwrap();
+        assert!(matches!(
+            decision,
+            Decision::ChooseOptionalCost {
+                sacrifice_payable: true,
+                ..
+            }
+        ));
+        step(
+            &mut state,
+            Action::ChooseOptionalCost(OptionalCostChoice::SacrificeLand),
+        )
+        .unwrap();
 
         let picked = match advance_until_decision(&mut state) {
             Decision::ChooseCostTargets { candidates, .. } => candidates[0],
@@ -3741,13 +4395,22 @@ mod tests {
         // stack item before anyone's had a chance to respond to it (the
         // pre-fix bug silently dropped it: nothing would be here at all).
         let after_resolution = advance_until_decision(&mut state);
-        assert!(matches!(after_resolution, Decision::CastSpellOrPass { .. }), "got {after_resolution:?}");
+        assert!(
+            matches!(after_resolution, Decision::CastSpellOrPass { .. }),
+            "got {after_resolution:?}"
+        );
         assert_eq!(state.stack.len(), 1, "Sneaky Snacker's own return-from-graveyard trigger must be sitting on the stack, unresolved");
         assert_eq!(state.stack.last().unwrap().source, snacker);
 
         pass_until_stack_resolves(&mut state);
-        assert!(state.players[0].battlefield.contains(&snacker), "Sneaky Snacker must have returned to the battlefield");
-        assert!(state.objects.get(snacker).tapped, "\"return... to the battlefield tapped\"");
+        assert!(
+            state.players[0].battlefield.contains(&snacker),
+            "Sneaky Snacker must have returned to the battlefield"
+        );
+        assert!(
+            state.objects.get(snacker).tapped,
+            "\"return... to the battlefield tapped\""
+        );
     }
 
     #[test]
@@ -3759,7 +4422,15 @@ mod tests {
         step(&mut state, Action::PlotSpell(robbery)).unwrap();
         assert_eq!(state.objects.get(robbery).zone, Zone::Exile);
         assert_eq!(state.objects.get(robbery).plotted_turn, Some(state.turn));
-        assert_eq!(state.players[0].battlefield.iter().filter(|&&id| !state.objects.get(id).tapped).count(), 0, "Plot pays real mana");
+        assert_eq!(
+            state.players[0]
+                .battlefield
+                .iter()
+                .filter(|&&id| !state.objects.get(id).tapped)
+                .count(),
+            0,
+            "Plot pays real mana"
+        );
 
         // Same turn: not castable yet (702.163a).
         assert!(!castable_spells(PlayerId::P0, &state).contains(&robbery));
@@ -3767,22 +4438,40 @@ mod tests {
         // A later turn, still Main1: castable for free.
         state.turn += 1;
         state.players[0].mana_pool = [0; 6];
-        assert!(castable_spells(PlayerId::P0, &state).contains(&robbery), "Plotted card should be castable for free on a later turn");
+        assert!(
+            castable_spells(PlayerId::P0, &state).contains(&robbery),
+            "Plotted card should be castable for free on a later turn"
+        );
         step(&mut state, Action::CastSpell(robbery)).unwrap();
         assert_eq!(state.stack.len(), 1);
         assert_eq!(state.stack[0].source, robbery);
         // Free: no Mountain should have been tapped for this cast (both were
         // already tapped paying the Plot cost and stay that way).
-        assert_eq!(state.players[0].battlefield.iter().filter(|&&id| state.objects.get(id).tapped).count(), 2);
+        assert_eq!(
+            state.players[0]
+                .battlefield
+                .iter()
+                .filter(|&&id| state.objects.get(id).tapped)
+                .count(),
+            2
+        );
     }
 
     #[test]
     fn fiery_temper_discard_offers_madness_cast_for_r() {
         let mut state = ready_game_in_main1(1);
         let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
-        state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
+        state.engine.pending_discard = Some(PendingDiscard {
+            player: PlayerId::P0,
+            count: 1,
+            resume: DiscardResume::None,
+        });
         step(&mut state, Action::Discard(vec![temper])).unwrap();
-        assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding");
+        assert_eq!(
+            state.objects.get(temper).zone,
+            Zone::Exile,
+            "Madness exiles instead of graveyarding"
+        );
         assert!(state.players[0].graveyard.is_empty());
 
         // The Madness offer is a real triggered ability, sitting on the
@@ -3799,8 +4488,18 @@ mod tests {
             other => panic!("expected ChooseMadnessCast, got {other:?}"),
         }
         step(&mut state, Action::ChooseMadnessCast(true)).unwrap();
-        assert_eq!(state.stack.len(), 1, "the cast is announced (601.2a) before its cost is paid or its target chosen");
-        assert!(!state.players[0].battlefield.iter().any(|&id| state.objects.get(id).tapped), "cost isn't paid until targeting finishes");
+        assert_eq!(
+            state.stack.len(),
+            1,
+            "the cast is announced (601.2a) before its cost is paid or its target chosen"
+        );
+        assert!(
+            !state.players[0]
+                .battlefield
+                .iter()
+                .any(|&id| state.objects.get(id).tapped),
+            "cost isn't paid until targeting finishes"
+        );
 
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
@@ -3814,9 +4513,22 @@ mod tests {
         // the *next* pass through `advance_until_decision`'s loop, not
         // synchronously inside `step(ChooseTarget(..))` itself.
         pass_until_stack_resolves(&mut state);
-        assert!(state.players[0].battlefield.iter().all(|&id| state.objects.get(id).tapped), "madness cost {{R}} should have tapped the only Mountain");
-        assert_eq!(state.players[1].life, 17, "Fiery Temper still deals its normal 3 damage when cast via madness");
-        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "resolves to the graveyard as normal (madness doesn't change that)");
+        assert!(
+            state.players[0]
+                .battlefield
+                .iter()
+                .all(|&id| state.objects.get(id).tapped),
+            "madness cost {{R}} should have tapped the only Mountain"
+        );
+        assert_eq!(
+            state.players[1].life, 17,
+            "Fiery Temper still deals its normal 3 damage when cast via madness"
+        );
+        assert_eq!(
+            state.objects.get(temper).zone,
+            Zone::Graveyard,
+            "resolves to the graveyard as normal (madness doesn't change that)"
+        );
     }
 
     /// Root-caused against `game_20260713_002149_0004.txt` (decision 26) and
@@ -3830,15 +4542,23 @@ mod tests {
     #[test]
     fn fiery_temper_madness_attempt_fizzles_to_the_graveyard_when_unaffordable() {
         let mut state = empty_game(); // no Mountains: {R} is never payable
-        // Pinned to Main1 (matching the real corpus scenario this test's
-        // increment-15 addendum root-causes against) rather than whatever
-        // step `empty_game()` defaults to -- see that addendum below.
+                                      // Pinned to Main1 (matching the real corpus scenario this test's
+                                      // increment-15 addendum root-causes against) rather than whatever
+                                      // step `empty_game()` defaults to -- see that addendum below.
         state.step = Step::Main1;
         state.active_player = PlayerId::P0;
         let temper = put_in_hand(&mut state, PlayerId::P0, "Fiery Temper");
-        state.engine.pending_discard = Some(PendingDiscard { player: PlayerId::P0, count: 1, resume: DiscardResume::None });
+        state.engine.pending_discard = Some(PendingDiscard {
+            player: PlayerId::P0,
+            count: 1,
+            resume: DiscardResume::None,
+        });
         step(&mut state, Action::Discard(vec![temper])).unwrap();
-        assert_eq!(state.objects.get(temper).zone, Zone::Exile, "Madness exiles instead of graveyarding, same as the affordable case");
+        assert_eq!(
+            state.objects.get(temper).zone,
+            Zone::Exile,
+            "Madness exiles instead of graveyarding, same as the affordable case"
+        );
 
         // See `fiery_temper_discard_offers_madness_cast_for_r`'s comment:
         // the Madness offer is a real stack item, resolved only after both
@@ -3857,7 +4577,12 @@ mod tests {
         // SELECT_TARGETS record captures for an ultimately-unpayable
         // attempt.
         match advance_until_decision(&mut state) {
-            Decision::ChooseTargets { player, spell, legal_targets, .. } => {
+            Decision::ChooseTargets {
+                player,
+                spell,
+                legal_targets,
+                ..
+            } => {
                 assert_eq!(player, PlayerId::P0);
                 assert_eq!(spell, temper);
                 let target = Target::Player(PlayerId::P1);
@@ -3871,9 +4596,19 @@ mod tests {
         // attempt fail -- reverting to the graveyard (not back to exile,
         // and never landing on the stack/resolving).
         let after_abort = advance_until_decision(&mut state);
-        assert_eq!(state.objects.get(temper).zone, Zone::Graveyard, "a failed madness attempt goes to the graveyard, not back to exile");
-        assert!(state.stack.is_empty(), "the failed cast must not leave a stack item behind");
-        assert_eq!(state.players[1].life, 20, "no damage: the cast never actually resolved");
+        assert_eq!(
+            state.objects.get(temper).zone,
+            Zone::Graveyard,
+            "a failed madness attempt goes to the graveyard, not back to exile"
+        );
+        assert!(
+            state.stack.is_empty(),
+            "the failed cast must not leave a stack item behind"
+        );
+        assert_eq!(
+            state.players[1].life, 20,
+            "no damage: the cast never actually resolved"
+        );
 
         // Regression test (increment 15) for `abort_cast`'s own missing
         // priority reset -- root-caused against `game_20260713_002201_
@@ -3910,17 +4645,32 @@ mod tests {
         state.players[0].lands_played_this_turn = 1; // landfall satisfied
 
         step(&mut state, Action::CastSpell(blaze)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
-                assert_eq!(legal_targets, vec![Target::Object(victim)], "only P1's own creature is legal for the second target");
+                assert_eq!(
+                    legal_targets,
+                    vec![Target::Object(victim)],
+                    "only P1's own creature is legal for the second target"
+                );
                 step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
         }
         pass_until_stack_resolves(&mut state);
-        assert_eq!(state.players[1].life, 17, "landfall: 3 damage to the player");
-        assert_eq!(state.objects.get(victim).damage, 3, "landfall: 3 damage to the creature");
+        assert_eq!(
+            state.players[1].life, 17,
+            "landfall: 3 damage to the player"
+        );
+        assert_eq!(
+            state.objects.get(victim).damage,
+            3,
+            "landfall: 3 damage to the creature"
+        );
     }
 
     #[test]
@@ -3930,7 +4680,11 @@ mod tests {
         let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
 
         step(&mut state, Action::CastSpell(blaze)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
         pass_until_stack_resolves(&mut state);
         assert_eq!(state.players[1].life, 19);
@@ -3947,13 +4701,23 @@ mod tests {
         let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
 
         step(&mut state, Action::CastSpell(blaze)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         step(&mut state, Action::ChooseTarget(Target::Object(victim))).unwrap();
         // The creature leaves the battlefield before Searing Blaze resolves
         // (simulating e.g. an in-response removal spell).
-        event::propose_and_commit(&mut state, ProposedEvent::zone_change(victim, Zone::Graveyard));
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(victim, Zone::Graveyard),
+        );
         pass_until_stack_resolves(&mut state);
-        assert_eq!(state.players[1].life, 19, "the player is still hit for the full amount");
+        assert_eq!(
+            state.players[1].life, 19,
+            "the player is still hit for the full amount"
+        );
     }
 
     #[test]
@@ -3973,13 +4737,25 @@ mod tests {
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
                 assert!(legal_targets.contains(&Target::Object(counterspell)));
-                step(&mut state, Action::ChooseTarget(Target::Object(counterspell))).unwrap();
+                step(
+                    &mut state,
+                    Action::ChooseTarget(Target::Object(counterspell)),
+                )
+                .unwrap();
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
         }
         pass_until_stack_resolves(&mut state);
-        assert_eq!(state.objects.get(counterspell).zone, Zone::Graveyard, "a blue spell should be countered (moved to its owner's graveyard)");
-        assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard, "Pyroblast itself resolves to the graveyard as normal");
+        assert_eq!(
+            state.objects.get(counterspell).zone,
+            Zone::Graveyard,
+            "a blue spell should be countered (moved to its owner's graveyard)"
+        );
+        assert_eq!(
+            state.objects.get(pyroblast).zone,
+            Zone::Graveyard,
+            "Pyroblast itself resolves to the graveyard as normal"
+        );
     }
 
     #[test]
@@ -3996,8 +4772,16 @@ mod tests {
         // own, so actually letting it resolve too would panic on an empty
         // `ctx.targets`, unrelated to what this test is checking.
         pass_until_one_stack_item_resolves(&mut state);
-        assert_eq!(state.objects.get(bolt).zone, Zone::Stack, "Pyroblast's counter-mode targets any spell but only actually counters a blue one");
-        assert_eq!(state.objects.get(pyroblast).zone, Zone::Graveyard, "Pyroblast itself still resolves normally even when its effect no-ops");
+        assert_eq!(
+            state.objects.get(bolt).zone,
+            Zone::Stack,
+            "Pyroblast's counter-mode targets any spell but only actually counters a blue one"
+        );
+        assert_eq!(
+            state.objects.get(pyroblast).zone,
+            Zone::Graveyard,
+            "Pyroblast itself still resolves normally even when its effect no-ops"
+        );
     }
 
     #[test]
@@ -4030,7 +4814,10 @@ mod tests {
         step(&mut state, Action::ChooseSpellMode(0)).unwrap();
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
-                assert!(!legal_targets.contains(&Target::Object(bolt)), "REB's counter mode should never even offer a non-blue spell as a target");
+                assert!(
+                    !legal_targets.contains(&Target::Object(bolt)),
+                    "REB's counter mode should never even offer a non-blue spell as a target"
+                );
                 assert!(legal_targets.contains(&Target::Object(counterspell)));
             }
             other => panic!("expected ChooseTargets, got {other:?}"),
@@ -4045,7 +4832,11 @@ mod tests {
 
         step(&mut state, Action::CastSpell(pyroblast)).unwrap();
         step(&mut state, Action::ChooseSpellMode(0)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Object(counterspell))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Object(counterspell)),
+        )
+        .unwrap();
         // The target resolves and leaves the stack before Pyroblast does
         // (simulated directly here; the kernel's real priority/stack
         // ordering can't actually reach this shape with this pool's cards,
@@ -4106,10 +4897,24 @@ mod tests {
         }
         pass_until_stack_resolves(&mut state);
 
-        assert_eq!(effective_power(&state, bushwhacker), 2, "1/1 base +1/+0 from its own kicked ETB");
-        assert_eq!(effective_power(&state, voldaren), 2, "Voldaren Epicure is also a creature P0 controls");
-        assert!(can_attack(&state, bushwhacker), "kicked haste should let it attack despite just entering");
-        assert!(can_attack(&state, voldaren), "Voldaren Epicure should keep its own pre-existing ability to attack");
+        assert_eq!(
+            effective_power(&state, bushwhacker),
+            2,
+            "1/1 base +1/+0 from its own kicked ETB"
+        );
+        assert_eq!(
+            effective_power(&state, voldaren),
+            2,
+            "Voldaren Epicure is also a creature P0 controls"
+        );
+        assert!(
+            can_attack(&state, bushwhacker),
+            "kicked haste should let it attack despite just entering"
+        );
+        assert!(
+            can_attack(&state, voldaren),
+            "Voldaren Epicure should keep its own pre-existing ability to attack"
+        );
     }
 
     #[test]
@@ -4122,7 +4927,10 @@ mod tests {
         // same "no real choice" shortcut as `ChooseCastMode`.
         pass_until_stack_resolves(&mut state);
         assert_eq!(effective_power(&state, bushwhacker), 1);
-        assert!(!can_attack(&state, bushwhacker), "unkicked: no haste, and it just entered summoning sick");
+        assert!(
+            !can_attack(&state, bushwhacker),
+            "unkicked: no haste, and it just entered summoning sick"
+        );
     }
 
     #[test]
@@ -4151,7 +4959,10 @@ mod tests {
             Decision::CastSpellOrPass { player, .. } => assert_eq!(player, PlayerId::P0),
             other => panic!("expected fresh P0 priority after Bushwhacker resolves, got {other:?}"),
         }
-        assert!(state.stack.is_empty(), "603.4: declining Kicker means Bushwhacker's intervening-if ability never triggers");
+        assert!(
+            state.stack.is_empty(),
+            "603.4: declining Kicker means Bushwhacker's intervening-if ability never triggers"
+        );
     }
 
     #[test]
@@ -4165,8 +4976,15 @@ mod tests {
         }
         pass_until_stack_resolves(&mut state);
         assert_eq!(effective_power(&state, bushwhacker), 1);
-        let tapped_lands = state.players[0].battlefield.iter().filter(|&&id| state.objects.get(id).tapped).count();
-        assert_eq!(tapped_lands, 1, "only the base {{R}} cost should have been paid, not the declined kicker too");
+        let tapped_lands = state.players[0]
+            .battlefield
+            .iter()
+            .filter(|&&id| state.objects.get(id).tapped)
+            .count();
+        assert_eq!(
+            tapped_lands, 1,
+            "only the base {{R}} cost should have been paid, not the declined kicker too"
+        );
     }
 
     #[test]
@@ -4180,15 +4998,36 @@ mod tests {
         pass_until_stack_resolves(&mut state);
 
         let token_def = card_id_by_name("Human Soldier Token").unwrap();
-        let tokens: Vec<ObjectId> = state.players[0].battlefield.iter().copied().filter(|&id| state.objects.get(id).card_def == token_def).collect();
-        assert_eq!(tokens.len(), 2, "should create exactly two Human Soldier tokens");
+        let tokens: Vec<ObjectId> = state.players[0]
+            .battlefield
+            .iter()
+            .copied()
+            .filter(|&id| state.objects.get(id).card_def == token_def)
+            .collect();
+        assert_eq!(
+            tokens.len(),
+            2,
+            "should create exactly two Human Soldier tokens"
+        );
 
-        assert!(has_effective_keyword(&state, human, Keywords::HASTE), "Burning-Tree Emissary is Human, should gain haste");
+        assert!(
+            has_effective_keyword(&state, human, Keywords::HASTE),
+            "Burning-Tree Emissary is Human, should gain haste"
+        );
         for &t in &tokens {
-            assert!(has_effective_keyword(&state, t, Keywords::HASTE), "the tokens are Human Soldiers themselves");
-            assert!(can_attack(&state, t), "a hasty token should be able to attack the turn it's created");
+            assert!(
+                has_effective_keyword(&state, t, Keywords::HASTE),
+                "the tokens are Human Soldiers themselves"
+            );
+            assert!(
+                can_attack(&state, t),
+                "a hasty token should be able to attack the turn it's created"
+            );
         }
-        assert!(!has_effective_keyword(&state, non_human, Keywords::HASTE), "Goblin Tomb Raider isn't Human and controls no artifact here");
+        assert!(
+            !has_effective_keyword(&state, non_human, Keywords::HASTE),
+            "Goblin Tomb Raider isn't Human and controls no artifact here"
+        );
     }
 
     #[test]
@@ -4200,8 +5039,16 @@ mod tests {
         assert!(!has_effective_keyword(&state, raider, Keywords::HASTE));
 
         put_on_battlefield(&mut state, PlayerId::P0, "Great Furnace");
-        assert_eq!(effective_power(&state, raider), 2, "+1/+0 while controlling an artifact");
-        assert_eq!(effective_toughness(&state, raider), 2, "the boost is +1/+0, toughness unaffected");
+        assert_eq!(
+            effective_power(&state, raider),
+            2,
+            "+1/+0 while controlling an artifact"
+        );
+        assert_eq!(
+            effective_toughness(&state, raider),
+            2,
+            "the boost is +1/+0, toughness unaffected"
+        );
         assert!(has_effective_keyword(&state, raider, Keywords::HASTE));
     }
 
@@ -4210,7 +5057,11 @@ mod tests {
         let mut state = ready_game_in_main1(1);
         let blast = put_in_hand(&mut state, PlayerId::P0, "Galvanic Blast");
         step(&mut state, Action::CastSpell(blast)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         pass_until_stack_resolves(&mut state);
         assert_eq!(state.players[1].life, 18);
     }
@@ -4223,9 +5074,16 @@ mod tests {
         put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
         let blast = put_in_hand(&mut state, PlayerId::P0, "Galvanic Blast");
         step(&mut state, Action::CastSpell(blast)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         pass_until_stack_resolves(&mut state);
-        assert_eq!(state.players[1].life, 16, "3+ artifacts controlled: Metalcraft deals 4 instead of 2");
+        assert_eq!(
+            state.players[1].life, 16,
+            "3+ artifacts controlled: Metalcraft deals 4 instead of 2"
+        );
     }
 
     #[test]
@@ -4242,8 +5100,15 @@ mod tests {
         assert_eq!(state.players[1].life, 19);
         assert_eq!(state.objects.get(p1_a).damage, 1);
         assert_eq!(state.objects.get(p1_b).damage, 1);
-        assert_eq!(state.objects.get(p0_creature).damage, 0, "only the opponent and their own creatures are hit");
-        assert_eq!(state.players[0].life, 20, "the caster themself isn't damaged");
+        assert_eq!(
+            state.objects.get(p0_creature).damage,
+            0,
+            "only the opponent and their own creatures are hit"
+        );
+        assert_eq!(
+            state.players[0].life, 20,
+            "the caster themself isn't damaged"
+        );
     }
 
     #[test]
@@ -4251,8 +5116,14 @@ mod tests {
         let mut state = ready_game_in_main1(3);
         let synth = put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
         match advance_until_decision(&mut state) {
-            Decision::CastSpellOrPass { activatable_abilities, .. } => {
-                assert!(activatable_abilities.contains(&(synth, 0)), "should be activatable at sorcery speed with an empty stack");
+            Decision::CastSpellOrPass {
+                activatable_abilities,
+                ..
+            } => {
+                assert!(
+                    activatable_abilities.contains(&(synth, 0)),
+                    "should be activatable at sorcery speed with an empty stack"
+                );
             }
             other => panic!("expected CastSpellOrPass, got {other:?}"),
         }
@@ -4261,10 +5132,16 @@ mod tests {
 
         let samurai_def = card_id_by_name("Samurai Token").unwrap();
         assert!(
-            state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == samurai_def),
+            state.players[0]
+                .battlefield
+                .iter()
+                .any(|&id| state.objects.get(id).card_def == samurai_def),
             "should have created a Samurai Token"
         );
-        assert!(!state.players[0].battlefield.contains(&synth), "Experimental Synthesizer sacrificed itself to pay the cost");
+        assert!(
+            !state.players[0].battlefield.contains(&synth),
+            "Experimental Synthesizer sacrificed itself to pay the cost"
+        );
     }
 
     #[test]
@@ -4273,15 +5150,22 @@ mod tests {
         let synth = put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
         put_on_stack(&mut state, PlayerId::P0, "Lightning Bolt");
         match advance_until_decision(&mut state) {
-            Decision::CastSpellOrPass { activatable_abilities, .. } => {
-                assert!(!activatable_abilities.contains(&(synth, 0)), "sorcery-speed-only: illegal with something already on the stack");
+            Decision::CastSpellOrPass {
+                activatable_abilities,
+                ..
+            } => {
+                assert!(
+                    !activatable_abilities.contains(&(synth, 0)),
+                    "sorcery-speed-only: illegal with something already on the stack"
+                );
             }
             other => panic!("expected CastSpellOrPass, got {other:?}"),
         }
     }
 
     fn set_library_top(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id =
+            card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -4294,7 +5178,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].library.insert(0, obj_id);
         obj_id
@@ -4312,26 +5196,42 @@ mod tests {
         step(&mut state, Action::CastSpell(synth)).unwrap();
         pass_until_stack_resolves(&mut state);
 
-        assert_eq!(state.objects.get(bolt_id).zone, Zone::Exile, "the ETB trigger should have exiled the top card");
+        assert_eq!(
+            state.objects.get(bolt_id).zone,
+            Zone::Exile,
+            "the ETB trigger should have exiled the top card"
+        );
         assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
         match advance_until_decision(&mut state) {
-            Decision::CastSpellOrPass { castable_spells, .. } => assert!(castable_spells.contains(&bolt_id), "should be playable this turn"),
+            Decision::CastSpellOrPass {
+                castable_spells, ..
+            } => assert!(
+                castable_spells.contains(&bolt_id),
+                "should be playable this turn"
+            ),
             other => panic!("expected CastSpellOrPass, got {other:?}"),
         }
 
         while state.step != Step::Cleanup {
             advance_step(&mut state);
         }
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "an 'until end of turn' window closes at this turn's own cleanup");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_none(),
+            "an 'until end of turn' window closes at this turn's own cleanup"
+        );
     }
 
     #[test]
-    fn clockwork_percussionist_dies_impulse_draw_survives_the_opponents_turn_and_expires_after_owners_next_turn() {
+    fn clockwork_percussionist_dies_impulse_draw_survives_the_opponents_turn_and_expires_after_owners_next_turn(
+    ) {
         let mut state = ready_game_in_main1(0);
         let bolt_id = set_library_top(&mut state, PlayerId::P0, "Lightning Bolt");
         let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
 
-        event::propose_and_commit(&mut state, ProposedEvent::zone_change(percussionist, Zone::Graveyard));
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(percussionist, Zone::Graveyard),
+        );
         collect_and_queue_triggers(&mut state);
         loop {
             if state.engine.pending_triggers.is_empty() && state.stack.is_empty() {
@@ -4343,14 +5243,21 @@ mod tests {
             }
         }
 
-        assert_eq!(state.objects.get(bolt_id).zone, Zone::Exile, "the dies trigger should have exiled the top card");
+        assert_eq!(
+            state.objects.get(bolt_id).zone,
+            Zone::Exile,
+            "the dies trigger should have exiled the top card"
+        );
         assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some());
 
         // Rest of this same turn (P0's): survives its own cleanup.
         while state.step != Step::Cleanup {
             advance_step(&mut state);
         }
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "survives this turn's own cleanup (not the owner's next turn yet)");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_some(),
+            "survives this turn's own cleanup (not the owner's next turn yet)"
+        );
 
         // -> P1's Untap: the opponent's whole turn.
         advance_step(&mut state);
@@ -4359,18 +5266,27 @@ mod tests {
         while state.step != Step::Cleanup {
             advance_step(&mut state);
         }
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "survives the opponent's whole turn too");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_some(),
+            "survives the opponent's whole turn too"
+        );
 
         // -> P0's Untap: the owner's own next turn begins.
         advance_step(&mut state);
         assert_eq!(state.active_player, PlayerId::P0);
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_some(), "the owner's next turn has begun; still open");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_some(),
+            "the owner's next turn has begun; still open"
+        );
 
         // Through to that turn's own cleanup, where it finally expires.
         while state.step != Step::Cleanup {
             advance_step(&mut state);
         }
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "expires at the owner's next turn's own cleanup");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_none(),
+            "expires at the owner's next turn's own cleanup"
+        );
     }
 
     #[test]
@@ -4384,7 +5300,11 @@ mod tests {
         deal_combat_damage(&mut state);
 
         assert_eq!(state.objects.get(percussionist).zone, Zone::Graveyard);
-        assert_eq!(state.engine.pending_triggers.len(), 1, "the SBA-created death event must be collected before the next priority window");
+        assert_eq!(
+            state.engine.pending_triggers.len(),
+            1,
+            "the SBA-created death event must be collected before the next priority window"
+        );
         assert_eq!(state.engine.pending_triggers[0].source, percussionist);
     }
 
@@ -4392,7 +5312,10 @@ mod tests {
     fn trigger_collection_preserves_pre_sba_etb_and_collects_sba_created_death_together() {
         let mut state = empty_game();
         let epicure = put_in_hand(&mut state, PlayerId::P1, "Voldaren Epicure");
-        event::propose_and_commit(&mut state, ProposedEvent::zone_change(epicure, Zone::Battlefield));
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(epicure, Zone::Battlefield),
+        );
         let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
 
         // Model two creatures that are lethal at the next SBA check. The
@@ -4410,7 +5333,10 @@ mod tests {
         assert_eq!(state.objects.get(epicure).zone, Zone::Graveyard);
         assert_eq!(state.objects.get(percussionist).zone, Zone::Graveyard);
         assert_eq!(state.engine.pending_triggers.len(), 2);
-        assert_eq!(state.engine.pending_triggers[0].source, percussionist, "the active player's SBA-created dies trigger is ordered first");
+        assert_eq!(
+            state.engine.pending_triggers[0].source, percussionist,
+            "the active player's SBA-created dies trigger is ordered first"
+        );
         assert_eq!(state.engine.pending_triggers[1].source, epicure, "the nonactive player's pre-SBA ETB trigger survives its source dying and is ordered second");
     }
 
@@ -4426,13 +5352,28 @@ mod tests {
         // Exactly the ETB's {R}{G} floating (the 2 Mountains that paid the
         // cost are spent, not left over -- `mana::pay_plan` nets them to
         // zero before this trigger's own `AddMana` ever runs).
-        assert_eq!(state.players[0].mana_pool[crate::mana::ManaColor::R.pool_index()], 1);
-        assert_eq!(state.players[0].mana_pool[crate::mana::ManaColor::G.pool_index()], 1);
+        assert_eq!(
+            state.players[0].mana_pool[crate::mana::ManaColor::R.pool_index()],
+            1
+        );
+        assert_eq!(
+            state.players[0].mana_pool[crate::mana::ManaColor::G.pool_index()],
+            1
+        );
 
-        assert!(!state.objects.get(bte).tapped, "the mana came from its ETB trigger, not from tapping it");
-        assert!(available_mana_abilities(PlayerId::P0, &state).is_empty(), "Burning-Tree Emissary has no repeatable tap ability");
+        assert!(
+            !state.objects.get(bte).tapped,
+            "the mana came from its ETB trigger, not from tapping it"
+        );
+        assert!(
+            available_mana_abilities(PlayerId::P0, &state).is_empty(),
+            "Burning-Tree Emissary has no repeatable tap ability"
+        );
         let sources = crate::mana::gather_sources(PlayerId::P0, &state);
-        assert!(!sources.iter().any(|s| s.id == bte), "the mana solver must never treat it as a tappable source (root-caused this increment)");
+        assert!(
+            !sources.iter().any(|s| s.id == bte),
+            "the mana solver must never treat it as a tappable source (root-caused this increment)"
+        );
     }
 
     #[test]
@@ -4440,10 +5381,17 @@ mod tests {
         let mut state = ready_game_in_main1(1);
         let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
         step(&mut state, Action::CastSpell(bolt)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         pass_until_stack_resolves(&mut state);
 
-        assert_eq!(state.players[1].life, 17, "the mandatory 3 damage always happens");
+        assert_eq!(
+            state.players[1].life, 17,
+            "the mandatory 3 damage always happens"
+        );
         assert!(state.engine.halted.is_none(), "declining is the only legal choice when {{R}}{{R}} is unaffordable, so the walk continues normally");
     }
 
@@ -4457,7 +5405,11 @@ mod tests {
         put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
 
         step(&mut state, Action::CastSpell(bolt)).unwrap();
-        step(&mut state, Action::ChooseTarget(Target::Player(PlayerId::P1))).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
         match pass_until_stack_resolves(&mut state) {
             Decision::Halted { mechanic, source } => {
                 assert_eq!(mechanic, UnsupportedMechanic::SpellCopy);
@@ -4465,7 +5417,10 @@ mod tests {
             }
             other => panic!("expected Decision::Halted, got {other:?}"),
         }
-        assert_eq!(state.players[1].life, 17, "the mandatory damage still happened before the halt");
+        assert_eq!(
+            state.players[1].life, 17,
+            "the mandatory damage still happened before the halt"
+        );
     }
 
     #[test]
@@ -4481,11 +5436,19 @@ mod tests {
 
         assert_eq!(state.engine.until_end_of_turn.len(), 1);
         match &state.engine.until_end_of_turn[0] {
-            UntilEndOfTurnEffect::ResolvedSetEffect { layer, duration, object_ids, .. } => {
+            UntilEndOfTurnEffect::ResolvedSetEffect {
+                layer,
+                duration,
+                object_ids,
+                ..
+            } => {
                 assert!(layer.has(Layers::POWER_TOUGHNESS), "grants +1/+0");
                 assert!(layer.has(Layers::ABILITY_ADDING), "grants Haste");
                 assert_eq!(*duration, EffectDuration::EndOfTurn);
-                assert!(object_ids.contains(&bushwhacker), "611.2c: the resolving effect's own locked-in set includes itself");
+                assert!(
+                    object_ids.contains(&bushwhacker),
+                    "611.2c: the resolving effect's own locked-in set includes itself"
+                );
             }
             other => panic!("expected ResolvedSetEffect, got {other:?}"),
         }
@@ -4496,7 +5459,10 @@ mod tests {
         let mut state = ready_game_in_main1(0);
         let bolt_id = set_library_top(&mut state, PlayerId::P0, "Lightning Bolt");
         let percussionist = put_on_battlefield(&mut state, PlayerId::P0, "Clockwork Percussionist");
-        event::propose_and_commit(&mut state, ProposedEvent::zone_change(percussionist, Zone::Graveyard));
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(percussionist, Zone::Graveyard),
+        );
         collect_and_queue_triggers(&mut state);
         loop {
             if state.engine.pending_triggers.is_empty() && state.stack.is_empty() {
@@ -4513,14 +5479,23 @@ mod tests {
         // of the permission (e.g. a hypothetical graveyard-hate effect) --
         // CR 400.7: this alone must void the permission, not just actually
         // playing it.
-        event::propose_and_commit(&mut state, ProposedEvent::zone_change(bolt_id, Zone::Graveyard));
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "any further zone change voids the permission");
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(bolt_id, Zone::Graveyard),
+        );
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_none(),
+            "any further zone change voids the permission"
+        );
 
         // Even if it later returns to exile by some other means, the
         // *stale* `exile_play_permissions` entry (never explicitly removed)
         // must not reactivate: the generation moved twice, never back to
         // the exact snapshot the permission was granted at.
         event::propose_and_commit(&mut state, ProposedEvent::zone_change(bolt_id, Zone::Exile));
-        assert!(active_permission_for(PlayerId::P0, bolt_id, &state).is_none(), "a later re-arrival in exile must not resurrect a stale permission");
+        assert!(
+            active_permission_for(PlayerId::P0, bolt_id, &state).is_none(),
+            "a later re-arrival in exile must not resurrect a stale permission"
+        );
     }
 }

@@ -86,7 +86,10 @@ fn main() {
     if std::env::var("REPLAY_DEBUG").is_err() {
         std::panic::set_hook(Box::new(|_| {}));
     }
-    let root = std::env::args().nth(1).map(PathBuf::from).expect("usage: replay_burn_v2 <v4 corpus dir>");
+    let root = std::env::args()
+        .nth(1)
+        .map(PathBuf::from)
+        .expect("usage: replay_burn_v2 <v4 corpus dir>");
 
     // --- Gate 1: corpus provenance (see this file's module doc, point 5) ---
     match load_manifest(&root) {
@@ -102,11 +105,16 @@ fn main() {
                 }
             }
             let skip_compensation = manifest.reference_rules_version >= 2;
-            SKIP_V1_EXILED_EVER_COMPENSATION.store(skip_compensation, std::sync::atomic::Ordering::Relaxed);
+            SKIP_V1_EXILED_EVER_COMPENSATION
+                .store(skip_compensation, std::sync::atomic::Ordering::Relaxed);
             println!(
                 "reference_rules_version={} -> v1 exiled_ever library-size compensation {}",
                 manifest.reference_rules_version,
-                if skip_compensation { "SKIPPED (v2 corpus)" } else { "APPLIED (v1/legacy corpus)" }
+                if skip_compensation {
+                    "SKIPPED (v2 corpus)"
+                } else {
+                    "APPLIED (v1/legacy corpus)"
+                }
             );
         }
         None => {
@@ -120,7 +128,11 @@ fn main() {
     }
 
     let (traces, errors) = trace::load_corpus(&root);
-    println!("traces parsed: {}   parse errors: {}", traces.len(), errors.len());
+    println!(
+        "traces parsed: {}   parse errors: {}",
+        traces.len(),
+        errors.len()
+    );
     for e in errors.iter().take(5) {
         println!("  ERR {e}");
     }
@@ -128,16 +140,31 @@ fn main() {
     // --- Gate 2: corpus invariant validation (see this file's module doc, point 4) ---
     let invariants = validate_corpus_invariants(&traces);
     println!("\n--- corpus invariant validation ---");
-    println!("phantom (episode<0) records found by this parser: {} (manifest claims 0 at lock)", invariants.phantom_total);
-    println!("SELECT_TARGETS records scanned: {}", invariants.select_targets_total);
-    println!("SELECT_TARGETS distinct semantic keys: {}", invariants.select_targets_distinct_keys);
-    println!("SELECT_TARGETS semantic-key collisions (echo/duplicate-logging candidates): {}", invariants.violations.len());
+    println!(
+        "phantom (episode<0) records found by this parser: {} (manifest claims 0 at lock)",
+        invariants.phantom_total
+    );
+    println!(
+        "SELECT_TARGETS records scanned: {}",
+        invariants.select_targets_total
+    );
+    println!(
+        "SELECT_TARGETS distinct semantic keys: {}",
+        invariants.select_targets_distinct_keys
+    );
+    println!(
+        "SELECT_TARGETS semantic-key collisions (echo/duplicate-logging candidates): {}",
+        invariants.violations.len()
+    );
     if invariants.phantom_total == 0 && invariants.violations.is_empty() {
         println!("corpus invariant validation: PASS");
     } else {
         println!("corpus invariant validation: FAIL -- refusing to replay");
         for v in invariants.violations.iter().take(20) {
-            println!("  COLLISION file={} player={} key={} first_ordinal={} second_ordinal={}", v.file, v.player, v.key, v.first_occurrence_ordinal, v.second_occurrence_ordinal);
+            println!(
+                "  COLLISION file={} player={} key={} first_ordinal={} second_ordinal={}",
+                v.file, v.player, v.key, v.first_occurrence_ordinal, v.second_occurrence_ordinal
+            );
         }
         std::process::exit(1);
     }
@@ -184,13 +211,25 @@ fn main() {
             }
         }
         let reason_for_triage = if outcome.reached_game_over {
-            if outcome.winner_matched { "COMPLETE:winner-matched".to_string() } else { "COMPLETE:winner-mismatch".to_string() }
+            if outcome.winner_matched {
+                "COMPLETE:winner-matched".to_string()
+            } else {
+                "COMPLETE:winner-mismatch".to_string()
+            }
         } else if let Some(reason) = &outcome.halted {
             format!("HALTED:{reason}")
         } else {
-            outcome.divergence.clone().unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
+            outcome
+                .divergence
+                .clone()
+                .unwrap_or_else(|| "no-divergence-no-game-over(?)".to_string())
         };
-        triage.push((outcome.decisions_consumed, outcome.decisions_total, reason_for_triage, t.source_path.clone()));
+        triage.push((
+            outcome.decisions_consumed,
+            outcome.decisions_total,
+            reason_for_triage,
+            t.source_path.clone(),
+        ));
         if let Some(reason) = outcome.halted {
             // Classified, not a divergence -- see ReplayOutcome::halted's
             // doc. Quarantined into its own bucket, not the parity
@@ -208,7 +247,11 @@ fn main() {
         triage.sort_by(|a, b| b.0.cmp(&a.0));
         println!("\n--- triage (sorted by decisions_consumed desc) ---");
         for (consumed, total, reason, path) in &triage {
-            let pct = if *total > 0 { 100.0 * *consumed as f64 / *total as f64 } else { 0.0 };
+            let pct = if *total > 0 {
+                100.0 * *consumed as f64 / *total as f64
+            } else {
+                0.0
+            };
             println!("  {consumed:>4}/{total:<4} ({pct:>5.1}%)  {reason:<50} {path}");
         }
     }
@@ -239,7 +282,11 @@ fn main() {
     println!(
         "silent-window auto-resolutions, same-caster reprompt after their own cast/activation this round (informational): {stack_top_is_casters_own_total}"
     );
-    let pct = if decisions_total_total > 0 { 100.0 * decisions_consumed_total as f64 / decisions_total_total as f64 } else { 0.0 };
+    let pct = if decisions_total_total > 0 {
+        100.0 * decisions_consumed_total as f64 / decisions_total_total as f64
+    } else {
+        0.0
+    };
     println!(
         "real (non-mulligan) decisions gate-checked and applied before GameOver/divergence: {decisions_consumed_total} / {decisions_total_total} ({pct:.1}%)"
     );
@@ -270,27 +317,54 @@ fn main() {
 
     if std::env::var("CHECK_TRIGGER_COMMUTATIVITY").is_ok() {
         println!("\n=== trigger-order commutativity audit (CHECK_TRIGGER_COMMUTATIVITY) ===");
-        println!("same-controller 2+-trigger groups checked: {}", commutativity_total.groups_checked);
+        println!(
+            "same-controller 2+-trigger groups checked: {}",
+            commutativity_total.groups_checked
+        );
         println!("  commutative:     {}", commutativity_total.commutative);
         println!("  NONCOMMUTATIVE:  {}", commutativity_total.noncommutative);
         if commutativity_total.skipped_too_large > 0 {
-            println!("  skipped (group size > 7, factorial-blowup guard): {}", commutativity_total.skipped_too_large);
+            println!(
+                "  skipped (group size > 7, factorial-blowup guard): {}",
+                commutativity_total.skipped_too_large
+            );
         }
         if commutativity_total.noncommutative > 0 {
             println!();
-            println!("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            println!("!! NONCOMMUTATIVE TRIGGER ORDERING FOUND -- {} group(s) of {} checked !!", commutativity_total.noncommutative, commutativity_total.groups_checked);
-            println!("!! At least one same-controller trigger group's final state DEPENDS on the  !!");
-            println!("!! order chosen (603.3b) -- trigger-ordering correctness is no longer a      !!");
-            println!("!! someday item; see the detail(s) below.                                    !!");
-            println!("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            for (i, detail) in commutativity_total.noncommutative_details.iter().enumerate() {
+            println!(
+                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            );
+            println!(
+                "!! NONCOMMUTATIVE TRIGGER ORDERING FOUND -- {} group(s) of {} checked !!",
+                commutativity_total.noncommutative, commutativity_total.groups_checked
+            );
+            println!(
+                "!! At least one same-controller trigger group's final state DEPENDS on the  !!"
+            );
+            println!(
+                "!! order chosen (603.3b) -- trigger-ordering correctness is no longer a      !!"
+            );
+            println!(
+                "!! someday item; see the detail(s) below.                                    !!"
+            );
+            println!(
+                "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            );
+            for (i, detail) in commutativity_total
+                .noncommutative_details
+                .iter()
+                .enumerate()
+            {
                 println!("\n  [{}] {detail}", i + 1);
             }
         } else if commutativity_total.groups_checked > 0 {
-            println!("\nAll checked same-controller trigger groups are commutative in this corpus.");
+            println!(
+                "\nAll checked same-controller trigger groups are commutative in this corpus."
+            );
         } else {
-            println!("\nNo same-controller 2+-trigger groups were ever encountered in this corpus run.");
+            println!(
+                "\nNo same-controller 2+-trigger groups were ever encountered in this corpus run."
+            );
         }
     }
 }
@@ -318,9 +392,20 @@ fn load_manifest(root: &Path) -> Option<CorpusManifest> {
     let v: serde_json::Value = serde_json::from_str(&text).ok()?;
     Some(CorpusManifest {
         java_oracle_commit: v.get("java_oracle_commit")?.as_str()?.to_string(),
-        corpus: v.get("corpus").and_then(|x| x.as_str()).unwrap_or("?").to_string(),
-        status: v.get("status").and_then(|x| x.as_str()).unwrap_or("?").to_string(),
-        reference_rules_version: v.get("reference_rules_version").and_then(|x| x.as_i64()).unwrap_or(1),
+        corpus: v
+            .get("corpus")
+            .and_then(|x| x.as_str())
+            .unwrap_or("?")
+            .to_string(),
+        status: v
+            .get("status")
+            .and_then(|x| x.as_str())
+            .unwrap_or("?")
+            .to_string(),
+        reference_rules_version: v
+            .get("reference_rules_version")
+            .and_then(|x| x.as_i64())
+            .unwrap_or(1),
     })
 }
 
@@ -355,7 +440,8 @@ fn load_manifest(root: &Path) -> Option<CorpusManifest> {
 /// exact before/after scoreboard. This is exactly the transition the
 /// addendum's own "New manifest.json field" section warned a v2-aware
 /// replay driver must make.
-static SKIP_V1_EXILED_EVER_COMPENSATION: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+static SKIP_V1_EXILED_EVER_COMPENSATION: std::sync::atomic::AtomicBool =
+    std::sync::atomic::AtomicBool::new(false);
 
 // ==================== corpus invariant validation ====================
 
@@ -433,7 +519,11 @@ fn validate_corpus_invariants(traces: &[GoldenTrace]) -> CorpusInvariantReport {
         }
 
         for player_name in players {
-            let stream: Vec<&DecisionRecord> = t.decisions.iter().filter(|d| d.player == player_name).collect();
+            let stream: Vec<&DecisionRecord> = t
+                .decisions
+                .iter()
+                .filter(|d| d.player == player_name)
+                .collect();
             let mut episode_start: Option<u32> = None;
             let mut episode_source: String = String::new();
             // Distinct decision_numbers seen so far in the current episode,
@@ -457,10 +547,19 @@ fn validate_corpus_invariants(traces: &[GoldenTrace]) -> CorpusInvariantReport {
                     episode_calls.clear();
                 }
 
-                let slot = episode_calls.iter().position(|(dn, _)| *dn == rec.decision_number);
+                let slot = episode_calls
+                    .iter()
+                    .position(|(dn, _)| *dn == rec.decision_number);
                 let target_slot = slot.unwrap_or(episode_calls.len());
-                let accumulated: Vec<&str> = episode_calls[..target_slot].iter().map(|(_, name)| name.as_str()).collect();
-                let key = format!("{player_name}:{}:{target_slot}:[{}]", episode_start.expect("just set above"), accumulated.join("|"));
+                let accumulated: Vec<&str> = episode_calls[..target_slot]
+                    .iter()
+                    .map(|(_, name)| name.as_str())
+                    .collect();
+                let key = format!(
+                    "{player_name}:{}:{target_slot}:[{}]",
+                    episode_start.expect("just set above"),
+                    accumulated.join("|")
+                );
 
                 match seen_keys.get(&key) {
                     Some(&first_ordinal) => {
@@ -479,7 +578,12 @@ fn validate_corpus_invariants(traces: &[GoldenTrace]) -> CorpusInvariantReport {
                 }
 
                 if slot.is_none() {
-                    let chosen_name = rec.chosen_indices.first().and_then(|&i| rec.candidate_texts.get(i as usize)).cloned().unwrap_or_default();
+                    let chosen_name = rec
+                        .chosen_indices
+                        .first()
+                        .and_then(|&i| rec.candidate_texts.get(i as usize))
+                        .cloned()
+                        .unwrap_or_default();
                     episode_calls.push((rec.decision_number, chosen_name));
                 }
             }
@@ -548,7 +652,8 @@ impl CommutativityStats {
         self.commutative += other.commutative;
         self.noncommutative += other.noncommutative;
         self.skipped_too_large += other.skipped_too_large;
-        self.noncommutative_details.extend(other.noncommutative_details);
+        self.noncommutative_details
+            .extend(other.noncommutative_details);
     }
 
     fn record(&mut self, outcome: CommutativityCheck) {
@@ -632,14 +737,17 @@ fn advance_to_quiescent_boundary(state: &mut GameState) -> Decision {
         let decision = engine::advance_until_decision(state);
         match &decision {
             Decision::CastSpellOrPass { .. } if !state.stack.is_empty() => {
-                engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+                engine::step(state, Action::Pass)
+                    .expect("Pass is always legal in an offered priority window");
             }
             Decision::OrderTriggers { pending, .. } => {
                 let n = pending.len();
-                engine::step(state, Action::OrderTriggers((0..n).collect())).expect("identity permutation is always a legal ordering");
+                engine::step(state, Action::OrderTriggers((0..n).collect()))
+                    .expect("identity permutation is always a legal ordering");
             }
             Decision::ChooseMadnessCast { .. } => {
-                engine::step(state, Action::ChooseMadnessCast(false)).expect("declining a madness cast is always legal");
+                engine::step(state, Action::ChooseMadnessCast(false))
+                    .expect("declining a madness cast is always legal");
             }
             _ => return decision,
         }
@@ -673,7 +781,10 @@ fn advance_to_quiescent_boundary(state: &mut GameState) -> Decision {
 fn canonical_snapshot(state: &GameState) -> String {
     let describe_permanent = |&id: &ObjectId| {
         let o = state.objects.get(id);
-        format!("{}(tapped={},sick={},dmg={},+1/+1={})", o.name, o.tapped, o.summoning_sick, o.damage, o.counters.plus1_plus1)
+        format!(
+            "{}(tapped={},sick={},dmg={},+1/+1={})",
+            o.name, o.tapped, o.summoning_sick, o.damage, o.counters.plus1_plus1
+        )
     };
     let describe_card = |&id: &ObjectId| state.objects.get(id).name.clone();
     let describe_player = |p: PlayerId| {
@@ -691,12 +802,29 @@ fn canonical_snapshot(state: &GameState) -> String {
             ps.life, ps.has_lost,
         )
     };
-    let mut exile: Vec<String> = state.exile.iter().map(|&id| format!("{}(owner={:?})", state.objects.get(id).name, state.objects.get(id).owner)).collect();
+    let mut exile: Vec<String> = state
+        .exile
+        .iter()
+        .map(|&id| {
+            format!(
+                "{}(owner={:?})",
+                state.objects.get(id).name,
+                state.objects.get(id).owner
+            )
+        })
+        .collect();
     exile.sort();
     let stack: Vec<String> = state
         .stack
         .iter()
-        .map(|s| format!("{}(controller={:?},madness_offer={})", state.objects.get(s.source).name, s.controller, s.madness_offer))
+        .map(|s| {
+            format!(
+                "{}(controller={:?},madness_offer={})",
+                state.objects.get(s.source).name,
+                s.controller,
+                s.madness_offer
+            )
+        })
         .collect();
     format!(
         "turn={} step={:?} active_player={:?} exile={exile:?} stack={stack:?} P0[{}] P1[{}]",
@@ -712,7 +840,10 @@ fn canonical_snapshot(state: &GameState) -> String {
 /// exactly as of the moment `Decision::OrderTriggers` was raised for
 /// `pending` (a same-controller group of 2+), before any permutation is
 /// applied to the *real* replay.
-fn check_trigger_commutativity(state: &GameState, pending: &[PendingTrigger]) -> CommutativityCheck {
+fn check_trigger_commutativity(
+    state: &GameState,
+    pending: &[PendingTrigger],
+) -> CommutativityCheck {
     let n = pending.len();
     if n > 7 {
         // 7! = 5040 clones is already an absurd amount of work for a
@@ -726,7 +857,8 @@ fn check_trigger_commutativity(state: &GameState, pending: &[PendingTrigger]) ->
     let mut results: Vec<(Vec<usize>, String)> = Vec::with_capacity(permutations(n).len());
     for perm in permutations(n) {
         let mut clone = state.clone();
-        engine::step(&mut clone, Action::OrderTriggers(perm.clone())).expect("every generated permutation is a legal ordering of this group");
+        engine::step(&mut clone, Action::OrderTriggers(perm.clone()))
+            .expect("every generated permutation is a legal ordering of this group");
         advance_to_quiescent_boundary(&mut clone);
         results.push((perm, canonical_snapshot(&clone)));
     }
@@ -736,8 +868,14 @@ fn check_trigger_commutativity(state: &GameState, pending: &[PendingTrigger]) ->
         return CommutativityCheck::Commutative;
     }
 
-    let sources: Vec<String> = pending.iter().map(|t| state.objects.get(t.source).name.clone()).collect();
-    let mut detail = format!("controller={:?} sources={sources:?} group_size={n} -- permutation outcomes:", pending[0].controller);
+    let sources: Vec<String> = pending
+        .iter()
+        .map(|t| state.objects.get(t.source).name.clone())
+        .collect();
+    let mut detail = format!(
+        "controller={:?} sources={sources:?} group_size={n} -- permutation outcomes:",
+        pending[0].controller
+    );
     for (perm, snapshot) in &results {
         detail.push_str(&format!("\n    perm={perm:?} {snapshot}"));
     }
@@ -747,12 +885,18 @@ fn check_trigger_commutativity(state: &GameState, pending: &[PendingTrigger]) ->
 fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
     let mut outcome = ReplayOutcome::default();
     let mut surface = HarnessSurfaceV2::new();
-    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| run(t, &mut surface, &mut outcome)));
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        run(t, &mut surface, &mut outcome)
+    }));
     match result {
         Ok(Err(reason)) => outcome.divergence = Some(reason),
         Ok(Ok(())) => {}
         Err(payload) => {
-            let msg = payload.downcast_ref::<String>().cloned().or_else(|| payload.downcast_ref::<&str>().map(|s| s.to_string())).unwrap_or_else(|| "<non-string panic payload>".to_string());
+            let msg = payload
+                .downcast_ref::<String>()
+                .cloned()
+                .or_else(|| payload.downcast_ref::<&str>().map(|s| s.to_string()))
+                .unwrap_or_else(|| "<non-string panic payload>".to_string());
             outcome.divergence = Some(format!("engine-panic:{msg}"));
         }
     }
@@ -760,9 +904,15 @@ fn replay_trace(t: &GoldenTrace) -> ReplayOutcome {
         match s.reason {
             SuppressionReason::StepGated => outcome.silent_window_step_gated += 1,
             SuppressionReason::NoRealOption => outcome.trace_exhausted_passes += 1,
-            SuppressionReason::NoEligibleAttacker => outcome.silent_window_no_eligible_attacker += 1,
-            SuppressionReason::NoEligibleBlockersForAttacker => outcome.declare_blocks_no_eligible_blockers += 1,
-            SuppressionReason::CombatPriorityActionSpent => outcome.combat_priority_action_spent += 1,
+            SuppressionReason::NoEligibleAttacker => {
+                outcome.silent_window_no_eligible_attacker += 1
+            }
+            SuppressionReason::NoEligibleBlockersForAttacker => {
+                outcome.declare_blocks_no_eligible_blockers += 1
+            }
+            SuppressionReason::CombatPriorityActionSpent => {
+                outcome.combat_priority_action_spent += 1
+            }
             SuppressionReason::StackTopIsCastersOwn => outcome.stack_top_is_casters_own += 1,
         }
     }
@@ -806,13 +956,21 @@ impl<'a> ReplayCtx<'a> {
     }
 }
 
-fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutcome) -> Result<(), String> {
+fn run(
+    t: &GoldenTrace,
+    surface: &mut HarnessSurfaceV2,
+    outcome: &mut ReplayOutcome,
+) -> Result<(), String> {
     if std::env::var("REPLAY_DEBUG").is_ok() {
         eprintln!("=== {} ===", t.source_path);
     }
     let (p0_name, p1_name) = seat_names(t)?;
-    let opening0 = t.opening_hand_for(&p0_name).ok_or("setup:no-opening-hand-record:p0")?;
-    let opening1 = t.opening_hand_for(&p1_name).ok_or("setup:no-opening-hand-record:p1")?;
+    let opening0 = t
+        .opening_hand_for(&p0_name)
+        .ok_or("setup:no-opening-hand-record:p0")?;
+    let opening1 = t
+        .opening_hand_for(&p1_name)
+        .ok_or("setup:no-opening-hand-record:p1")?;
 
     let lib0 = card_ids_for(opening0.hand.iter().chain(opening0.library.iter()))?;
     let lib1 = card_ids_for(opening1.hand.iter().chain(opening1.library.iter()))?;
@@ -820,7 +978,12 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
     if std::env::var("REPLAY_DEBUG").is_ok() {
         eprintln!("=== TRACE {} ===", t.source_path);
     }
-    let mut state = GameState::new_from_libraries(&lib0, &lib1, |id| CARD_DEFS[id as usize].name.to_string(), t.header.seed);
+    let mut state = GameState::new_from_libraries(
+        &lib0,
+        &lib1,
+        |id| CARD_DEFS[id as usize].name.to_string(),
+        t.header.seed,
+    );
     for _ in 0..opening0.hand.len() {
         state.draw_card(PlayerId::P0);
     }
@@ -833,9 +996,23 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
     let seat_uuid = find_player_uuids(t, &p0_name, &p1_name);
 
     let queue_for = |name: &str| -> Vec<&DecisionRecord> {
-        t.decisions.iter().filter(|d| d.player == name && d.action_type != "MULLIGAN" && d.action_type != "LONDON_MULLIGAN").collect()
+        t.decisions
+            .iter()
+            .filter(|d| {
+                d.player == name
+                    && d.action_type != "MULLIGAN"
+                    && d.action_type != "LONDON_MULLIGAN"
+            })
+            .collect()
     };
-    let mut ctx = ReplayCtx { id_map, pregame_object_count, seat_uuid, queues: [queue_for(&p0_name), queue_for(&p1_name)], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
+    let mut ctx = ReplayCtx {
+        id_map,
+        pregame_object_count,
+        seat_uuid,
+        queues: [queue_for(&p0_name), queue_for(&p1_name)],
+        cursors: [0, 0],
+        exiled_ever: std::collections::HashSet::new(),
+    };
     outcome.decisions_total = ctx.queues[0].len() + ctx.queues[1].len();
 
     loop {
@@ -846,62 +1023,110 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
         match decision {
             SurfaceDecision::Decision(Decision::GameOver { winner }) => {
                 outcome.reached_game_over = true;
-                let winner_name = winner.map(|p| if p == PlayerId::P0 { p0_name.clone() } else { p1_name.clone() });
-                outcome.winner_matched = matches!((&winner_name, &t.winner), (Some(a), Some(b)) if a == b);
+                let winner_name = winner.map(|p| {
+                    if p == PlayerId::P0 {
+                        p0_name.clone()
+                    } else {
+                        p1_name.clone()
+                    }
+                });
+                outcome.winner_matched =
+                    matches!((&winner_name, &t.winner), (Some(a), Some(b)) if a == b);
                 return Ok(());
             }
-            SurfaceDecision::Decision(Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions }) => {
-                match ctx.next(player) {
-                    None => return Err("trace-exhausted:CastSpellOrPass-with-real-options".to_string()),
-                    Some(&rec) => {
-                        debug_verbose(t, &state, player, rec, "CastSpellOrPass");
-                        if rec.action_type != "ACTIVATE_ABILITY_OR_SPELL" {
-                            if std::env::var("REPLAY_DEBUG").is_ok() {
-                                let ps = &state.players[player.index()];
-                                eprintln!(
+            SurfaceDecision::Decision(Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                mana_abilities,
+                land_drops,
+                activatable_abilities,
+                plot_actions,
+            }) => match ctx.next(player) {
+                None => return Err("trace-exhausted:CastSpellOrPass-with-real-options".to_string()),
+                Some(&rec) => {
+                    debug_verbose(t, &state, player, rec, "CastSpellOrPass");
+                    if rec.action_type != "ACTIVATE_ABILITY_OR_SPELL" {
+                        if std::env::var("REPLAY_DEBUG").is_ok() {
+                            let ps = &state.players[player.index()];
+                            eprintln!(
                                     "KIND MISMATCH decision_number={} player={} expected=CastSpellOrPass got={} kernel_castable={:?} kernel_land={:?} kernel_mana={:?} state_step={:?} stack_len={} rec_source={:?} rec_texts={:?} kernel_hand={:?} kernel_gy={:?} kernel_exile={:?}",
                                     rec.decision_number, rec.player, rec.action_type, castable_spells, land_drops, mana_abilities, state.step, state.stack.len(), rec.source_name, rec.candidate_texts,
                                     ps.hand.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
                                     ps.graveyard.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
                                     state.objects.iter().filter(|(_, o)| o.zone == Zone::Exile && o.owner == player).map(|(_, o)| o.name.clone()).collect::<Vec<_>>(),
                                 );
-                            }
-                            return Err(format!("decision-kind-mismatch:CastSpellOrPass-vs-{}", rec.action_type));
                         }
-                        check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
-                        learn_token_ids(&mut ctx, &state, rec, player, Some(player));
-                        apply_cast_spell_or_pass(surface, &mut state, rec, &castable_spells, &mana_abilities, &land_drops, &activatable_abilities, &plot_actions, &ctx.id_map)?;
-                        ctx.advance(player);
-                        outcome.decisions_consumed += 1;
+                        return Err(format!(
+                            "decision-kind-mismatch:CastSpellOrPass-vs-{}",
+                            rec.action_type
+                        ));
                     }
+                    check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
+                    learn_token_ids(&mut ctx, &state, rec, player, Some(player));
+                    apply_cast_spell_or_pass(
+                        surface,
+                        &mut state,
+                        rec,
+                        &castable_spells,
+                        &mana_abilities,
+                        &land_drops,
+                        &activatable_abilities,
+                        &plot_actions,
+                        &ctx.id_map,
+                    )?;
+                    ctx.advance(player);
+                    outcome.decisions_consumed += 1;
                 }
-            }
-            SurfaceDecision::Decision(Decision::ChooseTargets { player, legal_targets, .. }) => {
+            },
+            SurfaceDecision::Decision(Decision::ChooseTargets {
+                player,
+                legal_targets,
+                ..
+            }) => {
                 // No `java_reference_target_shortcut` here -- see this
                 // file's module doc, point 2. Every ChooseTargets window
                 // consumes the next real trace record, unconditionally.
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseTargets".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseTargets");
                 if rec.action_type != "SELECT_TARGETS" {
-                    return Err(format!("decision-kind-mismatch:ChooseTargets-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseTargets-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec, player, None);
-                apply_choose_targets(surface, &mut state, rec, &legal_targets, &ctx.id_map, &ctx.seat_uuid)?;
+                apply_choose_targets(
+                    surface,
+                    &mut state,
+                    rec,
+                    &legal_targets,
+                    &ctx.id_map,
+                    &ctx.seat_uuid,
+                )?;
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
             }
-            SurfaceDecision::Decision(Decision::ChooseCostTargets { player, candidates, .. }) => {
+            SurfaceDecision::Decision(Decision::ChooseCostTargets {
+                player, candidates, ..
+            }) => {
                 // Same shape as ChooseTargets above (a real, logged
                 // SELECT_TARGETS record, one per pick) -- see
                 // `mtg_kernel::engine::Decision::ChooseCostTargets`'s doc:
                 // the reference's sacrifice-cost-target picks (Fireblast's
                 // alt cost, Lava Dart's flashback cost) are real decisions,
                 // not silently auto-solved.
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseCostTargets".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseCostTargets".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseCostTargets");
                 if rec.action_type != "SELECT_TARGETS" {
-                    return Err(format!("decision-kind-mismatch:ChooseCostTargets-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseCostTargets-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec, player, Some(player));
@@ -910,10 +1135,15 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 outcome.decisions_consumed += 1;
             }
             SurfaceDecision::Decision(Decision::DeclareAttackers { player, eligible }) => {
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:DeclareAttackers".to_string())?;
                 debug_verbose(t, &state, player, rec, "DeclareAttackers");
                 if rec.action_type != "DECLARE_ATTACKS" {
-                    return Err(format!("decision-kind-mismatch:DeclareAttackers-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:DeclareAttackers-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 check_state(&state, player, rec, &p0_name, &p1_name, &mut ctx)?;
                 learn_token_ids(&mut ctx, &state, rec, player, Some(player));
@@ -921,19 +1151,39 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
             }
-            SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers } => {
+            SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers,
+            } => {
                 let player = state.active_player.opponent();
-                apply_declare_blockers_for_attacker(surface, &mut state, t, &mut ctx, outcome, player, attacker, &legal_blockers, &p0_name, &p1_name)?;
+                apply_declare_blockers_for_attacker(
+                    surface,
+                    &mut state,
+                    t,
+                    &mut ctx,
+                    outcome,
+                    player,
+                    attacker,
+                    &legal_blockers,
+                    &p0_name,
+                    &p1_name,
+                )?;
             }
-            SurfaceDecision::Decision(Decision::Discard { player, choices, .. }) => {
+            SurfaceDecision::Decision(Decision::Discard {
+                player, choices, ..
+            }) => {
                 // The presented `count` is always 1 (one real pick at a
                 // time -- see `DiscardReshape`'s doc); the *total* this
                 // whole obligation needs comes from `state.engine.
                 // pending_discard` directly (see `pending_discard_total`'s
                 // doc for why that, not "keep going while `next_decision`
                 // still says Discard", is the only correct loop bound).
-                let count = HarnessSurfaceV2::pending_discard_total(&state).ok_or("no Discard decision is pending")?;
-                apply_discard(surface, &mut state, t, &mut ctx, outcome, player, count, choices, &p0_name, &p1_name)?;
+                let count = HarnessSurfaceV2::pending_discard_total(&state)
+                    .ok_or("no Discard decision is pending")?;
+                apply_discard(
+                    surface, &mut state, t, &mut ctx, outcome, player, count, choices, &p0_name,
+                    &p1_name,
+                )?;
             }
             SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. }) => {
                 apply_choose_optional_cost(surface, &mut state, &mut ctx, player)?;
@@ -953,18 +1203,28 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 // claim was only ever checked against 2 games, both
                 // incidentally `YES`; the corpus-wide split is close to
                 // even, 25 `YES` / 25 `NO`).
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseMadnessCast".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseMadnessCast".to_string())?;
                 if rec.action_type != "CHOOSE_USE" {
-                    return Err(format!("decision-kind-mismatch:ChooseMadnessCast-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseMadnessCast-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 let attempt = rec.chosen_indices.first() == Some(&0); // 0=Yes, 1=No -- see MADNESS_CHOOSE_USE_MARKER's doc
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::ChooseMadnessCast(attempt)))
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseMadnessCast(attempt)),
+                    )
                     .map_err(|e| format!("engine-step-error:ChooseMadnessCast:{e}"))?;
             }
-            SurfaceDecision::Decision(Decision::ChooseCastMode { player, options, .. }) => {
+            SurfaceDecision::Decision(Decision::ChooseCastMode {
+                player, options, ..
+            }) => {
                 apply_choose_cast_mode(surface, &mut state, &mut ctx, player, &options)?;
             }
             SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => {
@@ -1005,13 +1265,20 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 // See `check_trigger_commutativity`'s doc for the full
                 // mechanism.
                 if std::env::var("CHECK_TRIGGER_COMMUTATIVITY").is_ok() {
-                    outcome.commutativity.record(check_trigger_commutativity(&state, &pending));
+                    outcome
+                        .commutativity
+                        .record(check_trigger_commutativity(&state, &pending));
                 }
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())))
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::OrderTriggers((0..pending.len()).collect())),
+                    )
                     .map_err(|e| format!("engine-step-error:OrderTriggers:{e}"))?;
             }
-            SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => return Err("unhandled-decision:ChooseSpellMode".to_string()),
+            SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => {
+                return Err("unhandled-decision:ChooseSpellMode".to_string())
+            }
             SurfaceDecision::Decision(Decision::ChooseKicker { player, .. }) => {
                 // Ground truth, not a guess (unlike ChooseCastMode/
                 // ChooseOptionalCost/ChooseMadnessCast): Goblin Bushwhacker's
@@ -1020,16 +1287,24 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 // const's doc) -- "Pay Kicker {R} ?" is a genuine CHOOSE_USE
                 // record like Fiery Temper's Madness offer, just for a
                 // Rally-only card.
-                let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:ChooseKicker".to_string())?;
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseKicker".to_string())?;
                 debug_verbose(t, &state, player, rec, "ChooseKicker");
                 if rec.action_type != "CHOOSE_USE" {
-                    return Err(format!("decision-kind-mismatch:ChooseKicker-vs-{}", rec.action_type));
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseKicker-vs-{}",
+                        rec.action_type
+                    ));
                 }
                 let kicked = rec.chosen_indices.first() == Some(&0); // 0=Yes, 1=No -- see KICKER_CHOOSE_USE_MARKER's doc
                 ctx.advance(player);
                 outcome.decisions_consumed += 1;
                 surface
-                    .apply(&mut state, SurfaceAction::Action(Action::ChooseKicker(kicked)))
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseKicker(kicked)),
+                    )
                     .map_err(|e| format!("engine-step-error:ChooseKicker:{e}"))?;
             }
             SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
@@ -1048,7 +1323,10 @@ fn run(t: &GoldenTrace, surface: &mut HarnessSurfaceV2, outcome: &mut ReplayOutc
                 return Ok(());
             }
             SurfaceDecision::Decision(Decision::DeclareBlockers { .. }) => {
-                return Err("unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface".to_string());
+                return Err(
+                    "unreachable-decision:DeclareBlockers-should-have-been-reshaped-by-the-surface"
+                        .to_string(),
+                );
             }
         }
     }
@@ -1095,7 +1373,12 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
     }
 }
 
-fn skip_stale_forced_discards(state: &GameState, ctx: &mut ReplayCtx, player: PlayerId, outcome: &mut ReplayOutcome) {
+fn skip_stale_forced_discards(
+    state: &GameState,
+    ctx: &mut ReplayCtx,
+    player: PlayerId,
+    outcome: &mut ReplayOutcome,
+) {
     loop {
         let Some(&rec) = ctx.next(player) else { return };
         if rec.action_type != "SELECT_CARD" || rec.chosen_object_ids.is_empty() {
@@ -1117,10 +1400,13 @@ fn skip_stale_forced_discards(state: &GameState, ctx: &mut ReplayCtx, player: Pl
         // *following* real decision (`Decision::ChooseMadnessCast`, Fiery
         // Temper's own Madness offer this exile triggers) then peeked it
         // instead of the real `CHOOSE_USE` record synced right behind it.
-        let already_applied = rec.chosen_object_ids.iter().all(|uuid| match ctx.id_map.get(uuid) {
-            Some(&id) => matches!(state.objects.get(id).zone, Zone::Graveyard | Zone::Exile),
-            None => false,
-        });
+        let already_applied = rec
+            .chosen_object_ids
+            .iter()
+            .all(|uuid| match ctx.id_map.get(uuid) {
+                Some(&id) => matches!(state.objects.get(id).zone, Zone::Graveyard | Zone::Exile),
+                None => false,
+            });
         if !already_applied {
             return;
         }
@@ -1139,13 +1425,30 @@ fn seat_names(t: &GoldenTrace) -> Result<(String, String), String> {
     if names.len() != 2 {
         return Err(format!("setup:player-name-count={}", names.len()));
     }
-    let p0 = t.decisions.first().ok_or_else(|| "setup:no-decisions".to_string())?.player.clone();
-    let p1 = names.into_iter().find(|&n| n != p0).ok_or_else(|| "setup:cannot-determine-p1-name".to_string())?.to_string();
+    let p0 = t
+        .decisions
+        .first()
+        .ok_or_else(|| "setup:no-decisions".to_string())?
+        .player
+        .clone();
+    let p1 = names
+        .into_iter()
+        .find(|&n| n != p0)
+        .ok_or_else(|| "setup:cannot-determine-p1-name".to_string())?
+        .to_string();
     Ok((p0, p1))
 }
 
-fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &DecisionRecord, kind: &str) {
-    let Ok(filter) = std::env::var("REPLAY_TRACE_FILTER") else { return };
+fn debug_verbose(
+    t: &GoldenTrace,
+    state: &GameState,
+    player: PlayerId,
+    rec: &DecisionRecord,
+    kind: &str,
+) {
+    let Ok(filter) = std::env::var("REPLAY_TRACE_FILTER") else {
+        return;
+    };
     if !t.source_path.contains(&filter) {
         return;
     }
@@ -1168,15 +1471,31 @@ fn debug_verbose(t: &GoldenTrace, state: &GameState, player: PlayerId, rec: &Dec
 }
 
 fn card_ids_for<'a>(names: impl Iterator<Item = &'a String>) -> Result<Vec<u16>, String> {
-    names.map(|n| card_def::card_id_by_name(n).ok_or_else(|| format!("setup:unknown-card-name:{n}"))).collect()
+    names
+        .map(|n| card_def::card_id_by_name(n).ok_or_else(|| format!("setup:unknown-card-name:{n}")))
+        .collect()
 }
 
-fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0_object_count: u32) -> HashMap<String, ObjectId> {
+fn build_id_map(
+    opening0: &trace::OpeningHand,
+    opening1: &trace::OpeningHand,
+    p0_object_count: u32,
+) -> HashMap<String, ObjectId> {
     let mut id_map = HashMap::new();
-    for (i, uuid) in opening0.hand_object_ids.iter().chain(opening0.library_object_ids.iter()).enumerate() {
+    for (i, uuid) in opening0
+        .hand_object_ids
+        .iter()
+        .chain(opening0.library_object_ids.iter())
+        .enumerate()
+    {
         id_map.insert(uuid.clone(), ObjectId(i as u32));
     }
-    for (i, uuid) in opening1.hand_object_ids.iter().chain(opening1.library_object_ids.iter()).enumerate() {
+    for (i, uuid) in opening1
+        .hand_object_ids
+        .iter()
+        .chain(opening1.library_object_ids.iter())
+        .enumerate()
+    {
         id_map.insert(uuid.clone(), ObjectId(p0_object_count + i as u32));
     }
     id_map
@@ -1206,13 +1525,21 @@ fn build_id_map(opening0: &trace::OpeningHand, opening1: &trace::OpeningHand, p0
 /// `find_player_uuids`) is the authoritative "is this uuid actually a
 /// player, not an object" check; skip here, same as the sentinel `DONE`
 /// and empty-string cases already were.
-const BLOOD_TOKEN_ACTIVATION_TEXT: &str = "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.";
+const BLOOD_TOKEN_ACTIVATION_TEXT: &str =
+    "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.";
 
-fn token_identity_hint(text: &str, rec_player: &str, deciding_player: PlayerId) -> (Option<&'static str>, Option<PlayerId>) {
+fn token_identity_hint(
+    text: &str,
+    rec_player: &str,
+    deciding_player: PlayerId,
+) -> (Option<&'static str>, Option<PlayerId>) {
     if text == BLOOD_TOKEN_ACTIVATION_TEXT {
         return (Some("Blood Token"), None);
     }
-    let (name, controller) = match text.strip_suffix(')').and_then(|without_close| without_close.rsplit_once(" (")) {
+    let (name, controller) = match text
+        .strip_suffix(')')
+        .and_then(|without_close| without_close.rsplit_once(" ("))
+    {
         Some((name, "you")) => (name, Some(deciding_player)),
         Some((name, "opponent")) => (name, Some(deciding_player.opponent())),
         Some((name, label)) if label == rec_player => (name, Some(deciding_player)),
@@ -1237,16 +1564,26 @@ fn learn_token_ids(
     expected_controller: Option<PlayerId>,
 ) {
     let candidate_observations = rec.candidate_object_ids.iter().enumerate().map(|(i, raw)| {
-        (raw, rec.candidate_texts.get(i).map(String::as_str).unwrap_or(""))
+        (
+            raw,
+            rec.candidate_texts.get(i).map(String::as_str).unwrap_or(""),
+        )
     });
     let chosen_observations = rec.chosen_object_ids.iter().enumerate().map(|(i, raw)| {
-        (raw, rec.chosen_texts.get(i).map(String::as_str).unwrap_or(""))
+        (
+            raw,
+            rec.chosen_texts.get(i).map(String::as_str).unwrap_or(""),
+        )
     });
     let observations = candidate_observations.chain(chosen_observations);
     for (raw, text) in observations {
         let is_block_pair = raw.contains("->");
         for (part, uuid) in raw.split("->").enumerate() {
-            if uuid.is_empty() || uuid == DONE || ctx.id_map.contains_key(uuid) || ctx.seat_uuid.iter().any(|s| s.as_deref() == Some(uuid)) {
+            if uuid.is_empty()
+                || uuid == DONE
+                || ctx.id_map.contains_key(uuid)
+                || ctx.seat_uuid.iter().any(|s| s.as_deref() == Some(uuid))
+            {
                 continue;
             }
             let bound: std::collections::HashSet<ObjectId> = ctx.id_map.values().copied().collect();
@@ -1265,7 +1602,11 @@ fn learn_token_ids(
             } else {
                 (None, None)
             };
-            let pair_controller = is_block_pair.then_some(if part == 0 { deciding_player } else { deciding_player.opponent() });
+            let pair_controller = is_block_pair.then_some(if part == 0 {
+                deciding_player
+            } else {
+                deciding_player.opponent()
+            });
             let next = state.objects.iter().find_map(|(id, object)| {
                 (id.0 >= ctx.pregame_object_count
                     && !bound.contains(&id)
@@ -1273,8 +1614,9 @@ fn learn_token_ids(
                         .into_iter()
                         .flatten()
                         .all(|controller| object.controller == controller)
-                    && expected_name.is_none_or(|name| object.name == name && object.zone == Zone::Battlefield))
-                    .then_some(id)
+                    && expected_name
+                        .is_none_or(|name| object.name == name && object.zone == Zone::Battlefield))
+                .then_some(id)
             });
             let Some(next) = next else {
                 continue;
@@ -1292,7 +1634,10 @@ fn find_player_uuids(t: &GoldenTrace, p0_name: &str, p1_name: &str) -> [Option<S
         }
         for (text, uuid) in d.candidate_texts.iter().zip(d.candidate_object_ids.iter()) {
             if (text == p0_name || text == p1_name) && !found.contains_key(text.as_str()) {
-                found.insert(if text == p0_name { p0_name } else { p1_name }, uuid.clone());
+                found.insert(
+                    if text == p0_name { p0_name } else { p1_name },
+                    uuid.clone(),
+                );
             }
         }
         if found.len() == 2 {
@@ -1324,7 +1669,11 @@ fn expected_phase_strings(step: mtg_kernel::state::Step) -> &'static [&'static s
     match step {
         Step::Main1 => &["Precombat Main"],
         Step::Main2 => &["Postcombat Main"],
-        Step::BeginCombat | Step::DeclareAttackers | Step::DeclareBlockers | Step::CombatDamage | Step::EndCombat => &["Combat"],
+        Step::BeginCombat
+        | Step::DeclareAttackers
+        | Step::DeclareBlockers
+        | Step::CombatDamage
+        | Step::EndCombat => &["Combat"],
         Step::End | Step::Cleanup => &["End"],
         Step::Untap | Step::Upkeep | Step::Draw => &[],
     }
@@ -1334,7 +1683,14 @@ fn expected_phase_strings(step: mtg_kernel::state::Step) -> &'static [&'static s
 /// `check_state` (`examples/replay_burn.rs`) -- see this file's module doc,
 /// point 3, for exactly what's new and exactly what the trace format does
 /// not expose (stack size, pending-trigger count).
-fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_name: &str, p1_name: &str, ctx: &mut ReplayCtx) -> Result<(), String> {
+fn check_state(
+    state: &GameState,
+    player: PlayerId,
+    rec: &DecisionRecord,
+    p0_name: &str,
+    p1_name: &str,
+    ctx: &mut ReplayCtx,
+) -> Result<(), String> {
     // Track by raw `state.exile` membership (monotonic once filtered --
     // see `ReplayCtx::exiled_ever`'s doc), not `state.engine.
     // exile_play_permissions`: a permission can be granted *and* expire
@@ -1413,11 +1769,15 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
     // and applying the v1 compensation anyway double-corrects (adds back a
     // count Java's own trace already subtracted). See
     // `SKIP_V1_EXILED_EVER_COMPENSATION`'s doc for the full mechanism.
-    let skip_compensation = SKIP_V1_EXILED_EVER_COMPENSATION.load(std::sync::atomic::Ordering::Relaxed);
+    let skip_compensation =
+        SKIP_V1_EXILED_EVER_COMPENSATION.load(std::sync::atomic::Ordering::Relaxed);
     let player_exiled_ever = if skip_compensation {
         0
     } else {
-        ctx.exiled_ever.iter().filter(|&&(_, owner)| owner == player).count()
+        ctx.exiled_ever
+            .iter()
+            .filter(|&&(_, owner)| owner == player)
+            .count()
     };
     if ps.library.len() + player_exiled_ever != rec.library.len() {
         if std::env::var("REPLAY_DEBUG").is_ok() {
@@ -1452,7 +1812,10 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
     // same instant).
     if ps.life != rec.life {
         if std::env::var("REPLAY_DEBUG").is_ok() {
-            eprintln!("LIFE MISMATCH (own) decision_number={} player={} kernel_life={} trace_life={}", rec.decision_number, rec.player, ps.life, rec.life);
+            eprintln!(
+                "LIFE MISMATCH (own) decision_number={} player={} kernel_life={} trace_life={}",
+                rec.decision_number, rec.player, ps.life, rec.life
+            );
         }
         return Err("life-mismatch:own".to_string());
     }
@@ -1467,7 +1830,10 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
     // NEW vs H1: phase, only where the kernel Step -> XMage phase-text
     // mapping is unambiguous (see `expected_phase_strings`'s doc).
     let expected_phases = expected_phase_strings(state.step);
-    if !expected_phases.is_empty() && !rec.phase.is_empty() && !expected_phases.contains(&rec.phase.as_str()) {
+    if !expected_phases.is_empty()
+        && !rec.phase.is_empty()
+        && !expected_phases.contains(&rec.phase.as_str())
+    {
         if std::env::var("REPLAY_TRACE_FILTER").is_ok() {
             eprintln!(
                 "PHASE-MISMATCH-DEBUG decision_number={} player={player:?} lands_played_this_turn={} battlefield={:?} hand={:?}",
@@ -1477,7 +1843,10 @@ fn check_state(state: &GameState, player: PlayerId, rec: &DecisionRecord, p0_nam
                 ps.hand.iter().map(|&id| state.objects.get(id).name.clone()).collect::<Vec<_>>(),
             );
         }
-        return Err(format!("phase-mismatch:kernel_step={:?}:trace_phase={}", state.step, rec.phase));
+        return Err(format!(
+            "phase-mismatch:kernel_step={:?}:trace_phase={}",
+            state.step, rec.phase
+        ));
     }
 
     // NEW vs H1: "priority player" -- the closest signal this trace format
@@ -1592,26 +1961,44 @@ fn apply_cast_spell_or_pass(
     let mut by_key: BTreeMap<String, KernelChoice> = BTreeMap::new();
     by_key.insert("pass".to_string(), KernelChoice::Pass);
     for &id in land_drops {
-        by_key.entry(format!("land:{}", state.objects.get(id).name)).or_insert(KernelChoice::PlayLand(id));
+        by_key
+            .entry(format!("land:{}", state.objects.get(id).name))
+            .or_insert(KernelChoice::PlayLand(id));
     }
     for &id in castable_spells {
-        by_key.entry(format!("cast:{}:{}", state.objects.get(id).name, cast_zone_tag(state, id))).or_insert(KernelChoice::CastSpell(id));
+        by_key
+            .entry(format!(
+                "cast:{}:{}",
+                state.objects.get(id).name,
+                cast_zone_tag(state, id)
+            ))
+            .or_insert(KernelChoice::CastSpell(id));
     }
     for &id in mana_abilities {
-        by_key.entry(mana_ability_key(state, id)).or_insert(KernelChoice::ActivateMana(id));
+        by_key
+            .entry(mana_ability_key(state, id))
+            .or_insert(KernelChoice::ActivateMana(id));
     }
     for &(id, idx) in activatable_abilities {
-        by_key.entry(format!("activate:{}:{idx}", state.objects.get(id).name)).or_insert(KernelChoice::ActivateAbility(id, idx));
+        by_key
+            .entry(format!("activate:{}:{idx}", state.objects.get(id).name))
+            .or_insert(KernelChoice::ActivateAbility(id, idx));
     }
     for &id in plot_actions {
-        by_key.entry(format!("plot:{}", state.objects.get(id).name)).or_insert(KernelChoice::PlotSpell(id));
+        by_key
+            .entry(format!("plot:{}", state.objects.get(id).name))
+            .or_insert(KernelChoice::PlotSpell(id));
     }
     let mut kernel_keys: Vec<String> = by_key.keys().cloned().collect();
     kernel_keys.sort();
 
     let trace_ids = translate_object_candidates(rec, id_map, "CastSpellOrPass")?;
     let mut trace_keys = Vec::with_capacity(trace_ids.len());
-    for ((id, text), uuid) in trace_ids.iter().zip(rec.candidate_texts.iter()).zip(rec.candidate_object_ids.iter()) {
+    for ((id, text), uuid) in trace_ids
+        .iter()
+        .zip(rec.candidate_texts.iter())
+        .zip(rec.candidate_object_ids.iter())
+    {
         let key = match id {
             None => "pass".to_string(),
             Some(oid) => candidate_key(state, *oid, text, land_drops, castable_spells, mana_abilities, activatable_abilities, plot_actions).ok_or_else(|| {
@@ -1654,7 +2041,10 @@ fn apply_cast_spell_or_pass(
 
     if kernel_keys != sorted_trace_keys {
         if std::env::var("REPLAY_DEBUG").is_ok() {
-            eprintln!("MISMATCH decision_number={} texts={:?} kernel={:?} trace={:?}", rec.decision_number, rec.candidate_texts, kernel_keys, sorted_trace_keys);
+            eprintln!(
+                "MISMATCH decision_number={} texts={:?} kernel={:?} trace={:?}",
+                rec.decision_number, rec.candidate_texts, kernel_keys, sorted_trace_keys
+            );
         }
         return Err("candidate-multiset-mismatch:CastSpellOrPass".to_string());
     }
@@ -1663,7 +2053,9 @@ fn apply_cast_spell_or_pass(
         return Err("unexpected-chosen-count:CastSpellOrPass".to_string());
     }
     let idx = rec.chosen_indices[0] as usize;
-    let chosen_key = trace_keys.get(idx).ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
+    let chosen_key = trace_keys
+        .get(idx)
+        .ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
 
     let action = match by_key.get(chosen_key) {
         Some(KernelChoice::Pass) => Action::Pass,
@@ -1674,16 +2066,29 @@ fn apply_cast_spell_or_pass(
         Some(KernelChoice::PlotSpell(id)) => Action::PlotSpell(*id),
         None => return Err("chosen-not-in-kernel-candidates:CastSpellOrPass".to_string()),
     };
-    surface.apply(state, SurfaceAction::Action(action)).map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))
+    surface
+        .apply(state, SurfaceAction::Action(action))
+        .map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))
 }
 
-fn translate_object_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>, kind: &str) -> Result<Vec<Option<ObjectId>>, String> {
+fn translate_object_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+    kind: &str,
+) -> Result<Vec<Option<ObjectId>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_texts.len());
-    for (text, uuid) in rec.candidate_texts.iter().zip(rec.candidate_object_ids.iter()) {
+    for (text, uuid) in rec
+        .candidate_texts
+        .iter()
+        .zip(rec.candidate_object_ids.iter())
+    {
         if text == "Pass" && uuid.is_empty() {
             out.push(None);
         } else {
-            let id = id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:{kind}:{uuid}"))?;
+            let id = id_map
+                .get(uuid)
+                .copied()
+                .ok_or_else(|| format!("untranslatable-object-id:{kind}:{uuid}"))?;
             out.push(Some(id));
         }
     }
@@ -1717,7 +2122,9 @@ fn apply_choose_targets(
 
     let mut trace_targets: Vec<Target> = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
-        trace_targets.push(translate(uuid).ok_or_else(|| format!("untranslatable-target:ChooseTargets:{uuid}"))?);
+        trace_targets.push(
+            translate(uuid).ok_or_else(|| format!("untranslatable-target:ChooseTargets:{uuid}"))?,
+        );
     }
     let mut trace_keys: Vec<String> = trace_targets.iter().map(target_key).collect();
     trace_keys.sort();
@@ -1730,9 +2137,13 @@ fn apply_choose_targets(
         return Err("unexpected-chosen-count:ChooseTargets".to_string());
     }
     let idx = rec.chosen_indices[0] as usize;
-    let target = *trace_targets.get(idx).ok_or("chosen-index-out-of-range:ChooseTargets")?;
+    let target = *trace_targets
+        .get(idx)
+        .ok_or("chosen-index-out-of-range:ChooseTargets")?;
 
-    surface.apply(state, SurfaceAction::Action(Action::ChooseTarget(target))).map_err(|e| format!("engine-step-error:ChooseTargets:{e}"))
+    surface
+        .apply(state, SurfaceAction::Action(Action::ChooseTarget(target)))
+        .map_err(|e| format!("engine-step-error:ChooseTargets:{e}"))
 }
 
 fn target_key(t: &Target) -> String {
@@ -1747,7 +2158,13 @@ fn target_key(t: &Target) -> String {
 /// candidate-multiset-then-chosen-index shape as `apply_choose_targets`,
 /// simplified: every candidate is always a permanent (`ObjectId`), never a
 /// player, so there's no `Target`/`seat_uuid` translation to do.
-fn apply_choose_cost_targets(surface: &mut HarnessSurfaceV2, state: &mut GameState, rec: &DecisionRecord, candidates: &[ObjectId], id_map: &HashMap<String, ObjectId>) -> Result<(), String> {
+fn apply_choose_cost_targets(
+    surface: &mut HarnessSurfaceV2,
+    state: &mut GameState,
+    rec: &DecisionRecord,
+    candidates: &[ObjectId],
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<(), String> {
     let mut kernel_keys: Vec<String> = candidates.iter().map(|id| format!("O{}", id.0)).collect();
     kernel_keys.sort();
 
@@ -1768,18 +2185,39 @@ fn apply_choose_cost_targets(surface: &mut HarnessSurfaceV2, state: &mut GameSta
         return Err("unexpected-chosen-count:ChooseCostTargets".to_string());
     }
     let idx = rec.chosen_indices[0] as usize;
-    let chosen = trace_ids.get(idx).copied().flatten().ok_or("chosen-index-out-of-range:ChooseCostTargets")?;
+    let chosen = trace_ids
+        .get(idx)
+        .copied()
+        .flatten()
+        .ok_or("chosen-index-out-of-range:ChooseCostTargets")?;
 
-    surface.apply(state, SurfaceAction::Action(Action::ChooseCostTarget(chosen))).map_err(|e| format!("engine-step-error:ChooseCostTargets:{e}"))
+    surface
+        .apply(
+            state,
+            SurfaceAction::Action(Action::ChooseCostTarget(chosen)),
+        )
+        .map_err(|e| format!("engine-step-error:ChooseCostTargets:{e}"))
 }
 
-fn apply_declare_attackers(surface: &mut HarnessSurfaceV2, state: &mut GameState, rec: &DecisionRecord, eligible: &[ObjectId], id_map: &HashMap<String, ObjectId>) -> Result<(), String> {
+fn apply_declare_attackers(
+    surface: &mut HarnessSurfaceV2,
+    state: &mut GameState,
+    rec: &DecisionRecord,
+    eligible: &[ObjectId],
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<(), String> {
     let mut kernel_keys: Vec<String> = eligible.iter().map(|id| format!("O{}", id.0)).collect();
     kernel_keys.push("DONE".to_string());
     kernel_keys.sort();
 
     let trace_candidates = translate_attacker_candidates(rec, id_map)?;
-    let mut trace_keys: Vec<String> = trace_candidates.iter().map(|c| match c { Some(id) => format!("O{}", id.0), None => "DONE".to_string() }).collect();
+    let mut trace_keys: Vec<String> = trace_candidates
+        .iter()
+        .map(|c| match c {
+            Some(id) => format!("O{}", id.0),
+            None => "DONE".to_string(),
+        })
+        .collect();
     trace_keys.sort();
 
     if kernel_keys != trace_keys {
@@ -1810,14 +2248,27 @@ fn apply_declare_attackers(surface: &mut HarnessSurfaceV2, state: &mut GameState
         return Err("candidate-multiset-mismatch:DeclareAttackers".to_string());
     }
 
-    let attackers = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareAttackers")?;
-    surface.apply(state, SurfaceAction::Action(Action::DeclareAttackers(attackers))).map_err(|e| format!("engine-step-error:DeclareAttackers:{e}"))
+    let attackers =
+        apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareAttackers")?;
+    surface
+        .apply(
+            state,
+            SurfaceAction::Action(Action::DeclareAttackers(attackers)),
+        )
+        .map_err(|e| format!("engine-step-error:DeclareAttackers:{e}"))
 }
 
-fn apply_prefix_before_done<T: Copy>(chosen_indices: &[u32], candidates: &[Option<T>], kind: &str) -> Result<Vec<T>, String> {
+fn apply_prefix_before_done<T: Copy>(
+    chosen_indices: &[u32],
+    candidates: &[Option<T>],
+    kind: &str,
+) -> Result<Vec<T>, String> {
     let mut out = Vec::new();
     for &idx in chosen_indices {
-        match candidates.get(idx as usize).ok_or_else(|| format!("chosen-index-out-of-range:{kind}"))? {
+        match candidates
+            .get(idx as usize)
+            .ok_or_else(|| format!("chosen-index-out-of-range:{kind}"))?
+        {
             None => break,
             Some(v) => out.push(*v),
         }
@@ -1825,13 +2276,19 @@ fn apply_prefix_before_done<T: Copy>(chosen_indices: &[u32], candidates: &[Optio
     Ok(out)
 }
 
-fn translate_attacker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>) -> Result<Vec<Option<ObjectId>>, String> {
+fn translate_attacker_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<Vec<Option<ObjectId>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
         if uuid == DONE {
             out.push(None);
         } else {
-            let id = id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareAttackers:{uuid}"))?;
+            let id = id_map
+                .get(uuid)
+                .copied()
+                .ok_or_else(|| format!("untranslatable-object-id:DeclareAttackers:{uuid}"))?;
             out.push(Some(id));
         }
     }
@@ -1851,35 +2308,58 @@ fn apply_declare_blockers_for_attacker(
     p0_name: &str,
     p1_name: &str,
 ) -> Result<(), String> {
-    let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
+    let &rec = ctx
+        .next(player)
+        .ok_or_else(|| "trace-exhausted:DeclareBlockers".to_string())?;
     debug_verbose(t, state, player, rec, "DeclareBlockers");
     if rec.action_type != "DECLARE_BLOCKS" {
-        return Err(format!("decision-kind-mismatch:DeclareBlockers-vs-{}", rec.action_type));
+        return Err(format!(
+            "decision-kind-mismatch:DeclareBlockers-vs-{}",
+            rec.action_type
+        ));
     }
     check_state(state, player, rec, p0_name, p1_name, ctx)?;
     learn_token_ids(ctx, state, rec, player, None);
 
-    let mut kernel_keys: Vec<String> = legal_blockers.iter().map(|b| format!("{}->{}", b.0, attacker.0)).collect();
+    let mut kernel_keys: Vec<String> = legal_blockers
+        .iter()
+        .map(|b| format!("{}->{}", b.0, attacker.0))
+        .collect();
     kernel_keys.push("DONE".to_string());
     kernel_keys.sort();
 
     let trace_candidates = translate_blocker_candidates(rec, &ctx.id_map)?;
-    if trace_candidates.iter().any(|c| matches!(c, Some((_, a)) if a != &attacker)) {
+    if trace_candidates
+        .iter()
+        .any(|c| matches!(c, Some((_, a)) if a != &attacker))
+    {
         return Err("declare-blocks-attacker-mismatch".to_string());
     }
-    let mut trace_keys: Vec<String> = trace_candidates.iter().map(|c| match c { Some((blocker, a)) => format!("{}->{}", blocker.0, a.0), None => "DONE".to_string() }).collect();
+    let mut trace_keys: Vec<String> = trace_candidates
+        .iter()
+        .map(|c| match c {
+            Some((blocker, a)) => format!("{}->{}", blocker.0, a.0),
+            None => "DONE".to_string(),
+        })
+        .collect();
     trace_keys.sort();
 
     if kernel_keys != trace_keys {
         return Err("candidate-multiset-mismatch:DeclareBlockers".to_string());
     }
 
-    let picks = apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
+    let picks =
+        apply_prefix_before_done(&rec.chosen_indices, &trace_candidates, "DeclareBlockers")?;
     let blockers_only: Vec<ObjectId> = picks.into_iter().map(|(blocker, _)| blocker).collect();
 
     ctx.advance(player);
     outcome.decisions_consumed += 1;
-    surface.apply(state, SurfaceAction::DeclareBlockersForAttacker(blockers_only)).map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
+    surface
+        .apply(
+            state,
+            SurfaceAction::DeclareBlockersForAttacker(blockers_only),
+        )
+        .map_err(|e| format!("engine-step-error:DeclareBlockers:{e}"))
 }
 
 /// Drives `HarnessSurfaceV2`'s discard reshape (`DiscardReshape`'s doc) one
@@ -1934,15 +2414,23 @@ fn apply_discard(
     // own terminal `SELECT_CARD` summary instead.
     let mut chosen_names: Vec<String> = Vec::new();
     for _ in 0..count {
-        let &rec = ctx.next(player).ok_or_else(|| "trace-exhausted:Discard".to_string())?;
+        let &rec = ctx
+            .next(player)
+            .ok_or_else(|| "trace-exhausted:Discard".to_string())?;
         debug_verbose(t, state, player, rec, "Discard");
         if rec.action_type != "SELECT_TARGETS" {
-            return Err(format!("decision-kind-mismatch:Discard-vs-{}", rec.action_type));
+            return Err(format!(
+                "decision-kind-mismatch:Discard-vs-{}",
+                rec.action_type
+            ));
         }
         check_state(state, player, rec, p0_name, p1_name, ctx)?;
         learn_token_ids(ctx, state, rec, player, Some(player));
 
-        let mut kernel_names: Vec<&str> = choices.iter().map(|&id| state.objects.get(id).name.as_str()).collect();
+        let mut kernel_names: Vec<&str> = choices
+            .iter()
+            .map(|&id| state.objects.get(id).name.as_str())
+            .collect();
         kernel_names.sort_unstable();
         let mut trace_names: Vec<&str> = rec.candidate_texts.iter().map(String::as_str).collect();
         trace_names.sort_unstable();
@@ -1950,14 +2438,28 @@ fn apply_discard(
             return Err("candidate-multiset-mismatch:Discard".to_string());
         }
 
-        let &idx = rec.chosen_indices.first().ok_or("unexpected-chosen-count:Discard")?;
-        let name = rec.candidate_texts.get(idx as usize).cloned().ok_or("chosen-index-out-of-range:Discard")?;
+        let &idx = rec
+            .chosen_indices
+            .first()
+            .ok_or("unexpected-chosen-count:Discard")?;
+        let name = rec
+            .candidate_texts
+            .get(idx as usize)
+            .cloned()
+            .ok_or("chosen-index-out-of-range:Discard")?;
         // Identity: translate the trace's own `chosen_object_ids` via
         // `id_map` -- same as every other decision kind (target-port hazard
         // checklist: "selected tuple mapped directly from
         // candidate_object_ids/chosen indices, never recovered from text").
-        let uuid = rec.chosen_object_ids.first().ok_or("missing-chosen-object-id:Discard")?;
-        let chosen_id = ctx.id_map.get(uuid).copied().ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}"))?;
+        let uuid = rec
+            .chosen_object_ids
+            .first()
+            .ok_or("missing-chosen-object-id:Discard")?;
+        let chosen_id = ctx
+            .id_map
+            .get(uuid)
+            .copied()
+            .ok_or_else(|| format!("untranslatable-object-id:Discard:{uuid}"))?;
         if !choices.contains(&chosen_id) {
             return Err("chosen-not-in-kernel-candidates:Discard".to_string());
         }
@@ -1965,7 +2467,12 @@ fn apply_discard(
         ctx.advance(player);
         outcome.decisions_consumed += 1;
         chosen_names.push(name);
-        surface.apply(state, SurfaceAction::Action(Action::Discard(vec![chosen_id]))).map_err(|e| format!("engine-step-error:Discard:{e}"))?;
+        surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::Discard(vec![chosen_id])),
+            )
+            .map_err(|e| format!("engine-step-error:Discard:{e}"))?;
         choices.retain(|&id| id != chosen_id);
     }
 
@@ -1974,7 +2481,14 @@ fn apply_discard(
             let terminal_names: Vec<String> = rec
                 .chosen_indices
                 .iter()
-                .map(|&idx| rec.candidate_texts.get(idx as usize).cloned().ok_or_else(|| "chosen-index-out-of-range:Discard-terminal-summary".to_string()))
+                .map(|&idx| {
+                    rec.candidate_texts
+                        .get(idx as usize)
+                        .cloned()
+                        .ok_or_else(|| {
+                            "chosen-index-out-of-range:Discard-terminal-summary".to_string()
+                        })
+                })
                 .collect::<Result<_, _>>()?;
             if terminal_names != chosen_names {
                 return Err("discard-terminal-summary-mismatch".to_string());
@@ -2002,11 +2516,22 @@ fn apply_discard(
 /// (a land-sacrifice cost payment, picking *which* permanents); `Normal`
 /// leaves no such extra interactive record before the spell's own targets
 /// (if any) are asked.
-fn apply_choose_cast_mode(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId, options: &[CastMode]) -> Result<(), String> {
-    let looks_like_alternative_cost_pick =
-        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
-    let mode = if looks_like_alternative_cost_pick && options.contains(&CastMode::Alternative) { CastMode::Alternative } else { CastMode::Normal };
-    surface.apply(state, SurfaceAction::Action(Action::ChooseCastMode(mode))).map_err(|e| format!("engine-step-error:ChooseCastMode:{e}"))
+fn apply_choose_cast_mode(
+    surface: &mut HarnessSurfaceV2,
+    state: &mut GameState,
+    ctx: &mut ReplayCtx,
+    player: PlayerId,
+    options: &[CastMode],
+) -> Result<(), String> {
+    let looks_like_alternative_cost_pick = matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
+    let mode = if looks_like_alternative_cost_pick && options.contains(&CastMode::Alternative) {
+        CastMode::Alternative
+    } else {
+        CastMode::Normal
+    };
+    surface
+        .apply(state, SurfaceAction::Action(Action::ChooseCastMode(mode)))
+        .map_err(|e| format!("engine-step-error:ChooseCastMode:{e}"))
 }
 
 /// Guesses which `OptionalCostChoice` the reference's own policy made --
@@ -2057,23 +2582,35 @@ fn apply_choose_cast_mode(surface: &mut HarnessSurfaceV2, state: &mut GameState,
 /// so a symmetric single-legal-land collapse (no corpus example yet, but
 /// the same reference chooser would behave identically) is handled the
 /// same way rather than left as a latent gap.
-fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameState, ctx: &mut ReplayCtx, player: PlayerId) -> Result<(), String> {
+fn apply_choose_optional_cost(
+    surface: &mut HarnessSurfaceV2,
+    state: &mut GameState,
+    ctx: &mut ReplayCtx,
+    player: PlayerId,
+) -> Result<(), String> {
     // Real payable flags, not the H2 reshape's presentation-only sentinel
     // (`(false, false)` at the `Use` stage the caller just observed) -- see
     // `HarnessSurfaceV2::pending_optional_cost_payable`'s doc.
-    let (discard_payable, sacrifice_payable) = HarnessSurfaceV2::pending_optional_cost_payable(state).ok_or("no ChooseOptionalCost decision is pending")?;
+    let (discard_payable, sacrifice_payable) =
+        HarnessSurfaceV2::pending_optional_cost_payable(state)
+            .ok_or("no ChooseOptionalCost decision is pending")?;
     let hand_len = state.players[player.index()].hand.len();
-    let land_len = state.players[player.index()].battlefield.iter().filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land).count();
+    let land_len = state.players[player.index()]
+        .battlefield
+        .iter()
+        .filter(|&&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land)
+        .count();
     let next_is_select_targets_with_len = |n: usize| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && rec.candidate_texts.len() == n);
-    let next_looks_like_land_refs =
-        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
-    let next_is_lone_select_card_shaped = |want_land: bool| {
-        matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_CARD" && rec.candidate_texts.len() == 1 && rec.candidate_texts[0].ends_with(" (you)") == want_land)
-    };
-    let looks_like_sacrifice_pick =
-        sacrifice_payable && (next_looks_like_land_refs || (!discard_payable && next_is_select_targets_with_len(land_len)) || (land_len == 1 && next_is_lone_select_card_shaped(true)));
-    let looks_like_discard_pick =
-        discard_payable && !looks_like_sacrifice_pick && (next_is_select_targets_with_len(hand_len) || (hand_len == 1 && next_is_lone_select_card_shaped(false)));
+    let next_looks_like_land_refs = matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_TARGETS" && !rec.candidate_texts.is_empty() && rec.candidate_texts.iter().all(|t| t.ends_with(" (you)")));
+    let next_is_lone_select_card_shaped = |want_land: bool| matches!(ctx.next(player), Some(&rec) if rec.action_type == "SELECT_CARD" && rec.candidate_texts.len() == 1 && rec.candidate_texts[0].ends_with(" (you)") == want_land);
+    let looks_like_sacrifice_pick = sacrifice_payable
+        && (next_looks_like_land_refs
+            || (!discard_payable && next_is_select_targets_with_len(land_len))
+            || (land_len == 1 && next_is_lone_select_card_shaped(true)));
+    let looks_like_discard_pick = discard_payable
+        && !looks_like_sacrifice_pick
+        && (next_is_select_targets_with_len(hand_len)
+            || (hand_len == 1 && next_is_lone_select_card_shaped(false)));
     let choice = if looks_like_sacrifice_pick {
         OptionalCostChoice::SacrificeLand
     } else if looks_like_discard_pick {
@@ -2081,19 +2618,35 @@ fn apply_choose_optional_cost(surface: &mut HarnessSurfaceV2, state: &mut GameSt
     } else {
         OptionalCostChoice::Decline
     };
-    surface.apply(state, SurfaceAction::Action(Action::ChooseOptionalCost(choice))).map_err(|e| format!("engine-step-error:ChooseOptionalCost:{e}"))
+    surface
+        .apply(
+            state,
+            SurfaceAction::Action(Action::ChooseOptionalCost(choice)),
+        )
+        .map_err(|e| format!("engine-step-error:ChooseOptionalCost:{e}"))
 }
 
-fn translate_blocker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, ObjectId>) -> Result<Vec<Option<(ObjectId, ObjectId)>>, String> {
+fn translate_blocker_candidates(
+    rec: &DecisionRecord,
+    id_map: &HashMap<String, ObjectId>,
+) -> Result<Vec<Option<(ObjectId, ObjectId)>>, String> {
     let mut out = Vec::with_capacity(rec.candidate_object_ids.len());
     for uuid in &rec.candidate_object_ids {
         if uuid == DONE {
             out.push(None);
             continue;
         }
-        let (blocker_uuid, attacker_uuid) = uuid.split_once("->").ok_or_else(|| format!("malformed-block-pair:DeclareBlockers:{uuid}"))?;
-        let blocker = id_map.get(blocker_uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{blocker_uuid}"))?;
-        let attacker = id_map.get(attacker_uuid).copied().ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{attacker_uuid}"))?;
+        let (blocker_uuid, attacker_uuid) = uuid
+            .split_once("->")
+            .ok_or_else(|| format!("malformed-block-pair:DeclareBlockers:{uuid}"))?;
+        let blocker = id_map
+            .get(blocker_uuid)
+            .copied()
+            .ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{blocker_uuid}"))?;
+        let attacker = id_map
+            .get(attacker_uuid)
+            .copied()
+            .ok_or_else(|| format!("untranslatable-object-id:DeclareBlockers:{attacker_uuid}"))?;
         out.push(Some((blocker, attacker)));
     }
     Ok(out)
@@ -2103,7 +2656,13 @@ fn translate_blocker_candidates(rec: &DecisionRecord, id_map: &HashMap<String, O
 mod tests {
     use super::*;
 
-    fn decision_record_ex(action_type: &str, candidate_texts: &[&str], candidate_object_ids: &[&str], chosen_indices: &[u32], extra: &str) -> DecisionRecord {
+    fn decision_record_ex(
+        action_type: &str,
+        candidate_texts: &[&str],
+        candidate_object_ids: &[&str],
+        chosen_indices: &[u32],
+        extra: &str,
+    ) -> DecisionRecord {
         let json = format!(
             "{{\"ordinal\":0,\"player\":\"P\",\"action_type\":\"{action_type}\",\"candidate_count\":{},\
              \"candidate_texts\":{},\"candidate_object_ids\":{},\"chosen_indices\":{:?}{extra}}}",
@@ -2160,11 +2719,18 @@ mod tests {
         // player/source/slot/accumulated-targets -- an echo/duplicate-log
         // bug, not a second real target pick.
         let mut lines = fl_records(200);
-        lines.insert(1, lines[0].clone().replace("\"ordinal\":0", "\"ordinal\":1"));
+        lines.insert(
+            1,
+            lines[0].clone().replace("\"ordinal\":0", "\"ordinal\":1"),
+        );
         let text = lines.join("\n");
         let t = parse_fixture(&text);
         let report = validate_corpus_invariants(std::slice::from_ref(&t));
-        assert_eq!(report.violations.len(), 1, "the injected duplicate first pick must be flagged");
+        assert_eq!(
+            report.violations.len(),
+            1,
+            "the injected duplicate first pick must be flagged"
+        );
     }
 
     #[test]
@@ -2182,7 +2748,10 @@ mod tests {
         let t = parse_fixture(&text);
         let report = validate_corpus_invariants(std::slice::from_ref(&t));
         assert_eq!(report.select_targets_total, 2);
-        assert_eq!(report.select_targets_distinct_keys, 2, "both casts are target_slot=0 of their own episode, and must not collide");
+        assert_eq!(
+            report.select_targets_distinct_keys, 2,
+            "both casts are target_slot=0 of their own episode, and must not collide"
+        );
         assert!(report.violations.is_empty());
     }
 
@@ -2315,7 +2884,10 @@ mod tests {
         // function is private to `trace.rs`; `GoldenTrace::parse_file`
         // is the smallest public entry point that exercises the same
         // parser.
-        let path = std::env::temp_dir().join(format!("replay_burn_v2_fixture_{:?}.txt", std::thread::current().id()));
+        let path = std::env::temp_dir().join(format!(
+            "replay_burn_v2_fixture_{:?}.txt",
+            std::thread::current().id()
+        ));
         std::fs::write(&path, text).unwrap();
         let t = GoldenTrace::parse_file(&path).unwrap();
         let _ = std::fs::remove_file(&path);
@@ -2329,7 +2901,13 @@ mod tests {
         use mtg_kernel::state::Step;
         assert_eq!(expected_phase_strings(Step::Main1), &["Precombat Main"]);
         assert_eq!(expected_phase_strings(Step::Main2), &["Postcombat Main"]);
-        for step in [Step::BeginCombat, Step::DeclareAttackers, Step::DeclareBlockers, Step::CombatDamage, Step::EndCombat] {
+        for step in [
+            Step::BeginCombat,
+            Step::DeclareAttackers,
+            Step::DeclareBlockers,
+            Step::CombatDamage,
+            Step::EndCombat,
+        ] {
             assert_eq!(expected_phase_strings(step), &["Combat"], "{step:?}");
         }
         assert_eq!(expected_phase_strings(Step::End), &["End"]);
@@ -2357,7 +2935,13 @@ mod tests {
         let mut id_map = HashMap::new();
         id_map.insert("blocker-uuid".to_string(), ObjectId(3));
         id_map.insert("attacker-uuid".to_string(), ObjectId(9));
-        let rec = decision_record_ex("DECLARE_BLOCKS", &["Guttersnipe", "DONE"], &["blocker-uuid->attacker-uuid", "sentinel:DONE"], &[0, 1], "");
+        let rec = decision_record_ex(
+            "DECLARE_BLOCKS",
+            &["Guttersnipe", "DONE"],
+            &["blocker-uuid->attacker-uuid", "sentinel:DONE"],
+            &[0, 1],
+            "",
+        );
         let translated = translate_blocker_candidates(&rec, &id_map).unwrap();
         assert_eq!(translated, vec![Some((ObjectId(3), ObjectId(9))), None]);
     }
@@ -2365,12 +2949,37 @@ mod tests {
     #[test]
     fn candidate_key_disambiguates_cast_vs_plot_for_the_same_plottable_card() {
         let robbery = card_def::card_id_by_name("Highway Robbery").unwrap();
-        let mut state = GameState::new_from_libraries(&[robbery], &[], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[robbery],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         let id = state.draw_card(PlayerId::P0).unwrap();
         let castable_spells = [id];
         let plot_actions = [id];
-        let cast_key = candidate_key(&state, id, "Cast Highway Robbery", &[], &castable_spells, &[], &[], &plot_actions).unwrap();
-        let plot_key = candidate_key(&state, id, "Plot {1}{R}", &[], &castable_spells, &[], &[], &plot_actions).unwrap();
+        let cast_key = candidate_key(
+            &state,
+            id,
+            "Cast Highway Robbery",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &plot_actions,
+        )
+        .unwrap();
+        let plot_key = candidate_key(
+            &state,
+            id,
+            "Plot {1}{R}",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &plot_actions,
+        )
+        .unwrap();
         assert_ne!(cast_key, plot_key);
     }
 
@@ -2379,7 +2988,12 @@ mod tests {
     #[test]
     fn check_state_catches_a_life_mismatch() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
-        let state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         let rec = decision_record_ex(
             "ACTIVATE_ABILITY_OR_SPELL",
             &["Pass"],
@@ -2394,7 +3008,12 @@ mod tests {
     #[test]
     fn check_state_catches_a_phase_mismatch() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         state.step = mtg_kernel::state::Step::Main1;
         let rec = decision_record_ex(
             "ACTIVATE_ABILITY_OR_SPELL",
@@ -2410,7 +3029,12 @@ mod tests {
     #[test]
     fn check_state_catches_an_active_player_mismatch() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         state.active_player = PlayerId::P0;
         let rec = decision_record_ex(
             "ACTIVATE_ABILITY_OR_SPELL",
@@ -2426,7 +3050,12 @@ mod tests {
     #[test]
     fn check_state_passes_a_fully_consistent_record() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         state.active_player = PlayerId::P0;
         state.step = mtg_kernel::state::Step::Main1;
         let rec = decision_record_ex(
@@ -2436,7 +3065,8 @@ mod tests {
             &[0],
             ",\"hand\":[],\"library\":[\"Mountain\"],\"graveyard\":[],\"turn\":1,\"life\":20,\"opp_life\":20,\"phase\":\"Precombat Main\",\"active_player\":\"P\"",
         );
-        check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx()).expect("everything agrees");
+        check_state(&state, PlayerId::P0, &rec, "P", "Q", &mut empty_ctx())
+            .expect("everything agrees");
     }
 
     /// Regression test for the increment-13 fix (root-caused against
@@ -2450,7 +3080,12 @@ mod tests {
     fn choose_optional_cost_prefers_text_shape_over_a_coincidental_count_tie() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
         let lightning_bolt = card_def::card_id_by_name("Lightning Bolt").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
 
         // 3 controlled Mountains (battlefield) and 3 hand cards -- the
         // exact coincidental tie that exposed the bug.
@@ -2501,15 +3136,35 @@ mod tests {
             spell_resume: None,
         });
 
-        let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)", "Mountain (you)"], &["a", "b", "c"], &[0], ",\"episode\":0");
+        let rec = decision_record_ex(
+            "SELECT_TARGETS",
+            &["Mountain (you)", "Mountain (you)", "Mountain (you)"],
+            &["a", "b", "c"],
+            &[0],
+            ",\"episode\":0",
+        );
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
+        let mut ctx = ReplayCtx {
+            id_map: HashMap::new(),
+            pregame_object_count: 0,
+            seat_uuid: [None, None],
+            queues: [queue, Vec::new()],
+            cursors: [0, 0],
+            exiled_ever: std::collections::HashSet::new(),
+        };
         let mut surface = HarnessSurfaceV2::new();
 
-        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0)
+            .expect("ChooseOptionalCost must be legal here");
 
-        assert!(state.engine.pending_optional_cost_sacrifice.is_some(), "expected SacrificeLand to be chosen (text shape), not Discard");
-        assert!(state.engine.pending_discard.is_none(), "must not have staged a discard for a sacrifice-land pick");
+        assert!(
+            state.engine.pending_optional_cost_sacrifice.is_some(),
+            "expected SacrificeLand to be chosen (text shape), not Discard"
+        );
+        assert!(
+            state.engine.pending_discard.is_none(),
+            "must not have staged a discard for a sacrifice-land pick"
+        );
     }
 
     /// Root-caused against `game_20260713_002153_0009.txt` decision 142:
@@ -2523,7 +3178,12 @@ mod tests {
     fn choose_optional_cost_recognizes_the_lone_candidate_select_card_collapse() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
         let guttersnipe = card_def::card_id_by_name("Guttersnipe").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
 
         let hand_card = state.objects.push(mtg_kernel::state::GameObject {
             card_def: guttersnipe,
@@ -2537,7 +3197,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(hand_card);
 
@@ -2553,7 +3213,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.engine.pending_optional_cost = Some(mtg_kernel::engine::PendingOptionalCost {
             player: PlayerId::P0,
@@ -2566,14 +3226,31 @@ mod tests {
             spell_resume: None,
         });
 
-        let rec = decision_record_ex("SELECT_CARD", &["Guttersnipe"], &["a"], &[0], ",\"episode\":0");
+        let rec = decision_record_ex(
+            "SELECT_CARD",
+            &["Guttersnipe"],
+            &["a"],
+            &[0],
+            ",\"episode\":0",
+        );
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
+        let mut ctx = ReplayCtx {
+            id_map: HashMap::new(),
+            pregame_object_count: 0,
+            seat_uuid: [None, None],
+            queues: [queue, Vec::new()],
+            cursors: [0, 0],
+            exiled_ever: std::collections::HashSet::new(),
+        };
         let mut surface = HarnessSurfaceV2::new();
 
-        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0).expect("ChooseOptionalCost must be legal here");
+        apply_choose_optional_cost(&mut surface, &mut state, &mut ctx, PlayerId::P0)
+            .expect("ChooseOptionalCost must be legal here");
 
-        assert!(state.engine.pending_discard.is_some(), "expected Discard to be chosen (lone-candidate SELECT_CARD collapse), not Decline");
+        assert!(
+            state.engine.pending_discard.is_some(),
+            "expected Discard to be chosen (lone-candidate SELECT_CARD collapse), not Decline"
+        );
     }
 
     /// Regression test for the increment-14 fix (root-caused against
@@ -2589,7 +3266,12 @@ mod tests {
     fn choose_cast_mode_picks_alternative_when_the_next_record_is_a_land_reference_pick() {
         let mountain = card_def::card_id_by_name("Mountain").unwrap();
         let fireblast = card_def::card_id_by_name("Fireblast").unwrap();
-        let mut state = GameState::new_from_libraries(&[mountain], &[mountain], |id| CARD_DEFS[id as usize].name.to_string(), 1);
+        let mut state = GameState::new_from_libraries(
+            &[mountain],
+            &[mountain],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
         let spell = state.objects.push(mtg_kernel::state::GameObject {
             card_def: fireblast,
             name: "Fireblast".to_string(),
@@ -2602,7 +3284,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.engine.pending_cast = Some(mtg_kernel::engine::PendingCast {
             spell,
@@ -2619,14 +3301,38 @@ mod tests {
             kicked: Some(false),
         });
 
-        let rec = decision_record_ex("SELECT_TARGETS", &["Mountain (you)", "Mountain (you)"], &["a", "b"], &[0], ",\"episode\":0");
+        let rec = decision_record_ex(
+            "SELECT_TARGETS",
+            &["Mountain (you)", "Mountain (you)"],
+            &["a", "b"],
+            &[0],
+            ",\"episode\":0",
+        );
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map: HashMap::new(), pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
+        let mut ctx = ReplayCtx {
+            id_map: HashMap::new(),
+            pregame_object_count: 0,
+            seat_uuid: [None, None],
+            queues: [queue, Vec::new()],
+            cursors: [0, 0],
+            exiled_ever: std::collections::HashSet::new(),
+        };
         let mut surface = HarnessSurfaceV2::new();
 
-        apply_choose_cast_mode(&mut surface, &mut state, &mut ctx, PlayerId::P0, &[CastMode::Normal, CastMode::Alternative]).expect("ChooseCastMode must be legal here");
+        apply_choose_cast_mode(
+            &mut surface,
+            &mut state,
+            &mut ctx,
+            PlayerId::P0,
+            &[CastMode::Normal, CastMode::Alternative],
+        )
+        .expect("ChooseCastMode must be legal here");
 
-        assert_eq!(state.engine.pending_cast.as_ref().and_then(|p| p.cast_mode), Some(CastMode::Alternative), "expected Alternative, not Normal");
+        assert_eq!(
+            state.engine.pending_cast.as_ref().and_then(|p| p.cast_mode),
+            Some(CastMode::Alternative),
+            "expected Alternative, not Normal"
+        );
     }
 
     /// Regression test for the increment-14 fix (root-caused against
@@ -2653,19 +3359,35 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         let mut id_map = HashMap::new();
         id_map.insert("uuid-fiery-temper".to_string(), obj);
 
-        let rec = decision_record_ex("SELECT_CARD", &["Fiery Temper"], &["uuid-fiery-temper"], &[0], ",\"episode\":0,\"chosen_object_ids\":[\"uuid-fiery-temper\"]");
+        let rec = decision_record_ex(
+            "SELECT_CARD",
+            &["Fiery Temper"],
+            &["uuid-fiery-temper"],
+            &[0],
+            ",\"episode\":0,\"chosen_object_ids\":[\"uuid-fiery-temper\"]",
+        );
         let queue = vec![&rec];
-        let mut ctx = ReplayCtx { id_map, pregame_object_count: 0, seat_uuid: [None, None], queues: [queue, Vec::new()], cursors: [0, 0], exiled_ever: std::collections::HashSet::new() };
+        let mut ctx = ReplayCtx {
+            id_map,
+            pregame_object_count: 0,
+            seat_uuid: [None, None],
+            queues: [queue, Vec::new()],
+            cursors: [0, 0],
+            exiled_ever: std::collections::HashSet::new(),
+        };
         let mut outcome = ReplayOutcome::default();
 
         skip_stale_forced_discards(&state, &mut ctx, PlayerId::P0, &mut outcome);
 
-        assert_eq!(ctx.cursors[0], 1, "the stale SELECT_CARD record for the already-exiled Madness discard must be skipped");
+        assert_eq!(
+            ctx.cursors[0], 1,
+            "the stale SELECT_CARD record for the already-exiled Madness discard must be skipped"
+        );
         assert_eq!(outcome.forced_discard_records_skipped, 1);
     }
 
@@ -2678,7 +3400,11 @@ mod tests {
         let mut sorted = perms.clone();
         sorted.sort();
         sorted.dedup();
-        assert_eq!(sorted.len(), 6, "all 6 permutations of 0..3 must be distinct, got {perms:?}");
+        assert_eq!(
+            sorted.len(),
+            6,
+            "all 6 permutations of 0..3 must be distinct, got {perms:?}"
+        );
         for p in &perms {
             let mut s = p.clone();
             s.sort_unstable();
@@ -2687,7 +3413,8 @@ mod tests {
     }
 
     fn dummy_object(state: &mut GameState, player: PlayerId, name: &str) -> ObjectId {
-        let card_def = card_def::card_id_by_name(name).unwrap_or_else(|| panic!("{name} not in CARD_DEFS"));
+        let card_def =
+            card_def::card_id_by_name(name).unwrap_or_else(|| panic!("{name} not in CARD_DEFS"));
         let id = state.objects.push(mtg_kernel::state::GameObject {
             card_def,
             name: name.to_string(),
@@ -2700,7 +3427,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(id);
         id
@@ -2745,8 +3472,26 @@ mod tests {
         state.priority_player = PlayerId::P0;
 
         let pending = vec![
-            PendingTrigger { controller: PlayerId::P0, source: g1, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false, kicked: false },
-            PendingTrigger { controller: PlayerId::P0, source: g2, effect: mtg_kernel::effect::EffectOp::DealDamage { target: mtg_kernel::effect::TargetRef::Opponent, amount: 2 }, is_madness_offer: false, kicked: false },
+            PendingTrigger {
+                controller: PlayerId::P0,
+                source: g1,
+                effect: mtg_kernel::effect::EffectOp::DealDamage {
+                    target: mtg_kernel::effect::TargetRef::Opponent,
+                    amount: 2,
+                },
+                is_madness_offer: false,
+                kicked: false,
+            },
+            PendingTrigger {
+                controller: PlayerId::P0,
+                source: g2,
+                effect: mtg_kernel::effect::EffectOp::DealDamage {
+                    target: mtg_kernel::effect::TargetRef::Opponent,
+                    amount: 2,
+                },
+                is_madness_offer: false,
+                kicked: false,
+            },
         ];
         // `check_trigger_commutativity` (like its one real call site in
         // `run()`) applies `Action::OrderTriggers` per permutation, which
@@ -2757,7 +3502,9 @@ mod tests {
         state.engine.pending_triggers = pending.clone();
         match check_trigger_commutativity(&state, &pending) {
             CommutativityCheck::Commutative => {}
-            CommutativityCheck::Noncommutative(detail) => panic!("expected commutative, got: {detail}"),
+            CommutativityCheck::Noncommutative(detail) => {
+                panic!("expected commutative, got: {detail}")
+            }
             CommutativityCheck::SkippedTooLarge => panic!("group of 2 must never be skipped"),
         }
     }
@@ -2783,8 +3530,26 @@ mod tests {
         assert_eq!(state.players[0].life, 20);
 
         let pending = vec![
-            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::LoseLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 20 }, is_madness_offer: false, kicked: false },
-            PendingTrigger { controller: PlayerId::P0, source: src, effect: mtg_kernel::effect::EffectOp::GainLife { player: mtg_kernel::effect::PlayerRef::Controller, amount: 25 }, is_madness_offer: false, kicked: false },
+            PendingTrigger {
+                controller: PlayerId::P0,
+                source: src,
+                effect: mtg_kernel::effect::EffectOp::LoseLife {
+                    player: mtg_kernel::effect::PlayerRef::Controller,
+                    amount: 20,
+                },
+                is_madness_offer: false,
+                kicked: false,
+            },
+            PendingTrigger {
+                controller: PlayerId::P0,
+                source: src,
+                effect: mtg_kernel::effect::EffectOp::GainLife {
+                    player: mtg_kernel::effect::PlayerRef::Controller,
+                    amount: 25,
+                },
+                is_madness_offer: false,
+                kicked: false,
+            },
         ];
         state.engine.pending_triggers = pending.clone();
         match check_trigger_commutativity(&state, &pending) {

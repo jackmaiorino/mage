@@ -407,10 +407,7 @@ mod tests {
 
         let drawn = state.draw_card(PlayerId::P0).unwrap();
         assert_eq!(drawn, ObjectId(0)); // was index 0 = top
-        assert_eq!(
-            state.players[0].library,
-            vec![ObjectId(1), ObjectId(2)]
-        );
+        assert_eq!(state.players[0].library, vec![ObjectId(1), ObjectId(2)]);
         assert_eq!(state.players[0].hand, vec![ObjectId(0)]);
         assert_eq!(state.objects.get(ObjectId(0)).zone, Zone::Hand);
 

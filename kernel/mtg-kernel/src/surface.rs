@@ -301,7 +301,15 @@ pub enum SurfaceAction {
 /// a `CastSpellOrPass` decision for either is unreachable and there's
 /// nothing to gate.
 pub fn harness_never_offers_priority(step: Step) -> bool {
-    matches!(step, Step::Upkeep | Step::Draw | Step::BeginCombat | Step::CombatDamage | Step::EndCombat | Step::End)
+    matches!(
+        step,
+        Step::Upkeep
+            | Step::Draw
+            | Step::BeginCombat
+            | Step::CombatDamage
+            | Step::EndCombat
+            | Step::End
+    )
 }
 
 #[derive(Default)]
@@ -355,8 +363,19 @@ impl HarnessSurfaceV1 {
         &self.suppressions
     }
 
-    fn record(&mut self, reason: SuppressionReason, auto_action: impl Into<String>, before: u64, state: &GameState) {
-        self.suppressions.push(Suppression { reason, auto_action: auto_action.into(), state_hash_before: before, state_hash_after: state.state_hash() });
+    fn record(
+        &mut self,
+        reason: SuppressionReason,
+        auto_action: impl Into<String>,
+        before: u64,
+        state: &GameState,
+    ) {
+        self.suppressions.push(Suppression {
+            reason,
+            auto_action: auto_action.into(),
+            state_hash_before: before,
+            state_hash_after: state.state_hash(),
+        });
     }
 
     /// Drives `engine::advance_until_decision`, silently auto-resolving
@@ -373,15 +392,28 @@ impl HarnessSurfaceV1 {
             let decision = engine::advance_until_decision(state);
 
             match &decision {
-                Decision::CastSpellOrPass { player, castable_spells, mana_abilities, land_drops, activatable_abilities, .. } => {
+                Decision::CastSpellOrPass {
+                    player,
+                    castable_spells,
+                    mana_abilities,
+                    land_drops,
+                    activatable_abilities,
+                    ..
+                } => {
                     if matches!(state.step, Step::DeclareAttackers | Step::DeclareBlockers) {
                         if self.combat_priority_round_seen != Some(state.engine.priority_round) {
                             self.combat_priority_spent = [false, false];
                             self.combat_priority_round_seen = Some(state.engine.priority_round);
                         }
                         if self.combat_priority_spent[player.index()] {
-                            engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
-                            self.record(SuppressionReason::CombatPriorityActionSpent, "Pass (forced: one action per round already taken)", before, state);
+                            engine::step(state, Action::Pass)
+                                .expect("Pass is always legal in an offered priority window");
+                            self.record(
+                                SuppressionReason::CombatPriorityActionSpent,
+                                "Pass (forced: one action per round already taken)",
+                                before,
+                                state,
+                            );
                             continue;
                         }
                         // Whatever happens next (real ask or NoRealOption
@@ -397,10 +429,15 @@ impl HarnessSurfaceV1 {
                             self.round_opening_stack_len = state.stack.len();
                             self.stack_len_round_seen = Some(state.engine.priority_round);
                         }
-                        let stack_top_is_fresh_own_item = state.stack.len() > self.round_opening_stack_len
-                            && state.stack.last().is_some_and(|item| item.controller == *player);
+                        let stack_top_is_fresh_own_item = state.stack.len()
+                            > self.round_opening_stack_len
+                            && state
+                                .stack
+                                .last()
+                                .is_some_and(|item| item.controller == *player);
                         if stack_top_is_fresh_own_item {
-                            engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
+                            engine::step(state, Action::Pass)
+                                .expect("Pass is always legal in an offered priority window");
                             self.record(
                                 SuppressionReason::StackTopIsCastersOwn,
                                 "Pass (forced: caster's own cast/activation still unresolved on the stack this round)",
@@ -410,18 +447,37 @@ impl HarnessSurfaceV1 {
                             continue;
                         }
                     }
-                    let no_real_option = castable_spells.is_empty() && mana_abilities.is_empty() && land_drops.is_empty() && activatable_abilities.is_empty();
+                    let no_real_option = castable_spells.is_empty()
+                        && mana_abilities.is_empty()
+                        && land_drops.is_empty()
+                        && activatable_abilities.is_empty();
                     let step_gated = harness_never_offers_priority(state.step);
                     if step_gated || no_real_option {
-                        engine::step(state, Action::Pass).expect("Pass is always legal in an offered priority window");
-                        self.record(if step_gated { SuppressionReason::StepGated } else { SuppressionReason::NoRealOption }, "Pass", before, state);
+                        engine::step(state, Action::Pass)
+                            .expect("Pass is always legal in an offered priority window");
+                        self.record(
+                            if step_gated {
+                                SuppressionReason::StepGated
+                            } else {
+                                SuppressionReason::NoRealOption
+                            },
+                            "Pass",
+                            before,
+                            state,
+                        );
                         continue;
                     }
                 }
                 Decision::DeclareAttackers { eligible, .. } => {
                     if eligible.is_empty() {
-                        engine::step(state, Action::DeclareAttackers(Vec::new())).expect("declaring zero attackers is always legal here");
-                        self.record(SuppressionReason::NoEligibleAttacker, "DeclareAttackers([])", before, state);
+                        engine::step(state, Action::DeclareAttackers(Vec::new()))
+                            .expect("declaring zero attackers is always legal here");
+                        self.record(
+                            SuppressionReason::NoEligibleAttacker,
+                            "DeclareAttackers([])",
+                            before,
+                            state,
+                        );
                         continue;
                     }
                 }
@@ -447,8 +503,14 @@ impl HarnessSurfaceV1 {
         match action {
             SurfaceAction::Action(a) => engine::step(state, a),
             SurfaceAction::DeclareBlockersForAttacker(blockers) => {
-                let reshape = self.blockers.as_mut().ok_or("no DeclareBlockersForAttacker decision is pending")?;
-                let attacker = reshape.current_attacker.take().ok_or("no DeclareBlockersForAttacker decision is pending")?;
+                let reshape = self
+                    .blockers
+                    .as_mut()
+                    .ok_or("no DeclareBlockersForAttacker decision is pending")?;
+                let attacker = reshape
+                    .current_attacker
+                    .take()
+                    .ok_or("no DeclareBlockersForAttacker decision is pending")?;
                 for b in blockers {
                     reshape.accumulated.push((b, attacker));
                 }
@@ -460,31 +522,55 @@ impl HarnessSurfaceV1 {
         }
     }
 
-    fn begin_blockers_reshape(&mut self, legal_blockers: Vec<(ObjectId, Vec<ObjectId>)>, before: u64, state: &GameState) {
+    fn begin_blockers_reshape(
+        &mut self,
+        legal_blockers: Vec<(ObjectId, Vec<ObjectId>)>,
+        before: u64,
+        state: &GameState,
+    ) {
         let mut remaining = std::collections::VecDeque::new();
         for (attacker, blockers) in legal_blockers {
             if blockers.is_empty() {
-                self.record(SuppressionReason::NoEligibleBlockersForAttacker, format!("skip attacker {attacker}"), before, state);
+                self.record(
+                    SuppressionReason::NoEligibleBlockersForAttacker,
+                    format!("skip attacker {attacker}"),
+                    before,
+                    state,
+                );
                 continue;
             }
             remaining.push_back((attacker, blockers));
         }
-        self.blockers = Some(BlockersReshape { remaining, accumulated: Vec::new(), current_attacker: None });
+        self.blockers = Some(BlockersReshape {
+            remaining,
+            accumulated: Vec::new(),
+            current_attacker: None,
+        });
     }
 
     fn next_blockers_subdecision(&mut self) -> Option<SurfaceDecision> {
         let reshape = self.blockers.as_mut()?;
         let (attacker, legal_blockers) = reshape.remaining.pop_front()?;
         reshape.current_attacker = Some(attacker);
-        Some(SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers })
+        Some(SurfaceDecision::DeclareBlockersForAttacker {
+            attacker,
+            legal_blockers,
+        })
     }
 
     /// Applies the fully-accumulated blocker assignment as one combined
     /// `engine::Action::DeclareBlockers` and clears the reshape state.
     fn finish_blockers_reshape(&mut self, state: &mut GameState) {
-        let reshape = self.blockers.take().expect("finish_blockers_reshape requires an in-progress reshape");
-        debug_assert!(reshape.remaining.is_empty(), "finish_blockers_reshape called before every attacker was asked");
-        engine::step(state, Action::DeclareBlockers(reshape.accumulated)).expect("accumulated blocks were already checked legal one attacker at a time");
+        let reshape = self
+            .blockers
+            .take()
+            .expect("finish_blockers_reshape requires an in-progress reshape");
+        debug_assert!(
+            reshape.remaining.is_empty(),
+            "finish_blockers_reshape called before every attacker was asked"
+        );
+        engine::step(state, Action::DeclareBlockers(reshape.accumulated))
+            .expect("accumulated blocks were already checked legal one attacker at a time");
     }
 }
 
@@ -500,7 +586,8 @@ mod tests {
     }
 
     fn put_on_battlefield(state: &mut GameState, player: PlayerId, card_name: &str) -> ObjectId {
-        let card_id = card_def::card_id_by_name(card_name).unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
+        let card_id = card_def::card_id_by_name(card_name)
+            .unwrap_or_else(|| panic!("{card_name} not in CARD_DEFS"));
         let obj_id = state.objects.push(crate::state::GameObject {
             card_def: card_id,
             name: card_name.to_string(),
@@ -513,7 +600,7 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[player.index()].battlefield.push(obj_id);
         obj_id
@@ -573,16 +660,30 @@ mod tests {
         let mut surface = HarnessSurfaceV1::new();
         let decision = surface.next_decision(&mut state);
         match decision {
-            SurfaceDecision::DeclareBlockersForAttacker { attacker, legal_blockers } => {
+            SurfaceDecision::DeclareBlockersForAttacker {
+                attacker,
+                legal_blockers,
+            } => {
                 assert_eq!(attacker, attacker_a);
                 assert_eq!(legal_blockers, vec![blocker]);
             }
             other => panic!("expected DeclareBlockersForAttacker, got {other:?}"),
         }
 
-        surface.apply(&mut state, SurfaceAction::DeclareBlockersForAttacker(vec![blocker])).unwrap();
-        assert!(state.engine.combat.blockers_declared, "the combined DeclareBlockers action should have been applied automatically");
-        assert_eq!(state.engine.combat.blocked_by, vec![(attacker_a, vec![blocker])]);
+        surface
+            .apply(
+                &mut state,
+                SurfaceAction::DeclareBlockersForAttacker(vec![blocker]),
+            )
+            .unwrap();
+        assert!(
+            state.engine.combat.blockers_declared,
+            "the combined DeclareBlockers action should have been applied automatically"
+        );
+        assert_eq!(
+            state.engine.combat.blocked_by,
+            vec![(attacker_a, vec![blocker])]
+        );
     }
 
     #[test]
@@ -596,7 +697,10 @@ mod tests {
         surface.next_decision(&mut state);
 
         assert!(!surface.suppressions().is_empty());
-        assert_eq!(surface.suppressions()[0].reason, SuppressionReason::NoRealOption);
+        assert_eq!(
+            surface.suppressions()[0].reason,
+            SuppressionReason::NoRealOption
+        );
     }
 
     /// A real, >=2-option priority window (a castable spell present) is
@@ -617,18 +721,24 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         state.step = Step::Main1;
         state.priority_player = PlayerId::P0;
         state.active_player = PlayerId::P0;
 
         let mut surface = HarnessSurfaceV1::new();
         let decision = surface.next_decision(&mut state);
-        assert!(matches!(decision, SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })));
+        assert!(matches!(
+            decision,
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })
+        ));
         assert!(surface.suppressions().is_empty());
         let _ = CARD_DEFS;
         let _ = Target::Player(PlayerId::P0);
@@ -659,11 +769,14 @@ mod tests {
             counters: Default::default(),
             attachments: Vec::new(),
             plotted_turn: None,
-                zone_change_count: 0,
+            zone_change_count: 0,
         });
         state.players[0].hand.push(id);
         put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
-        state.objects.get_mut(state.players[0].battlefield[0]).tapped = false;
+        state
+            .objects
+            .get_mut(state.players[0].battlefield[0])
+            .tapped = false;
         state.step = Step::Main1;
         state.priority_player = PlayerId::P0;
         state.active_player = PlayerId::P0;
@@ -673,7 +786,10 @@ mod tests {
         // `real_option_priority_window_is_surfaced`) -- this is also what
         // snapshots `round_opening_stack_len` at 0 for the current round.
         let first = surface.next_decision(&mut state);
-        assert!(matches!(first, SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })));
+        assert!(matches!(
+            first,
+            SurfaceDecision::Decision(Decision::CastSpellOrPass { .. })
+        ));
         assert!(surface.suppressions().is_empty());
 
         // Simulate "the caster just finished casting Lightning Bolt this
@@ -708,7 +824,11 @@ mod tests {
         // test isn't pinning.
         let _second = surface.next_decision(&mut state);
         let suppressions = surface.suppressions();
-        assert_eq!(suppressions[0].reason, SuppressionReason::StackTopIsCastersOwn, "got {suppressions:?}");
+        assert_eq!(
+            suppressions[0].reason,
+            SuppressionReason::StackTopIsCastersOwn,
+            "got {suppressions:?}"
+        );
         assert!(suppressions[0].auto_action.starts_with("Pass"));
     }
 }

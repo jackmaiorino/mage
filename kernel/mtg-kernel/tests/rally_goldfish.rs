@@ -26,7 +26,10 @@ fn debug_name(card_id: u16) -> String {
 }
 
 fn build_library(names: &[&str]) -> Vec<u16> {
-    names.iter().map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found in CARD_DEFS"))).collect()
+    names
+        .iter()
+        .map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found in CARD_DEFS")))
+        .collect()
 }
 
 fn deal_opening_hands(state: &mut GameState, n: usize) {
@@ -68,7 +71,9 @@ fn setup() -> GameState {
 }
 
 fn card_in(list: &[ObjectId], state: &GameState, def_id: u16) -> Option<ObjectId> {
-    list.iter().copied().find(|&id| state.objects.get(id).card_def == def_id)
+    list.iter()
+        .copied()
+        .find(|&id| state.objects.get(id).card_def == def_id)
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -107,7 +112,12 @@ fn kind_of(d: &Decision) -> Kind {
 /// it unkicked on turn 1); Galvanic Blast turn 3 (no Metalcraft yet: 0
 /// artifacts); Clockwork Percussionist + Reckless Impulse turn 4; Lightning
 /// Bolt (hand or impulse-exiled) from turn 5 onward to finish.
-fn p0_action(state: &GameState, land_drops: &[ObjectId], castable_spells: &[ObjectId], defs: &Defs) -> Action {
+fn p0_action(
+    state: &GameState,
+    land_drops: &[ObjectId],
+    castable_spells: &[ObjectId],
+    defs: &Defs,
+) -> Action {
     if !land_drops.is_empty() {
         return Action::PlayLand(land_drops[0]);
     }
@@ -174,7 +184,10 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
 
     loop {
         iterations += 1;
-        assert!(iterations < 5000, "scripted game did not terminate; policy or engine logic is likely wrong");
+        assert!(
+            iterations < 5000,
+            "scripted game did not terminate; policy or engine logic is likely wrong"
+        );
 
         let decision = engine::advance_until_decision(state);
         log.push(kind_of(&decision));
@@ -185,11 +198,17 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
 
         match decision {
             Decision::GameOver { winner } => {
-                assert_eq!(winner, Some(PlayerId::P0), "P0 should win via a kicked Rally curve + burn");
+                assert_eq!(
+                    winner,
+                    Some(PlayerId::P0),
+                    "P0 should win via a kicked Rally curve + burn"
+                );
                 break;
             }
             Decision::OrderTriggers { .. } => {
-                unreachable!("no card in this script produces 2+ simultaneous same-controller triggers")
+                unreachable!(
+                    "no card in this script produces 2+ simultaneous same-controller triggers"
+                )
             }
             Decision::ChooseCastMode { .. }
             | Decision::ChooseCostTargets { .. }
@@ -197,16 +216,27 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
             | Decision::ChooseSpellMode { .. }
             | Decision::ChooseOptionalCost { .. }
             | Decision::ChooseMadnessCast { .. } => {
-                unreachable!("the rally goldfish's library has no card that can produce this decision")
+                unreachable!(
+                    "the rally goldfish's library has no card that can produce this decision"
+                )
             }
             // Chain Lightning isn't in this script's card pool.
             Decision::Halted { .. } => unreachable!("no card in this script can halt the walk"),
             Decision::ChooseKicker { player, .. } => {
-                assert_eq!(player, PlayerId::P0, "only Goblin Bushwhacker (P0's) ever offers Kicker in this script");
+                assert_eq!(
+                    player,
+                    PlayerId::P0,
+                    "only Goblin Bushwhacker (P0's) ever offers Kicker in this script"
+                );
                 kicker_decisions += 1;
                 engine::step(state, Action::ChooseKicker(true)).unwrap();
             }
-            Decision::ChooseTargets { player, remaining, legal_targets, .. } => {
+            Decision::ChooseTargets {
+                player,
+                remaining,
+                legal_targets,
+                ..
+            } => {
                 assert_eq!(remaining, 1);
                 let target = Target::Player(PlayerId::P1);
                 assert!(legal_targets.contains(&target));
@@ -222,10 +252,19 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
                 engine::step(state, Action::DeclareAttackers(eligible)).unwrap();
             }
             Decision::DeclareBlockers { player, .. } => {
-                assert_eq!(player, PlayerId::P1, "P0 is never the defending player in this script");
+                assert_eq!(
+                    player,
+                    PlayerId::P1,
+                    "P0 is never the defending player in this script"
+                );
                 engine::step(state, Action::DeclareBlockers(Vec::new())).unwrap();
             }
-            Decision::CastSpellOrPass { player, castable_spells, land_drops, .. } => {
+            Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                land_drops,
+                ..
+            } => {
                 // P1's own land drops keep its hand from overflowing 7 (it
                 // never casts anything, but it still gets its own turn's
                 // one land play, same as P0) -- `p0_action` handles P0's
@@ -242,7 +281,12 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
         }
     }
 
-    RunResult { log, life_history, kicker_decisions, choose_targets_p0 }
+    RunResult {
+        log,
+        life_history,
+        kicker_decisions,
+        choose_targets_p0,
+    }
 }
 
 #[test]
@@ -266,9 +310,30 @@ fn rally_goldfish_kicked_bushwhacker_pump_plus_burn_ends_the_game_through_faithf
     // ---- exactly 4 targeted spells resolved for P0 (1 Galvanic Blast + 3
     // Lightning Bolts); P1 never cast or targeted anything.
     assert_eq!(result.choose_targets_p0, 4);
-    assert_eq!(result.log.iter().filter(|d| matches!(d, Kind::ChooseTargets(PlayerId::P1))).count(), 0);
-    assert_eq!(result.log.iter().filter(|d| matches!(d, Kind::ChooseKicker(PlayerId::P1))).count(), 0);
-    assert_eq!(result.log.iter().filter(|d| matches!(d, Kind::OrderTriggers(_))).count(), 0);
+    assert_eq!(
+        result
+            .log
+            .iter()
+            .filter(|d| matches!(d, Kind::ChooseTargets(PlayerId::P1)))
+            .count(),
+        0
+    );
+    assert_eq!(
+        result
+            .log
+            .iter()
+            .filter(|d| matches!(d, Kind::ChooseKicker(PlayerId::P1)))
+            .count(),
+        0
+    );
+    assert_eq!(
+        result
+            .log
+            .iter()
+            .filter(|d| matches!(d, Kind::OrderTriggers(_)))
+            .count(),
+        0
+    );
 
     // ---- final board: Burning-Tree Emissary, Goblin Bushwhacker, and
     // Clockwork Percussionist all survived (P1 never blocked or removed
@@ -277,10 +342,22 @@ fn rally_goldfish_kicked_bushwhacker_pump_plus_burn_ends_the_game_through_faithf
     let bte_id = card_id_by_name("Burning-Tree Emissary").unwrap();
     let bushwhacker_id = card_id_by_name("Goblin Bushwhacker").unwrap();
     let percussionist_id = card_id_by_name("Clockwork Percussionist").unwrap();
-    assert!(state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == bte_id));
-    assert!(state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == bushwhacker_id));
-    assert!(state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == percussionist_id));
-    assert!(state.engine.until_end_of_turn.is_empty(), "no pump effect should still be lingering at game's end");
+    assert!(state.players[0]
+        .battlefield
+        .iter()
+        .any(|&id| state.objects.get(id).card_def == bte_id));
+    assert!(state.players[0]
+        .battlefield
+        .iter()
+        .any(|&id| state.objects.get(id).card_def == bushwhacker_id));
+    assert!(state.players[0]
+        .battlefield
+        .iter()
+        .any(|&id| state.objects.get(id).card_def == percussionist_id));
+    assert!(
+        state.engine.until_end_of_turn.is_empty(),
+        "no pump effect should still be lingering at game's end"
+    );
 
     // ---- no shortcuts: P1 got a real priority window somewhere between
     // every ChooseTargets decision that wasn't immediately preceded by
@@ -290,18 +367,38 @@ fn rally_goldfish_kicked_bushwhacker_pump_plus_burn_ends_the_game_through_faithf
     // last 2 Lightning Bolts before anyone else is asked again -- a
     // zero/one-entry segment here reflects that legal chaining, not a
     // skipped priority window).
-    let choose_target_positions: Vec<usize> = result.log.iter().enumerate().filter(|(_, d)| matches!(d, Kind::ChooseTargets(_))).map(|(i, _)| i).collect();
-    assert_eq!(choose_target_positions.len(), 4, "1 Galvanic Blast + 3 Lightning Bolts");
+    let choose_target_positions: Vec<usize> = result
+        .log
+        .iter()
+        .enumerate()
+        .filter(|(_, d)| matches!(d, Kind::ChooseTargets(_)))
+        .map(|(i, _)| i)
+        .collect();
+    assert_eq!(
+        choose_target_positions.len(),
+        4,
+        "1 Galvanic Blast + 3 Lightning Bolts"
+    );
     let mut segment_start = 0;
     for &pos in &choose_target_positions {
         let segment = &result.log[segment_start..pos];
         if segment.len() > 1 {
-            assert!(segment.iter().any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))), "segment [{segment_start}..{pos}) never offered P1 a decision");
+            assert!(
+                segment
+                    .iter()
+                    .any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))),
+                "segment [{segment_start}..{pos}) never offered P1 a decision"
+            );
         }
         segment_start = pos + 1;
     }
     assert!(
-        result.log.iter().filter(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))).count() > 30,
+        result
+            .log
+            .iter()
+            .filter(|d| matches!(d, Kind::CastOrPass(PlayerId::P1)))
+            .count()
+            > 30,
         "P1 should have gotten many real priority windows across the whole game"
     );
 }

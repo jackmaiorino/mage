@@ -307,7 +307,13 @@ pub struct ExecCtx {
 
 impl ExecCtx {
     pub fn no_targets(source: ObjectId, controller: PlayerId) -> ExecCtx {
-        ExecCtx { source, controller, targets: Vec::new(), discarded: Vec::new(), kicked: false }
+        ExecCtx {
+            source,
+            controller,
+            targets: Vec::new(),
+            discarded: Vec::new(),
+            kicked: false,
+        }
     }
 
     fn resolve_object(&self, r: ObjectRef) -> ObjectId {
@@ -335,7 +341,9 @@ impl ExecCtx {
                 Target::Player(p) => p,
                 Target::Object(_) => panic!("effect expected a player target at index {i}"),
             },
-            PlayerRef::ObjectController(oref) => state.objects.get(self.resolve_object(oref)).controller,
+            PlayerRef::ObjectController(oref) => {
+                state.objects.get(self.resolve_object(oref)).controller
+            }
         }
     }
 }
@@ -358,7 +366,10 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
         }
         EffectOp::DealDamage { target, amount } => {
             let target = ctx.resolve_target(*target);
-            event::propose_and_commit(state, event::ProposedEvent::damage(ctx.source, target, *amount));
+            event::propose_and_commit(
+                state,
+                event::ProposedEvent::damage(ctx.source, target, *amount),
+            );
         }
         EffectOp::GainLife { player, amount } => {
             let player = ctx.resolve_player(*player, state);
@@ -384,7 +395,10 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
         }
         EffectOp::AddMana { player, colors } => {
             let player = ctx.resolve_player(*player, state);
-            event::propose_and_commit(state, event::ProposedEvent::mana_add(player, colors.clone()));
+            event::propose_and_commit(
+                state,
+                event::ProposedEvent::mana_add(player, colors.clone()),
+            );
         }
         EffectOp::DiscardCards { player, count } => {
             let player = ctx.resolve_player(*player, state);
@@ -394,13 +408,26 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                 resume: crate::engine::DiscardResume::None,
             });
         }
-        EffectOp::CreateToken { token_def, controller } => {
+        EffectOp::CreateToken {
+            token_def,
+            controller,
+        } => {
             let controller = ctx.resolve_player(*controller, state);
-            event::propose_and_commit(state, event::ProposedEvent::create_token(*token_def, controller));
+            event::propose_and_commit(
+                state,
+                event::ProposedEvent::create_token(*token_def, controller),
+            );
         }
-        EffectOp::MayPayCostThen { discard, sacrifice_lands, then } => {
-            let discard_payable = *discard > 0 && state.players[ctx.controller.index()].hand.len() >= *discard as usize;
-            let sacrifice_payable = *sacrifice_lands > 0 && crate::engine::count_controlled_lands(ctx.controller, state) >= *sacrifice_lands as u32;
+        EffectOp::MayPayCostThen {
+            discard,
+            sacrifice_lands,
+            then,
+        } => {
+            let discard_payable = *discard > 0
+                && state.players[ctx.controller.index()].hand.len() >= *discard as usize;
+            let sacrifice_payable = *sacrifice_lands > 0
+                && crate::engine::count_controlled_lands(ctx.controller, state)
+                    >= *sacrifice_lands as u32;
             if !discard_payable && !sacrifice_payable {
                 // Nothing payable: DoIfCostPaid's own `cost.canPay(...)`
                 // gate is false too, so the reference never even offers the
@@ -429,14 +456,32 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
             // sequential individual commits that could see each other's
             // side effects mid-resolution.
             let opponent = ctx.controller.opponent();
-            let mut events = vec![event::ProposedEvent::damage(ctx.source, Target::Player(opponent), *amount)];
-            events.extend(state.players[opponent.index()].battlefield.iter().copied().filter_map(|id| {
-                let def = &crate::card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-                def.has_type(crate::card_def::CardType::Creature).then(|| event::ProposedEvent::damage(ctx.source, Target::Object(id), *amount))
-            }));
+            let mut events = vec![event::ProposedEvent::damage(
+                ctx.source,
+                Target::Player(opponent),
+                *amount,
+            )];
+            events.extend(
+                state.players[opponent.index()]
+                    .battlefield
+                    .iter()
+                    .copied()
+                    .filter_map(|id| {
+                        let def =
+                            &crate::card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+                        def.has_type(crate::card_def::CardType::Creature).then(|| {
+                            event::ProposedEvent::damage(ctx.source, Target::Object(id), *amount)
+                        })
+                    }),
+            );
             event::propose_and_commit_batch(state, events);
         }
-        EffectOp::PumpControlled { filter, power, toughness, grant_haste } => {
+        EffectOp::PumpControlled {
+            filter,
+            power,
+            toughness,
+            grant_haste,
+        } => {
             let object_ids: Vec<ObjectId> = state.players[ctx.controller.index()]
                 .battlefield
                 .iter()
@@ -461,15 +506,17 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                     layer = layer | crate::engine::Layers::ABILITY_ADDING;
                 }
                 let timestamp = crate::engine::next_timestamp(state);
-                state.engine.until_end_of_turn.push(crate::engine::UntilEndOfTurnEffect::ResolvedSetEffect {
-                    object_ids,
-                    layer,
-                    timestamp,
-                    duration: crate::engine::EffectDuration::EndOfTurn,
-                    power: *power,
-                    toughness: *toughness,
-                    grant_haste: *grant_haste,
-                });
+                state.engine.until_end_of_turn.push(
+                    crate::engine::UntilEndOfTurnEffect::ResolvedSetEffect {
+                        object_ids,
+                        layer,
+                        timestamp,
+                        duration: crate::engine::EffectDuration::EndOfTurn,
+                        power: *power,
+                        toughness: *toughness,
+                        grant_haste: *grant_haste,
+                    },
+                );
             }
         }
         EffectOp::ImpulseDraw { count, duration } => {
@@ -491,24 +538,38 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                         state.engine.priority_round,
                     );
                 }
-                event::propose_and_commit(state, event::ProposedEvent::zone_change(top, Zone::Exile));
+                event::propose_and_commit(
+                    state,
+                    event::ProposedEvent::zone_change(top, Zone::Exile),
+                );
                 let expiry = match duration {
                     ImpulseDuration::EndOfTurn => crate::engine::PlayPermissionExpiry::EndOfTurn,
-                    ImpulseDuration::UntilOwnersNextTurn => crate::engine::PlayPermissionExpiry::UntilHoldersNextTurn { holder_turn_started: false },
+                    ImpulseDuration::UntilOwnersNextTurn => {
+                        crate::engine::PlayPermissionExpiry::UntilHoldersNextTurn {
+                            holder_turn_started: false,
+                        }
+                    }
                 };
                 let def = &crate::card_def::CARD_DEFS[state.objects.get(top).card_def as usize];
-                let play_or_cast = if def.is_land { crate::engine::PlayOrCast::Play } else { crate::engine::PlayOrCast::Cast };
-                state.engine.exile_play_permissions.push(crate::engine::PlayPermission {
-                    object: top,
-                    holder: ctx.controller,
-                    // Snapshot *after* the exile move above, so this
-                    // permission's own creating zone change isn't what
-                    // immediately invalidates it -- see `PlayPermission::
-                    // zone_change_generation`'s doc.
-                    zone_change_generation: state.objects.get(top).zone_change_count,
-                    play_or_cast,
-                    expiry,
-                });
+                let play_or_cast = if def.is_land {
+                    crate::engine::PlayOrCast::Play
+                } else {
+                    crate::engine::PlayOrCast::Cast
+                };
+                state
+                    .engine
+                    .exile_play_permissions
+                    .push(crate::engine::PlayPermission {
+                        object: top,
+                        holder: ctx.controller,
+                        // Snapshot *after* the exile move above, so this
+                        // permission's own creating zone change isn't what
+                        // immediately invalidates it -- see `PlayPermission::
+                        // zone_change_generation`'s doc.
+                        zone_change_generation: state.objects.get(top).zone_change_count,
+                        play_or_cast,
+                        expiry,
+                    });
             }
         }
         EffectOp::HaltIfAffectedCanPayCopyCost { affected } => {
@@ -517,9 +578,17 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                 Target::Player(p) => p,
                 Target::Object(id) => state.objects.get(id).controller,
             };
-            let pay_rr = crate::mana::Cost { pips: &[crate::mana::Pip::Colored(ManaColor::R), crate::mana::Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+            let pay_rr = crate::mana::Cost {
+                pips: &[
+                    crate::mana::Pip::Colored(ManaColor::R),
+                    crate::mana::Pip::Colored(ManaColor::R),
+                ],
+                generic: 0,
+                x_count: 0,
+            };
             if crate::mana::can_pay(&pay_rr, 0, decider, state).is_some() {
-                state.engine.halted = Some((crate::engine::UnsupportedMechanic::SpellCopy, ctx.source));
+                state.engine.halted =
+                    Some((crate::engine::UnsupportedMechanic::SpellCopy, ctx.source));
             }
         }
     }
@@ -533,7 +602,9 @@ fn eval_cond(cond: &EffectCond, ctx: &ExecCtx, state: &GameState) -> bool {
             let def_idx = state.objects.get(id).card_def;
             !crate::card_def::CARD_DEFS[def_idx as usize].is_land
         }),
-        EffectCond::LandfallThisTurn => state.players[ctx.controller.index()].lands_played_this_turn > 0,
+        EffectCond::LandfallThisTurn => {
+            state.players[ctx.controller.index()].lands_played_this_turn > 0
+        }
         EffectCond::TargetInZone(idx, zone) => match ctx.targets.get(*idx as usize) {
             Some(Target::Object(id)) => state.objects.get(*id).zone == *zone,
             _ => false,
@@ -541,7 +612,9 @@ fn eval_cond(cond: &EffectCond, ctx: &ExecCtx, state: &GameState) -> bool {
         EffectCond::TargetIsColor(idx, color) => match ctx.targets.get(*idx as usize) {
             Some(Target::Object(id)) => {
                 let def_idx = state.objects.get(*id).card_def;
-                crate::card_def::CARD_DEFS[def_idx as usize].colors.contains(color)
+                crate::card_def::CARD_DEFS[def_idx as usize]
+                    .colors
+                    .contains(color)
             }
             _ => false,
         },
@@ -575,8 +648,14 @@ mod tests {
         let mut state = two_card_libraries();
         let ctx = ExecCtx::no_targets(ObjectId(0), PlayerId::P0);
         let op = EffectOp::Sequence(vec![
-            EffectOp::LoseLife { player: PlayerRef::Controller, amount: 2 },
-            EffectOp::GainLife { player: PlayerRef::Controller, amount: 5 },
+            EffectOp::LoseLife {
+                player: PlayerRef::Controller,
+                amount: 2,
+            },
+            EffectOp::GainLife {
+                player: PlayerRef::Controller,
+                amount: 5,
+            },
         ]);
         execute(&op, &ctx, &mut state);
         assert_eq!(state.players[0].life, 20 - 2 + 5);
@@ -591,7 +670,10 @@ mod tests {
 
         let taken = EffectOp::Conditional {
             cond: EffectCond::Always,
-            then: Box::new(EffectOp::LoseLife { player: PlayerRef::Controller, amount: 3 }),
+            then: Box::new(EffectOp::LoseLife {
+                player: PlayerRef::Controller,
+                amount: 3,
+            }),
             else_: Box::new(EffectOp::Sequence(vec![])),
         };
         execute(&taken, &ctx, &mut state);
@@ -599,7 +681,10 @@ mod tests {
 
         let not_taken = EffectOp::Conditional {
             cond: EffectCond::Never,
-            then: Box::new(EffectOp::LoseLife { player: PlayerRef::Controller, amount: 100 }),
+            then: Box::new(EffectOp::LoseLife {
+                player: PlayerRef::Controller,
+                amount: 100,
+            }),
             else_: Box::new(EffectOp::Sequence(vec![])),
         };
         execute(&not_taken, &ctx, &mut state);
@@ -616,7 +701,14 @@ mod tests {
             discarded: Vec::new(),
             kicked: false,
         };
-        execute(&EffectOp::DealDamage { target: TargetRef::Target(0), amount: 3 }, &ctx, &mut state);
+        execute(
+            &EffectOp::DealDamage {
+                target: TargetRef::Target(0),
+                amount: 3,
+            },
+            &ctx,
+            &mut state,
+        );
         assert_eq!(state.players[1].life, 17);
     }
 
@@ -632,7 +724,14 @@ mod tests {
             discarded: Vec::new(),
             kicked: false,
         };
-        execute(&EffectOp::DealDamage { target: TargetRef::Target(0), amount: 4 }, &ctx, &mut state);
+        execute(
+            &EffectOp::DealDamage {
+                target: TargetRef::Target(0),
+                amount: 4,
+            },
+            &ctx,
+            &mut state,
+        );
         assert_eq!(state.objects.get(creature).damage, 4);
     }
 
@@ -640,7 +739,14 @@ mod tests {
     fn draw_cards_leaf_draws_the_requested_count() {
         let mut state = two_card_libraries();
         let ctx = ExecCtx::no_targets(ObjectId(0), PlayerId::P0);
-        execute(&EffectOp::DrawCards { player: PlayerRef::Controller, count: 2 }, &ctx, &mut state);
+        execute(
+            &EffectOp::DrawCards {
+                player: PlayerRef::Controller,
+                count: 2,
+            },
+            &ctx,
+            &mut state,
+        );
         assert_eq!(state.players[0].hand.len(), 2);
     }
 
@@ -651,8 +757,13 @@ mod tests {
         state.move_hand_to_battlefield(PlayerId::P0, land);
         let ctx = ExecCtx::no_targets(land, PlayerId::P0);
         let op = EffectOp::Sequence(vec![
-            EffectOp::TapObject { object: ObjectRef::ThisSource },
-            EffectOp::AddMana { player: PlayerRef::Controller, colors: vec![ManaColor::R] },
+            EffectOp::TapObject {
+                object: ObjectRef::ThisSource,
+            },
+            EffectOp::AddMana {
+                player: PlayerRef::Controller,
+                colors: vec![ManaColor::R],
+            },
         ]);
         execute(&op, &ctx, &mut state);
         assert!(state.objects.get(land).tapped);

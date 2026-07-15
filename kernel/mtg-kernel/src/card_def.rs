@@ -40,7 +40,9 @@
 //! shape doesn't support) -- see `local-training/kernel_oracle/rally/
 //! coverage_ledger.md` for the full per-card ledger.
 
-use crate::effect::{CreatureFilter, EffectCond, EffectOp, ImpulseDuration, ObjectRef, PlayerRef, TargetRef};
+use crate::effect::{
+    CreatureFilter, EffectCond, EffectOp, ImpulseDuration, ObjectRef, PlayerRef, TargetRef,
+};
 use crate::mana::{Cost, ManaColor, Pip};
 use crate::state::Zone;
 use serde::{Deserialize, Serialize};
@@ -396,7 +398,12 @@ mod tests {
     #[test]
     fn lookup_by_name_round_trips_id() {
         for (i, def) in CARD_DEFS.iter().enumerate() {
-            assert_eq!(card_id_by_name(def.name), Some(i as u16), "name={}", def.name);
+            assert_eq!(
+                card_id_by_name(def.name),
+                Some(i as u16),
+                "name={}",
+                def.name
+            );
         }
         assert_eq!(card_id_by_name("Not A Real Card"), None);
     }
@@ -410,10 +417,18 @@ mod tests {
         assert!(!def.is_castable(), "lands aren't cast");
         match (def.mana_ability)() {
             Some(EffectOp::Sequence(ops)) => {
-                assert_eq!(ops, vec![
-                    EffectOp::TapObject { object: ObjectRef::ThisSource },
-                    EffectOp::AddMana { player: PlayerRef::Controller, colors: vec![ManaColor::R] },
-                ]);
+                assert_eq!(
+                    ops,
+                    vec![
+                        EffectOp::TapObject {
+                            object: ObjectRef::ThisSource
+                        },
+                        EffectOp::AddMana {
+                            player: PlayerRef::Controller,
+                            colors: vec![ManaColor::R]
+                        },
+                    ]
+                );
             }
             other => panic!("expected tap+add-mana sequence, got {other:?}"),
         }
@@ -421,13 +436,21 @@ mod tests {
 
     #[test]
     fn the_four_burn_spells_deal_exactly_their_printed_damage_to_any_target() {
-        let expected = [("Lightning Bolt", 3), ("Fiery Temper", 3), ("Fireblast", 4), ("Lava Dart", 1)];
+        let expected = [
+            ("Lightning Bolt", 3),
+            ("Fiery Temper", 3),
+            ("Fireblast", 4),
+            ("Lava Dart", 1),
+        ];
         for (name, amount) in expected {
             let id = card_id_by_name(name).unwrap_or_else(|| panic!("{name} in pool"));
             let def = &CARD_DEFS[id as usize];
             assert_eq!(def.target_spec, TargetSpec::AnyTarget, "{name}");
             match (def.spell_effect)() {
-                Some(EffectOp::DealDamage { target: TargetRef::Target(0), amount: a }) => {
+                Some(EffectOp::DealDamage {
+                    target: TargetRef::Target(0),
+                    amount: a,
+                }) => {
                     assert_eq!(a, amount, "{name}");
                 }
                 other => panic!("{name}: expected DealDamage to Target(0), got {other:?}"),
@@ -437,13 +460,21 @@ mod tests {
 
     #[test]
     fn vanilla_creatures_resolve_straight_to_battlefield() {
-        for name in ["Guttersnipe", "Masked Meower", "Voldaren Epicure", "Sneaky Snacker"] {
+        for name in [
+            "Guttersnipe",
+            "Masked Meower",
+            "Voldaren Epicure",
+            "Sneaky Snacker",
+        ] {
             let id = card_id_by_name(name).unwrap_or_else(|| panic!("{name} in pool"));
             let def = &CARD_DEFS[id as usize];
             assert!(def.has_type(CardType::Creature), "{name}");
             assert_eq!(def.target_spec, TargetSpec::None, "{name}");
             match (def.spell_effect)() {
-                Some(EffectOp::MoveObject { object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }) => {}
+                Some(EffectOp::MoveObject {
+                    object: ObjectRef::ThisSource,
+                    to_zone: Zone::Battlefield,
+                }) => {}
                 other => panic!("{name}: expected MoveObject to Battlefield, got {other:?}"),
             }
         }
@@ -475,8 +506,17 @@ mod tests {
         let def = &CARD_DEFS[id as usize];
         assert!(def.is_castable());
         assert_eq!(def.target_spec, TargetSpec::None);
-        assert!(matches!((def.spell_effect)(), Some(EffectOp::MayPayCostThen { discard: 1, sacrifice_lands: 1, .. })));
-        let plot_cost = def.plot_cost.expect("Highway Robbery should have Plot {1}{R}");
+        assert!(matches!(
+            (def.spell_effect)(),
+            Some(EffectOp::MayPayCostThen {
+                discard: 1,
+                sacrifice_lands: 1,
+                ..
+            })
+        ));
+        let plot_cost = def
+            .plot_cost
+            .expect("Highway Robbery should have Plot {1}{R}");
         assert_eq!(plot_cost.generic, 1);
         assert_eq!(plot_cost.pips, &[Pip::Colored(ManaColor::R)]);
     }
@@ -485,7 +525,9 @@ mod tests {
     fn fiery_temper_has_madness_r() {
         let id = card_id_by_name("Fiery Temper").expect("Fiery Temper in pool");
         let def = &CARD_DEFS[id as usize];
-        let madness_cost = def.madness_cost.expect("Fiery Temper should have Madness {R}");
+        let madness_cost = def
+            .madness_cost
+            .expect("Fiery Temper should have Madness {R}");
         assert_eq!(madness_cost.generic, 0);
         assert_eq!(madness_cost.pips, &[Pip::Colored(ManaColor::R)]);
     }
@@ -503,12 +545,18 @@ mod tests {
         let pyroblast = &CARD_DEFS[card_id_by_name("Pyroblast").unwrap() as usize];
         assert!(pyroblast.is_castable());
         assert_eq!(pyroblast.target_spec, TargetSpec::AnySpellOnStack);
-        assert_eq!(pyroblast.mode2.as_ref().map(|m| m.target_spec), Some(TargetSpec::AnyPermanent));
+        assert_eq!(
+            pyroblast.mode2.as_ref().map(|m| m.target_spec),
+            Some(TargetSpec::AnyPermanent)
+        );
 
         let reb = &CARD_DEFS[card_id_by_name("Red Elemental Blast").unwrap() as usize];
         assert!(reb.is_castable());
         assert_eq!(reb.target_spec, TargetSpec::BlueSpellOnStack);
-        assert_eq!(reb.mode2.as_ref().map(|m| m.target_spec), Some(TargetSpec::BluePermanent));
+        assert_eq!(
+            reb.mode2.as_ref().map(|m| m.target_spec),
+            Some(TargetSpec::BluePermanent)
+        );
     }
 
     #[test]
@@ -524,22 +572,38 @@ mod tests {
         let id = card_id_by_name("Grab the Prize").expect("Grab the Prize in pool");
         let def = &CARD_DEFS[id as usize];
         assert!(def.is_castable());
-        assert_eq!(def.additional_cost, Some([CostComponent::DiscardCards(1)].as_slice()));
+        assert_eq!(
+            def.additional_cost,
+            Some([CostComponent::DiscardCards(1)].as_slice())
+        );
     }
 
     #[test]
     fn fireblast_has_a_sacrifice_two_mountains_alt_cost() {
         let id = card_id_by_name("Fireblast").expect("Fireblast in pool");
         let def = &CARD_DEFS[id as usize];
-        assert_eq!(def.alt_cost, Some([CostComponent::SacrificeLands(2)].as_slice()));
+        assert_eq!(
+            def.alt_cost,
+            Some([CostComponent::SacrificeLands(2)].as_slice())
+        );
     }
 
     #[test]
     fn faithless_looting_and_lava_dart_have_flashback() {
         let looting = &CARD_DEFS[card_id_by_name("Faithless Looting").unwrap() as usize];
-        assert!(matches!(looting.flashback, Some(FlashbackDef { cost: FlashbackCost::Mana(_) })));
+        assert!(matches!(
+            looting.flashback,
+            Some(FlashbackDef {
+                cost: FlashbackCost::Mana(_)
+            })
+        ));
         let lava_dart = &CARD_DEFS[card_id_by_name("Lava Dart").unwrap() as usize];
-        assert!(matches!(lava_dart.flashback, Some(FlashbackDef { cost: FlashbackCost::SacrificeLands(1) })));
+        assert!(matches!(
+            lava_dart.flashback,
+            Some(FlashbackDef {
+                cost: FlashbackCost::SacrificeLands(1)
+            })
+        ));
     }
 
     #[test]
@@ -548,7 +612,10 @@ mod tests {
         let def = &CARD_DEFS[id as usize];
         assert!(def.keywords.has(Keywords::HASTE));
         assert_eq!(def.activated_abilities.len(), 1);
-        assert_eq!(def.activated_abilities[0].cost, [CostComponent::DiscardCards(1), CostComponent::SacrificeSelf].as_slice());
+        assert_eq!(
+            def.activated_abilities[0].cost,
+            [CostComponent::DiscardCards(1), CostComponent::SacrificeSelf].as_slice()
+        );
     }
 
     #[test]
@@ -559,7 +626,8 @@ mod tests {
 
     #[test]
     fn blood_token_exists_with_its_draw_a_card_ability() {
-        let id = card_id_by_name("Blood Token").expect("Blood Token should be codegen'd as a token");
+        let id =
+            card_id_by_name("Blood Token").expect("Blood Token should be codegen'd as a token");
         let def = &CARD_DEFS[id as usize];
         assert!(!def.is_castable(), "tokens are never cast");
         assert_eq!(def.activated_abilities.len(), 1);
@@ -582,10 +650,19 @@ mod tests {
     fn burning_tree_emissary_has_hybrid_cost_and_no_spell_effect_of_its_own() {
         let id = card_id_by_name("Burning-Tree Emissary").expect("Burning-Tree Emissary in pool");
         let def = &CARD_DEFS[id as usize];
-        assert_eq!(def.cost.pips, &[Pip::Hybrid(ManaColor::R, ManaColor::G), Pip::Hybrid(ManaColor::R, ManaColor::G)]);
+        assert_eq!(
+            def.cost.pips,
+            &[
+                Pip::Hybrid(ManaColor::R, ManaColor::G),
+                Pip::Hybrid(ManaColor::R, ManaColor::G)
+            ]
+        );
         assert_eq!(def.subtypes, &[Subtype::Human, Subtype::Shaman]);
         match (def.spell_effect)() {
-            Some(EffectOp::MoveObject { object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }) => {}
+            Some(EffectOp::MoveObject {
+                object: ObjectRef::ThisSource,
+                to_zone: Zone::Battlefield,
+            }) => {}
             other => panic!("expected MoveObject to Battlefield, got {other:?}"),
         }
     }
@@ -598,10 +675,23 @@ mod tests {
         match (def.spell_effect)() {
             Some(EffectOp::Sequence(ops)) => {
                 assert_eq!(ops.len(), 2);
-                assert_eq!(ops[0], EffectOp::DealDamage { target: TargetRef::Target(0), amount: 3 });
-                assert_eq!(ops[1], EffectOp::HaltIfAffectedCanPayCopyCost { affected: TargetRef::Target(0) });
+                assert_eq!(
+                    ops[0],
+                    EffectOp::DealDamage {
+                        target: TargetRef::Target(0),
+                        amount: 3
+                    }
+                );
+                assert_eq!(
+                    ops[1],
+                    EffectOp::HaltIfAffectedCanPayCopyCost {
+                        affected: TargetRef::Target(0)
+                    }
+                );
             }
-            other => panic!("expected a 2-op Sequence (damage, then the copy-cost gate), got {other:?}"),
+            other => {
+                panic!("expected a 2-op Sequence (damage, then the copy-cost gate), got {other:?}")
+            }
         }
     }
 
@@ -617,10 +707,15 @@ mod tests {
     fn goblin_bushwhacker_has_kicker_r_and_no_static_haste() {
         let id = card_id_by_name("Goblin Bushwhacker").expect("Goblin Bushwhacker in pool");
         let def = &CARD_DEFS[id as usize];
-        let kicker = def.kicker_cost.expect("Goblin Bushwhacker should have Kicker {R}");
+        let kicker = def
+            .kicker_cost
+            .expect("Goblin Bushwhacker should have Kicker {R}");
         assert_eq!(kicker.generic, 0);
         assert_eq!(kicker.pips, &[Pip::Colored(ManaColor::R)]);
-        assert!(!def.keywords.has(Keywords::HASTE), "haste is conditional on Kicker, not a static keyword");
+        assert!(
+            !def.keywords.has(Keywords::HASTE),
+            "haste is conditional on Kicker, not a static keyword"
+        );
     }
 
     #[test]
@@ -637,20 +732,30 @@ mod tests {
 
     #[test]
     fn clockwork_percussionist_has_haste() {
-        let id = card_id_by_name("Clockwork Percussionist").expect("Clockwork Percussionist in pool");
+        let id =
+            card_id_by_name("Clockwork Percussionist").expect("Clockwork Percussionist in pool");
         assert!(CARD_DEFS[id as usize].keywords.has(Keywords::HASTE));
     }
 
     #[test]
     fn experimental_synthesizer_has_a_sorcery_speed_only_sacrifice_ability() {
-        let id = card_id_by_name("Experimental Synthesizer").expect("Experimental Synthesizer in pool");
+        let id =
+            card_id_by_name("Experimental Synthesizer").expect("Experimental Synthesizer in pool");
         let def = &CARD_DEFS[id as usize];
         assert_eq!(def.activated_abilities.len(), 1);
         let ability = &def.activated_abilities[0];
         assert!(ability.sorcery_speed_only);
         assert_eq!(
             ability.cost,
-            [CostComponent::Mana(Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 2, x_count: 0 }), CostComponent::SacrificeSelf].as_slice()
+            [
+                CostComponent::Mana(Cost {
+                    pips: &[Pip::Colored(ManaColor::R)],
+                    generic: 2,
+                    x_count: 0
+                }),
+                CostComponent::SacrificeSelf
+            ]
+            .as_slice()
         );
     }
 
@@ -661,7 +766,10 @@ mod tests {
         assert_eq!(def.target_spec, TargetSpec::AnyTarget);
         assert!(matches!(
             (def.spell_effect)(),
-            Some(EffectOp::Conditional { cond: EffectCond::ControlsArtifactCount(3), .. })
+            Some(EffectOp::Conditional {
+                cond: EffectCond::ControlsArtifactCount(3),
+                ..
+            })
         ));
     }
 
@@ -670,7 +778,10 @@ mod tests {
         let id = card_id_by_name("End the Festivities").expect("End the Festivities in pool");
         let def = &CARD_DEFS[id as usize];
         assert_eq!(def.target_spec, TargetSpec::None);
-        assert_eq!((def.spell_effect)(), Some(EffectOp::DamageOpponentAndTheirCreatures { amount: 1 }));
+        assert_eq!(
+            (def.spell_effect)(),
+            Some(EffectOp::DamageOpponentAndTheirCreatures { amount: 1 })
+        );
     }
 
     #[test]
@@ -679,7 +790,10 @@ mod tests {
         let def = &CARD_DEFS[id as usize];
         assert_eq!(
             (def.spell_effect)(),
-            Some(EffectOp::ImpulseDraw { count: 2, duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn })
+            Some(EffectOp::ImpulseDraw {
+                count: 2,
+                duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn
+            })
         );
     }
 
@@ -694,7 +808,13 @@ mod tests {
                 assert!(matches!(ops[1], EffectOp::CreateToken { .. }));
                 assert!(matches!(
                     ops[2],
-                    EffectOp::PumpControlled { filter: crate::effect::CreatureFilter::ControlledWithSubtype(Subtype::Human), grant_haste: true, .. }
+                    EffectOp::PumpControlled {
+                        filter: crate::effect::CreatureFilter::ControlledWithSubtype(
+                            Subtype::Human
+                        ),
+                        grant_haste: true,
+                        ..
+                    }
                 ));
             }
             other => panic!("expected a 3-op Sequence, got {other:?}"),
@@ -703,14 +823,16 @@ mod tests {
 
     #[test]
     fn human_soldier_and_samurai_tokens_exist() {
-        let hst = card_id_by_name("Human Soldier Token").expect("Human Soldier Token should be codegen'd as a token");
+        let hst = card_id_by_name("Human Soldier Token")
+            .expect("Human Soldier Token should be codegen'd as a token");
         let def = &CARD_DEFS[hst as usize];
         assert!(!def.is_castable());
         assert_eq!(def.power, Some(1));
         assert_eq!(def.toughness, Some(1));
         assert_eq!(def.subtypes, &[Subtype::Human, Subtype::Soldier]);
 
-        let samurai = card_id_by_name("Samurai Token").expect("Samurai Token should be codegen'd as a token");
+        let samurai =
+            card_id_by_name("Samurai Token").expect("Samurai Token should be codegen'd as a token");
         let sdef = &CARD_DEFS[samurai as usize];
         assert_eq!(sdef.power, Some(2));
         assert_eq!(sdef.toughness, Some(2));

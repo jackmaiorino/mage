@@ -87,7 +87,11 @@ pub struct Cost {
 
 impl Cost {
     pub const fn zero() -> Cost {
-        Cost { pips: &[], generic: 0, x_count: 0 }
+        Cost {
+            pips: &[],
+            generic: 0,
+            x_count: 0,
+        }
     }
 }
 
@@ -115,7 +119,12 @@ pub struct PaymentPlan {
 
 /// Gathers `player`'s floating pool and untapped mana sources from `state`
 /// and calls `solve`.
-pub fn can_pay(cost: &Cost, x_value: u8, player: PlayerId, state: &GameState) -> Option<PaymentPlan> {
+pub fn can_pay(
+    cost: &Cost,
+    x_value: u8,
+    player: PlayerId,
+    state: &GameState,
+) -> Option<PaymentPlan> {
     let sources = gather_sources(player, state);
     let pool = state.players[player.index()].mana_pool;
     solve(cost, x_value, pool, &sources)
@@ -127,7 +136,12 @@ pub fn can_pay(cost: &Cost, x_value: u8, player: PlayerId, state: &GameState) ->
 /// independent affordability checks that could double-count a source. All
 /// `pips` are concatenated (order doesn't matter to the solver) and
 /// `generic`/`x_count` are summed.
-pub fn can_pay_combined(costs: &[&Cost], x_value: u8, player: PlayerId, state: &GameState) -> Option<PaymentPlan> {
+pub fn can_pay_combined(
+    costs: &[&Cost],
+    x_value: u8,
+    player: PlayerId,
+    state: &GameState,
+) -> Option<PaymentPlan> {
     let sources = gather_sources(player, state);
     let pool = state.players[player.index()].mana_pool;
     let combined_pips: Vec<Pip> = costs.iter().flat_map(|c| c.pips.iter().copied()).collect();
@@ -137,10 +151,23 @@ pub fn can_pay_combined(costs: &[&Cost], x_value: u8, player: PlayerId, state: &
     let mut plan = PaymentPlan::default();
     let mut pool_remaining = pool;
     let mut used = vec![false; sources.len()];
-    if !solve_pips(&combined_pips, 0, &sources, &mut used, &mut pool_remaining, &mut plan) {
+    if !solve_pips(
+        &combined_pips,
+        0,
+        &sources,
+        &mut used,
+        &mut pool_remaining,
+        &mut plan,
+    ) {
         return None;
     }
-    if !pay_generic(generic + extra_x + x_value as u32, &sources, &mut used, &mut pool_remaining, &mut plan) {
+    if !pay_generic(
+        generic + extra_x + x_value as u32,
+        &sources,
+        &mut used,
+        &mut pool_remaining,
+        &mut plan,
+    ) {
         return None;
     }
     Some(plan)
@@ -185,17 +212,35 @@ pub fn gather_sources(player: PlayerId, state: &GameState) -> Vec<ManaSource> {
 /// generic pass safe to do greedily: by the time it runs, every colored
 /// requirement is already locked in, so which specific leftover
 /// source/color pays generic can never strand a pip.
-pub fn solve(cost: &Cost, x_value: u8, pool: [u8; 6], sources: &[ManaSource]) -> Option<PaymentPlan> {
+pub fn solve(
+    cost: &Cost,
+    x_value: u8,
+    pool: [u8; 6],
+    sources: &[ManaSource],
+) -> Option<PaymentPlan> {
     let mut plan = PaymentPlan::default();
     let mut pool_remaining = pool;
     let mut used = vec![false; sources.len()];
 
-    if !solve_pips(cost.pips, 0, sources, &mut used, &mut pool_remaining, &mut plan) {
+    if !solve_pips(
+        cost.pips,
+        0,
+        sources,
+        &mut used,
+        &mut pool_remaining,
+        &mut plan,
+    ) {
         return None;
     }
 
     let generic_needed = cost.generic as u32 + x_value as u32;
-    if !pay_generic(generic_needed, sources, &mut used, &mut pool_remaining, &mut plan) {
+    if !pay_generic(
+        generic_needed,
+        sources,
+        &mut used,
+        &mut pool_remaining,
+        &mut plan,
+    ) {
         return None;
     }
 
@@ -210,7 +255,9 @@ fn solve_pips(
     pool_remaining: &mut [u8; 6],
     plan: &mut PaymentPlan,
 ) -> bool {
-    let Some(pip) = pips.get(idx) else { return true };
+    let Some(pip) = pips.get(idx) else {
+        return true;
+    };
 
     let candidate_colors: Vec<ManaColor> = match *pip {
         Pip::Colored(c) => vec![c],
@@ -301,12 +348,19 @@ mod tests {
     use super::*;
 
     fn src(id: u32, choices: &[ManaColor]) -> ManaSource {
-        ManaSource { id: ObjectId(id), choices: choices.to_vec() }
+        ManaSource {
+            id: ObjectId(id),
+            choices: choices.to_vec(),
+        }
     }
 
     #[test]
     fn simple_same_color_cost_is_satisfied() {
-        let cost = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 0,
+            x_count: 0,
+        };
         let sources = vec![src(0, &[ManaColor::R])];
         let plan = solve(&cost, 0, [0; 6], &sources).expect("should pay");
         assert_eq!(plan.taps, vec![(ObjectId(0), ManaColor::R)]);
@@ -314,14 +368,22 @@ mod tests {
 
     #[test]
     fn insufficient_mana_returns_none() {
-        let cost = Cost { pips: &[Pip::Colored(ManaColor::R), Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::R), Pip::Colored(ManaColor::R)],
+            generic: 0,
+            x_count: 0,
+        };
         let sources = vec![src(0, &[ManaColor::R])];
         assert_eq!(solve(&cost, 0, [0; 6], &sources), None);
     }
 
     #[test]
     fn generic_paid_by_leftover_any_color_source() {
-        let cost = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 1, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 1,
+            x_count: 0,
+        };
         let sources = vec![src(0, &[ManaColor::R]), src(1, &[ManaColor::G])];
         let plan = solve(&cost, 0, [0; 6], &sources).expect("should pay");
         assert_eq!(plan.taps.len(), 2);
@@ -329,18 +391,29 @@ mod tests {
 
     #[test]
     fn pool_mana_is_used_before_tapping_new_sources() {
-        let cost = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 0,
+            x_count: 0,
+        };
         let mut pool = [0u8; 6];
         pool[ManaColor::R.pool_index()] = 1;
         let sources = vec![src(0, &[ManaColor::R])];
         let plan = solve(&cost, 0, pool, &sources).expect("should pay");
-        assert!(plan.taps.is_empty(), "should have used pool mana, not tapped a source");
+        assert!(
+            plan.taps.is_empty(),
+            "should have used pool mana, not tapped a source"
+        );
         assert_eq!(plan.pool_used[ManaColor::R.pool_index()], 1);
     }
 
     #[test]
     fn hybrid_pip_can_be_paid_by_either_color() {
-        let cost = Cost { pips: &[Pip::Hybrid(ManaColor::R, ManaColor::G)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Hybrid(ManaColor::R, ManaColor::G)],
+            generic: 0,
+            x_count: 0,
+        };
         let sources = vec![src(0, &[ManaColor::G])];
         let plan = solve(&cost, 0, [0; 6], &sources).expect("should pay via G");
         assert_eq!(plan.taps, vec![(ObjectId(0), ManaColor::G)]);
@@ -348,7 +421,11 @@ mod tests {
 
     #[test]
     fn phyrexian_pip_can_be_paid_with_life() {
-        let cost = Cost { pips: &[Pip::Phyrexian(ManaColor::B)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Phyrexian(ManaColor::B)],
+            generic: 0,
+            x_count: 0,
+        };
         let plan = solve(&cost, 0, [0; 6], &[]).expect("should pay via life");
         assert_eq!(plan.life_paid, 2);
         assert!(plan.taps.is_empty());
@@ -362,7 +439,11 @@ mod tests {
     /// w_only for the W pip, freeing the dual for U.
     #[test]
     fn backtracking_is_required_for_modal_sources() {
-        let cost = Cost { pips: &[Pip::Colored(ManaColor::W), Pip::Colored(ManaColor::U)], generic: 0, x_count: 0 };
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::W), Pip::Colored(ManaColor::U)],
+            generic: 0,
+            x_count: 0,
+        };
         let dual = src(0, &[ManaColor::W, ManaColor::U]);
         let w_only = src(1, &[ManaColor::W]);
         let sources = vec![dual, w_only];
@@ -378,7 +459,11 @@ mod tests {
 
     #[test]
     fn x_cost_adds_to_generic_requirement() {
-        let cost = Cost { pips: &[], generic: 0, x_count: 1 };
+        let cost = Cost {
+            pips: &[],
+            generic: 0,
+            x_count: 1,
+        };
         let sources = vec![src(0, &[ManaColor::R]), src(1, &[ManaColor::R])];
         assert!(solve(&cost, 2, [0; 6], &sources).is_some());
         assert!(solve(&cost, 3, [0; 6], &sources).is_none());
@@ -391,10 +476,19 @@ mod tests {
         // neither the combined check nor a double-count of the same source.
         use crate::state::GameState;
         let mountain = crate::card_def::card_id_by_name("Mountain").expect("Mountain in CARD_DEFS");
-        let base = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
-        let kicker = Cost { pips: &[Pip::Colored(ManaColor::R)], generic: 0, x_count: 0 };
+        let base = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 0,
+            x_count: 0,
+        };
+        let kicker = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 0,
+            x_count: 0,
+        };
 
-        let mut one_mountain = GameState::new_from_libraries(&[mountain], &[mountain], |_| "Mountain".to_string(), 1);
+        let mut one_mountain =
+            GameState::new_from_libraries(&[mountain], &[mountain], |_| "Mountain".to_string(), 1);
         let land = one_mountain.draw_card(PlayerId::P0).unwrap();
         one_mountain.move_hand_to_battlefield(PlayerId::P0, land);
         assert!(
@@ -402,12 +496,18 @@ mod tests {
             "1 Mountain can't pay 2 {{R}} pips at once"
         );
 
-        let mut two_mountains = GameState::new_from_libraries(&[mountain, mountain], &[mountain], |_| "Mountain".to_string(), 1);
+        let mut two_mountains = GameState::new_from_libraries(
+            &[mountain, mountain],
+            &[mountain],
+            |_| "Mountain".to_string(),
+            1,
+        );
         let l0 = two_mountains.draw_card(PlayerId::P0).unwrap();
         let l1 = two_mountains.draw_card(PlayerId::P0).unwrap();
         two_mountains.move_hand_to_battlefield(PlayerId::P0, l0);
         two_mountains.move_hand_to_battlefield(PlayerId::P0, l1);
-        let plan = can_pay_combined(&[&base, &kicker], 0, PlayerId::P0, &two_mountains).expect("2 Mountains should pay both {R} pips");
+        let plan = can_pay_combined(&[&base, &kicker], 0, PlayerId::P0, &two_mountains)
+            .expect("2 Mountains should pay both {R} pips");
         assert_eq!(plan.taps.len(), 2);
     }
 }

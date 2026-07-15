@@ -66,42 +66,75 @@ pub struct TriggeredAbilityDef {
 
 fn guttersnipe_effect() -> EffectOp {
     // Guttersnipe deals 2 damage to each opponent.
-    EffectOp::DealDamage { target: TargetRef::Opponent, amount: 2 }
+    EffectOp::DealDamage {
+        target: TargetRef::Opponent,
+        amount: 2,
+    }
 }
 
 fn voldaren_epicure_effect() -> EffectOp {
     // It deals 1 damage to each opponent. Create a Blood token.
-    let blood_token = crate::card_def::card_id_by_name("Blood Token").expect("Blood Token in CARD_DEFS");
+    let blood_token =
+        crate::card_def::card_id_by_name("Blood Token").expect("Blood Token in CARD_DEFS");
     EffectOp::Sequence(vec![
-        EffectOp::DealDamage { target: TargetRef::Opponent, amount: 1 },
-        EffectOp::CreateToken { token_def: blood_token, controller: PlayerRef::Controller },
+        EffectOp::DealDamage {
+            target: TargetRef::Opponent,
+            amount: 1,
+        },
+        EffectOp::CreateToken {
+            token_def: blood_token,
+            controller: PlayerRef::Controller,
+        },
     ])
 }
 
 fn sneaky_snacker_effect() -> EffectOp {
     // Return Sneaky Snacker from your graveyard to the battlefield tapped.
     EffectOp::Sequence(vec![
-        EffectOp::MoveObject { object: crate::effect::ObjectRef::ThisSource, to_zone: Zone::Battlefield },
-        EffectOp::TapObject { object: crate::effect::ObjectRef::ThisSource },
+        EffectOp::MoveObject {
+            object: crate::effect::ObjectRef::ThisSource,
+            to_zone: Zone::Battlefield,
+        },
+        EffectOp::TapObject {
+            object: crate::effect::ObjectRef::ThisSource,
+        },
     ])
 }
 
-const GUTTERSNIPE_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::CastInstantOrSorcery, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: guttersnipe_effect }];
-const VOLDAREN_EPICURE_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: voldaren_epicure_effect }];
-const SNEAKY_SNACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::DrawNth(3), home_zone: Zone::Graveyard, intervening_if_kicked: false, effect: sneaky_snacker_effect }];
+const GUTTERSNIPE_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::CastInstantOrSorcery,
+    home_zone: Zone::Battlefield,
+    intervening_if_kicked: false,
+    effect: guttersnipe_effect,
+}];
+const VOLDAREN_EPICURE_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::Etb,
+    home_zone: Zone::Battlefield,
+    intervening_if_kicked: false,
+    effect: voldaren_epicure_effect,
+}];
+const SNEAKY_SNACKER_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::DrawNth(3),
+    home_zone: Zone::Graveyard,
+    intervening_if_kicked: false,
+    effect: sneaky_snacker_effect,
+}];
 
 fn burning_tree_emissary_effect() -> EffectOp {
     // When Burning-Tree Emissary enters the battlefield, add {R}{G}.
-    EffectOp::AddMana { player: PlayerRef::Controller, colors: vec![crate::mana::ManaColor::R, crate::mana::ManaColor::G] }
+    EffectOp::AddMana {
+        player: PlayerRef::Controller,
+        colors: vec![crate::mana::ManaColor::R, crate::mana::ManaColor::G],
+    }
 }
 
 fn clockwork_percussionist_dies_effect() -> EffectOp {
     // When Clockwork Percussionist dies, exile the top card of your
     // library. You may play it until the end of your next turn.
-    EffectOp::ImpulseDraw { count: 1, duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn }
+    EffectOp::ImpulseDraw {
+        count: 1,
+        duration: crate::effect::ImpulseDuration::UntilOwnersNextTurn,
+    }
 }
 
 fn experimental_synthesizer_impulse_effect() -> EffectOp {
@@ -109,7 +142,10 @@ fn experimental_synthesizer_impulse_effect() -> EffectOp {
     // the top card of your library. Until end of turn, you may play that
     // card. Both triggers share this one effect -- the card's text is
     // identical either way.
-    EffectOp::ImpulseDraw { count: 1, duration: crate::effect::ImpulseDuration::EndOfTurn }
+    EffectOp::ImpulseDraw {
+        count: 1,
+        duration: crate::effect::ImpulseDuration::EndOfTurn,
+    }
 }
 
 fn goblin_bushwhacker_effect() -> EffectOp {
@@ -127,8 +163,12 @@ fn goblin_bushwhacker_effect() -> EffectOp {
     }
 }
 
-const BURNING_TREE_EMISSARY_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: burning_tree_emissary_effect }];
+const BURNING_TREE_EMISSARY_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::Etb,
+    home_zone: Zone::Battlefield,
+    intervening_if_kicked: false,
+    effect: burning_tree_emissary_effect,
+}];
 const CLOCKWORK_PERCUSSIONIST_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
     condition: TriggerCondition::LeftBattlefieldToGraveyard,
     home_zone: Zone::Graveyard,
@@ -136,7 +176,12 @@ const CLOCKWORK_PERCUSSIONIST_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbi
     effect: clockwork_percussionist_dies_effect,
 }];
 const EXPERIMENTAL_SYNTHESIZER_TRIGGERS: [TriggeredAbilityDef; 2] = [
-    TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: false, effect: experimental_synthesizer_impulse_effect },
+    TriggeredAbilityDef {
+        condition: TriggerCondition::Etb,
+        home_zone: Zone::Battlefield,
+        intervening_if_kicked: false,
+        effect: experimental_synthesizer_impulse_effect,
+    },
     TriggeredAbilityDef {
         condition: TriggerCondition::LeftBattlefieldToGraveyard,
         home_zone: Zone::Graveyard,
@@ -144,8 +189,12 @@ const EXPERIMENTAL_SYNTHESIZER_TRIGGERS: [TriggeredAbilityDef; 2] = [
         effect: experimental_synthesizer_impulse_effect,
     },
 ];
-const GOBLIN_BUSHWHACKER_TRIGGERS: [TriggeredAbilityDef; 1] =
-    [TriggeredAbilityDef { condition: TriggerCondition::Etb, home_zone: Zone::Battlefield, intervening_if_kicked: true, effect: goblin_bushwhacker_effect }];
+const GOBLIN_BUSHWHACKER_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityDef {
+    condition: TriggerCondition::Etb,
+    home_zone: Zone::Battlefield,
+    intervening_if_kicked: true,
+    effect: goblin_bushwhacker_effect,
+}];
 
 /// The Burn 16's and Mono Red Rally's real triggered abilities, matched by
 /// card name (ids are codegen-assigned from `cards_v1.json`'s array order
@@ -215,7 +264,10 @@ pub fn sba_fixed_point(state: &mut GameState) {
             }
         }
         for id in dying {
-            crate::event::commit(state, crate::event::ProposedEvent::zone_change(id, Zone::Graveyard));
+            crate::event::commit(
+                state,
+                crate::event::ProposedEvent::zone_change(id, Zone::Graveyard),
+            );
             changed = true;
         }
 
@@ -239,7 +291,10 @@ pub fn sba_fixed_point(state: &mut GameState) {
         let leaving: Vec<ObjectId> = state
             .objects
             .iter()
-            .filter(|(_, obj)| obj.zone != Zone::Battlefield && crate::card_def::CARD_DEFS[obj.card_def as usize].is_token)
+            .filter(|(_, obj)| {
+                obj.zone != Zone::Battlefield
+                    && crate::card_def::CARD_DEFS[obj.card_def as usize].is_token
+            })
             .map(|(id, _)| id)
             .collect();
         for id in leaving {
@@ -286,7 +341,11 @@ pub fn collect_and_process(state: &mut GameState) -> Vec<PendingTrigger> {
     order_apnap(new_triggers, state.active_player)
 }
 
-fn triggers_from_events(state: &GameState, events: &[CommittedEvent], kicked_source: Option<ObjectId>) -> Vec<PendingTrigger> {
+fn triggers_from_events(
+    state: &GameState,
+    events: &[CommittedEvent],
+    kicked_source: Option<ObjectId>,
+) -> Vec<PendingTrigger> {
     let draws_this_turn_at = draws_this_turn_snapshot(events, state);
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
@@ -295,7 +354,14 @@ fn triggers_from_events(state: &GameState, events: &[CommittedEvent], kicked_sou
                 continue;
             }
             for (i, ev) in events.iter().enumerate() {
-                if trigger_matches(def.condition, ev, id, obj.controller, state, draws_this_turn_at[i]) {
+                if trigger_matches(
+                    def.condition,
+                    ev,
+                    id,
+                    obj.controller,
+                    state,
+                    draws_this_turn_at[i],
+                ) {
                     let kicked = Some(id) == kicked_source;
                     if def.intervening_if_kicked && !kicked {
                         continue;
@@ -341,12 +407,25 @@ fn triggers_from_events(state: &GameState, events: &[CommittedEvent], kicked_sou
 /// batch, then each of that player's `Draw` events in commit order adds
 /// exactly 1.
 fn draws_this_turn_snapshot(events: &[CommittedEvent], state: &GameState) -> Vec<u32> {
-    let batch_draws = |p: PlayerId| events.iter().filter(|e| matches!(e, CommittedEvent::Draw { player, object: Some(_) } if *player == p)).count() as u32;
-    let mut running = [state.players[0].draws_this_turn - batch_draws(PlayerId::P0), state.players[1].draws_this_turn - batch_draws(PlayerId::P1)];
+    let batch_draws = |p: PlayerId| {
+        events
+            .iter()
+            .filter(
+                |e| matches!(e, CommittedEvent::Draw { player, object: Some(_) } if *player == p),
+            )
+            .count() as u32
+    };
+    let mut running = [
+        state.players[0].draws_this_turn - batch_draws(PlayerId::P0),
+        state.players[1].draws_this_turn - batch_draws(PlayerId::P1),
+    ];
     events
         .iter()
         .map(|ev| match ev {
-            CommittedEvent::Draw { player, object: Some(_) } => {
+            CommittedEvent::Draw {
+                player,
+                object: Some(_),
+            } => {
                 running[player.index()] += 1;
                 running[player.index()]
             }
@@ -359,20 +438,52 @@ fn draws_this_turn_snapshot(events: &[CommittedEvent], state: &GameState) -> Vec
 /// (see `draws_this_turn_snapshot`'s doc for why this can't just read
 /// `state` live) -- unused, and irrelevant, for every other event/condition
 /// pairing.
-fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId, controller: PlayerId, state: &GameState, draws_this_turn_at_event: u32) -> bool {
+fn trigger_matches(
+    cond: TriggerCondition,
+    ev: &CommittedEvent,
+    source: ObjectId,
+    controller: PlayerId,
+    state: &GameState,
+    draws_this_turn_at_event: u32,
+) -> bool {
     match (cond, ev) {
-        (TriggerCondition::Etb, CommittedEvent::ZoneChange { object, to: Zone::Battlefield, .. }) => *object == source,
+        (
+            TriggerCondition::Etb,
+            CommittedEvent::ZoneChange {
+                object,
+                to: Zone::Battlefield,
+                ..
+            },
+        ) => *object == source,
         (TriggerCondition::DealsDamage, CommittedEvent::Damage { source: s, .. }) => *s == source,
-        (TriggerCondition::CastInstantOrSorcery, CommittedEvent::SpellCast { spell, controller: caster }) => {
+        (
+            TriggerCondition::CastInstantOrSorcery,
+            CommittedEvent::SpellCast {
+                spell,
+                controller: caster,
+            },
+        ) => {
             *caster == controller && {
                 let def = &crate::card_def::CARD_DEFS[state.objects.get(*spell).card_def as usize];
-                def.has_type(crate::card_def::CardType::Instant) || def.has_type(crate::card_def::CardType::Sorcery)
+                def.has_type(crate::card_def::CardType::Instant)
+                    || def.has_type(crate::card_def::CardType::Sorcery)
             }
         }
-        (TriggerCondition::DrawNth(n), CommittedEvent::Draw { player, object: Some(_) }) => *player == controller && draws_this_turn_at_event == n,
-        (TriggerCondition::LeftBattlefieldToGraveyard, CommittedEvent::ZoneChange { object, from: Zone::Battlefield, to: Zone::Graveyard }) => {
-            *object == source
-        }
+        (
+            TriggerCondition::DrawNth(n),
+            CommittedEvent::Draw {
+                player,
+                object: Some(_),
+            },
+        ) => *player == controller && draws_this_turn_at_event == n,
+        (
+            TriggerCondition::LeftBattlefieldToGraveyard,
+            CommittedEvent::ZoneChange {
+                object,
+                from: Zone::Battlefield,
+                to: Zone::Graveyard,
+            },
+        ) => *object == source,
         _ => false,
     }
 }
@@ -382,7 +493,9 @@ fn trigger_matches(cond: TriggerCondition, ev: &CommittedEvent, source: ObjectId
 /// first). This only groups; a real per-player choice within a group of 2+
 /// is `engine::Decision::OrderTriggers`.
 pub fn order_apnap(triggers: Vec<PendingTrigger>, active_player: PlayerId) -> Vec<PendingTrigger> {
-    let (mut active, mut other): (Vec<_>, Vec<_>) = triggers.into_iter().partition(|t| t.controller == active_player);
+    let (mut active, mut other): (Vec<_>, Vec<_>) = triggers
+        .into_iter()
+        .partition(|t| t.controller == active_player);
     active.append(&mut other);
     active
 }
@@ -416,8 +529,20 @@ mod tests {
 
     #[test]
     fn apnap_orders_active_player_triggers_first() {
-        let a = PendingTrigger { controller: PlayerId::P1, source: ObjectId(1), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false };
-        let b = PendingTrigger { controller: PlayerId::P0, source: ObjectId(2), effect: EffectOp::Sequence(vec![]), is_madness_offer: false, kicked: false };
+        let a = PendingTrigger {
+            controller: PlayerId::P1,
+            source: ObjectId(1),
+            effect: EffectOp::Sequence(vec![]),
+            is_madness_offer: false,
+            kicked: false,
+        };
+        let b = PendingTrigger {
+            controller: PlayerId::P0,
+            source: ObjectId(2),
+            effect: EffectOp::Sequence(vec![]),
+            is_madness_offer: false,
+            kicked: false,
+        };
         let ordered = order_apnap(vec![a.clone(), b.clone()], PlayerId::P0);
         assert_eq!(ordered, vec![b, a]);
     }

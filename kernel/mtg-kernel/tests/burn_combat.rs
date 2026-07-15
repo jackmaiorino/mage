@@ -28,7 +28,10 @@ fn debug_name(card_id: u16) -> String {
 }
 
 fn build_library(names: &[&str]) -> Vec<u16> {
-    names.iter().map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found in CARD_DEFS"))).collect()
+    names
+        .iter()
+        .map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found in CARD_DEFS")))
+        .collect()
 }
 
 fn deal_opening_hands(state: &mut GameState, n: usize) {
@@ -63,12 +66,16 @@ fn kind_of(d: &Decision) -> Kind {
         // This script's card pool (Mountain, Guttersnipe, Lightning Bolt,
         // Masked Meower) has no Plot/Madness/modal card, so none of these
         // are ever reachable here.
-        Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
+        Decision::ChooseSpellMode { .. }
+        | Decision::ChooseOptionalCost { .. }
+        | Decision::ChooseMadnessCast { .. } => {
             unreachable!("no card in this script is Plotted, Madness, or modal")
         }
         // Neither Fireblast nor Lava Dart is in this script's card pool, so
         // no cast ever needs a sacrifice-cost-target pick.
-        Decision::ChooseCostTargets { .. } => unreachable!("no card in this script has a SacrificeLands cost"),
+        Decision::ChooseCostTargets { .. } => {
+            unreachable!("no card in this script has a SacrificeLands cost")
+        }
         // Goblin Bushwhacker (the only Kicker card) isn't in this script's
         // card pool.
         Decision::ChooseKicker { .. } => unreachable!("no card in this script has Kicker"),
@@ -99,7 +106,11 @@ fn setup() -> GameState {
 }
 
 fn card_in_hand(state: &GameState, player: PlayerId, def_id: u16) -> Option<ObjectId> {
-    state.players[player.index()].hand.iter().copied().find(|&id| state.objects.get(id).card_def == def_id)
+    state.players[player.index()]
+        .hand
+        .iter()
+        .copied()
+        .find(|&id| state.objects.get(id).card_def == def_id)
 }
 
 /// Drives the whole scripted game to completion, logging every decision
@@ -137,26 +148,41 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
 
     loop {
         iterations += 1;
-        assert!(iterations < 5000, "scripted game did not terminate; policy or engine logic is likely wrong");
+        assert!(
+            iterations < 5000,
+            "scripted game did not terminate; policy or engine logic is likely wrong"
+        );
 
         let decision = engine::advance_until_decision(state);
         log.push(kind_of(&decision));
 
         match decision {
             Decision::GameOver { winner } => {
-                assert_eq!(winner, Some(PlayerId::P0), "P0 should win via a mix of combat and burn");
+                assert_eq!(
+                    winner,
+                    Some(PlayerId::P0),
+                    "P0 should win via a mix of combat and burn"
+                );
                 break;
             }
             Decision::OrderTriggers { .. } => {
-                unreachable!("only Guttersnipe ever triggers in this script, and only once per event batch")
+                unreachable!(
+                    "only Guttersnipe ever triggers in this script, and only once per event batch"
+                )
             }
             Decision::ChooseCastMode { .. } => {
-                unreachable!("no card in this script has an alt_cost (Fireblast isn't in either library)")
+                unreachable!(
+                    "no card in this script has an alt_cost (Fireblast isn't in either library)"
+                )
             }
             Decision::ChooseCostTargets { .. } => {
                 unreachable!("no card in this script has a SacrificeLands cost (Fireblast/Lava Dart aren't in either library)")
             }
-            Decision::Discard { player, count, choices } => {
+            Decision::Discard {
+                player,
+                count,
+                choices,
+            } => {
                 // Defensive, not scripted: discard the lowest-id `count`
                 // cards. Never actually exercised by this script's hand
                 // sizes (see the increment-3 report), but keeps the test
@@ -165,11 +191,24 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
                 let mut sorted = choices.clone();
                 sorted.sort_unstable();
                 let chosen: Vec<ObjectId> = sorted.into_iter().take(count as usize).collect();
-                assert_eq!(chosen.len() as u32, count, "player {player:?} had fewer legal discards than required");
+                assert_eq!(
+                    chosen.len() as u32,
+                    count,
+                    "player {player:?} had fewer legal discards than required"
+                );
                 engine::step(state, Action::Discard(chosen)).unwrap();
             }
-            Decision::ChooseTargets { player, remaining, legal_targets, .. } => {
-                assert_eq!(player, PlayerId::P0, "only P0 ever casts a targeted spell (Lightning Bolt) in this script");
+            Decision::ChooseTargets {
+                player,
+                remaining,
+                legal_targets,
+                ..
+            } => {
+                assert_eq!(
+                    player,
+                    PlayerId::P0,
+                    "only P0 ever casts a targeted spell (Lightning Bolt) in this script"
+                );
                 assert_eq!(remaining, 1);
                 let target = Target::Player(PlayerId::P1);
                 assert!(legal_targets.contains(&target));
@@ -178,7 +217,11 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
             Decision::DeclareAttackers { player, eligible } => {
                 let attackers: Vec<ObjectId> = if player == PlayerId::P0 {
                     // Attack with Guttersnipe whenever it's eligible.
-                    eligible.iter().copied().filter(|&id| state.objects.get(id).card_def == guttersnipe_def).collect()
+                    eligible
+                        .iter()
+                        .copied()
+                        .filter(|&id| state.objects.get(id).card_def == guttersnipe_def)
+                        .collect()
                 } else {
                     // P1's Masked Meower has haste and so is technically
                     // eligible from the turn it's cast, but the script
@@ -190,29 +233,56 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
                 }
                 engine::step(state, Action::DeclareAttackers(attackers)).unwrap();
             }
-            Decision::DeclareBlockers { player, attackers, legal_blockers } => {
-                assert_eq!(player, PlayerId::P1, "P0 is never the defending player in this script (P1 never attacks)");
+            Decision::DeclareBlockers {
+                player,
+                attackers,
+                legal_blockers,
+            } => {
+                assert_eq!(
+                    player,
+                    PlayerId::P1,
+                    "P0 is never the defending player in this script (P1 never attacks)"
+                );
                 let blocks: Vec<(ObjectId, ObjectId)> = attackers
                     .iter()
                     .filter_map(|&attacker| {
                         let (_, blockers) = legal_blockers.iter().find(|(a, _)| *a == attacker)?;
-                        blockers.iter().copied().find(|&b| state.objects.get(b).card_def == meower_def).map(|b| (b, attacker))
+                        blockers
+                            .iter()
+                            .copied()
+                            .find(|&b| state.objects.get(b).card_def == meower_def)
+                            .map(|b| (b, attacker))
                     })
                     .collect();
                 engine::step(state, Action::DeclareBlockers(blocks)).unwrap();
             }
-            Decision::CastSpellOrPass { player, castable_spells, land_drops, .. } => {
+            Decision::CastSpellOrPass {
+                player,
+                castable_spells,
+                land_drops,
+                ..
+            } => {
                 if !land_drops.is_empty() {
                     engine::step(state, Action::PlayLand(land_drops[0])).unwrap();
-                } else if player == PlayerId::P0 && card_in_hand(state, PlayerId::P0, guttersnipe_def).is_some_and(|g| castable_spells.contains(&g)) {
+                } else if player == PlayerId::P0
+                    && card_in_hand(state, PlayerId::P0, guttersnipe_def)
+                        .is_some_and(|g| castable_spells.contains(&g))
+                {
                     let guttersnipe = card_in_hand(state, PlayerId::P0, guttersnipe_def).unwrap();
                     engine::step(state, Action::CastSpell(guttersnipe)).unwrap();
                 } else if player == PlayerId::P0
                     && state.active_player == PlayerId::P0
-                    && matches!(state.step, mtg_kernel::state::Step::Main1 | mtg_kernel::state::Step::Main2)
+                    && matches!(
+                        state.step,
+                        mtg_kernel::state::Step::Main1 | mtg_kernel::state::Step::Main2
+                    )
                     && state.turn != last_bolt_turn
-                    && state.players[0].battlefield.iter().any(|&id| state.objects.get(id).card_def == guttersnipe_def)
-                    && card_in_hand(state, PlayerId::P0, bolt_def).is_some_and(|b| castable_spells.contains(&b))
+                    && state.players[0]
+                        .battlefield
+                        .iter()
+                        .any(|&id| state.objects.get(id).card_def == guttersnipe_def)
+                    && card_in_hand(state, PlayerId::P0, bolt_def)
+                        .is_some_and(|b| castable_spells.contains(&b))
                 {
                     // Bolt is an instant and could legally be cast any time
                     // P0 has priority (including during P1's turn, or P0's
@@ -225,14 +295,19 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
                     let bolt = card_in_hand(state, PlayerId::P0, bolt_def).unwrap();
                     last_bolt_turn = state.turn;
                     engine::step(state, Action::CastSpell(bolt)).unwrap();
-                } else if player == PlayerId::P1 && card_in_hand(state, PlayerId::P1, meower_def).is_some_and(|m| castable_spells.contains(&m)) {
+                } else if player == PlayerId::P1
+                    && card_in_hand(state, PlayerId::P1, meower_def)
+                        .is_some_and(|m| castable_spells.contains(&m))
+                {
                     let meower = card_in_hand(state, PlayerId::P1, meower_def).unwrap();
                     engine::step(state, Action::CastSpell(meower)).unwrap();
                 } else {
                     engine::step(state, Action::Pass).unwrap();
                 }
             }
-            Decision::ChooseSpellMode { .. } | Decision::ChooseOptionalCost { .. } | Decision::ChooseMadnessCast { .. } => {
+            Decision::ChooseSpellMode { .. }
+            | Decision::ChooseOptionalCost { .. }
+            | Decision::ChooseMadnessCast { .. } => {
                 unreachable!("no card in this script is Plotted, Madness, or modal")
             }
             Decision::ChooseKicker { .. } => unreachable!("no card in this script has Kicker"),
@@ -257,11 +332,28 @@ fn combat_and_burn_together_end_the_game() {
     assert!(state.players[1].life <= 0);
 
     // ---- Guttersnipe survived combat; Masked Meower died to it ----------
-    let guttersnipe_id = state.players[0].battlefield.iter().copied().find(|&id| state.objects.get(id).card_def == guttersnipe_def);
-    assert!(guttersnipe_id.is_some(), "Guttersnipe should still be on P0's battlefield");
-    let meower_id = state.players[1].graveyard.iter().copied().find(|&id| state.objects.get(id).card_def == meower_def);
-    assert!(meower_id.is_some(), "Masked Meower should have died blocking and be in P1's graveyard");
-    assert!(!state.players[1].battlefield.iter().any(|&id| state.objects.get(id).card_def == meower_def));
+    let guttersnipe_id = state.players[0]
+        .battlefield
+        .iter()
+        .copied()
+        .find(|&id| state.objects.get(id).card_def == guttersnipe_def);
+    assert!(
+        guttersnipe_id.is_some(),
+        "Guttersnipe should still be on P0's battlefield"
+    );
+    let meower_id = state.players[1]
+        .graveyard
+        .iter()
+        .copied()
+        .find(|&id| state.objects.get(id).card_def == meower_def);
+    assert!(
+        meower_id.is_some(),
+        "Masked Meower should have died blocking and be in P1's graveyard"
+    );
+    assert!(!state.players[1]
+        .battlefield
+        .iter()
+        .any(|&id| state.objects.get(id).card_def == meower_def));
 
     // ---- decision-kind sequence: real DeclareAttackers/DeclareBlockers
     // windows happened on both sides, no shortcuts taken. Declare Attackers
@@ -290,8 +382,15 @@ fn combat_and_burn_together_end_the_game() {
         real_p0_attacks as usize,
         "P1 should be asked to declare blockers exactly once per turn P0 actually declared a non-empty attack (509.4-ish: skipped when zero attackers were declared)"
     );
-    assert_eq!(count(Kind::DeclareBlockers(PlayerId::P0)), 0, "P0 is never the defending player (P1 never attacks)");
-    assert!(count(Kind::ChooseTargets(PlayerId::P0)) >= 1, "at least one Lightning Bolt should have been cast");
+    assert_eq!(
+        count(Kind::DeclareBlockers(PlayerId::P0)),
+        0,
+        "P0 is never the defending player (P1 never attacks)"
+    );
+    assert!(
+        count(Kind::ChooseTargets(PlayerId::P0)) >= 1,
+        "at least one Lightning Bolt should have been cast"
+    );
 
     // ---- event log: exact combat-damage exchange between Guttersnipe and
     // Masked Meower (the one turn they fought).
@@ -301,13 +400,29 @@ fn combat_and_burn_together_end_the_game() {
         .engine
         .event_history
         .iter()
-        .filter(|e| matches!(e, CommittedEvent::Damage { target: Target::Object(_), .. }))
+        .filter(|e| {
+            matches!(
+                e,
+                CommittedEvent::Damage {
+                    target: Target::Object(_),
+                    ..
+                }
+            )
+        })
         .collect();
     assert_eq!(
         object_damage,
         vec![
-            &CommittedEvent::Damage { source: guttersnipe_id, target: Target::Object(meower_id), amount: 2 },
-            &CommittedEvent::Damage { source: meower_id, target: Target::Object(guttersnipe_id), amount: 1 },
+            &CommittedEvent::Damage {
+                source: guttersnipe_id,
+                target: Target::Object(meower_id),
+                amount: 2
+            },
+            &CommittedEvent::Damage {
+                source: meower_id,
+                target: Target::Object(guttersnipe_id),
+                amount: 1
+            },
         ],
         "exactly one combat exchange should have happened, in the same simultaneous-damage batch"
     );
@@ -325,9 +440,21 @@ fn combat_and_burn_together_end_the_game() {
         .engine
         .event_history
         .iter()
-        .filter(|e| matches!(e, CommittedEvent::Damage { target: Target::Player(PlayerId::P1), amount: 3, .. }))
+        .filter(|e| {
+            matches!(
+                e,
+                CommittedEvent::Damage {
+                    target: Target::Player(PlayerId::P1),
+                    amount: 3,
+                    ..
+                }
+            )
+        })
         .count();
-    assert_eq!(bolts_cast, bolt_damage, "one SpellCast per Lightning Bolt, one 3-damage event per resolved Lightning Bolt");
+    assert_eq!(
+        bolts_cast, bolt_damage,
+        "one SpellCast per Lightning Bolt, one 3-damage event per resolved Lightning Bolt"
+    );
     assert!(bolts_cast >= 1);
 
     // ---- Guttersnipe's cast-trigger + unblocked-combat damage to P1 both
@@ -341,11 +468,19 @@ fn combat_and_burn_together_end_the_game() {
         .event_history
         .iter()
         .filter_map(|e| match e {
-            CommittedEvent::Damage { target: Target::Player(PlayerId::P1), amount, .. } => Some(*amount),
+            CommittedEvent::Damage {
+                target: Target::Player(PlayerId::P1),
+                amount,
+                ..
+            } => Some(*amount),
             _ => None,
         })
         .sum();
-    assert_eq!(damage_to_p1, 20 - state.players[1].life, "every point of P1's life loss should be accounted for by a logged Damage event");
+    assert_eq!(
+        damage_to_p1,
+        20 - state.players[1].life,
+        "every point of P1's life loss should be accounted for by a logged Damage event"
+    );
 
     let two_damage_events_to_p1 = state
         .engine
@@ -364,11 +499,21 @@ fn combat_and_burn_together_end_the_game() {
     // ---- no shortcuts: P1 got a real priority window somewhere between
     // every ChooseTargets decision (mirrors burn_goldfish's equivalent
     // check), proving instants/sorceries weren't auto-resolved.
-    let choose_target_positions: Vec<usize> = log.iter().enumerate().filter(|(_, d)| matches!(d, Kind::ChooseTargets(_))).map(|(i, _)| i).collect();
+    let choose_target_positions: Vec<usize> = log
+        .iter()
+        .enumerate()
+        .filter(|(_, d)| matches!(d, Kind::ChooseTargets(_)))
+        .map(|(i, _)| i)
+        .collect();
     let mut segment_start = 0;
     for &pos in &choose_target_positions {
         let segment = &log[segment_start..pos];
-        assert!(segment.iter().any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))), "segment [{segment_start}..{pos}) never offered P1 a decision");
+        assert!(
+            segment
+                .iter()
+                .any(|d| matches!(d, Kind::CastOrPass(PlayerId::P1))),
+            "segment [{segment_start}..{pos}) never offered P1 a decision"
+        );
         segment_start = pos + 1;
     }
 }
@@ -386,17 +531,30 @@ fn masked_meower_zone_history_is_stack_battlefield_graveyard() {
     run_combat_game(&mut state);
 
     let meower_def = card_id_by_name("Masked Meower").unwrap();
-    let meower_id = state.players[1].graveyard.iter().copied().find(|&id| state.objects.get(id).card_def == meower_def).expect("Masked Meower should be dead");
+    let meower_id = state.players[1]
+        .graveyard
+        .iter()
+        .copied()
+        .find(|&id| state.objects.get(id).card_def == meower_def)
+        .expect("Masked Meower should be dead");
 
     let history: Vec<_> = state
         .engine
         .event_history
         .iter()
         .filter_map(|e| match e {
-            CommittedEvent::ZoneChange { object, from, to } if *object == meower_id => Some((*from, *to)),
+            CommittedEvent::ZoneChange { object, from, to } if *object == meower_id => {
+                Some((*from, *to))
+            }
             _ => None,
         })
         .collect();
-    assert_eq!(history, vec![(Zone::Stack, Zone::Battlefield), (Zone::Battlefield, Zone::Graveyard)]);
+    assert_eq!(
+        history,
+        vec![
+            (Zone::Stack, Zone::Battlefield),
+            (Zone::Battlefield, Zone::Graveyard)
+        ]
+    );
     assert_eq!(state.objects.get(meower_id).zone, Zone::Graveyard);
 }

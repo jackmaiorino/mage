@@ -153,8 +153,7 @@ pub struct OpeningHand {
 
 impl GoldenTrace {
     pub fn parse_file(path: &Path) -> Result<GoldenTrace, String> {
-        let text = fs::read_to_string(path)
-            .map_err(|e| format!("read {}: {e}", path.display()))?;
+        let text = fs::read_to_string(path).map_err(|e| format!("read {}: {e}", path.display()))?;
         parse_text(&text, path.display().to_string())
     }
 
@@ -231,11 +230,10 @@ impl GoldenTrace {
     /// onto `library` (in either order -- both are headed to the bottom
     /// regardless) reconstructs the correct post-keep state.
     pub fn opening_hand_for(&self, player: &str) -> Option<OpeningHand> {
-        let rec = self
-            .decisions
-            .iter()
-            .rev()
-            .find(|d| d.player == player && (d.action_type == "MULLIGAN" || d.action_type == "LONDON_MULLIGAN"))?;
+        let rec = self.decisions.iter().rev().find(|d| {
+            d.player == player
+                && (d.action_type == "MULLIGAN" || d.action_type == "LONDON_MULLIGAN")
+        })?;
 
         if rec.action_type == "MULLIGAN" {
             return Some(OpeningHand {
@@ -254,7 +252,12 @@ impl GoldenTrace {
         library.extend(rec.hand.iter().cloned());
         let mut library_object_ids = rec.library_object_ids.clone();
         library_object_ids.extend(rec.hand_object_ids.iter().cloned());
-        Some(OpeningHand { hand: Vec::new(), hand_object_ids: Vec::new(), library, library_object_ids })
+        Some(OpeningHand {
+            hand: Vec::new(),
+            hand_object_ids: Vec::new(),
+            library,
+            library_object_ids,
+        })
     }
 }
 
@@ -272,7 +275,12 @@ fn parse_choose_use_header(line: &str) -> Option<(u32, u32, String, String)> {
     let turn: u32 = turn_str.parse().ok()?;
     let rest = rest.split_once("), ")?.1;
     let (phase, player) = rest.split_once(" (CHOOSE_USE) - ")?;
-    Some((decision_number, turn, phase.to_string(), player.trim().to_string()))
+    Some((
+        decision_number,
+        turn,
+        phase.to_string(),
+        player.trim().to_string(),
+    ))
 }
 
 /// Parses the data line that always follows a `(CHOOSE_USE)` header a few
@@ -339,7 +347,9 @@ fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
             pending_choose_use = Some(header);
         } else if let Some((msg, is_yes)) = parse_choose_use_line(line) {
             if let Some((decision_number, turn, phase, player)) = pending_choose_use.take() {
-                if msg.contains(MADNESS_CHOOSE_USE_MARKER) || msg.starts_with(KICKER_CHOOSE_USE_MARKER) {
+                if msg.contains(MADNESS_CHOOSE_USE_MARKER)
+                    || msg.starts_with(KICKER_CHOOSE_USE_MARKER)
+                {
                     trace.decisions.push(DecisionRecord {
                         decision_number,
                         player,
@@ -377,8 +387,7 @@ fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
             }
             if let Some(idx) = rest.find("agent_deck=") {
                 let tail = &rest[idx + "agent_deck=".len()..];
-                trace.header.agent_deck =
-                    tail.split(" opp_deck=").next().unwrap_or("").to_string();
+                trace.header.agent_deck = tail.split(" opp_deck=").next().unwrap_or("").to_string();
                 if let Some(o) = tail.find("opp_deck=") {
                     let otail = &tail[o + "opp_deck=".len()..];
                     trace.header.opp_deck = otail
@@ -421,7 +430,9 @@ pub fn load_corpus(root: &Path) -> (Vec<GoldenTrace>, Vec<String>) {
     let mut traces = Vec::new();
     let mut errors = Vec::new();
     fn walk(dir: &Path, traces: &mut Vec<GoldenTrace>, errors: &mut Vec<String>) {
-        let Ok(entries) = fs::read_dir(dir) else { return };
+        let Ok(entries) = fs::read_dir(dir) else {
+            return;
+        };
         for entry in entries.flatten() {
             let p = entry.path();
             if p.is_dir() {
@@ -448,9 +459,22 @@ mod tests {
     /// Same shape as `decision_line`, but also carries a `library` snapshot
     /// -- needed for the silent-forced-keep mulligan test, which reads
     /// `opening_hand_for`'s reconstructed `library`, not just `hand`.
-    fn decision_line_with_library(player: &str, action_type: &str, hand: &[&str], library: &[&str]) -> String {
-        let hand_json = hand.iter().map(|c| format!("\"{c}\"")).collect::<Vec<_>>().join(",");
-        let library_json = library.iter().map(|c| format!("\"{c}\"")).collect::<Vec<_>>().join(",");
+    fn decision_line_with_library(
+        player: &str,
+        action_type: &str,
+        hand: &[&str],
+        library: &[&str],
+    ) -> String {
+        let hand_json = hand
+            .iter()
+            .map(|c| format!("\"{c}\""))
+            .collect::<Vec<_>>()
+            .join(",");
+        let library_json = library
+            .iter()
+            .map(|c| format!("\"{c}\""))
+            .collect::<Vec<_>>()
+            .join(",");
         format!(
             "REPLAY_DECISION_JSON: {{\"ordinal\":0,\"player\":\"{player}\",\"action_type\":\"{action_type}\",\
              \"candidate_count\":1,\"candidate_texts\":[\"Pass\"],\"chosen_indices\":[0],\
@@ -490,7 +514,11 @@ mod tests {
 
         let trace = parse_text(&text, "fixture".to_string()).unwrap();
 
-        assert_eq!(trace.decisions.len(), 3, "the episode=-1 phantom record must be dropped");
+        assert_eq!(
+            trace.decisions.len(),
+            3,
+            "the episode=-1 phantom record must be dropped"
+        );
         assert_eq!(trace.phantom_decisions_skipped, 1);
         assert!(trace.decisions.iter().all(|d| d.episode >= 0));
     }
@@ -510,12 +538,31 @@ mod tests {
 
     #[test]
     fn result_and_game_finished_winner_formats_still_parse() {
-        let with_result = [decision_line("P", "ACTIVATE_ABILITY_OR_SPELL", 0, &[]), "RESULT: PlayerRL1".to_string()].join("\n");
-        assert_eq!(parse_text(&with_result, "fixture".to_string()).unwrap().winner.as_deref(), Some("PlayerRL1"));
+        let with_result = [
+            decision_line("P", "ACTIVATE_ABILITY_OR_SPELL", 0, &[]),
+            "RESULT: PlayerRL1".to_string(),
+        ]
+        .join("\n");
+        assert_eq!(
+            parse_text(&with_result, "fixture".to_string())
+                .unwrap()
+                .winner
+                .as_deref(),
+            Some("PlayerRL1")
+        );
 
-        let with_game_finished =
-            [decision_line("P", "ACTIVATE_ABILITY_OR_SPELL", 0, &[]), "Game finished. Winner: PlayerRL1".to_string()].join("\n");
-        assert_eq!(parse_text(&with_game_finished, "fixture".to_string()).unwrap().winner.as_deref(), Some("PlayerRL1"));
+        let with_game_finished = [
+            decision_line("P", "ACTIVATE_ABILITY_OR_SPELL", 0, &[]),
+            "Game finished. Winner: PlayerRL1".to_string(),
+        ]
+        .join("\n");
+        assert_eq!(
+            parse_text(&with_game_finished, "fixture".to_string())
+                .unwrap()
+                .winner
+                .as_deref(),
+            Some("PlayerRL1")
+        );
     }
 
     #[test]
@@ -528,13 +575,28 @@ mod tests {
                 "PlayerRL1",
                 "LONDON_MULLIGAN",
                 0,
-                &["Mountain", "Lava Dart", "Lightning Bolt", "Guttersnipe", "Sneaky Snacker", "Masked Meower", "Fireblast"],
+                &[
+                    "Mountain",
+                    "Lava Dart",
+                    "Lightning Bolt",
+                    "Guttersnipe",
+                    "Sneaky Snacker",
+                    "Masked Meower",
+                    "Fireblast",
+                ],
             ),
             decision_line(
                 "PlayerRL1",
                 "MULLIGAN",
                 0,
-                &["Mountain", "Lava Dart", "Lightning Bolt", "Guttersnipe", "Sneaky Snacker", "Masked Meower"],
+                &[
+                    "Mountain",
+                    "Lava Dart",
+                    "Lightning Bolt",
+                    "Guttersnipe",
+                    "Sneaky Snacker",
+                    "Masked Meower",
+                ],
             ),
             // This player's first *logged* real decision doesn't arrive
             // until a couple of turns later (nothing playable earlier, so
@@ -546,26 +608,81 @@ mod tests {
                 "PlayerRL1",
                 "ACTIVATE_ABILITY_OR_SPELL",
                 0,
-                &["Mountain", "Lava Dart", "Lightning Bolt", "Guttersnipe", "Sneaky Snacker", "Masked Meower", "Fiery Temper"],
+                &[
+                    "Mountain",
+                    "Lava Dart",
+                    "Lightning Bolt",
+                    "Guttersnipe",
+                    "Sneaky Snacker",
+                    "Masked Meower",
+                    "Fiery Temper",
+                ],
             ),
             // SelfPlay keeps on the first 7, no mulligan loop at all.
-            decision_line("SelfPlay", "MULLIGAN", 0, &["Mountain", "Mountain", "Mountain", "Mountain", "Mountain", "Grab the Prize", "Lava Dart"]),
+            decision_line(
+                "SelfPlay",
+                "MULLIGAN",
+                0,
+                &[
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Grab the Prize",
+                    "Lava Dart",
+                ],
+            ),
             decision_line(
                 "SelfPlay",
                 "ACTIVATE_ABILITY_OR_SPELL",
                 0,
-                &["Mountain", "Mountain", "Mountain", "Mountain", "Mountain", "Grab the Prize", "Lava Dart", "Lightning Bolt"],
+                &[
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Mountain",
+                    "Grab the Prize",
+                    "Lava Dart",
+                    "Lightning Bolt",
+                ],
             ),
         ]
         .join("\n");
 
         let trace = parse_text(&text, "fixture".to_string()).unwrap();
 
-        let opening = trace.opening_hand_for("PlayerRL1").expect("PlayerRL1 has a MULLIGAN decision");
-        assert_eq!(opening.hand, vec!["Mountain", "Lava Dart", "Lightning Bolt", "Guttersnipe", "Sneaky Snacker", "Masked Meower"]);
+        let opening = trace
+            .opening_hand_for("PlayerRL1")
+            .expect("PlayerRL1 has a MULLIGAN decision");
+        assert_eq!(
+            opening.hand,
+            vec![
+                "Mountain",
+                "Lava Dart",
+                "Lightning Bolt",
+                "Guttersnipe",
+                "Sneaky Snacker",
+                "Masked Meower"
+            ]
+        );
 
-        let other = trace.opening_hand_for("SelfPlay").expect("SelfPlay has a MULLIGAN decision");
-        assert_eq!(other.hand, vec!["Mountain", "Mountain", "Mountain", "Mountain", "Mountain", "Grab the Prize", "Lava Dart"]);
+        let other = trace
+            .opening_hand_for("SelfPlay")
+            .expect("SelfPlay has a MULLIGAN decision");
+        assert_eq!(
+            other.hand,
+            vec![
+                "Mountain",
+                "Mountain",
+                "Mountain",
+                "Mountain",
+                "Mountain",
+                "Grab the Prize",
+                "Lava Dart"
+            ]
+        );
 
         assert!(trace.opening_hand_for("Nobody").is_none());
     }
@@ -589,12 +706,27 @@ mod tests {
         );
 
         let trace = parse_text(&text, "fixture".to_string()).unwrap();
-        let opening = trace.opening_hand_for("PlayerRL1").expect("PlayerRL1 has a mulligan-phase record");
+        let opening = trace
+            .opening_hand_for("PlayerRL1")
+            .expect("PlayerRL1 has a mulligan-phase record");
 
-        assert_eq!(opening.hand, Vec::<String>::new(), "mulliganing all the way to 0 cards forces a silent keep with an empty hand");
+        assert_eq!(
+            opening.hand,
+            Vec::<String>::new(),
+            "mulliganing all the way to 0 cards forces a silent keep with an empty hand"
+        );
         // Both leftover `hand` cards from the last logged pick are headed to
         // the bottom of the library either way, appended after the record's
         // own `library` snapshot.
-        assert_eq!(opening.library, vec!["Grab the Prize", "Highway Robbery", "Mountain", "Mountain", "Fiery Temper"]);
+        assert_eq!(
+            opening.library,
+            vec![
+                "Grab the Prize",
+                "Highway Robbery",
+                "Mountain",
+                "Mountain",
+                "Fiery Temper"
+            ]
+        );
     }
 }

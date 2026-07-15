@@ -91,7 +91,11 @@ fn burn_deck_ids() -> Vec<u16> {
             ids.push(id);
         }
     }
-    assert_eq!(ids.len(), 60, "Mono-Red Burn mainboard should be exactly 60 cards");
+    assert_eq!(
+        ids.len(),
+        60,
+        "Mono-Red Burn mainboard should be exactly 60 cards"
+    );
     ids
 }
 
@@ -141,29 +145,62 @@ fn rng_chance(rng: &mut SplitMix64, num: u64, den: u64) -> bool {
 /// offers (Pass included as one of the candidates for `CastSpellOrPass`).
 /// Never called on `Decision::GameOver` (the driver loops break before
 /// reaching here for that variant).
-fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut SplitMix64) -> Action {
+fn random_action_for_decision(
+    decision: &Decision,
+    state: &GameState,
+    rng: &mut SplitMix64,
+) -> Action {
     match decision {
-        Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, activatable_abilities, plot_actions, .. } => {
+        Decision::CastSpellOrPass {
+            castable_spells,
+            mana_abilities,
+            land_drops,
+            activatable_abilities,
+            plot_actions,
+            ..
+        } => {
             let mut candidates: Vec<Action> = Vec::with_capacity(
-                castable_spells.len() + mana_abilities.len() + land_drops.len() + activatable_abilities.len() + plot_actions.len() + 1,
+                castable_spells.len()
+                    + mana_abilities.len()
+                    + land_drops.len()
+                    + activatable_abilities.len()
+                    + plot_actions.len()
+                    + 1,
             );
             candidates.extend(castable_spells.iter().map(|&id| Action::CastSpell(id)));
-            candidates.extend(mana_abilities.iter().map(|&id| Action::ActivateManaAbility(id)));
+            candidates.extend(
+                mana_abilities
+                    .iter()
+                    .map(|&id| Action::ActivateManaAbility(id)),
+            );
             candidates.extend(land_drops.iter().map(|&id| Action::PlayLand(id)));
-            candidates.extend(activatable_abilities.iter().map(|&(id, idx)| Action::ActivateAbility(id, idx)));
+            candidates.extend(
+                activatable_abilities
+                    .iter()
+                    .map(|&(id, idx)| Action::ActivateAbility(id, idx)),
+            );
             candidates.extend(plot_actions.iter().map(|&id| Action::PlotSpell(id)));
             candidates.push(Action::Pass);
             let i = rng_below(rng, candidates.len());
             candidates.swap_remove(i)
         }
         Decision::ChooseTargets { legal_targets, .. } => {
-            assert!(!legal_targets.is_empty(), "a real ChooseTargets window must have at least one legal target");
+            assert!(
+                !legal_targets.is_empty(),
+                "a real ChooseTargets window must have at least one legal target"
+            );
             Action::ChooseTarget(legal_targets[rng_below(rng, legal_targets.len())])
         }
-        Decision::ChooseCostTargets { candidates, .. } => Action::ChooseCostTarget(candidates[rng_below(rng, candidates.len())]),
-        Decision::ChooseCastMode { options, .. } => Action::ChooseCastMode(options[rng_below(rng, options.len())]),
+        Decision::ChooseCostTargets { candidates, .. } => {
+            Action::ChooseCostTarget(candidates[rng_below(rng, candidates.len())])
+        }
+        Decision::ChooseCastMode { options, .. } => {
+            Action::ChooseCastMode(options[rng_below(rng, options.len())])
+        }
         Decision::ChooseKicker { .. } => Action::ChooseKicker(rng_chance(rng, 1, 2)),
-        Decision::ChooseSpellMode { mode_count, .. } => Action::ChooseSpellMode(rng_below(rng, *mode_count as usize) as u8),
+        Decision::ChooseSpellMode { mode_count, .. } => {
+            Action::ChooseSpellMode(rng_below(rng, *mode_count as usize) as u8)
+        }
         Decision::ChooseOptionalCost { .. } => {
             // Real payable flags, not this decision's own -- the H2 surface
             // reshape re-presents `ChooseOptionalCost` with a presentation-
@@ -172,7 +209,8 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
             // pending_optional_cost` directly is accurate for the raw-engine
             // path too (`play_one_game_raw`/`hunt_max_legal_actions`, which
             // never goes through the reshape at all).
-            let (discard_payable, sacrifice_payable) = HarnessSurfaceV2::pending_optional_cost_payable(state).unwrap_or((false, false));
+            let (discard_payable, sacrifice_payable) =
+                HarnessSurfaceV2::pending_optional_cost_payable(state).unwrap_or((false, false));
             let mut options = vec![OptionalCostChoice::Decline];
             if discard_payable {
                 options.push(OptionalCostChoice::Discard);
@@ -196,7 +234,13 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
         }
         Decision::DeclareAttackers { eligible, .. } => {
             let (num, den) = ATTACK_INCLUDE_CHANCE;
-            Action::DeclareAttackers(eligible.iter().copied().filter(|_| rng_chance(rng, num, den)).collect())
+            Action::DeclareAttackers(
+                eligible
+                    .iter()
+                    .copied()
+                    .filter(|_| rng_chance(rng, num, den))
+                    .collect(),
+            )
         }
         Decision::DeclareBlockers { legal_blockers, .. } => {
             let mut used: HashSet<ObjectId> = HashSet::new();
@@ -206,7 +250,11 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
                 if !rng_chance(rng, num, den) {
                     continue;
                 }
-                let avail: Vec<ObjectId> = blockers.iter().copied().filter(|b| !used.contains(b)).collect();
+                let avail: Vec<ObjectId> = blockers
+                    .iter()
+                    .copied()
+                    .filter(|b| !used.contains(b))
+                    .collect();
                 if !avail.is_empty() {
                     let b = avail[rng_below(rng, avail.len())];
                     used.insert(b);
@@ -223,8 +271,12 @@ fn random_action_for_decision(decision: &Decision, state: &GameState, rng: &mut 
             }
             Action::OrderTriggers(idx)
         }
-        Decision::GameOver { .. } => unreachable!("caller must check for GameOver before requesting an action"),
-        Decision::Halted { .. } => unreachable!("caller must check for Halted before requesting an action"),
+        Decision::GameOver { .. } => {
+            unreachable!("caller must check for GameOver before requesting an action")
+        }
+        Decision::Halted { .. } => {
+            unreachable!("caller must check for Halted before requesting an action")
+        }
     }
 }
 
@@ -249,7 +301,8 @@ fn play_one_game_raw(seed: u64) -> u64 {
             break;
         }
         let action = random_action_for_decision(&decision, &state, &mut rng);
-        engine::step(&mut state, action).expect("random policy only picks actions the decision itself listed as legal");
+        engine::step(&mut state, action)
+            .expect("random policy only picks actions the decision itself listed as legal");
         if decisions >= DECISION_SAFETY_CAP {
             warn_safety_cap_once();
             break;
@@ -272,7 +325,9 @@ fn play_one_game_surface(seed: u64) -> u64 {
             SurfaceDecision::Decision(Decision::GameOver { .. }) => break,
             SurfaceDecision::Decision(d) => {
                 let action = random_action_for_decision(d, &state, &mut rng);
-                surface.apply(&mut state, SurfaceAction::Action(action)).expect("random policy only picks legal actions");
+                surface
+                    .apply(&mut state, SurfaceAction::Action(action))
+                    .expect("random policy only picks legal actions");
             }
             SurfaceDecision::DeclareBlockersForAttacker { legal_blockers, .. } => {
                 let (num, den) = BLOCK_CHANCE;
@@ -281,7 +336,9 @@ fn play_one_game_surface(seed: u64) -> u64 {
                 } else {
                     Vec::new()
                 };
-                surface.apply(&mut state, SurfaceAction::DeclareBlockersForAttacker(picks)).expect("blockers reshape accepts a subset of the offered legal_blockers");
+                surface
+                    .apply(&mut state, SurfaceAction::DeclareBlockersForAttacker(picks))
+                    .expect("blockers reshape accepts a subset of the offered legal_blockers");
             }
         }
         if decisions >= DECISION_SAFETY_CAP {
@@ -294,7 +351,11 @@ fn play_one_game_surface(seed: u64) -> u64 {
 
 // ---------------------------------------------------------- measurement
 
-fn measure_games<F: FnMut(u64) -> u64>(mut play_one: F, warmup: Duration, target: Duration) -> (u64, u64, Duration) {
+fn measure_games<F: FnMut(u64) -> u64>(
+    mut play_one: F,
+    warmup: Duration,
+    target: Duration,
+) -> (u64, u64, Duration) {
     let mut seed = 0u64;
     let warm_start = Instant::now();
     while warm_start.elapsed() < warmup {
@@ -337,8 +398,12 @@ fn synthetic_state_of_size(total_objects: u32, seed: u64) -> GameState {
     let base = total_objects.saturating_sub(4); // reserve 4 slots for fabricated tokens below
     let per_p0 = base / 2;
     let per_p1 = base - per_p0;
-    let lib0: Vec<u16> = (0..per_p0).map(|i| cycle[i as usize % cycle.len()]).collect();
-    let lib1: Vec<u16> = (0..per_p1).map(|i| cycle[i as usize % cycle.len()]).collect();
+    let lib0: Vec<u16> = (0..per_p0)
+        .map(|i| cycle[i as usize % cycle.len()])
+        .collect();
+    let lib1: Vec<u16> = (0..per_p1)
+        .map(|i| cycle[i as usize % cycle.len()])
+        .collect();
     let mut state = GameState::new_from_libraries(&lib0, &lib1, debug_name, seed);
 
     for player in [PlayerId::P0, PlayerId::P1] {
@@ -390,7 +455,10 @@ fn time_iters<F: FnMut()>(mut f: F, warmup: u64, timed: u64) -> Duration {
 
 fn section1_snapshot_scaling() {
     println!("--- Section 1: snapshot/restore scaling (PERFORMANCE-ONLY) ---");
-    println!("{:>10} {:>12} {:>14} {:>14}", "objects", "actual_objs", "snapshot ns/op", "restore ns/op");
+    println!(
+        "{:>10} {:>12} {:>14} {:>14}",
+        "objects", "actual_objs", "snapshot ns/op", "restore ns/op"
+    );
     for &target in &[80u32, 200, 350, 500] {
         let state = synthetic_state_of_size(target, 0xABCD_0000 + target as u64);
         let actual_objects = state.objects.len();
@@ -424,7 +492,10 @@ fn section1_snapshot_scaling() {
 // -------------------------------------------------- section 2: step throughput
 
 fn goldfish_library(names: &[&str]) -> Vec<u16> {
-    names.iter().map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found"))).collect()
+    names
+        .iter()
+        .map(|n| card_id_by_name(n).unwrap_or_else(|| panic!("card {n:?} not found")))
+        .collect()
 }
 
 /// Deterministic scripted Mono-Red Burn goldfish (see `tests/burn_goldfish.rs`,
@@ -488,7 +559,11 @@ fn play_goldfish_once(_seed: u64) -> u64 {
 fn section2_step_throughput() {
     println!("--- Section 2: step throughput, single-threaded (PERFORMANCE-ONLY) ---");
 
-    let (games, decisions, elapsed) = measure_games(play_goldfish_once, Duration::from_millis(200), GOLDFISH_DURATION);
+    let (games, decisions, elapsed) = measure_games(
+        play_goldfish_once,
+        Duration::from_millis(200),
+        GOLDFISH_DURATION,
+    );
     let secs = elapsed.as_secs_f64();
     let games_per_sec = games as f64 / secs;
     let decisions_per_sec = decisions as f64 / secs;
@@ -496,7 +571,11 @@ fn section2_step_throughput() {
         "(a) Burn goldfish script, replayed:  {games_per_sec:>8.1} games/sec   {decisions_per_sec:>10.1} decisions/sec   ({games} games, {decisions} decisions, {secs:.2}s)"
     );
 
-    let (games, decisions, elapsed) = measure_games(play_one_game_raw, Duration::from_millis(300), RANDOM_GAME_DURATION);
+    let (games, decisions, elapsed) = measure_games(
+        play_one_game_raw,
+        Duration::from_millis(300),
+        RANDOM_GAME_DURATION,
+    );
     let secs = elapsed.as_secs_f64();
     let games_per_sec = games as f64 / secs;
     let decisions_per_sec = decisions as f64 / secs;
@@ -512,7 +591,10 @@ fn section3_selfplay_threading() {
     println!("--- Section 3 (HEADLINE): self-play throughput via HarnessSurfaceV2, N threads (PERFORMANCE-ONLY) ---");
     println!("Compare against Java's ~3 eps/sec (24-core box, 48 runners, FULL training stack incl. NN inference+training --");
     println!("this section is ENGINE+SURFACE ONLY, no NN, so this is an upper bound on what the engine alone could feed a learner.");
-    println!("{:>8} {:>14} {:>18} {:>18}", "threads", "games/sec", "H-visible dec/sec", "games/sec/thread");
+    println!(
+        "{:>8} {:>14} {:>18} {:>18}",
+        "threads", "games/sec", "H-visible dec/sec", "games/sec/thread"
+    );
 
     for &n in &SELFPLAY_THREAD_COUNTS {
         let start = Instant::now();
@@ -548,7 +630,10 @@ fn section3_selfplay_threading() {
         let wall = start.elapsed().as_secs_f64();
         let games_per_sec = total_games as f64 / wall;
         let decisions_per_sec = total_decisions as f64 / wall;
-        println!("{n:>8} {games_per_sec:>14.2} {decisions_per_sec:>18.1} {:>18.3}", games_per_sec / n as f64);
+        println!(
+            "{n:>8} {games_per_sec:>14.2} {decisions_per_sec:>18.1} {:>18.3}",
+            games_per_sec / n as f64
+        );
     }
     println!();
 }
@@ -567,7 +652,13 @@ fn capture_rich_cast_window(seed: u64, max_decisions: u64) -> GameState {
     let mut best_score = 0usize;
     for _ in 0..max_decisions {
         let decision = engine::advance_until_decision(&mut state);
-        if let Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, .. } = &decision {
+        if let Decision::CastSpellOrPass {
+            castable_spells,
+            mana_abilities,
+            land_drops,
+            ..
+        } = &decision
+        {
             if !castable_spells.is_empty() && !mana_abilities.is_empty() && !land_drops.is_empty() {
                 let score = castable_spells.len() + mana_abilities.len();
                 if score > best_score {
@@ -592,7 +683,16 @@ fn section4_legal_actions_cost() {
     let captured = capture_rich_cast_window(0x1357_9BDF, 2_000);
     let decision = engine::advance_until_decision(&mut captured.clone());
     let (castable, mana, land) = match &decision {
-        Decision::CastSpellOrPass { castable_spells, mana_abilities, land_drops, .. } => (castable_spells.len(), mana_abilities.len(), land_drops.len()),
+        Decision::CastSpellOrPass {
+            castable_spells,
+            mana_abilities,
+            land_drops,
+            ..
+        } => (
+            castable_spells.len(),
+            mana_abilities.len(),
+            land_drops.len(),
+        ),
         _ => (0, 0, 0),
     };
     println!("captured window: {castable} castable spells, {mana} mana abilities, {land} land drops, {} total objects", captured.objects.len());
@@ -606,7 +706,10 @@ fn section4_legal_actions_cost() {
         LEGAL_ACTIONS_TIMED_ITERS,
     );
     let ns_per_call = elapsed.as_nanos() as f64 / LEGAL_ACTIONS_TIMED_ITERS as f64;
-    assert_eq!(probe, captured, "advance_until_decision must not mutate an already-idle decision state");
+    assert_eq!(
+        probe, captured,
+        "advance_until_decision must not mutate an already-idle decision state"
+    );
     println!("advance_until_decision (idle re-enumeration): {ns_per_call:.1} ns/op over {LEGAL_ACTIONS_TIMED_ITERS} iterations");
 
     // Section 3's HarnessSurfaceV2::next_decision computes `state.state_hash()`
@@ -651,7 +754,10 @@ mod counting_alloc {
     }
 
     pub fn snapshot() -> (u64, u64) {
-        (ALLOC_COUNT.load(Ordering::Relaxed), ALLOC_BYTES.load(Ordering::Relaxed))
+        (
+            ALLOC_COUNT.load(Ordering::Relaxed),
+            ALLOC_BYTES.load(Ordering::Relaxed),
+        )
     }
 }
 
