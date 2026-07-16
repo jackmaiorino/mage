@@ -72,16 +72,20 @@ ALLOWED_LOGICAL_TENSOR_DTYPES = {
 def create_adam(model: KernelPolicyValueNet, learning_rate: float) -> torch.optim.Adam:
     if type(learning_rate) is not float or not math.isfinite(learning_rate) or learning_rate <= 0.0:
         raise ValueError("learning_rate must be a positive finite float")
-    return torch.optim.Adam(
-        model.parameters(),
-        lr=learning_rate,
-        betas=(0.9, 0.999),
-        eps=1e-8,
-        weight_decay=0.0,
-        amsgrad=False,
-        foreach=False,
-        fused=False,
-    )
+    # Adam's first construction can lazily import torch._dynamo. Keep those
+    # internal allocations on CPU even when a library caller uses a non-CPU
+    # process default device; the context restores that default on exit.
+    with torch.device("cpu"):
+        return torch.optim.Adam(
+            model.parameters(),
+            lr=learning_rate,
+            betas=(0.9, 0.999),
+            eps=1e-8,
+            weight_decay=0.0,
+            amsgrad=False,
+            foreach=False,
+            fused=False,
+        )
 
 
 def adam_config(learning_rate: float) -> dict[str, Any]:
