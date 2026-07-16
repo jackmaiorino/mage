@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import builtins
 from collections import Counter
+import io
 import math
 import os
 import hashlib
@@ -15,6 +17,7 @@ import time
 import unittest
 from pathlib import Path
 from typing import Any
+from unittest import mock
 
 import torch
 
@@ -927,30 +930,422 @@ class TrainerTest(unittest.TestCase):
                 before = _cache_bytes(target)
 
                 content_reads: list[str] = []
+                labeled_content_reads: list[tuple[str, str]] = []
+                active_reader_stack: list[str] = []
                 append_calls: list[dict[str, Any]] = []
                 original_json_read = artifact_io.read_regular_file_bytes
                 original_checkpoint_read = checkpoint_io.read_regular_file_bytes
                 original_rebuild = trainer_mod.rebuild_derived_caches
                 original_append = artifacts_mod._append_jsonl_no_read
+                original_os_open = os.open
+                original_builtin_open = builtins.open
+                original_io_open = io.open
+                original_os_close = os.close
+                original_os_fstat = os.fstat
+                target_abs = os.path.abspath(os.fspath(target))
+                target_cmp = os.path.normcase(target_abs)
+                outside_probe_area = tmp / f"outside-read-probes-{head}"
+                probe_paths = {
+                    "direct-read": target / "guard-direct-read-probe.txt",
+                    "directory": target / "guard-directory-probe",
+                    "caller-fd": target / "guard-fd-pass-through-probe.txt",
+                    "stateful-pathlike": target / "guard-stateful-pathlike-probe.txt",
+                    "write-only": target / "guard-write-only-probe.tmp",
+                    "outside-root": outside_probe_area / "outside-read-probe.txt",
+                    "outside-root-area": outside_probe_area,
+                }
+                probe_cleanup_order = (
+                    "direct-read",
+                    "caller-fd",
+                    "stateful-pathlike",
+                    "write-only",
+                    "outside-root",
+                    "directory",
+                    "outside-root-area",
+                )
 
-                def normalize_path(path: str | Path) -> str:
-                    path_obj = Path(path)
+                def capture_path(path: Any) -> str | bytes | None:
+                    if isinstance(path, int):
+                        return None
+                    return os.fspath(path)
+
+                def absolute_captured_path(captured: str | bytes) -> str:
+                    return os.path.abspath(os.fsdecode(captured))
+
+                def measured_abs_path(path: Any) -> str | None:
+                    captured = capture_path(path)
+                    if captured is None:
+                        return None
+                    return classified_target_path(captured)
+
+                def classified_target_path(captured: str | bytes) -> str | None:
+                    path_abs = absolute_captured_path(captured)
+                    normalized_abs = os.path.normcase(path_abs)
+                    if os.path.commonpath([target_cmp, normalized_abs]) != target_cmp:
+                        return None
+                    return path_abs
+
+                def is_readable_os_open(flags: int) -> bool:
+                    if hasattr(os, "O_PATH") and flags & os.O_PATH:
+                        return False
+                    access_mode = flags & getattr(os, "O_ACCMODE", os.O_RDONLY | os.O_WRONLY | os.O_RDWR)
+                    return access_mode != os.O_WRONLY
+
+                def assert_no_relative_dir_fd_read(captured: str | bytes, flags: int, kwargs: dict[str, Any]) -> None:
+                    if kwargs.get("dir_fd") is None or not is_readable_os_open(flags):
+                        return
+                    if not os.path.isabs(captured):
+                        raise AssertionError("readable relative os.open with dir_fd cannot be classified portably")
+
+                def readable_mode(mode: Any) -> bool:
+                    mode_text = str(mode)
+                    return "r" in mode_text or "+" in mode_text
+
+                def assert_caller_fd_still_open(fd: int) -> None:
                     try:
-                        rel = path_obj.relative_to(target)
-                    except ValueError:
-                        return str(path_obj).replace("\\", "/")
-                    parts = rel.parts
+                        original_os_fstat(fd)
+                    except OSError as exc:
+                        self.fail(f"caller-owned fd was closed by high-level open guard: {exc}")
+
+                class StatefulPathLike:
+                    def __init__(self, first: Path, second: Path) -> None:
+                        self.first = os.fspath(first)
+                        self.second = os.fspath(second)
+                        self.calls = 0
+
+                    def __fspath__(self) -> str:
+                        self.calls += 1
+                        if self.calls == 1:
+                            return self.first
+                        return self.second
+
+                def normalize_abs_path(path_abs: str) -> str:
+                    rel = os.path.relpath(path_abs, target_abs)
+                    parts = Path(rel).parts
                     if len(parts) >= 3 and parts[0] == ".transactions":
                         return "/".join(("<tx>", *parts[2:]))
                     return "/".join(parts)
 
+                def normalize_path(path: str | Path) -> str:
+                    path_abs = measured_abs_path(path)
+                    if path_abs is None:
+                        return str(Path(path)).replace("\\", "/")
+                    return normalize_abs_path(path_abs)
+
+                def snapshot_tree(root: Path) -> dict[str, tuple[Any, ...]]:
+                    if not os.path.lexists(os.fspath(root)):
+                        return {".": ("missing",)}
+                    snapshot: dict[str, tuple[Any, ...]] = {}
+                    root_mode = root.lstat().st_mode
+                    descendants = (
+                        sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix())
+                        if stat.S_ISDIR(root_mode) and not stat.S_ISLNK(root_mode)
+                        else []
+                    )
+                    paths = [root, *descendants]
+                    for path in paths:
+                        rel = "." if path == root else path.relative_to(root).as_posix()
+                        info = path.lstat()
+                        mode = info.st_mode
+                        if stat.S_ISLNK(mode):
+                            snapshot[rel] = ("symlink", os.readlink(path))
+                        elif stat.S_ISDIR(mode):
+                            snapshot[rel] = ("dir",)
+                        elif stat.S_ISREG(mode):
+                            with original_builtin_open(os.fspath(path), "rb") as handle:
+                                data = handle.read()
+                            snapshot[rel] = ("file", len(data), hashlib.sha256(data).hexdigest())
+                        else:
+                            snapshot[rel] = ("other", stat.S_IFMT(mode))
+                    return snapshot
+
+                def remove_probe_path(path: Path) -> None:
+                    if not os.path.lexists(os.fspath(path)):
+                        return
+                    if stat.S_ISDIR(path.lstat().st_mode):
+                        path.rmdir()
+                    else:
+                        path.unlink()
+
+                def format_probe_failure(label: str, exc: BaseException) -> str:
+                    message = str(exc).replace("\n", " ")
+                    if len(message) > 300:
+                        message = message[:297] + "..."
+                    return f"{label}: {type(exc).__name__}: {message}"
+
+                def snapshot_delta(expected: dict[str, tuple[Any, ...]], actual: dict[str, tuple[Any, ...]]) -> str:
+                    expected_keys = set(expected)
+                    actual_keys = set(actual)
+                    added = sorted(actual_keys - expected_keys)
+                    removed = sorted(expected_keys - actual_keys)
+                    changed = sorted(key for key in expected_keys & actual_keys if expected[key] != actual[key])
+                    return (
+                        f"added={added[:5]} removed={removed[:5]} changed={changed[:5]} "
+                        f"counts=+{len(added)}/-{len(removed)}/~{len(changed)}"
+                    )
+
+                def collect_probe_absence_failures() -> list[str]:
+                    failures: list[str] = []
+                    for label, path in probe_paths.items():
+                        try:
+                            if os.path.lexists(os.fspath(path)):
+                                failures.append(f"{label}: probe path remained at {path}")
+                        except BaseException as exc:
+                            failures.append(format_probe_failure(f"{label} absence check", exc))
+                    return failures
+
+                def assert_probe_paths_absent() -> None:
+                    failures = collect_probe_absence_failures()
+                    if failures:
+                        raise AssertionError("probe path absence failures: " + "; ".join(failures))
+
+                def collect_probe_restoration_failures(
+                    pre_probe_target_snapshot: dict[str, tuple[Any, ...]],
+                    pre_probe_outside_snapshot: dict[str, tuple[Any, ...]],
+                ) -> list[str]:
+                    failures = collect_probe_absence_failures()
+                    try:
+                        target_snapshot = snapshot_tree(target)
+                        if target_snapshot != pre_probe_target_snapshot:
+                            failures.append(
+                                "target snapshot mismatch: "
+                                + snapshot_delta(pre_probe_target_snapshot, target_snapshot)
+                            )
+                    except BaseException as exc:
+                        failures.append(format_probe_failure("target snapshot verification", exc))
+                    try:
+                        outside_snapshot = snapshot_tree(outside_probe_area)
+                        if outside_snapshot != pre_probe_outside_snapshot:
+                            failures.append(
+                                "outside snapshot mismatch: "
+                                + snapshot_delta(pre_probe_outside_snapshot, outside_snapshot)
+                            )
+                    except BaseException as exc:
+                        failures.append(format_probe_failure("outside snapshot verification", exc))
+                    return failures
+
+                def handle_probe_cleanup_failures(primary: BaseException | None, failures: list[str]) -> None:
+                    if not failures:
+                        return
+                    details = "; ".join(failures)
+                    if primary is not None:
+                        add_note = getattr(primary, "add_note", None)
+                        if add_note is not None:
+                            try:
+                                add_note("probe cleanup/restoration failures: " + details)
+                            except BaseException:
+                                pass
+                        return
+                    raise AssertionError("probe cleanup/restoration failures: " + details)
+
+                def with_reader_label(label: str, path: str | Path, *args: Any, **kwargs: Any) -> Any:
+                    active_reader_stack.append(label)
+                    try:
+                        if label == "json":
+                            return original_json_read(path, *args, **kwargs)
+                        if label == "checkpoint":
+                            return original_checkpoint_read(path, *args, **kwargs)
+                        raise AssertionError(f"unknown reader label: {label}")
+                    finally:
+                        popped = active_reader_stack.pop()
+                        if popped != label:
+                            raise AssertionError(f"reader label stack corrupted: expected {label}, got {popped}")
+
                 def counted_json(path: str | Path, *args: Any, **kwargs: Any) -> Any:
-                    content_reads.append(normalize_path(path))
-                    return original_json_read(path, *args, **kwargs)
+                    return with_reader_label("json", path, *args, **kwargs)
 
                 def counted_checkpoint(path: str | Path, *args: Any, **kwargs: Any) -> Any:
-                    content_reads.append(normalize_path(path))
-                    return original_checkpoint_read(path, *args, **kwargs)
+                    return with_reader_label("checkpoint", path, *args, **kwargs)
+
+                def guarded_os_open(path: Any, flags: int, *args: Any, **kwargs: Any) -> int:
+                    captured = capture_path(path)
+                    open_path = path if captured is None else captured
+                    if captured is not None:
+                        assert_no_relative_dir_fd_read(captured, flags, kwargs)
+                    fd = original_os_open(open_path, flags, *args, **kwargs)
+                    try:
+                        if captured is None:
+                            return fd
+                        path_abs = classified_target_path(captured)
+                        if path_abs is None:
+                            return fd
+                        if not is_readable_os_open(flags):
+                            return fd
+                        opened = os.fstat(fd)
+                        if not stat.S_ISREG(opened.st_mode):
+                            return fd
+                        if len(active_reader_stack) != 1:
+                            raise AssertionError(
+                                f"unapproved readable regular-file open under output root: {normalize_abs_path(path_abs)}"
+                            )
+                        label = active_reader_stack[-1]
+                        normalized = normalize_abs_path(path_abs)
+                        content_reads.append(normalized)
+                        labeled_content_reads.append((label, normalized))
+                    except BaseException:
+                        try:
+                            os.close(fd)
+                        except BaseException:
+                            pass
+                        raise
+                    return fd
+
+                def guarded_builtin_open(file: Any, mode: Any = "r", *args: Any, **kwargs: Any) -> Any:
+                    captured = capture_path(file)
+                    if captured is None:
+                        return original_builtin_open(file, mode, *args, **kwargs)
+                    path_abs = classified_target_path(captured)
+                    if path_abs is not None and readable_mode(mode):
+                        raise AssertionError(f"unapproved readable open under output root: {normalize_abs_path(path_abs)}")
+                    return original_builtin_open(captured, mode, *args, **kwargs)
+
+                def guarded_io_open(file: Any, mode: Any = "r", *args: Any, **kwargs: Any) -> Any:
+                    captured = capture_path(file)
+                    if captured is None:
+                        return original_io_open(file, mode, *args, **kwargs)
+                    path_abs = classified_target_path(captured)
+                    if path_abs is not None and readable_mode(mode):
+                        raise AssertionError(f"unapproved readable io.open under output root: {normalize_abs_path(path_abs)}")
+                    return original_io_open(captured, mode, *args, **kwargs)
+
+                def assert_guard_non_vacuity() -> dict[str, str]:
+                    probe_results: dict[str, str] = {}
+                    primary: BaseException | None = None
+                    try:
+                        direct_probe = probe_paths["direct-read"]
+                        direct_probe.write_bytes(b"under-root-probe")
+                        outside_probe_area.mkdir()
+                        outside_probe = probe_paths["outside-root"]
+                        outside_probe.write_bytes(b"outside-root-probe")
+
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable regular-file open"):
+                            os.open(direct_probe, os.O_RDONLY)
+                        probe_results["os.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable open"):
+                            builtins.open(direct_probe, "rb")
+                        probe_results["builtins.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            io.open(direct_probe, "rb")
+                        probe_results["io.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            direct_probe.read_bytes()
+                        probe_results["Path.read_bytes under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            direct_probe.read_text(encoding="utf-8")
+                        probe_results["Path.read_text under-root reader"] = "rejected"
+
+                        with self.assertRaisesRegex(AssertionError, "dir_fd cannot be classified"):
+                            os.open(os.path.join("updates", f"update-{head:08d}.json"), os.O_RDONLY, dir_fd=-1)
+                        probe_results["relative dir_fd readable os.open"] = "rejected before OS open"
+
+                        with builtins.open(outside_probe, "rb") as outside_handle:
+                            self.assertEqual(outside_handle.read(), b"outside-root-probe")
+                        probe_results["outside-root builtins.open reader"] = "allowed expected bytes"
+
+                        write_only_probe = probe_paths["write-only"]
+                        write_fd = os.open(write_only_probe, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+                        try:
+                            os.write(write_fd, b"write-only-probe")
+                        finally:
+                            os.close(write_fd)
+                        with original_builtin_open(os.fspath(write_only_probe), "rb") as write_only_handle:
+                            self.assertEqual(write_only_handle.read(), b"write-only-probe")
+                        probe_results["write-only under-root os.open"] = "allowed"
+
+                        directory_probe = probe_paths["directory"]
+                        directory_probe.mkdir()
+                        try:
+                            directory_fd = os.open(directory_probe, os.O_RDONLY)
+                        except OSError as exc:
+                            probe_results["directory os.open"] = f"unsupported by platform: {type(exc).__name__}"
+                        else:
+                            os.close(directory_fd)
+                            probe_results["directory os.open"] = "allowed and test closed fd"
+
+                        self.assertEqual(io.BytesIO(b"bytesio-probe").read(), b"bytesio-probe")
+                        probe_results["io.BytesIO"] = "usable"
+
+                        fd_probe = probe_paths["caller-fd"]
+                        fd_probe.write_bytes(b"fd-pass-through")
+                        builtin_fd = original_os_open(os.fspath(fd_probe), os.O_RDONLY)
+                        try:
+                            with builtins.open(builtin_fd, "rb", closefd=False) as builtin_handle:
+                                self.assertEqual(builtin_handle.read(), b"fd-pass-through")
+                            assert_caller_fd_still_open(builtin_fd)
+                        finally:
+                            original_os_close(builtin_fd)
+                        probe_results["builtins.open caller fd closefd=False"] = "caller fd remained open"
+                        io_fd = original_os_open(os.fspath(fd_probe), os.O_RDONLY)
+                        try:
+                            with io.open(io_fd, "rb", closefd=False) as io_handle:
+                                self.assertEqual(io_handle.read(), b"fd-pass-through")
+                            assert_caller_fd_still_open(io_fd)
+                        finally:
+                            original_os_close(io_fd)
+                        probe_results["io.open caller fd closefd=False"] = "caller fd remained open"
+
+                        stateful_probe = probe_paths["stateful-pathlike"]
+                        stateful_probe.write_bytes(b"stateful-probe")
+                        stateful_path = StatefulPathLike(stateful_probe, outside_probe)
+                        captured_stateful = os.fspath(stateful_probe)
+                        primary_exception = RuntimeError("injected classification failure")
+                        closed_fds: list[int] = []
+                        real_abspath = os.path.abspath
+
+                        def failing_abspath(value: str | bytes) -> str:
+                            if value == captured_stateful:
+                                raise primary_exception
+                            return real_abspath(value)
+
+                        def tracking_close(fd: int) -> None:
+                            closed_fds.append(fd)
+                            original_os_close(fd)
+
+                        with (
+                            mock.patch.object(os.path, "abspath", failing_abspath),
+                            mock.patch.object(os, "close", tracking_close),
+                        ):
+                            with self.assertRaisesRegex(RuntimeError, "injected classification failure") as raised:
+                                os.open(stateful_path, os.O_RDONLY)
+                        self.assertIs(raised.exception, primary_exception)
+                        self.assertEqual(stateful_path.calls, 1)
+                        self.assertEqual(len(closed_fds), 1)
+                        with self.assertRaises(OSError):
+                            original_os_fstat(closed_fds[0])
+                        probe_results["stateful os.PathLike classification failure"] = (
+                            "__fspath__ once, primary exception preserved, new fd closed once"
+                        )
+
+                        for open_name, open_fn, expected_message in (
+                            ("builtins.open", builtins.open, "classification failure"),
+                            ("io.open", io.open, "classification failure"),
+                        ):
+                            high_level_stateful = StatefulPathLike(stateful_probe, outside_probe)
+                            with mock.patch.object(os.path, "abspath", failing_abspath):
+                                with self.assertRaisesRegex(RuntimeError, expected_message) as high_level_raised:
+                                    open_fn(high_level_stateful, "rb")
+                            self.assertIs(high_level_raised.exception, primary_exception)
+                            self.assertEqual(high_level_stateful.calls, 1)
+                            probe_results[f"stateful os.PathLike {open_name}"] = "__fspath__ once, exception propagated"
+
+                        self.assertEqual(content_reads, [])
+                        self.assertEqual(labeled_content_reads, [])
+                        self.assertEqual(append_calls, [])
+                        return probe_results
+                    except BaseException as exc:
+                        primary = exc
+                        raise
+                    finally:
+                        cleanup_failures: list[str] = []
+                        for label in probe_cleanup_order:
+                            try:
+                                remove_probe_path(probe_paths[label])
+                            except BaseException as exc:
+                                cleanup_failures.append(format_probe_failure(f"{label} cleanup", exc))
+                        cleanup_failures.extend(
+                            collect_probe_restoration_failures(pre_probe_target_snapshot, pre_probe_outside_snapshot)
+                        )
+                        handle_probe_cleanup_failures(primary or sys.exc_info()[1], cleanup_failures)
 
                 def forbidden_rebuild(*_args: Any, **_kwargs: Any) -> None:
                     raise AssertionError("steady-state commit must not rebuild derived caches")
@@ -970,23 +1365,38 @@ class TrainerTest(unittest.TestCase):
                 trainer_mod.rebuild_derived_caches = forbidden_rebuild  # type: ignore[assignment]
                 artifacts_mod._append_jsonl_no_read = counted_append  # type: ignore[assignment]
                 try:
-                    head_digest, committed_payload = trainer_mod._commit_generation(
-                        out_dir=target,
-                        run=run,
-                        payload=payload,
-                        update_record=update_record,
-                        run_digest=chain.head.run_digest,
-                        parent_head=chain.head.head,
-                        previous_payload=resume_snapshot.checkpoint_payload,
-                        compatibility=run["compatibility"],
-                        learning_rate=run["optimizer"]["lr"],
-                    )
+                    with (
+                        mock.patch.object(os, "open", guarded_os_open),
+                        mock.patch.object(builtins, "open", guarded_builtin_open),
+                        mock.patch.object(io, "open", guarded_io_open),
+                    ):
+                        assert_probe_paths_absent()
+                        pre_probe_target_snapshot = snapshot_tree(target)
+                        pre_probe_outside_snapshot = snapshot_tree(outside_probe_area)
+                        probe_results = assert_guard_non_vacuity()
+                        probe_results["target probe cleanup"] = "restored to byte/object-equivalent pre-probe tree"
+                        probe_results["outside probe cleanup"] = "restored to byte/object-equivalent pre-probe area"
+                        assert_probe_paths_absent()
+                        self.assertEqual(snapshot_tree(target), pre_probe_target_snapshot)
+                        self.assertEqual(snapshot_tree(outside_probe_area), pre_probe_outside_snapshot)
+                        head_digest, committed_payload = trainer_mod._commit_generation(
+                            out_dir=target,
+                            run=run,
+                            payload=payload,
+                            update_record=update_record,
+                            run_digest=chain.head.run_digest,
+                            parent_head=chain.head.head,
+                            previous_payload=resume_snapshot.checkpoint_payload,
+                            compatibility=run["compatibility"],
+                            learning_rate=run["optimizer"]["lr"],
+                        )
                 finally:
                     artifact_io.read_regular_file_bytes = original_json_read
                     checkpoint_io.read_regular_file_bytes = original_checkpoint_read
                     trainer_mod.rebuild_derived_caches = original_rebuild  # type: ignore[assignment]
                     artifacts_mod._append_jsonl_no_read = original_append  # type: ignore[assignment]
 
+                self.assertEqual(active_reader_stack, [])
                 self.assertEqual(head_digest, read_json_file(target / "latest.json")["head"])
                 self.assertEqual(committed_payload["completed_update"], next_update)
                 after = _cache_bytes(target)
@@ -995,17 +1405,20 @@ class TrainerTest(unittest.TestCase):
                 self.assertEqual(after["episodes.jsonl"], before["episodes.jsonl"] + expected_episode_append)
                 self.assertEqual(after["updates.jsonl"], before["updates.jsonl"] + expected_update_append)
                 _assert_derived_caches_match_clean_rebuild(self, target)
-                expected_read_multiset = Counter(
+                expected_labeled_read_multiset = Counter(
                     {
-                        "<tx>/checkpoint.pt": 2,
-                        "<tx>/update.json": 1,
-                        "<tx>/sidecar.json": 1,
-                        f"checkpoints/update-{next_update:08d}.pt": 1,
-                        f"updates/update-{next_update:08d}.json": 1,
-                        f"checkpoints/update-{next_update:08d}.json": 1,
+                        ("checkpoint", "<tx>/checkpoint.pt"): 2,
+                        ("json", "<tx>/update.json"): 1,
+                        ("json", "<tx>/sidecar.json"): 1,
+                        ("checkpoint", f"checkpoints/update-{next_update:08d}.pt"): 1,
+                        ("json", f"updates/update-{next_update:08d}.json"): 1,
+                        ("json", f"checkpoints/update-{next_update:08d}.json"): 1,
                     }
                 )
+                expected_read_multiset = Counter({path: count for (_label, path), count in expected_labeled_read_multiset.items()})
                 actual_read_multiset = Counter(content_reads)
+                actual_labeled_read_multiset = Counter(labeled_content_reads)
+                self.assertEqual(actual_labeled_read_multiset, expected_labeled_read_multiset)
                 self.assertEqual(actual_read_multiset, expected_read_multiset)
                 forbidden_roots = {"run.json", "latest.json", "episodes.jsonl", "updates.jsonl", "summary.json"}
                 allowed_tx_reads = {"<tx>/checkpoint.pt", "<tx>/update.json", "<tx>/sidecar.json"}
@@ -1027,6 +1440,7 @@ class TrainerTest(unittest.TestCase):
                 measurements[head] = {
                     "read_count": len(content_reads),
                     "read_multiset": dict(sorted(actual_read_multiset.items())),
+                    "labeled_read_multiset": {f"{label}:{path}": count for (label, path), count in sorted(actual_labeled_read_multiset.items())},
                     "append_count": len(append_calls),
                     "episode_append_bytes": len(expected_episode_append),
                     "episode_append_sha256": hashlib.sha256(expected_episode_append).hexdigest(),
@@ -1034,6 +1448,7 @@ class TrainerTest(unittest.TestCase):
                     "update_append_sha256": hashlib.sha256(expected_update_append).hexdigest(),
                     "episode_rows": len(update_record["episode_summaries"]),
                     "summary_bytes": len(after["summary.json"]),
+                    "probe_results": probe_results,
                 }
 
             self.assertEqual({head: row["episode_rows"] for head, row in measurements.items()}, {1: 2, 4: 2, 16: 2, 32: 2})
@@ -1839,6 +2254,32 @@ class TrainerTest(unittest.TestCase):
 
                 run_case("updates_junction", updates_junction)
 
+    def test_preflight_derived_cache_append_rejects_synthetic_symlink_stat_without_mutating_caches(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            out = Path(tmp_name) / "out"
+            out.mkdir()
+            (out / "episodes.jsonl").write_bytes(b'{"episode":0}\n')
+            (out / "updates.jsonl").write_bytes(b'{"update":0}\n')
+            (out / "summary.json").write_bytes(b'{"generations":1}\n')
+            before = _cache_bytes(out)
+            path_class = type(out)
+            original_lstat = path_class.lstat
+            synthetic_link = os.stat_result((stat.S_IFLNK | 0o777, 0, 0, 1, 0, 0, 0, 0, 0, 0))
+
+            for cache_name in ("episodes.jsonl", "updates.jsonl", "summary.json"):
+                cache_abs = os.path.abspath(os.fspath(out / cache_name))
+
+                def synthetic_lstat(self: Path, target_abs: str = cache_abs) -> os.stat_result:
+                    if os.path.abspath(os.fspath(self)) == target_abs:
+                        return synthetic_link
+                    return original_lstat(self)
+
+                with self.subTest(cache=cache_name):
+                    with mock.patch.object(path_class, "lstat", synthetic_lstat):
+                        with self.assertRaisesRegex(ValueError, "regular non-link file"):
+                            artifacts_mod.preflight_derived_cache_append(out)
+                    self.assertEqual(_cache_bytes(out), before)
+
     def test_steady_state_cache_aliases_fail_before_authoritative_or_cache_mutation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -1871,9 +2312,6 @@ class TrainerTest(unittest.TestCase):
                 else:
                     symlink_capable = True
                     probe.unlink()
-            if not symlink_capable:
-                synthetic_link = os.stat_result((stat.S_IFLNK | 0o777, 0, 0, 0, 0, 0, 0, 0, 0, 0))
-                self.assertTrue(artifacts_mod._is_reparse_or_link_stat(synthetic_link))
 
             def run_case(cache_name: str, alias_kind: str, mutator) -> None:  # type: ignore[no-untyped-def]
                 target = tmp / f"{cache_name}_{alias_kind}".replace(".", "_")
