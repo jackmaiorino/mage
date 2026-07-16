@@ -160,6 +160,23 @@ class ArtifactTest(unittest.TestCase):
             '["/srv/run"]',
             "/home/jack/mage",
             "prefix /tmp/run/root",
+            "artifact / home/jack",
+            "diagnostic=x / home/jack",
+            "artifact / home / jack",
+            "artifact / home and / jack",
+            "diagnostic=x / home with spaces / jack",
+            "diagnostic=x / home / jack",
+            "artifact  /  home  /  jack",
+            "artifact\t/\thome\t/\tjack",
+            "artifact\t/\thome with spaces\t/\tjack",
+            "diagnostic=x\t/\thome with spaces\t/\tjack",
+            "a / b / c",
+            "a / b \\ c",
+            "a\t/\tb\t/\tc",
+            "a\t/\tb\t\\\tc",
+            "loss = (a / b) / c",
+            "loss = a / b/c",
+            "loss = a / b\\c",
             "C:\\Users\\Jack\\IdeaProjects\\mage",
             "\\Users\\Jack\\IdeaProjects\\mage",
             "\\secret",
@@ -167,6 +184,9 @@ class ArtifactTest(unittest.TestCase):
             "artifact=\\\thome",
             "artifact= \\ secret",
             "value=\\secret",
+            "artifact \\ home\\jack",
+            "diagnostic=x \\ secret\\file",
+            "ordinary \\ secret\\file",
             "\\\\server\\share\\run",
             "x='\\\\server\\share\\run'",
             "\\\\.\\C:\\Users\\Jack",
@@ -176,8 +196,26 @@ class ArtifactTest(unittest.TestCase):
             "https://example.test/path;diagnostic=/home/jack/run",
             "https://example.test/path?diagnostic=/home/jack/run",
             "https://x;diagnostic=C:\\Users\\Jack",
+            "http:example.test",
+            "http:example.test/path",
+            "http:/example.test/path",
+            "http:///example.test/path",
+            "http:////example.test/path",
+            "HTTPS:example.test",
+            "HTTPS:example.test/path",
+            "HtTpS:example.test/path",
+            "diagnostic=http:example.test/path",
+            "note;http:example.test/path",
+            "(http:example.test/path)",
+            "http:%2Fhome%2Fjack",
+            "HTTPS:C:%5CUsers%5CJack",
             "https://exa|mple.test/path",
             "https://exa|mple.test/path?diagnostic=/home/jack/run",
+            "https://user@example.test/path",
+            "https://user:pass@example.test/path",
+            "https://example.test/%zz",
+            "https://example.test/\u0007path",
+            "https://example.test/\u200bpath",
             "https://[::1/path",
             "https://[::gg]/path",
             "https://[::1]:70000/path",
@@ -189,6 +227,8 @@ class ArtifactTest(unittest.TestCase):
             "https://example..test/path",
             "https://example[.]test/path",
             "https://example.test\\path",
+            "HTTPS://exa|mple.test/path",
+            "Http://example.test?diagnostic=/home/jack/run",
             "diagnostic\t/home/jack",
             "note;/data",
             "note; / home/jack",
@@ -211,11 +251,26 @@ class ArtifactTest(unittest.TestCase):
             "terminal_reinforce_value/v1",
             "http://example.test",
             "https://example.test/path",
+            "HTTPS://example.test/path",
+            "Http://example.test/path",
+            "HtTpS://Example.test:443/path",
+            "https://192.0.2.1/path",
+            "HTTPS://192.0.2.1:443/path",
             "https://[2001:db8::1]:443/path",
             "loss = a / b",
+            "loss = a / b + c",
+            "loss = a / b - c",
+            "loss = a / b * c",
+            "loss = (a / b) + c",
+            "loss = a\t/\tb",
+            "loss = (a\t/\tb) + c",
+            "ratio = numerator / denominator",
             "b48d972b8f2fc56c330c815223c7cb7ef663a2cc45072a203a13e3f00b253f61",
             "train-learner-action/base_seed/episode_index",
             "schema#/properties/run",
+            "kernel.schema-1#/properties/run/latest",
+            "myhttp:label",
+            "relative.myhttps:label",
             "ordinary prose with / separated words",
             "namespace\u0301/component",
             "namespace\u0301\u0302/component",
@@ -223,6 +278,112 @@ class ArtifactTest(unittest.TestCase):
         for value in negatives:
             with self.subTest(value=value):
                 validate_training_json_privacy({"metadata": value})
+
+    def test_privacy_scan_generated_separator_matrix(self) -> None:
+        allowed: list[str] = []
+        for whitespace in (" ", "\t"):
+            core = f"a{whitespace}/{whitespace}b"
+            allowed.extend(
+                [
+                    core,
+                    f"loss = {core} + c",
+                    f"loss = {core} - c",
+                    f"loss = {core} * c",
+                    f"loss = ({core}) + c",
+                    f"ratio = numerator{whitespace}/{whitespace}denominator",
+                ]
+            )
+
+        rejected: list[str] = []
+        for whitespace in (" ", "\t"):
+            for left, middle, right in (
+                ("artifact", "home", "jack"),
+                ("artifact", "home and", "jack"),
+                ("diagnostic=x", "home with spaces", "jack"),
+                ("a", "b", "c"),
+            ):
+                rejected.append(f"{left}{whitespace}/{whitespace}{middle}{whitespace}/{whitespace}{right}")
+                rejected.append(f"{left}{whitespace}/{whitespace}{middle}{whitespace}\\{whitespace}{right}")
+            rejected.extend(
+                [
+                    f"a{whitespace}\\{whitespace}b",
+                    f"artifact{whitespace}/{whitespace}home/jack",
+                    f"artifact{whitespace}/{whitespace}home\\jack",
+                    f"loss = (a{whitespace}/{whitespace}b){whitespace}/{whitespace}c",
+                ]
+            )
+
+        for value in allowed:
+            with self.subTest(value=value, expected="allowed_value"):
+                validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="allowed_key"):
+                validate_training_json_privacy({value: "ok"})
+        for value in rejected:
+            with self.subTest(value=value, expected="rejected_value"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="rejected_key"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({value: "blocked"})
+
+    def test_privacy_scan_generated_uri_matrix(self) -> None:
+        allowed = [
+            "http://example.test",
+            "HTTP://example.test/path",
+            "HtTpS://Example.test:443/path",
+            "https://192.0.2.1/path",
+            "HTTPS://192.0.2.1:443/path",
+            "https://[2001:db8::1]/path",
+            "https://[2001:db8::1]:443/path",
+            "schema#/properties/run",
+            "kernel.schema-1#/properties/run/latest",
+            "myhttp:label",
+            "relative.myhttps:label",
+        ]
+        rejected = []
+        for scheme in ("http", "HTTP", "https", "HtTpS"):
+            rejected.extend(
+                [
+                    f"{scheme}:example.test",
+                    f"{scheme}:example.test/path",
+                    f"{scheme}:/example.test/path",
+                    f"{scheme}:///example.test/path",
+                    f"{scheme}:////example.test/path",
+                    f"diagnostic={scheme}:example.test/path",
+                    f"note;{scheme}:example.test/path",
+                    f"({scheme}:example.test/path)",
+                    f"{scheme}:%2Fhome%2Fjack",
+                    f"{scheme}:C:%5CUsers%5CJack",
+                ]
+            )
+        rejected.extend(
+            [
+                "https://exa|mple.test/path",
+                "https://user@example.test/path",
+                "https://user:pass@example.test/path",
+                "https://example.test:/path",
+                "https://example.test:bad/path",
+                "https://example.test:70000/path",
+                "https://[::gg]/path",
+                "https://[::1/path",
+                "https://example.test/%zz",
+                "https://example.test/\u0007path",
+                "https://example.test/\u200bpath",
+            ]
+        )
+
+        for value in allowed:
+            with self.subTest(value=value, expected="allowed_value"):
+                validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="allowed_key"):
+                validate_training_json_privacy({value: "ok"})
+        for value in rejected:
+            with self.subTest(value=value, expected="rejected_value"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="rejected_key"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({value: "blocked"})
 
     def test_quarantine_and_mkdir_no_follow_preserve_external_link_sentinels(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

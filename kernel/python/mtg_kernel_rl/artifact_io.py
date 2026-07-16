@@ -353,6 +353,10 @@ def _is_word_like_for_path_prose(ch: str) -> bool:
 
 
 def _is_narrow_arithmetic_separator(value: str, index: int) -> bool:
+    if value[index] != "/":
+        return False
+    if value.count("/") + value.count("\\") != 1:
+        return False
     if index <= 0 or index + 1 >= len(value):
         return False
     if not value[index - 1].isspace() or not value[index + 1].isspace():
@@ -360,7 +364,14 @@ def _is_narrow_arithmetic_separator(value: str, index: int) -> bool:
     base = index - 2
     while base >= 0 and value[base].isspace():
         base -= 1
-    return base >= 0 and _is_word_like_for_path_prose(value[base])
+    if base < 0 or not _is_word_like_for_path_prose(value[base]):
+        return False
+    right = index + 1
+    while right < len(value) and value[right].isspace():
+        right += 1
+    if right >= len(value) or not _is_word_like_for_path_prose(value[right]):
+        return False
+    return True
 
 
 def _validate_dns_reg_name(host: str) -> bool:
@@ -458,11 +469,27 @@ def _is_allowed_whole_uri(value: str) -> bool:
         return False
     if any(part.startswith(("/", "\\")) or re.search(r"(^|[&;])[^=&;]+=(/|\\|[A-Za-z]:[\\/])", part) for part in (parsed.query, parsed.fragment)):
         return False
-    return urllib.parse.urlunsplit(parsed) == value
+    scheme_end = value.find(":")
+    if scheme_end <= 0:
+        return False
+    original_scheme = value[:scheme_end]
+    if original_scheme.casefold() != parsed.scheme.casefold():
+        return False
+    return urllib.parse.urlunsplit(parsed._replace(scheme=original_scheme)) == value
 
 
 def _is_allowed_schema_reference(value: str) -> bool:
     return not _contains_control_or_format(value) and "\\" not in value and _SCHEMA_REF_RE.fullmatch(value) is not None
+
+
+def _has_http_scheme_token(value: str) -> bool:
+    folded = value.casefold()
+    for index in range(len(value)):
+        if not _is_candidate_boundary(value, index):
+            continue
+        if folded.startswith("http:", index) or folded.startswith("https:", index):
+            return True
+    return False
 
 
 def _is_slash(ch: str) -> bool:
@@ -509,7 +536,6 @@ def _has_windows_root_relative_at(value: str, index: int) -> bool:
         _is_candidate_boundary(value, index)
         and value[index] == "\\"
         and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?"))
-        and not _is_narrow_arithmetic_separator(value, index)
     )
 
 
@@ -528,7 +554,11 @@ def _looks_like_absolute_path(value: str) -> bool:
         return False
     if _FILE_URI_RE.search(value):
         return True
-    if _is_allowed_whole_uri(value) or _is_allowed_schema_reference(value):
+    if _is_allowed_whole_uri(value):
+        return False
+    if _has_http_scheme_token(value):
+        return True
+    if _is_allowed_schema_reference(value):
         return False
     if value in ("/", "\\"):
         return True

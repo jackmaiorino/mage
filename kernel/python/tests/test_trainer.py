@@ -235,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v8")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v6")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v9")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v7")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1435,20 +1435,28 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v7_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v7"}))
-            case(
-                "old_v5_artifact_boundary_rejected",
-                lambda p: write_json_atomic(
-                    p / "run.json",
-                    {
-                        **read_json_file(p / "run.json"),
-                        "artifact_boundary": {
-                            **read_json_file(p / "run.json")["artifact_boundary"],
-                            "schema": "kernel_rl_artifact_boundary/v5",
+            for version in range(1, 9):
+                case(
+                    f"old_v{version}_run_schema_rejected",
+                    lambda p, version=version: write_json_atomic(
+                        p / "run.json",
+                        {**read_json_file(p / "run.json"), "schema": f"kernel_rl_train_run/v{version}"},
+                    ),
+                )
+            for version in range(1, 7):
+                case(
+                    f"old_v{version}_artifact_boundary_rejected",
+                    lambda p, version=version: write_json_atomic(
+                        p / "run.json",
+                        {
+                            **read_json_file(p / "run.json"),
+                            "artifact_boundary": {
+                                **read_json_file(p / "run.json")["artifact_boundary"],
+                                "schema": f"kernel_rl_artifact_boundary/v{version}",
+                            },
                         },
-                    },
-                ),
-            )
+                    ),
+                )
             case(
                 "checkpoint_counter_drift",
                 lambda p: (
@@ -1458,6 +1466,99 @@ class TrainerTest(unittest.TestCase):
                     ))(load_checkpoint_file(p / "checkpoints" / "update-00000001.pt"))
                 ),
             )
+
+    def test_schema_and_privacy_manifest_rejections_fail_before_env_launch_without_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+
+            def mutate_run(path: Path, mutator) -> None:  # type: ignore[no-untyped-def]
+                run = read_json_file(path / "run.json")
+                mutator(run)
+                write_json_atomic(path / "run.json", run)
+
+            cases = []
+            privacy_rejections = [
+                ("posix_spaced_slash", "artifact / home/jack"),
+                ("posix_multi_spaced_slash", "artifact / home / jack"),
+                ("posix_multiword_spaced_slash", "artifact / home and / jack"),
+                ("diagnostic_multiword_spaced_slash", "diagnostic=x / home with spaces / jack"),
+                ("tab_multi_spaced_slash", "artifact\t/\thome with spaces\t/\tjack"),
+                ("chained_division", "a / b / c"),
+                ("tab_chained_division", "a\t/\tb\t/\tc"),
+                ("chained_mixed_separator", "a / b \\ c"),
+                ("tab_chained_mixed_separator", "a\t/\tb\t\\\tc"),
+                ("backslash_root_relative", "diagnostic=x \\ secret\\file"),
+                ("backslash_root_relative_prose", "ordinary \\ secret\\file"),
+                ("authorityless_http_zero_slash", "http:example.test"),
+                ("authorityless_http_path", "http:example.test/path"),
+                ("authorityless_https_upper_zero_slash", "HTTPS:example.test"),
+                ("authorityless_https_upper_path", "HTTPS:example.test/path"),
+                ("authorityless_http_one_slash", "http:/example.test/path"),
+                ("authorityless_http_multi_slash", "http:///example.test/path"),
+                ("embedded_http_assignment", "diagnostic=http:example.test/path"),
+                ("embedded_http_punctuation", "note;http:example.test/path"),
+                ("embedded_http_parenthesized", "(http:example.test/path)"),
+                ("encoded_posix_http", "http:%2Fhome%2Fjack"),
+                ("encoded_windows_https", "HTTPS:C:%5CUsers%5CJack"),
+                ("malformed_userinfo_uri", "https://user@example.test/path"),
+            ]
+            for name, text in privacy_rejections:
+                cases.append(
+                    (
+                        f"{name}_value",
+                        lambda p, text=text: mutate_run(p, lambda run: run["algorithm"].__setitem__("loss", text)),
+                        "forbidden absolute path",
+                    )
+                )
+                cases.append(
+                    (
+                        f"{name}_key",
+                        lambda p, text=text: mutate_run(p, lambda run: run["algorithm"].__setitem__(text, "x")),
+                        "forbidden training artifact field",
+                    )
+                )
+            cases.extend(
+                [
+                    (
+                        "old_v8_run_schema",
+                        lambda p: mutate_run(p, lambda run: run.__setitem__("schema", "kernel_rl_train_run/v8")),
+                        "schema mismatch",
+                    ),
+                    (
+                        "old_v6_artifact_boundary",
+                        lambda p: mutate_run(
+                            p,
+                            lambda run: run["artifact_boundary"].__setitem__("schema", "kernel_rl_artifact_boundary/v6"),
+                        ),
+                        "training contract drift",
+                    ),
+                ]
+            )
+            for name, mutator, pattern in cases:
+                target = tmp / name
+                shutil.copytree(source, target)
+                mutator(target)
+                before = _snapshot_tree(target)
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(ValueError, pattern):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertFalse(env_marker.exists())
+                    self.assertEqual(_snapshot_tree(target), before)
 
     def test_subprocess_continuous_split_and_future_exact_without_pt_byte_equality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

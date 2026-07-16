@@ -86,7 +86,7 @@ from .path_safety import (
     scandir_no_follow,
 )
 
-RUN_SCHEMA = "kernel_rl_train_run/v8"
+RUN_SCHEMA = "kernel_rl_train_run/v9"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
@@ -221,7 +221,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
     from . import artifact_io as json_contract
 
     return {
-        "schema": "kernel_rl_artifact_boundary/v6",
+        "schema": "kernel_rl_artifact_boundary/v7",
         "format": {
             "checkpoint_container": "torch-zip",
             "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
@@ -305,8 +305,8 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         },
         "privacy": {
             "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
-            "rejects": "generic POSIX absolute roots including whitespace-leading first components, Windows drive-root, Windows root-relative including whitespace-leading first components, UNC, device/extended, file URI, controls/format-boundary embedded fragments, combining-mark-hidden path boundaries after punctuation/assignment, invalid or diagnostic URI spellings, malformed HTTP(S) authorities, and schema-fragment prefixes followed by local absolute paths",
-            "allows": "numeric versions, digests, narrow arithmetic slash text, relative namespace labels including word-like bases with combining marks, exact ordinary whole HTTP(S) URIs with validated authority, and validated whole schema reference tokens",
+            "rejects": "generic POSIX absolute roots including whitespace-leading first components, spaced-slash text with any additional slash/backslash separator, chained division outside the single-separator arithmetic exemption, Windows drive-root, all Windows root-relative separators including whitespace-leading first components, UNC, device/extended, file URI, controls/format-boundary embedded fragments, combining-mark-hidden path boundaries after punctuation/assignment, invalid or diagnostic URI spellings, malformed HTTP(S) authorities, and schema-fragment prefixes followed by local absolute paths",
+            "allows": "numeric versions, digests, narrow arithmetic slash text only when a single slash is the sole slash/backslash in the complete string, relative namespace labels including word-like bases with combining marks, exact ordinary whole HTTP(S) URIs with case-insensitive scheme and validated authority, and validated whole schema reference tokens",
         },
     }
 
