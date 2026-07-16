@@ -34,6 +34,7 @@ from .evaluation_store import (
     MAX_PAIR_COUNT,
     MAX_TIMEOUT_MS,
     MIN_BOOTSTRAP_REPLICATES,
+    SEAT_SCHEDULE_CONTRACT,
     _publish_evaluation,
     statistics_payload,
 )
@@ -45,6 +46,7 @@ from .training_store import SnapshotRef, TrainingStore, ValidatedChain, runtime_
 
 _HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 _MAX_ENV_BINARY_BYTES = 1024 * 1024 * 1024
+DEFAULT_DECK_IDS = ("Burn", "Burn")
 
 
 @dataclass(frozen=True, slots=True)
@@ -74,7 +76,8 @@ def _validate_request(
     bootstrap_replicates: Any,
     max_decisions: Any,
     timeout_ms: Any,
-) -> tuple[str, int, int, int, int, int]:
+    deck_ids: Any = DEFAULT_DECK_IDS,
+) -> tuple[str, int, int, int, int, int, tuple[str, str]]:
     expected_head = _validate_exact_head(expected_candidate_head)
     base_seed = validate_uint63(base_seed, "base_seed")
     pairs = validate_positive_int(pairs, "pairs", maximum=MAX_PAIR_COUNT)
@@ -91,7 +94,11 @@ def _validate_request(
         raise TypeError("timeout_ms must be an integer and not bool")
     if timeout_ms <= 0 or timeout_ms > MAX_TIMEOUT_MS:
         raise ValueError(f"timeout_ms must be in [1, {MAX_TIMEOUT_MS}]")
-    return expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms
+    if type(deck_ids) is not tuple or len(deck_ids) != 2:
+        raise TypeError("deck_ids must be an exact two-item tuple")
+    if any(type(deck_id) is not str or not deck_id for deck_id in deck_ids):
+        raise ValueError("deck_ids entries must be nonempty strings")
+    return expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms, deck_ids
 
 
 def _normalized_real(path: str | Path) -> str:
@@ -186,6 +193,19 @@ def _candidate_result(terminal: Terminal, candidate_seat: str) -> tuple[str, int
     return result, points
 
 
+def _assert_deck_identity(
+    response: Decision | Terminal,
+    *,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+    context: str,
+) -> None:
+    if response.deck_ids != deck_ids:
+        raise ValueError(f"{context} deck_ids drift")
+    if response.deck_hashes != deck_hashes:
+        raise ValueError(f"{context} deck_hashes drift")
+
+
 def _run_game(
     client: KernelRlClient,
     *,
@@ -196,6 +216,8 @@ def _run_game(
     candidate_model: KernelPolicyValueNet,
     baseline_model: KernelPolicyValueNet,
     expected_provenance: dict[str, Any],
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
 ) -> dict[str, Any]:
     candidate_seat = "p0" if game_in_pair == 0 else "p1"
     baseline_seat = "p1" if candidate_seat == "p0" else "p0"
@@ -204,6 +226,13 @@ def _run_game(
         episode_id=episode_id,
         env_seed=env_seed,
         max_decisions=max_decisions,
+        deck_ids=deck_ids,
+    )
+    _assert_deck_identity(
+        current,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
+        context="evaluation environment",
     )
     if not json_values_equal_strict(current.provenance, expected_provenance):
         raise ValueError("evaluation environment protocol provenance differs from source training run")
@@ -220,6 +249,12 @@ def _run_game(
             raise ValueError("greedy model selected an out-of-range legal action")
         selected_action = current.legal_actions[selected_position]
         current = client.step(selected_action["selected_index"], selected_action["stable_id"])
+        _assert_deck_identity(
+            current,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
+            context="evaluation environment",
+        )
         decisions += 1
         if is_candidate:
             candidate_decisions += 1
@@ -241,6 +276,8 @@ def _run_game(
         "candidate_seat": candidate_seat,
         "decision_count": current.decision_count,
         "env_seed": env_seed,
+        "deck_ids": list(current.deck_ids),
+        "deck_hashes": list(current.deck_hashes),
         "episode_id": episode_id,
         "game_in_pair": game_in_pair,
         "pair_index": pair_index,
@@ -253,13 +290,21 @@ def _run_game(
     }
 
 
-def _pair_row(pair_index: int, env_seed: int, points: PairedGamePoints) -> dict[str, Any]:
+def _pair_row(
+    pair_index: int,
+    env_seed: int,
+    points: PairedGamePoints,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+) -> dict[str, Any]:
     return {
         "candidate_as_p0_episode_id": 2 * pair_index,
         "candidate_as_p0_half_points": points.candidate_as_p0,
         "candidate_as_p1_episode_id": 2 * pair_index + 1,
         "candidate_as_p1_half_points": points.candidate_as_p1,
         "env_seed": env_seed,
+        "deck_ids": list(deck_ids),
+        "deck_hashes": list(deck_hashes),
         "pair_index": pair_index,
         "schema": PAIR_SCHEMA,
         "total_half_points": points.total_half_points,
@@ -286,6 +331,8 @@ def _manifest_without_files(
     candidate_ref: SnapshotRef,
     baseline_ref: SnapshotRef,
     env_sha: str,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
     pair_count: int,
     base_seed: int,
     bootstrap_replicates: int,
@@ -309,6 +356,7 @@ def _manifest_without_files(
         "configuration": {
             "base_seed": base_seed,
             "bootstrap_replicates": bootstrap_replicates,
+            "deck_ids": list(deck_ids),
             "game_count": 2 * pair_count,
             "max_decisions": max_decisions,
             "pair_count": pair_count,
@@ -316,6 +364,8 @@ def _manifest_without_files(
         },
         "environment": {
             "binary_sha256": env_sha,
+            "deck_ids": list(deck_ids),
+            "deck_hashes": list(deck_hashes),
             "protocol": source["protocol"],
             "protocol_provenance": source["protocol_provenance"],
         },
@@ -329,11 +379,7 @@ def _manifest_without_files(
         "package": {"name": "mtg-kernel-rl", "version": __version__},
         "schema": RUN_SCHEMA,
         "scoring": {"candidate_draw": 1, "candidate_loss": 0, "candidate_win": 2, "unit": "half_point"},
-        "seat_schedule": {
-            "candidate_as_p0": "episode 2k",
-            "candidate_as_p1": "episode 2k+1",
-            "paired_environment_seed": "both games use evaluation-env/base_seed/pair_index",
-        },
+        "seat_schedule": SEAT_SCHEDULE_CONTRACT,
         "seed_derivation": seed_derivation,
         "snapshots": [_snapshot_manifest(candidate_ref, "candidate"), _snapshot_manifest(baseline_ref, "baseline")],
         "source_training": {
@@ -357,6 +403,7 @@ def _preflight_store(
     env_bin: str | Path,
     out_dir: str | Path,
     max_decisions: int,
+    deck_ids: tuple[str, str],
 ) -> tuple[ValidatedChain, SnapshotRef, SnapshotRef, KernelPolicyValueNet, KernelPolicyValueNet, str]:
     chain = TrainingStore(training_store).validate_latest()
     if not chain.snapshots or chain.snapshots[0].update != 0:
@@ -366,6 +413,8 @@ def _preflight_store(
     if candidate_ref.head != expected_candidate_head:
         raise ValueError("expected_candidate_head does not match the validated training head")
     source = chain.run_record
+    if tuple(source["environment"]["deck_ids"]) != deck_ids:
+        raise ValueError("deck_ids must exactly match the validated training run contract")
     if max_decisions != source["trainer"]["max_decisions"]:
         raise ValueError("max_decisions must exactly match the validated training run contract")
     current_compatibility = runtime_compatibility()
@@ -400,16 +449,18 @@ def evaluate(
     bootstrap_replicates: int,
     max_decisions: int,
     timeout_ms: int,
+    deck_ids: tuple[str, str] = DEFAULT_DECK_IDS,
 ) -> EvaluationResult:
     """Evaluate the validated head against update zero with fixed greedy pairs."""
 
-    expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms = _validate_request(
+    expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms, deck_ids = _validate_request(
         expected_candidate_head=expected_candidate_head,
         pairs=pairs,
         base_seed=base_seed,
         bootstrap_replicates=bootstrap_replicates,
         max_decisions=max_decisions,
         timeout_ms=timeout_ms,
+        deck_ids=deck_ids,
     )
     chain, candidate_ref, baseline_ref, candidate_model, baseline_model, env_sha = _preflight_store(
         training_store,
@@ -417,8 +468,10 @@ def evaluate(
         env_bin=env_bin,
         out_dir=out_dir,
         max_decisions=max_decisions,
+        deck_ids=deck_ids,
     )
     expected_provenance = chain.run_record["protocol_provenance"]
+    deck_hashes = tuple(chain.run_record["environment"]["deck_hashes"])
 
     with OutputLock(out_dir) as output_lock:
         # OutputLock resolves cooperating ancestor aliases to one physical root
@@ -440,6 +493,8 @@ def evaluate(
                     candidate_model=candidate_model,
                     baseline_model=baseline_model,
                     expected_provenance=expected_provenance,
+                    deck_ids=deck_ids,
+                    deck_hashes=deck_hashes,
                 )
                 candidate_as_p1 = _run_game(
                     client,
@@ -450,13 +505,15 @@ def evaluate(
                     candidate_model=candidate_model,
                     baseline_model=baseline_model,
                     expected_provenance=expected_provenance,
+                    deck_ids=deck_ids,
+                    deck_hashes=deck_hashes,
                 )
                 points = PairedGamePoints(
                     candidate_as_p0["candidate_half_points"],
                     candidate_as_p1["candidate_half_points"],
                 )
                 game_rows.extend((candidate_as_p0, candidate_as_p1))
-                pair_rows.append(_pair_row(pair_index, env_seed, points))
+                pair_rows.append(_pair_row(pair_index, env_seed, points, deck_ids, deck_hashes))
                 paired_points.append(points)
 
         score = score_pair_half_points(
@@ -488,6 +545,8 @@ def evaluate(
             candidate_ref=candidate_ref,
             baseline_ref=baseline_ref,
             env_sha=env_sha,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
             pair_count=pairs,
             base_seed=base_seed,
             bootstrap_replicates=bootstrap_replicates,

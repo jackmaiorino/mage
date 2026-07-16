@@ -21,7 +21,7 @@ from .artifact_io import (
     sha256_bytes,
     validate_training_json_privacy,
 )
-from .artifacts import generation_paths, latest_path
+from .artifacts import SUMMARY_SCHEMA, generation_paths, latest_path
 from .checkpoint import (
     CHECKPOINT_SCHEMA,
     LATEST_SCHEMA,
@@ -53,13 +53,12 @@ from .model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet, ModelCon
 from .path_safety import ensure_real_child_dir, ensure_real_file
 
 
-RUN_SCHEMA = "kernel_rl_train_run/v12"
+RUN_SCHEMA = "kernel_rl_train_run/v13"
 ALGORITHM_NAME = "terminal_reinforce_value/v2"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
 MAX_DECISIONS = 10_000_000
-EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v2"
-SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
+EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v3"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -655,6 +654,8 @@ def _artifact_boundary_contract() -> dict[str, Any]:
 def _run_manifest_from_config(
     *,
     env_sha: str,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
     provenance: dict[str, Any],
     model_config: dict[str, Any],
     base_seed: int,
@@ -679,7 +680,11 @@ def _run_manifest_from_config(
             "entropy_bonus": None,
             "bootstrap": None,
         },
-        "environment": {"binary_sha256": env_sha},
+        "environment": {
+            "binary_sha256": env_sha,
+            "deck_ids": list(deck_ids),
+            "deck_hashes": list(deck_hashes),
+        },
         "protocol": {
             "schema_version": SCHEMA_VERSION,
             "protocol": PROTOCOL_NAME,
@@ -736,6 +741,8 @@ def _run_manifest_from_config(
 def _run_manifest(
     *,
     env_sha: str,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
     provenance: dict[str, Any],
     model: KernelPolicyValueNet,
     base_seed: int,
@@ -747,6 +754,8 @@ def _run_manifest(
 ) -> dict[str, Any]:
     return _run_manifest_from_config(
         env_sha=env_sha,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
         provenance=provenance,
         model_config=model.config.to_dict(),
         base_seed=base_seed,
@@ -768,15 +777,34 @@ def _validate_hash(value: Any, name: str) -> str:
     return value
 
 
+def _validate_deck_ids(value: Any, context: str = "deck_ids") -> tuple[str, str]:
+    if type(value) is not list or len(value) != 2:
+        raise ValueError(f"{context} must be an exact two-item list")
+    if any(type(item) is not str or not item for item in value):
+        raise ValueError(f"{context} entries must be nonempty strings")
+    return value[0], value[1]
+
+
+def _validate_deck_hashes(value: Any, context: str = "deck_hashes") -> tuple[int, int]:
+    if type(value) is not list or len(value) != 2:
+        raise ValueError(f"{context} must be an exact two-item list")
+    if any(type(item) is not int or item < 0 or item > 0xFFFF_FFFF_FFFF_FFFF for item in value):
+        raise ValueError(f"{context} entries must be unsigned 64-bit integers")
+    return value[0], value[1]
+
+
 def _validate_provenance(value: Any) -> None:
     required = {"protocol", "protocol_version", "schema_version", "kernel_version", "surface_version", "card_db_hash"}
     if not isinstance(value, dict) or set(value) != required:
         raise ValueError("run provenance keys mismatch")
-    if value["protocol"] != "kernel_rl_jsonl":
+    if value["protocol"] != PROTOCOL_NAME:
         raise ValueError("run provenance protocol mismatch")
-    for key in ("protocol_version", "schema_version", "surface_version"):
-        if type(value[key]) is not int or value[key] < 0:
-            raise ValueError(f"run provenance {key} must be a nonnegative int")
+    if value["protocol_version"] != PROTOCOL_VERSION:
+        raise ValueError("run provenance protocol_version mismatch")
+    if value["schema_version"] != SCHEMA_VERSION:
+        raise ValueError("run provenance schema_version mismatch")
+    if type(value["surface_version"]) is not int or value["surface_version"] < 0:
+        raise ValueError("run provenance surface_version must be a nonnegative int")
     if type(value["kernel_version"]) is not str or not value["kernel_version"]:
         raise ValueError("run provenance kernel_version must be nonempty")
     if type(value["card_db_hash"]) is not int or value["card_db_hash"] < 0 or value["card_db_hash"] > 0xFFFF_FFFF_FFFF_FFFF:
@@ -814,7 +842,12 @@ def _validate_run_manifest(
     if run["schema"] != RUN_SCHEMA:
         raise ValueError("run.json schema mismatch")
     validate_training_json_privacy(run)
-    committed_env_sha = _validate_hash(run.get("environment", {}).get("binary_sha256"), "run environment binary_sha256")
+    environment = run.get("environment")
+    if not isinstance(environment, dict) or set(environment) != {"binary_sha256", "deck_ids", "deck_hashes"}:
+        raise ValueError("run environment keys mismatch")
+    committed_env_sha = _validate_hash(environment["binary_sha256"], "run environment binary_sha256")
+    deck_ids = _validate_deck_ids(environment["deck_ids"], "run environment deck_ids")
+    deck_hashes = _validate_deck_hashes(environment["deck_hashes"], "run environment deck_hashes")
     if env_sha is not None and committed_env_sha != env_sha:
         raise ValueError("environment executable SHA-256 drift")
     if compatibility is not None and run["compatibility"] != compatibility:
@@ -831,6 +864,8 @@ def _validate_run_manifest(
     max_decisions = _validate_max_decisions(run.get("trainer", {}).get("max_decisions"))
     expected = _run_manifest_from_config(
         env_sha=committed_env_sha,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
         provenance=run["protocol_provenance"],
         model_config=model_config,
         base_seed=base_seed,
@@ -866,6 +901,7 @@ def _assert_run_matches_options(
     run: dict[str, Any],
     *,
     env_sha: str,
+    deck_ids: tuple[str, str] | None,
     base_seed: int | None,
     batch_episodes: int | None,
     learning_rate: float | None,
@@ -875,6 +911,7 @@ def _assert_run_matches_options(
 ) -> None:
     _validate_run_manifest(run, env_sha=env_sha, compatibility=compatibility)
     checks = {
+        "deck_ids": (deck_ids, tuple(run["environment"]["deck_ids"])),
         "base_seed": (base_seed, run["trainer"]["base_seed"]),
         "batch_episodes": (batch_episodes, run["schedule"]["batch_episodes"]),
         "learning_rate": (learning_rate, run["optimizer"]["lr"]),
@@ -938,11 +975,20 @@ def _validate_loss_fields(loss: Any, *, optimizer_step: bool) -> None:
             raise ValueError(f"{key} must be finite")
 
 
-def _validate_episode_summary(summary: Any, *, expected_episode: int, base_seed: int) -> dict[str, Any]:
+def _validate_episode_summary(
+    summary: Any,
+    *,
+    expected_episode: int,
+    base_seed: int,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+) -> dict[str, Any]:
     required = {
         "schema",
         "episode",
         "env_seed",
+        "deck_ids",
+        "deck_hashes",
         "learner_seat",
         "terminal_outcome",
         "winner",
@@ -961,6 +1007,10 @@ def _validate_episode_summary(summary: Any, *, expected_episode: int, base_seed:
         raise ValueError("episode summary index mismatch")
     if summary["env_seed"] != _env_seed_for_episode(base_seed, expected_episode):
         raise ValueError("episode env seed mismatch")
+    if _validate_deck_ids(summary["deck_ids"], "episode deck_ids") != deck_ids:
+        raise ValueError("episode deck_ids mismatch")
+    if _validate_deck_hashes(summary["deck_hashes"], "episode deck_hashes") != deck_hashes:
+        raise ValueError("episode deck_hashes mismatch")
     learner = _learner_seat(expected_episode)
     if summary["learner_seat"] != learner:
         raise ValueError("episode learner seat mismatch")
@@ -1077,7 +1127,13 @@ def _validate_update_record(
     expected_decisions = dict(previous_payload["learner_decisions_by_seat"])
     learner_decision_total = 0
     for offset, summary in enumerate(record["episode_summaries"]):
-        row = _validate_episode_summary(summary, expected_episode=episode_start + offset, base_seed=run["trainer"]["base_seed"])
+        row = _validate_episode_summary(
+            summary,
+            expected_episode=episode_start + offset,
+            base_seed=run["trainer"]["base_seed"],
+            deck_ids=tuple(run["environment"]["deck_ids"]),
+            deck_hashes=tuple(run["environment"]["deck_hashes"]),
+        )
         learner_decision_total += row["learner_decision_count"]
         seat = row["learner_seat"]
         if row["learner_return"] == 1:

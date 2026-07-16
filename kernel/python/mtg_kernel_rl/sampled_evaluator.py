@@ -23,6 +23,8 @@ from .evaluator import (
     EvaluationResult,
     _MAX_ENV_BINARY_BYTES,
     _candidate_result,
+    _assert_deck_identity,
+    DEFAULT_DECK_IDS,
     _manifest_without_files,
     _preflight_store,
     _require_model_matches_attestation,
@@ -89,6 +91,8 @@ def _run_sampled_game(
     candidate_model: KernelPolicyValueNet,
     baseline_model: KernelPolicyValueNet,
     expected_provenance: dict[str, Any],
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
 ) -> dict[str, Any]:
     candidate_seat = "p0" if game_in_pair == 0 else "p1"
     baseline_seat = "p1" if candidate_seat == "p0" else "p0"
@@ -97,6 +101,13 @@ def _run_sampled_game(
         episode_id=episode_id,
         env_seed=env_seed,
         max_decisions=max_decisions,
+        deck_ids=deck_ids,
+    )
+    _assert_deck_identity(
+        current,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
+        context="sampled evaluation environment",
     )
     if not json_values_equal_strict(current.provenance, expected_provenance):
         raise ValueError("sampled evaluation environment protocol provenance differs from source training run")
@@ -118,6 +129,12 @@ def _run_sampled_game(
         physical_decision_counts[actor] += 1
         selected_action = current.legal_actions[selected_position]
         current = client.step(selected_action["selected_index"], selected_action["stable_id"])
+        _assert_deck_identity(
+            current,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
+            context="sampled evaluation environment",
+        )
         decisions += 1
         if is_candidate:
             candidate_decisions += 1
@@ -139,6 +156,8 @@ def _run_sampled_game(
         "candidate_seat": candidate_seat,
         "decision_count": current.decision_count,
         "env_seed": env_seed,
+        "deck_ids": list(current.deck_ids),
+        "deck_hashes": list(current.deck_hashes),
         "episode_id": episode_id,
         "game_in_pair": game_in_pair,
         "pair_index": pair_index,
@@ -151,13 +170,21 @@ def _run_sampled_game(
     }
 
 
-def _pair_row(pair_index: int, env_seed: int, points: PairedGamePoints) -> dict[str, Any]:
+def _pair_row(
+    pair_index: int,
+    env_seed: int,
+    points: PairedGamePoints,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+) -> dict[str, Any]:
     return {
         "candidate_as_p0_episode_id": 2 * pair_index,
         "candidate_as_p0_half_points": points.candidate_as_p0,
         "candidate_as_p1_episode_id": 2 * pair_index + 1,
         "candidate_as_p1_half_points": points.candidate_as_p1,
         "env_seed": env_seed,
+        "deck_ids": list(deck_ids),
+        "deck_hashes": list(deck_hashes),
         "pair_index": pair_index,
         "schema": PAIR_SCHEMA,
         "total_half_points": points.total_half_points,
@@ -170,6 +197,8 @@ def _sampled_manifest_without_files(
     candidate_ref: SnapshotRef,
     baseline_ref: SnapshotRef,
     env_sha: str,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
     pair_count: int,
     base_seed: int,
     bootstrap_replicates: int,
@@ -182,6 +211,8 @@ def _sampled_manifest_without_files(
         candidate_ref=candidate_ref,
         baseline_ref=baseline_ref,
         env_sha=env_sha,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
         pair_count=pair_count,
         base_seed=base_seed,
         bootstrap_replicates=bootstrap_replicates,
@@ -209,16 +240,18 @@ def evaluate_sampled(
     bootstrap_replicates: int,
     max_decisions: int,
     timeout_ms: int,
+    deck_ids: tuple[str, str] = DEFAULT_DECK_IDS,
 ) -> EvaluationResult:
     """Evaluate the validated head against update zero with sampled CRN pairs."""
 
-    expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms = _validate_request(
+    expected_head, pairs, base_seed, bootstrap_replicates, max_decisions, timeout_ms, deck_ids = _validate_request(
         expected_candidate_head=expected_candidate_head,
         pairs=pairs,
         base_seed=base_seed,
         bootstrap_replicates=bootstrap_replicates,
         max_decisions=max_decisions,
         timeout_ms=timeout_ms,
+        deck_ids=deck_ids,
     )
     chain, candidate_ref, baseline_ref, candidate_model, baseline_model, env_sha = _preflight_store(
         training_store,
@@ -226,8 +259,10 @@ def evaluate_sampled(
         env_bin=env_bin,
         out_dir=out_dir,
         max_decisions=max_decisions,
+        deck_ids=deck_ids,
     )
     expected_provenance = chain.run_record["protocol_provenance"]
+    deck_hashes = tuple(chain.run_record["environment"]["deck_hashes"])
 
     with OutputLock(out_dir) as output_lock:
         root = require_new_or_empty_dir(output_lock.path.parent)
@@ -247,6 +282,8 @@ def evaluate_sampled(
                     candidate_model=candidate_model,
                     baseline_model=baseline_model,
                     expected_provenance=expected_provenance,
+                    deck_ids=deck_ids,
+                    deck_hashes=deck_hashes,
                 )
                 candidate_as_p1 = _run_sampled_game(
                     client,
@@ -258,13 +295,15 @@ def evaluate_sampled(
                     candidate_model=candidate_model,
                     baseline_model=baseline_model,
                     expected_provenance=expected_provenance,
+                    deck_ids=deck_ids,
+                    deck_hashes=deck_hashes,
                 )
                 points = PairedGamePoints(
                     candidate_as_p0["candidate_half_points"],
                     candidate_as_p1["candidate_half_points"],
                 )
                 game_rows.extend((candidate_as_p0, candidate_as_p1))
-                pair_rows.append(_pair_row(pair_index, env_seed, points))
+                pair_rows.append(_pair_row(pair_index, env_seed, points, deck_ids, deck_hashes))
                 paired_points.append(points)
 
         score = score_pair_half_points(
@@ -294,6 +333,8 @@ def evaluate_sampled(
             candidate_ref=candidate_ref,
             baseline_ref=baseline_ref,
             env_sha=env_sha,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
             pair_count=pairs,
             base_seed=base_seed,
             bootstrap_replicates=bootstrap_replicates,

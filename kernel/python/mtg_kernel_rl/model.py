@@ -26,8 +26,8 @@ from .features import (
     feature_contract_fingerprint,
 )
 
-MODEL_CONFIG_SCHEMA_VERSION = 3
-MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-4"
+MODEL_CONFIG_SCHEMA_VERSION = 4
+MODEL_ARCHITECTURE_VERSION = "kernel-policy-value-net-5"
 MODEL_CARD_EMBEDDING_DIM = 16
 MODEL_HIDDEN_DIM = 64
 INITIALIZER_RUNNER_FIXED_V1 = "runner-fixed-v1"

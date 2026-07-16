@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import filecmp
+import json
 import random
 import tempfile
 import unittest
@@ -21,7 +22,7 @@ from mtg_kernel_rl.rollout import (
 from mtg_kernel_rl.sampled_evaluation_store import ACTION_SELECTION_CONTRACT as EVALUATOR_ACTION_SELECTION_CONTRACT
 from mtg_kernel_rl.training_store import TRAINER_ACTION_SELECTION_CONTRACT
 
-from fixtures import PROVENANCE, actor_observation, fake_launcher, legal_actions
+from fixtures import DECK_HASHES, DECK_IDS, PROVENANCE, actor_observation, fake_launcher, legal_actions
 
 
 class _FixedModelPolicy:
@@ -30,6 +31,24 @@ class _FixedModelPolicy:
 
 
 class RolloutTest(unittest.TestCase):
+    def test_deck_identity_failures_publish_no_runner_artifacts(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            for scenario in ("deck_id_drift", "deck_hash_shape", "deck_hash_drift"):
+                with self.subTest(scenario=scenario):
+                    out = tmp / scenario
+                    with self.assertRaises(Exception):
+                        run_episodes(
+                            env_bin=fake_launcher(tmp, scenario),
+                            out_dir=out,
+                            episodes=1,
+                            base_seed=71_501,
+                            max_decisions=8,
+                            p0="uniform",
+                            p1="uniform",
+                        )
+                    self.assertFalse(out.exists())
+
     def test_sampled_selector_has_fixed_goldens_and_preserves_global_rng(self) -> None:
         cases = (
             (0, 0, "p0"),
@@ -50,6 +69,8 @@ class RolloutTest(unittest.TestCase):
                 actor_observation(actor, step),
                 legal_actions(actor),
                 dict(PROVENANCE),
+                DECK_IDS,
+                DECK_HASHES,
             )
             selected.append(
                 select_action(
@@ -101,6 +122,12 @@ class RolloutTest(unittest.TestCase):
             self.assertIn('"halted":0', run_text)
             self.assertIn('"truncated":0', run_text)
             self.assertIn('"terminal_outcome"', episodes_text)
+            manifest_a = json.loads(run_text)
+            episode_rows = [json.loads(line) for line in episodes_text.splitlines()]
+            self.assertEqual(tuple(manifest_a["environment"]["deck_ids"]), DECK_IDS)
+            self.assertEqual(tuple(manifest_a["environment"]["deck_hashes"]), DECK_HASHES)
+            self.assertTrue(all(tuple(row["deck_ids"]) == DECK_IDS for row in episode_rows))
+            self.assertTrue(all(tuple(row["deck_hashes"]) == DECK_HASHES for row in episode_rows))
             manifest = run_episodes(
                 env_bin=launcher,
                 out_dir=tmp / "mixed",
@@ -118,7 +145,7 @@ class RolloutTest(unittest.TestCase):
                 },
             )
 
-    def test_sampled_rollout_v2_contract_is_repeatable_and_v1_remains_distinct(self) -> None:
+    def test_sampled_rollout_v3_contract_is_repeatable_and_legacy_versions_remain_distinct(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
             launcher = fake_launcher(tmp, "valid")
@@ -146,6 +173,7 @@ class RolloutTest(unittest.TestCase):
             self.assertTrue(filecmp.cmp(out_a / "run.json", out_b / "run.json", shallow=False))
             self.assertTrue(filecmp.cmp(out_a / "episodes.jsonl", out_b / "episodes.jsonl", shallow=False))
             self.assertEqual(manifest_a["artifact_schema_version"], RUNNER_ARTIFACT_SCHEMA_VERSION)
+            self.assertEqual(RUNNER_ARTIFACT_SCHEMA_VERSION, 3)
             self.assertEqual(
                 manifest_a["action_selection"],
                 {
@@ -156,6 +184,7 @@ class RolloutTest(unittest.TestCase):
             self.assertEqual(manifest_a["seed_derivation"], RUNNER_SEED_DERIVATION_CONTRACT)
             self.assertEqual(V1_RUNNER_ARTIFACT_SCHEMA_VERSION, 1)
             self.assertNotEqual(manifest_a["artifact_schema_version"], V1_RUNNER_ARTIFACT_SCHEMA_VERSION)
+            self.assertNotEqual(manifest_a["artifact_schema_version"], 2)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-"""Path-aware v3 feature contract and actor-relative encoder."""
+"""Path-aware v4 feature contract and actor-relative encoder."""
 
 from __future__ import annotations
 
@@ -15,9 +15,9 @@ OPERATIONAL_ONLY = "operational_only"
 FORBIDDEN = "forbidden"
 CLASSIFICATIONS = (MODEL_INPUT, OPERATIONAL_ONLY, FORBIDDEN)
 
-FEATURE_SCHEMA_VERSION = "actor-relative-v3-python-6"
-FEATURE_REGISTRY_VERSION = "rust-observation-v3-action-v1-registry-6"
-ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-6"
+FEATURE_SCHEMA_VERSION = "actor-relative-v4-python-3"
+FEATURE_REGISTRY_VERSION = "rust-observation-v4-action-v4-registry-3"
+ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-9"
 
 STATE_HASH_DIM = 96
 ACTION_HASH_DIM = 96
@@ -46,11 +46,14 @@ ENGINE_STAGES = [
     "pending_optional_cost",
     "pending_optional_cost_sacrifice",
     "pending_spell_copy",
+    "pending_effect",
     "pending_triggers",
     "halted",
 ]
 SURFACE_STAGES = ["priority", "declare_blockers_for_attacker", "discard_pick", "optional_cost_use", "optional_cost_which"]
 STACK_KINDS = ["spell", "activated_ability", "triggered_ability", "madness_offer"]
+CAST_METHODS = ["normal", "alternative", "flashback", "madness", "plotted", "escape", "bestow", "omen"]
+MANA_COLORS = ["W", "U", "B", "R", "G", "C"]
 ACTION_KINDS = [
     "pass",
     "play_land",
@@ -63,6 +66,13 @@ ACTION_KINDS = [
     "choose_cast_mode",
     "choose_kicker",
     "choose_spell_mode",
+    "choose_effect_option",
+    "choose_effect_target",
+    "finish_effect_selection",
+    "choose_effect_color",
+    "choose_effect_number",
+    "choose_effect_boolean",
+    "finish_target_selection",
     "choose_optional_cost_use",
     "choose_optional_cost_which",
     "choose_spell_copy_payment",
@@ -74,12 +84,35 @@ ACTION_KINDS = [
     "order_triggers",
 ]
 CAST_MODES = ["Normal", "Alternative"]
-COST_KINDS = ["SacrificeLands"]
+COST_KINDS = [
+    "SacrificeLands",
+    "SacrificePermanents",
+    "SacrificeCreatures",
+    "SacrificeArtifacts",
+    "DiscardCards",
+    "ExileFromGraveyard",
+    "TapPermanents",
+    "ReturnPermanentsToHand",
+    "PayLife",
+    "RemoveCounters",
+    "PutCounters",
+]
 OPTIONAL_COST_CHOICES = ["Decline", "Discard", "SacrificeLand"]
 DISCARD_RESUME_STAGES = ["none", "finish_cast", "finish_activation", "finish_spell_resolution", "finish_optional_cost"]
 TRIGGER_KINDS = ["triggered_ability", "madness_offer"]
 SPELL_COPY_STAGES = ["payment", "retarget", "target"]
-EFFECT_DURATIONS = ["end_of_turn"]
+EFFECT_DURATIONS = ["end_of_turn", "until_controllers_next_turn", "while_attached", "while_source_present"]
+TARGET_SELECTION_PURPOSES = [
+    "effect_targets",
+    "card_selection",
+    "permanent_selection",
+    "player_selection",
+    "damage_division",
+    "cost_payment",
+    "library_order",
+    "search_result",
+]
+BOOLEAN_CHOICE_PURPOSES = ["optional_effect", "shuffle", "pay_cost"]
 PLAY_OR_CAST = ["play", "cast"]
 EXPIRY_KINDS = ["end_of_turn", "until_holders_next_turn"]
 TARGET_KINDS = ["player", "object"]
@@ -99,6 +132,11 @@ OBJECT_GROUPS = [
     "combat_block",
     "pending_context",
     "private_context",
+    "known_library_self",
+    "known_library_opponent",
+    "known_hand_self",
+    "known_hand_opponent",
+    "paid_cost",
 ]
 EDGE_ROLES = [
     "attachment",
@@ -106,9 +144,15 @@ EDGE_ROLES = [
     "combat_attacker",
     "combat_blocker",
     "effect_affected",
+    "effect_source",
     "permission",
     "pending_context",
     "private_context",
+    "known_library",
+    "known_hand",
+    "attached_to",
+    "exiled_by",
+    "paid_cost",
 ]
 ACTION_REF_ROLES = [
     "source",
@@ -122,10 +166,27 @@ ACTION_REF_ROLES = [
     "pending_sources",
 ]
 
-OBJECT_SOURCE_KINDS = ["card", "stack", "combat", "effect", "permission", "attachment", "target", "pending", "private"]
+OBJECT_SOURCE_KINDS = ["card", "stack", "combat", "effect", "permission", "attachment", "target", "pending", "private", "known_library", "known_hand", "paid_cost"]
 CARD_REF_FEATURE_DIM = 6 + len(ZONES)
-OBJECT_FEATURE_DIM = CARD_REF_FEATURE_DIM + 5 + 3 + 6 + 4 + 10 + len(OBJECT_SOURCE_KINDS) + 1
-EDGE_FEATURE_DIM = len(EDGE_ROLES) + 3 + 8
+OBJECT_FEATURE_DIM = (
+    CARD_REF_FEATURE_DIM
+    + 9  # tapped/sick/damage, five counter kinds, legacy attachment count
+    + 3  # plotted-turn relation
+    + 2  # token and face
+    + 1 + len(MANA_COLORS)  # optional chosen color
+    + 3  # entered-battlefield turn relation
+    + 5  # ability-use count/total/max-index and per-kind summaries
+    + 1  # skip-next-untap
+    + 3  # goad count/self/opponent
+    + 6  # type flags
+    + 4  # printed/effective power and toughness
+    + len(MANA_COLORS) + 1  # effective color mask and subtype count
+    + 14  # boolean keyword flags
+    + 2 + len(MANA_COLORS)  # ward, minimum blockers, landwalk mask
+    + len(OBJECT_SOURCE_KINDS)
+    + 1  # order
+)
+EDGE_FEATURE_DIM = len(EDGE_ROLES) + 3 + 24
 ACTION_REF_FEATURE_DIM = len(ACTION_REF_ROLES) + CARD_REF_FEATURE_DIM + 2
 ACTION_FEATURE_DIM = (
     len(ACTION_KINDS)
@@ -133,13 +194,25 @@ ACTION_FEATURE_DIM = (
     + CARD_REF_FEATURE_DIM
     + len(TARGET_KINDS)
     + 3
-    + 13
+    + 22
+    + 1 + (2 * len(MANA_COLORS))
     + len(CAST_MODES)
     + len(COST_KINDS)
     + len(OPTIONAL_COST_CHOICES)
     + ACTION_HASH_DIM
 )
-STATE_FEATURE_DIM = len(PHASES) + 6 + (2 * 13) + 7 + 24 + len(SURFACE_STAGES) + 2 + 10 + STATE_HASH_DIM
+STATE_FEATURE_DIM = (
+    len(PHASES)
+    + 9  # active player, priority player, initiative
+    + (2 * 19)  # per-player public resources, status, and dungeon summaries
+    + 9  # combat/stack/effect/permission and relation summaries
+    + 4  # known-library and known-hand counts by relative owner
+    + 26  # engine context
+    + len(SURFACE_STAGES)
+    + 2
+    + 10
+    + STATE_HASH_DIM
+)
 CARD_TOKEN_VOCAB_SIZE = 65_537
 
 PLAYER_INDEXED_LISTS = {
@@ -152,11 +225,22 @@ PLAYER_INDEXED_LISTS = {
     ("observation", "projection", "graveyards"),
     ("observation", "projection", "engine_context", "priority_passes"),
     ("observation", "projection", "surface_context", "combat_priority_spent"),
+    ("observation", "known_library_cards"),
+    ("observation", "known_hand_cards"),
 }
 
 SET_LIKE_LISTS = {
     ("observation", "projection", "continuous_effects", "[]", "affected_objects"),
     ("observation", "projection", "exile_play_permissions"),
+    ("observation", "projection", "object_relations"),
+    ("observation", "projection", "continuous_effects", "[]", "add_subtype_ids"),
+    ("observation", "projection", "continuous_effects", "[]", "remove_subtype_ids"),
+    ("observation", "projection", "continuous_effects", "[]", "affected_players"),
+    ("observation", "projection", "battlefield", "[]", "[]", "goaded_by"),
+    ("observation", "projection", "graveyards", "[]", "[]", "goaded_by"),
+    ("observation", "projection", "exile", "[]", "goaded_by"),
+    ("observation", "projection", "player_status", "[]", "dungeon", "completed_dungeons"),
+    ("observation", "known_hand_cards", "[]"),
     ("legal_action", "semantic", "cards"),
     ("legal_action", "semantic", "attackers"),
     ("legal_action", "semantic", "blockers"),
@@ -180,6 +264,9 @@ PENDING_CONTEXT_SUBROLES = [
     ("pending_spell_copy", "parent"),
     ("pending_spell_copy", "inherited_target", "object"),
     ("pending_spell_copy", "copy"),
+    ("pending_effect", "source"),
+    ("pending_effect", "choice", "selected_targets", "[]", "object"),
+    ("pending_effect", "choice", "legal_targets", "[]", "object"),
     ("pending_triggers", "[]", "source"),
 ]
 PRIVATE_CONTEXT_SUBROLES = [
@@ -223,6 +310,7 @@ ENGINE_SURFACE_TUPLE_CONTRACT = [
     "pending_optional_cost+optional_cost_which: optional-cost discard-vs-sacrifice gate when both are payable",
     "pending_optional_cost_sacrifice+priority: sacrifice-land cost-target subdecision",
     "pending_spell_copy+priority: spell-copy payment, retarget, or target subdecision",
+    "pending_effect+priority: generic resumable effect choice",
     "pending_triggers+priority: trigger ordering subdecision",
     "halted+priority: halted engine branch with no surface reshape",
 ]
@@ -496,23 +584,32 @@ CARD_STABLE_REF = ObjectSpec(
     }
 )
 
-COUNTERS = ObjectSpec({"plus1_plus1": I(MODEL_INPUT, minimum=-128, maximum=127)})
+COUNTER_NAMES = ("plus1_plus1", "minus1_minus1", "minus0_minus1", "stun", "lore")
+BOOLEAN_KEYWORD_NAMES = (
+    "flying",
+    "reach",
+    "haste",
+    "vigilance",
+    "trample",
+    "first_strike",
+    "double_strike",
+    "deathtouch",
+    "menace",
+    "defender",
+    "lifelink",
+    "hexproof",
+    "indestructible",
+    "protection_from_monocolored",
+)
+
+COUNTERS = ObjectSpec({name: I(MODEL_INPUT, minimum=-32_768, maximum=32_767) for name in COUNTER_NAMES})
 TYPE_FLAGS = ObjectSpec({name: B(MODEL_INPUT) for name in ("land", "creature", "instant", "sorcery", "artifact", "enchantment")})
 KEYWORDS = ObjectSpec(
     {
-        name: B(MODEL_INPUT)
-        for name in (
-            "flying",
-            "reach",
-            "haste",
-            "vigilance",
-            "trample",
-            "first_strike",
-            "double_strike",
-            "deathtouch",
-            "menace",
-            "defender",
-        )
+        **{name: B(MODEL_INPUT) for name in BOOLEAN_KEYWORD_NAMES},
+        "ward_generic": I(MODEL_INPUT, maximum=U16),
+        "minimum_blockers": I(MODEL_INPUT, maximum=U8),
+        "landwalk_mask": I(MODEL_INPUT, maximum=U8),
     }
 )
 CHARACTERISTICS = ObjectSpec(
@@ -522,6 +619,8 @@ CHARACTERISTICS = ObjectSpec(
         "base_toughness": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
         "effective_power": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
         "effective_toughness": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "effective_color_mask": I(MODEL_INPUT, maximum=U8),
+        "effective_subtype_ids": ListSpec(I(MODEL_INPUT, maximum=U16)),
         "effective_keywords": KEYWORDS,
     }
 )
@@ -535,6 +634,28 @@ CARD_PUBLIC = ObjectSpec(
         "counters": COUNTERS,
         "attachments": ListSpec(I(OPERATIONAL_ONLY, maximum=U32)),
         "plotted_turn": Opt(I(MODEL_INPUT, maximum=U32)),
+        "is_token": B(MODEL_INPUT),
+        "face_index": I(MODEL_INPUT, maximum=U8),
+        "chosen_color": Opt(E(MANA_COLORS)),
+        "entered_battlefield_turn": Opt(I(MODEL_INPUT, maximum=U32)),
+        "ability_uses_this_turn": ListSpec(
+            ObjectSpec(
+                {
+                    "ability_kind": E(["mana", "activated"]),
+                    "ability_index": I(MODEL_INPUT, maximum=U16),
+                    "uses": I(MODEL_INPUT, maximum=U16),
+                }
+            )
+        ),
+        "skip_next_untap": B(MODEL_INPUT),
+        "goaded_by": ListSpec(
+            ObjectSpec(
+                {
+                    "player": Seat(),
+                    "expires_at_turn": I(MODEL_INPUT, maximum=U32),
+                }
+            )
+        ),
         "characteristics": CHARACTERISTICS,
     }
 )
@@ -560,6 +681,17 @@ STACK_ITEM = ObjectSpec(
         "mode_chosen": I(MODEL_INPUT, maximum=U8),
         "madness_offer": B(MODEL_INPUT),
         "kicked": B(MODEL_INPUT),
+        "cast_method": Opt(E(CAST_METHODS)),
+        "face_index": I(MODEL_INPUT, maximum=U8),
+        "x_value": I(MODEL_INPUT, maximum=U16),
+        "paid_cost_refs": ListSpec(CARD_STABLE_REF),
+    }
+)
+DUNGEON = ObjectSpec(
+    {
+        "dungeon_id": Opt(I(MODEL_INPUT, maximum=U16)),
+        "room_id": Opt(I(MODEL_INPUT, maximum=U16)),
+        "completed_dungeons": ListSpec(I(MODEL_INPUT, maximum=U16)),
     }
 )
 PLAYER_STATUS = ObjectSpec(
@@ -568,6 +700,8 @@ PLAYER_STATUS = ObjectSpec(
         "lands_played_this_turn": I(MODEL_INPUT, maximum=U8),
         "drew_from_empty": B(MODEL_INPUT),
         "draws_this_turn": I(MODEL_INPUT, maximum=U32),
+        "spells_cast_this_turn": I(MODEL_INPUT, maximum=U16),
+        "dungeon": DUNGEON,
     }
 )
 COMBAT = ObjectSpec(
@@ -580,14 +714,52 @@ COMBAT = ObjectSpec(
 )
 EFFECT = ObjectSpec(
     {
+        "source": Opt(CARD_STABLE_REF),
+        "controller": Opt(Seat()),
         "affected_objects": ListSpec(CARD_STABLE_REF),
+        "affected_players": ListSpec(Seat()),
+        "global": B(MODEL_INPUT),
         "layers": I(MODEL_INPUT, maximum=U8),
         "timestamp": I(OPERATIONAL_ONLY, maximum=U64),
         "duration": E(EFFECT_DURATIONS),
         "power_delta": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
         "toughness_delta": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
         "grants_haste": B(MODEL_INPUT),
+        "set_power": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "set_toughness": Opt(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)),
+        "add_color_mask": I(MODEL_INPUT, maximum=U8),
+        "remove_color_mask": I(MODEL_INPUT, maximum=U8),
+        "add_subtype_ids": ListSpec(I(MODEL_INPUT, maximum=U16)),
+        "remove_subtype_ids": ListSpec(I(MODEL_INPUT, maximum=U16)),
+        "add_keyword_mask": I(MODEL_INPUT, maximum=U32),
+        "remove_keyword_mask": I(MODEL_INPUT, maximum=U32),
+        "ward_generic_delta": I(MODEL_INPUT, minimum=-32_768, maximum=32_767),
+        "minimum_blockers": Opt(I(MODEL_INPUT, maximum=U8)),
+        "add_landwalk_mask": I(MODEL_INPUT, maximum=U8),
+        "remove_landwalk_mask": I(MODEL_INPUT, maximum=U8),
+        "prevent_damage_from_color_mask": I(MODEL_INPUT, maximum=U8),
+        "damage_cannot_be_prevented": B(MODEL_INPUT),
     }
+)
+OBJECT_RELATION = VariantSpec(
+    "relation_kind",
+    {
+        "attached_to": ObjectSpec(
+            {
+                "relation_kind": E(["attached_to"]),
+                "object": CARD_STABLE_REF,
+                "attached_to": CARD_STABLE_REF,
+            }
+        ),
+        "exiled_by": ObjectSpec(
+            {
+                "relation_kind": E(["exiled_by"]),
+                "object": CARD_STABLE_REF,
+                "exiled_by": CARD_STABLE_REF,
+            }
+        ),
+    },
+    MODEL_INPUT,
 )
 EXPIRY = VariantSpec(
     "expiry_kind",
@@ -668,6 +840,67 @@ PENDING_SPELL_COPY = ObjectSpec(
         "copy": Opt(CARD_STABLE_REF),
     }
 )
+PENDING_EFFECT_CHOICE = VariantSpec(
+    "choice_kind",
+    {
+        "options": ObjectSpec(
+            {
+                "choice_kind": E(["options"]),
+                "player": Seat(),
+                "structural_path": ListSpec(I(MODEL_INPUT, maximum=U16)),
+                "option_count": I(MODEL_INPUT, maximum=U16),
+            }
+        ),
+        "targets": ObjectSpec(
+            {
+                "choice_kind": E(["targets"]),
+                "player": Seat(),
+                "structural_path": ListSpec(I(MODEL_INPUT, maximum=U16)),
+                "selected_targets": ListSpec(TARGET_REF),
+                "legal_targets": ListSpec(TARGET_REF),
+                "min_targets": I(MODEL_INPUT, maximum=U16),
+                "max_targets": I(MODEL_INPUT, maximum=U16),
+                "can_finish": B(MODEL_INPUT),
+                "ordered": B(MODEL_INPUT),
+                "purpose": E(TARGET_SELECTION_PURPOSES),
+            }
+        ),
+        "color": ObjectSpec(
+            {
+                "choice_kind": E(["color"]),
+                "player": Seat(),
+                "structural_path": ListSpec(I(MODEL_INPUT, maximum=U16)),
+                "legal_colors": ListSpec(E(MANA_COLORS)),
+            }
+        ),
+        "number": ObjectSpec(
+            {
+                "choice_kind": E(["number"]),
+                "player": Seat(),
+                "structural_path": ListSpec(I(MODEL_INPUT, maximum=U16)),
+                "minimum": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
+                "maximum": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX),
+            }
+        ),
+        "boolean": ObjectSpec(
+            {
+                "choice_kind": E(["boolean"]),
+                "player": Seat(),
+                "structural_path": ListSpec(I(MODEL_INPUT, maximum=U16)),
+                "default": Opt(B(MODEL_INPUT)),
+                "purpose": E(BOOLEAN_CHOICE_PURPOSES),
+            }
+        ),
+    },
+    MODEL_INPUT,
+)
+PENDING_EFFECT = ObjectSpec(
+    {
+        "source": Opt(CARD_STABLE_REF),
+        "controller": Seat(),
+        "choice": Opt(PENDING_EFFECT_CHOICE),
+    }
+)
 PENDING_TRIGGER = ObjectSpec(
     {
         "source": Opt(CARD_STABLE_REF),
@@ -690,6 +923,7 @@ ENGINE_CONTEXT = ObjectSpec(
         "pending_optional_cost": Opt(PENDING_OPTIONAL_COST),
         "pending_optional_cost_sacrifice": Opt(PENDING_OPTIONAL_COST_SAC),
         "pending_spell_copy": Opt(PENDING_SPELL_COPY),
+        "pending_effect": Opt(PENDING_EFFECT),
         "pending_triggers": ListSpec(PENDING_TRIGGER),
     }
 )
@@ -737,6 +971,7 @@ PENDING_CONTEXT_ROOTS = (
     ("pending_optional_cost", PENDING_OPTIONAL_COST, ("pending_optional_cost",)),
     ("pending_optional_cost_sacrifice", PENDING_OPTIONAL_COST_SAC, ("pending_optional_cost_sacrifice",)),
     ("pending_spell_copy", PENDING_SPELL_COPY, ("pending_spell_copy",)),
+    ("pending_effect", PENDING_EFFECT, ("pending_effect",)),
     ("pending_triggers", ListSpec(PENDING_TRIGGER), ("pending_triggers",)),
 )
 PRIVATE_CONTEXT_ROOTS = (
@@ -751,6 +986,7 @@ PROJECTION = ObjectSpec(
         "phase": E(PHASES),
         "active_player": Seat(),
         "priority_player": Seat(),
+        "initiative": Opt(Seat()),
         "life_totals": ListSpec(I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX), length=2),
         "mana_pools": ListSpec(ListSpec(I(MODEL_INPUT, maximum=U8), length=6), length=2),
         "hand_counts": ListSpec(I(MODEL_INPUT, maximum=U64), length=2),
@@ -762,9 +998,16 @@ PROJECTION = ObjectSpec(
         "stack": ListSpec(STACK_ITEM),
         "combat": COMBAT,
         "continuous_effects": ListSpec(EFFECT),
+        "object_relations": ListSpec(OBJECT_RELATION),
         "exile_play_permissions": ListSpec(PERMISSION),
         "engine_context": ENGINE_CONTEXT,
         "surface_context": SURFACE_CONTEXT,
+    }
+)
+KNOWN_LIBRARY_CARD = ObjectSpec(
+    {
+        "position": I(MODEL_INPUT, maximum=U32),
+        "card": CARD_PRIVATE,
     }
 )
 OBSERVATION_SPEC = ObjectSpec(
@@ -777,6 +1020,8 @@ OBSERVATION_SPEC = ObjectSpec(
         "step_index": I(OPERATIONAL_ONLY, maximum=U64),
         "projection": PROJECTION,
         "own_hand": ListSpec(CARD_PRIVATE),
+        "known_library_cards": ListSpec(ListSpec(KNOWN_LIBRARY_CARD), length=2),
+        "known_hand_cards": ListSpec(ListSpec(CARD_PRIVATE), length=2),
         "visible_projection_hash": I(FORBIDDEN, maximum=U64),
     }
 )
@@ -785,7 +1030,7 @@ ACTION_VARIANTS = {
     "pass": ObjectSpec({"action_kind": E(["pass"]), "actor": Seat()}),
     "play_land": ObjectSpec({"action_kind": E(["play_land"]), "actor": Seat(), "source": CARD_STABLE_REF}),
     "cast_spell": ObjectSpec({"action_kind": E(["cast_spell"]), "actor": Seat(), "source": CARD_STABLE_REF}),
-    "activate_mana_ability": ObjectSpec({"action_kind": E(["activate_mana_ability"]), "actor": Seat(), "source": CARD_STABLE_REF}),
+    "activate_mana_ability": ObjectSpec({"action_kind": E(["activate_mana_ability"]), "actor": Seat(), "source": CARD_STABLE_REF, "mana_choice": Opt(E(MANA_COLORS))}),
     "activate_ability": ObjectSpec({"action_kind": E(["activate_ability"]), "actor": Seat(), "source": CARD_STABLE_REF, "ability_index": I(MODEL_INPUT, maximum=U8)}),
     "plot_spell": ObjectSpec({"action_kind": E(["plot_spell"]), "actor": Seat(), "source": CARD_STABLE_REF}),
     "choose_target": ObjectSpec({"action_kind": E(["choose_target"]), "actor": Seat(), "source": CARD_STABLE_REF, "remaining": I(MODEL_INPUT, maximum=U8), "target": TARGET_REF}),
@@ -793,6 +1038,13 @@ ACTION_VARIANTS = {
     "choose_cast_mode": ObjectSpec({"action_kind": E(["choose_cast_mode"]), "actor": Seat(), "source": CARD_STABLE_REF, "mode": E(CAST_MODES)}),
     "choose_kicker": ObjectSpec({"action_kind": E(["choose_kicker"]), "actor": Seat(), "source": CARD_STABLE_REF, "pay": B(MODEL_INPUT)}),
     "choose_spell_mode": ObjectSpec({"action_kind": E(["choose_spell_mode"]), "actor": Seat(), "source": CARD_STABLE_REF, "mode_index": I(MODEL_INPUT, maximum=U8), "mode_count": I(MODEL_INPUT, maximum=U8)}),
+    "choose_effect_option": ObjectSpec({"action_kind": E(["choose_effect_option"]), "actor": Seat(), "source": CARD_STABLE_REF, "option_index": I(MODEL_INPUT, maximum=U16), "option_count": I(MODEL_INPUT, maximum=U16)}),
+    "choose_effect_target": ObjectSpec({"action_kind": E(["choose_effect_target"]), "actor": Seat(), "source": CARD_STABLE_REF, "target": TARGET_REF, "selected_count": I(MODEL_INPUT, maximum=U16), "min_targets": I(MODEL_INPUT, maximum=U16), "max_targets": I(MODEL_INPUT, maximum=U16)}),
+    "finish_effect_selection": ObjectSpec({"action_kind": E(["finish_effect_selection"]), "actor": Seat(), "source": CARD_STABLE_REF, "selected_count": I(MODEL_INPUT, maximum=U16)}),
+    "choose_effect_color": ObjectSpec({"action_kind": E(["choose_effect_color"]), "actor": Seat(), "source": CARD_STABLE_REF, "color": E(MANA_COLORS)}),
+    "choose_effect_number": ObjectSpec({"action_kind": E(["choose_effect_number"]), "actor": Seat(), "source": CARD_STABLE_REF, "number": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX), "minimum": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX), "maximum": I(MODEL_INPUT, minimum=I32_MIN, maximum=I32_MAX)}),
+    "choose_effect_boolean": ObjectSpec({"action_kind": E(["choose_effect_boolean"]), "actor": Seat(), "source": CARD_STABLE_REF, "value": B(MODEL_INPUT)}),
+    "finish_target_selection": ObjectSpec({"action_kind": E(["finish_target_selection"]), "actor": Seat(), "source": CARD_STABLE_REF, "selected_count": I(MODEL_INPUT, maximum=U16)}),
     "choose_optional_cost_use": ObjectSpec({"action_kind": E(["choose_optional_cost_use"]), "actor": Seat(), "use_cost": B(MODEL_INPUT)}),
     "choose_optional_cost_which": ObjectSpec({"action_kind": E(["choose_optional_cost_which"]), "actor": Seat(), "choice": E(OPTIONAL_COST_CHOICES)}),
     "choose_spell_copy_payment": ObjectSpec({"action_kind": E(["choose_spell_copy_payment"]), "actor": Seat(), "source": CARD_STABLE_REF, "pay": B(MODEL_INPUT)}),
@@ -842,6 +1094,7 @@ def _encoding_payload() -> dict[str, Any]:
             "target_pending_private_trigger_sequences",
         ],
         "object_groups": OBJECT_GROUPS,
+        "object_source_kinds": OBJECT_SOURCE_KINDS,
         "edge_roles": EDGE_ROLES,
         "action_ref_roles": ACTION_REF_ROLES,
         "fixed_dimensions": {
@@ -876,7 +1129,7 @@ def encoding_contract_fingerprint() -> str:
 
 
 def model_contract_fingerprint(schema: FeatureSchema) -> str:
-    return _sha256_json({"model_contract_version": "kernel-policy-value-net-4", "feature_schema": schema.__dict__})
+    return _sha256_json({"model_contract_version": "kernel-policy-value-net-5", "feature_schema": schema.__dict__})
 
 
 def classification_registry() -> dict[str, str]:
@@ -1012,16 +1265,23 @@ class _CanonicalContext:
             raise FeatureSchemaError("attachment reference does not resolve to an observed arena id")
         return {"handle": self._arena_handles[raw]}
 
-    def plotted_relation(self, value: int) -> str:
+    def turn_relation(self, value: int, field: str) -> str:
         if type(value) is not int:
-            raise FeatureSchemaError("plotted_turn must be an integer when present")
+            raise FeatureSchemaError(f"{field} must be an integer when present")
         if type(self.turn) is not int:
             raise FeatureSchemaError("projection.turn must be an integer")
         if value > self.turn:
-            raise FeatureSchemaError("plotted_turn cannot be in the future relative to projection.turn")
+            raise FeatureSchemaError(f"{field} cannot be in the future relative to projection.turn")
         if value == self.turn:
             return "this_turn"
         return "earlier_turn"
+
+    def future_turn_delta(self, value: int, field: str) -> int:
+        if type(value) is not int or type(self.turn) is not int:
+            raise FeatureSchemaError(f"{field} and projection.turn must be integers")
+        if value < self.turn:
+            raise FeatureSchemaError(f"{field} cannot be earlier than projection.turn")
+        return value - self.turn
 
 
 def _iter_card_refs(value: Any) -> Iterable[dict[str, Any]]:
@@ -1073,8 +1333,10 @@ def _canonical_model_value(value: Any, spec: Spec, path: tuple[str, ...], ctx: _
             return _OMIT
         if spec.kind == "seat":
             return _relative_seat(value, ctx.actor)
-        if spec.kind == "int" and path and path[-1] == "plotted_turn":
-            return ctx.plotted_relation(value)
+        if spec.kind == "int" and path and path[-1] in ("plotted_turn", "entered_battlefield_turn"):
+            return ctx.turn_relation(value, path[-1])
+        if spec.kind == "int" and path and path[-1] == "expires_at_turn":
+            return ctx.future_turn_delta(value, path[-1])
         return value
     if isinstance(spec, OptionalSpec):
         if value is None:
@@ -1128,17 +1390,22 @@ def _digest_features(namespace: str, canonical: Any, dims: int) -> list[float]:
     return out
 
 
-def _plotted_turn_features(card: dict[str, Any], current_turn: int) -> list[float]:
-    plotted_turn = card.get("plotted_turn")
-    if plotted_turn is None:
+def _turn_relation_features(value: int | None, current_turn: int, field: str) -> list[float]:
+    if value is None:
         return [1.0, 0.0, 0.0]
-    if type(plotted_turn) is not int or type(current_turn) is not int:
-        raise FeatureSchemaError("plotted_turn and projection.turn must be integers")
-    if plotted_turn > current_turn:
-        raise FeatureSchemaError("plotted_turn cannot be in the future relative to projection.turn")
-    if plotted_turn == current_turn:
+    if type(value) is not int or type(current_turn) is not int:
+        raise FeatureSchemaError(f"{field} and projection.turn must be integers")
+    if value > current_turn:
+        raise FeatureSchemaError(f"{field} cannot be in the future relative to projection.turn")
+    if value == current_turn:
         return [0.0, 1.0, 0.0]
     return [0.0, 0.0, 1.0]
+
+
+def _mask_bits(value: int, width: int, field: str) -> list[float]:
+    if type(value) is not int or value < 0 or value >= (1 << width):
+        raise FeatureSchemaError(f"{field} must fit inside {width} reserved bits")
+    return [1.0 if value & (1 << bit) else 0.0 for bit in range(width)]
 
 
 def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0, source_kind: str = "card", current_turn: int = 0) -> tuple[list[float], int]:
@@ -1146,6 +1413,10 @@ def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0
     characteristics = card.get("characteristics", {})
     type_flags = characteristics.get("type_flags", {})
     keywords = characteristics.get("effective_keywords", {})
+    counters = card.get("counters", {})
+    chosen_color = card.get("chosen_color")
+    ability_uses = card.get("ability_uses_this_turn", [])
+    goaded_by = card.get("goaded_by", [])
     source_flags = [1.0 if source_kind == kind else 0.0 for kind in OBJECT_SOURCE_KINDS]
     features = (
         _card_ref_features(stable, actor)
@@ -1153,10 +1424,30 @@ def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0
             _flag(card.get("tapped", False)),
             _flag(card.get("summoning_sick", False)),
             _number(card.get("damage", 0), 20.0),
-            _number(card.get("counters", {}).get("plus1_plus1", 0), 10.0),
+        ]
+        + [_number(counters.get(name, 0), 10.0) for name in COUNTER_NAMES]
+        + [
             _number(len(card.get("attachments", [])), 8.0),
         ]
-        + _plotted_turn_features(card, current_turn)
+        + _turn_relation_features(card.get("plotted_turn"), current_turn, "plotted_turn")
+        + [
+            _flag(card.get("is_token", False)),
+            _number(card.get("face_index", 0), 8.0),
+            1.0 if chosen_color is not None else 0.0,
+        ]
+        + (_one_hot(chosen_color, MANA_COLORS) if chosen_color is not None else [0.0] * len(MANA_COLORS))
+        + _turn_relation_features(card.get("entered_battlefield_turn"), current_turn, "entered_battlefield_turn")
+        + [
+            _number(len(ability_uses), 8.0),
+            _number(sum(item["uses"] for item in ability_uses), 16.0),
+            _number(max((item["ability_index"] for item in ability_uses), default=0), 16.0),
+            _number(sum(item["uses"] for item in ability_uses if item["ability_kind"] == "mana"), 16.0),
+            _number(sum(item["uses"] for item in ability_uses if item["ability_kind"] == "activated"), 16.0),
+            _flag(card.get("skip_next_untap", False)),
+            _number(len(goaded_by), 2.0),
+            1.0 if any(item["player"] == actor for item in goaded_by) else 0.0,
+            1.0 if any(item["player"] == ("p1" if actor == "p0" else "p0") for item in goaded_by) else 0.0,
+        ]
         + [_flag(type_flags.get(name, False)) for name in ("land", "creature", "instant", "sorcery", "artifact", "enchantment")]
         + [
             _number(characteristics.get("base_power"), 20.0),
@@ -1164,21 +1455,14 @@ def _card_public_features(card: dict[str, Any], actor: str, order_index: int = 0
             _number(characteristics.get("effective_power"), 20.0),
             _number(characteristics.get("effective_toughness"), 20.0),
         ]
+        + _mask_bits(characteristics.get("effective_color_mask", 0), len(MANA_COLORS), "effective_color_mask")
+        + [_number(len(characteristics.get("effective_subtype_ids", [])), 16.0)]
+        + [_flag(keywords.get(name, False)) for name in BOOLEAN_KEYWORD_NAMES]
         + [
-            _flag(keywords.get(name, False))
-            for name in (
-                "flying",
-                "reach",
-                "haste",
-                "vigilance",
-                "trample",
-                "first_strike",
-                "double_strike",
-                "deathtouch",
-                "menace",
-                "defender",
-            )
+            _number(keywords.get("ward_generic", 0), 16.0),
+            _number(keywords.get("minimum_blockers", 0), 8.0),
         ]
+        + _mask_bits(keywords.get("landwalk_mask", 0), len(MANA_COLORS), "landwalk_mask")
         + source_flags
         + [_number(order_index, 64.0)]
     )
@@ -1191,29 +1475,29 @@ def _blank_public_from_ref(stable: dict[str, Any], source_kind: str = "card") ->
         "tapped": False,
         "summoning_sick": False,
         "damage": 0,
-        "counters": {"plus1_plus1": 0},
+        "counters": {name: 0 for name in COUNTER_NAMES},
         "attachments": [],
         "plotted_turn": None,
+        "is_token": False,
+        "face_index": 0,
+        "chosen_color": None,
+        "entered_battlefield_turn": None,
+        "ability_uses_this_turn": [],
+        "skip_next_untap": False,
+        "goaded_by": [],
         "characteristics": {
             "type_flags": {name: False for name in ("land", "creature", "instant", "sorcery", "artifact", "enchantment")},
             "base_power": None,
             "base_toughness": None,
             "effective_power": None,
             "effective_toughness": None,
+            "effective_color_mask": 0,
+            "effective_subtype_ids": [],
             "effective_keywords": {
-                name: False
-                for name in (
-                    "flying",
-                    "reach",
-                    "haste",
-                    "vigilance",
-                    "trample",
-                    "first_strike",
-                    "double_strike",
-                    "deathtouch",
-                    "menace",
-                    "defender",
-                )
+                **{name: False for name in BOOLEAN_KEYWORD_NAMES},
+                "ward_generic": 0,
+                "minimum_blockers": 0,
+                "landwalk_mask": 0,
             },
         },
         "_source_kind": source_kind,
@@ -1231,6 +1515,7 @@ def _state_features(obs: dict[str, Any]) -> list[float]:
     state += _one_hot(p["phase"], PHASES)
     state += _seat_features(p["active_player"], actor)
     state += _seat_features(p["priority_player"], actor)
+    state += _seat_features(p["initiative"], actor)
     for rel in (0, 1):
         seat = actor if rel == 0 else ("p1" if actor == "p0" else "p0")
         idx = 0 if seat == "p0" else 1
@@ -1239,11 +1524,18 @@ def _state_features(obs: dict[str, Any]) -> list[float]:
         state.append(_number(p["hand_counts"][idx], 16.0))
         state.append(_number(p["library_counts"][idx], 64.0))
         status = p["player_status"][idx]
+        dungeon = status["dungeon"]
         state += [
             _flag(status["has_lost"]),
             _number(status["lands_played_this_turn"], 4.0),
             _flag(status["drew_from_empty"]),
             _number(status["draws_this_turn"], 8.0),
+            _number(status["spells_cast_this_turn"], 8.0),
+            1.0 if dungeon["dungeon_id"] is not None else 0.0,
+            _number(dungeon["dungeon_id"], 32.0),
+            1.0 if dungeon["room_id"] is not None else 0.0,
+            _number(dungeon["room_id"], 32.0),
+            _number(len(dungeon["completed_dungeons"]), 8.0),
         ]
     combat = p["combat"]
     state += [
@@ -1254,7 +1546,17 @@ def _state_features(obs: dict[str, Any]) -> list[float]:
         _number(len(p["stack"]), 32.0),
         _number(len(p["continuous_effects"]), 32.0),
         _number(len(p["exile_play_permissions"]), 32.0),
+        _number(sum(1 for relation in p["object_relations"] if relation["relation_kind"] == "attached_to"), 32.0),
+        _number(sum(1 for relation in p["object_relations"] if relation["relation_kind"] == "exiled_by"), 32.0),
     ]
+    for rel in (0, 1):
+        seat = actor if rel == 0 else ("p1" if actor == "p0" else "p0")
+        idx = 0 if seat == "p0" else 1
+        state.append(_number(len(obs["known_library_cards"][idx]), 16.0))
+    for rel in (0, 1):
+        seat = actor if rel == 0 else ("p1" if actor == "p0" else "p0")
+        idx = 0 if seat == "p0" else 1
+        state.append(_number(len(obs["known_hand_cards"][idx]), 16.0))
     engine = p["engine_context"]
     state += [_flag(engine["priority_passes"][0 if actor == "p0" else 1]), _flag(engine["priority_passes"][1 if actor == "p0" else 0])]
     state += [
@@ -1271,6 +1573,7 @@ def _state_features(obs: dict[str, Any]) -> list[float]:
         1.0 if engine["pending_optional_cost"] else 0.0,
         1.0 if engine["pending_optional_cost_sacrifice"] else 0.0,
         1.0 if engine["pending_spell_copy"] else 0.0,
+        1.0 if engine["pending_effect"] else 0.0,
         _number(len(engine["pending_triggers"]), 16.0),
     ]
     surface = p["surface_context"]
@@ -1347,6 +1650,18 @@ class _NodeRegistry:
         features, token = _card_public_features(_blank_public_from_ref(ref, source_kind), self.actor, order, source_kind, self.current_turn)
         return self._add_node(key, features, token, group)
 
+    def add_historical_ref_node(self, ref: dict[str, Any], order: int) -> int:
+        """Register payment-time provenance without claiming a current arena incarnation."""
+        key = self.validate_ref(ref)
+        features, token = _card_public_features(
+            _blank_public_from_ref(ref, "paid_cost"),
+            self.actor,
+            order,
+            "paid_cost",
+            self.current_turn,
+        )
+        return self._add_node(key, features, token, "paid_cost", register_arena=False)
+
     def resolve_context_ref_node(self, ref: dict[str, Any], group: str, order: int, source_kind: str, path: tuple[str, ...]) -> int:
         key = self.validate_ref(ref)
         if key in self._node_by_key:
@@ -1356,15 +1671,16 @@ class _NodeRegistry:
             raise FeatureSchemaError(f"context stable reference does not resolve to an observed object node: {'.'.join(path)}")
         return self.add_ref_node(ref, group, order, source_kind)
 
-    def _add_node(self, key: tuple[int, int], features: list[float], token: int, group: str) -> int:
+    def _add_node(self, key: tuple[int, int], features: list[float], token: int, group: str, *, register_arena: bool = True) -> int:
         if key in self._node_by_key:
             return self._node_by_key[key]
         arena = key[0]
-        if arena in self._node_by_arena:
+        if register_arena and arena in self._node_by_arena:
             raise FeatureSchemaError("multiple visible incarnations share one arena_id in a single decision")
         node_id = len(self.rows)
         self._node_by_key[key] = node_id
-        self._node_by_arena[arena] = node_id
+        if register_arena:
+            self._node_by_arena[arena] = node_id
         self.rows.append(features)
         self.tokens.append(token)
         self.groups.append(_group_id(group))
@@ -1470,6 +1786,49 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
     for i, card in enumerate(obs["own_hand"]):
         registry.add_card(_blank_public_from_ref(card["stable"]), "self_hand", i, "card")
     seat_order = [actor, "p1" if actor == "p0" else "p0"]
+    for owner_order, seat in enumerate(seat_order):
+        seat_idx = 0 if seat == "p0" else 1
+        group = "known_library_self" if seat == actor else "known_library_opponent"
+        for entry in obs["known_library_cards"][seat_idx]:
+            position = entry["position"]
+            node = registry.add_card(
+                _blank_public_from_ref(entry["card"]["stable"]),
+                group,
+                position,
+                "known_library",
+            )
+            _append_edge(
+                edge_rows,
+                edge_sources,
+                edge_targets,
+                node,
+                node,
+                "known_library",
+                owner_order,
+                position,
+                extra=_seat_features(seat, actor),
+            )
+    for owner_order, seat in enumerate(seat_order):
+        seat_idx = 0 if seat == "p0" else 1
+        group = "known_hand_self" if seat == actor else "known_hand_opponent"
+        for reveal_order, card in enumerate(obs["known_hand_cards"][seat_idx]):
+            node = registry.add_card(
+                _blank_public_from_ref(card["stable"]),
+                group,
+                reveal_order,
+                "known_hand",
+            )
+            _append_edge(
+                edge_rows,
+                edge_sources,
+                edge_targets,
+                node,
+                node,
+                "known_hand",
+                owner_order,
+                reveal_order,
+                extra=_seat_features(seat, actor),
+            )
     for seat in seat_order:
         seat_idx = 0 if seat == "p0" else 1
         group = "self_battlefield" if seat == actor else "opponent_battlefield"
@@ -1484,6 +1843,11 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
         registry.add_card(card, "exile", i)
     for i, item in enumerate(p["stack"]):
         registry.add_ref_node(item["source"], "stack", i, "stack")
+    historical_paid_order = 0
+    for item in p["stack"]:
+        for paid_ref in item["paid_cost_refs"]:
+            registry.add_historical_ref_node(paid_ref, historical_paid_order)
+            historical_paid_order += 1
 
     attachment_edges: list[tuple[int, int]] = []
     actor_relative_zones = []
@@ -1500,12 +1864,23 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
             attachment_edges.append((host, attachment))
     for attach_order, (host, attachment) in enumerate(sorted(attachment_edges)):
         _append_edge(edge_rows, edge_sources, edge_targets, host, attachment, "attachment", attach_order)
+    relation_edges: list[tuple[int, int, str]] = []
+    for relation in p["object_relations"]:
+        source = registry.resolve(relation["object"])
+        kind = relation["relation_kind"]
+        target = registry.resolve(relation["attached_to"] if kind == "attached_to" else relation["exiled_by"])
+        relation_edges.append((source, target, kind))
+    for relation_order, (source, target, kind) in enumerate(sorted(relation_edges, key=lambda edge: (edge[2], edge[0], edge[1]))):
+        _append_edge(edge_rows, edge_sources, edge_targets, source, target, kind, relation_order)
     for i, item in enumerate(p["stack"]):
         source = registry.resolve(item["source"])
         for target_index, target in enumerate(item["targets"]):
             if target["target_kind"] == "object":
                 target_node = registry.resolve(target["object"])
                 _append_edge(edge_rows, edge_sources, edge_targets, source, target_node, "stack_target", i, target_index)
+        for paid_order, paid_ref in enumerate(item["paid_cost_refs"]):
+            paid_node = registry.resolve(paid_ref)
+            _append_edge(edge_rows, edge_sources, edge_targets, source, paid_node, "paid_cost", i, paid_order)
     for i, ref in enumerate(p["combat"]["ordered_attackers"]):
         node = registry.resolve(ref)
         _append_edge(edge_rows, edge_sources, edge_targets, node, node, "combat_attacker", i)
@@ -1517,9 +1892,34 @@ def _objects(obs: dict[str, Any]) -> tuple[_NodeRegistry, list[list[float]], lis
             _append_edge(edge_rows, edge_sources, edge_targets, attacker_node, blocker_node, "combat_blocker", attacker_order, blocker_order)
     for effect_order, effect in enumerate(p["continuous_effects"]):
         affected = sorted(registry.resolve(ref) for ref in effect["affected_objects"])
-        extra = [_number(effect["layers"], 16.0), _number(effect["power_delta"], 20.0), _number(effect["toughness_delta"], 20.0), _flag(effect["grants_haste"])] + _one_hot(effect["duration"], EFFECT_DURATIONS)
+        controller = effect["controller"]
+        affected_players = effect["affected_players"]
+        extra = [
+            _number(effect["layers"], 16.0),
+            _number(effect["power_delta"], 20.0),
+            _number(effect["toughness_delta"], 20.0),
+            _flag(effect["grants_haste"]),
+        ] + _one_hot(effect["duration"], EFFECT_DURATIONS) + [
+            _flag(effect["global"]),
+        ] + _seat_features(controller, actor) + [
+            1.0 if actor in affected_players else 0.0,
+            1.0 if ("p1" if actor == "p0" else "p0") in affected_players else 0.0,
+            1.0 if effect["set_power"] is not None else 0.0,
+            _number(effect["set_power"], 20.0),
+            1.0 if effect["set_toughness"] is not None else 0.0,
+            _number(effect["set_toughness"], 20.0),
+            _number(effect["add_color_mask"], 63.0),
+            _number(effect["remove_color_mask"], 63.0),
+            _number(effect["ward_generic_delta"], 16.0),
+            _number(effect["minimum_blockers"], 8.0),
+            _number(effect["prevent_damage_from_color_mask"], 63.0),
+            _flag(effect["damage_cannot_be_prevented"]),
+        ]
+        source_node = registry.resolve(effect["source"]) if effect["source"] is not None else None
+        if source_node is not None:
+            _append_edge(edge_rows, edge_sources, edge_targets, source_node, source_node, "effect_source", effect_order, extra=extra)
         for affected_order, node in enumerate(affected):
-            _append_edge(edge_rows, edge_sources, edge_targets, node, node, "effect_affected", effect_order, affected_order, extra=extra)
+            _append_edge(edge_rows, edge_sources, edge_targets, source_node if source_node is not None else node, node, "effect_affected", effect_order, affected_order, extra=extra)
     permission_edges: list[tuple[int, list[float]]] = []
     for permission in p["exile_play_permissions"]:
         obj = permission["object"]
@@ -1601,6 +2001,8 @@ def _action_features(action: dict[str, Any], actor: str, registry: _NodeRegistry
         _number(semantic.get("remaining", 0), 8.0),
         _number(semantic.get("mode_index", 0), 8.0),
         _number(semantic.get("mode_count", 0), 8.0),
+        _number(semantic.get("option_index", 0), 16.0),
+        _number(semantic.get("option_count", 0), 16.0),
         _flag(semantic.get("pay", False)),
         _flag(semantic.get("change_target", False)),
         _flag(semantic.get("use_cost", False)),
@@ -1610,7 +2012,19 @@ def _action_features(action: dict[str, Any], actor: str, registry: _NodeRegistry
         _number(len(semantic.get("blockers", [])), 16.0),
         _number(len(semantic.get("pending_sources", [])), 16.0),
         _number(len(semantic.get("order", [])), 16.0),
+        _number(semantic.get("selected_count", 0), 16.0),
+        _number(semantic.get("min_targets", 0), 16.0),
+        _number(semantic.get("max_targets", 0), 16.0),
+        _number(semantic.get("number", 0), 16.0),
+        _number(semantic.get("minimum", 0), 16.0),
+        _number(semantic.get("maximum", 0), 16.0),
+        _flag(semantic.get("value", False)),
     ]
+    mana_choice = semantic.get("mana_choice")
+    features += [1.0 if mana_choice is not None else 0.0]
+    features += _one_hot(mana_choice, MANA_COLORS) if mana_choice is not None else [0.0] * len(MANA_COLORS)
+    color = semantic.get("color")
+    features += _one_hot(color, MANA_COLORS) if color is not None else [0.0] * len(MANA_COLORS)
     features += _one_hot(semantic.get("mode", CAST_MODES[0]), CAST_MODES)
     features += _one_hot(semantic.get("cost_kind", COST_KINDS[0]), COST_KINDS)
     features += _one_hot(semantic.get("choice", OPTIONAL_COST_CHOICES[0]), OPTIONAL_COST_CHOICES)
@@ -1698,6 +2112,7 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
         "pending_optional_cost",
         "pending_optional_cost_sacrifice",
         "pending_spell_copy",
+        "pending_effect",
         "pending_triggers",
     )
     rust_stage_order = pending_keys
@@ -1724,6 +2139,7 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             "pending_optional_cost": {()},
             "pending_optional_cost_sacrifice": {()},
             "pending_spell_copy": {()},
+            "pending_effect": {()},
             "pending_triggers": {()},
         }
         if tuple(extras) not in allowed_extras[stage]:
@@ -1787,6 +2203,36 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             if copy["arena_id"] == parent["arena_id"]:
                 raise FeatureSchemaError("pending_spell_copy copy must be distinct from its parent")
 
+    pending_effect = engine["pending_effect"]
+    if pending_effect is not None:
+        source = _require_ref_zone(pending_effect["source"], "pending_effect.source", ("Stack",))
+        _require_ref_controller(source, pending_effect["controller"], "pending_effect.source")
+        choice = pending_effect["choice"]
+        if choice is None:
+            raise FeatureSchemaError("an observed pending_effect must be waiting for a choice")
+        choice_kind = choice["choice_kind"]
+        if choice_kind == "options":
+            if choice["option_count"] < 2:
+                raise FeatureSchemaError("pending effect option choice must expose at least two options")
+        elif choice_kind == "targets":
+            selected_count = len(choice["selected_targets"])
+            if choice["min_targets"] > choice["max_targets"]:
+                raise FeatureSchemaError("pending effect target choice min_targets exceeds max_targets")
+            if selected_count > choice["max_targets"]:
+                raise FeatureSchemaError("pending effect target choice selected_targets exceeds max_targets")
+            if choice["can_finish"] != (selected_count >= choice["min_targets"]):
+                raise FeatureSchemaError("pending effect target choice can_finish disagrees with its minimum")
+            selected_keys = [_sort_key(target) for target in choice["selected_targets"]]
+            legal_keys = [_sort_key(target) for target in choice["legal_targets"]]
+            if len(selected_keys) != len(set(selected_keys)) or len(legal_keys) != len(set(legal_keys)):
+                raise FeatureSchemaError("pending effect target choices must not repeat targets")
+        elif choice_kind == "color":
+            if not choice["legal_colors"] or len(choice["legal_colors"]) != len(set(choice["legal_colors"])):
+                raise FeatureSchemaError("pending effect color choice must expose unique legal colors")
+        elif choice_kind == "number":
+            if choice["minimum"] > choice["maximum"]:
+                raise FeatureSchemaError("pending effect number choice minimum exceeds maximum")
+
 
 def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any], actor: str) -> None:
     stage = surface["current_stage"]
@@ -1848,6 +2294,12 @@ def _validate_engine_surface_tuple(projection: dict[str, Any], engine: dict[str,
             return
         if engine_stage == "pending_spell_copy":
             _require_actor(actor, engine["pending_spell_copy"]["player"], engine_stage)
+            return
+        if engine_stage == "pending_effect":
+            choice = engine["pending_effect"]["choice"]
+            if choice is None:
+                raise FeatureSchemaError("pending_effect priority tuple requires an active choice")
+            _require_actor(actor, choice["player"], engine_stage)
             return
         if engine_stage == "pending_optional_cost_sacrifice":
             _require_actor(actor, engine["pending_optional_cost_sacrifice"]["player"], engine_stage)
@@ -1912,6 +2364,69 @@ def _validate_engine_surface_tuple(projection: dict[str, Any], engine: dict[str,
 
 def _validate_observation_semantics(observation: dict[str, Any]) -> None:
     p = observation["projection"]
+    turn = p["turn"]
+    actor_index = 0 if observation["acting_player"] == "p0" else 1
+    public_cards = [
+        card
+        for zone in p["battlefield"] + p["graveyards"] + [p["exile"]]
+        for card in zone
+    ]
+    observed_node_keys = {
+        _stable_key(card["stable"])
+        for card in public_cards
+    }
+    observed_node_keys.update(_stable_key(card["stable"]) for card in observation["own_hand"])
+    observed_node_keys.update(
+        _stable_key(entry["card"]["stable"])
+        for owner_entries in observation["known_library_cards"]
+        for entry in owner_entries
+    )
+    observed_node_keys.update(
+        _stable_key(card["stable"])
+        for owner_entries in observation["known_hand_cards"]
+        for card in owner_entries
+    )
+    identity_by_key: dict[tuple[int, int], tuple[int, str, str, str]] = {}
+    for ref in _iter_card_refs_by_schema(observation, OBSERVATION_SPEC):
+        key = _stable_key(ref)
+        identity = _stable_identity(ref)
+        previous = identity_by_key.get(key)
+        if previous is not None and previous != identity:
+            raise FeatureSchemaError("inconsistent repeated stable reference for same incarnation")
+        identity_by_key[key] = identity
+    for card in public_cards:
+        characteristics = card["characteristics"]
+        keywords = characteristics["effective_keywords"]
+        if characteristics["effective_color_mask"] >= (1 << len(MANA_COLORS)):
+            raise FeatureSchemaError("effective_color_mask uses bits outside the stable WUBRGC mask")
+        if keywords["landwalk_mask"] >= (1 << len(MANA_COLORS)):
+            raise FeatureSchemaError("landwalk_mask uses bits outside the stable WUBRGC mask")
+        subtype_ids = characteristics["effective_subtype_ids"]
+        if subtype_ids != sorted(set(subtype_ids)):
+            raise FeatureSchemaError("effective_subtype_ids must be sorted and unique")
+        uses = card["ability_uses_this_turn"]
+        use_keys = [(entry["ability_kind"], entry["ability_index"]) for entry in uses]
+        kind_order = {"mana": 0, "activated": 1}
+        sorted_keys = sorted(set(use_keys), key=lambda key: (kind_order[key[0]], key[1]))
+        if use_keys != sorted_keys or any(entry["uses"] == 0 for entry in uses):
+            raise FeatureSchemaError("ability_uses_this_turn must have sorted unique kind/index keys and positive uses")
+        goads = card["goaded_by"]
+        goad_players = [entry["player"] for entry in goads]
+        if goad_players != sorted(set(goad_players), key=SEATS.index):
+            raise FeatureSchemaError("goaded_by must be sorted and unique by player")
+        if any(entry["expires_at_turn"] < turn for entry in goads):
+            raise FeatureSchemaError("goaded_by expiry cannot precede projection.turn")
+        for field in ("plotted_turn", "entered_battlefield_turn"):
+            value = card[field]
+            if value is not None and value > turn:
+                raise FeatureSchemaError(f"{field} cannot be in the future relative to projection.turn")
+    for status in p["player_status"]:
+        dungeon = status["dungeon"]
+        if (dungeon["dungeon_id"] is None) != (dungeon["room_id"] is None):
+            raise FeatureSchemaError("dungeon_id and room_id must be present or absent together")
+        completed = dungeon["completed_dungeons"]
+        if completed != sorted(set(completed)):
+            raise FeatureSchemaError("completed_dungeons must be sorted and unique")
     stack_by_key: dict[tuple[int, int], tuple[int, dict[str, Any]]] = {}
     for i, item in enumerate(p["stack"]):
         if item["stack_index"] != i:
@@ -1922,7 +2437,76 @@ def _validate_observation_semantics(observation: dict[str, Any]) -> None:
         if key in stack_by_key:
             raise FeatureSchemaError("stack contains duplicate stable object incarnations")
         stack_by_key[key] = (i, item)
+        observed_node_keys.add(key)
+        if item["stack_item_kind"] == "spell":
+            if item["cast_method"] is None:
+                raise FeatureSchemaError("spell stack items must expose cast_method")
+        elif item["cast_method"] is not None:
+            raise FeatureSchemaError("non-spell stack items cannot expose cast_method")
+        paid_keys = [_stable_key(ref) for ref in item["paid_cost_refs"]]
+        if len(paid_keys) != len(set(paid_keys)):
+            raise FeatureSchemaError("paid_cost_refs must not repeat an object incarnation")
     _validate_engine_context(p["engine_context"])
+    for owner_index, entries in enumerate(observation["known_library_cards"]):
+        owner = "p0" if owner_index == 0 else "p1"
+        positions: list[int] = []
+        identities: set[tuple[int, int]] = set()
+        for entry in entries:
+            position = entry["position"]
+            ref = entry["card"]["stable"]
+            if ref["zone"] != "Library" or ref["owner"] != owner:
+                raise FeatureSchemaError("known library card must belong to the indexed owner and remain in Library")
+            if position >= p["library_counts"][owner_index]:
+                raise FeatureSchemaError("known library position is outside the visible library count")
+            if _stable_key(ref) in identities:
+                raise FeatureSchemaError("known library knowledge repeats one object incarnation")
+            identities.add(_stable_key(ref))
+            positions.append(position)
+        if positions != sorted(set(positions)):
+            raise FeatureSchemaError("known library positions must be unique and strictly sorted")
+    if observation["known_hand_cards"][actor_index]:
+        raise FeatureSchemaError("known_hand_cards must not duplicate the acting player's own_hand")
+    for owner_index, entries in enumerate(observation["known_hand_cards"]):
+        owner = "p0" if owner_index == 0 else "p1"
+        identities: set[tuple[int, int]] = set()
+        for card in entries:
+            ref = card["stable"]
+            if ref["zone"] != "Hand" or ref["owner"] != owner:
+                raise FeatureSchemaError("known hand card must belong to the indexed owner and remain in Hand")
+            key = _stable_key(ref)
+            if key in identities:
+                raise FeatureSchemaError("known hand knowledge repeats one object incarnation")
+            identities.add(key)
+        if len(entries) > p["hand_counts"][owner_index]:
+            raise FeatureSchemaError("known hand identities exceed the visible hand count")
+    relation_keys: set[str] = set()
+    for relation in p["object_relations"]:
+        kind = relation["relation_kind"]
+        object_key = _stable_key(relation["object"])
+        related_key = _stable_key(relation["attached_to"] if kind == "attached_to" else relation["exiled_by"])
+        if object_key not in observed_node_keys or related_key not in observed_node_keys:
+            raise FeatureSchemaError("object relation endpoints must resolve to observed object nodes")
+        relation_key = _sort_key(relation)
+        if relation_key in relation_keys:
+            raise FeatureSchemaError("object_relations must not repeat a relation")
+        relation_keys.add(relation_key)
+    for effect in p["continuous_effects"]:
+        for field in ("add_color_mask", "remove_color_mask", "add_landwalk_mask", "remove_landwalk_mask", "prevent_damage_from_color_mask"):
+            if effect[field] >= (1 << len(MANA_COLORS)):
+                raise FeatureSchemaError(f"{field} uses bits outside the stable WUBRGC mask")
+        for field in ("add_subtype_ids", "remove_subtype_ids"):
+            values = effect[field]
+            if values != sorted(set(values)):
+                raise FeatureSchemaError(f"{field} must be sorted and unique")
+        if effect["source"] is not None and _stable_key(effect["source"]) not in observed_node_keys:
+            raise FeatureSchemaError("continuous effect source must resolve to an observed object node")
+        if any(_stable_key(ref) not in observed_node_keys for ref in effect["affected_objects"]):
+            raise FeatureSchemaError("continuous effect affected_objects must resolve to observed object nodes")
+        affected_players = effect["affected_players"]
+        if affected_players != sorted(set(affected_players), key=SEATS.index):
+            raise FeatureSchemaError("continuous effect affected_players must be sorted and unique")
+        if not effect["global"] and not effect["affected_objects"] and not affected_players:
+            raise FeatureSchemaError("continuous effect must declare an object, player, or global scope")
     pending_spell_copy = p["engine_context"]["pending_spell_copy"]
     if pending_spell_copy is not None:
         parent = _require_ref(pending_spell_copy["parent"], "pending_spell_copy.parent")
@@ -1949,6 +2533,12 @@ def _validate_observation_semantics(observation: dict[str, Any]) -> None:
                 raise FeatureSchemaError("pending_spell_copy inherited_target must match the copied spell target")
             if copy_index != len(p["stack"]) - 1 or copy_index != parent_index + 1:
                 raise FeatureSchemaError("pending_spell_copy copy must be directly above its parent on the stack")
+    pending_effect = p["engine_context"]["pending_effect"]
+    if pending_effect is not None:
+        source = _require_ref(pending_effect["source"], "pending_effect.source")
+        entry = stack_by_key.get(_stable_key(source))
+        if entry is None or entry[0] != len(p["stack"]) - 1:
+            raise FeatureSchemaError("pending_effect source must be the top public stack item")
     _validate_surface_context(p["surface_context"], p, observation["acting_player"])
     _validate_engine_surface_tuple(p, p["engine_context"], p["surface_context"], observation["acting_player"])
     for permission in p["exile_play_permissions"]:
@@ -1968,6 +2558,21 @@ def assert_action_classified(action: dict[str, Any]) -> None:
         raise FeatureSchemaError("choose_spell_mode.mode_index must be < mode_count")
     if semantic["action_kind"] == "choose_spell_mode" and semantic["mode_count"] <= 0:
         raise FeatureSchemaError("choose_spell_mode.mode_count must be positive")
+    if semantic["action_kind"] == "choose_effect_option":
+        if semantic["option_count"] < 2:
+            raise FeatureSchemaError("choose_effect_option.option_count must be at least two")
+        if semantic["option_index"] >= semantic["option_count"]:
+            raise FeatureSchemaError("choose_effect_option.option_index must be < option_count")
+    if semantic["action_kind"] == "choose_effect_target":
+        if semantic["min_targets"] > semantic["max_targets"]:
+            raise FeatureSchemaError("choose_effect_target.min_targets must be <= max_targets")
+        if semantic["selected_count"] >= semantic["max_targets"]:
+            raise FeatureSchemaError("choose_effect_target must leave room for the selected target")
+    if semantic["action_kind"] == "choose_effect_number":
+        if semantic["minimum"] > semantic["maximum"]:
+            raise FeatureSchemaError("choose_effect_number.minimum must be <= maximum")
+        if not semantic["minimum"] <= semantic["number"] <= semantic["maximum"]:
+            raise FeatureSchemaError("choose_effect_number.number must be inside its legal range")
     _validate_order_trigger_semantic(semantic)
 
 
@@ -1979,12 +2584,12 @@ def validate_legal_actions_contract(actions: Any, acting_player: str | None = No
     seen_stable: set[str] = set()
     for i, action in enumerate(actions):
         assert_action_classified(action)
-        if action["schema_version"] != 3:
+        if action["schema_version"] != 4:
             raise FeatureSchemaError("legal action schema mismatch")
         if action["selected_index"] != i:
             raise FeatureSchemaError("legal action selected_index is not contiguous")
-        if not action["stable_id"].startswith("legal-action-v3:"):
-            raise FeatureSchemaError("legal action stable_id must use the legal-action-v3 prefix")
+        if not action["stable_id"].startswith("legal-action-v4:"):
+            raise FeatureSchemaError("legal action stable_id must use the legal-action-v4 prefix")
         if action["stable_id"] in seen_stable:
             raise FeatureSchemaError("duplicate legal action stable_id")
         seen_stable.add(action["stable_id"])
@@ -2039,7 +2644,7 @@ def _validate_spell_copy_legal_actions(
 
 def encode_decision(observation: dict[str, Any], legal_actions: list[dict[str, Any]]) -> EncodedDecision:
     assert_observation_classified(observation)
-    if observation["schema_version"] != 3:
+    if observation["schema_version"] != 4:
         raise FeatureSchemaError("observation schema mismatch")
     validate_legal_actions_contract(legal_actions, observation["acting_player"])
     _validate_spell_copy_legal_actions(observation, legal_actions)
@@ -2117,13 +2722,13 @@ def every_action_variant_fixture(base_ref: dict[str, Any], target_ref: dict[str,
         second_ref = {**base_ref, "arena_id": base_ref["arena_id"] + 2, "card_db_id": base_ref["card_db_id"] + 2}
     target_object = {"target_kind": "object", "object": target_ref}
     return [
-        {"schema_version": 3, "selected_index": i, "stable_id": f"legal-action-v3:fixture-{i}", "display_text": f"text-{i}", "semantic": semantic}
+        {"schema_version": 4, "selected_index": i, "stable_id": f"legal-action-v4:fixture-{i}", "display_text": f"text-{i}", "semantic": semantic}
         for i, semantic in enumerate(
             [
                 {"action_kind": "pass", "actor": "p0"},
                 {"action_kind": "play_land", "actor": "p0", "source": base_ref},
                 {"action_kind": "cast_spell", "actor": "p0", "source": base_ref},
-                {"action_kind": "activate_mana_ability", "actor": "p0", "source": base_ref},
+                {"action_kind": "activate_mana_ability", "actor": "p0", "source": base_ref, "mana_choice": "R"},
                 {"action_kind": "activate_ability", "actor": "p0", "source": base_ref, "ability_index": 1},
                 {"action_kind": "plot_spell", "actor": "p0", "source": base_ref},
                 {"action_kind": "choose_target", "actor": "p0", "source": base_ref, "remaining": 1, "target": target_player},
@@ -2132,6 +2737,13 @@ def every_action_variant_fixture(base_ref: dict[str, Any], target_ref: dict[str,
                 {"action_kind": "choose_cast_mode", "actor": "p0", "source": base_ref, "mode": "Normal"},
                 {"action_kind": "choose_kicker", "actor": "p0", "source": base_ref, "pay": True},
                 {"action_kind": "choose_spell_mode", "actor": "p0", "source": base_ref, "mode_index": 0, "mode_count": 2},
+                {"action_kind": "choose_effect_option", "actor": "p0", "source": base_ref, "option_index": 1, "option_count": 2},
+                {"action_kind": "choose_effect_target", "actor": "p0", "source": base_ref, "target": target_object, "selected_count": 0, "min_targets": 1, "max_targets": 2},
+                {"action_kind": "finish_effect_selection", "actor": "p0", "source": base_ref, "selected_count": 1},
+                {"action_kind": "choose_effect_color", "actor": "p0", "source": base_ref, "color": "R"},
+                {"action_kind": "choose_effect_number", "actor": "p0", "source": base_ref, "number": 2, "minimum": -1, "maximum": 3},
+                {"action_kind": "choose_effect_boolean", "actor": "p0", "source": base_ref, "value": True},
+                {"action_kind": "finish_target_selection", "actor": "p0", "source": base_ref, "selected_count": 1},
                 {"action_kind": "choose_optional_cost_use", "actor": "p0", "use_cost": True},
                 {"action_kind": "choose_optional_cost_which", "actor": "p0", "choice": "Discard"},
                 {"action_kind": "choose_spell_copy_payment", "actor": "p0", "source": base_ref, "pay": True},

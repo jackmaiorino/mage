@@ -425,6 +425,11 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: {
+                    let mut v4 = crate::state::ObjectStateV4::from_card_def(t.token_def);
+                    v4.entered_battlefield_turn = Some(state.turn);
+                    v4
+                },
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -480,9 +485,18 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
     let from_zone = state.objects.get(id).zone;
 
     remove_from_zone(state, owner, id, from_zone);
+    state.forget_hand_object(id);
+    state.clear_object_relations(id);
 
     match to_zone {
-        Zone::Library => state.players[owner.index()].library.insert(0, id),
+        Zone::Library => {
+            // A generic zone change does not carry enough visibility
+            // information to say which observers know the inserted card.
+            // Clear conservatively; a library effect that explicitly
+            // reveals the result can repopulate knowledge afterward.
+            state.clear_library_knowledge(owner);
+            state.players[owner.index()].library.insert(0, id);
+        }
         Zone::Hand => state.players[owner.index()].hand.push(id),
         Zone::Battlefield => state.players[owner.index()].battlefield.push(id),
         Zone::Graveyard => state.players[owner.index()].graveyard.push(id),
@@ -491,20 +505,34 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
         Zone::Stack => panic!("MoveObject to Stack is an engine action, not an effect leaf"),
     }
 
-    let obj = state.objects.get_mut(id);
-    obj.zone = to_zone;
-    // CR 400.7's zone-change identity: bumped on *every* zone change,
-    // regardless of which zones, so `engine::PlayPermission::
-    // zone_change_generation` can tell "still sitting where it was granted"
-    // apart from "moved since, for any reason" without needing a
-    // zone-specific special case.
-    obj.zone_change_count += 1;
-    if to_zone == Zone::Battlefield {
-        obj.tapped = false;
-        obj.summoning_sick = true;
-        obj.damage = 0;
-        obj.counters = Default::default();
-        obj.attachments.clear();
+    let turn = state.turn;
+    {
+        let obj = state.objects.get_mut(id);
+        obj.zone = to_zone;
+        // CR 400.7's zone-change identity: bumped on *every* zone change,
+        // regardless of which zones, so `engine::PlayPermission::
+        // zone_change_generation` can tell "still sitting where it was granted"
+        // apart from "moved since, for any reason" without needing a
+        // zone-specific special case.
+        obj.zone_change_count += 1;
+        obj.v4.reset_for_zone_change(obj.card_def, to_zone, turn);
+        if to_zone == Zone::Battlefield {
+            obj.tapped = false;
+            obj.summoning_sick = true;
+            obj.damage = 0;
+            obj.counters = Default::default();
+            obj.attachments.clear();
+        }
+    }
+    if to_zone == Zone::Hand && from_zone != Zone::Library {
+        // Returning a publicly identified card to hand does not make that
+        // identity secret again. The owner sees it through `own_hand`; the
+        // other observer receives an incarnation-bound known-hand fact.
+        for observer in [PlayerId::P0, PlayerId::P1] {
+            state
+                .reveal_hand_card(observer, owner, id)
+                .expect("just moved this live public object into its owner's hand");
+        }
     }
 }
 
@@ -532,7 +560,12 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
 pub fn cease_to_exist(state: &mut GameState, id: ObjectId) -> bool {
     let owner = state.objects.get(id).owner;
     let zone = state.objects.get(id).zone;
-    remove_from_zone(state, owner, id, zone)
+    let removed = remove_from_zone(state, owner, id, zone);
+    if removed {
+        state.forget_hand_object(id);
+        state.clear_object_relations(id);
+    }
+    removed
 }
 
 /// Returns whether `id` was actually present in `zone`'s list before being
@@ -544,7 +577,21 @@ fn remove_from_zone(state: &mut GameState, owner: PlayerId, id: ObjectId, zone: 
         before != v.len()
     }
     match zone {
-        Zone::Library => drop_from(&mut state.players[owner.index()].library, id),
+        Zone::Library => {
+            let position = state.players[owner.index()]
+                .library
+                .iter()
+                .position(|&candidate| candidate == id);
+            let removed = drop_from(&mut state.players[owner.index()].library, id);
+            if let Some(position) = position {
+                // At present every generic library departure is from a
+                // publicly determined position (draw/top-card exile). A
+                // future hidden search must use its own knowledge-aware
+                // library operation instead of this generic zone move.
+                state.note_library_removal(owner, position);
+            }
+            removed
+        }
         Zone::Hand => drop_from(&mut state.players[owner.index()].hand, id),
         Zone::Battlefield => drop_from(&mut state.players[owner.index()].battlefield, id),
         Zone::Graveyard => drop_from(&mut state.players[owner.index()].graveyard, id),

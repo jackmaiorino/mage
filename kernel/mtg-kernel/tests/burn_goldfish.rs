@@ -76,6 +76,7 @@ fn kind_of(d: &Decision) -> Kind {
         | Decision::Discard { .. }
         | Decision::DeclareBlockers { .. }
         | Decision::ChooseSpellMode { .. }
+        | Decision::ChooseEffectOption { .. }
         | Decision::ChooseOptionalCost { .. }
         | Decision::ChooseSpellCopyPayment { .. }
         | Decision::ChooseSpellCopyRetarget { .. }
@@ -151,6 +152,7 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             | Decision::Discard { .. }
             | Decision::DeclareBlockers { .. }
             | Decision::ChooseSpellMode { .. }
+            | Decision::ChooseEffectOption { .. }
             | Decision::ChooseOptionalCost { .. }
             | Decision::ChooseSpellCopyPayment { .. }
             | Decision::ChooseSpellCopyRetarget { .. }

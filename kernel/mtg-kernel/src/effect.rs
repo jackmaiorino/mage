@@ -17,7 +17,7 @@ use crate::card_def::Subtype;
 use crate::event;
 use crate::ids::{ObjectId, PlayerId};
 use crate::mana::ManaColor;
-use crate::state::{GameState, Target, Zone};
+use crate::state::{GameState, StackItem, Target, Zone};
 use serde::{Deserialize, Serialize};
 
 /// Which of a controller's creatures a team-wide pump/keyword effect
@@ -271,9 +271,65 @@ pub enum EffectOp {
     },
 }
 
+/// One owned interpreter frame. `path` is the structural route through the
+/// original effect program (sequence/branch/choice ordinals), making a
+/// suspended continuation deterministic, hashable, and auditable without
+/// storing closures or card-definition function pointers.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct EffectFrame {
+    pub op: EffectOp,
+    pub path: Vec<u16>,
+}
+
+/// A policy-visible choice yielded by the generic effect interpreter. This is
+/// intentionally typed and extensible: later library ordering, subset, Ward,
+/// and Escape choices add variants here instead of adding card-specific
+/// `EngineState::pending_*` fields.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum PendingEffectChoice {
+    ChooseOption {
+        player: PlayerId,
+        path: Vec<u16>,
+        options: Vec<EffectOp>,
+    },
+}
+
+impl PendingEffectChoice {
+    pub fn player(&self) -> PlayerId {
+        match self {
+            PendingEffectChoice::ChooseOption { player, .. } => *player,
+        }
+    }
+
+    pub fn option_count(&self) -> usize {
+        match self {
+            PendingEffectChoice::ChooseOption { options, .. } => options.len(),
+        }
+    }
+}
+
+/// Full in-state continuation for one resolving stack item. The complete
+/// `StackItem`, execution context, remaining frames, and active typed choice
+/// all participate in clone/equality/hash/serde, so snapshot/restore cannot
+/// lose or alias a mid-resolution decision.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct EffectContinuation {
+    pub resolving_item: StackItem,
+    pub ctx: ExecCtx,
+    pub frames: Vec<EffectFrame>,
+    pub choice: Option<PendingEffectChoice>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum ResumableProgress {
+    Complete(StackItem),
+    Suspended,
+}
+
 /// Everything an effect program needs to resolve symbolic refs against a
 /// concrete game: which object it's running for, who controls it, and the
 /// targets chosen when it was cast/activated.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ExecCtx {
     pub source: ObjectId,
     pub controller: PlayerId,
@@ -291,6 +347,187 @@ pub struct ExecCtx {
     /// Kicker (the overwhelming majority), and for any ability/trigger not
     /// downstream of a kicked cast.
     pub kicked: bool,
+}
+
+/// Whether this program contains a policy-visible `Choice` anywhere in its
+/// tree. Existing Burn/Rally programs stay on their frozen synchronous/legacy
+/// continuation paths; only genuinely choice-bearing programs enter the v4
+/// interpreter in this first migration slice.
+pub fn contains_player_choice(op: &EffectOp) -> bool {
+    match op {
+        EffectOp::Sequence(ops) => ops.iter().any(contains_player_choice),
+        EffectOp::Conditional { then, else_, .. } => {
+            contains_player_choice(then) || contains_player_choice(else_)
+        }
+        EffectOp::Choice { options, .. } => {
+            options.len() > 1 || options.iter().any(contains_player_choice)
+        }
+        _ => false,
+    }
+}
+
+/// Starts a choice-bearing stack resolution and runs synchronously until it
+/// either completes or yields a real player choice. Legacy-suspending leaves
+/// are rejected up front in this first v4 slice: mixing them with remaining
+/// frames would change the already-certified Burn/Rally completion timing.
+pub fn begin_resumable_resolution(
+    op: &EffectOp,
+    ctx: &ExecCtx,
+    resolving_item: StackItem,
+    state: &mut GameState,
+) -> Result<ResumableProgress, String> {
+    if state.engine.pending_effect.is_some() {
+        return Err("cannot begin an effect while another continuation is pending".to_string());
+    }
+    validate_resumable_program(op)?;
+    state.engine.pending_effect = Some(EffectContinuation {
+        resolving_item,
+        ctx: ctx.clone(),
+        frames: vec![EffectFrame {
+            op: op.clone(),
+            path: Vec::new(),
+        }],
+        choice: None,
+    });
+    drive_resumable(state)
+}
+
+/// Resumes after `choose_resumable_option` installed the selected branch.
+pub fn resume_resumable_resolution(state: &mut GameState) -> Result<ResumableProgress, String> {
+    if state.engine.pending_effect.is_none() {
+        return Err("no effect continuation is pending".to_string());
+    }
+    drive_resumable(state)
+}
+
+/// Records one selected option without executing it. The next engine advance
+/// owns resumption, preserving the usual step/advance separation and making a
+/// snapshot taken immediately after the action deterministic too.
+pub fn choose_resumable_option(state: &mut GameState, option_index: u16) -> Result<(), String> {
+    let continuation = state
+        .engine
+        .pending_effect
+        .as_mut()
+        .ok_or("no effect continuation is pending")?;
+    let choice = continuation
+        .choice
+        .take()
+        .ok_or("the pending effect is not waiting for a choice")?;
+    match choice {
+        PendingEffectChoice::ChooseOption {
+            player,
+            mut path,
+            options,
+        } => {
+            let index = option_index as usize;
+            let Some(selected) = options.get(index).cloned() else {
+                continuation.choice = Some(PendingEffectChoice::ChooseOption {
+                    player,
+                    path,
+                    options,
+                });
+                return Err(format!(
+                    "effect option {option_index} is outside the available range"
+                ));
+            };
+            path.push(option_index);
+            continuation.frames.push(EffectFrame { op: selected, path });
+            Ok(())
+        }
+    }
+}
+
+fn validate_resumable_program(op: &EffectOp) -> Result<(), String> {
+    match op {
+        EffectOp::Sequence(ops) => {
+            for inner in ops {
+                validate_resumable_program(inner)?;
+            }
+        }
+        EffectOp::Conditional { then, else_, .. } => {
+            validate_resumable_program(then)?;
+            validate_resumable_program(else_)?;
+        }
+        EffectOp::Choice { options, .. } => {
+            for option in options {
+                validate_resumable_program(option)?;
+            }
+        }
+        EffectOp::DiscardCards { .. }
+        | EffectOp::MayPayCostThen { .. }
+        | EffectOp::OfferAffectedPlayerSpellCopy { .. } => {
+            return Err(
+                "choice-bearing programs cannot yet mix legacy-suspending effect leaves"
+                    .to_string(),
+            );
+        }
+        _ => {}
+    }
+    Ok(())
+}
+
+fn drive_resumable(state: &mut GameState) -> Result<ResumableProgress, String> {
+    let mut continuation = state
+        .engine
+        .pending_effect
+        .take()
+        .ok_or("no effect continuation is pending")?;
+    if continuation.choice.is_some() {
+        state.engine.pending_effect = Some(continuation);
+        return Ok(ResumableProgress::Suspended);
+    }
+
+    while let Some(frame) = continuation.frames.pop() {
+        match frame.op {
+            EffectOp::Sequence(ops) => {
+                for (index, inner) in ops.into_iter().enumerate().rev() {
+                    let mut path = frame.path.clone();
+                    path.push(index as u16);
+                    continuation.frames.push(EffectFrame { op: inner, path });
+                }
+            }
+            EffectOp::Conditional { cond, then, else_ } => {
+                let branch = if eval_cond(&cond, &continuation.ctx, state) {
+                    0
+                } else {
+                    1
+                };
+                let mut path = frame.path;
+                path.push(branch);
+                continuation.frames.push(EffectFrame {
+                    op: if branch == 0 { *then } else { *else_ },
+                    path,
+                });
+            }
+            EffectOp::Choice {
+                controller,
+                mut options,
+            } => match options.len() {
+                0 => {}
+                1 => {
+                    let mut path = frame.path;
+                    path.push(0);
+                    continuation.frames.push(EffectFrame {
+                        op: options.remove(0),
+                        path,
+                    });
+                }
+                _ => {
+                    let player = continuation.ctx.resolve_player(controller, state);
+                    continuation.choice = Some(PendingEffectChoice::ChooseOption {
+                        player,
+                        path: frame.path,
+                        options,
+                    });
+                    state.engine.pending_effect = Some(continuation);
+                    return Ok(ResumableProgress::Suspended);
+                }
+            },
+            leaf => execute(&leaf, &continuation.ctx, state),
+        }
+    }
+
+    Ok(ResumableProgress::Complete(continuation.resolving_item))
 }
 
 impl ExecCtx {

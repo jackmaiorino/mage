@@ -23,7 +23,7 @@ from fixtures import complete_legal_actions, complete_observation, deep_copy, le
 
 
 def pass_action() -> list[dict[str, object]]:
-    return [{"schema_version": 3, "selected_index": 0, "stable_id": "legal-action-v3:pass", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"}]
+    return [{"schema_version": 4, "selected_index": 0, "stable_id": "legal-action-v4:pass", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"}]
 
 
 def zero_object_observation() -> dict[str, object]:

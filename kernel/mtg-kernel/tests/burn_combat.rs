@@ -67,6 +67,7 @@ fn kind_of(d: &Decision) -> Kind {
         // Masked Meower) has no Plot/Madness/modal card, so none of these
         // are ever reachable here.
         Decision::ChooseSpellMode { .. }
+        | Decision::ChooseEffectOption { .. }
         | Decision::ChooseOptionalCost { .. }
         | Decision::ChooseSpellCopyPayment { .. }
         | Decision::ChooseSpellCopyRetarget { .. }
@@ -308,6 +309,7 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
                 }
             }
             Decision::ChooseSpellMode { .. }
+            | Decision::ChooseEffectOption { .. }
             | Decision::ChooseOptionalCost { .. }
             | Decision::ChooseSpellCopyPayment { .. }
             | Decision::ChooseSpellCopyRetarget { .. }

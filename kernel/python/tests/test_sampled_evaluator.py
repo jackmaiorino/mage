@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import decimal
+import importlib
 import io
 import json
 import os
@@ -19,6 +20,7 @@ import torch
 import mtg_kernel_rl.action_sampling as action_sampling_mod
 import mtg_kernel_rl.cli as cli_mod
 import mtg_kernel_rl.sampled_evaluator as sampled_mod
+import mtg_kernel_rl.sampled_evaluation_store as sampled_store_mod
 from mtg_kernel_rl.artifact_io import canonical_json_bytes, read_json_file, sha256_bytes
 from mtg_kernel_rl.artifacts import set_fault_injector
 from mtg_kernel_rl.client import Decision, Terminal
@@ -41,13 +43,53 @@ from mtg_kernel_rl.sampled_evaluation_store import (
     V2_GAME_SCHEMA,
     V2_PAIR_SCHEMA,
     V2_RUN_SCHEMA,
+    V3_ACTION_SELECTION_CONTRACT,
+    V3_ALGORITHM_CONTRACT,
+    V3_GAME_SCHEMA,
+    V3_PAIR_SCHEMA,
+    V3_RUN_SCHEMA,
     validate_sampled_evaluation,
 )
 from mtg_kernel_rl.sampled_evaluator import _run_sampled_game, _select_sampled_action, evaluate_sampled
 from mtg_kernel_rl.trainer import train
 from mtg_kernel_rl.training_store import TrainingStore
 
-from fixtures import PROVENANCE, actor_observation, fake_launcher, legal_actions
+from fixtures import DECK_HASHES, DECK_IDS, PROVENANCE, actor_observation, fake_launcher, legal_actions
+
+
+V3_ACTION_SELECTION_GOLDEN = {
+    "categorical_sampler": {
+        "action_rng": "one splitmix64-v1 uint64 output per decision, initialized directly from the action seed",
+        "algorithm": "inverse CDF over Hamilton-apportioned 2**64-unit mass in legal-action order",
+        "decimal_softmax": {
+            "context": {
+                "capitals": 1,
+                "clamp": 0,
+                "emax": 999_999,
+                "emin": -999_999,
+                "flags_initially_set": [],
+                "traps": ["InvalidOperation", "DivisionByZero", "Overflow"],
+            },
+            "delta_precision_digits": 256,
+            "exp_cutoff": "strictly below -128 receives zero mass",
+            "exp_precision_digits": 80,
+            "input": "exact IEEE-754 binary32 logits converted to Decimal",
+            "rounding": "ROUND_HALF_EVEN",
+        },
+        "probability_mass": {
+            "apportionment": (
+                "floor exact normalized Decimal-exp shares, then residual units by descending exact remainder "
+                "and ascending legal-action index"
+            ),
+            "total": "2**64",
+        },
+        "sampler_version": "decimal-softmax-hamilton-splitmix64-v1",
+    },
+    "inference": "torch.inference_mode",
+    "mode": "sampled_softmax",
+    "replacement": False,
+    "temperature_hex": "0x1.0000000000000p+0",
+}
 
 
 def _train_fixture(
@@ -188,7 +230,16 @@ raise SystemExit(92)
 
 class SampledSelectorTest(unittest.TestCase):
     def _decision(self) -> Decision:
-        return Decision(0, 0, "p0", actor_observation("p0"), legal_actions("p0"), dict(PROVENANCE))
+        return Decision(
+            0,
+            0,
+            "p0",
+            actor_observation("p0"),
+            legal_actions("p0"),
+            dict(PROVENANCE),
+            DECK_IDS,
+            DECK_HASHES,
+        )
 
     def test_selector_goldens_repeatability_seed_separation_and_global_rng(self) -> None:
         decision = self._decision()
@@ -361,9 +412,20 @@ class SampledCrnRoutingTest(unittest.TestCase):
                     actor_observation(actor, self.index),
                     legal_actions(actor),
                     dict(PROVENANCE),
+                    DECK_IDS,
+                    DECK_HASHES,
                 )
 
-            def reset(self, *, episode_id: int, env_seed: int, max_decisions: int):  # type: ignore[no-untyped-def]
+            def reset(
+                self,
+                *,
+                episode_id: int,
+                env_seed: int,
+                max_decisions: int,
+                deck_ids: tuple[str, str],
+            ):  # type: ignore[no-untyped-def]
+                if deck_ids != DECK_IDS:
+                    raise AssertionError("sampled evaluator changed physical deck order")
                 self.index = 0
                 self.episode_id = episode_id
                 return self._decision()
@@ -381,6 +443,8 @@ class SampledCrnRoutingTest(unittest.TestCase):
                     [1, -1],
                     len(actors),
                     dict(PROVENANCE),
+                    DECK_IDS,
+                    DECK_HASHES,
                 )
 
         candidate = object()
@@ -404,6 +468,8 @@ class SampledCrnRoutingTest(unittest.TestCase):
                 candidate_model=candidate,  # type: ignore[arg-type]
                 baseline_model=baseline,  # type: ignore[arg-type]
                 expected_provenance=PROVENANCE,
+                deck_ids=DECK_IDS,
+                deck_hashes=DECK_HASHES,
             )
             current_leg["value"] = 1
             second = _run_sampled_game(
@@ -416,6 +482,8 @@ class SampledCrnRoutingTest(unittest.TestCase):
                 candidate_model=candidate,  # type: ignore[arg-type]
                 baseline_model=baseline,  # type: ignore[arg-type]
                 expected_provenance=PROVENANCE,
+                deck_ids=DECK_IDS,
+                deck_hashes=DECK_HASHES,
             )
 
         first_events = events[: len(actors)]
@@ -434,6 +502,31 @@ class SampledCrnRoutingTest(unittest.TestCase):
         self.assertEqual([model for _leg, _seat, model, _seed in second_events], [baseline, candidate, baseline])
         self.assertEqual(first["candidate_decisions"], second["baseline_decisions"])
         self.assertEqual(first["baseline_decisions"], second["candidate_decisions"])
+
+
+class SampledV3FreezeTest(unittest.TestCase):
+    def test_v3_action_contract_is_its_own_golden_under_future_live_sampler_change(self) -> None:
+        self.assertEqual(V3_ACTION_SELECTION_CONTRACT, V3_ACTION_SELECTION_GOLDEN)
+        self.assertEqual(ACTION_SELECTION_CONTRACT, V3_ACTION_SELECTION_GOLDEN)
+        future_sampler = action_sampling_mod.fixed_categorical_sampler_contract()
+        future_sampler["sampler_version"] = "simulated-future-sampler-v99"
+        self.assertNotEqual(future_sampler, V3_ACTION_SELECTION_GOLDEN["categorical_sampler"])
+
+        try:
+            with mock.patch.object(
+                action_sampling_mod,
+                "fixed_categorical_sampler_contract",
+                return_value=future_sampler,
+            ):
+                reloaded = importlib.reload(sampled_store_mod)
+                self.assertEqual(reloaded.V3_ACTION_SELECTION_CONTRACT, V3_ACTION_SELECTION_GOLDEN)
+                self.assertEqual(reloaded.ACTION_SELECTION_CONTRACT["categorical_sampler"], future_sampler)
+                self.assertNotEqual(
+                    reloaded.V3_ACTION_SELECTION_CONTRACT,
+                    reloaded.ACTION_SELECTION_CONTRACT,
+                )
+        finally:
+            importlib.reload(sampled_store_mod)
 
 
 class SampledEndToEndTest(unittest.TestCase):
@@ -461,13 +554,17 @@ class SampledEndToEndTest(unittest.TestCase):
             self.assertEqual(manifest["schema"], RUN_SCHEMA)
             self.assertEqual(manifest["algorithm"], ALGORITHM_CONTRACT)
             self.assertEqual(manifest["artifact_schemas"], {"game": GAME_SCHEMA, "pair": PAIR_SCHEMA, "run": RUN_SCHEMA})
+            self.assertEqual(V3_ALGORITHM_CONTRACT, ALGORITHM_CONTRACT)
+            self.assertEqual(V3_ACTION_SELECTION_CONTRACT, V3_ACTION_SELECTION_GOLDEN)
             self.assertEqual(manifest["action_seed_derivation"], ACTION_SEED_DERIVATION_CONTRACT)
             self.assertEqual(manifest["action_selection"], ACTION_SELECTION_CONTRACT)
             self.assertEqual(manifest["seat_schedule"], SEAT_SCHEDULE_CONTRACT)
             games = _jsonl(root / "sampled-a" / "games.jsonl")
             pairs = _jsonl(root / "sampled-a" / "pairs.jsonl")
-            self.assertTrue(all(len(row) == 17 and row["schema"] == GAME_SCHEMA for row in games))
-            self.assertTrue(all(len(row) == 8 and row["schema"] == PAIR_SCHEMA for row in pairs))
+            self.assertTrue(all(len(row) == 19 and row["schema"] == GAME_SCHEMA for row in games))
+            self.assertTrue(all(len(row) == 10 and row["schema"] == PAIR_SCHEMA for row in pairs))
+            self.assertTrue(all(tuple(row["deck_ids"]) == DECK_IDS for row in games + pairs))
+            self.assertTrue(all(tuple(row["deck_hashes"]) == DECK_HASHES for row in games + pairs))
             for pair_index, pair in enumerate(pairs):
                 first, second = games[2 * pair_index : 2 * pair_index + 2]
                 self.assertEqual(pair["total_half_points"], 2)
@@ -538,6 +635,9 @@ class SampledEndToEndTest(unittest.TestCase):
             "8",
             "--timeout-ms",
             "5000",
+            "--deck-ids",
+            "Burn",
+            "Rally",
         ]
         parsed = cli_mod.build_parser().parse_args(argv)
         self.assertEqual(parsed.command, "evaluate-sampled")
@@ -548,6 +648,7 @@ class SampledEndToEndTest(unittest.TestCase):
         with mock.patch.object(cli_mod, "evaluate_sampled", return_value=result) as called, contextlib.redirect_stdout(output):
             self.assertEqual(cli_mod.main(argv), 0)
         called.assert_called_once()
+        self.assertEqual(called.call_args.kwargs["deck_ids"], ("Burn", "Rally"))
         line = output.getvalue()
         self.assertEqual(line, json.dumps(json.loads(line), sort_keys=True, separators=(",", ":")) + "\n")
         self.assertEqual(
@@ -749,13 +850,21 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
                 return target
 
             manifest_mutations = (
-                ("run-schema", lambda value: value.__setitem__("schema", "kernel_rl_paired_evaluation/v1")),
+                ("legacy-v1-run-schema", lambda value: value.__setitem__("schema", "kernel_rl_paired_evaluation/v1")),
                 ("legacy-v2-run-schema", lambda value: value.__setitem__("schema", V2_RUN_SCHEMA)),
+                ("legacy-v3-run-schema", lambda value: value.__setitem__("schema", V3_RUN_SCHEMA)),
                 (
                     "legacy-v2-artifact-schemas",
                     lambda value: value.__setitem__(
                         "artifact_schemas",
                         {"game": V2_GAME_SCHEMA, "pair": V2_PAIR_SCHEMA, "run": V2_RUN_SCHEMA},
+                    ),
+                ),
+                (
+                    "legacy-v3-artifact-schemas",
+                    lambda value: value.__setitem__(
+                        "artifact_schemas",
+                        {"game": V3_GAME_SCHEMA, "pair": V3_PAIR_SCHEMA, "run": V3_RUN_SCHEMA},
                     ),
                 ),
                 ("legacy-v2-algorithm", lambda value: value.__setitem__("algorithm", V2_ALGORITHM_CONTRACT)),
@@ -790,9 +899,12 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
                 ),
                 ("seat-candidate-p0", lambda value: value["seat_schedule"].__setitem__("candidate_as_p0", "bad")),
                 ("seat-candidate-p1", lambda value: value["seat_schedule"].__setitem__("candidate_as_p1", "bad")),
+                ("seat-deck-order", lambda value: value["seat_schedule"].__setitem__("deck_order", "bad")),
                 ("seat-env", lambda value: value["seat_schedule"].__setitem__("paired_environment_seed", "bad")),
                 ("seat-action", lambda value: value["seat_schedule"].__setitem__("paired_physical_action_streams", "bad")),
                 ("environment", lambda value: value["environment"].__setitem__("binary_sha256", "0" * 64)),
+                ("environment-deck-hash", lambda value: value["environment"]["deck_hashes"].__setitem__(0, 1)),
+                ("configuration-deck-id", lambda value: value["configuration"]["deck_ids"].__setitem__(1, "Rally")),
                 ("statistics", lambda value: value["statistics"]["paired"].__setitem__("total_half_points", 0)),
                 ("files", lambda value: value["files"]["games.jsonl"].__setitem__("sha256", "0" * 64)),
                 ("bool-type", lambda value: value["configuration"].__setitem__("base_seed", True)),
@@ -811,6 +923,8 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
                 ("pair", lambda row: row.__setitem__("pair_index", 1)),
                 ("episode", lambda row: row.__setitem__("episode_id", 2)),
                 ("env", lambda row: row.__setitem__("env_seed", row["env_seed"] + 1)),
+                ("deck-id", lambda row: row["deck_ids"].__setitem__(0, "Rally")),
+                ("deck-hash", lambda row: row["deck_hashes"].__setitem__(0, 1)),
                 ("candidate-seat", lambda row: row.__setitem__("candidate_seat", "p1")),
                 ("baseline-seat", lambda row: row.__setitem__("baseline_seat", "p0")),
                 ("terminal-code", lambda row: row.__setitem__("terminal_code", "bad")),
@@ -838,6 +952,8 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
                 ("schema", lambda row: row.__setitem__("schema", "bad")),
                 ("pair", lambda row: row.__setitem__("pair_index", 1)),
                 ("env", lambda row: row.__setitem__("env_seed", row["env_seed"] + 1)),
+                ("deck-id", lambda row: row["deck_ids"].__setitem__(0, "Rally")),
+                ("deck-hash", lambda row: row["deck_hashes"].__setitem__(0, 1)),
                 ("p0-episode", lambda row: row.__setitem__("candidate_as_p0_episode_id", 2)),
                 ("p1-episode", lambda row: row.__setitem__("candidate_as_p1_episode_id", 3)),
                 ("p0-points", lambda row: row.__setitem__("candidate_as_p0_half_points", 0)),

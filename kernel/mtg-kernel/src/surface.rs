@@ -599,6 +599,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -720,6 +721,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -768,6 +770,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -816,6 +819,7 @@ mod tests {
             mode_chosen: 0,
             madness_offer: false,
             kicked: false,
+            v4: crate::state::StackStateV4::spell(crate::state::CastMethodV4::Normal),
         });
 
         // The very next suppression recorded must be P0's forced Pass --

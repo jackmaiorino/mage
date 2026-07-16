@@ -49,6 +49,10 @@ mod tests {
         state.restore(&snap);
         assert_eq!(state, snap.0);
         assert_eq!(state.state_hash(), snap.0.state_hash());
+        assert_eq!(
+            state.diagnostic_state_hash(),
+            snap.0.diagnostic_state_hash()
+        );
     }
 
     /// ~80 objects: two 40-card libraries, mid-game (some drawn, some on

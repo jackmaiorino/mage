@@ -6,7 +6,7 @@ from pathlib import Path
 
 from mtg_kernel_rl.client import EnvProcessError, KernelRlClient, ProtocolError, strict_json_loads
 
-from fixtures import fake_launcher
+from fixtures import DECK_HASHES, DECK_IDS, fake_launcher
 
 
 class ClientStrictnessTest(unittest.TestCase):
@@ -45,7 +45,7 @@ class ClientStrictnessTest(unittest.TestCase):
         finally:
             client.close()
             self.tmp.cleanup()
-        for scenario in ("error_bad_schema", "error_bad_request_id", "error_empty_code"):
+        for scenario in ("error_legacy_v3", "error_bad_schema", "error_bad_request_id", "error_empty_code"):
             self.assert_reset_protocol_error(scenario)
 
     def test_stdout_noise_rejected(self) -> None:
@@ -73,6 +73,36 @@ class ClientStrictnessTest(unittest.TestCase):
     def test_episode_and_step_drift_rejected(self) -> None:
         self.assert_reset_protocol_error("episode_drift")
         self.assert_reset_protocol_error("step_drift")
+
+    def test_deck_identity_is_required_pinned_and_stable(self) -> None:
+        self.assert_reset_protocol_error("deck_id_drift")
+        self.assert_reset_protocol_error("deck_hash_shape")
+        client = self.make_client("deck_hash_drift")
+        try:
+            decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            self.assertEqual(decision.deck_ids, DECK_IDS)
+            self.assertEqual(decision.deck_hashes, DECK_HASHES)
+            action = decision.legal_actions[0]
+            with self.assertRaisesRegex(ProtocolError, "deck_hashes drift"):
+                client.step(action["selected_index"], action["stable_id"])
+        finally:
+            client.close()
+            self.tmp.cleanup()
+
+    def test_reset_validates_and_sends_exact_ordered_deck_ids(self) -> None:
+        client = self.make_client("valid")
+        try:
+            with self.assertRaisesRegex(ProtocolError, "two-item tuple"):
+                client.reset(episode_id=0, env_seed=1, max_decisions=8, deck_ids=["Burn", "Burn"])  # type: ignore[arg-type]
+            with self.assertRaisesRegex(ProtocolError, "must be nonempty"):
+                client.reset(episode_id=0, env_seed=1, max_decisions=8, deck_ids=("Burn", ""))
+            with self.assertRaisesRegex(ProtocolError, "unsupported_deck"):
+                client.reset(episode_id=0, env_seed=1, max_decisions=8, deck_ids=("Rally", "Burn"))
+            decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
+            self.assertEqual(decision.deck_ids, ("Burn", "Burn"))
+        finally:
+            client.close()
+            self.tmp.cleanup()
 
     def test_legal_action_integrity_rejected(self) -> None:
         for scenario in ("empty_actions", "noncontiguous_actions", "duplicate_actions", "mismatched_action_actor", "mixed_action_actors"):
@@ -109,7 +139,7 @@ class ClientStrictnessTest(unittest.TestCase):
         try:
             client.reset(episode_id=0, env_seed=1, max_decisions=8)
             with self.assertRaises(ProtocolError):
-                client.step(4_294_967_296, "legal-action-v3:a")
+                client.step(4_294_967_296, "legal-action-v4:a")
         finally:
             client.close()
             self.tmp.cleanup()
@@ -120,9 +150,13 @@ class ClientStrictnessTest(unittest.TestCase):
             decision = client.reset(episode_id=0, env_seed=1, max_decisions=8)
             terminal = client.step(decision.legal_actions[0]["selected_index"], decision.legal_actions[0]["stable_id"])
             self.assertEqual(terminal.terminal_outcome, "p0_win")
+            self.assertEqual(terminal.deck_ids, DECK_IDS)
+            self.assertEqual(terminal.deck_hashes, DECK_HASHES)
             decision2 = client.reset(episode_id=1, env_seed=2, max_decisions=8)
             self.assertEqual(decision2.episode_id, 1)
             self.assertEqual(decision2.step, 0)
+            self.assertEqual(decision2.deck_ids, DECK_IDS)
+            self.assertEqual(decision2.deck_hashes, DECK_HASHES)
         finally:
             client.close()
             self.tmp.cleanup()

@@ -19,8 +19,9 @@ from .features import EncodedDecision, encode_decision
 from .model import KernelPolicyValueNet, greedy_action
 
 POLICIES = {"uniform", "greedy", "sampled"}
-RUNNER_ARTIFACT_SCHEMA_VERSION = 2
+RUNNER_ARTIFACT_SCHEMA_VERSION = 3
 V1_RUNNER_ARTIFACT_SCHEMA_VERSION = 1
+DEFAULT_DECK_IDS = ("Burn", "Burn")
 
 
 def _runner_sampled_action_selection_contract() -> dict[str, Any]:
@@ -125,6 +126,8 @@ def _episode_record(episode: int, env_seed: int, terminal: Terminal, p0_policy: 
     return {
         "episode": episode,
         "env_seed": env_seed,
+        "deck_ids": list(terminal.deck_ids),
+        "deck_hashes": list(terminal.deck_hashes),
         "terminal_outcome": terminal.terminal_outcome,
         "terminal_classification": terminal.terminal_classification,
         "terminal_code": terminal.terminal_code,
@@ -179,6 +182,7 @@ def run_episodes(
     max_decisions: int,
     p0: str,
     p1: str,
+    deck_ids: tuple[str, str] = DEFAULT_DECK_IDS,
     timeout_s: float = 10.0,
 ) -> dict[str, Any]:
     configure_torch_determinism()
@@ -186,24 +190,44 @@ def run_episodes(
         raise ValueError("episodes must be positive")
     if p0 not in POLICIES or p1 not in POLICIES:
         raise ValueError("unsupported policy")
+    if type(deck_ids) is not tuple or len(deck_ids) != 2:
+        raise TypeError("deck_ids must be an exact two-item tuple")
+    if any(type(deck_id) is not str or not deck_id for deck_id in deck_ids):
+        raise ValueError("deck_ids entries must be nonempty strings")
     env_path = Path(env_bin)
     env_sha = sha256_file(env_path)
     terminal_records: list[dict[str, Any]] = []
     provenance: dict[str, Any] | None = None
+    deck_hashes: tuple[int, int] | None = None
     model_policy = InMemoryModelPolicy()
     with KernelRlClient(env_path, timeout_s=timeout_s) as client:
         for episode in range(episodes):
             env_seed = derive_env_seed(base_seed, episode)
-            current: Decision | Terminal = client.reset(episode_id=episode, env_seed=env_seed, max_decisions=max_decisions)
+            current: Decision | Terminal = client.reset(
+                episode_id=episode,
+                env_seed=env_seed,
+                max_decisions=max_decisions,
+                deck_ids=deck_ids,
+            )
+            if current.deck_ids != deck_ids:
+                raise ValueError("runner environment deck_ids differ from requested deck_ids")
+            if deck_hashes is None:
+                deck_hashes = current.deck_hashes
+            elif current.deck_hashes != deck_hashes:
+                raise ValueError("runner environment deck_hashes drift")
             while isinstance(current, Decision):
                 provenance = current.provenance
                 policy = _policy_for_seat(current.acting_player, p0, p1)
                 index = select_action(current, policy=policy, base_seed=base_seed, episode=episode, model_policy=model_policy)
                 action = current.legal_actions[index]
                 current = client.step(action["selected_index"], action["stable_id"])
+                if current.deck_ids != deck_ids or current.deck_hashes != deck_hashes:
+                    raise ValueError("runner environment deck identity drift")
             provenance = current.provenance
             terminal_records.append(_episode_record(episode, env_seed, current, p0, p1))
     aggregate = _aggregate(terminal_records)
+    if deck_hashes is None:
+        raise AssertionError("runner completed without resolving deck hashes")
     if aggregate["halted"] != 0 or aggregate["truncated"] != 0:
         raise RuntimeError("halted/truncated episodes are not admissible")
     manifest = {
@@ -211,7 +235,11 @@ def run_episodes(
         "action_selection": _runner_seat_action_selection_contract(p0, p1),
         "package": {"name": "mtg-kernel-rl", "version": __version__},
         "runtime": {"python": platform.python_version(), "torch": torch.__version__},
-        "environment": {"binary_sha256": env_sha},
+        "environment": {
+            "binary_sha256": env_sha,
+            "deck_ids": list(deck_ids),
+            "deck_hashes": list(deck_hashes),
+        },
         "protocol_provenance": provenance,
         "seed_derivation": _runner_seed_derivation_contract(),
         "config": {
@@ -220,6 +248,7 @@ def run_episodes(
             "max_decisions": max_decisions,
             "p0_policy": p0,
             "p1_policy": p1,
+            "deck_ids": list(deck_ids),
         },
         "aggregate": aggregate,
         "episodes": terminal_records,

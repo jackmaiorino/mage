@@ -1,17 +1,20 @@
-//! Interactive RL session protocol for the kernel Burn-mirror environment.
+//! Interactive RL session protocol for deck-identified kernel environments.
 //!
 //! This module owns the reset/step state machine used by both the JSONL
 //! process wrapper and the batch rollout recorder, so action validation and
 //! terminal classification cannot drift between interactive and offline use.
+//! Schema v4 reserves ordered physical-seat deck identity on the wire. The
+//! only executable pair in this increment remains canonical `Burn`/`Burn`;
+//! every other id fails before an active session is created or replaced.
 
 use crate::card_def::KERNEL_CARDDB_HASH;
 use crate::engine::Decision;
 use crate::ids::PlayerId;
 use crate::rl::{
-    acting_player_for_surface_decision, build_burn_mirror_state, legal_action_candidates_v1,
-    observe_v2, validate_selected_action, EpisodeTerminalSummaryV1, LegalActionCandidateV1,
-    LegalActionV1, ObservationV2, PlayerSeatV1, RlContractError, TerminalClassificationV1,
-    TerminalOutcomeV1, TerminalSafeCodeV2,
+    acting_player_for_surface_decision, build_burn_mirror_state, burn_deck_hash,
+    legal_action_candidates_v1, observe_v2, validate_selected_action, EpisodeTerminalSummaryV1,
+    LegalActionCandidateV1, LegalActionV1, ObservationV2, PlayerSeatV1, RlContractError,
+    TerminalClassificationV1, TerminalOutcomeV1, TerminalSafeCodeV2,
 };
 use crate::surface_v2::{HarnessSurfaceV2, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
@@ -19,9 +22,13 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::fmt;
 
-pub const RL_SESSION_SCHEMA_VERSION: u32 = 3;
-pub const RL_SESSION_PROTOCOL_VERSION: u32 = 3;
+pub const RL_SESSION_SCHEMA_VERSION: u32 = 4;
+pub const RL_SESSION_PROTOCOL_VERSION: u32 = 4;
 pub const RL_SESSION_PROTOCOL_NAME: &str = "kernel_rl_jsonl";
+pub const CANONICAL_BURN_DECK_ID: &str = "Burn";
+
+pub type SessionDeckIdsV1 = [String; 2];
+pub type SessionDeckHashesV1 = [u64; 2];
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RlSessionProvenanceV1 {
@@ -49,6 +56,8 @@ impl RlSessionProvenanceV1 {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RlSessionDecisionV1 {
     pub schema_version: u32,
+    pub deck_ids: SessionDeckIdsV1,
+    pub deck_hashes: SessionDeckHashesV1,
     pub episode_id: u64,
     pub step: u64,
     pub acting_player: PlayerSeatV1,
@@ -60,6 +69,8 @@ pub struct RlSessionDecisionV1 {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RlSessionTerminalV1 {
     pub schema_version: u32,
+    pub deck_ids: SessionDeckIdsV1,
+    pub deck_hashes: SessionDeckHashesV1,
     pub episode_id: u64,
     pub terminal_outcome: TerminalOutcomeV1,
     pub terminal_classification: TerminalClassificationV1,
@@ -99,6 +110,7 @@ pub enum RlSessionErrorCode {
     SelectedIndexOutOfRange,
     SelectedActionIdMismatch,
     SelectedActionIdUnknown,
+    UnsupportedDeck,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -129,6 +141,8 @@ struct CurrentDecisionV1 {
 }
 
 pub struct RlEpisodeSessionV1 {
+    deck_ids: SessionDeckIdsV1,
+    deck_hashes: SessionDeckHashesV1,
     episode_id: u64,
     max_decisions: u64,
     state: crate::state::GameState,
@@ -140,7 +154,25 @@ pub struct RlEpisodeSessionV1 {
 
 impl RlEpisodeSessionV1 {
     pub fn reset(episode_id: u64, env_seed: u64, max_decisions: u64) -> Self {
+        Self::reset_with_decks(
+            episode_id,
+            env_seed,
+            max_decisions,
+            canonical_burn_mirror_deck_ids(),
+        )
+        .expect("the built-in Burn/Burn deck pair is supported")
+    }
+
+    pub fn reset_with_decks(
+        episode_id: u64,
+        env_seed: u64,
+        max_decisions: u64,
+        deck_ids: SessionDeckIdsV1,
+    ) -> Result<Self, RlSessionError> {
+        let deck_hashes = resolve_deck_hashes(&deck_ids)?;
         let mut session = RlEpisodeSessionV1 {
+            deck_ids,
+            deck_hashes,
             episode_id,
             max_decisions,
             state: build_burn_mirror_state(env_seed),
@@ -150,7 +182,7 @@ impl RlEpisodeSessionV1 {
             terminal: None,
         };
         session.advance_to_decision_or_terminal();
-        session
+        Ok(session)
     }
 
     pub fn current_response(&self) -> RlSessionResponseV1 {
@@ -163,6 +195,8 @@ impl RlEpisodeSessionV1 {
             .expect("session has either a current decision or terminal");
         RlSessionResponseV1::Decision(RlSessionDecisionV1 {
             schema_version: RL_SESSION_SCHEMA_VERSION,
+            deck_ids: self.deck_ids.clone(),
+            deck_hashes: self.deck_hashes,
             episode_id: self.episode_id,
             step: self.decision_count,
             acting_player: current.actor.into(),
@@ -181,7 +215,7 @@ impl RlEpisodeSessionV1 {
     }
 
     pub fn diagnostic_state_hash(&self) -> u64 {
-        self.state.state_hash()
+        self.state.diagnostic_state_hash()
     }
 
     pub fn step(
@@ -251,6 +285,8 @@ impl RlEpisodeSessionV1 {
         if let Err(err) = self.surface.apply(&mut self.state, surface_action) {
             self.decision_count += 1;
             self.terminal = Some(halted_terminal(
+                &self.deck_ids,
+                self.deck_hashes,
                 self.episode_id,
                 format!("fail_closed:surface_apply:{err}"),
                 self.decision_count,
@@ -268,6 +304,8 @@ impl RlEpisodeSessionV1 {
         match &surfaced {
             SurfaceDecision::Decision(Decision::GameOver { winner }) => {
                 self.terminal = Some(terminal_from_winner(
+                    &self.deck_ids,
+                    self.deck_hashes,
                     self.episode_id,
                     *winner,
                     "game_over".to_string(),
@@ -277,6 +315,8 @@ impl RlEpisodeSessionV1 {
             }
             SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
                 self.terminal = Some(halted_terminal(
+                    &self.deck_ids,
+                    self.deck_hashes,
                     self.episode_id,
                     format!("engine_halted:{mechanic:?}:source:{}", source.0),
                     self.decision_count,
@@ -287,6 +327,8 @@ impl RlEpisodeSessionV1 {
         }
         if self.decision_count >= self.max_decisions {
             self.terminal = Some(truncated_terminal(
+                &self.deck_ids,
+                self.deck_hashes,
                 self.episode_id,
                 format!("decision_cap_reached:{}", self.max_decisions),
                 self.decision_count,
@@ -295,6 +337,8 @@ impl RlEpisodeSessionV1 {
         }
         let Some(actor) = acting_player_for_surface_decision(&surfaced, &self.state) else {
             self.terminal = Some(halted_terminal(
+                &self.deck_ids,
+                self.deck_hashes,
                 self.episode_id,
                 "fail_closed:nonterminal decision without acting player".to_string(),
                 self.decision_count,
@@ -305,6 +349,8 @@ impl RlEpisodeSessionV1 {
             Ok(observation) => observation,
             Err(err) => {
                 self.terminal = Some(halted_terminal(
+                    &self.deck_ids,
+                    self.deck_hashes,
                     self.episode_id,
                     format!("fail_closed:observation:{err}"),
                     self.decision_count,
@@ -316,6 +362,8 @@ impl RlEpisodeSessionV1 {
             Ok(candidates) => candidates,
             Err(err) => {
                 self.terminal = Some(halted_terminal(
+                    &self.deck_ids,
+                    self.deck_hashes,
                     self.episode_id,
                     format!("fail_closed:{err}"),
                     self.decision_count,
@@ -325,6 +373,8 @@ impl RlEpisodeSessionV1 {
         };
         if candidates.is_empty() {
             self.terminal = Some(halted_terminal(
+                &self.deck_ids,
+                self.deck_hashes,
                 self.episode_id,
                 "fail_closed:nonterminal decision produced zero legal actions".to_string(),
                 self.decision_count,
@@ -345,6 +395,7 @@ pub enum KernelRlRequestV1 {
     Reset {
         schema_version: u32,
         request_id: String,
+        deck_ids: SessionDeckIdsV1,
         episode_id: u64,
         env_seed: u64,
         max_decisions: u64,
@@ -388,6 +439,8 @@ pub enum KernelRlResponseV1 {
         schema_version: u32,
         request_id: String,
         provenance: RlSessionProvenanceV1,
+        deck_ids: SessionDeckIdsV1,
+        deck_hashes: SessionDeckHashesV1,
         episode_id: u64,
         step: u64,
         acting_player: PlayerSeatV1,
@@ -399,6 +452,8 @@ pub enum KernelRlResponseV1 {
         schema_version: u32,
         request_id: String,
         provenance: RlSessionProvenanceV1,
+        deck_ids: SessionDeckIdsV1,
+        deck_hashes: SessionDeckHashesV1,
         episode_id: u64,
         terminal_outcome: TerminalOutcomeV1,
         terminal_classification: TerminalClassificationV1,
@@ -454,7 +509,7 @@ impl KernelRlJsonlServerV1 {
                 return serialize_response(error_response(
                     request_id,
                     "malformed_request",
-                    "request does not match the v2 protocol schema",
+                    "request does not match the v4 protocol schema",
                 ));
             }
         };
@@ -489,6 +544,7 @@ impl KernelRlJsonlServerV1 {
             KernelRlRequestV1::Reset {
                 schema_version,
                 request_id,
+                deck_ids,
                 episode_id,
                 env_seed,
                 max_decisions,
@@ -500,7 +556,21 @@ impl KernelRlJsonlServerV1 {
                         "unsupported request schema_version",
                     );
                 }
-                let session = RlEpisodeSessionV1::reset(episode_id, env_seed, max_decisions);
+                let session = match RlEpisodeSessionV1::reset_with_decks(
+                    episode_id,
+                    env_seed,
+                    max_decisions,
+                    deck_ids,
+                ) {
+                    Ok(session) => session,
+                    Err(err) => {
+                        return error_response(
+                            Some(request_id),
+                            session_error_code(&err.code),
+                            &err.message,
+                        );
+                    }
+                };
                 let response = session_response_to_protocol(request_id, session.current_response());
                 self.session = Some(session);
                 response
@@ -554,6 +624,8 @@ fn session_response_to_protocol(
             schema_version: RL_SESSION_SCHEMA_VERSION,
             request_id,
             provenance: RlSessionProvenanceV1::current(),
+            deck_ids: decision.deck_ids,
+            deck_hashes: decision.deck_hashes,
             episode_id: decision.episode_id,
             step: decision.step,
             acting_player: decision.acting_player,
@@ -565,6 +637,8 @@ fn session_response_to_protocol(
             schema_version: RL_SESSION_SCHEMA_VERSION,
             request_id,
             provenance: RlSessionProvenanceV1::current(),
+            deck_ids: terminal.deck_ids,
+            deck_hashes: terminal.deck_hashes,
             episode_id: terminal.episode_id,
             terminal_outcome: terminal.terminal_outcome,
             terminal_classification: terminal.terminal_classification,
@@ -614,10 +688,35 @@ fn session_error_code(code: &RlSessionErrorCode) -> &'static str {
         RlSessionErrorCode::SelectedIndexOutOfRange => "selected_index_out_of_range",
         RlSessionErrorCode::SelectedActionIdMismatch => "selected_action_id_mismatch",
         RlSessionErrorCode::SelectedActionIdUnknown => "selected_action_id_unknown",
+        RlSessionErrorCode::UnsupportedDeck => "unsupported_deck",
     }
 }
 
+fn canonical_burn_mirror_deck_ids() -> SessionDeckIdsV1 {
+    [
+        CANONICAL_BURN_DECK_ID.to_string(),
+        CANONICAL_BURN_DECK_ID.to_string(),
+    ]
+}
+
+fn resolve_deck_hashes(deck_ids: &SessionDeckIdsV1) -> Result<SessionDeckHashesV1, RlSessionError> {
+    for (seat, deck_id) in deck_ids.iter().enumerate() {
+        if deck_id != CANONICAL_BURN_DECK_ID {
+            return Err(session_error(
+                RlSessionErrorCode::UnsupportedDeck,
+                &format!(
+                    "unsupported deck_id for seat {seat}: {deck_id:?}; only exact canonical id {CANONICAL_BURN_DECK_ID:?} is currently available"
+                ),
+            ));
+        }
+    }
+    let hash = burn_deck_hash();
+    Ok([hash, hash])
+}
+
 fn terminal_from_winner(
+    deck_ids: &SessionDeckIdsV1,
+    deck_hashes: SessionDeckHashesV1,
     episode_id: u64,
     winner: Option<PlayerId>,
     terminal_reason: String,
@@ -631,6 +730,8 @@ fn terminal_from_winner(
     };
     RlSessionTerminalV1 {
         schema_version: RL_SESSION_SCHEMA_VERSION,
+        deck_ids: deck_ids.clone(),
+        deck_hashes,
         episode_id,
         terminal_outcome,
         terminal_classification: TerminalClassificationV1::Natural,
@@ -643,12 +744,16 @@ fn terminal_from_winner(
 }
 
 fn halted_terminal(
+    deck_ids: &SessionDeckIdsV1,
+    deck_hashes: SessionDeckHashesV1,
     episode_id: u64,
     terminal_reason: String,
     decision_count: u64,
 ) -> RlSessionTerminalV1 {
     RlSessionTerminalV1 {
         schema_version: RL_SESSION_SCHEMA_VERSION,
+        deck_ids: deck_ids.clone(),
+        deck_hashes,
         episode_id,
         terminal_outcome: TerminalOutcomeV1::Halted,
         terminal_classification: TerminalClassificationV1::Halted,
@@ -661,12 +766,16 @@ fn halted_terminal(
 }
 
 fn truncated_terminal(
+    deck_ids: &SessionDeckIdsV1,
+    deck_hashes: SessionDeckHashesV1,
     episode_id: u64,
     terminal_reason: String,
     decision_count: u64,
 ) -> RlSessionTerminalV1 {
     RlSessionTerminalV1 {
         schema_version: RL_SESSION_SCHEMA_VERSION,
+        deck_ids: deck_ids.clone(),
+        deck_hashes,
         episode_id,
         terminal_outcome: TerminalOutcomeV1::Truncated,
         terminal_classification: TerminalClassificationV1::Truncated,

@@ -114,7 +114,7 @@ class ArtifactTest(unittest.TestCase):
             tmp = Path(tmp_name)
             records = [
                 {
-                    "schema": "kernel_rl_train_update_record/v2",
+                    "schema": "kernel_rl_train_update_record/v3",
                     "run_digest": "r",
                     "update": 0,
                     "parent_head": None,
@@ -128,7 +128,7 @@ class ArtifactTest(unittest.TestCase):
                     "post_update_logical_sha256": "h0",
                 },
                 {
-                    "schema": "kernel_rl_train_update_record/v2",
+                    "schema": "kernel_rl_train_update_record/v3",
                     "run_digest": "r",
                     "update": 1,
                     "parent_head": "h0",
@@ -140,7 +140,7 @@ class ArtifactTest(unittest.TestCase):
                     "loss": {"policy_sum_hex": "0x1.0p+0", "value_sum_hex": "0x1.0p+0", "loss_hex": "0x1.0p+0"},
                     "episode_summaries": [
                         {
-                            "schema": "kernel_rl_train_episode_summary/v2",
+                            "schema": "kernel_rl_train_episode_summary/v3",
                             "episode": 0,
                             "env_seed": 1,
                             "learner_seat": "p0",

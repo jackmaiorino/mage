@@ -1,4 +1,4 @@
-"""Fresh-only sampled paired-evaluation artifacts and strict V3 validation."""
+"""Fresh-only sampled paired-evaluation artifacts and strict V4 validation."""
 
 from __future__ import annotations
 
@@ -34,9 +34,9 @@ from .path_safety import (
 )
 
 
-RUN_SCHEMA = "kernel_rl_paired_evaluation/v3"
-GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v3"
-PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v3"
+RUN_SCHEMA = "kernel_rl_paired_evaluation/v4"
+GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v4"
+PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v4"
 RUN_FILE_NAME = v1.RUN_FILE_NAME
 GAMES_FILE_NAME = v1.GAMES_FILE_NAME
 PAIRS_FILE_NAME = v1.PAIRS_FILE_NAME
@@ -71,8 +71,9 @@ ACTION_SELECTION_CONTRACT = {
     "temperature_hex": "0x1.0000000000000p+0",
 }
 
-# V2 is intentionally frozen rather than reinterpreted as the V3 selector. These
-# identities make the release boundary explicit and support corruption tests.
+# V2 and V3 are intentionally frozen rather than reinterpreted as the V4
+# selector/protocol boundary. These identities make both release boundaries
+# explicit and support corruption tests.
 V2_RUN_SCHEMA = "kernel_rl_paired_evaluation/v2"
 V2_GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v2"
 V2_PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v2"
@@ -88,9 +89,54 @@ V2_ACTION_SELECTION_CONTRACT = {
     "replacement": False,
     "temperature_hex": "0x1.0000000000000p+0",
 }
+V3_RUN_SCHEMA = "kernel_rl_paired_evaluation/v3"
+V3_GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v3"
+V3_PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v3"
+V3_ALGORITHM_CONTRACT = {
+    "descriptive_intervals": "fixed 95% Wilson over game-level outcomes",
+    "name": "sampled_head_vs_update_zero_paired/v2",
+    "primary_statistic": "mean candidate half-points per pair divided by 4",
+}
+# This is deliberately a self-contained release golden. Do not derive it from
+# fixed_categorical_sampler_contract(): that helper owns the live schema and may
+# change for a future release without reinterpreting already-published v3.
+V3_ACTION_SELECTION_CONTRACT = {
+    "categorical_sampler": {
+        "action_rng": "one splitmix64-v1 uint64 output per decision, initialized directly from the action seed",
+        "algorithm": "inverse CDF over Hamilton-apportioned 2**64-unit mass in legal-action order",
+        "decimal_softmax": {
+            "context": {
+                "capitals": 1,
+                "clamp": 0,
+                "emax": 999_999,
+                "emin": -999_999,
+                "flags_initially_set": [],
+                "traps": ["InvalidOperation", "DivisionByZero", "Overflow"],
+            },
+            "delta_precision_digits": 256,
+            "exp_cutoff": "strictly below -128 receives zero mass",
+            "exp_precision_digits": 80,
+            "input": "exact IEEE-754 binary32 logits converted to Decimal",
+            "rounding": "ROUND_HALF_EVEN",
+        },
+        "probability_mass": {
+            "apportionment": (
+                "floor exact normalized Decimal-exp shares, then residual units by descending exact remainder "
+                "and ascending legal-action index"
+            ),
+            "total": "2**64",
+        },
+        "sampler_version": "decimal-softmax-hamilton-splitmix64-v1",
+    },
+    "inference": "torch.inference_mode",
+    "mode": "sampled_softmax",
+    "replacement": False,
+    "temperature_hex": "0x1.0000000000000p+0",
+}
 SEAT_SCHEDULE_CONTRACT = {
     "candidate_as_p0": "episode 2k",
     "candidate_as_p1": "episode 2k+1",
+    "deck_order": "deck_ids[0] is physical p0 and deck_ids[1] is physical p1 in both games; only candidate/baseline policies swap seats",
     "paired_environment_seed": "both games use evaluation-env/base_seed/pair_index",
     "paired_physical_action_streams": "both games use evaluation-action/base_seed/pair_index/physical_seat/local_decision_index",
 }
@@ -102,12 +148,12 @@ _V1_ACTION_SELECTION_CONTRACT = {
     "mode": "greedy",
     "tie_break": "lowest legal-action index",
 }
-_V1_SEAT_SCHEDULE_CONTRACT = {
+_CURRENT_GREEDY_SEAT_SCHEDULE_CONTRACT = v1.SEAT_SCHEDULE_CONTRACT
+_FROZEN_V1_SEAT_SCHEDULE_CONTRACT = {
     "candidate_as_p0": "episode 2k",
     "candidate_as_p1": "episode 2k+1",
     "paired_environment_seed": "both games use evaluation-env/base_seed/pair_index",
 }
-
 ValidatedEvaluation = v1.ValidatedEvaluation
 
 
@@ -119,7 +165,7 @@ class _ValidatedContent:
     score: ScoreSummary
 
 
-def _project_manifest_to_v1(manifest: dict[str, Any]) -> dict[str, Any]:
+def _project_manifest_to_current_greedy(manifest: dict[str, Any]) -> dict[str, Any]:
     projected = dict(manifest)
     del projected["action_seed_derivation"]
     projected["schema"] = v1.RUN_SCHEMA
@@ -130,11 +176,30 @@ def _project_manifest_to_v1(manifest: dict[str, Any]) -> dict[str, Any]:
         "run": v1.RUN_SCHEMA,
     }
     projected["action_selection"] = _V1_ACTION_SELECTION_CONTRACT
-    projected["seat_schedule"] = _V1_SEAT_SCHEDULE_CONTRACT
+    projected["seat_schedule"] = _CURRENT_GREEDY_SEAT_SCHEDULE_CONTRACT
     return projected
 
 
-def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, int, str, str]:
+def _project_v3_manifest_to_frozen_greedy_v1(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Project a legacy sampled-v3 manifest without consulting live v2 identities."""
+
+    projected = dict(manifest)
+    del projected["action_seed_derivation"]
+    projected["schema"] = v1.V1_RUN_SCHEMA
+    projected["algorithm"] = v1.V1_ALGORITHM_CONTRACT
+    projected["artifact_schemas"] = {
+        "game": v1.V1_GAME_SCHEMA,
+        "pair": v1.V1_PAIR_SCHEMA,
+        "run": v1.V1_RUN_SCHEMA,
+    }
+    projected["action_selection"] = _V1_ACTION_SELECTION_CONTRACT
+    projected["seat_schedule"] = _FROZEN_V1_SEAT_SCHEDULE_CONTRACT
+    return projected
+
+
+def _validate_manifest(
+    manifest: dict[str, Any],
+) -> tuple[int, int, int, int, int, str, str, tuple[str, str], tuple[int, int]]:
     expected_root = {
         "schema",
         "package",
@@ -178,7 +243,7 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
         SEAT_SCHEDULE_CONTRACT,
         "sampled seat schedule contract",
     )
-    return v1._validate_manifest(_project_manifest_to_v1(manifest))
+    return v1._validate_manifest(_project_manifest_to_current_greedy(manifest))
 
 
 def _game_points_from_row(
@@ -188,6 +253,8 @@ def _game_points_from_row(
     game_in_pair: int,
     base_seed: int,
     max_decisions: int,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
 ) -> int:
     expected_keys = {
         "schema",
@@ -195,6 +262,8 @@ def _game_points_from_row(
         "game_in_pair",
         "episode_id",
         "env_seed",
+        "deck_ids",
+        "deck_hashes",
         "candidate_seat",
         "baseline_seat",
         "terminal_outcome",
@@ -218,11 +287,22 @@ def _game_points_from_row(
         game_in_pair=game_in_pair,
         base_seed=base_seed,
         max_decisions=max_decisions,
+        deck_ids=deck_ids,
+        deck_hashes=deck_hashes,
     )
 
 
-def _expected_pair_row(pair_index: int, env_seed: int, points: PairedGamePoints) -> dict[str, Any]:
-    return {**v1._expected_pair_row(pair_index, env_seed, points), "schema": PAIR_SCHEMA}
+def _expected_pair_row(
+    pair_index: int,
+    env_seed: int,
+    points: PairedGamePoints,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+) -> dict[str, Any]:
+    return {
+        **v1._expected_pair_row(pair_index, env_seed, points, deck_ids, deck_hashes),
+        "schema": PAIR_SCHEMA,
+    }
 
 
 def _validate_aa_pair(
@@ -258,9 +338,17 @@ def _validate_captured_payload(
     captured_pairs: CapturedFile,
 ) -> _ValidatedContent:
     validate_training_json_privacy(manifest)
-    pair_count, base_seed, bootstrap_replicates, max_decisions, _trainer_cap, candidate_head, baseline_head = (
-        _validate_manifest(manifest)
-    )
+    (
+        pair_count,
+        base_seed,
+        bootstrap_replicates,
+        max_decisions,
+        _trainer_cap,
+        candidate_head,
+        baseline_head,
+        deck_ids,
+        deck_hashes,
+    ) = _validate_manifest(manifest)
     game_rows = v1._parse_jsonl(
         captured_games,
         row_limit=MAX_GAME_ROW_BYTES,
@@ -286,6 +374,8 @@ def _validate_captured_payload(
             game_in_pair=0,
             base_seed=base_seed,
             max_decisions=max_decisions,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
         )
         p1_points = _game_points_from_row(
             candidate_as_p1,
@@ -293,10 +383,18 @@ def _validate_captured_payload(
             game_in_pair=1,
             base_seed=base_seed,
             max_decisions=max_decisions,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
         )
         points = PairedGamePoints(p0_points, p1_points)
         paired_points.append(points)
-        expected_pair = _expected_pair_row(pair_index, derive_evaluation_env_seed(base_seed, pair_index), points)
+        expected_pair = _expected_pair_row(
+            pair_index,
+            derive_evaluation_env_seed(base_seed, pair_index),
+            points,
+            deck_ids,
+            deck_hashes,
+        )
         v1._require_strict_equal(pair_rows[pair_index], expected_pair, "sampled pair row derived from game rows")
         if candidate_head == baseline_head:
             _validate_aa_pair(candidate_as_p0, candidate_as_p1, points)
@@ -348,9 +446,10 @@ def _publish_sampled_evaluation(
     is_verified_output_lock_entry(root, initial_entries[0])
     configuration = v1._require_keys(
         manifest_without_files.get("configuration"),
-        {"base_seed", "bootstrap_replicates", "game_count", "max_decisions", "pair_count", "timeout_ms"},
+        {"base_seed", "bootstrap_replicates", "deck_ids", "game_count", "max_decisions", "pair_count", "timeout_ms"},
         "sampled configuration",
     )
+    v1._deck_ids(configuration["deck_ids"], "sampled configuration.deck_ids")
     pair_count = v1._int(configuration["pair_count"], "pair_count", minimum=1, maximum=MAX_PAIR_COUNT)
     game_count = v1._int(configuration["game_count"], "game_count", minimum=1, maximum=2 * MAX_PAIR_COUNT)
     if len(pairs) != pair_count or len(games) != 2 * pair_count or game_count != len(games):
@@ -420,7 +519,7 @@ def _publish_sampled_evaluation(
 
 
 def validate_sampled_evaluation(root: str | Path) -> ValidatedEvaluation:
-    """Validate one complete sampled V3 evaluation without side effects."""
+    """Validate one complete sampled V4 evaluation without side effects."""
 
     root = ensure_real_dir(root)
     entries = scandir_no_follow(root)
@@ -468,6 +567,11 @@ __all__ = [
     "V2_GAME_SCHEMA",
     "V2_PAIR_SCHEMA",
     "V2_RUN_SCHEMA",
+    "V3_ACTION_SELECTION_CONTRACT",
+    "V3_ALGORITHM_CONTRACT",
+    "V3_GAME_SCHEMA",
+    "V3_PAIR_SCHEMA",
+    "V3_RUN_SCHEMA",
     "ValidatedEvaluation",
     "validate_sampled_evaluation",
 ]

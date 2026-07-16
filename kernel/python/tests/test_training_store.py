@@ -118,6 +118,16 @@ class TrainingStoreTest(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
 
+    def test_run_manifest_rejects_legacy_v3_protocol_and_schema_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            out = _train_fixture(Path(tmp_name), until_update=0)
+            run = read_json_file(out / "run.json")
+            for key in ("protocol_version", "schema_version"):
+                legacy = copy.deepcopy(run)
+                legacy["protocol_provenance"][key] = 3
+                with self.subTest(key=key), self.assertRaisesRegex(ValueError, rf"{key} mismatch"):
+                    store_mod._validate_run_manifest(legacy)
+
     def test_validate_latest_read_counts_are_exact_linear(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -715,6 +725,24 @@ assert_same(before, "tampered_load")
                     self.assertEqual(_tree_snapshot(target), before)
 
             case("old_run_schema", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v10"}))
+            case(
+                "run_deck_id_drift",
+                lambda p: (
+                    (lambda run: (
+                        run["environment"]["deck_ids"].__setitem__(1, "Rally"),
+                        write_json_atomic(p / "run.json", run),
+                    ))(read_json_file(p / "run.json"))
+                ),
+            )
+            case(
+                "run_deck_hash_shape",
+                lambda p: (
+                    (lambda run: (
+                        run["environment"].__setitem__("deck_hashes", [1]),
+                        write_json_atomic(p / "run.json", run),
+                    ))(read_json_file(p / "run.json"))
+                ),
+            )
             case(
                 "old_boundary_schema",
                 lambda p: write_json_atomic(

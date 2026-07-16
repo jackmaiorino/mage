@@ -1831,6 +1831,12 @@ fn decision_texts(
             "CHOOSE_MODE",
             (0..*mode_count).map(|i| format!("mode#{i}")).collect(),
         )),
+        SurfaceDecision::Decision(Decision::ChooseEffectOption { option_count, .. }) => Some((
+            "CHOOSE_MODE",
+            (0..*option_count)
+                .map(|i| format!("effect-option#{i}"))
+                .collect(),
+        )),
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => Some((
             "ORDER_TRIGGERS",
             vec![format!("identity_order({})", pending.len())],
@@ -1980,6 +1986,12 @@ fn apply_by_indices(
                 SurfaceAction::Action(Action::ChooseSpellMode(i0 as u8)),
             )
             .map_err(|e| format!("engine-step-error:walk:ChooseSpellMode:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseEffectOption(i0 as u16)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseEffectOption:{e}")),
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => surface
             .apply(
                 state,

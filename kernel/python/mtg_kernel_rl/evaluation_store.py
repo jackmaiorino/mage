@@ -45,9 +45,12 @@ from .path_safety import (
 )
 
 
-RUN_SCHEMA = "kernel_rl_paired_evaluation/v1"
-GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v1"
-PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v1"
+RUN_SCHEMA = "kernel_rl_paired_evaluation/v2"
+GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v2"
+PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v2"
+V1_RUN_SCHEMA = "kernel_rl_paired_evaluation/v1"
+V1_GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v1"
+V1_PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v1"
 RUN_FILE_NAME = "run.json"
 GAMES_FILE_NAME = "games.jsonl"
 PAIRS_FILE_NAME = "pairs.jsonl"
@@ -63,8 +66,20 @@ MAX_PAIR_ROW_BYTES = 16 * 1024
 MAX_GAMES_BYTES = 128 * 1024 * 1024
 MAX_PAIRS_BYTES = 64 * 1024 * 1024
 EXACT_FRACTION_ENCODING = "unsigned-lowercase-hex-magnitude/v1"
-SOURCE_RUN_SCHEMA = "kernel_rl_train_run/v12"
+SOURCE_RUN_SCHEMA = "kernel_rl_train_run/v13"
+V1_SOURCE_RUN_SCHEMA = "kernel_rl_train_run/v12"
 ALGORITHM_CONTRACT = {
+    "descriptive_intervals": "fixed 95% Wilson over game-level outcomes",
+    "name": "greedy_head_vs_update_zero_paired/v1",
+    "primary_statistic": "mean candidate half-points per pair divided by 4",
+}
+SEAT_SCHEDULE_CONTRACT = {
+    "candidate_as_p0": "episode 2k",
+    "candidate_as_p1": "episode 2k+1",
+    "deck_order": "deck_ids[0] is physical p0 and deck_ids[1] is physical p1 in both games; only candidate/baseline policies swap seats",
+    "paired_environment_seed": "both games use evaluation-env/base_seed/pair_index",
+}
+V1_ALGORITHM_CONTRACT = {
     "descriptive_intervals": "fixed 95% Wilson over game-level outcomes",
     "name": "greedy_head_vs_update_zero_paired/v1",
     "primary_statistic": "mean candidate half-points per pair divided by 4",
@@ -135,6 +150,22 @@ def _seat(value: Any, context: str) -> str:
     if value not in ("p0", "p1"):
         raise ValueError(f"{context} must be p0 or p1")
     return value
+
+
+def _deck_ids(value: Any, context: str) -> tuple[str, str]:
+    if type(value) is not list or len(value) != 2:
+        raise ValueError(f"{context} must be an exact two-item list")
+    if any(type(item) is not str or not item for item in value):
+        raise ValueError(f"{context} entries must be nonempty strings")
+    return value[0], value[1]
+
+
+def _deck_hashes(value: Any, context: str) -> tuple[int, int]:
+    if type(value) is not list or len(value) != 2:
+        raise ValueError(f"{context} must be an exact two-item list")
+    if any(type(item) is not int or item < 0 or item > (1 << 64) - 1 for item in value):
+        raise ValueError(f"{context} entries must be unsigned 64-bit integers")
+    return value[0], value[1]
 
 
 def _magnitude_hex(value: int) -> str:
@@ -265,9 +296,10 @@ def _publish_evaluation(
     is_verified_output_lock_entry(root, initial_entries[0])
     configuration = _require_keys(
         manifest_without_files.get("configuration"),
-        {"base_seed", "bootstrap_replicates", "game_count", "max_decisions", "pair_count", "timeout_ms"},
+        {"base_seed", "bootstrap_replicates", "deck_ids", "game_count", "max_decisions", "pair_count", "timeout_ms"},
         "configuration",
     )
+    _deck_ids(configuration["deck_ids"], "configuration.deck_ids")
     pair_count = _int(configuration["pair_count"], "pair_count", minimum=1, maximum=MAX_PAIR_COUNT)
     game_count = _int(configuration["game_count"], "game_count", minimum=1, maximum=2 * MAX_PAIR_COUNT)
     if len(pairs) != pair_count or len(games) != 2 * pair_count or game_count != len(games):
@@ -418,7 +450,9 @@ def _validate_snapshot(value: Any, *, role: str, source_digest: str, model_finge
     return value
 
 
-def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, int, str, str]:
+def _validate_manifest(
+    manifest: dict[str, Any],
+) -> tuple[int, int, int, int, int, str, str, tuple[str, str], tuple[int, int]]:
     expected_root = {
         "schema",
         "package",
@@ -448,8 +482,14 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
         "artifact schemas",
     )
 
-    environment = _require_keys(manifest["environment"], {"binary_sha256", "protocol", "protocol_provenance"}, "environment")
+    environment = _require_keys(
+        manifest["environment"],
+        {"binary_sha256", "deck_ids", "deck_hashes", "protocol", "protocol_provenance"},
+        "environment",
+    )
     env_sha = _hash(environment["binary_sha256"], "environment.binary_sha256")
+    deck_ids = _deck_ids(environment["deck_ids"], "environment.deck_ids")
+    deck_hashes = _deck_hashes(environment["deck_hashes"], "environment.deck_hashes")
     expected_protocol = {
         "protocol": PROTOCOL_NAME,
         "protocol_version": PROTOCOL_VERSION,
@@ -478,9 +518,17 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
     if source_run["schema"] != SOURCE_RUN_SCHEMA:
         raise ValueError("source training run schema mismatch")
     source_digest = _hash(source_run["sha256"], "source_training.run.sha256")
-    source_environment = _require_keys(source["environment"], {"binary_sha256"}, "source_training.environment")
+    source_environment = _require_keys(
+        source["environment"],
+        {"binary_sha256", "deck_ids", "deck_hashes"},
+        "source_training.environment",
+    )
     if _hash(source_environment["binary_sha256"], "source_training.environment.binary_sha256") != env_sha:
         raise ValueError("evaluation environment differs from source training environment")
+    if _deck_ids(source_environment["deck_ids"], "source_training.environment.deck_ids") != deck_ids:
+        raise ValueError("evaluation deck_ids differ from source training environment")
+    if _deck_hashes(source_environment["deck_hashes"], "source_training.environment.deck_hashes") != deck_hashes:
+        raise ValueError("evaluation deck_hashes differ from source training environment")
     _require_strict_equal(source["protocol"], expected_protocol, "source protocol contract")
     _require_strict_equal(source["protocol_provenance"], provenance, "source protocol provenance")
     feature = _require_keys(
@@ -566,9 +614,11 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
 
     config = _require_keys(
         manifest["configuration"],
-        {"base_seed", "bootstrap_replicates", "game_count", "max_decisions", "pair_count", "timeout_ms"},
+        {"base_seed", "bootstrap_replicates", "deck_ids", "game_count", "max_decisions", "pair_count", "timeout_ms"},
         "configuration",
     )
+    if _deck_ids(config["deck_ids"], "configuration.deck_ids") != deck_ids:
+        raise ValueError("configuration deck_ids differ from environment deck_ids")
     base_seed = validate_uint63(config["base_seed"], "base_seed")
     pair_count = validate_positive_int(config["pair_count"], "pair_count", maximum=MAX_PAIR_COUNT)
     if _int(config["game_count"], "game_count", minimum=1, maximum=2 * MAX_PAIR_COUNT) != 2 * pair_count:
@@ -602,11 +652,7 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
     )
     _require_strict_equal(
         manifest["seat_schedule"],
-        {
-            "candidate_as_p0": "episode 2k",
-            "candidate_as_p1": "episode 2k+1",
-            "paired_environment_seed": "both games use evaluation-env/base_seed/pair_index",
-        },
+        SEAT_SCHEDULE_CONTRACT,
         "seat schedule contract",
     )
     _require_strict_equal(
@@ -624,7 +670,17 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
         },
         "publication contract",
     )
-    return pair_count, base_seed, bootstrap_replicates, max_decisions, trainer_max_decisions, candidate["head"], baseline["head"]
+    return (
+        pair_count,
+        base_seed,
+        bootstrap_replicates,
+        max_decisions,
+        trainer_max_decisions,
+        candidate["head"],
+        baseline["head"],
+        deck_ids,
+        deck_hashes,
+    )
 
 
 def _game_points_from_row(
@@ -634,6 +690,8 @@ def _game_points_from_row(
     game_in_pair: int,
     base_seed: int,
     max_decisions: int,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
 ) -> int:
     expected_keys = {
         "schema",
@@ -641,6 +699,8 @@ def _game_points_from_row(
         "game_in_pair",
         "episode_id",
         "env_seed",
+        "deck_ids",
+        "deck_hashes",
         "candidate_seat",
         "baseline_seat",
         "terminal_outcome",
@@ -667,6 +727,10 @@ def _game_points_from_row(
     expected_seed = derive_evaluation_env_seed(base_seed, pair_index)
     if _int(row["env_seed"], "env_seed", maximum=(1 << 63) - 1) != expected_seed:
         raise ValueError("paired environment seed mismatch")
+    if _deck_ids(row["deck_ids"], "game deck_ids") != deck_ids:
+        raise ValueError("game deck_ids mismatch")
+    if _deck_hashes(row["deck_hashes"], "game deck_hashes") != deck_hashes:
+        raise ValueError("game deck_hashes mismatch")
     candidate_seat = _seat(row["candidate_seat"], "candidate_seat")
     expected_candidate_seat = "p0" if game_in_pair == 0 else "p1"
     if candidate_seat != expected_candidate_seat:
@@ -709,13 +773,21 @@ def _game_points_from_row(
     return points
 
 
-def _expected_pair_row(pair_index: int, env_seed: int, points: PairedGamePoints) -> dict[str, Any]:
+def _expected_pair_row(
+    pair_index: int,
+    env_seed: int,
+    points: PairedGamePoints,
+    deck_ids: tuple[str, str],
+    deck_hashes: tuple[int, int],
+) -> dict[str, Any]:
     return {
         "candidate_as_p0_episode_id": 2 * pair_index,
         "candidate_as_p0_half_points": points.candidate_as_p0,
         "candidate_as_p1_episode_id": 2 * pair_index + 1,
         "candidate_as_p1_half_points": points.candidate_as_p1,
         "env_seed": env_seed,
+        "deck_ids": list(deck_ids),
+        "deck_hashes": list(deck_hashes),
         "pair_index": pair_index,
         "schema": PAIR_SCHEMA,
         "total_half_points": points.total_half_points,
@@ -738,7 +810,17 @@ def _validate_captured_payload(
     captured_pairs: CapturedFile,
 ) -> _ValidatedContent:
     validate_training_json_privacy(manifest)
-    pair_count, base_seed, bootstrap_replicates, max_decisions, _trainer_cap, candidate_head, baseline_head = _validate_manifest(manifest)
+    (
+        pair_count,
+        base_seed,
+        bootstrap_replicates,
+        max_decisions,
+        _trainer_cap,
+        candidate_head,
+        baseline_head,
+        deck_ids,
+        deck_hashes,
+    ) = _validate_manifest(manifest)
     game_rows = _parse_jsonl(
         captured_games,
         row_limit=MAX_GAME_ROW_BYTES,
@@ -762,6 +844,8 @@ def _validate_captured_payload(
             game_in_pair=0,
             base_seed=base_seed,
             max_decisions=max_decisions,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
         )
         p1_points = _game_points_from_row(
             game_rows[2 * pair_index + 1],
@@ -769,10 +853,18 @@ def _validate_captured_payload(
             game_in_pair=1,
             base_seed=base_seed,
             max_decisions=max_decisions,
+            deck_ids=deck_ids,
+            deck_hashes=deck_hashes,
         )
         points = PairedGamePoints(p0_points, p1_points)
         paired_points.append(points)
-        expected_pair = _expected_pair_row(pair_index, derive_evaluation_env_seed(base_seed, pair_index), points)
+        expected_pair = _expected_pair_row(
+            pair_index,
+            derive_evaluation_env_seed(base_seed, pair_index),
+            points,
+            deck_ids,
+            deck_hashes,
+        )
         _require_strict_equal(pair_rows[pair_index], expected_pair, "pair row derived from game rows")
 
     score = score_pair_half_points(
@@ -839,6 +931,12 @@ __all__ = [
     "PAIRS_FILE_NAME",
     "RUN_FILE_NAME",
     "RUN_SCHEMA",
+    "SEAT_SCHEDULE_CONTRACT",
+    "V1_ALGORITHM_CONTRACT",
+    "V1_GAME_SCHEMA",
+    "V1_PAIR_SCHEMA",
+    "V1_RUN_SCHEMA",
+    "V1_SOURCE_RUN_SCHEMA",
     "ValidatedEvaluation",
     "statistics_payload",
     "validate_evaluation",

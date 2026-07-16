@@ -18,13 +18,14 @@ from .checkpoint_io import (
     MAX_CHECKPOINT_FILE_BYTES,
     load_torch_zip_checkpoint,
 )
+from .client import PROTOCOL_NAME, PROTOCOL_VERSION, SCHEMA_VERSION
 from .determinism import TrainerSeedDerivation, validate_uint63
 from .model import KernelPolicyValueNet, ModelConfig
 from .path_safety import mkdir_no_follow
 
-CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v2"
+CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v3"
 SIDECAR_SCHEMA = "kernel_rl_train_checkpoint_sidecar/v2"
-UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v2"
+UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v3"
 LATEST_SCHEMA = "kernel_rl_train_latest/v2"
 ADAM_ALGORITHM = "adam/torch-cpu-canonical-v1"
 ADAM_SETTINGS = {
@@ -582,11 +583,14 @@ def _validate_provenance(value: Any) -> None:
     required = {"protocol", "protocol_version", "schema_version", "kernel_version", "surface_version", "card_db_hash"}
     if not isinstance(value, dict) or set(value) != required:
         raise ValueError("checkpoint provenance keys mismatch")
-    if value["protocol"] != "kernel_rl_jsonl":
+    if value["protocol"] != PROTOCOL_NAME:
         raise ValueError("checkpoint provenance protocol mismatch")
-    for key in ("protocol_version", "schema_version", "surface_version"):
-        if type(value[key]) is not int or value[key] < 0:
-            raise ValueError(f"checkpoint provenance {key} must be a nonnegative int")
+    if value["protocol_version"] != PROTOCOL_VERSION:
+        raise ValueError("checkpoint provenance protocol_version mismatch")
+    if value["schema_version"] != SCHEMA_VERSION:
+        raise ValueError("checkpoint provenance schema_version mismatch")
+    if type(value["surface_version"]) is not int or value["surface_version"] < 0:
+        raise ValueError("checkpoint provenance surface_version must be a nonnegative int")
     if type(value["kernel_version"]) is not str or not value["kernel_version"]:
         raise ValueError("checkpoint provenance kernel_version must be nonempty")
     if type(value["card_db_hash"]) is not int or value["card_db_hash"] < 0 or value["card_db_hash"] > 0xFFFF_FFFF_FFFF_FFFF:

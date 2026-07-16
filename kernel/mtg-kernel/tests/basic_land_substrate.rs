@@ -28,6 +28,7 @@ fn put_on_battlefield(state: &mut GameState, name: &str) -> ObjectId {
         damage: 0,
         counters: Counters::default(),
         attachments: Vec::new(),
+        v4: mtg_kernel::state::ObjectStateV4::from_card_def(card_def),
         plotted_turn: None,
         zone_change_count: 0,
     });
@@ -93,8 +94,8 @@ fn two_islands_pay_uu_exactly() {
 }
 
 #[test]
-fn island_snapshot_restore_preserves_schema_v3_and_stable_action_identity() {
-    assert_eq!(RL_SESSION_SCHEMA_VERSION, 3);
+fn island_snapshot_restore_preserves_schema_v4_and_stable_action_identity() {
+    assert_eq!(RL_SESSION_SCHEMA_VERSION, 4);
     let mut state = ready_main1();
     let island = put_on_battlefield(&mut state, "Island");
     preflight_fully_supported_deck(&[state.objects.get(island).card_def]).unwrap();

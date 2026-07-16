@@ -29,4 +29,4 @@ pub mod surface_v2;
 pub mod trace;
 pub mod trigger;
 
-pub const KERNEL_VERSION: &str = "0.0.2-spike";
+pub const KERNEL_VERSION: &str = "0.0.3-spike";

@@ -44,7 +44,10 @@ use crate::effect::{self, EffectOp, ExecCtx, ObjectRef};
 use crate::event::{self, ActiveReplacement, CommittedEvent, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
 use crate::mana::{self, Cost};
-use crate::state::{GameState, StackItem, StackItemKind, Step, Target, Zone};
+use crate::state::{
+    AbilityKindV4, CastMethodV4, GameState, ObjectStateV4, PaidCostRefV4, StackItem, StackItemKind,
+    StackStateV4, Step, Target, Zone,
+};
 use crate::trigger::{self, PendingTrigger};
 use serde::{Deserialize, Serialize};
 
@@ -118,6 +121,12 @@ pub struct EngineState {
     /// present, the resolving stack item stays live and SBAs/triggers/
     /// priority are deliberately deferred.
     pub pending_spell_copy: Option<PendingSpellCopy>,
+    /// Generic, owned effect-frame continuation for policy-visible choices
+    /// yielded during resolution. New choice-bearing mechanics use this one
+    /// typed interpreter state instead of adding card-specific `pending_*`
+    /// slots. The certified legacy discard/optional-cost/Chain continuations
+    /// remain separate until they are migrated deliberately.
+    pub pending_effect: Option<effect::EffectContinuation>,
     /// Transient buffer for the *current* resolution: `event::commit`
     /// appends here, `trigger::collect_and_process` drains it after every
     /// resolution to match triggers. Empty between resolutions.
@@ -475,6 +484,10 @@ pub enum UnsupportedMechanic {
     /// before Chain Lightning gained its full copy/retarget state machine.
     /// Current engine code never emits it.
     SpellCopy,
+    /// A generated choice-bearing effect program violated the resumable
+    /// interpreter's fail-closed structural contract. Supported card
+    /// definitions must never reach this at runtime.
+    InvalidEffectContinuation,
 }
 
 /// Issues the next 613.7 timestamp for a newly-created
@@ -502,6 +515,16 @@ pub enum CastMode {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum CostKind {
     SacrificeLands,
+    SacrificePermanents,
+    SacrificeCreatures,
+    SacrificeArtifacts,
+    DiscardCards,
+    ExileFromGraveyard,
+    TapPermanents,
+    ReturnPermanentsToHand,
+    PayLife,
+    RemoveCounters,
+    PutCounters,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -531,10 +554,10 @@ pub struct PendingCast {
     /// zero()` for casting a Plotted card for free (`begin_cast`, `zone ==
     /// Exile`), or a card's `madness_cost` for a Madness cast
     /// (`apply_choose_madness_cast`). `None` for every ordinary cast.
-    /// `#[serde(skip)]`: `mana::Cost` can't derive `Deserialize` (see its
-    /// doc) -- harmless since nothing serializes mid-cast engine state
-    /// today; a real cast is entirely synchronous within one `step` call.
-    #[serde(skip)]
+    /// Serialized so the canonical diagnostic full-state hash includes it.
+    /// Deserialization still defaults this transient field to `None` because
+    /// `mana::Cost` contains a registry-owned `&'static [Pip]`.
+    #[serde(skip_deserializing)]
     pub cost_override: Option<Cost>,
     /// `None` until resolved, only meaningful for a modal card
     /// (`CardDef::mode2.is_some()`) -- pre-seeded to `Some(0)` at
@@ -810,6 +833,14 @@ pub enum Decision {
         spell: ObjectId,
         mode_count: u8,
     },
+    /// A generic resumable effect program yielded a branch choice during
+    /// resolution. `option_count` preserves the printed/program order; one
+    /// legal action is emitted per zero-based option index.
+    ChooseEffectOption {
+        player: PlayerId,
+        source: ObjectId,
+        option_count: u16,
+    },
     /// Highway Robbery only, this increment: a resolution-time optional
     /// cost (`effect::EffectOp::MayPayCostThen`). Always a real choice with
     /// at least 2 options (`Decline` plus whichever of `Discard`/
@@ -939,6 +970,9 @@ pub enum Action {
     /// like: same shape as `PlayLand`).
     PlotSpell(ObjectId),
     ChooseSpellMode(u8),
+    /// Answers `Decision::ChooseEffectOption` with a zero-based program
+    /// option index.
+    ChooseEffectOption(u16),
     ChooseOptionalCost(OptionalCostChoice),
     /// Answers `Decision::ChooseSpellCopyPayment`.
     ChooseSpellCopyPayment(bool),
@@ -1161,7 +1195,7 @@ fn completable_next_targets_for(
 
 /// Modal indices whose target requirements can be completed in the current
 /// state. `mode_count` remains the card's stable printed mode count; this
-/// list only filters the currently offered schema-v3 action candidates.
+/// list only filters the currently offered schema-v4 action candidates.
 fn viable_spell_modes(def: &card_def::CardDef, state: &GameState) -> Vec<u8> {
     let mut modes = Vec::with_capacity(if def.mode2.is_some() { 2 } else { 1 });
     if target_prefix_can_complete(def.target_spec, &[], state) {
@@ -1664,6 +1698,10 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return d;
         }
 
+        if let Some(d) = drain_pending_effect_or_decide(state) {
+            return d;
+        }
+
         if let Some(d) = drain_pending_discard_or_decide(state) {
             return d;
         }
@@ -2097,6 +2135,62 @@ fn drain_pending_spell_copy_or_decide(state: &mut GameState) -> Option<Decision>
     }
 }
 
+/// Drives the generic v4 effect continuation. A suspended resolving item is
+/// represented on the public stack while the player chooses, but is removed
+/// again before interpreter execution resumes, matching the ordinary
+/// resolution path's pop-before-effects invariant.
+fn drain_pending_effect_or_decide(state: &mut GameState) -> Option<Decision> {
+    let pending = state.engine.pending_effect.as_ref()?;
+    if let Some(choice) = pending.choice.as_ref() {
+        return Some(Decision::ChooseEffectOption {
+            player: choice.player(),
+            source: pending.resolving_item.source,
+            option_count: choice
+                .option_count()
+                .try_into()
+                .expect("effect option count fits the u16 public contract"),
+        });
+    }
+
+    let item = pending.resolving_item.clone();
+    match state.stack.pop() {
+        Some(public_item) if public_item == item => {}
+        Some(public_item) => {
+            state.stack.push(public_item);
+            state.engine.halted =
+                Some((UnsupportedMechanic::InvalidEffectContinuation, item.source));
+            return None;
+        }
+        None => {
+            state.engine.halted =
+                Some((UnsupportedMechanic::InvalidEffectContinuation, item.source));
+            return None;
+        }
+    }
+
+    match effect::resume_resumable_resolution(state) {
+        Ok(effect::ResumableProgress::Complete(completed)) => {
+            if completed != item {
+                state.engine.halted =
+                    Some((UnsupportedMechanic::InvalidEffectContinuation, item.source));
+                return None;
+            }
+            finish_resolved_stack_item(state, &completed);
+            collect_and_queue_triggers(state);
+            reset_priority(state);
+        }
+        Ok(effect::ResumableProgress::Suspended) => {
+            state.stack.push(item);
+        }
+        Err(_) => {
+            state.stack.push(item.clone());
+            state.engine.halted =
+                Some((UnsupportedMechanic::InvalidEffectContinuation, item.source));
+        }
+    }
+    None
+}
+
 /// If `Action::ChooseOptionalCost(SacrificeLand)` was just chosen, stages
 /// *which* land(s) through the same per-pick `Decision::ChooseCostTargets`
 /// flow `drain_pending_cast_or_decide` uses for Fireblast/Lava Dart (see
@@ -2211,7 +2305,7 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     // mandatory target assignment exists. If exactly one printed mode is
     // viable there is no policy choice, so retain that mode's original
     // index (including index 1) silently; if both are viable, expose the
-    // existing two-action schema-v3 decision unchanged.
+    // existing two-action schema-v4 decision unchanged.
     if def.mode2.is_some() && pending.mode_chosen.is_none() {
         let viable_modes = viable_spell_modes(def, state);
         if viable_modes.is_empty() {
@@ -2445,6 +2539,7 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         // own resolution context -- see `StackItem::kicked`'s doc for the
         // full chain.
         kicked: t.kicked,
+        v4: StackStateV4::default(),
     });
     // Same `priority_passes`/`priority_player` reset as `reset_priority`
     // (117.5: priority passes to the active player once a triggered
@@ -2528,6 +2623,37 @@ fn finish_resolved_stack_item(state: &mut GameState, item: &StackItem) {
     event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
 }
 
+fn execute_resolving_program(
+    state: &mut GameState,
+    item: &StackItem,
+    ctx: &ExecCtx,
+    program: &EffectOp,
+) -> ResolutionProgress {
+    if !effect::contains_player_choice(program) {
+        effect::execute(program, ctx, state);
+        return ResolutionProgress::Complete;
+    }
+
+    match effect::begin_resumable_resolution(program, ctx, item.clone(), state) {
+        Ok(effect::ResumableProgress::Complete(completed)) if completed == *item => {
+            ResolutionProgress::Complete
+        }
+        Ok(effect::ResumableProgress::Suspended) => {
+            // Keep the resolving item visible throughout the decision, but
+            // grant no priority/SBA/trigger window until the continuation
+            // completes.
+            state.stack.push(item.clone());
+            ResolutionProgress::Suspended
+        }
+        Ok(effect::ResumableProgress::Complete(_)) | Err(_) => {
+            state.stack.push(item.clone());
+            state.engine.halted =
+                Some((UnsupportedMechanic::InvalidEffectContinuation, item.source));
+            ResolutionProgress::Suspended
+        }
+    }
+}
+
 fn resolve_top_of_stack(state: &mut GameState) -> ResolutionProgress {
     let targets_legal = state
         .stack
@@ -2557,8 +2683,7 @@ fn resolve_top_of_stack(state: &mut GameState) -> ResolutionProgress {
     }
 
     if let Some(effect) = item.inline_effect.clone() {
-        effect::execute(&effect, &ctx, state);
-        return ResolutionProgress::Complete;
+        return execute_resolving_program(state, &item, &ctx, &effect);
     }
 
     let card_def_idx = state.objects.get(item.source).card_def;
@@ -2574,7 +2699,10 @@ fn resolve_top_of_stack(state: &mut GameState) -> ResolutionProgress {
         (def.spell_effect)()
     };
     if let Some(program) = program {
-        effect::execute(&program, &ctx, state);
+        if execute_resolving_program(state, &item, &ctx, &program) == ResolutionProgress::Suspended
+        {
+            return ResolutionProgress::Suspended;
+        }
     }
 
     if state
@@ -2731,6 +2859,11 @@ fn run_step_entry_action(state: &mut GameState, step: Step) {
             }
             state.players[0].draws_this_turn = 0;
             state.players[1].draws_this_turn = 0;
+            state.players[0].spells_cast_this_turn = 0;
+            state.players[1].spells_cast_this_turn = 0;
+            for (_, object) in state.objects.iter_mut() {
+                object.v4.ability_uses_this_turn.clear();
+            }
             // See `PlayPermissionExpiry`'s doc: the *holder's* own Untap
             // marks the start of their "next turn" for an "until end of
             // your next turn" impulse-draw permission (Clockwork
@@ -3138,6 +3271,11 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
                 .expect("checked available_mana_abilities above");
             let ctx = ExecCtx::no_targets(id, p);
             effect::execute(&program, &ctx, state);
+            state
+                .objects
+                .get_mut(id)
+                .v4
+                .note_ability_use(AbilityKindV4::Mana, 0);
             // 605.3b: mana abilities don't use the stack, so nothing goes on
             // it and no new *stack item* appears -- but this is not the same
             // claim as "doesn't reset the priority-passing count": Java's
@@ -3240,6 +3378,9 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             }
             state.engine.pending_cast.as_mut().unwrap().mode_chosen = Some(mode);
             Ok(())
+        }
+        Action::ChooseEffectOption(option_index) => {
+            effect::choose_resumable_option(state, option_index)
         }
         Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
         Action::ChooseSpellCopyPayment(pay) => apply_choose_spell_copy_payment(state, pay),
@@ -3445,6 +3586,7 @@ fn create_spell_copy(state: &mut GameState, pending: &PendingSpellCopy) -> Objec
         damage: 0,
         counters: Default::default(),
         attachments: Vec::new(),
+        v4: ObjectStateV4::from_card_def(original.card_def),
         plotted_turn: None,
         zone_change_count: 0,
     });
@@ -3858,6 +4000,15 @@ fn begin_cast_ex(
         // `finalize_cast` fills this in once `PendingCast::kicked` resolves
         // -- see `StackItem::kicked`'s doc.
         kicked: false,
+        v4: StackStateV4::spell(if is_flashback {
+            CastMethodV4::Flashback
+        } else if is_plotted {
+            CastMethodV4::Plotted
+        } else if forced_cost_override.is_some() {
+            CastMethodV4::Madness
+        } else {
+            CastMethodV4::Normal
+        }),
     });
 
     state.engine.pending_cast = Some(PendingCast {
@@ -3987,6 +4138,15 @@ fn finalize_cast(state: &mut GameState) {
     }
 
     let discarded = pending.additional_cost_discarded.unwrap_or_default();
+    let mut paid_cost_objects = pending.sacrifice_chosen.clone();
+    paid_cost_objects.extend(discarded.iter().copied());
+    // Capture after sacrifice/discard zone changes have committed. These refs
+    // describe the payment-time incarnation and visibility forever; later
+    // reanimation, bounce, shuffle, or exile cannot rewrite stack provenance.
+    let paid_cost_refs = paid_cost_objects
+        .into_iter()
+        .map(|object| PaidCostRefV4::capture(state, object))
+        .collect();
     let item = state.stack.last_mut().expect("begin_cast pushed this spell's StackItem and nothing can push another item while a cast is pending");
     debug_assert_eq!(
         item.source, pending.spell,
@@ -3996,6 +4156,14 @@ fn finalize_cast(state: &mut GameState) {
     item.discarded = discarded;
     item.mode_chosen = pending.mode_chosen.unwrap_or(0);
     item.kicked = was_kicked;
+    item.v4.paid_cost_refs = paid_cost_refs;
+    if pending.cast_mode == Some(CastMode::Alternative) {
+        item.v4.cast_method = Some(CastMethodV4::Alternative);
+    }
+    state.players[pending.controller.index()].spells_cast_this_turn = state.players
+        [pending.controller.index()]
+    .spells_cast_this_turn
+    .saturating_add(1);
     event::log_spell_cast(state, pending.spell, pending.controller);
 
     // 601.2i/603.3: casting is complete the instant costs are paid --
@@ -4080,7 +4248,24 @@ fn abort_cast(state: &mut GameState, pending: PendingCast) {
         Zone::Exile => state.exile.push(pending.spell),
         _ => unreachable!("origin_zone is always Hand, Graveyard, or Exile"),
     }
-    state.objects.get_mut(pending.spell).zone = to_zone;
+    state.forget_hand_object(pending.spell);
+    state.clear_object_relations(pending.spell);
+    let turn = state.turn;
+    {
+        let object = state.objects.get_mut(pending.spell);
+        object.zone = to_zone;
+        object.zone_change_count += 1;
+        object
+            .v4
+            .reset_for_zone_change(object.card_def, to_zone, turn);
+    }
+    if to_zone == Zone::Hand {
+        for observer in [PlayerId::P0, PlayerId::P1] {
+            state
+                .reveal_hand_card(observer, owner, pending.spell)
+                .expect("an aborted public stack spell just returned to hand");
+        }
+    }
     collect_and_queue_triggers(state);
     reset_priority(state);
 }
@@ -4118,7 +4303,13 @@ fn finalize_activation(state: &mut GameState) {
         mode_chosen: 0,
         madness_offer: false,
         kicked: false, // no activated ability in this pool has Kicker
+        v4: StackStateV4::default(),
     });
+    state
+        .objects
+        .get_mut(pending.source)
+        .v4
+        .note_ability_use(AbilityKindV4::Activated, pending.ability_index as u16);
 
     // No ability in this increment's pool triggers off another ability
     // being activated, but see `finalize_cast`'s identical call for why
@@ -4139,7 +4330,15 @@ fn move_to_stack(state: &mut GameState, id: ObjectId, from_zone: Zone) {
         Zone::Exile => state.exile.retain(|&x| x != id),
         _ => state.players[owner.index()].hand.retain(|&x| x != id),
     }
-    state.objects.get_mut(id).zone = Zone::Stack;
+    state.forget_hand_object(id);
+    state.clear_object_relations(id);
+    let turn = state.turn;
+    let object = state.objects.get_mut(id);
+    object.zone = Zone::Stack;
+    object.zone_change_count += 1;
+    object
+        .v4
+        .reset_for_zone_change(object.card_def, Zone::Stack, turn);
 }
 
 fn pay_plan(state: &mut GameState, player: PlayerId, plan: &mana::PaymentPlan) {
@@ -4184,6 +4383,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4205,6 +4405,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4226,11 +4427,129 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
         state.players[player.index()].graveyard.push(obj_id);
         obj_id
+    }
+
+    #[test]
+    fn resumable_effect_choice_preserves_order_stack_and_snapshot_state() {
+        let mut state = empty_game();
+        state.step = Step::Main1;
+        let source = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let program = EffectOp::Sequence(vec![
+            EffectOp::LoseLife {
+                player: PlayerRef::Controller,
+                amount: 1,
+            },
+            EffectOp::Choice {
+                controller: PlayerRef::Controller,
+                options: vec![
+                    EffectOp::GainLife {
+                        player: PlayerRef::Controller,
+                        amount: 2,
+                    },
+                    EffectOp::LoseLife {
+                        player: PlayerRef::Controller,
+                        amount: 3,
+                    },
+                ],
+            },
+            EffectOp::GainLife {
+                player: PlayerRef::Controller,
+                amount: 5,
+            },
+        ]);
+        let resolving = StackItem {
+            kind: StackItemKind::TriggeredAbility,
+            source,
+            controller: PlayerId::P0,
+            targets: vec![],
+            is_copy: false,
+            inline_effect: Some(program),
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: false,
+            kicked: false,
+            v4: StackStateV4::default(),
+        };
+        state.stack.push(resolving.clone());
+        state.engine.priority_passes = [true, true];
+
+        let decision = advance_until_decision(&mut state);
+        assert_eq!(
+            state.players[0].life, 19,
+            "nothing after the choice ran early"
+        );
+        assert_eq!(state.stack, vec![resolving]);
+        assert!(matches!(
+            decision,
+            Decision::ChooseEffectOption {
+                player: PlayerId::P0,
+                source: decision_source,
+                option_count: 2,
+            } if decision_source == source
+        ));
+
+        let snapshot = state.snapshot();
+        let pending_hash = state.state_hash();
+        step(&mut state, Action::ChooseEffectOption(0)).unwrap();
+        let after_first = advance_until_decision(&mut state);
+        let completed_hash = state.state_hash();
+        assert_eq!(state.players[0].life, 26);
+        assert!(state.stack.is_empty());
+        assert!(state.engine.pending_effect.is_none());
+        assert!(matches!(after_first, Decision::CastSpellOrPass { .. }));
+
+        state.restore(&snapshot);
+        assert_eq!(state.state_hash(), pending_hash);
+        assert!(matches!(
+            advance_until_decision(&mut state),
+            Decision::ChooseEffectOption {
+                option_count: 2,
+                ..
+            }
+        ));
+        step(&mut state, Action::ChooseEffectOption(0)).unwrap();
+        let after_restore = advance_until_decision(&mut state);
+        assert_eq!(state.state_hash(), completed_hash);
+        assert_eq!(after_restore, after_first);
+    }
+
+    #[test]
+    fn invalid_resumable_choice_answer_is_nonmutating() {
+        let mut state = empty_game();
+        let source = put_on_battlefield(&mut state, PlayerId::P0, "Mountain");
+        let item = StackItem {
+            kind: StackItemKind::TriggeredAbility,
+            source,
+            controller: PlayerId::P0,
+            targets: vec![],
+            is_copy: false,
+            inline_effect: Some(EffectOp::Choice {
+                controller: PlayerRef::Controller,
+                options: vec![EffectOp::Sequence(vec![]), EffectOp::Sequence(vec![])],
+            }),
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: false,
+            kicked: false,
+            v4: StackStateV4::default(),
+        };
+        state.stack.push(item);
+        state.engine.priority_passes = [true, true];
+        assert!(matches!(
+            advance_until_decision(&mut state),
+            Decision::ChooseEffectOption { .. }
+        ));
+        let before = state.clone();
+        assert!(step(&mut state, Action::ChooseEffectOption(2)).is_err());
+        assert_eq!(state, before);
     }
 
     /// Fireblast's alternative cost (Sol #85: alt costs are payment
@@ -4330,6 +4649,18 @@ mod tests {
             "alt cost shouldn't tap any Mountain"
         );
         assert_eq!(state.stack.len(), 1);
+        let payment_refs = &state.stack[0].v4.paid_cost_refs;
+        assert_eq!(payment_refs.len(), 2);
+        assert_eq!(payment_refs[0].object, first_pick);
+        assert_eq!(payment_refs[1].object, second_pick);
+        for payment in payment_refs {
+            assert_eq!(payment.zone, Zone::Graveyard);
+            assert_eq!(payment.visible_to_mask, 0b11);
+            assert_eq!(
+                payment.zone_change_count,
+                state.objects.get(payment.object).zone_change_count
+            );
+        }
     }
 
     /// When only one of Fireblast's two cost paths is actually payable,
@@ -4784,6 +5115,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4799,6 +5131,7 @@ mod tests {
             mode_chosen: 0,
             madness_offer: false,
             kicked: false,
+            v4: StackStateV4::spell(CastMethodV4::Normal),
         });
         obj_id
     }
@@ -5041,6 +5374,7 @@ mod tests {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: ObjectStateV4::from_card_def(mountain),
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -5624,8 +5958,8 @@ mod tests {
     }
 
     #[test]
-    fn counter_target_rl_identity_and_snapshot_restore_remain_schema_v3_stable() {
-        assert_eq!(crate::rl_session::RL_SESSION_SCHEMA_VERSION, 3);
+    fn counter_target_rl_identity_and_snapshot_restore_remain_schema_v4_stable() {
+        assert_eq!(crate::rl_session::RL_SESSION_SCHEMA_VERSION, 4);
         let mut state = ready_game_in_main1(0);
         put_on_battlefield(&mut state, PlayerId::P0, "Island");
         put_on_battlefield(&mut state, PlayerId::P0, "Island");
@@ -5648,7 +5982,7 @@ mod tests {
             _ => None,
         })
         .expect("Counterspell target has a stable RL action id");
-        assert!(action_id.starts_with("legal-action-v3:"));
+        assert!(action_id.starts_with("legal-action-v4:"));
 
         let hash = state.state_hash();
         let snapshot = state.snapshot();
@@ -5889,6 +6223,7 @@ mod tests {
             mode_chosen: 0,
             madness_offer: false,
             kicked: false,
+            v4: StackStateV4::spell(CastMethodV4::Normal),
         });
         let triggered = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
         state.stack.push(StackItem {
@@ -5903,6 +6238,7 @@ mod tests {
             mode_chosen: 0,
             madness_offer: false,
             kicked: false,
+            v4: StackStateV4::default(),
         });
         let madness = put_in_graveyard(&mut state, PlayerId::P1, "Fiery Temper");
         state.stack.push(StackItem {
@@ -5917,6 +6253,7 @@ mod tests {
             mode_chosen: 0,
             madness_offer: true,
             kicked: false,
+            v4: StackStateV4::default(),
         });
 
         for spec in [
@@ -6420,6 +6757,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });

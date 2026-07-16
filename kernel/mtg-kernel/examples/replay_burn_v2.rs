@@ -1644,6 +1644,9 @@ fn run(
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => {
                 return Err("unhandled-decision:ChooseSpellMode".to_string())
             }
+            SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => {
+                return Err("unhandled-decision:ChooseEffectOption".to_string())
+            }
             SurfaceDecision::Decision(Decision::ChooseKicker { player, .. }) => {
                 // Ground truth, not a guess (unlike ChooseCastMode/
                 // ChooseOptionalCost/ChooseMadnessCast): Goblin Bushwhacker's
@@ -1758,6 +1761,7 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::DeclareBlockers { player, .. })
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectOption { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. })
         // `OrderTriggers` itself consumes no trace record either (see that
@@ -3859,6 +3863,7 @@ mod tests {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: mtg_kernel::state::ObjectStateV4::from_card_def(mountain),
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -3876,6 +3881,7 @@ mod tests {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: mtg_kernel::state::ObjectStateV4::from_card_def(lightning_bolt),
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -3954,6 +3960,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(guttersnipe),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3970,6 +3977,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(mountain),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4041,6 +4049,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(fireblast),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4116,6 +4125,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(fiery_temper),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -4184,6 +4194,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(card_def),
             plotted_turn: None,
             zone_change_count: 0,
         });

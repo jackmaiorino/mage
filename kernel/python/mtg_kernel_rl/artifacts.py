@@ -23,6 +23,7 @@ from .path_safety import is_verified_output_lock_entry, mkdir_no_follow, scandir
 
 FaultInjector = Callable[[str, Path | None], None]
 _FAULT_INJECTOR: FaultInjector | None = None
+SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
 
 
 @dataclass(frozen=True)
@@ -266,7 +267,7 @@ def _incremental_summary(*, latest: dict[str, Any], checkpoint_payload: dict[str
         raise ValueError("checkpoint episode aggregate mismatch")
     learner_decisions = int(checkpoint_payload["learner_decisions_by_seat"]["p0"]) + int(checkpoint_payload["learner_decisions_by_seat"]["p1"])
     summary = {
-        "schema": "kernel_rl_train_summary/v2",
+        "schema": SUMMARY_SCHEMA,
         "run_digest": latest["run_digest"],
         "head_update": latest["update"],
         "head": latest["head"],
@@ -356,7 +357,7 @@ def rebuild_derived_caches(out_dir: str | Path, records: list[dict[str, Any]], l
     episode_rows: list[dict[str, Any]] = []
     update_rows: list[dict[str, Any]] = []
     summary = {
-        "schema": "kernel_rl_train_summary/v2",
+        "schema": SUMMARY_SCHEMA,
         "run_digest": latest["run_digest"],
         "head_update": latest["update"],
         "head": latest["head"],

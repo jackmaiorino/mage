@@ -108,7 +108,8 @@ impl CardCapability {
 /// data). `build.rs::subtype_variant` panics on an unrecognized string,
 /// same as `card_type_variant`/`supertype_variant`/`color_variant`, since
 /// this is now a closed set the same way those are.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[repr(u16)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 pub enum Subtype {
     Ape,
     Aura,
@@ -177,6 +178,15 @@ pub enum Subtype {
     Zombie,
 }
 
+impl Subtype {
+    /// Schema-v4 observation id. Existing discriminants are append-only:
+    /// feature encoders may sort and embed these ids without depending on
+    /// source spelling or locale-sensitive string ordering.
+    pub const fn stable_id(self) -> u16 {
+        self as u16
+    }
+}
+
 /// What a spell/ability needs targeted at cast/activation time.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum TargetSpec {
@@ -218,7 +228,7 @@ pub enum TargetSpec {
 /// `DOUBLE_STRIKE` back the two-wave combat-damage hook in `engine.rs`
 /// even though nothing in Mono-Red Burn has first strike.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Hash, Serialize, Deserialize)]
-pub struct Keywords(pub u16);
+pub struct Keywords(pub u32);
 
 impl Keywords {
     pub const NONE: Keywords = Keywords(0);
@@ -232,10 +242,33 @@ impl Keywords {
     pub const DEATHTOUCH: Keywords = Keywords(1 << 7);
     pub const MENACE: Keywords = Keywords(1 << 8);
     pub const DEFENDER: Keywords = Keywords(1 << 9);
+    pub const LIFELINK: Keywords = Keywords(1 << 10);
+    pub const HEXPROOF: Keywords = Keywords(1 << 11);
+    pub const INDESTRUCTIBLE: Keywords = Keywords(1 << 12);
+    pub const PROTECTION_FROM_MONOCOLORED: Keywords = Keywords(1 << 13);
 
     pub const fn has(self, other: Keywords) -> bool {
         self.0 & other.0 != 0
     }
+}
+
+/// Stable W/U/B/R/G/C bit positions used by schema-v4 object colors,
+/// landwalk, and color-selection contracts.
+pub const fn mana_color_mask(color: ManaColor) -> u8 {
+    match color {
+        ManaColor::W => 1 << 0,
+        ManaColor::U => 1 << 1,
+        ManaColor::B => 1 << 2,
+        ManaColor::R => 1 << 3,
+        ManaColor::G => 1 << 4,
+        ManaColor::C => 1 << 5,
+    }
+}
+
+pub fn mana_colors_mask(colors: &[ManaColor]) -> u8 {
+    colors
+        .iter()
+        .fold(0, |mask, &color| mask | mana_color_mask(color))
 }
 
 impl std::ops::BitOr for Keywords {

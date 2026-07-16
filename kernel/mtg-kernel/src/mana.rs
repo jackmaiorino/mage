@@ -73,7 +73,7 @@ const GENERIC_POOL_PAYMENT_ORDER: [ManaColor; 6] = [
     ManaColor::R,
 ];
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize)]
 pub enum Pip {
     Colored(ManaColor),
     Hybrid(ManaColor, ManaColor),
@@ -85,15 +85,11 @@ pub enum Pip {
 /// table (see `card_def.rs` / `build.rs`); nothing here prevents a future
 /// increment adding an owned-slice variant for runtime-built costs (e.g. an
 /// alternative cost).
-/// Deliberately does *not* derive `Serialize`/`Deserialize`: `pips` is a
-/// `&'static` reference (see its field doc), which can't round-trip through
-/// serde without a registry to resolve it back to. Nothing in this crate
-/// actually serializes a `GameState` yet (every `Serialize`/`Deserialize`
-/// derive elsewhere is defensive, for a future increment) -- the one place
-/// a `Cost` now lives inside a type that otherwise derives those
-/// (`engine::PendingCast::cost_override`) opts that single field out with
-/// `#[serde(skip)]` instead of forcing this shape to change.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+/// Derives `Serialize` so the diagnostic full-state hash includes a pending
+/// cast's exact override. It deliberately does not derive `Deserialize`:
+/// rebuilding a `&'static [Pip]` requires registry ownership that the current
+/// snapshot API does not need.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize)]
 pub struct Cost {
     pub pips: &'static [Pip],
     pub generic: u8,

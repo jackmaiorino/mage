@@ -22,14 +22,22 @@ from mtg_kernel_rl.artifact_io import canonical_json_bytes, read_json_file, sha2
 from mtg_kernel_rl.artifacts import set_fault_injector
 from mtg_kernel_rl.client import Decision
 from mtg_kernel_rl.determinism import derive_evaluation_env_seed
-from mtg_kernel_rl.evaluation_store import validate_evaluation
+from mtg_kernel_rl.evaluation_store import (
+    GAME_SCHEMA,
+    PAIR_SCHEMA,
+    RUN_SCHEMA,
+    V1_GAME_SCHEMA,
+    V1_PAIR_SCHEMA,
+    V1_RUN_SCHEMA,
+    validate_evaluation,
+)
 from mtg_kernel_rl.evaluator import EvaluationResult, _select_greedy_action, _validate_request, evaluate
 from mtg_kernel_rl.output_lock import OutputLock
 from mtg_kernel_rl.path_safety import OUTPUT_LOCK_FILE_NAME
 from mtg_kernel_rl.trainer import train
 from mtg_kernel_rl.training_store import TrainingStore
 
-from fixtures import PROVENANCE, actor_observation, fake_launcher, legal_actions
+from fixtures import DECK_HASHES, DECK_IDS, PROVENANCE, actor_observation, fake_launcher, legal_actions
 
 
 def _train_fixture(
@@ -201,6 +209,15 @@ class EvaluatorEndToEndTest(unittest.TestCase):
             pairs = _jsonl(root / "eval-a" / "pairs.jsonl")
             self.assertEqual([row["total_half_points"] for row in pairs], [2, 2, 2])
             manifest = read_json_file(root / "eval-a" / "run.json")
+            games = _jsonl(root / "eval-a" / "games.jsonl")
+            self.assertEqual(manifest["schema"], RUN_SCHEMA)
+            self.assertEqual(manifest["artifact_schemas"], {"game": GAME_SCHEMA, "pair": PAIR_SCHEMA, "run": RUN_SCHEMA})
+            self.assertTrue(all(row["schema"] == GAME_SCHEMA for row in games))
+            self.assertTrue(all(row["schema"] == PAIR_SCHEMA for row in pairs))
+            self.assertEqual(tuple(manifest["configuration"]["deck_ids"]), DECK_IDS)
+            self.assertEqual(tuple(manifest["environment"]["deck_hashes"]), DECK_HASHES)
+            self.assertTrue(all(tuple(row["deck_ids"]) == DECK_IDS for row in games + pairs))
+            self.assertTrue(all(tuple(row["deck_hashes"]) == DECK_HASHES for row in games + pairs))
             paired = manifest["statistics"]["paired"]
             self.assertEqual(paired["estimate_hex"], (0.5).hex())
             self.assertEqual((paired["bootstrap"]["lower_hex"], paired["bootstrap"]["upper_hex"]), ((0.5).hex(), (0.5).hex()))
@@ -241,6 +258,7 @@ class EvaluatorEndToEndTest(unittest.TestCase):
             expected_seeds = [derive_evaluation_env_seed(91, pair) for pair in range(3) for _ in range(2)]
             self.assertEqual([row["env_seed"] for row in resets], expected_seeds)
             self.assertEqual([row["max_decisions"] for row in resets], [8] * 6)
+            self.assertEqual([tuple(row["deck_ids"]) for row in resets], [DECK_IDS] * 6)
             games = _jsonl(root / "evaluation" / "games.jsonl")
             self.assertEqual([row["candidate_seat"] for row in games], ["p0", "p1"] * 3)
             self.assertTrue(all(row["candidate_decisions"] == 1 and row["baseline_decisions"] == 1 for row in games))
@@ -272,6 +290,21 @@ class EvaluatorEndToEndTest(unittest.TestCase):
                 )
             self.assertFalse(marker.exists())
             self.assertFalse((root / "head-mismatch").exists())
+            with self.assertRaisesRegex(ValueError, "deck_ids"):
+                evaluate(
+                    training_store=store,
+                    expected_candidate_head=head,
+                    env_bin=launcher,
+                    out_dir=root / "deck-mismatch",
+                    pairs=1,
+                    base_seed=1,
+                    bootstrap_replicates=1_000,
+                    max_decisions=8,
+                    timeout_ms=5_000,
+                    deck_ids=("Burn", "Rally"),
+                )
+            self.assertFalse(marker.exists())
+            self.assertFalse((root / "deck-mismatch").exists())
             with self.assertRaises(ValueError):
                 evaluate(
                     training_store=store,
@@ -623,6 +656,9 @@ class EvaluationConcurrencyAndFailureProofTest(unittest.TestCase):
                 "eof_nonzero",
                 "timeout",
                 "provenance_drift",
+                "deck_id_drift",
+                "deck_hash_shape",
+                "deck_hash_drift",
             ):
                 with self.subTest(scenario=scenario):
                     out_name = f"failure-{scenario}"
@@ -650,7 +686,16 @@ class EvaluationConcurrencyAndFailureProofTest(unittest.TestCase):
 
 class EvaluatorUnitTest(unittest.TestCase):
     def _decision(self) -> Decision:
-        return Decision(0, 0, "p0", actor_observation("p0"), legal_actions("p0"), dict(PROVENANCE))
+        return Decision(
+            0,
+            0,
+            "p0",
+            actor_observation("p0"),
+            legal_actions("p0"),
+            dict(PROVENANCE),
+            DECK_IDS,
+            DECK_HASHES,
+        )
 
     def test_greedy_tie_nonfinite_shape_and_global_rng(self) -> None:
         decision = self._decision()
@@ -734,6 +779,9 @@ class EvaluatorUnitTest(unittest.TestCase):
             "8",
             "--timeout-ms",
             "5000",
+            "--deck-ids",
+            "Burn",
+            "Rally",
         ]
         parsed = cli_mod.build_parser().parse_args(argv)
         self.assertEqual(parsed.command, "evaluate")
@@ -744,6 +792,7 @@ class EvaluatorUnitTest(unittest.TestCase):
         with mock.patch.object(cli_mod, "evaluate", return_value=result) as called, contextlib.redirect_stdout(output):
             self.assertEqual(cli_mod.main(argv), 0)
         called.assert_called_once()
+        self.assertEqual(called.call_args.kwargs["deck_ids"], ("Burn", "Rally"))
         line = output.getvalue()
         self.assertEqual(line, json.dumps(json.loads(line), sort_keys=True, separators=(",", ":")) + "\n")
         self.assertNotIn("source", line)
@@ -825,11 +874,30 @@ class EvaluationVerifierCorruptionTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 validate_evaluation(target)
 
+            target = clone("legacy-v1-run-schema")
+            manifest = read_json_file(target / "run.json")
+            manifest["schema"] = V1_RUN_SCHEMA
+            (target / "run.json").write_bytes(canonical_json_bytes(manifest))
+            with self.assertRaises(ValueError):
+                validate_evaluation(target)
+
+            target = clone("legacy-v1-artifact-schemas")
+            manifest = read_json_file(target / "run.json")
+            manifest["artifact_schemas"] = {"game": V1_GAME_SCHEMA, "pair": V1_PAIR_SCHEMA, "run": V1_RUN_SCHEMA}
+            (target / "run.json").write_bytes(canonical_json_bytes(manifest))
+            with self.assertRaises(ValueError):
+                validate_evaluation(target)
+
             for name, mutate in (
                 ("bool-game", lambda manifest, games, pairs: games[0]["terminal_reward"].__setitem__(0, True)),
                 ("float-game", lambda manifest, games, pairs: games[0]["terminal_reward"].__setitem__(0, 1.0)),
                 ("bool-pair", lambda manifest, games, pairs: pairs[0].__setitem__("candidate_as_p1_half_points", False)),
                 ("bool-stat", lambda manifest, games, pairs: manifest["statistics"]["games"].__setitem__("draws", False)),
+                ("manifest-deck-id", lambda manifest, games, pairs: manifest["configuration"]["deck_ids"].__setitem__(1, "Rally")),
+                ("manifest-deck-hash", lambda manifest, games, pairs: manifest["environment"]["deck_hashes"].__setitem__(0, 1)),
+                ("game-deck-hash", lambda manifest, games, pairs: games[0]["deck_hashes"].__setitem__(0, 1)),
+                ("pair-deck-id", lambda manifest, games, pairs: pairs[0]["deck_ids"].__setitem__(0, "Rally")),
+                ("seat-deck-order", lambda manifest, games, pairs: manifest["seat_schedule"].__setitem__("deck_order", "bad")),
                 ("bool-scoring", lambda manifest, games, pairs: manifest["scoring"].__setitem__("candidate_draw", True)),
                 ("int-publication", lambda manifest, games, pairs: manifest["publication"].__setitem__("resume", 0)),
                 (

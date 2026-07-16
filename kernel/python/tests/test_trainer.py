@@ -34,7 +34,7 @@ from mtg_kernel_rl.training_store import ALGORITHM_NAME, RUN_SCHEMA, TRAINER_ACT
 from mtg_kernel_rl.trainer import _compute_loss_tensors, train
 import mtg_kernel_rl.trainer as trainer_mod
 
-from fixtures import fake_launcher
+from fixtures import DECK_HASHES, DECK_IDS, fake_launcher
 
 
 def _state(path: Path, update: int) -> dict:
@@ -268,6 +268,90 @@ def _assert_hard_kill_fired(
 
 
 class TrainerTest(unittest.TestCase):
+    def test_fresh_deck_identity_failure_persists_no_run_or_generation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            for scenario in ("deck_id_drift", "deck_hash_shape"):
+                with self.subTest(scenario=scenario):
+                    out = tmp / scenario
+                    with self.assertRaises(Exception):
+                        train(
+                            env_bin=fake_launcher(tmp, scenario),
+                            out_dir=out,
+                            base_seed=71501,
+                            until_update=0,
+                            batch_episodes=2,
+                            learning_rate=0.001,
+                            value_coef=0.5,
+                            max_decisions=8,
+                        )
+                    self.assertFalse((out / "run.json").exists())
+                    self.assertFalse((out / "latest.json").exists())
+
+    def test_resume_requested_deck_drift_fails_before_environment_launch_or_artifact_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            marker = tmp / "started.txt"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(marker)})
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            marker.unlink()
+            before = _snapshot_tree(out)
+            with self.assertRaisesRegex(ValueError, "deck_ids"):
+                train(
+                    env_bin=launcher,
+                    out_dir=out,
+                    resume=out / "latest.json",
+                    until_update=2,
+                    deck_ids=("Burn", "Rally"),
+                )
+            self.assertFalse(marker.exists())
+            self.assertEqual(_snapshot_tree(out), before)
+
+    def test_resume_resolved_deck_drift_fails_before_recovery_or_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            scenario_file = tmp / "scenario.txt"
+            scenario_file.write_text("train_pair", encoding="utf-8")
+            launcher = fake_launcher(
+                tmp,
+                "switchable",
+                {"FAKE_SCENARIO_FILE": str(scenario_file)},
+            )
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            (out / "episodes.jsonl").unlink()
+            scenario_file.write_text("deck_id_drift", encoding="utf-8")
+            before = _snapshot_tree(out)
+            with self.assertRaises(Exception):
+                train(
+                    env_bin=launcher,
+                    out_dir=out,
+                    resume=out / "latest.json",
+                    until_update=2,
+                )
+            self.assertEqual(_snapshot_tree(out), before)
+            self.assertFalse((out / "episodes.jsonl").exists())
+            self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
+
     def test_fresh_update_zero_is_published_before_training_actions(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -291,6 +375,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(run["algorithm"]["name"], ALGORITHM_NAME)
             self.assertEqual(run["samplers"]["learner"]["action_selection"], TRAINER_ACTION_SELECTION_CONTRACT)
             self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v9")
+            self.assertEqual(tuple(run["environment"]["deck_ids"]), DECK_IDS)
+            self.assertEqual(tuple(run["environment"]["deck_hashes"]), DECK_HASHES)
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -868,6 +954,8 @@ class TrainerTest(unittest.TestCase):
             self.assertTrue(record["optimizer_step"])
             self.assertEqual([row["learner_seat"] for row in record["episode_summaries"]], ["p0", "p1"])
             self.assertEqual([row["learner_decision_count"] for row in record["episode_summaries"]], [1, 1])
+            self.assertTrue(all(tuple(row["deck_ids"]) == DECK_IDS for row in record["episode_summaries"]))
+            self.assertTrue(all(tuple(row["deck_hashes"]) == DECK_HASHES for row in record["episode_summaries"]))
 
     def test_zero_decision_batch_commits_without_model_or_optimizer_mutation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

@@ -9,7 +9,7 @@ import random
 import re
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import torch
 
@@ -104,9 +104,27 @@ _COMMITTED_ROOT_TEMP_TARGETS = frozenset({"latest.json", "episodes.jsonl", "upda
 _TRANSACTION_TEMP_TARGETS = frozenset({"update.json", "sidecar.json"})
 _MAX_PID_COMPONENT = (1 << 32) - 1
 _MAX_MONOTONIC_COMPONENT = (1 << 64) - 1
+DEFAULT_DECK_IDS = ("Burn", "Burn")
 
 # Legacy private trainer names remain bound for ownership audits; definitions live in training_store.
 _PERSISTED_CONTRACT_OWNER_HELPERS = (_validate_latest, _validate_run_manifest, _validate_update_record)
+
+
+def _validate_requested_deck_ids(value: Any) -> tuple[str, str]:
+    if type(value) is not tuple or len(value) != 2:
+        raise TypeError("deck_ids must be an exact two-item tuple")
+    if any(type(item) is not str or not item for item in value):
+        raise ValueError("deck_ids entries must be nonempty strings")
+    return value[0], value[1]
+
+
+def _assert_response_deck_identity(run: dict[str, Any], response: Decision | Terminal) -> None:
+    expected_ids = tuple(run["environment"]["deck_ids"])
+    expected_hashes = tuple(run["environment"]["deck_hashes"])
+    if response.deck_ids != expected_ids:
+        raise ValueError("environment deck_ids drift")
+    if response.deck_hashes != expected_hashes:
+        raise ValueError("environment deck_hashes drift")
 
 
 @dataclasses.dataclass
@@ -153,6 +171,7 @@ def _write_run_json(out_dir: Path, run: dict[str, Any]) -> str:
 
 
 def _assert_first_decision_matches_run(run: dict[str, Any], decision: Decision) -> None:
+    _assert_response_deck_identity(run, decision)
     if decision.provenance != run["protocol_provenance"]:
         raise ValueError("environment provenance drift on first decision")
     encoded = encode_decision(decision.observation, decision.legal_actions)
@@ -566,12 +585,14 @@ def _load_chain(
     out_dir: Path,
     env_sha: str,
     until_update: int,
+    deck_ids: tuple[str, str],
     base_seed: int | None,
     batch_episodes: int | None,
     learning_rate: float | None,
     value_coef: float | None,
     max_decisions: int | None,
     compatibility: dict[str, Any],
+    before_mutation: Callable[[dict[str, Any], Any], None] | None = None,
 ) -> TrainState:
     chain = TrainingStore(out_dir).validate_latest()
     run = chain.run_record
@@ -592,6 +613,7 @@ def _load_chain(
     _assert_run_matches_options(
         run,
         env_sha=env_sha,
+        deck_ids=deck_ids,
         base_seed=base_seed,
         batch_episodes=batch_episodes,
         learning_rate=learning_rate,
@@ -610,6 +632,8 @@ def _load_chain(
     resume_snapshot = chain.load_resume(chain.head)
     records = list(chain.update_records)
     latest = chain.latest_record
+    if before_mutation is not None:
+        before_mutation(run, resume_snapshot)
     _apply_uncommitted_artifact_recovery(out_dir, recovery_plan)
     rebuild_derived_caches(out_dir, records, latest)
     restore_python_rng_state(resume_snapshot.python_rng_state)
@@ -634,6 +658,7 @@ def _bootstrap_fresh(
     *,
     env_bin: Path,
     out_dir: Path,
+    deck_ids: tuple[str, str],
     base_seed: int,
     batch_episodes: int,
     learning_rate: float,
@@ -645,7 +670,16 @@ def _bootstrap_fresh(
     env_sha = sha256_file(env_bin)
     client = KernelRlClient(env_bin, timeout_s=10.0)
     try:
-        first = client.reset(episode_id=0, env_seed=_env_seed_for_episode(base_seed, 0), max_decisions=max_decisions)
+        first = client.reset(
+            episode_id=0,
+            env_seed=_env_seed_for_episode(base_seed, 0),
+            max_decisions=max_decisions,
+            deck_ids=deck_ids,
+        )
+        if not isinstance(first, Decision):
+            raise ValueError("fresh trainer reset must return an initial decision")
+        if first.deck_ids != deck_ids:
+            raise ValueError("environment deck_ids differ from requested deck_ids")
         encoded = encode_decision(first.observation, first.legal_actions)
         random.seed(derive_model_init_seed(base_seed))
         torch.manual_seed(derive_model_init_seed(base_seed))
@@ -657,6 +691,8 @@ def _bootstrap_fresh(
         optimizer = create_adam(model, learning_rate)
         run = _run_manifest(
             env_sha=env_sha,
+            deck_ids=first.deck_ids,
+            deck_hashes=first.deck_hashes,
             provenance=first.provenance,
             model=model,
             base_seed=base_seed,
@@ -702,6 +738,7 @@ def _bootstrap_fresh(
             out_dir=out_dir,
             env_sha=env_sha,
             until_update=0,
+            deck_ids=deck_ids,
             base_seed=base_seed,
             batch_episodes=batch_episodes,
             learning_rate=learning_rate,
@@ -753,6 +790,7 @@ def _bootstrap_incomplete_fresh(
     *,
     env_bin: Path,
     out_dir: Path,
+    deck_ids: tuple[str, str],
     base_seed: int,
     batch_episodes: int,
     learning_rate: float,
@@ -768,6 +806,7 @@ def _bootstrap_incomplete_fresh(
     _assert_run_matches_options(
         run,
         env_sha=env_sha,
+        deck_ids=deck_ids,
         base_seed=base_seed,
         batch_episodes=batch_episodes,
         learning_rate=learning_rate,
@@ -781,11 +820,18 @@ def _bootstrap_incomplete_fresh(
         run_digest=run_digest,
         compatibility=compatibility,
     )
-    _apply_uncommitted_artifact_recovery(out_dir, recovery_plan)
     client = KernelRlClient(env_bin, timeout_s=10.0)
     try:
-        first = client.reset(episode_id=0, env_seed=_env_seed_for_episode(base_seed, 0), max_decisions=max_decisions)
+        first = client.reset(
+            episode_id=0,
+            env_seed=_env_seed_for_episode(base_seed, 0),
+            max_decisions=max_decisions,
+            deck_ids=deck_ids,
+        )
+        if not isinstance(first, Decision):
+            raise ValueError("incomplete fresh trainer reset must return an initial decision")
         _assert_first_decision_matches_run(run, first)
+        _apply_uncommitted_artifact_recovery(out_dir, recovery_plan)
         cfg = ModelConfig.from_dict(run["model"]["config"])
         random.seed(run["initializer"]["seed"])
         torch.manual_seed(run["initializer"]["seed"])
@@ -828,6 +874,7 @@ def _bootstrap_incomplete_fresh(
             out_dir=out_dir,
             env_sha=env_sha,
             until_update=0,
+            deck_ids=deck_ids,
             base_seed=base_seed,
             batch_episodes=batch_episodes,
             learning_rate=learning_rate,
@@ -909,7 +956,14 @@ def _run_episode(
         if current.episode_id != episode or current.step != 0:
             raise ValueError("carried first decision does not match expected episode")
     else:
-        current = client.reset(episode_id=episode, env_seed=env_seed, max_decisions=max_decisions)
+        current = client.reset(
+            episode_id=episode,
+            env_seed=env_seed,
+            max_decisions=max_decisions,
+            deck_ids=tuple(state.run["environment"]["deck_ids"]),
+        )
+    if not isinstance(current, Decision):
+        raise ValueError("trainer reset must return an initial decision")
     _assert_first_decision_matches_run(state.run, current)
     learner_decision_index = 0
     opponent_decision_index = 0
@@ -947,6 +1001,7 @@ def _run_episode(
             raise ValueError("unknown acting player")
         action = current.legal_actions[selected]
         current = client.step(action["selected_index"], action["stable_id"])
+        _assert_response_deck_identity(state.run, current)
         total_decisions += 1
     terminal_return = _terminal_return(current, learner)
     learner_terms = [(log_prob, value, terminal_return) for log_prob, value, _unused in learner_terms]
@@ -954,6 +1009,8 @@ def _run_episode(
         "schema": EPISODE_SUMMARY_SCHEMA,
         "episode": episode,
         "env_seed": env_seed,
+        "deck_ids": list(current.deck_ids),
+        "deck_hashes": list(current.deck_hashes),
         "learner_seat": learner,
         "terminal_outcome": current.terminal_outcome,
         "winner": current.winner,
@@ -1121,6 +1178,7 @@ def train(
     env_bin: str | Path,
     out_dir: str | Path,
     until_update: int,
+    deck_ids: tuple[str, str] = DEFAULT_DECK_IDS,
     resume: str | Path | None = None,
     base_seed: int | None = None,
     batch_episodes: int | None = None,
@@ -1128,11 +1186,13 @@ def train(
     value_coef: float | None = None,
     max_decisions: int | None = None,
 ) -> dict[str, Any]:
+    deck_ids = _validate_requested_deck_ids(deck_ids)
     with OutputLock(out_dir):
         return _train_locked(
             env_bin=env_bin,
             out_dir=out_dir,
             until_update=until_update,
+            deck_ids=deck_ids,
             resume=resume,
             base_seed=base_seed,
             batch_episodes=batch_episodes,
@@ -1147,6 +1207,7 @@ def _train_locked(
     env_bin: str | Path,
     out_dir: str | Path,
     until_update: int,
+    deck_ids: tuple[str, str] = DEFAULT_DECK_IDS,
     resume: str | Path | None = None,
     base_seed: int | None = None,
     batch_episodes: int | None = None,
@@ -1155,6 +1216,7 @@ def _train_locked(
     max_decisions: int | None = None,
 ) -> dict[str, Any]:
     configure_torch_determinism()
+    deck_ids = _validate_requested_deck_ids(deck_ids)
     until_update = _validate_until_update(until_update)
     env_path = Path(env_bin)
     if not env_path.is_file():
@@ -1180,6 +1242,7 @@ def _train_locked(
                 state, client, first_decision = _bootstrap_incomplete_fresh(
                     env_bin=env_path,
                     out_dir=out_path,
+                    deck_ids=deck_ids,
                     base_seed=base_seed,
                     batch_episodes=batch_episodes,
                     learning_rate=learning_rate,
@@ -1192,6 +1255,7 @@ def _train_locked(
                 state, client, first_decision = _bootstrap_fresh(
                     env_bin=env_path,
                     out_dir=out_path,
+                    deck_ids=deck_ids,
                     base_seed=base_seed,
                     batch_episodes=batch_episodes,
                     learning_rate=learning_rate,
@@ -1203,6 +1267,7 @@ def _train_locked(
             state, client, first_decision = _bootstrap_fresh(
                 env_bin=env_path,
                 out_dir=out_path,
+                deck_ids=deck_ids,
                 base_seed=base_seed,
                 batch_episodes=batch_episodes,
                 learning_rate=learning_rate,
@@ -1219,32 +1284,52 @@ def _train_locked(
     if not same_lexical_path(Path(resume), latest_path(out_path)):
         raise ValueError("resume path must be exactly the selected out-dir latest.json")
     ensure_real_file(out_path, latest_path(out_path))
-    state = _load_chain(
-        out_dir=out_path,
-        env_sha=env_sha,
-        until_update=until_update,
-        base_seed=base_seed,
-        batch_episodes=batch_episodes,
-        learning_rate=learning_rate,
-        value_coef=value_coef,
-        max_decisions=max_decisions,
-        compatibility=compatibility,
-    )
-    if until_update < state.completed_update:
-        raise ValueError("until_update must be at least the committed update")
-    if until_update == state.completed_update:
-        return _result(state)
-    client = KernelRlClient(env_path, timeout_s=10.0)
+    client: KernelRlClient | None = None
+    first: Decision | None = None
+
+    def preflight_environment(run: dict[str, Any], resume_snapshot: Any) -> None:
+        nonlocal client, first
+        client = KernelRlClient(env_path, timeout_s=10.0)
+        try:
+            response = client.reset(
+                episode_id=resume_snapshot.next_episode,
+                env_seed=_env_seed_for_episode(run["trainer"]["base_seed"], resume_snapshot.next_episode),
+                max_decisions=run["trainer"]["max_decisions"],
+                deck_ids=deck_ids,
+            )
+            if not isinstance(response, Decision):
+                raise ValueError("resume trainer reset must return an initial decision")
+            _assert_first_decision_matches_run(run, response)
+            first = response
+        except Exception:
+            client.close()
+            client = None
+            raise
+
     try:
-        first = client.reset(
-            episode_id=state.next_episode,
-            env_seed=_env_seed_for_episode(state.run["trainer"]["base_seed"], state.next_episode),
-            max_decisions=state.run["trainer"]["max_decisions"],
+        state = _load_chain(
+            out_dir=out_path,
+            env_sha=env_sha,
+            until_update=until_update,
+            deck_ids=deck_ids,
+            base_seed=base_seed,
+            batch_episodes=batch_episodes,
+            learning_rate=learning_rate,
+            value_coef=value_coef,
+            max_decisions=max_decisions,
+            compatibility=compatibility,
+            before_mutation=preflight_environment,
         )
-        _assert_first_decision_matches_run(state.run, first)
+        if until_update < state.completed_update:
+            raise ValueError("until_update must be at least the committed update")
+        if until_update == state.completed_update:
+            return _result(state)
+        if client is None or first is None:
+            raise AssertionError("resume environment preflight did not provide a client and first decision")
         state = _train_until(state=state, client=client, until_update=until_update, first_decision=first)
     finally:
-        client.close()
+        if client is not None:
+            client.close()
     return _result(state)
 
 
