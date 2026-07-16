@@ -235,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v7")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v5")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v8")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v6")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -434,6 +434,60 @@ class TrainerTest(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
                     self.assertEqual(_snapshot_tree(target), before)
+
+    def test_exact_update_names_reject_unicode_digits_and_bounded_transaction_components_before_env_launch(self) -> None:
+        unicode_update = "update-\u0660\u0660\u0660\u0660\u0660\u0660\u0660\u0661"
+        transaction_names = [
+            f"{unicode_update}-1.2",
+            "update-00000001-0.1",
+            f"update-00000001-{1 << 32}.1",
+            "update-00000001-1.0",
+            f"update-00000001-1.{1 << 64}",
+        ]
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+
+            def run_case(name: str, mutator) -> None:  # type: ignore[no-untyped-def]
+                target = tmp / name
+                shutil.copytree(source, target)
+                mutator(target)
+                before = _snapshot_tree(target)
+                if env_marker.exists():
+                    env_marker.unlink()
+                with self.subTest(name=name):
+                    with self.assertRaises(ValueError):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=2)
+                    self.assertFalse(env_marker.exists())
+                    self.assertEqual(_snapshot_tree(target), before)
+
+            run_case(
+                "unicode_update_json",
+                lambda p: shutil.copy2(p / "updates" / "update-00000001.json", p / "updates" / f"{unicode_update}.json"),
+            )
+            run_case(
+                "unicode_checkpoint_pt",
+                lambda p: shutil.copy2(p / "checkpoints" / "update-00000001.pt", p / "checkpoints" / f"{unicode_update}.pt"),
+            )
+            for transaction_name in transaction_names:
+                run_case(
+                    f"transaction_{transaction_name.replace('.', '_')}",
+                    lambda p, transaction_name=transaction_name: (p / ".transactions" / transaction_name).mkdir(parents=True),
+                )
 
     def test_recovery_plan_prevalidates_all_quarantines_before_first_mutation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1381,16 +1435,16 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v6_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v6"}))
+            case("old_v7_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v7"}))
             case(
-                "old_v4_artifact_boundary_rejected",
+                "old_v5_artifact_boundary_rejected",
                 lambda p: write_json_atomic(
                     p / "run.json",
                     {
                         **read_json_file(p / "run.json"),
                         "artifact_boundary": {
                             **read_json_file(p / "run.json")["artifact_boundary"],
-                            "schema": "kernel_rl_artifact_boundary/v4",
+                            "schema": "kernel_rl_artifact_boundary/v5",
                         },
                     },
                 ),

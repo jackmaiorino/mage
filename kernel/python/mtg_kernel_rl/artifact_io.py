@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import dataclasses
 import hashlib
+import ipaddress
 import json
 import math
 import os
@@ -65,6 +66,8 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
 
 _FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
 _SCHEMA_REF_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*#/properties(?:/[A-Za-z0-9_.-]+)+$")
+_DNS_LABEL_RE = re.compile(r"^[A-Za-z0-9-]{1,63}$")
+_ASCII_PORT_RE = re.compile(r"^[0-9]+$")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -318,9 +321,14 @@ def read_authoritative_json(path: str | Path, kind: str) -> dict[str, Any]:
 def _is_candidate_boundary(value: str, index: int) -> bool:
     if index <= 0:
         return True
-    if value[index - 1].isspace():
+    base = index - 1
+    while base >= 0 and unicodedata.category(value[base])[0] == "M":
+        base -= 1
+    if base < 0:
         return True
-    category = unicodedata.category(value[index - 1])
+    if value[base].isspace():
+        return True
+    category = unicodedata.category(value[base])
     return category[0] in {"C", "Z", "P", "S"}
 
 
@@ -328,8 +336,113 @@ def _contains_control_or_format(value: str) -> bool:
     return any(unicodedata.category(ch)[0] == "C" for ch in value)
 
 
+def _has_malformed_percent_escape(value: str) -> bool:
+    for index, ch in enumerate(value):
+        if ch != "%":
+            continue
+        if index + 2 >= len(value):
+            return True
+        if not all(next_ch in "0123456789ABCDEFabcdef" for next_ch in value[index + 1 : index + 3]):
+            return True
+    return False
+
+
+def _is_word_like_for_path_prose(ch: str) -> bool:
+    category = unicodedata.category(ch)
+    return category[0] in {"L", "N"} or ch == "_"
+
+
+def _is_narrow_arithmetic_separator(value: str, index: int) -> bool:
+    if index <= 0 or index + 1 >= len(value):
+        return False
+    if not value[index - 1].isspace() or not value[index + 1].isspace():
+        return False
+    base = index - 2
+    while base >= 0 and value[base].isspace():
+        base -= 1
+    return base >= 0 and _is_word_like_for_path_prose(value[base])
+
+
+def _validate_dns_reg_name(host: str) -> bool:
+    if not host or host.endswith(".") or len(host.encode("utf-8")) > 253:
+        return False
+    labels = host.split(".")
+    if any(label == "" for label in labels):
+        return False
+    encoded_labels: list[str] = []
+    for label in labels:
+        try:
+            encoded = label.encode("idna").decode("ascii")
+        except UnicodeError:
+            return False
+        if _DNS_LABEL_RE.fullmatch(encoded) is None:
+            return False
+        if encoded.startswith("-") or encoded.endswith("-"):
+            return False
+        encoded_labels.append(encoded)
+    return len(".".join(encoded_labels)) <= 253
+
+
+def _validate_http_authority(authority: str, parsed: urllib.parse.SplitResult) -> bool:
+    if not authority or "@" in authority:
+        return False
+    if any(ch.isspace() or unicodedata.category(ch)[0] == "C" for ch in authority):
+        return False
+    if any(ch in "\\|;=" for ch in authority):
+        return False
+    if _has_malformed_percent_escape(authority) or "%" in authority:
+        return False
+    try:
+        parsed_port = parsed.port
+    except ValueError:
+        return False
+
+    if authority.startswith("["):
+        close = authority.find("]")
+        if close <= 1:
+            return False
+        host = authority[1:close]
+        rest = authority[close + 1 :]
+        if "[" in host or "[" in rest or "]" in rest:
+            return False
+        if rest:
+            if not rest.startswith(":") or _ASCII_PORT_RE.fullmatch(rest[1:]) is None:
+                return False
+            if parsed_port is None or parsed_port < 0 or parsed_port > 65535:
+                return False
+        try:
+            ipaddress.IPv6Address(host)
+        except ValueError:
+            return False
+        return True
+
+    if "[" in authority or "]" in authority:
+        return False
+    if authority.count(":") > 1:
+        return False
+    if ":" in authority:
+        host, port_text = authority.rsplit(":", 1)
+        if _ASCII_PORT_RE.fullmatch(port_text) is None:
+            return False
+        if parsed_port is None or parsed_port < 0 or parsed_port > 65535:
+            return False
+    else:
+        host = authority
+    if not host:
+        return False
+    if all(ch in "0123456789." for ch in host):
+        try:
+            parsed_ipv4 = ipaddress.IPv4Address(host)
+        except ValueError:
+            return False
+        return str(parsed_ipv4) == host
+    return _validate_dns_reg_name(host)
+
+
 def _is_allowed_whole_uri(value: str) -> bool:
     if _contains_control_or_format(value) or "\\" in value or any(ch.isspace() for ch in value):
+        return False
+    if _has_malformed_percent_escape(value):
         return False
     try:
         parsed = urllib.parse.urlsplit(value)
@@ -339,16 +452,7 @@ def _is_allowed_whole_uri(value: str) -> bool:
         return False
     if not parsed.netloc or parsed.username is not None or parsed.password is not None:
         return False
-    if any(ch.isspace() for ch in parsed.netloc):
-        return False
-    if ";" in parsed.netloc or "=" in parsed.netloc:
-        return False
-    try:
-        host = parsed.hostname
-        _port = parsed.port
-    except ValueError:
-        return False
-    if not host:
+    if not _validate_http_authority(parsed.netloc, parsed):
         return False
     if ";" in parsed.path and "=" in parsed.path:
         return False
@@ -404,7 +508,8 @@ def _has_windows_root_relative_at(value: str, index: int) -> bool:
     return (
         _is_candidate_boundary(value, index)
         and value[index] == "\\"
-        and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?", " "))
+        and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?"))
+        and not _is_narrow_arithmetic_separator(value, index)
     )
 
 
@@ -413,7 +518,7 @@ def _has_posix_root_at(value: str, index: int) -> bool:
         return False
     if value[index] != "/" or (index + 1 < len(value) and value[index + 1] == "/"):
         return False
-    if index + 1 < len(value) and value[index + 1].isspace():
+    if _is_narrow_arithmetic_separator(value, index):
         return False
     return True
 

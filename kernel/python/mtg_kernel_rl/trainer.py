@@ -86,7 +86,7 @@ from .path_safety import (
     scandir_no_follow,
 )
 
-RUN_SCHEMA = "kernel_rl_train_run/v7"
+RUN_SCHEMA = "kernel_rl_train_run/v8"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
@@ -94,8 +94,8 @@ MAX_DECISIONS = 10_000_000
 EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v2"
 SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
-GENERATION_RE = re.compile(r"^update-(\d{8})\.(json|pt)$")
-TRANSACTION_RE = re.compile(r"^update-(\d{8})-([1-9][0-9]*)\.([1-9][0-9]*)$")
+GENERATION_RE = re.compile(r"^update-([0-9]{8})\.(json|pt)$")
+TRANSACTION_RE = re.compile(r"^update-([0-9]{8})-([1-9][0-9]*)\.([1-9][0-9]*)$")
 
 _DECIMAL_COMPONENT_RE = re.compile(r"^[1-9][0-9]*$")
 _PREMANIFEST_TEMP_TARGETS = frozenset({"run.json"})
@@ -221,7 +221,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
     from . import artifact_io as json_contract
 
     return {
-        "schema": "kernel_rl_artifact_boundary/v5",
+        "schema": "kernel_rl_artifact_boundary/v6",
         "format": {
             "checkpoint_container": "torch-zip",
             "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
@@ -296,6 +296,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         "path_policy": {
             "containment": "lexical artifact-root containment",
             "links": "reject symlink and Windows reparse components, including dangling or in-root links",
+            "generation_names": "writer-created committed generation files and transaction directories use exact ASCII decimal update names; Unicode decimal digits and bounded component overflows fail closed before recovery or environment launch",
             "creation": "all output, transaction, quarantine, lock-parent, and generation-directory creation is component-wise no-follow",
             "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename after destination parents validate",
             "resume": "resume path must lexically equal selected latest.json",
@@ -304,8 +305,8 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         },
         "privacy": {
             "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
-            "rejects": "generic POSIX absolute roots including / plus Windows drive-root, Windows root-relative, UNC, device/extended, file URI, controls/format-boundary embedded fragments, invalid or diagnostic URI spellings, and schema-fragment prefixes followed by local absolute paths",
-            "allows": "numeric versions, digests, arithmetic slash text, relative namespace labels, exact ordinary whole HTTP(S) URIs with valid authority, and validated whole schema reference tokens",
+            "rejects": "generic POSIX absolute roots including whitespace-leading first components, Windows drive-root, Windows root-relative including whitespace-leading first components, UNC, device/extended, file URI, controls/format-boundary embedded fragments, combining-mark-hidden path boundaries after punctuation/assignment, invalid or diagnostic URI spellings, malformed HTTP(S) authorities, and schema-fragment prefixes followed by local absolute paths",
+            "allows": "numeric versions, digests, narrow arithmetic slash text, relative namespace labels including word-like bases with combining marks, exact ordinary whole HTTP(S) URIs with validated authority, and validated whole schema reference tokens",
         },
     }
 
@@ -331,7 +332,7 @@ def _run_manifest_from_config(
             "name": ALGORITHM_NAME,
             "loss": (
                 "loss = (sum(-log_prob(selected) * (terminal_return - value.detach())) "
-                "+ value_coef * sum((value - terminal_return)^2)) / learner_decision_count"
+                "+ value_coef * sum((value - terminal_return)^2)) divided by learner_decision_count"
             ),
             "discount": None,
             "entropy_bonus": None,
