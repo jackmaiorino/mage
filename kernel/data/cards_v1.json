@@ -2,14 +2,15 @@
   "version": 1,
   "generated": "2026-07-12",
   "pool_decks": [
-    "Deck - Grixis Affinity.dek",
-    "Deck - Mono-Red Burn.dek",
-    "Deck - Mono Red Rally.dek",
-    "Deck - Mono-Blue Faeries.dek",
-    "Deck - Mono-Blue Terror.dek",
     "Deck - Jund Wildfire.dek",
+    "Deck - Mono Red Rally.dek",
+    "Deck - Grixis Affinity.dek",
+    "Deck - Elves.dek",
+    "Deck - Spy Combo.dek",
+    "Deck - Mono-Red Burn.dek",
+    "Deck - Mono-Blue Terror.dek",
     "Deck - Caw-Gates.dek",
-    "Deck - Elves.dek"
+    "Deck - Mono-Blue Faeries.dek"
   ],
   "cards": [
     {
@@ -29,8 +30,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Blue Faeries.dek",
-        "Deck - Mono-Blue Terror.dek"
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": true,
       "complexity": "simple",
@@ -213,8 +214,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -246,9 +247,9 @@
       "produces_mana": [],
       "decks": [
         "Deck - Grixis Affinity.dek",
-        "Deck - Mono-Blue Faeries.dek",
         "Deck - Mono-Blue Terror.dek",
-        "Deck - Caw-Gates.dek"
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": true,
       "complexity": "simple",
@@ -305,8 +306,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": true,
       "complexity": "simple",
@@ -547,9 +548,9 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Blue Faeries.dek",
         "Deck - Mono-Blue Terror.dek",
-        "Deck - Caw-Gates.dek"
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -688,9 +689,9 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Blue Faeries.dek",
         "Deck - Mono-Blue Terror.dek",
-        "Deck - Caw-Gates.dek"
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -718,8 +719,8 @@
         "R"
       ],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -1066,8 +1067,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -1182,7 +1183,8 @@
         "G"
       ],
       "decks": [
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -1242,8 +1244,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -1273,7 +1275,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -1455,8 +1458,8 @@
         "R"
       ],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -1730,9 +1733,9 @@
       "produces_mana": [],
       "decks": [
         "Deck - Grixis Affinity.dek",
-        "Deck - Mono-Blue Faeries.dek",
         "Deck - Mono-Blue Terror.dek",
-        "Deck - Caw-Gates.dek"
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": true,
       "complexity": "moderate",
@@ -1759,8 +1762,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -1823,9 +1826,9 @@
         "U"
       ],
       "decks": [
-        "Deck - Mono-Blue Faeries.dek",
         "Deck - Mono-Blue Terror.dek",
-        "Deck - Caw-Gates.dek"
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -1883,8 +1886,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -1942,7 +1945,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -1999,8 +2003,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Red Burn.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -2089,8 +2093,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -2155,7 +2159,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -2306,9 +2311,9 @@
         "R"
       ],
       "decks": [
-        "Deck - Mono-Red Burn.dek",
+        "Deck - Jund Wildfire.dek",
         "Deck - Mono Red Rally.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -2388,8 +2393,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -2716,9 +2721,9 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
+        "Deck - Jund Wildfire.dek",
         "Deck - Grixis Affinity.dek",
         "Deck - Mono-Red Burn.dek",
-        "Deck - Jund Wildfire.dek",
         "Deck - Caw-Gates.dek"
       ],
       "sideboard_only": true,
@@ -2751,7 +2756,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -2859,9 +2865,9 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
+        "Deck - Mono Red Rally.dek",
         "Deck - Grixis Affinity.dek",
-        "Deck - Mono-Red Burn.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": true,
       "complexity": "simple",
@@ -2894,8 +2900,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "moderate",
@@ -2923,8 +2929,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Red Burn.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": true,
       "complexity": "moderate",
@@ -3047,8 +3053,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Red Burn.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": true,
       "complexity": "complex",
@@ -3437,8 +3443,9 @@
         "B"
       ],
       "decks": [
+        "Deck - Jund Wildfire.dek",
         "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -3640,8 +3647,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -3759,8 +3766,8 @@
         "B"
       ],
       "decks": [
-        "Deck - Grixis Affinity.dek",
-        "Deck - Jund Wildfire.dek"
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
       ],
       "sideboard_only": false,
       "complexity": "trivial",
@@ -3790,7 +3797,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": true,
       "complexity": "moderate",
@@ -3822,8 +3830,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Mono-Red Burn.dek",
-        "Deck - Mono Red Rally.dek"
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -3907,7 +3915,8 @@
       "is_land": false,
       "produces_mana": [],
       "decks": [
-        "Deck - Elves.dek"
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
       ],
       "sideboard_only": false,
       "complexity": "simple",
@@ -3986,7 +3995,9 @@
       "name": "Human Soldier Token",
       "mana_cost": "",
       "mana_value": 0,
-      "colors": ["W"],
+      "colors": [
+        "W"
+      ],
       "types": [
         "Creature"
       ],
@@ -4012,7 +4023,9 @@
       "name": "Samurai Token",
       "mana_cost": "",
       "mana_value": 0,
-      "colors": ["W"],
+      "colors": [
+        "W"
+      ],
       "types": [
         "Creature"
       ],
@@ -4035,5 +4048,24 @@
       "java_file": "Mage/src/main/java/mage/game/permanent/token/SamuraiToken.java"
     }
   ],
-  "unresolved": []
+  "unresolved": [
+    "Balustrade Spy",
+    "Dread Return",
+    "Elves of Deep Shadow",
+    "Faerie Macabre",
+    "Flaring Pain",
+    "Fume Spitter",
+    "Gatecreeper Vine",
+    "Healer of the Glade",
+    "Land Grant",
+    "Lotleth Giant",
+    "Lotus Petal",
+    "Mesmeric Fiend",
+    "Overgrown Battlement",
+    "Sagu Wildling",
+    "Saruli Caretaker",
+    "Tinder Wall",
+    "Troll of Khazad-dum",
+    "Wall of Roots"
+  ]
 }

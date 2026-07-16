@@ -1,0 +1,3691 @@
+{
+  "schema": "kernel_pauper_support/v1",
+  "protocol": "canonical-mainboard-bo1/v1",
+  "inputs": {
+    "pool_path": "kernel/data/pauper_pool_v1.json",
+    "pool_raw_sha256": "92b44a36225471a42bdf03364a7eb22f7f7ce809864add70060c872a6adba2e7",
+    "registry_path": "kernel/data/cards_v1.json",
+    "registry_raw_sha256": "3388fd28042bbf9530cf5094253da483b909d2cc41fac9640c2a77459c848cc2"
+  },
+  "totals": {
+    "pool_cards": 150,
+    "full_cards": 25,
+    "partial_cards": 1,
+    "no_effect_cards": 124,
+    "token_dependencies": 3
+  },
+  "deck_mainboard_copy_totals": [
+    {
+      "deck_id": "Wildfire",
+      "full": 2,
+      "partial": 0,
+      "no_effect": 58,
+      "total": 60
+    },
+    {
+      "deck_id": "Rally",
+      "full": 58,
+      "partial": 2,
+      "no_effect": 0,
+      "total": 60
+    },
+    {
+      "deck_id": "Affinity",
+      "full": 7,
+      "partial": 0,
+      "no_effect": 53,
+      "total": 60
+    },
+    {
+      "deck_id": "Elves",
+      "full": 0,
+      "partial": 0,
+      "no_effect": 60,
+      "total": 60
+    },
+    {
+      "deck_id": "Spy",
+      "full": 0,
+      "partial": 0,
+      "no_effect": 60,
+      "total": 60
+    },
+    {
+      "deck_id": "Burn",
+      "full": 60,
+      "partial": 0,
+      "no_effect": 0,
+      "total": 60
+    },
+    {
+      "deck_id": "Terror",
+      "full": 0,
+      "partial": 0,
+      "no_effect": 60,
+      "total": 60
+    },
+    {
+      "deck_id": "CawGates",
+      "full": 0,
+      "partial": 0,
+      "no_effect": 60,
+      "total": 60
+    },
+    {
+      "deck_id": "Faeries",
+      "full": 0,
+      "partial": 0,
+      "no_effect": 60,
+      "total": 60
+    }
+  ],
+  "token_dependencies": [
+    {
+      "name": "Blood Token",
+      "required_by": [
+        "Voldaren Epicure"
+      ],
+      "registry_status": "present",
+      "expected_decks": [],
+      "declared_decks": [],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Human Soldier Token",
+      "required_by": [
+        "Rally at the Hornburg"
+      ],
+      "registry_status": "present",
+      "expected_decks": [],
+      "declared_decks": [],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Samurai Token",
+      "required_by": [
+        "Experimental Synthesizer"
+      ],
+      "registry_status": "present",
+      "expected_decks": [],
+      "declared_decks": [],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    }
+  ],
+  "cards": [
+    {
+      "name": "Annul",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Avenging Hunter",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Azorius Guildgate",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Balustrade Spy",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Basilisk Gate",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Bind the Monster",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Black Mage's Rod",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Blood Fountain",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Blue Elemental Blast",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 2
+        },
+        {
+          "deck_id": "Terror",
+          "copies": 1
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 3
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Brainstorm",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Breath Weapon",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 2
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Burning-Tree Emissary",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Cast Down",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Cast into the Fire",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Chain Lightning",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "partial",
+      "blockers": [
+        "affordable_spell_copy_branch_halts"
+      ]
+    },
+    {
+      "name": "Citadel Gate",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Cleansing Wildfire",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Clockwork Percussionist",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Counterspell",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Cryogen Relic",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Cryptic Serpent",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Deem Inferior",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Deep Analysis",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Dispel",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 2
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 2
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Dread Return",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Drossforge Bridge",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Duress",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Dust to Dust",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Elves of Deep Shadow",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Elvish Mystic",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "End the Festivities",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 1
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Envelop",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 1
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Eviscerator's Insight",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Experimental Synthesizer",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Extract a Confession",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Faerie Macabre",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Faerie Miscreant",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Faerie Seer",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Faithless Looting",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Fanatical Offering",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Fiery Temper",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Fireblast",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Flaring Pain",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 1
+        }
+      ],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Force Spike",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Forest",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 2
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Fume Spitter",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Fyndhorn Elves",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Galvanic Blast",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Gatecreeper Vine",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Generous Ent",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Gingerbread Cabin",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Goblin Bushwhacker",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Goblin Tomb Raider",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Gorilla Shaman",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Grab the Prize",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Great Furnace",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Guardian of the Guildpact",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Gut Shot",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Guttersnipe",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Harrier Strix",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Healer of the Glade",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Heap Gate",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Highway Robbery",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Humbling Elder",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Hunter's Blowgun",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Hydroblast",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        },
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Ichor Wellspring",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Idyllic Beachfront",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Island",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 16
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        },
+        {
+          "deck_id": "Faeries",
+          "copies": 18
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek",
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Journey to Nowhere",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Krark-Clan Shaman",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 3
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Land Grant",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lava Dart",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Lead the Stampede",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lembas",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lightning Bolt",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Llanowar Elves",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lorien Revealed",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lotleth Giant",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Lotus Petal",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Makeshift Munitions",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Masked Meower",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Masked Vandal",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 3
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Mental Note",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Mesmeric Fiend",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Mistvault Bridge",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Monstrous Emergence",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Moon-Circuit Hacker",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Mountain",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 2
+        },
+        {
+          "deck_id": "Rally",
+          "copies": 14
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 18
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Murmuring Mystic",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Myr Enforcer",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Nihil Spellbomb",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Ninja of the Deep Hours",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Nyxborn Hydra",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        },
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Of One Mind",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Outlaw Medic",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Overgrown Battlement",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Piracy Charm",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Ponder",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Preordain",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Priest of Titania",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Prismatic Strands",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Pulse of Murasa",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Pyroblast",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        },
+        {
+          "deck_id": "CawGates",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek",
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Quirion Ranger",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Rally at the Hornburg",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Reckless Impulse",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Reckoner's Bargain",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Red Elemental Blast",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 3
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Refurbished Familiar",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Relic of Progenitus",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Sacred Cat",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Sagu Wildling",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Saiba Cryptomancer",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Saruli Caretaker",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Sea Gate",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Searing Blaze",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 3
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Seat of the Synod",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Silverbluff Bridge",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Slagwoods Bridge",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Sleep of the Dead",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Snap",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Sneaky Snacker",
+      "mainboard": [
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Snow-Covered Forest",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 13
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Spell Pierce",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Spellstutter Sprite",
+      "mainboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Spinewoods Paladin",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 3
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Squadron Hawk",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Steel Sabotage",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Faeries",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Faeries.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Swamp",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 3
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 1
+        }
+      ],
+      "sideboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "The Modern Age",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Thought Scour",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Thoughtcast",
+      "mainboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Thraben Charm",
+      "mainboard": [
+        {
+          "deck_id": "CawGates",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "declared_decks": [
+        "Deck - Caw-Gates.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Timberwatch Elf",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Tinder Wall",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Tolarian Terror",
+      "mainboard": [
+        {
+          "deck_id": "Terror",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono-Blue Terror.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Toxin Analysis",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 2
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Troll of Khazad-dum",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 1
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Troublemaker Ouphe",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Twisted Landscape",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Unexpected Fangs",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Affinity",
+          "copies": 1
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Vault of Whispers",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 1
+        },
+        {
+          "deck_id": "Affinity",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek",
+        "Deck - Grixis Affinity.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Vitu-Ghazi Inspector",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 2
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Voldaren Epicure",
+      "mainboard": [
+        {
+          "deck_id": "Rally",
+          "copies": 4
+        },
+        {
+          "deck_id": "Burn",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "declared_decks": [
+        "Deck - Mono Red Rally.dek",
+        "Deck - Mono-Red Burn.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "full",
+      "blockers": []
+    },
+    {
+      "name": "Wall of Roots",
+      "mainboard": [
+        {
+          "deck_id": "Spy",
+          "copies": 3
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "missing",
+      "expected_decks": [
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [],
+      "registry_membership_matches": false,
+      "support_status": "no_effect",
+      "blockers": [
+        "missing_registry_record",
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Weather the Storm",
+      "mainboard": [],
+      "sideboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Wellwisher",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 2
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Winding Way",
+      "mainboard": [
+        {
+          "deck_id": "Elves",
+          "copies": 4
+        },
+        {
+          "deck_id": "Spy",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "declared_decks": [
+        "Deck - Elves.dek",
+        "Deck - Spy Combo.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    },
+    {
+      "name": "Writhing Chrysalis",
+      "mainboard": [
+        {
+          "deck_id": "Wildfire",
+          "copies": 4
+        }
+      ],
+      "sideboard": [],
+      "registry_status": "present",
+      "expected_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "declared_decks": [
+        "Deck - Jund Wildfire.dek"
+      ],
+      "registry_membership_matches": true,
+      "support_status": "no_effect",
+      "blockers": [
+        "no_effect_program"
+      ]
+    }
+  ]
+}

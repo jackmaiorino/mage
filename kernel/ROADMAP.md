@@ -8,7 +8,7 @@ Scope: the nine canonical Pauper decks below in best-of-one play. Sideboarding a
 
 The kernel is science-ready when it can train and evaluate policies over all nine pinned BO1 decks without unsupported cards or mechanics, reproduce every accepted run from a clean clone, and publish a complete seat-balanced 9x9 matchup matrix whose primary result uses sampled policy actions. Greedy evaluation remains a required secondary diagnostic, not the promotion result.
 
-The current checkpoint has a strong deterministic RL and artifact foundation, but card coverage is still effectively Burn plus Rally. `cards_v1.json` inventories eight decks, omits Spy as a deck, and does not provide executable behavior for most registered cards. Card-pool expansion therefore precedes claims about general Pauper learning.
+The current checkpoint has a strong deterministic RL and artifact foundation, but card coverage is still effectively Burn plus Rally. The generated pool metadata now freezes all nine decks, and `cards_v1.json` declares their exact memberships for the 132 deck cards it contains; eighteen Spy cards are still absent from the registry, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
 
 The implementation order is:
 
@@ -27,7 +27,7 @@ The implementation order is:
 
 All of the following are required:
 
-- **Pinned scope:** the exact nine mainboards below load as 60-card decks and match their source hashes. A changed hash creates a new experimental protocol; it does not silently replace this one.
+- **Pinned scope:** the exact nine mainboards below load as 60-card decks and match their canonical full-text source hashes under `utf8_text_crlf_v1`. A changed hash creates a new experimental protocol; it does not silently replace this one.
 - **Rules completeness:** every mainboard spell is castable, every mana source works, every reachable card branch is modeled, and no BO1 run can reach `no_effect`, an unimplemented decision, or `UnsupportedMechanic`.
 - **Reference evidence:** each rules primitive has unit coverage, each deck has a deterministic public-engine golden, and fixed-provenance XMage traces replay without unexplained divergence.
 - **Deterministic environment:** deck construction, shuffling, policy sampling, seat swaps, observations, legal-action identities, checkpoints, and artifacts are versioned and reproducible from explicit seeds.
@@ -40,7 +40,7 @@ Sideboard and BO3 support are deliberately excluded from this BO1 definition. Th
 
 ## Canonical BO1 decks
 
-The hash covers the complete checked-in `.dek` source file, including its sideboard, even though the first science-ready protocol uses only the 60-card mainboard.
+The hash covers the complete UTF-8 `.dek` source text, including its sideboard, even though the first science-ready protocol uses only the 60-card mainboard. `utf8_text_crlf_v1` strictly decodes UTF-8, normalizes CRLF, LF, and bare-CR line boundaries, then hashes the complete text encoded with CRLF boundaries without adding or removing a final newline. This keeps the pinned hash portable across Git checkout line endings without excluding any XML content.
 
 | Order | Archetype | Canonical source | SHA-256 |
 |---:|---|---|---|
@@ -66,6 +66,7 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 - Deterministic paired head-versus-update-zero evaluation with seat swaps, natural-terminal enforcement, W/D/L and seat strata, paired bootstrap intervals, an exact paired sign test, and immutable artifact validation.
 - Greedy V1 and sampled V2 evaluator lanes. Sampled V2 is currently a Burn-mirror, head-versus-update-zero contract with one actor-local action stream per physical seat, shared across the two pair legs; its stream keys exclude policy role and game/leg. Greedy remains the secondary lane.
 - Source-level card behavior for the Burn mainboard and Rally mainboard, except that Chain Lightning explicitly halts if its spell-copy choice becomes live.
+- Generated `pauper_pool_v1.json` and `pauper_support_v1.json` metadata that pins all nine normalized 60+15 rosters, exact registry membership, current support blockers, token dependencies, source hashes, and raw pool/registry hashes.
 
 ### Card coverage
 
@@ -83,7 +84,7 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 | CawGates | 60/60 | 0/60 | 15/15 | 3/15 | Entire mainboard is fail-closed |
 | Faeries | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
 
-The registry currently contains 135 definitions: 132 deck cards and three tokens. Spy is absent from `pool_decks`; seven Spy mainboard names happen to be present because other decks use them, while fourteen Spy mainboard names and four additional sideboard-only names need new records.
+The registry currently contains 135 definitions: 132 deck cards and three tokens. `pool_decks` now lists all nine sources in canonical order, and the eight already-present Spy cards declare exact Spy membership. Seven of those are Spy mainboard names shared with other decks; fourteen Spy mainboard names and four additional sideboard-only names still need new records.
 
 Keyword representation is also not rules completeness. For example, defender is represented but not enforced when declaring attackers, trample still uses a no-trample combat path, and deathtouch, lifelink, protection, hexproof, and ward need real rules behavior.
 
@@ -106,8 +107,8 @@ These should be generic effect and decision primitives, not a growing per-card `
 
 ### Phase 0 - Seal the current baseline
 
-- Add a generated support manifest with `full`, `partial`, and `no_effect` states.
-- Assert that the authoritative deck set equals these nine hashes; `unresolved: []` must not be possible when Spy was never included.
+- Keep the generated pool and support manifests current, with explicit `full`, `partial`, and `no_effect` states over all 150 deck cards.
+- Preserve the assertion that the authoritative deck set equals these nine canonical full-text hashes; `unresolved: []` must not be possible when a source or registry record was never included.
 - Finish Chain Lightning's copy, retarget, and repeat-copy decisions.
 - Preserve all Burn/Rally goldens, replays, RL contracts, and evaluator proofs.
 
