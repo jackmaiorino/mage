@@ -14,12 +14,14 @@ from typing import Any
 import torch
 
 from .artifacts import (
+    append_current_derived_caches,
     atomic_replace,
     canonical_json_bytes,
     fsync_dir,
     generation_paths,
     inject_fault,
     latest_path,
+    preflight_derived_cache_append,
     read_authoritative_json,
     read_json_file,
     rebuild_derived_caches,
@@ -27,6 +29,7 @@ from .artifacts import (
     sha256_bytes,
     sha256_file,
     validate_training_json_privacy,
+    write_bytes_atomic,
     write_json_atomic,
 )
 from .checkpoint import (
@@ -78,7 +81,6 @@ from .training_store import (
     _assert_run_matches_options,
     _compatibility_tuple,
     _env_seed_for_episode,
-    _records_through,
     _validate_generation_bundle,
     _learner_seat,
     _opponent_seat,
@@ -118,7 +120,6 @@ class TrainState:
     next_episode: int
     outcomes_by_learner_seat: dict[str, dict[str, int]]
     learner_decisions_by_seat: dict[str, int]
-    records: list[dict[str, Any]]
     parent_head: str | None
     head_payload: dict[str, Any]
 
@@ -454,8 +455,9 @@ def _commit_generation(
     previous_payload: dict[str, Any] | None,
     compatibility: dict[str, Any],
     learning_rate: float,
-) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[str, dict[str, Any]]:
     update = payload["completed_update"]
+    cache_preflight = preflight_derived_cache_append(out_dir) if update > 0 else None
     mkdir_no_follow(out_dir, parents=True, exist_ok=True)
     mkdir_no_follow(out_dir / "updates", parents=True, exist_ok=True)
     mkdir_no_follow(out_dir / "checkpoints", parents=True, exist_ok=True)
@@ -479,7 +481,9 @@ def _commit_generation(
         _strict_validate_checkpoint_for_model(loaded, run_digest=run_digest, compatibility=compatibility, learning_rate=learning_rate)
         logical_hash = logical_state_hash(loaded)
         checkpoint_hash = loaded_checkpoint.sha256
-        update_hash = write_json_atomic(staged["update"], update_record)
+        update_bytes = canonical_json_bytes(update_record)
+        update_hash = sha256_bytes(update_bytes)
+        write_bytes_atomic(staged["update"], update_bytes)
         if update_hash != update_record_hash(update_record):
             raise ValueError("update record canonical hash mismatch")
         sidecar = build_sidecar(
@@ -490,7 +494,7 @@ def _commit_generation(
             logical_hash=logical_hash,
             update_hash=update_hash,
         )
-        write_json_atomic(staged["sidecar"], sidecar)
+        write_bytes_atomic(staged["sidecar"], canonical_json_bytes(sidecar))
         run_for_validation = dict(run)
         run_for_validation["_artifact_root"] = str(out_dir)
         _validate_generation_bundle(
@@ -517,7 +521,7 @@ def _commit_generation(
             atomic_replace(staged[key], paths[key])
             fsync_dir(paths[key].parent)
             inject_fault(f"final_replace_{key}_after", paths[key])
-        final_head, _unused_records, final_payload = _validate_generation_bundle(
+        final_head, final_record, final_payload = _validate_generation_bundle(
             paths=paths,
             update=update,
             run=run_for_validation,
@@ -530,12 +534,20 @@ def _commit_generation(
         latest = build_latest(update=update, run_digest=run_digest, head=final_head)
         validate_training_json_privacy(latest)
         inject_fault("latest_replace_before", latest_path(out_dir))
-        write_json_atomic(latest_path(out_dir), latest)
+        write_bytes_atomic(latest_path(out_dir), canonical_json_bytes(latest))
         inject_fault("latest_replace_after", latest_path(out_dir))
-        records = _records_through(out_dir, update)
-        rebuild_derived_caches(out_dir, records, latest)
+        if update == 0:
+            rebuild_derived_caches(out_dir, [final_record], latest)
+        else:
+            append_current_derived_caches(
+                out_dir,
+                current_record=final_record,
+                latest=latest,
+                checkpoint_payload=final_payload,
+                preflight=cache_preflight,
+            )
         inject_fault("post_latest_cleanup_before", tx_dir)
-        return final_head, records, final_payload
+        return final_head, final_payload
     finally:
         if tx_dir.exists():
             remove_tree_no_follow(tx_dir)
@@ -612,7 +624,6 @@ def _load_chain(
         next_episode=resume_snapshot.next_episode,
         outcomes_by_learner_seat=copy.deepcopy(resume_snapshot.outcomes_by_learner_seat),
         learner_decisions_by_seat=copy.deepcopy(resume_snapshot.learner_decisions_by_seat),
-        records=records,
         parent_head=chain.head.head,
         head_payload=resume_snapshot.checkpoint_payload,
     )
@@ -675,7 +686,7 @@ def _bootstrap_fresh(
             compatibility=compatibility,
         )
         update0 = _update_record_zero(run_digest, logical_state_hash(payload))
-        _head, _records, _payload = _commit_generation(
+        _head, _payload = _commit_generation(
             out_dir=out_dir,
             run=run,
             payload=payload,
@@ -1086,7 +1097,7 @@ def _train_until(
             "episode_summaries": batch_summaries,
             "post_update_logical_sha256": logical,
         }
-        head, records, committed_payload = _commit_generation(
+        head, committed_payload = _commit_generation(
             out_dir=state.out_dir,
             run=state.run,
             payload=payload,
@@ -1098,7 +1109,6 @@ def _train_until(
             learning_rate=state.run["optimizer"]["lr"],
         )
         state.parent_head = head
-        state.records = records
         state.head_payload = committed_payload
     return state
 

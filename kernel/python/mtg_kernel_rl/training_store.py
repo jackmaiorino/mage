@@ -356,9 +356,9 @@ def _validate_generation_bundle(
     previous_payload: dict[str, Any] | None,
     compatibility: dict[str, Any],
     learning_rate: float,
-) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[str, dict[str, Any], dict[str, Any]]:
     root = Path(run["_artifact_root"])
-    ref, _record, payload = _validate_generation_at_paths(
+    ref, record, payload = _validate_generation_at_paths(
         root=root,
         paths=paths,
         update=update,
@@ -369,8 +369,7 @@ def _validate_generation_bundle(
         compatibility=compatibility,
         learning_rate=learning_rate,
     )
-    records = _records_through(root, update) if paths == generation_paths(root, update) else []
-    return ref.head, records, payload
+    return ref.head, record, payload
 
 
 def _validate_generation_at_paths(
@@ -455,15 +454,6 @@ def _validate_generation_at_paths(
         record,
         payload,
     )
-
-
-def _records_through(out_dir: Path, update: int) -> list[dict[str, Any]]:
-    records: list[dict[str, Any]] = []
-    for i in range(update + 1):
-        path = generation_paths(out_dir, i)["update"]
-        ensure_real_file(out_dir, path)
-        records.append(read_authoritative_json_capture(path, "update").value)
-    return records
 
 
 def _finite_positive_float(value: Any, name: str) -> float:
