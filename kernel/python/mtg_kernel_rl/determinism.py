@@ -16,6 +16,7 @@ UNIFORM_POLICY_DOMAIN = 0x5059_5F55_4E49_7631
 SAMPLED_POLICY_DOMAIN = 0x5059_5F53414D_7631
 TRAINER_SEED_DERIVATION_VERSION = "kernel-python-rl-trainer-sha256-v1"
 EVALUATOR_SEED_DERIVATION_VERSION = "kernel-python-rl-evaluator-sha256-v1"
+EVALUATOR_ACTION_SEED_DERIVATION_VERSION = "kernel-python-rl-evaluator-action-sha256-v1"
 
 _TORCH_CONFIGURED = False
 
@@ -164,6 +165,34 @@ def derive_evaluation_env_seed(base_seed: int, pair_index: int) -> int:
             ("pair_index", validate_uint63(pair_index, "pair_index")),
         ],
     )
+
+
+def derive_evaluation_action_seed(
+    base_seed: int,
+    pair_index: int,
+    physical_seat: str,
+    local_decision_index: int,
+) -> int:
+    """Derive one sampled-evaluator action seed from a physical-seat stream."""
+
+    if type(physical_seat) is not str:
+        raise TypeError("physical_seat must be p0 or p1")
+    try:
+        seat_encoding = {"p0": 0, "p1": 1}[physical_seat]
+    except KeyError as exc:
+        raise ValueError("physical_seat must be p0 or p1") from exc
+    hasher = hashlib.sha256()
+    _atom(hasher, "version", EVALUATOR_ACTION_SEED_DERIVATION_VERSION.encode("utf-8"))
+    _atom(hasher, "namespace", b"evaluation-action")
+    for name, value in (
+        ("base_seed", validate_uint63(base_seed, "base_seed")),
+        ("pair_index", validate_uint63(pair_index, "pair_index")),
+        ("physical_seat", seat_encoding),
+        ("local_decision_index", validate_uint63(local_decision_index, "local_decision_index")),
+    ):
+        _atom(hasher, "field-name", name.encode("utf-8"))
+        _atom(hasher, "u63", value.to_bytes(8, "big"))
+    return int.from_bytes(hasher.digest()[:8], "big") & UINT63_MAX
 
 
 def derive_train_env_seed(base_seed: int, pair_index: int) -> int:

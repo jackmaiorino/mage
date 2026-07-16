@@ -6,11 +6,13 @@ import unittest
 import torch
 
 from mtg_kernel_rl.determinism import (
+    EVALUATOR_ACTION_SEED_DERIVATION_VERSION,
     EVALUATOR_SEED_DERIVATION_VERSION,
     TRAINER_SEED_DERIVATION_VERSION,
     EvaluatorSeedDerivation,
     TrainerSeedDerivation,
     configure_torch_determinism,
+    derive_evaluation_action_seed,
     derive_evaluation_bootstrap_seed,
     derive_evaluation_env_seed,
     derive_model_init_seed,
@@ -25,6 +27,38 @@ from fixtures import legal_actions, observation
 
 
 class TrainerDeterminismTest(unittest.TestCase):
+    def test_sha256_evaluator_action_seed_goldens_and_separation(self) -> None:
+        self.assertEqual(
+            EVALUATOR_ACTION_SEED_DERIVATION_VERSION,
+            "kernel-python-rl-evaluator-action-sha256-v1",
+        )
+        vectors = (
+            ((71_501, 0, "p0", 0), 0x5505_712D_47A9_47E7),
+            ((71_501, 0, "p1", 0), 0x21AD_2902_4A1D_0C9F),
+            ((71_501, 0, "p0", 1), 0x6A83_203A_4BF4_D3BC),
+            ((71_501, 1, "p0", 0), 0x4DAC_7809_C822_4C5E),
+            ((0, 0, "p0", 0), 0x3677_ACD7_8C36_6E48),
+            (((1 << 63) - 1, (1 << 63) - 1, "p1", (1 << 63) - 1), 0x6C67_B41B_B570_51A6),
+        )
+        for args, expected in vectors:
+            with self.subTest(args=args):
+                self.assertEqual(derive_evaluation_action_seed(*args), expected)
+        self.assertEqual(len({derive_evaluation_action_seed(*args) for args, _expected in vectors}), len(vectors))
+        self.assertNotEqual(
+            derive_evaluation_action_seed(71_501, 0, "p0", 0),
+            derive_evaluation_env_seed(71_501, 0),
+        )
+        for bad in (True, -1, 2**63):
+            with self.subTest(base_seed=bad), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_action_seed(bad, 0, "p0", 0)  # type: ignore[arg-type]
+            with self.subTest(pair_index=bad), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_action_seed(0, bad, "p0", 0)  # type: ignore[arg-type]
+            with self.subTest(local_decision_index=bad), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_action_seed(0, 0, "p0", bad)  # type: ignore[arg-type]
+        for bad_seat in ("P0", "candidate", "", 0, True, None):
+            with self.subTest(physical_seat=bad_seat), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_action_seed(0, 0, bad_seat, 0)  # type: ignore[arg-type]
+
     def test_sha256_evaluator_seed_known_vectors_and_frozen_contract(self) -> None:
         self.assertEqual(EVALUATOR_SEED_DERIVATION_VERSION, "kernel-python-rl-evaluator-sha256-v1")
         self.assertEqual(derive_evaluation_bootstrap_seed(71501), 0x4389_D43A_6139_A202)
