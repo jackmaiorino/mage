@@ -42,6 +42,48 @@ def _tree_snapshot(root: Path) -> dict[str, tuple[str, int, str | None, int, int
     return out
 
 
+def _generated_file_uri_rejections() -> list[str]:
+    payloads = [
+        "",
+        "home",
+        "home/user",
+        "/",
+        "/home/user",
+        "//server/share",
+        "///server/share",
+        r"C:\Users\user",
+        "C:/Users/user",
+        "%2Fhome%2Fuser",
+        "%2fhome%2fuser",
+        "%2F%2Fserver%2Fshare",
+        "C:%5CUsers%5Cuser",
+        "C:%5cUsers%5cuser",
+    ]
+    wrappers = [
+        ("", ""),
+        ("diagnostic=", ""),
+        ("note;", ""),
+        ("(", ")"),
+    ]
+    schemes = ["file", "FILE", "FiLe"]
+    values = [f"{prefix}{scheme}:{payload}{suffix}" for prefix, suffix in wrappers for scheme in schemes for payload in payloads]
+    unicode_prefixes = ["\u00df", "\u0130", "\ufb03"]
+    unicode_boundaries = [
+        (";", ""),
+        ("=", ""),
+        (" diagnostic=", ""),
+        ("(", ")"),
+    ]
+    values.extend(
+        f"{prefix}{boundary}{scheme}:{payload}{suffix}"
+        for prefix in unicode_prefixes
+        for boundary, suffix in unicode_boundaries
+        for scheme in schemes
+        for payload in payloads
+    )
+    return values
+
+
 class ArtifactTest(unittest.TestCase):
     def test_canonical_json_atomic_roundtrip_and_strict_parse(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -205,6 +247,11 @@ class ArtifactTest(unittest.TestCase):
             "\\\\.\\C:\\Users\\Jack",
             "\\\\?\\C:\\Users\\Jack",
             "file:///C:/Users/Jack/run",
+            "file:%2Fhome%2Fjack",
+            "FILE:%2F%2Fserver%2Fshare",
+            "file:C:%5CUsers%5CJack",
+            "diagnostic=file:%2Fhome%2Fjack",
+            "note;FILE:C:%5CUsers%5CJack",
             "https://example.test/path diagnostic=/home/jack/run",
             "https://example.test/path;diagnostic=/home/jack/run",
             "https://example.test/path?diagnostic=/home/jack/run",
@@ -284,6 +331,8 @@ class ArtifactTest(unittest.TestCase):
             "kernel.schema-1#/properties/run/latest",
             "myhttp:label",
             "relative.myhttps:label",
+            "myfile:label",
+            "relative.myfile:label",
             "ordinary prose with / separated words",
             "namespace\u0301/component",
             "namespace\u0301\u0302/component",
@@ -421,7 +470,35 @@ class ArtifactTest(unittest.TestCase):
                             with self.assertRaises(ValueError):
                                 validate_training_json_privacy({value: "blocked"})
 
-    def test_checkpoint_scalar_metadata_rejects_root_dot_question_and_unicode_casefold_http(self) -> None:
+    def test_privacy_scan_generated_file_uri_matrix(self) -> None:
+        allowed = [
+            "myfile:label",
+            "relative.myfile:label",
+            "wordlikefile:label",
+            "namespace\u0301/myfile:label",
+            "namespace\u0301\u0302/component",
+        ]
+        for value in allowed:
+            with self.subTest(value=value, expected="allowed_value"):
+                validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="allowed_key"):
+                validate_training_json_privacy({value: "ok"})
+
+        for value in _generated_file_uri_rejections():
+            with self.subTest(value=value, expected="rejected_value"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({"metadata": value})
+            with self.subTest(value=value, expected="rejected_key"):
+                with self.assertRaises(ValueError):
+                    validate_training_json_privacy({value: "blocked"})
+            with self.subTest(value=value, expected="checkpoint_value"):
+                with self.assertRaises(ValueError):
+                    validate_checkpoint_metadata_privacy({"metadata": {"label": value}})
+            with self.subTest(value=value, expected="checkpoint_key"):
+                with self.assertRaises(ValueError):
+                    validate_checkpoint_metadata_privacy({"metadata": {value: "blocked"}})
+
+    def test_checkpoint_scalar_metadata_rejects_root_dot_question_unicode_casefold_http_and_file_uri(self) -> None:
         rejected = [
             r"\.ssh",
             r"artifact=\.ssh",
@@ -434,6 +511,14 @@ class ArtifactTest(unittest.TestCase):
             "\u00df;http:%2Fhome%2Fjack",
             "\u0130;http:example.test/path",
             "\ufb03=HTTPS:%2Fhome%2Fjack",
+            "file:%2Fhome%2Fjack",
+            "FILE:%2F%2Fserver%2Fshare",
+            "file:C:%5CUsers%5CJack",
+            "diagnostic=file:%2Fhome%2Fjack",
+            "note;FILE:C:%5CUsers%5CJack",
+            "\u00df;file:%2Fhome%2Fjack",
+            "\u0130;FILE:C:%5CUsers%5CJack",
+            "\ufb03=FiLe:%2F%2Fserver%2Fshare",
         ]
         for value in rejected:
             with self.subTest(value=value, expected="rejected_value"):

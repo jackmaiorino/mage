@@ -64,7 +64,6 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
     "updated_at",
 }
 
-_FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
 _SCHEMA_REF_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*#/properties(?:/[A-Za-z0-9_.-]+)+$")
 _DNS_LABEL_RE = re.compile(r"^[A-Za-z0-9-]{1,63}$")
 _ASCII_PORT_RE = re.compile(r"^[0-9]+$")
@@ -491,6 +490,15 @@ def _has_http_scheme_token(value: str) -> bool:
     return False
 
 
+def _has_file_scheme_token(value: str) -> bool:
+    for index in range(len(value)):
+        if not _is_candidate_boundary(value, index):
+            continue
+        if value[index : index + 5].casefold() == "file:":
+            return True
+    return False
+
+
 def _is_slash(ch: str) -> bool:
     return ch == "/" or ch == "\\"
 
@@ -551,7 +559,7 @@ def _has_posix_root_at(value: str, index: int) -> bool:
 def _looks_like_absolute_path(value: str) -> bool:
     if not value:
         return False
-    if _FILE_URI_RE.search(value):
+    if _has_file_scheme_token(value):
         return True
     if _is_allowed_whole_uri(value):
         return False

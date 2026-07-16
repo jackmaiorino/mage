@@ -235,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v10")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v8")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v11")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v9")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1435,7 +1435,7 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            for version in range(1, 10):
+            for version in range(1, 11):
                 case(
                     f"old_v{version}_run_schema_rejected",
                     lambda p, version=version: write_json_atomic(
@@ -1443,7 +1443,7 @@ class TrainerTest(unittest.TestCase):
                         {**read_json_file(p / "run.json"), "schema": f"kernel_rl_train_run/v{version}"},
                     ),
                 )
-            for version in range(1, 8):
+            for version in range(1, 9):
                 case(
                     f"old_v{version}_artifact_boundary_rejected",
                     lambda p, version=version: write_json_atomic(
@@ -1526,6 +1526,15 @@ class TrainerTest(unittest.TestCase):
                 ("unicode_casefold_sharp_s_encoded_http", "\u00df;http:%2Fhome%2Fjack"),
                 ("unicode_casefold_dotted_i_authorityless_http", "\u0130;http:example.test/path"),
                 ("unicode_casefold_ligature_encoded_https", "\ufb03=HTTPS:%2Fhome%2Fjack"),
+                ("empty_file_uri", "file:"),
+                ("encoded_posix_file_uri", "file:%2Fhome%2Fuser"),
+                ("encoded_unc_file_uri", "FILE:%2F%2Fserver%2Fshare"),
+                ("encoded_windows_file_uri", "file:C:%5CUsers%5Cuser"),
+                ("embedded_file_assignment", "diagnostic=file:%2Fhome%2Fuser"),
+                ("embedded_file_punctuation", "note;FILE:C:%5CUsers%5Cuser"),
+                ("unicode_casefold_sharp_s_file_uri", "\u00df;file:%2Fhome%2Fuser"),
+                ("unicode_casefold_dotted_i_file_uri", "\u0130;FILE:C:%5CUsers%5Cuser"),
+                ("unicode_casefold_ligature_file_uri", "\ufb03=FiLe:%2F%2Fserver%2Fshare"),
                 ("malformed_userinfo_uri", "https://user@example.test/path"),
             ]
             for name, text in privacy_rejections:
@@ -1543,23 +1552,25 @@ class TrainerTest(unittest.TestCase):
                         "forbidden training artifact field",
                     )
                 )
-            cases.extend(
-                [
+            for version in range(1, 11):
+                cases.append(
                     (
-                        "old_v9_run_schema",
-                        lambda p: mutate_run(p, lambda run: run.__setitem__("schema", "kernel_rl_train_run/v9")),
+                        f"old_v{version}_run_schema",
+                        lambda p, version=version: mutate_run(p, lambda run: run.__setitem__("schema", f"kernel_rl_train_run/v{version}")),
                         "schema mismatch",
-                    ),
+                    )
+                )
+            for version in range(1, 9):
+                cases.append(
                     (
-                        "old_v7_artifact_boundary",
-                        lambda p: mutate_run(
+                        f"old_v{version}_artifact_boundary",
+                        lambda p, version=version: mutate_run(
                             p,
-                            lambda run: run["artifact_boundary"].__setitem__("schema", "kernel_rl_artifact_boundary/v7"),
+                            lambda run: run["artifact_boundary"].__setitem__("schema", f"kernel_rl_artifact_boundary/v{version}"),
                         ),
                         "training contract drift",
-                    ),
-                ]
-            )
+                    )
+                )
             for name, mutator, pattern in cases:
                 target = tmp / name
                 shutil.copytree(source, target)
@@ -1570,6 +1581,81 @@ class TrainerTest(unittest.TestCase):
                         train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
                     self.assertFalse(env_marker.exists())
                     self.assertEqual(_snapshot_tree(target), before)
+
+    def test_environment_file_uri_kernel_version_fails_before_run_persistence_without_tree_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            out.mkdir()
+            with OutputLock(out):
+                pass
+            before = _snapshot_tree(out)
+            env_marker = tmp / "env-started.marker"
+            script = tmp / "bad_kernel_version_env.py"
+            script.write_text(
+                """
+from __future__ import annotations
+
+import json
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path.cwd() / "kernel/python/tests"))
+from fixtures import decision_response
+
+marker = os.environ.get("BAD_KERNEL_VERSION_MARKER")
+if marker:
+    Path(marker).write_text("started\\n", encoding="utf-8")
+
+for line in sys.stdin:
+    request = json.loads(line)
+    version = os.environ["BAD_KERNEL_VERSION"]
+    response = decision_response(request["request_id"], request["episode_id"], 0, actor="p0")
+    response["provenance"]["kernel_version"] = version
+    response["observation"]["kernel_version"] = version
+    sys.stdout.write(json.dumps(response, separators=(",", ":")) + "\\n")
+    sys.stdout.flush()
+""",
+                encoding="utf-8",
+            )
+            if os.name == "nt":
+                launcher = tmp / "bad_kernel_version_env.cmd"
+                launcher.write_text(f'@echo off\n"{sys.executable}" "{script}"\n', encoding="utf-8")
+            else:
+                launcher = tmp / "bad_kernel_version_env.sh"
+                launcher.write_text(f'#!/usr/bin/env sh\nexec "{sys.executable}" "{script}"\n', encoding="utf-8")
+                launcher.chmod(0o700)
+
+            old_version = os.environ.get("BAD_KERNEL_VERSION")
+            old_marker = os.environ.get("BAD_KERNEL_VERSION_MARKER")
+            os.environ["BAD_KERNEL_VERSION"] = "file:%2Fhome%2Fuser"
+            os.environ["BAD_KERNEL_VERSION_MARKER"] = str(env_marker)
+            try:
+                with self.assertRaisesRegex(ValueError, "forbidden absolute path"):
+                    train(
+                        env_bin=launcher,
+                        out_dir=out,
+                        base_seed=71501,
+                        until_update=0,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+            finally:
+                if old_version is None:
+                    os.environ.pop("BAD_KERNEL_VERSION", None)
+                else:
+                    os.environ["BAD_KERNEL_VERSION"] = old_version
+                if old_marker is None:
+                    os.environ.pop("BAD_KERNEL_VERSION_MARKER", None)
+                else:
+                    os.environ["BAD_KERNEL_VERSION_MARKER"] = old_marker
+            self.assertTrue(env_marker.is_file())
+            self.assertEqual(_snapshot_tree(out), before)
+            for name in ("run.json", "latest.json", "updates", "checkpoints", "episodes.jsonl", "updates.jsonl", "summary.json"):
+                self.assertFalse((out / name).exists(), name)
 
     def test_subprocess_continuous_split_and_future_exact_without_pt_byte_equality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
