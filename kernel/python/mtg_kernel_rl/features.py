@@ -2657,12 +2657,41 @@ def _validate_pending_effect_legal_actions(
     observation: dict[str, Any], actions: list[dict[str, Any]]
 ) -> None:
     pending = observation["projection"]["engine_context"]["pending_effect"]
-    if pending is None or pending["choice"]["choice_kind"] != "targets":
+    if pending is None:
         return
 
     choice = pending["choice"]
     source = _require_ref(pending["source"], "pending_effect.source")
     actor = observation["acting_player"]
+    choice_kind = choice["choice_kind"]
+    if choice_kind == "options":
+        option_count = choice["option_count"]
+        if len(actions) != option_count:
+            raise FeatureSchemaError(
+                "pending effect option actions must correspond one-for-one to every option"
+            )
+        for option_index, action in enumerate(actions):
+            semantic = action["semantic"]
+            if semantic["action_kind"] != "choose_effect_option":
+                raise FeatureSchemaError(
+                    "pending effect option choice requires only choose_effect_option actions"
+                )
+            if semantic["actor"] != actor or semantic["source"] != source:
+                raise FeatureSchemaError(
+                    "pending effect option action actor/source does not match the active choice"
+                )
+            if semantic["option_count"] != option_count:
+                raise FeatureSchemaError(
+                    "pending effect option action count does not match the active choice"
+                )
+            if semantic["option_index"] != option_index:
+                raise FeatureSchemaError(
+                    "pending effect option actions must enumerate every option in order"
+                )
+        return
+    if choice_kind != "targets":
+        return
+
     selected_count = len(choice["selected_targets"])
     target_actions: list[dict[str, Any]] = []
     finish_actions: list[dict[str, Any]] = []

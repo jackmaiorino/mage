@@ -251,6 +251,44 @@ def pending_effect_target_decision(can_finish: bool = True) -> tuple[dict, list[
     return obs, actions
 
 
+def pending_effect_option_decision(option_count: int = 2) -> tuple[dict, list[dict]]:
+    obs = complete_observation()
+    projection = obs["projection"]
+    source = deep_copy(projection["stack"][-1]["source"])
+    projection["engine_context"].update(
+        {
+            "current_stage": "pending_effect",
+            "pending_effect": {
+                "source": source,
+                "controller": source["controller"],
+                "choice": {
+                    "choice_kind": "options",
+                    "player": "p0",
+                    "structural_path": [0],
+                    "option_count": option_count,
+                },
+            },
+        }
+    )
+    actions = [
+        {
+            "schema_version": 4,
+            "selected_index": option_index,
+            "stable_id": f"legal-action-v4:pending-option-{option_index}",
+            "semantic": {
+                "action_kind": "choose_effect_option",
+                "actor": "p0",
+                "source": deep_copy(source),
+                "option_index": option_index,
+                "option_count": option_count,
+            },
+            "display_text": None,
+        }
+        for option_index in range(option_count)
+    ]
+    return obs, actions
+
+
 class FeatureEncodingTest(unittest.TestCase):
     def test_observation_and_all_action_variants_are_classified(self) -> None:
         obs = complete_observation()
@@ -496,7 +534,24 @@ class FeatureEncodingTest(unittest.TestCase):
             )
             assert_observation_classified(obs)
             choice_actions = complete_legal_actions()
-            if choice["choice_kind"] == "targets":
+            if choice["choice_kind"] == "options":
+                choice_actions = [
+                    {
+                        "schema_version": 4,
+                        "selected_index": option_index,
+                        "stable_id": f"legal-action-v4:typed-option-{option_index}",
+                        "semantic": {
+                            "action_kind": "choose_effect_option",
+                            "actor": "p0",
+                            "source": source,
+                            "option_index": option_index,
+                            "option_count": choice["option_count"],
+                        },
+                        "display_text": None,
+                    }
+                    for option_index in range(choice["option_count"])
+                ]
+            elif choice["choice_kind"] == "targets":
                 selected_count = len(choice["selected_targets"])
                 choice_actions = [
                     {
@@ -655,6 +710,32 @@ class FeatureEncodingTest(unittest.TestCase):
         required_actions.append(unexpected_finish)
         with self.assertRaises(FeatureSchemaError):
             encode_decision(required_obs, required_actions)
+
+    def test_pending_effect_option_action_correspondence_fails_closed(self) -> None:
+        obs, actions = pending_effect_option_decision(option_count=2)
+
+        wrong_source = deep_copy(actions)
+        wrong_source[0]["semantic"]["source"] = deep_copy(obs["own_hand"][0]["stable"])
+        wrong_count = deep_copy(actions)
+        wrong_count[0]["semantic"]["option_count"] = 3
+        wrong_order = list(reversed(deep_copy(actions)))
+        for selected_index, action in enumerate(wrong_order):
+            action["selected_index"] = selected_index
+        missing_option = [deep_copy(actions[0])]
+        unrelated_action = [deep_copy(action) for action in complete_legal_actions()[:2]]
+        for selected_index, action in enumerate(unrelated_action):
+            action["selected_index"] = selected_index
+
+        malformed_sets = {
+            "wrong source": wrong_source,
+            "wrong option count": wrong_count,
+            "wrong option order": wrong_order,
+            "missing option": missing_option,
+            "unrelated actions": unrelated_action,
+        }
+        for label, malformed in malformed_sets.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                encode_decision(obs, malformed)
 
     def test_known_hand_perspective_safety_and_reserved_shape_errors_fail_closed(self) -> None:
         obs = complete_observation()
