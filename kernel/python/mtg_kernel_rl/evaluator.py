@@ -420,8 +420,11 @@ def evaluate(
     )
     expected_provenance = chain.run_record["protocol_provenance"]
 
-    with OutputLock(out_dir):
-        root = require_new_or_empty_dir(out_dir)
+    with OutputLock(out_dir) as output_lock:
+        # OutputLock resolves cooperating ancestor aliases to one physical root
+        # while rejecting a direct alias at the final output component. Keep
+        # artifact validation and publication in that same physical namespace.
+        root = require_new_or_empty_dir(output_lock.path.parent)
         game_rows: list[dict[str, Any]] = []
         pair_rows: list[dict[str, Any]] = []
         paired_points: list[PairedGamePoints] = []

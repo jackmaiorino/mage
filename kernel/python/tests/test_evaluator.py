@@ -4,8 +4,11 @@ import contextlib
 import hashlib
 import io
 import json
+import os
 import random
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,10 +19,12 @@ import torch
 import mtg_kernel_rl.cli as cli_mod
 import mtg_kernel_rl.evaluator as evaluator_mod
 from mtg_kernel_rl.artifact_io import canonical_json_bytes, read_json_file, sha256_bytes, validate_training_json_privacy
+from mtg_kernel_rl.artifacts import set_fault_injector
 from mtg_kernel_rl.client import Decision
 from mtg_kernel_rl.determinism import derive_evaluation_env_seed
 from mtg_kernel_rl.evaluation_store import validate_evaluation
 from mtg_kernel_rl.evaluator import EvaluationResult, _select_greedy_action, _validate_request, evaluate
+from mtg_kernel_rl.output_lock import OutputLock
 from mtg_kernel_rl.path_safety import OUTPUT_LOCK_FILE_NAME
 from mtg_kernel_rl.trainer import train
 from mtg_kernel_rl.training_store import TrainingStore
@@ -76,6 +81,81 @@ def _rewrite_manifest_file_metadata(root: Path, name: str) -> None:
         "size_bytes": len(data),
     }
     (root / "run.json").write_bytes(canonical_json_bytes(manifest))
+
+
+def _evaluate_fixture(root: Path, launcher: Path, store: Path, head: str, *, out_name: str = "evaluation") -> Path:
+    out = root / out_name
+    evaluate(
+        training_store=store,
+        expected_candidate_head=head,
+        env_bin=launcher,
+        out_dir=out,
+        pairs=1,
+        base_seed=4,
+        bootstrap_replicates=1_000,
+        max_decisions=8,
+        timeout_ms=5_000,
+    )
+    return out
+
+
+def _create_directory_alias(test: unittest.TestCase, alias: Path, target: Path) -> None:
+    if os.name == "nt":
+        result = subprocess.run(
+            ["cmd", "/c", "mklink", "/J", str(alias), str(target)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            test.fail(f"Windows junction creation failed: {result.stdout} {result.stderr}")
+        return
+    try:
+        os.symlink(target, alias, target_is_directory=True)
+    except (NotImplementedError, OSError) as exc:
+        raise unittest.SkipTest(f"directory symlink unavailable: {exc}") from exc
+
+
+def _remove_directory_alias(alias: Path) -> None:
+    if os.name == "nt":
+        os.rmdir(alias)
+    else:
+        alias.unlink()
+
+
+_HARD_EXIT_EVALUATOR = r"""
+import os
+import sys
+from pathlib import Path
+
+from mtg_kernel_rl.artifacts import set_fault_injector
+from mtg_kernel_rl.evaluator import evaluate
+
+store, head, launcher, out, wanted_boundary, wanted_name, marker = sys.argv[1:]
+marker_path = Path(marker)
+
+def injector(boundary, path):
+    if boundary == wanted_boundary and path is not None and path.name == wanted_name:
+        with marker_path.open("xb") as handle:
+            handle.write(b"reached")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os._exit(91)
+
+set_fault_injector(injector)
+evaluate(
+    training_store=Path(store),
+    expected_candidate_head=head,
+    env_bin=Path(launcher),
+    out_dir=Path(out),
+    pairs=1,
+    base_seed=4,
+    bootstrap_replicates=1000,
+    max_decisions=8,
+    timeout_ms=5000,
+)
+raise SystemExit(92)
+"""
 
 
 class EvaluatorEndToEndTest(unittest.TestCase):
@@ -317,6 +397,257 @@ class EvaluatorEndToEndTest(unittest.TestCase):
             self.assertEqual({path.name for path in out.iterdir()}, {OUTPUT_LOCK_FILE_NAME})
 
 
+class EvaluationPublicationProofTest(unittest.TestCase):
+    def test_data_file_faults_are_uncommitted_and_run_fault_is_postcommit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            cases = (
+                ("games.jsonl", {OUTPUT_LOCK_FILE_NAME, "games.jsonl"}, False),
+                ("pairs.jsonl", {OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl"}, False),
+                ("run.json", {OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"}, True),
+            )
+            for target_name, expected_entries, committed in cases:
+                with self.subTest(target=target_name):
+                    out = root / f"fault-{target_name.replace('.', '-')}"
+                    fired = {"value": False}
+
+                    def injector(boundary: str, path: Path | None) -> None:
+                        if (
+                            not fired["value"]
+                            and boundary == "json_replace_after"
+                            and path is not None
+                            and path.name == target_name
+                        ):
+                            fired["value"] = True
+                            raise RuntimeError(f"fault after {target_name}")
+
+                    previous = set_fault_injector(injector)
+                    try:
+                        with self.assertRaisesRegex(RuntimeError, target_name.replace(".", r"\.")):
+                            _evaluate_fixture(root, launcher, store, head, out_name=out.name)
+                    finally:
+                        set_fault_injector(previous)
+                    self.assertTrue(fired["value"])
+                    self.assertEqual({path.name for path in out.iterdir()}, expected_entries)
+                    if committed:
+                        validated = validate_evaluation(out)
+                        self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+                    else:
+                        self.assertFalse((out / "run.json").exists())
+                        with self.assertRaises(ValueError):
+                            validate_evaluation(out)
+                    with self.assertRaises(FileExistsError):
+                        _evaluate_fixture(root, launcher, store, head, out_name=out.name)
+                    self.assertEqual({path.name for path in out.iterdir()}, expected_entries)
+
+    def test_hard_exit_at_every_atomic_replace_boundary_is_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            source_root = Path(__file__).resolve().parents[1]
+            tests_root = Path(__file__).resolve().parent
+            child_env = os.environ.copy()
+            child_env["PYTHONPATH"] = os.pathsep.join((str(source_root), str(tests_root)))
+            published_before = {
+                "games.jsonl": set(),
+                "pairs.jsonl": {"games.jsonl"},
+                "run.json": {"games.jsonl", "pairs.jsonl"},
+            }
+            for boundary in ("json_replace_before", "json_replace_after"):
+                for target_name in ("games.jsonl", "pairs.jsonl", "run.json"):
+                    with self.subTest(boundary=boundary, target=target_name):
+                        slug = f"{boundary}-{target_name.replace('.', '-')}"
+                        out = root / slug
+                        marker = root / f"{slug}.marker"
+                        completed = subprocess.run(
+                            [
+                                sys.executable,
+                                "-c",
+                                _HARD_EXIT_EVALUATOR,
+                                str(store),
+                                head,
+                                str(launcher),
+                                str(out),
+                                boundary,
+                                target_name,
+                                str(marker),
+                            ],
+                            cwd=Path(__file__).resolve().parents[3],
+                            env=child_env,
+                            capture_output=True,
+                            text=True,
+                            timeout=60,
+                            check=False,
+                        )
+                        self.assertEqual(
+                            completed.returncode,
+                            91,
+                            msg=f"stdout={completed.stdout!r} stderr={completed.stderr!r}",
+                        )
+                        self.assertEqual(marker.read_bytes(), b"reached")
+                        self.assertNotIn(marker.name, {path.name for path in out.iterdir()})
+
+                        names = {path.name for path in out.iterdir()}
+                        expected = {OUTPUT_LOCK_FILE_NAME, *published_before[target_name]}
+                        if boundary == "json_replace_after":
+                            expected.add(target_name)
+                            self.assertEqual(names, expected)
+                        else:
+                            temp_names = names - expected
+                            self.assertEqual(len(temp_names), 1)
+                            temp_name = next(iter(temp_names))
+                            self.assertTrue(temp_name.startswith(f".{target_name}."), temp_name)
+                            self.assertTrue(temp_name.endswith(".tmp"), temp_name)
+
+                        # Process death must release the advisory lock even though
+                        # the persistent lock file remains part of the output root.
+                        with OutputLock(out):
+                            pass
+
+                        if boundary == "json_replace_after" and target_name == "run.json":
+                            validated = validate_evaluation(out)
+                            self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+                        else:
+                            with self.assertRaises(ValueError):
+                                validate_evaluation(out)
+                        with self.assertRaises(FileExistsError):
+                            _evaluate_fixture(root, launcher, store, head, out_name=out.name)
+                        self.assertEqual({path.name for path in out.iterdir()}, names)
+
+
+class EvaluationConcurrencyAndFailureProofTest(unittest.TestCase):
+    def test_concurrent_latest_advance_preserves_selected_update_zero_evaluation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root, scenario="train_pair")
+            original_run_game = evaluator_mod._run_game
+            advanced = {"value": False}
+
+            def advancing_run_game(*args, **kwargs):  # type: ignore[no-untyped-def]
+                row = original_run_game(*args, **kwargs)
+                if not advanced["value"]:
+                    advanced["value"] = True
+                    train(
+                        env_bin=launcher,
+                        out_dir=store,
+                        resume=store / "latest.json",
+                        until_update=1,
+                    )
+                return row
+
+            with mock.patch.object(evaluator_mod, "_run_game", side_effect=advancing_run_game):
+                result = _evaluate_fixture(root, launcher, store, head)
+            self.assertTrue(advanced["value"])
+            self.assertTrue((result / "run.json").is_file())
+            self.assertEqual(TrainingStore(store).validate_latest().head.update, 1)
+            manifest = read_json_file(result / "run.json")
+            self.assertEqual([snapshot["update"] for snapshot in manifest["snapshots"]], [0, 0])
+            self.assertEqual(manifest["snapshots"][0]["head"], head)
+            validate_evaluation(result)
+
+    def test_selected_generation_replacement_fails_before_artifact_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, source_store, head = _train_fixture(root, scenario="train_pair", until_update=1)
+            for role in ("candidate", "baseline"):
+                for path_attr in ("update_path", "sidecar_path", "checkpoint_path"):
+                    with self.subTest(role=role, artifact=path_attr):
+                        case = f"mutation-{role}-{path_attr}"
+                        store = root / f"store-{case}"
+                        shutil.copytree(source_store, store)
+                        chain = TrainingStore(store).validate_latest()
+                        selected = chain.head if role == "candidate" else chain.snapshots[0]
+                        target = getattr(selected, path_attr)
+                        original_run_game = evaluator_mod._run_game
+                        calls = {"count": 0}
+
+                        def replacing_run_game(*args, **kwargs):  # type: ignore[no-untyped-def]
+                            row = original_run_game(*args, **kwargs)
+                            calls["count"] += 1
+                            if calls["count"] == 2:
+                                replacement = target.with_name(f"replacement-{target.name}")
+                                replacement.write_bytes(target.read_bytes() + b"tampered")
+                                os.replace(replacement, target)
+                            return row
+
+                        out = root / case
+                        with mock.patch.object(evaluator_mod, "_run_game", side_effect=replacing_run_game):
+                            with self.assertRaises((ValueError, RuntimeError)):
+                                _evaluate_fixture(root, launcher, store, head, out_name=case)
+                        self.assertEqual(calls["count"], 2)
+                        self.assertEqual({path.name for path in out.iterdir()}, {OUTPUT_LOCK_FILE_NAME})
+
+    def test_environment_mutation_fails_before_artifact_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            original_bytes = launcher.read_bytes()
+            original_run_game = evaluator_mod._run_game
+            calls = {"count": 0}
+
+            def mutating_run_game(*args, **kwargs):  # type: ignore[no-untyped-def]
+                row = original_run_game(*args, **kwargs)
+                calls["count"] += 1
+                if calls["count"] == 2:
+                    launcher.write_bytes(original_bytes + b"\n# mutation\n")
+                return row
+
+            out = root / "evaluation"
+            try:
+                with mock.patch.object(evaluator_mod, "_run_game", side_effect=mutating_run_game):
+                    with self.assertRaisesRegex(ValueError, "environment binary changed"):
+                        _evaluate_fixture(root, launcher, store, head)
+            finally:
+                launcher.write_bytes(original_bytes)
+            self.assertEqual(calls["count"], 2)
+            self.assertEqual({path.name for path in out.iterdir()}, {OUTPUT_LOCK_FILE_NAME})
+
+    def test_protocol_and_process_failures_leave_lock_only_and_are_retryable(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            scenario_file = root / "scenario.txt"
+            scenario_file.write_text("valid", encoding="utf-8")
+            launcher, store, head = _train_fixture(
+                root,
+                scenario="switchable",
+                extra_env={"FAKE_SCENARIO_FILE": str(scenario_file)},
+            )
+            for scenario in (
+                "duplicate_keys",
+                "noise",
+                "nonfinite_json",
+                "nonfinite_overflow",
+                "truncated_terminal",
+                "halted_terminal",
+                "eof_nonzero",
+                "timeout",
+                "provenance_drift",
+            ):
+                with self.subTest(scenario=scenario):
+                    out_name = f"failure-{scenario}"
+                    out = root / out_name
+                    scenario_file.write_text(scenario, encoding="utf-8")
+                    timeout_ms = 100 if scenario == "timeout" else 5_000
+                    with self.assertRaises(Exception):
+                        evaluate(
+                            training_store=store,
+                            expected_candidate_head=head,
+                            env_bin=launcher,
+                            out_dir=out,
+                            pairs=1,
+                            base_seed=4,
+                            bootstrap_replicates=1_000,
+                            max_decisions=8,
+                            timeout_ms=timeout_ms,
+                        )
+                    self.assertEqual({path.name for path in out.iterdir()}, {OUTPUT_LOCK_FILE_NAME})
+                    scenario_file.write_text("valid", encoding="utf-8")
+                    _evaluate_fixture(root, launcher, store, head, out_name=out_name)
+                    validated = validate_evaluation(out)
+                    self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+
+
 class EvaluatorUnitTest(unittest.TestCase):
     def _decision(self) -> Decision:
         return Decision(0, 0, "p0", actor_observation("p0"), legal_actions("p0"), dict(PROVENANCE))
@@ -526,6 +857,226 @@ class EvaluationVerifierCorruptionTest(unittest.TestCase):
                 (target / "run.json").write_bytes(canonical_json_bytes(manifest))
                 with self.subTest(type_drift=name), self.assertRaises(ValueError):
                     validate_evaluation(target)
+
+
+class EvaluationFilesystemBoundaryTest(unittest.TestCase):
+    def test_committed_verifier_rejects_file_symlinks_and_preserves_targets(self) -> None:
+        if not hasattr(os, "symlink"):
+            self.skipTest("file symlink primitive unavailable")
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside"
+            outside.mkdir()
+            probe_target = outside / "probe-target"
+            probe_target.write_bytes(b"probe")
+            probe = root / "probe-link"
+            try:
+                os.symlink(probe_target, probe)
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"file symlink unavailable: {exc}")
+            else:
+                probe.unlink()
+            launcher, store, head = _train_fixture(root)
+            pristine = _evaluate_fixture(root, launcher, store, head, out_name="pristine-symlink")
+            for name in (OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"):
+                with self.subTest(name=name):
+                    target = root / f"symlink-{name.replace('.', '-')}"
+                    shutil.copytree(pristine, target)
+                    artifact = target / name
+                    sentinel = outside / f"{name.replace('.', '-')}.sentinel"
+                    sentinel.write_bytes(artifact.read_bytes())
+                    expected = sentinel.read_bytes()
+                    artifact.unlink()
+                    os.symlink(sentinel, artifact)
+                    with self.assertRaises(ValueError):
+                        validate_evaluation(target)
+                    self.assertEqual(sentinel.read_bytes(), expected)
+
+    def test_committed_verifier_rejects_hardlinks_and_preserves_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside"
+            outside.mkdir()
+            launcher, store, head = _train_fixture(root)
+            pristine = _evaluate_fixture(root, launcher, store, head, out_name="pristine-hardlink")
+            for name in (OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"):
+                with self.subTest(name=name):
+                    target = root / f"hardlink-{name.replace('.', '-')}"
+                    shutil.copytree(pristine, target)
+                    artifact = target / name
+                    sentinel = outside / f"{name.replace('.', '-')}.hardlink"
+                    sentinel.write_bytes(artifact.read_bytes())
+                    expected = sentinel.read_bytes()
+                    artifact.unlink()
+                    try:
+                        os.link(sentinel, artifact)
+                    except OSError as exc:
+                        self.skipTest(f"hardlink unavailable on temporary filesystem: {exc}")
+                    with self.assertRaises(ValueError):
+                        validate_evaluation(target)
+                    self.assertEqual(sentinel.read_bytes(), expected)
+
+    def test_root_junction_or_symlink_is_rejected_for_verification_and_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = _evaluate_fixture(root, launcher, store, head, out_name="pristine-root-alias")
+            before = _artifact_bytes(pristine)
+            verify_alias = root / "verify-root-alias"
+            _create_directory_alias(self, verify_alias, pristine)
+            try:
+                with self.assertRaises(ValueError):
+                    validate_evaluation(verify_alias)
+                self.assertEqual(_artifact_bytes(pristine), before)
+            finally:
+                _remove_directory_alias(verify_alias)
+
+            outside = root / "outside-publication"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-sentinel")
+            publish_alias = root / "publish-root-alias"
+            _create_directory_alias(self, publish_alias, outside)
+            try:
+                with self.assertRaises(ValueError):
+                    _evaluate_fixture(root, launcher, store, head, out_name=publish_alias.name)
+                self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+                self.assertEqual({path.name for path in outside.iterdir()}, {"sentinel.txt"})
+            finally:
+                _remove_directory_alias(publish_alias)
+
+    def test_ancestor_directory_alias_with_real_final_component_is_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            real_parent = root / "real-parent"
+            real_parent.mkdir()
+            launcher, store, head = _train_fixture(real_parent)
+            alias_parent = root / "alias-parent"
+            _create_directory_alias(self, alias_parent, real_parent)
+            try:
+                result = _evaluate_fixture(alias_parent, launcher, store, head)
+                self.assertEqual(result, alias_parent / "evaluation")
+                validated = validate_evaluation(real_parent / "evaluation")
+                self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+            finally:
+                _remove_directory_alias(alias_parent)
+
+    def test_exact_root_types_and_preexisting_aliases_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = _evaluate_fixture(root, launcher, store, head, out_name="pristine-exact-root")
+
+            wrong_type = root / "wrong-type"
+            shutil.copytree(pristine, wrong_type)
+            (wrong_type / "games.jsonl").unlink()
+            (wrong_type / "games.jsonl").mkdir()
+            with self.assertRaises(ValueError):
+                validate_evaluation(wrong_type)
+
+            outside = root / "outside"
+            outside.mkdir()
+            sentinel = outside / "sentinel.bin"
+            sentinel.write_bytes(b"do-not-change")
+            hardlink_root = root / "publish-hardlink"
+            hardlink_root.mkdir()
+            try:
+                os.link(sentinel, hardlink_root / "run.json")
+            except OSError as exc:
+                self.skipTest(f"hardlink unavailable on temporary filesystem: {exc}")
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(root, launcher, store, head, out_name=hardlink_root.name)
+            self.assertEqual(sentinel.read_bytes(), b"do-not-change")
+
+            directory_root = root / "publish-directory"
+            (directory_root / "run.json").mkdir(parents=True)
+            nested_sentinel = directory_root / "run.json" / "sentinel.txt"
+            nested_sentinel.write_bytes(b"nested-sentinel")
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(root, launcher, store, head, out_name=directory_root.name)
+            self.assertEqual(nested_sentinel.read_bytes(), b"nested-sentinel")
+
+    def test_preexisting_publication_file_symlink_is_not_followed(self) -> None:
+        if not hasattr(os, "symlink"):
+            self.skipTest("file symlink primitive unavailable")
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside-symlink"
+            outside.mkdir()
+            sentinel = outside / "sentinel.json"
+            sentinel.write_bytes(b"external-sentinel")
+            out = root / "publication-symlink"
+            out.mkdir()
+            try:
+                os.symlink(sentinel, out / "run.json")
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"file symlink unavailable: {exc}")
+            launcher, store, head = _train_fixture(root)
+            with self.assertRaises((FileExistsError, ValueError)):
+                _evaluate_fixture(root, launcher, store, head, out_name=out.name)
+            self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+
+    def test_child_junction_or_directory_symlink_is_rejected_without_following(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = _evaluate_fixture(root, launcher, store, head, out_name="pristine-child-alias")
+            outside = root / "outside-child"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-child-sentinel")
+            target = root / "child-alias"
+            shutil.copytree(pristine, target)
+            (target / "games.jsonl").unlink()
+            alias = target / "games.jsonl"
+            _create_directory_alias(self, alias, outside)
+            try:
+                with self.assertRaises(ValueError):
+                    validate_evaluation(target)
+                self.assertEqual(sentinel.read_bytes(), b"external-child-sentinel")
+            finally:
+                _remove_directory_alias(alias)
+
+
+class EvaluationRealEnvironmentTest(unittest.TestCase):
+    def test_real_environment_update_zero_aa_is_neutral_and_source_unchanged(self) -> None:
+        env_value = os.environ.get("MTG_KERNEL_RL_ENV_BIN")
+        if not env_value:
+            self.skipTest("MTG_KERNEL_RL_ENV_BIN not set")
+        env_bin = Path(env_value)
+        self.assertTrue(env_bin.is_file(), f"MTG_KERNEL_RL_ENV_BIN is not a file: {env_bin}")
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            store = root / "training-store"
+            train(
+                env_bin=env_bin,
+                out_dir=store,
+                base_seed=71_501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=5_000,
+            )
+            chain = TrainingStore(store).validate_latest()
+            self.assertEqual(chain.head.update, 0)
+            before = _tree_bytes(store)
+            result = evaluate(
+                training_store=store,
+                expected_candidate_head=chain.head.head,
+                env_bin=env_bin,
+                out_dir=root / "evaluation",
+                pairs=1,
+                base_seed=71_501,
+                bootstrap_replicates=1_000,
+                max_decisions=5_000,
+                timeout_ms=60_000,
+            )
+            self.assertEqual(_tree_bytes(store), before)
+            self.assertEqual(result.candidate_head, result.baseline_head)
+            self.assertEqual((result.pair_count, result.game_count, result.total_half_points), (1, 2, 2))
+            self.assertEqual(result.estimate.hex(), (0.5).hex())
+            self.assertEqual(validate_evaluation(root / "evaluation").run_sha256, result.run_sha256)
 
 
 if __name__ == "__main__":
