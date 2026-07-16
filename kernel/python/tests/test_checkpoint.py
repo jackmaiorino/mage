@@ -70,7 +70,7 @@ class CheckpointTest(unittest.TestCase):
                 **dataclasses.asdict(TrainerSeedDerivation()),
                 "namespaces": list(TrainerSeedDerivation().namespaces),
             },
-            provenance={"protocol": "kernel_rl_jsonl", "protocol_version": 2, "schema_version": 2, "kernel_version": "0.0.1-spike", "surface_version": 2, "card_db_hash": 1},
+            provenance={"protocol": "kernel_rl_jsonl", "protocol_version": 3, "schema_version": 3, "kernel_version": "0.0.2-spike", "surface_version": 2, "card_db_hash": 1},
             compatibility=compatibility,
         )
         return payload, model, optimizer, compatibility

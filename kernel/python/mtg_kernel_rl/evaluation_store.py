@@ -20,6 +20,7 @@ from .artifact_io import (
 )
 from .artifacts import write_bytes_atomic
 from .checkpoint import compute_head
+from .client import PROTOCOL_NAME, PROTOCOL_VERSION, SCHEMA_VERSION
 from .determinism import (
     EvaluatorSeedDerivation,
     derive_evaluation_bootstrap_seed,
@@ -449,10 +450,14 @@ def _validate_manifest(manifest: dict[str, Any]) -> tuple[int, int, int, int, in
 
     environment = _require_keys(manifest["environment"], {"binary_sha256", "protocol", "protocol_provenance"}, "environment")
     env_sha = _hash(environment["binary_sha256"], "environment.binary_sha256")
-    expected_protocol = {"protocol": "kernel_rl_jsonl", "protocol_version": 2, "schema_version": 2}
+    expected_protocol = {
+        "protocol": PROTOCOL_NAME,
+        "protocol_version": PROTOCOL_VERSION,
+        "schema_version": SCHEMA_VERSION,
+    }
     _require_strict_equal(environment["protocol"], expected_protocol, "environment protocol contract")
     provenance = _validate_provenance(environment["protocol_provenance"], "environment.protocol_provenance")
-    if provenance["protocol_version"] != 2 or provenance["schema_version"] != 2:
+    if provenance["protocol_version"] != PROTOCOL_VERSION or provenance["schema_version"] != SCHEMA_VERSION:
         raise ValueError("environment provenance versions differ from protocol contract")
 
     source = _require_keys(

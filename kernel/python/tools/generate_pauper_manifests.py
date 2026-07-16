@@ -76,12 +76,12 @@ DECK_SPECS = (
 
 # Every one of the 150 deck-card names is explicitly classified here.  "Full"
 # means its current spell/permanent/mana program covers every reachable BO1
-# branch; Chain Lightning remains partial because its affordable copy branch
-# deliberately halts.  All names below the two implemented groups are
-# explicitly no-effect at this checkpoint (missing registry records receive an
-# additional blocker in the generated support manifest).
+# branch. All names below the implemented group are explicitly no-effect at
+# this checkpoint (missing registry records receive an additional blocker in
+# the generated support manifest).
 FULL_SUPPORT_CARD_NAMES = (
     "Burning-Tree Emissary",
+    "Chain Lightning",
     "Clockwork Percussionist",
     "End the Festivities",
     "Experimental Synthesizer",
@@ -108,9 +108,7 @@ FULL_SUPPORT_CARD_NAMES = (
     "Voldaren Epicure",
 )
 
-PARTIAL_SUPPORT = {
-    "Chain Lightning": ("affordable_spell_copy_branch_halts",),
-}
+PARTIAL_SUPPORT: dict[str, tuple[str, ...]] = {}
 
 NO_EFFECT_CARD_NAMES = (
     "Annul",
@@ -247,7 +245,7 @@ TOKEN_DEPENDENCIES = (
 
 EXPECTED_MAINBOARD_SUPPORT = {
     "Wildfire": {"full": 2, "partial": 0, "no_effect": 58},
-    "Rally": {"full": 58, "partial": 2, "no_effect": 0},
+    "Rally": {"full": 60, "partial": 0, "no_effect": 0},
     "Affinity": {"full": 7, "partial": 0, "no_effect": 53},
     "Elves": {"full": 0, "partial": 0, "no_effect": 60},
     "Spy": {"full": 0, "partial": 0, "no_effect": 60},

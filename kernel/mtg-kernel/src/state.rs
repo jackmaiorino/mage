@@ -175,6 +175,12 @@ pub struct StackItem {
     pub source: ObjectId,
     pub controller: PlayerId,
     pub targets: Vec<Target>,
+    /// True iff this spell is a virtual copy rather than a physical card.
+    /// Copies receive their own stable arena object so stack targeting never
+    /// aliases the original spell, but they cease to exist instead of moving
+    /// to a graveyard/exile when they resolve, fizzle, or are countered.
+    /// Always false for abilities and ordinary cast spells.
+    pub is_copy: bool,
     /// `Some` for a triggered ability or a non-mana activated ability
     /// (Masked Meower's, the Blood token's -- see `card_def::
     /// ActivatedAbilityDef`): an inline effect program that isn't looked

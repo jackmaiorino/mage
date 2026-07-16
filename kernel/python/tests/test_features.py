@@ -173,6 +173,10 @@ class FeatureEncodingTest(unittest.TestCase):
         for action in actions:
             assert_action_classified(action)
         validate_legal_actions_contract(actions, "p0")
+        bad_prefix = deep_copy(actions)
+        bad_prefix[0]["stable_id"] = "fixture-0"
+        with self.assertRaises(FeatureSchemaError):
+            validate_legal_actions_contract(bad_prefix, "p0")
         encoded = encode_decision(obs, actions)
         self.assertEqual(encoded.action_features.shape[0], len(actions))
         self.assertGreater(encoded.action_ref_features.shape[0], len(actions))
@@ -185,7 +189,7 @@ class FeatureEncodingTest(unittest.TestCase):
         obs["projection"]["unknown_leaf"] = 1
         with self.assertRaises(FeatureSchemaError):
             encode_decision(obs, legal_actions())
-        ambiguous = {"schema_version": 2, "selected_index": 0, "stable_id": "x", "display_text": None, "semantic": {"action_kind": "ambiguous", "reason": "text"}}
+        ambiguous = {"schema_version": 3, "selected_index": 0, "stable_id": "legal-action-v3:ambiguous", "display_text": None, "semantic": {"action_kind": "ambiguous", "reason": "text"}}
         with self.assertRaises(FeatureSchemaError):
             encode_decision(observation(), [ambiguous])
 
@@ -396,6 +400,152 @@ class FeatureEncodingTest(unittest.TestCase):
             with self.subTest(label=label):
                 assert_observation_classified(obs)
                 encode_decision(obs, complete_legal_actions())
+
+    def test_spell_copy_state_machine_and_actions_are_encoded_fail_closed(self) -> None:
+        def spell_copy_observation(stage: str) -> tuple[dict, dict, dict | None]:
+            obs = complete_observation()
+            obs["acting_player"] = "p1"
+            obs["projection"]["priority_player"] = "p1"
+            engine = obs["projection"]["engine_context"]
+            engine["current_stage"] = "pending_spell_copy"
+            parent = obs["projection"]["stack"][0]["source"]
+            obs["projection"]["stack"][0]["targets"] = [
+                {"target_kind": "player", "player": "p1"}
+            ]
+            copy_ref = None
+            if stage != "payment":
+                copy_ref = stable_ref(68, parent["card_db_id"], "p1", "Stack", controller="p1")
+                obs["projection"]["stack"].append(
+                    {
+                        "stack_index": 1,
+                        "source": copy_ref,
+                        "controller": "p1",
+                        "targets": [{"target_kind": "player", "player": "p1"}],
+                        "stack_item_kind": "spell",
+                        "is_copy": True,
+                        "is_flashback": False,
+                        "mode_chosen": 0,
+                        "madness_offer": False,
+                        "kicked": False,
+                    }
+                )
+            engine["pending_spell_copy"] = {
+                "parent": parent,
+                "player": "p1",
+                "inherited_target": {"target_kind": "player", "player": "p1"},
+                "stage": stage,
+                "copy": copy_ref,
+            }
+            return obs, parent, copy_ref
+
+        payment, parent, _ = spell_copy_observation("payment")
+        payment_actions = [
+            {
+                "schema_version": 3,
+                "selected_index": i,
+                "stable_id": f"legal-action-v3:copy-pay-{i}",
+                "semantic": {"action_kind": "choose_spell_copy_payment", "actor": "p1", "source": parent, "pay": pay},
+                "display_text": None,
+            }
+            for i, pay in enumerate((True, False))
+        ]
+        assert_observation_classified(payment)
+        payment_encoded = encode_decision(payment, payment_actions)
+        self.assertNotEqual(action_representation(payment_encoded, 0), action_representation(payment_encoded, 1))
+
+        retarget, _, copy_ref = spell_copy_observation("retarget")
+        assert copy_ref is not None
+        retarget_actions = [
+            {
+                "schema_version": 3,
+                "selected_index": i,
+                "stable_id": f"legal-action-v3:copy-retarget-{i}",
+                "semantic": {
+                    "action_kind": "choose_spell_copy_retarget",
+                    "actor": "p1",
+                    "source": copy_ref,
+                    "change_target": change_target,
+                },
+                "display_text": None,
+            }
+            for i, change_target in enumerate((True, False))
+        ]
+        assert_observation_classified(retarget)
+        retarget_encoded = encode_decision(retarget, retarget_actions)
+        self.assertNotEqual(action_representation(retarget_encoded, 0), action_representation(retarget_encoded, 1))
+
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, retarget_actions)
+        wrong_payment_source = deep_copy(payment_actions)
+        wrong_payment_source[0]["semantic"]["source"] = copy_ref
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, wrong_payment_source)
+        wrong_payment_order = deep_copy(payment_actions)
+        wrong_payment_order[0]["semantic"]["pay"] = False
+        wrong_payment_order[1]["semantic"]["pay"] = True
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, wrong_payment_order)
+
+        target, _, target_copy = spell_copy_observation("target")
+        assert target_copy is not None
+        target_actions = [
+            {
+                "schema_version": 3,
+                "selected_index": i,
+                "stable_id": f"legal-action-v3:copy-target-{i}",
+                "semantic": {
+                    "action_kind": "choose_target",
+                    "actor": "p1",
+                    "source": target_copy,
+                    "remaining": 1,
+                    "target": {"target_kind": "player", "player": player},
+                },
+                "display_text": None,
+            }
+            for i, player in enumerate(("p0", "p1"))
+        ]
+        assert_observation_classified(target)
+        encode_decision(target, target_actions)
+
+        invalid_payment = deep_copy(payment)
+        invalid_payment["projection"]["engine_context"]["pending_spell_copy"]["copy"] = parent
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_payment)
+
+        invalid_missing_copy = deep_copy(retarget)
+        invalid_missing_copy["projection"]["engine_context"]["pending_spell_copy"]["copy"] = None
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_missing_copy)
+
+        invalid_copy_marker = deep_copy(retarget)
+        invalid_copy_marker["projection"]["stack"][1]["is_copy"] = False
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_copy_marker)
+
+        invalid_parent_target = deep_copy(payment)
+        invalid_parent_target["projection"]["engine_context"]["pending_spell_copy"]["inherited_target"] = {
+            "target_kind": "player",
+            "player": "p0",
+        }
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_parent_target)
+
+        invalid_copy_target = deep_copy(retarget)
+        invalid_copy_target["projection"]["stack"][1]["targets"] = [
+            {"target_kind": "player", "player": "p0"}
+        ]
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_copy_target)
+
+        invalid_controller = deep_copy(retarget)
+        invalid_controller["projection"]["stack"][1]["controller"] = "p0"
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_controller)
+
+        invalid_actor = deep_copy(retarget)
+        invalid_actor["acting_player"] = "p0"
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_actor)
 
     def test_invalid_engine_surface_context_combinations_fail(self) -> None:
         bad = complete_observation()
@@ -757,7 +907,7 @@ class FeatureEncodingTest(unittest.TestCase):
         mutated_obs["own_hand"][0]["card_name"] = "Different"
         mutated_obs["projection"]["battlefield"][0][0]["card_name"] = "Renamed"
         mutated_obs["projection"]["continuous_effects"][0]["timestamp"] = 777
-        mutated_actions[0]["stable_id"] = "changed"
+        mutated_actions[0]["stable_id"] = "legal-action-v3:changed"
         mutated_actions[1]["display_text"] = "Changed text"
         a = encode_decision(obs, actions)
         b = encode_decision(mutated_obs, mutated_actions)
@@ -851,8 +1001,8 @@ class FeatureEncodingTest(unittest.TestCase):
         obs["projection"]["combat"]["attacker_to_ordered_blockers"] = [[obs["projection"]["battlefield"][0][0]["stable"], [first["stable"]]]]
         src = obs["own_hand"][0]["stable"]
         actions = [
-            {"schema_version": 2, "selected_index": 0, "stable_id": "t0", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": first["stable"]}}, "display_text": None},
-            {"schema_version": 2, "selected_index": 1, "stable_id": "t1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": second["stable"]}}, "display_text": None},
+            {"schema_version": 3, "selected_index": 0, "stable_id": "legal-action-v3:t0", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": first["stable"]}}, "display_text": None},
+            {"schema_version": 3, "selected_index": 1, "stable_id": "legal-action-v3:t1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": second["stable"]}}, "display_text": None},
         ]
         encoded = encode_decision(obs, actions)
         self.assertNotEqual(action_representation(encoded, 0), action_representation(encoded, 1))
@@ -889,6 +1039,7 @@ class FeatureEncodingTest(unittest.TestCase):
                 "controller": "p0",
                 "targets": [{"target_kind": "player", "player": "p1"}],
                 "stack_item_kind": "spell",
+                "is_copy": False,
                 "is_flashback": False,
                 "mode_chosen": 0,
                 "madness_offer": False,
@@ -1038,6 +1189,7 @@ class FeatureEncodingTest(unittest.TestCase):
                 "controller": "p0",
                 "targets": [],
                 "stack_item_kind": "spell",
+                "is_copy": False,
                 "is_flashback": False,
                 "mode_chosen": 0,
                 "madness_offer": False,
@@ -1083,7 +1235,7 @@ class FeatureEncodingTest(unittest.TestCase):
         obs = complete_observation()
         src = stable_ref(1, 30, "p0", "Hand")
         other = stable_ref(12, 31, "p0", "Hand")
-        base = {"schema_version": 2, "selected_index": 0, "stable_id": "x", "display_text": None}
+        base = {"schema_version": 3, "selected_index": 0, "stable_id": "legal-action-v3:x", "display_text": None}
         pairs = [
             (
                 {**base, "semantic": {"action_kind": "order_triggers", "actor": "p0", "pending_sources": [src, other], "order": [0, 1]}},

@@ -1,22 +1,23 @@
 use mtg_kernel::card_def::{card_id_by_name, CardType, TargetSpec, CARD_DEFS};
 use mtg_kernel::engine::{
     self, Action, CastMode, DiscardResume, EffectDuration, Layers, PendingCast, PendingDiscard,
-    PlayOrCast, PlayPermission, PlayPermissionExpiry, UntilEndOfTurnEffect,
+    PendingSpellCopy, PlayOrCast, PlayPermission, PlayPermissionExpiry, SpellCopyStage,
+    UntilEndOfTurnEffect,
 };
 use mtg_kernel::ids::{ObjectId, PlayerId};
 use mtg_kernel::rl::{
     build_run_manifest, burn_deck_hash, card_name, derive_env_seed, derive_policy_seed,
     legal_action_candidates_v1, make_legal_action_v1, observe_v2, record_burn_mirror_episode,
-    ActionSemanticV1, EpisodeTerminalSummaryV1, GitDirtyFlagV1, GitMetadataV1, LegalActionV1,
-    ObservationV2, PlayerSeatV1, TerminalClassificationV1, TerminalOutcomeV1,
-    AUDIT_EPISODE_JSONL_FILENAME, AUDIT_EPISODE_SCHEMA_VERSION, LEGAL_ACTION_SCHEMA_VERSION,
-    MANIFEST_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION, POLICY_EPISODE_JSONL_FILENAME,
-    POLICY_EPISODE_SCHEMA_VERSION,
+    ActionSemanticV1, EngineDecisionStageV2, EpisodeTerminalSummaryV1, GitDirtyFlagV1,
+    GitMetadataV1, LegalActionV1, ObservationV2, PlayerSeatV1, SpellCopyStageV2,
+    TerminalClassificationV1, TerminalOutcomeV1, AUDIT_EPISODE_JSONL_FILENAME,
+    AUDIT_EPISODE_SCHEMA_VERSION, LEGAL_ACTION_SCHEMA_VERSION, MANIFEST_SCHEMA_VERSION,
+    OBSERVATION_SCHEMA_VERSION, POLICY_EPISODE_JSONL_FILENAME, POLICY_EPISODE_SCHEMA_VERSION,
 };
 use mtg_kernel::state::{
     Counters, GameObject, GameState, StackItem, StackItemKind, Step, Target, Zone,
 };
-use mtg_kernel::surface_v2::{HarnessSurfaceV2, SurfaceAction};
+use mtg_kernel::surface_v2::{HarnessSurfaceV2, SurfaceAction, SurfaceDecision};
 use serde::Serialize;
 use serde_json::Value;
 use std::collections::BTreeSet;
@@ -160,7 +161,7 @@ fn rl_contract_serde_roundtrip_and_schema_versions() {
         .remove(0)
         .record;
     assert_eq!(action.schema_version, LEGAL_ACTION_SCHEMA_VERSION);
-    assert!(action.stable_id.starts_with("legal-action-v2:"));
+    assert!(action.stable_id.starts_with("legal-action-v3:"));
     let action_roundtrip: LegalActionV1 =
         serde_json::from_str(&serde_json::to_string(&action).unwrap()).unwrap();
     assert_eq!(action_roundtrip, action);
@@ -476,6 +477,7 @@ fn rl_contract_stack_items_expose_explicit_public_kind() {
             source,
             controller,
             targets: Vec::new(),
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,
@@ -492,6 +494,129 @@ fn rl_contract_stack_items_expose_explicit_public_kind() {
     assert_eq!(stack[2]["stack_item_kind"], "triggered_ability");
     assert_eq!(stack[3]["stack_item_kind"], "madness_offer");
     assert!(!contains_key(&stack, "is_trigger_or_ability"));
+}
+
+#[test]
+fn rl_contract_spell_copy_state_and_binary_actions_are_explicit() {
+    let mut state = empty_state();
+    state.active_player = PlayerId::P0;
+    state.priority_player = PlayerId::P0;
+    state.step = Step::Main1;
+    make_object(&mut state, PlayerId::P1, "Great Furnace", Zone::Battlefield);
+    make_object(&mut state, PlayerId::P1, "Great Furnace", Zone::Battlefield);
+    let parent = make_object(&mut state, PlayerId::P0, "Chain Lightning", Zone::Stack);
+    state.stack.push(StackItem {
+        kind: StackItemKind::Spell,
+        source: parent,
+        controller: PlayerId::P0,
+        targets: vec![Target::Player(PlayerId::P1)],
+        is_copy: false,
+        inline_effect: None,
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+    });
+    state.engine.pending_spell_copy = Some(PendingSpellCopy {
+        resolving_source: parent,
+        player: PlayerId::P1,
+        inherited_target: Target::Player(PlayerId::P1),
+        stage: SpellCopyStage::Payment,
+        copy_source: None,
+    });
+
+    let payment_obs = observe_for_test(&state, PlayerId::P1, 4);
+    assert_eq!(
+        payment_obs.projection.engine_context.current_stage,
+        EngineDecisionStageV2::PendingSpellCopy
+    );
+    let pending = payment_obs
+        .projection
+        .engine_context
+        .pending_spell_copy
+        .as_ref()
+        .expect("payment continuation is public");
+    assert_eq!(pending.stage, SpellCopyStageV2::Payment);
+    assert_eq!(pending.parent.as_ref().unwrap().arena_id, parent.0);
+    assert!(pending.copy.is_none());
+    assert!(!payment_obs.projection.stack[0].is_copy);
+
+    let payment_decision = engine::advance_until_decision(&mut state);
+    let payment_actions =
+        legal_action_candidates_v1(&SurfaceDecision::Decision(payment_decision), &state).unwrap();
+    assert_eq!(payment_actions.len(), 2);
+    assert!(matches!(
+        payment_actions[0].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyPayment {
+            actor: PlayerSeatV1::P1,
+            pay: true,
+            ..
+        }
+    ));
+    assert!(matches!(
+        payment_actions[1].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyPayment {
+            actor: PlayerSeatV1::P1,
+            pay: false,
+            ..
+        }
+    ));
+
+    engine::step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+    let copy = state
+        .engine
+        .pending_spell_copy
+        .as_ref()
+        .unwrap()
+        .copy_source
+        .unwrap();
+    let retarget_obs = observe_for_test(&state, PlayerId::P1, 5);
+    let pending = retarget_obs
+        .projection
+        .engine_context
+        .pending_spell_copy
+        .as_ref()
+        .unwrap();
+    assert_eq!(pending.stage, SpellCopyStageV2::Retarget);
+    assert_eq!(pending.copy.as_ref().unwrap().arena_id, copy.0);
+    assert_eq!(retarget_obs.projection.stack.len(), 2);
+    assert!(!retarget_obs.projection.stack[0].is_copy);
+    assert!(retarget_obs.projection.stack[1].is_copy);
+
+    let retarget_decision = engine::advance_until_decision(&mut state);
+    let retarget_actions =
+        legal_action_candidates_v1(&SurfaceDecision::Decision(retarget_decision), &state).unwrap();
+    assert_eq!(retarget_actions.len(), 2);
+    assert!(matches!(
+        retarget_actions[0].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyRetarget {
+            actor: PlayerSeatV1::P1,
+            change_target: true,
+            ..
+        }
+    ));
+    assert!(matches!(
+        retarget_actions[1].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyRetarget {
+            actor: PlayerSeatV1::P1,
+            change_target: false,
+            ..
+        }
+    ));
+
+    engine::step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+    let target_obs = observe_for_test(&state, PlayerId::P1, 6);
+    assert_eq!(
+        target_obs
+            .projection
+            .engine_context
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .stage,
+        SpellCopyStageV2::Target
+    );
 }
 
 #[test]
@@ -902,7 +1027,7 @@ fn rl_contract_identical_seeds_produce_identical_policy_and_audit_records() {
 }
 
 #[test]
-fn rl_contract_episode_records_use_independent_v2_schema_versions() {
+fn rl_contract_episode_records_use_independent_v3_schema_versions() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
     let run = record_burn_mirror_episode(0, env_seed, policy_seed, 64).unwrap();

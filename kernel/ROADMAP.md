@@ -12,7 +12,7 @@ The current checkpoint has a strong deterministic RL and artifact foundation, bu
 
 The implementation order is:
 
-1. Certify Burn and Rally, including Chain Lightning's live copy branch.
+1. Finish certifying Burn and Rally. Chain Lightning's live copy branch is implemented; the remaining work is closing the residual reference-replay divergences.
 2. Build reusable card, target, cost, zone, trigger, combat, and token primitives.
 3. Terror.
 4. Faeries.
@@ -65,8 +65,9 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 - Failure-boundary and path-safety proofs for training and evaluation publication.
 - Deterministic paired head-versus-update-zero evaluation with seat swaps, natural-terminal enforcement, W/D/L and seat strata, paired bootstrap intervals, an exact paired sign test, and immutable artifact validation.
 - Greedy V1 and sampled V2 evaluator lanes. Sampled V2 is currently a Burn-mirror, head-versus-update-zero contract with one actor-local action stream per physical seat, shared across the two pair legs; its stream keys exclude policy role and game/leg. Greedy remains the secondary lane.
-- Source-level card behavior for the Burn mainboard and Rally mainboard, except that Chain Lightning explicitly halts if its spell-copy choice becomes live.
+- Source-level card behavior for the complete Burn and Rally mainboards. Chain Lightning now has explicit payment, retarget, target, repeat-copy, counter/fizzle, and copy-departure behavior; the RL observation/session contracts are schema v3.
 - Generated `pauper_pool_v1.json` and `pauper_support_v1.json` metadata that pins all nine normalized 60+15 rosters, exact registry membership, current support blockers, token dependencies, source hashes, and raw pool/registry hashes.
+- The support manifest currently classifies 26 unique cards as `full`, zero as `partial`, and 124 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer; this is not yet a claim that Rally's full reference-parity gate has passed.
 
 ### Card coverage
 
@@ -75,7 +76,7 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 | Archetype | Main registered | Main effect-backed | Side registered | Side effect-backed | Current limiting fact |
 |---|---:|---:|---:|---:|---|
 | Wildfire | 60/60 | 2/60 | 15/15 | 3/15 | Only Mountain is usable in the mainboard |
-| Rally | 60/60 | 60/60 | 15/15 | 8/15 | Chain Lightning's affordable copy branch halts |
+| Rally | 60/60 | 60/60 | 15/15 | 8/15 | Mainboard effect-complete; reference-parity certification remains |
 | Affinity | 60/60 | 7/60 | 15/15 | 5/15 | Great Furnace and Galvanic Blast only |
 | Elves | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
 | Spy | 21/60 | 0/60 | 4/15 | 0/15 | 39 main and 11 side copies are absent from the registry |
@@ -85,6 +86,8 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 | Faeries | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
 
 The registry currently contains 135 definitions: 132 deck cards and three tokens. `pool_decks` now lists all nine sources in canonical order, and the eight already-present Spy cards declare exact Spy membership. Seven of those are Spy mainboard names shared with other decks; fourteen Spy mainboard names and four additional sideboard-only names still need new records.
+
+Chain Lightning's implementation checkpoint is backed by unit tests for unpayable and declined payment, copied-stack identity, retargeting, recursive copies, illegal-target fizzles, copy-aware counters and flashback replacement, target-pool filtering, RL serialization/action semantics, and snapshot/restore determinism. The local 40-game `rallymirror_v2_gen3` corpus contains 15 logged payment prompts, six accepted payments, six retarget prompts, and three accepted retargets. Replaying it with `REPLAY_REFERENCE_RULES_VERSION=2` removes all Chain-specific halt/decision divergences: 21 traces reach GameOver with matching winners, while 19 still stop on pre-existing candidate/suppression parity differences (17 cast-candidate multiset and two blocker-window mismatches). Because that local corpus has no `manifest.json`, it is useful behavior evidence but not yet the fixed-provenance Phase 0 acceptance artifact.
 
 Keyword representation is also not rules completeness. For example, defender is represented but not enforced when declaring attackers, trample still uses a no-trample combat path, and deathtouch, lifelink, protection, hexproof, and ward need real rules behavior.
 
@@ -109,7 +112,8 @@ These should be generic effect and decision primitives, not a growing per-card `
 
 - Keep the generated pool and support manifests current, with explicit `full`, `partial`, and `no_effect` states over all 150 deck cards.
 - Preserve the assertion that the authoritative deck set equals these nine canonical full-text hashes; `unresolved: []` must not be possible when a source or registry record was never included.
-- Finish Chain Lightning's copy, retarget, and repeat-copy decisions.
+- Preserve Chain Lightning's implemented copy, retarget, repeat-copy, counter/fizzle, schema-v3 RL, snapshot, and trace-parser regressions.
+- Resolve the remaining Rally reference candidate/suppression divergences and rerun against a fixed-provenance corpus.
 - Preserve all Burn/Rally goldens, replays, RL contracts, and evaluator proofs.
 
 Exit: Burn and Rally pass every BO1 gate below with no conditional halt.

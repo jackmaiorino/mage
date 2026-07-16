@@ -1840,6 +1840,10 @@ fn decision_texts(
         SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
             Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()]))
         }
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => {
+            Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()]))
+        }
         // Not in the Burn corpus this walker replays (Chain Lightning is
         // Rally-only).
         SurfaceDecision::Decision(Decision::Halted { .. }) => None,
@@ -1985,6 +1989,18 @@ fn apply_by_indices(
         SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => surface
             .apply(state, SurfaceAction::Action(Action::ChooseKicker(i0 == 0)))
             .map_err(|e| format!("engine-step-error:walk:ChooseKicker:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseSpellCopyPayment(i0 == 0)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseSpellCopyPayment:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseSpellCopyRetarget(i0 == 0)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseSpellCopyRetarget:{e}")),
         SurfaceDecision::Decision(Decision::GameOver { .. })
         | SurfaceDecision::Decision(Decision::DeclareBlockers { .. })
         | SurfaceDecision::Decision(Decision::Halted { .. }) => {

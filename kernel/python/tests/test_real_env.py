@@ -21,9 +21,9 @@ class RealEnvTest(unittest.TestCase):
         with KernelRlClient(env_bin, timeout_s=5.0) as client:
             decision = client.reset(episode_id=0, env_seed=derive_env_seed(71501, 0), max_decisions=64)
             self.assertEqual(decision.provenance["protocol"], "kernel_rl_jsonl")
-            self.assertEqual(decision.provenance["protocol_version"], 2)
-            self.assertEqual(decision.provenance["schema_version"], 2)
-            self.assertEqual(decision.observation["schema_version"], 2)
+            self.assertEqual(decision.provenance["protocol_version"], 3)
+            self.assertEqual(decision.provenance["schema_version"], 3)
+            self.assertEqual(decision.observation["schema_version"], 3)
             assert_observation_classified(decision.observation)
             for action in decision.legal_actions:
                 assert_action_classified(action)

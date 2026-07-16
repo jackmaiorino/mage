@@ -740,6 +740,12 @@ fn fixed_continuation_action(decision: &SurfaceDecision) -> Result<SurfaceAction
         SurfaceDecision::Decision(Decision::ChooseOptionalCost { .. }) => Ok(
             SurfaceAction::Action(Action::ChooseOptionalCost(OptionalCostChoice::Decline)),
         ),
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. }) => {
+            Ok(SurfaceAction::Action(Action::ChooseSpellCopyPayment(false)))
+        }
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => Ok(
+            SurfaceAction::Action(Action::ChooseSpellCopyRetarget(false)),
+        ),
         SurfaceDecision::Decision(Decision::ChooseMadnessCast { .. }) => {
             Ok(SurfaceAction::Action(Action::ChooseMadnessCast(false)))
         }

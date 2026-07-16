@@ -114,13 +114,9 @@ enum Special {
     /// controller may pay {R}{R}. If the player does, they may copy this
     /// spell and may choose a new target for that copy." (Chain Lightning,
     /// Rally-only). The mandatory damage is byte-for-byte
-    /// `BurnAnyTarget(3)`'s shape; the optional-copy continuation is a
-    /// conditional fail-closed (`effect::EffectOp::HaltIfAffectedCanPayCopyCost`)
-    /// rather than either a silent "always decline" or an unconditional
-    /// defer -- see that leaf's doc, and the increment report for the
-    /// external-review citation (corpus non-occurrence doesn't justify
-    /// skipping the check; off-trace/search play can reach an affordable
-    /// board state even if no recorded game ever does).
+    /// `BurnAnyTarget(3)`'s shape; the optional-copy continuation suspends
+    /// resolution in the engine's dedicated payment/copy/retarget state
+    /// machine -- see `effect::EffectOp::OfferAffectedPlayerSpellCopy`.
     ChainLightning,
     /// Resolves straight onto the battlefield; any keyword/triggered
     /// ability is layered on separately (`keywords_for` for
@@ -440,8 +436,8 @@ fn codegen(cards: &[CardJson]) -> String {
         // "Deals 3 damage to any target. Then that player or that
         // permanent's controller may pay {R}{R}. If the player does, they
         // may copy this spell...": mandatory damage first (identical shape
-        // to `BurnAnyTarget(3)`), then the conditional halt-gate -- see
-        // `EffectOp::HaltIfAffectedCanPayCopyCost`'s doc.
+        // to `BurnAnyTarget(3)`), then the resolution-suspending copy offer
+        // -- see `EffectOp::OfferAffectedPlayerSpellCopy`'s doc.
         writeln!(
             out,
             "fn spell_effect_chain_lightning() -> Option<EffectOp> {{"
@@ -455,7 +451,7 @@ fn codegen(cards: &[CardJson]) -> String {
         .unwrap();
         writeln!(
             out,
-            "        EffectOp::HaltIfAffectedCanPayCopyCost {{ affected: TargetRef::Target(0) }},"
+            "        EffectOp::OfferAffectedPlayerSpellCopy {{ affected: TargetRef::Target(0) }},"
         )
         .unwrap();
         writeln!(out, "    ]))").unwrap();

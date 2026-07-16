@@ -220,6 +220,12 @@ fn random_action_for_decision(
             }
             Action::ChooseOptionalCost(options[rng_below(rng, options.len())])
         }
+        Decision::ChooseSpellCopyPayment { .. } => {
+            Action::ChooseSpellCopyPayment(rng_chance(rng, 1, 2))
+        }
+        Decision::ChooseSpellCopyRetarget { .. } => {
+            Action::ChooseSpellCopyRetarget(rng_chance(rng, 1, 2))
+        }
         Decision::ChooseMadnessCast { .. } => Action::ChooseMadnessCast(rng_chance(rng, 1, 2)),
         Decision::Discard { count, choices, .. } => {
             let mut pool = choices.clone();

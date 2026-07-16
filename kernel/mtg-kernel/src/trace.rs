@@ -333,6 +333,16 @@ const MADNESS_CHOOSE_USE_MARKER: &str = "instead of putting it into your graveya
 /// state divergence a shape-guess could hide rather than catch.
 const KICKER_CHOOSE_USE_MARKER: &str = "Pay Kicker ";
 
+/// Chain Lightning's copy-payment offer. Unlike the dynamic retarget prompt
+/// below, this message is stable and should match exactly so unrelated
+/// payment prompts do not enter the replay decision stream.
+const CHAIN_LIGHTNING_COPY_CHOOSE_USE_MSG: &str = "Pay {R}{R} to copy the spell?";
+
+/// Chain Lightning's copy-target gate. The suffix names the inherited target
+/// and varies between players (including HTML markup) and permanents, while
+/// this prefix is stable in the reference logs.
+const CHAIN_LIGHTNING_RETARGET_CHOOSE_USE_PREFIX: &str = "Change this 1 of 1 target:";
+
 /// Parses one trace's full text (already read off disk, or an in-memory
 /// fixture in tests). `source_path` is only used to build error messages.
 fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
@@ -349,6 +359,8 @@ fn parse_text(text: &str, source_path: String) -> Result<GoldenTrace, String> {
             if let Some((decision_number, turn, phase, player)) = pending_choose_use.take() {
                 if msg.contains(MADNESS_CHOOSE_USE_MARKER)
                     || msg.starts_with(KICKER_CHOOSE_USE_MARKER)
+                    || msg == CHAIN_LIGHTNING_COPY_CHOOSE_USE_MSG
+                    || msg.starts_with(CHAIN_LIGHTNING_RETARGET_CHOOSE_USE_PREFIX)
                 {
                     trace.decisions.push(DecisionRecord {
                         decision_number,
@@ -728,5 +740,56 @@ mod tests {
                 "Fiery Temper"
             ]
         );
+    }
+
+    #[test]
+    fn chain_lightning_copy_payment_choose_use_is_surfaced() {
+        let text = [
+            "DECISION #189 - Turn 8 (PlayerRL1 turn), Precombat Main (CHOOSE_USE) - SelfPlay",
+            "CHOOSE_USE: msg=\"Pay {R}{R} to copy the spell?\" outcome=Copy decision=YES scores=[0.49, 0.51]",
+        ]
+        .join("\n");
+
+        let trace = parse_text(&text, "fixture".to_string()).unwrap();
+        assert_eq!(trace.decisions.len(), 1);
+
+        let decision = &trace.decisions[0];
+        assert_eq!(decision.decision_number, 189);
+        assert_eq!(decision.turn, 8);
+        assert_eq!(decision.phase, "Precombat Main");
+        assert_eq!(decision.player, "SelfPlay");
+        assert_eq!(decision.action_type, "CHOOSE_USE");
+        assert_eq!(decision.candidate_texts, ["Yes", "No"]);
+        assert_eq!(decision.chosen_indices, [0]);
+        assert_eq!(decision.chosen_texts, ["Yes"]);
+        assert_eq!(decision.source_name, CHAIN_LIGHTNING_COPY_CHOOSE_USE_MSG);
+    }
+
+    #[test]
+    fn chain_lightning_retarget_choose_use_is_surfaced_without_consuming_target_pick() {
+        let text = [
+            "DECISION #194 - Turn 8 (PlayerRL1 turn), Precombat Main (CHOOSE_USE) - SelfPlay",
+            "CHOOSE_USE: msg=\"Change this 1 of 1 target: <font color='#20B2AA'>SelfPlay</font>?\" outcome=Damage decision=YES scores=[0.69, 0.31]",
+            &decision_line("SelfPlay", "SELECT_TARGETS", 3, &["Clockwork Percussionist"]),
+        ]
+        .join("\n");
+
+        let trace = parse_text(&text, "fixture".to_string()).unwrap();
+        assert_eq!(trace.decisions.len(), 2);
+
+        let decision = &trace.decisions[0];
+        assert_eq!(decision.decision_number, 194);
+        assert_eq!(decision.turn, 8);
+        assert_eq!(decision.phase, "Precombat Main");
+        assert_eq!(decision.player, "SelfPlay");
+        assert_eq!(decision.action_type, "CHOOSE_USE");
+        assert_eq!(decision.candidate_texts, ["Yes", "No"]);
+        assert_eq!(decision.chosen_indices, [0]);
+        assert_eq!(decision.chosen_texts, ["Yes"]);
+        assert_eq!(
+            decision.source_name,
+            "Change this 1 of 1 target: <font color='#20B2AA'>SelfPlay</font>?"
+        );
+        assert_eq!(trace.decisions[1].action_type, "SELECT_TARGETS");
     }
 }

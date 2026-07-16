@@ -24,11 +24,11 @@ use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 
 pub const OBSERVATION_SCHEMA_VERSION_V1: u32 = 1;
-pub const OBSERVATION_SCHEMA_VERSION: u32 = 2;
-pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 2;
-pub const AUDIT_EPISODE_SCHEMA_VERSION: u32 = 2;
-pub const POLICY_EPISODE_SCHEMA_VERSION: u32 = 2;
-pub const MANIFEST_SCHEMA_VERSION: u32 = 2;
+pub const OBSERVATION_SCHEMA_VERSION: u32 = 3;
+pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 3;
+pub const AUDIT_EPISODE_SCHEMA_VERSION: u32 = 3;
+pub const POLICY_EPISODE_SCHEMA_VERSION: u32 = 3;
+pub const MANIFEST_SCHEMA_VERSION: u32 = 3;
 pub const DEFAULT_MAX_DECISIONS: u64 = 200_000;
 pub const BURN_MIRROR_MATCHUP: &str = "burn_mirror";
 pub const AUDIT_EPISODE_JSONL_FILENAME: &str = "audit_episodes.jsonl";
@@ -207,6 +207,7 @@ pub struct StackItemPublicV2 {
     pub controller: PlayerSeatV1,
     pub targets: Vec<TargetRefV1>,
     pub stack_item_kind: StackItemKindV2,
+    pub is_copy: bool,
     pub is_flashback: bool,
     pub mode_chosen: u8,
     pub madness_offer: bool,
@@ -295,6 +296,7 @@ pub enum EngineDecisionStageV2 {
     PendingDiscard,
     PendingOptionalCost,
     PendingOptionalCostSacrifice,
+    PendingSpellCopy,
     PendingTriggers,
     Halted,
 }
@@ -364,6 +366,33 @@ pub struct PendingOptionalCostSacrificeSemanticV2 {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+pub enum SpellCopyStageV2 {
+    Payment,
+    Retarget,
+    Target,
+}
+
+impl From<engine::SpellCopyStage> for SpellCopyStageV2 {
+    fn from(value: engine::SpellCopyStage) -> Self {
+        match value {
+            engine::SpellCopyStage::Payment => SpellCopyStageV2::Payment,
+            engine::SpellCopyStage::Retarget => SpellCopyStageV2::Retarget,
+            engine::SpellCopyStage::Target => SpellCopyStageV2::Target,
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingSpellCopySemanticV2 {
+    pub parent: Option<CardStableRefV1>,
+    pub player: PlayerSeatV1,
+    pub inherited_target: TargetRefV1,
+    pub stage: SpellCopyStageV2,
+    pub copy: Option<CardStableRefV1>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
 pub enum PendingTriggerKindV2 {
     TriggeredAbility,
     MadnessOffer,
@@ -390,6 +419,7 @@ pub struct EngineContextV2 {
     pub pending_discard: Option<PendingDiscardSemanticV2>,
     pub pending_optional_cost: Option<PendingOptionalCostSemanticV2>,
     pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrificeSemanticV2>,
+    pub pending_spell_copy: Option<PendingSpellCopySemanticV2>,
     pub pending_triggers: Vec<PendingTriggerSemanticV2>,
 }
 
@@ -587,6 +617,16 @@ pub enum ActionSemanticV1 {
     ChooseOptionalCostWhich {
         actor: PlayerSeatV1,
         choice: OptionalCostChoice,
+    },
+    ChooseSpellCopyPayment {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        pay: bool,
+    },
+    ChooseSpellCopyRetarget {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        change_target: bool,
     },
     ChooseMadnessCast {
         actor: PlayerSeatV1,
@@ -1042,7 +1082,7 @@ pub fn make_legal_action_v1(
     Ok(LegalActionV1 {
         schema_version: LEGAL_ACTION_SCHEMA_VERSION,
         selected_index,
-        stable_id: format!("legal-action-v2:{hash:016x}"),
+        stable_id: format!("legal-action-v3:{hash:016x}"),
         semantic,
         display_text,
     })
@@ -1254,6 +1294,36 @@ pub fn legal_action_candidates_v1(
                     }
                 }
             }
+            Decision::ChooseSpellCopyPayment { player, spell } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *spell)?;
+                for pay in [true, false] {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseSpellCopyPayment {
+                            actor,
+                            source: source.clone(),
+                            pay,
+                        },
+                        SurfaceAction::Action(Action::ChooseSpellCopyPayment(pay)),
+                    )?;
+                }
+            }
+            Decision::ChooseSpellCopyRetarget { player, copy } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *copy)?;
+                for change_target in [true, false] {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseSpellCopyRetarget {
+                            actor,
+                            source: source.clone(),
+                            change_target,
+                        },
+                        SurfaceAction::Action(Action::ChooseSpellCopyRetarget(change_target)),
+                    )?;
+                }
+            }
             Decision::ChooseMadnessCast { player, card } => {
                 let actor = (*player).into();
                 let card = card_ref(state, *card)?;
@@ -1373,6 +1443,8 @@ pub fn acting_player_for_surface_decision(
             | Decision::ChooseKicker { player, .. }
             | Decision::ChooseSpellMode { player, .. }
             | Decision::ChooseOptionalCost { player, .. }
+            | Decision::ChooseSpellCopyPayment { player, .. }
+            | Decision::ChooseSpellCopyRetarget { player, .. }
             | Decision::ChooseMadnessCast { player, .. }
             | Decision::Discard { player, .. }
             | Decision::DeclareAttackers { player, .. }
@@ -2068,6 +2140,8 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
         EngineDecisionStageV2::PendingOptionalCost
     } else if state.engine.pending_optional_cost_sacrifice.is_some() {
         EngineDecisionStageV2::PendingOptionalCostSacrifice
+    } else if state.engine.pending_spell_copy.is_some() {
+        EngineDecisionStageV2::PendingSpellCopy
     } else if !state.engine.pending_triggers.is_empty() {
         EngineDecisionStageV2::PendingTriggers
     } else {
@@ -2119,6 +2193,12 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
             .pending_optional_cost_sacrifice
             .as_ref()
             .map(|p| pending_optional_cost_sacrifice_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_spell_copy: state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .map(|p| pending_spell_copy_semantic_v2(state, acting_player, p))
             .transpose()?,
         pending_triggers: state
             .engine
@@ -2244,6 +2324,24 @@ fn pending_optional_cost_sacrifice_semantic_v2(
         chosen: visible_card_refs(state, &p.chosen, acting_player)?,
         spell_resume_source,
         spell_resume_zone,
+    })
+}
+
+fn pending_spell_copy_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingSpellCopy,
+) -> Result<PendingSpellCopySemanticV2> {
+    Ok(PendingSpellCopySemanticV2 {
+        parent: visible_card_ref(state, p.resolving_source, acting_player)?,
+        player: p.player.into(),
+        inherited_target: target_ref(state, p.inherited_target)?,
+        stage: p.stage.into(),
+        copy: p
+            .copy_source
+            .map(|id| visible_card_ref(state, id, acting_player))
+            .transpose()?
+            .flatten(),
     })
 }
 
@@ -2379,7 +2477,7 @@ fn stack_item_public_v1(
             .iter()
             .map(|&target| target_ref(state, target))
             .collect::<Result<Vec<_>>>()?,
-        is_trigger_or_ability: item.inline_effect.is_some(),
+        is_trigger_or_ability: item.kind != StackItemKind::Spell,
         is_flashback: item.is_flashback,
         mode_chosen: item.mode_chosen,
         madness_offer: item.madness_offer,
@@ -2410,6 +2508,7 @@ fn stack_item_public_v2(
         controller: item.controller.into(),
         targets: target_refs_visible(state, &item.targets, acting_player)?,
         stack_item_kind: item.kind.into(),
+        is_copy: item.is_copy,
         is_flashback: item.is_flashback,
         mode_chosen: item.mode_chosen,
         madness_offer: item.madness_offer,

@@ -68,6 +68,8 @@ fn kind_of(d: &Decision) -> Kind {
         // are ever reachable here.
         Decision::ChooseSpellMode { .. }
         | Decision::ChooseOptionalCost { .. }
+        | Decision::ChooseSpellCopyPayment { .. }
+        | Decision::ChooseSpellCopyRetarget { .. }
         | Decision::ChooseMadnessCast { .. } => {
             unreachable!("no card in this script is Plotted, Madness, or modal")
         }
@@ -307,6 +309,8 @@ fn run_combat_game(state: &mut GameState) -> (Vec<Kind>, u32) {
             }
             Decision::ChooseSpellMode { .. }
             | Decision::ChooseOptionalCost { .. }
+            | Decision::ChooseSpellCopyPayment { .. }
+            | Decision::ChooseSpellCopyRetarget { .. }
             | Decision::ChooseMadnessCast { .. } => {
                 unreachable!("no card in this script is Plotted, Madness, or modal")
             }

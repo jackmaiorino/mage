@@ -809,6 +809,7 @@ mod tests {
             // respond with either), and Lightning Bolt's effect indexes
             // into `targets[0]`.
             targets: vec![Target::Player(PlayerId::P1)],
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,

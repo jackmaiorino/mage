@@ -12,9 +12,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 PROTOCOL_NAME = "kernel_rl_jsonl"
-PROTOCOL_VERSION = 2
+PROTOCOL_VERSION = 3
 MAX_LINE_BYTES = 8 * 1024 * 1024
 U32 = 4_294_967_295
 U64 = 18_446_744_073_709_551_615

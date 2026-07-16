@@ -39,6 +39,7 @@ from .checkpoint import (
     validate_model_state,
     validate_torch_rng_state,
 )
+from .client import PROTOCOL_NAME, PROTOCOL_VERSION, SCHEMA_VERSION
 from .determinism import (
     TrainerSeedDerivation,
     configure_torch_determinism,
@@ -665,7 +666,11 @@ def _run_manifest_from_config(
             "bootstrap": None,
         },
         "environment": {"binary_sha256": env_sha},
-        "protocol": {"schema_version": 2, "protocol": "kernel_rl_jsonl", "protocol_version": 2},
+        "protocol": {
+            "schema_version": SCHEMA_VERSION,
+            "protocol": PROTOCOL_NAME,
+            "protocol_version": PROTOCOL_VERSION,
+        },
         "protocol_provenance": provenance,
         "feature_contract": {
             "feature_schema_version": model_config["feature_schema_version"],

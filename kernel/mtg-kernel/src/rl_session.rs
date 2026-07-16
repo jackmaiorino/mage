@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::fmt;
 
-pub const RL_SESSION_SCHEMA_VERSION: u32 = 2;
-pub const RL_SESSION_PROTOCOL_VERSION: u32 = 2;
+pub const RL_SESSION_SCHEMA_VERSION: u32 = 3;
+pub const RL_SESSION_PROTOCOL_VERSION: u32 = 3;
 pub const RL_SESSION_PROTOCOL_NAME: &str = "kernel_rl_jsonl";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

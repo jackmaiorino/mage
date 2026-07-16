@@ -731,6 +731,12 @@ fn run(
             SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
                 return Err("unhandled-decision:ChooseKicker".to_string())
             }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. }) => {
+                return Err("unhandled-decision:ChooseSpellCopyPayment".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => {
+                return Err("unhandled-decision:ChooseSpellCopyRetarget".to_string())
+            }
             SurfaceDecision::Decision(Decision::Halted { .. }) => {
                 return Err("unhandled-decision:Halted".to_string())
             }
@@ -785,6 +791,8 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. }) => Some(*player),
         // The defending player -- same as `Decision::DeclareBlockers`'s own
         // `player` field before the surface reshaped it per attacker.

@@ -118,11 +118,21 @@ fn main() {
             );
         }
         None => {
+            let reference_rules_version = std::env::var("REPLAY_REFERENCE_RULES_VERSION")
+                .ok()
+                .and_then(|value| value.parse::<u32>().ok())
+                .unwrap_or(1);
+            let skip_compensation = reference_rules_version >= 2;
+            SKIP_V1_EXILED_EVER_COMPENSATION
+                .store(skip_compensation, std::sync::atomic::Ordering::Relaxed);
             eprintln!(
                 "WARNING: no readable manifest.json at {}; skipping provenance check \
                  (not a hard failure -- but replay results against an unverified corpus carry no provenance guarantee). \
-                 reference_rules_version unknown -- defaulting to v1 exiled_ever compensation APPLIED.",
-                root.display()
+                 reference_rules_version={} from REPLAY_REFERENCE_RULES_VERSION/default; \
+                 v1 exiled_ever compensation {}.",
+                root.display(),
+                reference_rules_version,
+                if skip_compensation { "SKIPPED" } else { "APPLIED" }
             );
         }
     }
@@ -1307,17 +1317,69 @@ fn run(
                     )
                     .map_err(|e| format!("engine-step-error:ChooseKicker:{e}"))?;
             }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. }) => {
+                let logged = ctx.next(player).filter(|rec| {
+                    rec.action_type == "CHOOSE_USE"
+                        && rec.source_name == "Pay {R}{R} to copy the spell?"
+                });
+                let pay = if let Some(&rec) = logged {
+                    debug_verbose(t, &state, player, rec, "ChooseSpellCopyPayment");
+                    let pay = rec.chosen_indices.first() == Some(&0);
+                    ctx.advance(player);
+                    outcome.decisions_consumed += 1;
+                    pay
+                } else if !engine::pending_spell_copy_cost_is_payable(&state) {
+                    // ChainLightningEffect calls chooseUse before constructing
+                    // and paying its Cost, so the engine exposes this decision.
+                    // ComputerPlayerRL's trace logger omits the prompt when RR
+                    // cannot be paid; either answer then has the same state, so
+                    // decline it without consuming the next real record.
+                    false
+                } else {
+                    let next = ctx
+                        .next(player)
+                        .map(|rec| format!("{}:{}", rec.action_type, rec.source_name))
+                        .unwrap_or_else(|| "trace-exhausted".to_string());
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseSpellCopyPayment-vs-{next}"
+                    ));
+                };
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseSpellCopyPayment(pay)),
+                    )
+                    .map_err(|e| format!("engine-step-error:ChooseSpellCopyPayment:{e}"))?;
+            }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. }) => {
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseSpellCopyRetarget".to_string())?;
+                debug_verbose(t, &state, player, rec, "ChooseSpellCopyRetarget");
+                if rec.action_type != "CHOOSE_USE"
+                    || !rec.source_name.starts_with("Change this 1 of 1 target:")
+                {
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseSpellCopyRetarget-vs-{}:{}",
+                        rec.action_type, rec.source_name
+                    ));
+                }
+                let change_target = rec.chosen_indices.first() == Some(&0);
+                ctx.advance(player);
+                outcome.decisions_consumed += 1;
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseSpellCopyRetarget(change_target)),
+                    )
+                    .map_err(|e| format!("engine-step-error:ChooseSpellCopyRetarget:{e}"))?;
+            }
             SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
                 // Terminal, same class as GameOver -- not a divergence (see
                 // ReplayOutcome::halted's doc and engine::Decision::Halted's
-                // own doc). The kernel has already proven, at this exact
-                // board state, that the unmodeled branch (Chain Lightning's
-                // spell-copy continuation) is live rather than vacuous, and
-                // stopped rather than guess. Reference-side ground truth for
-                // "was this really live" is cross-checkable against the
-                // corpus's own "Pay {R}{R} to copy the spell?" CHOOSE_USE
-                // lines (deliberately not parsed into a trace record --
-                // Halted consumes none -- but real, and greppable for audit).
+                // own doc). No currently supported Pauper card should reach
+                // this branch, but retaining it keeps older/future
+                // fail-closed runtime artifacts classifiable.
                 let source_name = state.objects.get(source).name.clone();
                 outcome.halted = Some(format!("{mechanic:?}:{source_name}"));
                 return Ok(());
@@ -1362,6 +1424,8 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         // here preemptively rather than waiting for a corpus trace to prove
         // it, since the shape (and the fix) are identical.
         | SurfaceDecision::Decision(Decision::ChooseCastMode { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. })
         // Not in this corpus (Goblin Bushwhacker/Kicker is Rally-only), but
         // the same "consumes no trace record" shape as `ChooseCastMode`
         // applies identically -- grouped here for the same reason.

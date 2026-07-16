@@ -112,6 +112,12 @@ pub struct EngineState {
     /// class as the other two, root-caused the same way (Sol #90,
     /// increment 11).
     pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrifice>,
+    /// A Chain Lightning resolution suspended between dealing damage and
+    /// finishing its spell/copy. Payment, copy construction, and optional
+    /// retargeting all occur inside the same resolution: while this is
+    /// present, the resolving stack item stays live and SBAs/triggers/
+    /// priority are deliberately deferred.
+    pub pending_spell_copy: Option<PendingSpellCopy>,
     /// Transient buffer for the *current* resolution: `event::commit`
     /// appends here, `trigger::collect_and_process` drains it after every
     /// resolution to match triggers. Empty between resolutions.
@@ -190,10 +196,10 @@ pub struct EngineState {
     /// this exists so a future layer-aware evaluator has real creation-order
     /// data to sort by without needing every effect re-created retroactively.
     pub next_effect_timestamp: u64,
-    /// `Some((mechanic, source))` iff the game walk hit a resolution this
-    /// kernel cannot simulate faithfully (Chain Lightning's live "may pay
-    /// {R}{R} to copy" decision, when actually affordable -- see
-    /// `effect::EffectOp::HaltIfAffectedCanPayCopyCost`). Checked at the top
+    /// `Some((mechanic, source))` iff the game walk hit a runtime branch this
+    /// kernel cannot simulate faithfully. No currently supported Pauper-pool
+    /// card sets this field; the fail-closed terminal remains part of the
+    /// public runner contract for future card increments. Checked at the top
     /// of `advance_until_decision`'s loop, same as `check_game_over`:
     /// once set, the walk is over -- `Decision::Halted` is the only decision
     /// this state will ever produce again.
@@ -373,6 +379,7 @@ pub struct EnginePublicContextV2 {
     pub pending_discard: Option<PendingDiscardPublicV2>,
     pub pending_optional_cost: Option<PendingOptionalCostPublicV2>,
     pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrificePublicV2>,
+    pub pending_spell_copy: Option<PendingSpellCopyPublicV2>,
     pub pending_triggers: Vec<PendingTriggerPublicV2>,
 }
 
@@ -442,6 +449,15 @@ pub struct PendingOptionalCostSacrificePublicV2 {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingSpellCopyPublicV2 {
+    pub resolving_source: ObjectId,
+    pub player: PlayerId,
+    pub inherited_target: Target,
+    pub stage: SpellCopyStage,
+    pub copy_source: Option<ObjectId>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct PendingTriggerPublicV2 {
     pub source: ObjectId,
     pub controller: PlayerId,
@@ -449,17 +465,15 @@ pub struct PendingTriggerPublicV2 {
     pub kicked: bool,
 }
 
-/// A resolution this kernel cannot simulate faithfully because it would
-/// require a mechanic the kernel has no representation for at all. Distinct
-/// from "fail-closed" (an uncastable card, decided once at compile/data
-/// time): this is a *runtime* halt, discovered only when a specific board
-/// state makes an otherwise-modeled card's unmodeled branch a live,
-/// consequential choice (see `effect::EffectOp::HaltIfAffectedCanPayCopyCost`'s
-/// doc). `EngineState::halted`/`Decision::Halted` are how this surfaces.
+/// A runtime mechanic the kernel cannot simulate faithfully. Distinct from
+/// source-level fail-closed card support, this terminal classification is
+/// discovered only after a game has begun. `EngineState::halted` and
+/// `Decision::Halted` are how a runner rejects such an episode.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum UnsupportedMechanic {
-    /// Chain Lightning's "may pay {R}{R} to copy this spell", when actually
-    /// affordable by the affected player/permanent-controller.
+    /// Backward-compatible wire value retained for old artifacts written
+    /// before Chain Lightning gained its full copy/retarget state machine.
+    /// Current engine code never emits it.
     SpellCopy,
 }
 
@@ -658,6 +672,30 @@ pub struct PendingOptionalCostSacrifice {
     pub spell_resume: Option<(ObjectId, Zone)>,
 }
 
+/// Which decision inside Chain Lightning's resolution is currently live.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum SpellCopyStage {
+    /// The affected player decides whether to pay {R}{R}.
+    Payment,
+    /// Payment succeeded and the copy exists on the stack; decide whether
+    /// to choose a target again or keep the inherited target.
+    Retarget,
+    /// The player chose to retarget and must now select one legal target.
+    Target,
+}
+
+/// Durable continuation for a spell-copy choice made during resolution.
+/// `resolving_source` uniquely identifies the still-live parent stack item;
+/// `copy_source` is a fresh virtual arena object once payment succeeds.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingSpellCopy {
+    pub resolving_source: ObjectId,
+    pub player: PlayerId,
+    pub inherited_target: Target,
+    pub stage: SpellCopyStage,
+    pub copy_source: Option<ObjectId>,
+}
+
 /// The answer to a `Decision::ChooseOptionalCost`. Declining is always
 /// legal (matches `DoIfCostPaid`'s optional "may" framing); the other two
 /// are only legal when the matching `PendingOptionalCost` field is true.
@@ -785,6 +823,18 @@ pub enum Decision {
         discard_payable: bool,
         sacrifice_payable: bool,
     },
+    /// Chain Lightning's affected player may pay {R}{R} to create the next
+    /// link. The offer only exists when a concrete payment plan is available.
+    ChooseSpellCopyPayment {
+        player: PlayerId,
+        spell: ObjectId,
+    },
+    /// Payment succeeded and a fresh spell-copy object is already on the
+    /// stack. The player may keep its inherited target or choose again.
+    ChooseSpellCopyRetarget {
+        player: PlayerId,
+        copy: ObjectId,
+    },
     /// Fiery Temper only, this increment: whether to cast a just-discarded
     /// Madness card for its madness cost (`CardDef::madness_cost`) instead
     /// of letting it go to the graveyard. Unconditionally asked, with no
@@ -892,6 +942,10 @@ pub enum Action {
     PlotSpell(ObjectId),
     ChooseSpellMode(u8),
     ChooseOptionalCost(OptionalCostChoice),
+    /// Answers `Decision::ChooseSpellCopyPayment`.
+    ChooseSpellCopyPayment(bool),
+    /// Answers `Decision::ChooseSpellCopyRetarget`.
+    ChooseSpellCopyRetarget(bool),
     /// `true` = cast the pending Madness card for its madness cost; `false`
     /// = let it go to the graveyard.
     ChooseMadnessCast(bool),
@@ -911,6 +965,31 @@ pub enum Action {
     /// `step` below exists only to fail loudly if that interception is ever
     /// bypassed, not as a supported direct-to-engine call.
     ChooseOptionalCostStage(bool),
+}
+
+const CHAIN_COPY_COST: Cost = Cost {
+    pips: &[
+        mana::Pip::Colored(mana::ManaColor::R),
+        mana::Pip::Colored(mana::ManaColor::R),
+    ],
+    generic: 0,
+    x_count: 0,
+};
+
+/// Whether the player in the live Chain Lightning payment continuation can
+/// currently pay {R}{R}. The engine still presents the payment decision even
+/// when this is false, matching XMage's effect order; parity drivers use this
+/// query only to recognize the reference logger's silent, outcome-equivalent
+/// unpayable prompt.
+pub fn pending_spell_copy_cost_is_payable(state: &GameState) -> bool {
+    state
+        .engine
+        .pending_spell_copy
+        .as_ref()
+        .is_some_and(|pending| {
+            pending.stage == SpellCopyStage::Payment
+                && mana::can_pay(&CHAIN_COPY_COST, 0, pending.player, state).is_some()
+        })
 }
 
 const STEP_ORDER: [Step; 12] = [
@@ -998,15 +1077,21 @@ pub fn legal_targets_for(
                 Vec::new()
             }
         }
-        TargetSpec::AnySpellOnStack => state
-            .stack
-            .iter()
-            .map(|item| Target::Object(item.source))
-            .collect(),
+        TargetSpec::AnySpellOnStack => {
+            let announcing = state.engine.pending_cast.as_ref().map(|p| p.spell);
+            state
+                .stack
+                .iter()
+                .filter(|item| item.kind == StackItemKind::Spell && Some(item.source) != announcing)
+                .map(|item| Target::Object(item.source))
+                .collect()
+        }
         TargetSpec::BlueSpellOnStack => state
             .stack
             .iter()
+            .filter(|item| item.kind == StackItemKind::Spell)
             .map(|item| item.source)
+            .filter(|id| state.engine.pending_cast.as_ref().map(|p| p.spell) != Some(*id))
             .filter(|&id| is_blue(state, id))
             .map(Target::Object)
             .collect(),
@@ -1485,6 +1570,10 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             return Decision::Halted { mechanic, source };
         }
 
+        if let Some(d) = drain_pending_spell_copy_or_decide(state) {
+            return d;
+        }
+
         if let Some(d) = drain_pending_discard_or_decide(state) {
             return d;
         }
@@ -1683,9 +1772,10 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
                         card: top.source,
                     };
                 }
-                resolve_top_of_stack(state);
-                collect_and_queue_triggers(state);
-                reset_priority(state);
+                if resolve_top_of_stack(state) == ResolutionProgress::Complete {
+                    collect_and_queue_triggers(state);
+                    reset_priority(state);
+                }
             } else {
                 advance_step(state);
             }
@@ -1871,6 +1961,37 @@ fn drain_pending_optional_cost_or_decide(state: &mut GameState) -> Option<Decisi
         discard_payable: poc.discard_payable,
         sacrifice_payable: poc.sacrifice_payable,
     })
+}
+
+/// Presents whichever decision is live inside Chain Lightning's suspended
+/// resolution. The target stage deliberately reuses ordinary
+/// `Decision::ChooseTargets`/`Action::ChooseTarget`; the two preceding
+/// binary decisions retain their distinct rules meanings on the RL wire.
+fn drain_pending_spell_copy_or_decide(state: &mut GameState) -> Option<Decision> {
+    let pending = state.engine.pending_spell_copy.as_ref()?;
+    match pending.stage {
+        SpellCopyStage::Payment => Some(Decision::ChooseSpellCopyPayment {
+            player: pending.player,
+            spell: pending.resolving_source,
+        }),
+        SpellCopyStage::Retarget => Some(Decision::ChooseSpellCopyRetarget {
+            player: pending.player,
+            copy: pending
+                .copy_source
+                .expect("Retarget stage requires a created spell copy"),
+        }),
+        SpellCopyStage::Target => {
+            let copy = pending
+                .copy_source
+                .expect("Target stage requires a created spell copy");
+            Some(Decision::ChooseTargets {
+                player: pending.player,
+                spell: copy,
+                remaining: 1,
+                legal_targets: legal_targets_for(TargetSpec::AnyTarget, &[], state),
+            })
+        }
+    }
 }
 
 /// If `Action::ChooseOptionalCost(SacrificeLand)` was just chosen, stages
@@ -2163,6 +2284,7 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
         source: t.source,
         controller: t.controller,
         targets: vec![],
+        is_copy: false,
         // A Madness offer (`is_madness_offer`, set by `apply_discard`) has
         // no fixed `EffectOp` program to run at resolution -- resolving it
         // means asking `Decision::ChooseMadnessCast`
@@ -2197,7 +2319,78 @@ fn push_trigger_onto_stack(state: &mut GameState, t: PendingTrigger) {
 /// 704.5g/h creature death, 704.5a life-loss, 704.5c empty-draw-loss all
 /// happen inside `resolve_top_of_stack`'s `collect_and_queue_triggers`
 /// call; this just pops and executes.
-fn resolve_top_of_stack(state: &mut GameState) {
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ResolutionProgress {
+    Complete,
+    Suspended,
+}
+
+/// Checks every target of a spell again at resolution time (608.2b). The
+/// target specs are sequential, so dependent specs such as
+/// `PlayerThenTheirCreature` validate each target against the already-valid
+/// prefix exactly as casting did.
+fn spell_targets_still_legal(item: &StackItem, state: &GameState) -> bool {
+    if item.kind != StackItemKind::Spell {
+        return true;
+    }
+    let def = &card_def::CARD_DEFS[state.objects.get(item.source).card_def as usize];
+    let spec = if item.mode_chosen == 1 {
+        def.mode2
+            .as_ref()
+            .expect("mode_chosen == 1 only when mode2 is Some")
+            .target_spec
+    } else {
+        def.target_spec
+    };
+    if item.targets.len() != target_count(spec) as usize {
+        return false;
+    }
+    if item.targets.is_empty() {
+        return true;
+    }
+    let mut chosen = Vec::with_capacity(item.targets.len());
+    let mut any_legal = false;
+    for &target in &item.targets {
+        any_legal |= legal_targets_for(spec, &chosen, state).contains(&target);
+        chosen.push(target);
+    }
+    // 608.2b: a spell with multiple targets is countered by the rules only
+    // when *all* targets are illegal. Its effect program remains responsible
+    // for ignoring each individually-illegal target (Searing Blaze already
+    // guards its creature leaf this way).
+    any_legal
+}
+
+/// Applies the last part of a completed spell resolution. Physical cards
+/// move normally; virtual spell copies simply stop being represented by a
+/// live stack item and never enter a card zone.
+fn finish_resolved_stack_item(state: &mut GameState, item: &StackItem) {
+    if item.inline_effect.is_some() || item.kind != StackItemKind::Spell {
+        return;
+    }
+    let def = &card_def::CARD_DEFS[state.objects.get(item.source).card_def as usize];
+    if !(def.has_type(CardType::Instant) || def.has_type(CardType::Sorcery)) {
+        return;
+    }
+    if item.is_copy {
+        // The stack item was already removed by the caller. The virtual
+        // arena object intentionally remains unreachable with its last
+        // Zone::Stack marker, exactly like a ceased token's stale zone.
+        return;
+    }
+    let to_zone = if item.is_flashback {
+        Zone::Exile
+    } else {
+        Zone::Graveyard
+    };
+    event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
+}
+
+fn resolve_top_of_stack(state: &mut GameState) -> ResolutionProgress {
+    let targets_legal = state
+        .stack
+        .last()
+        .is_some_and(|item| spell_targets_still_legal(item, state));
     let item = state
         .stack
         .pop()
@@ -2211,14 +2404,19 @@ fn resolve_top_of_stack(state: &mut GameState) {
     let ctx = ExecCtx {
         source: item.source,
         controller: item.controller,
-        targets: item.targets,
-        discarded: item.discarded,
+        targets: item.targets.clone(),
+        discarded: item.discarded.clone(),
         kicked: item.kicked,
     };
 
-    if let Some(effect) = item.inline_effect {
+    if !targets_legal {
+        finish_resolved_stack_item(state, &item);
+        return ResolutionProgress::Complete;
+    }
+
+    if let Some(effect) = item.inline_effect.clone() {
         effect::execute(&effect, &ctx, state);
-        return;
+        return ResolutionProgress::Complete;
     }
 
     let card_def_idx = state.objects.get(item.source).card_def;
@@ -2235,6 +2433,19 @@ fn resolve_top_of_stack(state: &mut GameState) {
     };
     if let Some(program) = program {
         effect::execute(&program, &ctx, state);
+    }
+
+    if state
+        .engine
+        .pending_spell_copy
+        .as_ref()
+        .is_some_and(|pending| pending.resolving_source == item.source)
+    {
+        // Resolution-time choices do not create a priority/SBA window. Put
+        // the parent back exactly where it was so the public stack contains
+        // a real resolving object throughout the suspended decision.
+        state.stack.push(item);
+        return ResolutionProgress::Suspended;
     }
 
     // 608.2m: instants/sorceries go to the graveyard as the last part of
@@ -2277,9 +2488,10 @@ fn resolve_top_of_stack(state: &mut GameState) {
             // deferred move actually happens once that's all done.
             poc.spell_resume = Some((item.source, to_zone));
         } else {
-            event::propose_and_commit(state, ProposedEvent::zone_change(item.source, to_zone));
+            finish_resolved_stack_item(state, &item);
         }
     }
+    ResolutionProgress::Complete
 }
 
 /// Moves `state.step`/`state.active_player`/`state.turn` to the next step,
@@ -2826,6 +3038,14 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             Ok(())
         }
         Action::ChooseTarget(t) => {
+            if state
+                .engine
+                .pending_spell_copy
+                .as_ref()
+                .is_some_and(|pending| pending.stage == SpellCopyStage::Target)
+            {
+                return apply_choose_spell_copy_target(state, t);
+            }
             let (spec, chosen_so_far) = pending_target_spec_and_chosen(state).ok_or("no spell or ability is currently being targeted")?;
             if !legal_targets_for(spec, &chosen_so_far, state).contains(&t) {
                 return Err(format!("{t:?} is not a legal target"));
@@ -2868,6 +3088,10 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             Ok(())
         }
         Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
+        Action::ChooseSpellCopyPayment(pay) => apply_choose_spell_copy_payment(state, pay),
+        Action::ChooseSpellCopyRetarget(change_target) => {
+            apply_choose_spell_copy_retarget(state, change_target)
+        }
         Action::ChooseMadnessCast(cast_it) => apply_choose_madness_cast(state, cast_it),
         Action::ChooseOptionalCostStage(_) => {
             Err("ChooseOptionalCostStage is presentation-only (HarnessSurfaceV2's reshape); it must never reach step() directly".to_string())
@@ -3047,6 +3271,167 @@ fn apply_choose_optional_cost(
             Ok(())
         }
     }
+}
+
+/// Allocates a distinct virtual card identity and stack item for the next
+/// Chain Lightning link. It clones copiable stack choices but is not a cast:
+/// no mana cost, cast event, or cast trigger is produced.
+fn create_spell_copy(state: &mut GameState, pending: &PendingSpellCopy) -> ObjectId {
+    let parent = pending_spell_copy_parent(state, pending)
+        .expect("validated immediately before paying; no action can interleave");
+    let original = state.objects.get(parent.source).clone();
+    let copy_source = state.objects.push(crate::state::GameObject {
+        card_def: original.card_def,
+        name: original.name,
+        owner: pending.player,
+        controller: pending.player,
+        zone: Zone::Stack,
+        tapped: false,
+        summoning_sick: false,
+        damage: 0,
+        counters: Default::default(),
+        attachments: Vec::new(),
+        plotted_turn: None,
+        zone_change_count: 0,
+    });
+    let mut copy = parent;
+    copy.source = copy_source;
+    copy.controller = pending.player;
+    copy.targets = vec![pending.inherited_target];
+    copy.is_copy = true;
+    copy.is_flashback = false;
+    copy.madness_offer = false;
+    state.stack.push(copy);
+    copy_source
+}
+
+fn pending_spell_copy_parent(
+    state: &GameState,
+    pending: &PendingSpellCopy,
+) -> Result<StackItem, String> {
+    let parent = state
+        .stack
+        .iter()
+        .find(|item| item.source == pending.resolving_source)
+        .cloned()
+        .ok_or("the resolving spell is no longer on the stack")?;
+    if parent.kind != StackItemKind::Spell {
+        return Err("only a spell can be copied by this resolution".to_string());
+    }
+    Ok(parent)
+}
+
+/// Removes the suspended parent and performs its final resolution
+/// disposition, then opens the single post-resolution SBA/trigger/priority
+/// boundary shared by every answer path.
+fn finish_pending_spell_copy_resolution(
+    state: &mut GameState,
+    pending: &PendingSpellCopy,
+) -> Result<(), String> {
+    let item = pending_spell_copy_parent(state, pending)?;
+    if !item.is_copy {
+        let def = &card_def::CARD_DEFS[state.objects.get(item.source).card_def as usize];
+        if item.inline_effect.is_some()
+            || !(def.has_type(CardType::Instant) || def.has_type(CardType::Sorcery))
+        {
+            return Err("the resolving physical spell has no supported departure".to_string());
+        }
+    }
+    state.engine.pending_spell_copy = None;
+    if item.is_copy {
+        if !event::cease_to_exist(state, item.source) {
+            return Err("the resolving spell copy could not be removed from the stack".to_string());
+        }
+    } else {
+        finish_resolved_stack_item(state, &item);
+        // Chain Lightning is an instant/sorcery and the helper above removes
+        // it via the zone-change pipeline. Keep the continuation fail-closed
+        // if this generic shape is ever reused by a nonmoving stack item.
+        if state.stack.iter().any(|entry| entry.source == item.source) {
+            return Err("the resolving physical spell did not leave the stack".to_string());
+        }
+    }
+    collect_and_queue_triggers(state);
+    reset_priority(state);
+    Ok(())
+}
+
+fn apply_choose_spell_copy_payment(state: &mut GameState, pay: bool) -> Result<(), String> {
+    let pending = state
+        .engine
+        .pending_spell_copy
+        .clone()
+        .ok_or("no spell-copy payment decision is pending")?;
+    if pending.stage != SpellCopyStage::Payment {
+        return Err("the pending spell-copy decision is not at its payment stage".to_string());
+    }
+    if !pay {
+        return finish_pending_spell_copy_resolution(state, &pending);
+    }
+    pending_spell_copy_parent(state, &pending)?;
+    let Some(plan) = mana::can_pay(&CHAIN_COPY_COST, 0, pending.player, state) else {
+        // XMage asks first, then lets the real payment attempt fail without
+        // creating a copy. The resolution still finishes normally.
+        return finish_pending_spell_copy_resolution(state, &pending);
+    };
+    pay_plan(state, pending.player, &plan);
+    let copy_source = create_spell_copy(state, &pending);
+    let live = state
+        .engine
+        .pending_spell_copy
+        .as_mut()
+        .expect("pending was validated above");
+    live.stage = SpellCopyStage::Retarget;
+    live.copy_source = Some(copy_source);
+    Ok(())
+}
+
+fn apply_choose_spell_copy_retarget(
+    state: &mut GameState,
+    change_target: bool,
+) -> Result<(), String> {
+    let pending = state
+        .engine
+        .pending_spell_copy
+        .clone()
+        .ok_or("no spell-copy retarget decision is pending")?;
+    if pending.stage != SpellCopyStage::Retarget {
+        return Err("the pending spell-copy decision is not at its retarget stage".to_string());
+    }
+    if change_target {
+        state
+            .engine
+            .pending_spell_copy
+            .as_mut()
+            .expect("pending was validated above")
+            .stage = SpellCopyStage::Target;
+        return Ok(());
+    }
+    finish_pending_spell_copy_resolution(state, &pending)
+}
+
+fn apply_choose_spell_copy_target(state: &mut GameState, target: Target) -> Result<(), String> {
+    let pending = state
+        .engine
+        .pending_spell_copy
+        .clone()
+        .ok_or("no spell-copy target decision is pending")?;
+    if pending.stage != SpellCopyStage::Target {
+        return Err("the pending spell-copy decision is not at its target stage".to_string());
+    }
+    if !legal_targets_for(TargetSpec::AnyTarget, &[], state).contains(&target) {
+        return Err(format!("{target:?} is not a legal spell-copy target"));
+    }
+    let copy_source = pending
+        .copy_source
+        .ok_or("the target-stage spell copy does not exist")?;
+    let copy = state
+        .stack
+        .iter_mut()
+        .find(|item| item.source == copy_source && item.is_copy)
+        .ok_or("the target-stage spell copy is no longer on the stack")?;
+    copy.targets = vec![target];
+    finish_pending_spell_copy_resolution(state, &pending)
 }
 
 /// `cast_it == true` no longer pre-verifies affordability -- it
@@ -3304,6 +3689,7 @@ fn begin_cast_ex(
         source: spell_id,
         controller: player,
         targets: vec![],
+        is_copy: false,
         inline_effect: None,
         discarded: vec![],
         is_flashback,
@@ -3565,6 +3951,7 @@ fn finalize_activation(state: &mut GameState) {
         source: pending.source,
         controller: pending.controller,
         targets: pending.targets_chosen,
+        is_copy: false,
         inline_effect: Some(effect),
         discarded: pending.cost_discard_paid.unwrap_or_default(),
         is_flashback: false,
@@ -4213,6 +4600,7 @@ mod tests {
             source: obj_id,
             controller: player,
             targets: vec![],
+            is_copy: false,
             inline_effect: None,
             discarded: vec![],
             is_flashback: false,
@@ -4861,6 +5249,108 @@ mod tests {
     }
 
     #[test]
+    fn pyroblast_countering_a_copied_blue_spell_makes_only_the_copy_cease() {
+        let mut state = ready_game_in_main1(1);
+        let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+        let copied_counterspell = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+        state.stack.last_mut().unwrap().is_copy = true;
+
+        step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+        step(&mut state, Action::ChooseSpellMode(0)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Object(copied_counterspell)),
+        )
+        .unwrap();
+        pass_until_stack_resolves(&mut state);
+
+        assert!(state.stack.is_empty());
+        assert_eq!(state.objects.get(copied_counterspell).zone, Zone::Stack);
+        assert!(!state.players[1].graveyard.contains(&copied_counterspell));
+        assert!(!state.exile.contains(&copied_counterspell));
+        assert!(!state.command.contains(&copied_counterspell));
+        assert!(state.players[0].graveyard.contains(&pyroblast));
+        assert!(
+            !state.engine.event_history.iter().any(|event| matches!(
+                event,
+                CommittedEvent::ZoneChange { object, .. } if *object == copied_counterspell
+            )),
+            "a virtual spell copy must not generate a physical-card zone change"
+        );
+    }
+
+    #[test]
+    fn countered_physical_flashback_spell_is_exiled_but_its_copy_still_ceases() {
+        for copied in [false, true] {
+            let mut state = ready_game_in_main1(1);
+            let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
+            let target = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+            state.stack.last_mut().unwrap().is_flashback = true;
+            state.stack.last_mut().unwrap().is_copy = copied;
+
+            step(&mut state, Action::CastSpell(pyroblast)).unwrap();
+            step(&mut state, Action::ChooseSpellMode(0)).unwrap();
+            step(&mut state, Action::ChooseTarget(Target::Object(target))).unwrap();
+            pass_until_stack_resolves(&mut state);
+
+            if copied {
+                assert!(!state.exile.contains(&target));
+                assert!(!state.players[1].graveyard.contains(&target));
+                assert_eq!(state.objects.get(target).zone, Zone::Stack);
+            } else {
+                assert_eq!(state.objects.get(target).zone, Zone::Exile);
+                assert!(state.exile.contains(&target));
+                assert!(!state.players[1].graveyard.contains(&target));
+            }
+        }
+    }
+
+    #[test]
+    fn spell_target_pools_include_copies_but_exclude_abilities_and_madness_offers() {
+        let mut state = empty_game();
+        let physical = put_on_stack(&mut state, PlayerId::P0, "Counterspell");
+        let copy = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+        state.stack.last_mut().unwrap().is_copy = true;
+
+        let activated = put_on_battlefield(&mut state, PlayerId::P0, "Blood Token");
+        state.stack.push(StackItem {
+            kind: StackItemKind::ActivatedAbility,
+            source: activated,
+            controller: PlayerId::P0,
+            targets: vec![],
+            is_copy: false,
+            inline_effect: Some(EffectOp::Sequence(vec![])),
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: false,
+            kicked: false,
+        });
+        let madness = put_in_graveyard(&mut state, PlayerId::P1, "Fiery Temper");
+        state.stack.push(StackItem {
+            kind: StackItemKind::MadnessOffer,
+            source: madness,
+            controller: PlayerId::P1,
+            targets: vec![],
+            is_copy: false,
+            inline_effect: None,
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: true,
+            kicked: false,
+        });
+
+        for spec in [TargetSpec::AnySpellOnStack, TargetSpec::BlueSpellOnStack] {
+            let targets = legal_targets_for(spec, &[], &state);
+            assert!(targets.contains(&Target::Object(physical)));
+            assert!(targets.contains(&Target::Object(copy)));
+            assert!(!targets.contains(&Target::Object(activated)));
+            assert!(!targets.contains(&Target::Object(madness)));
+        }
+    }
+
+    #[test]
     fn pyroblast_does_not_counter_a_non_blue_spell() {
         let mut state = ready_game_in_main1(1);
         let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
@@ -5479,33 +5969,9 @@ mod tests {
     }
 
     #[test]
-    fn chain_lightning_resolves_normally_when_copy_payment_is_impossible() {
+    fn chain_lightning_asks_before_an_unpayable_copy_attempt_then_finishes() {
         let mut state = ready_game_in_main1(1);
         let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
-        step(&mut state, Action::CastSpell(bolt)).unwrap();
-        step(
-            &mut state,
-            Action::ChooseTarget(Target::Player(PlayerId::P1)),
-        )
-        .unwrap();
-        pass_until_stack_resolves(&mut state);
-
-        assert_eq!(
-            state.players[1].life, 17,
-            "the mandatory 3 damage always happens"
-        );
-        assert!(state.engine.halted.is_none(), "declining is the only legal choice when {{R}}{{R}} is unaffordable, so the walk continues normally");
-    }
-
-    #[test]
-    fn chain_lightning_halts_the_walk_when_copy_payment_is_possible() {
-        let mut state = ready_game_in_main1(1);
-        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
-        // P1 (the affected player) controls 2 Red sources -- {R}{R} is
-        // genuinely payable, so this kernel cannot safely guess "declines".
-        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
-        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
-
         step(&mut state, Action::CastSpell(bolt)).unwrap();
         step(
             &mut state,
@@ -5513,16 +5979,387 @@ mod tests {
         )
         .unwrap();
         match pass_until_stack_resolves(&mut state) {
-            Decision::Halted { mechanic, source } => {
-                assert_eq!(mechanic, UnsupportedMechanic::SpellCopy);
-                assert_eq!(source, bolt);
+            Decision::ChooseSpellCopyPayment { player, spell } => {
+                assert_eq!(player, PlayerId::P1);
+                assert_eq!(spell, bolt);
             }
-            other => panic!("expected Decision::Halted, got {other:?}"),
+            other => panic!("expected the XMage-parity payment attempt, got {other:?}"),
         }
+
         assert_eq!(
             state.players[1].life, 17,
-            "the mandatory damage still happened before the halt"
+            "the mandatory 3 damage always happens"
         );
+        assert_eq!(state.stack.len(), 1, "the parent stays live mid-resolution");
+        assert_eq!(state.objects.get(bolt).zone, Zone::Stack);
+
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        assert!(state.engine.pending_spell_copy.is_none());
+        assert!(state.stack.is_empty());
+        assert_eq!(state.objects.get(bolt).zone, Zone::Graveyard);
+        assert_eq!(state.players[0].graveyard, vec![bolt]);
+    }
+
+    #[test]
+    fn chain_lightning_affordable_decline_spends_nothing_and_creates_no_copy() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        let red1 = put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        let red2 = put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment {
+                player: PlayerId::P1,
+                ..
+            }
+        ));
+        step(&mut state, Action::ChooseSpellCopyPayment(false)).unwrap();
+
+        assert!(!state.objects.get(red1).tapped);
+        assert!(!state.objects.get(red2).tapped);
+        assert!(state.stack.is_empty());
+        assert_eq!(state.players[0].graveyard, vec![bolt]);
+        assert_eq!(
+            state.objects.len(),
+            4,
+            "declining allocates no virtual object"
+        );
+    }
+
+    #[test]
+    fn chain_lightning_pay_keep_target_creates_one_recursive_copy_without_casting_it() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        let red1 = put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        let red2 = put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        let arena_before_copy = state.objects.len();
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment { .. }
+        ));
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+
+        assert!(state.objects.get(red1).tapped && state.objects.get(red2).tapped);
+        assert_eq!(state.objects.len(), arena_before_copy + 1);
+        assert_eq!(state.stack.len(), 2);
+        let copy = state.stack.last().unwrap().source;
+        assert!(state.stack.last().unwrap().is_copy);
+        assert_eq!(state.stack.last().unwrap().controller, PlayerId::P1);
+        assert_eq!(
+            state.stack.last().unwrap().targets,
+            vec![Target::Player(PlayerId::P1)]
+        );
+        assert!(matches!(
+            advance_until_decision(&mut state),
+            Decision::ChooseSpellCopyRetarget { player: PlayerId::P1, copy: c } if c == copy
+        ));
+        step(&mut state, Action::ChooseSpellCopyRetarget(false)).unwrap();
+
+        assert_eq!(state.objects.get(bolt).zone, Zone::Graveyard);
+        assert_eq!(state.stack.len(), 1);
+        assert_eq!(state.stack[0].source, copy);
+        assert!(
+            matches!(
+                advance_until_decision(&mut state),
+                Decision::CastSpellOrPass {
+                    player: PlayerId::P0,
+                    ..
+                }
+            ),
+            "normal active-player priority opens before the copy resolves"
+        );
+
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment { player: PlayerId::P1, spell } if spell == copy
+        ));
+        assert_eq!(state.players[1].life, 14);
+        step(&mut state, Action::ChooseSpellCopyPayment(false)).unwrap();
+        assert!(state.stack.is_empty());
+        assert_eq!(state.players[0].graveyard, vec![bolt]);
+        assert!(!state.players[1].graveyard.contains(&copy));
+        assert_eq!(
+            state
+                .engine
+                .event_history
+                .iter()
+                .filter(|event| matches!(event, CommittedEvent::SpellCast { .. }))
+                .count(),
+            1,
+            "the copy is created, not cast"
+        );
+    }
+
+    #[test]
+    fn chain_lightning_retarget_waits_for_choice_before_lethal_sba() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        let creature = put_on_battlefield(&mut state, PlayerId::P1, "Clockwork Percussionist");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(creature))).unwrap();
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment {
+                player: PlayerId::P1,
+                ..
+            }
+        ));
+        assert!(state.players[1].battlefield.contains(&creature));
+        assert_eq!(state.objects.get(creature).damage, 3);
+
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+        let copy = state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .copy_source
+            .unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets {
+                player,
+                spell,
+                legal_targets,
+                ..
+            } => {
+                assert_eq!(player, PlayerId::P1);
+                assert_eq!(spell, copy);
+                assert!(legal_targets.contains(&Target::Player(PlayerId::P0)));
+            }
+            other => panic!("expected copy target selection, got {other:?}"),
+        }
+        let before_invalid = state.state_hash();
+        assert!(step(&mut state, Action::ChooseTarget(Target::Object(bolt))).is_err());
+        assert_eq!(
+            state.state_hash(),
+            before_invalid,
+            "an invalid copy target is non-mutating"
+        );
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0)),
+        )
+        .unwrap();
+
+        assert!(!state.players[1].battlefield.contains(&creature));
+        assert!(state.players[1].graveyard.contains(&creature));
+        assert_eq!(state.stack.len(), 1);
+        assert_eq!(state.stack[0].source, copy);
+        assert_eq!(state.stack[0].targets, vec![Target::Player(PlayerId::P0)]);
+    }
+
+    #[test]
+    fn chain_lightning_copy_of_copy_uses_fresh_ids_and_alternating_controllers() {
+        let mut state = ready_game_in_main1(0);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        for _ in 0..3 {
+            put_on_battlefield(&mut state, PlayerId::P0, "Great Furnace");
+        }
+        for _ in 0..2 {
+            put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        }
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+        let _ = pass_until_stack_resolves(&mut state);
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        let copy1 = state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .copy_source
+            .unwrap();
+        step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0)),
+        )
+        .unwrap();
+
+        let _ = pass_until_stack_resolves(&mut state);
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        let copy2 = state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .copy_source
+            .unwrap();
+        assert_ne!(copy1, copy2);
+        assert_eq!(state.stack.last().unwrap().controller, PlayerId::P0);
+        step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+
+        let _ = pass_until_stack_resolves(&mut state);
+        step(&mut state, Action::ChooseSpellCopyPayment(false)).unwrap();
+        assert_eq!([state.players[0].life, state.players[1].life], [17, 14]);
+        assert!(state.stack.is_empty());
+        assert_eq!(state.players[0].graveyard, vec![bolt]);
+        assert!(!state.players[0].graveyard.contains(&copy2));
+        assert!(!state.players[1].graveyard.contains(&copy1));
+    }
+
+    #[test]
+    fn chain_lightning_copy_with_a_now_illegal_inherited_target_fizzles_and_ceases() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        let creature = put_on_battlefield(&mut state, PlayerId::P1, "Clockwork Percussionist");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(creature))).unwrap();
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment { .. }
+        ));
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        let copy = state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .copy_source
+            .unwrap();
+        step(&mut state, Action::ChooseSpellCopyRetarget(false)).unwrap();
+
+        assert_eq!(state.objects.get(creature).zone, Zone::Graveyard);
+        assert_eq!(state.stack.len(), 1);
+        assert_eq!(state.stack[0].source, copy);
+        assert_eq!(state.players[1].life, 20);
+        let event_count = state.engine.event_history.len();
+
+        let next = pass_until_stack_resolves(&mut state);
+        assert!(matches!(next, Decision::CastSpellOrPass { .. }));
+        assert!(state.stack.is_empty());
+        assert!(state.engine.pending_spell_copy.is_none());
+        assert_eq!(
+            state.players[1].life, 20,
+            "the illegal-target copy deals no damage"
+        );
+        assert_eq!(state.objects.get(copy).zone, Zone::Stack);
+        assert!(!state.players[1].graveyard.contains(&copy));
+        assert!(
+            !state.engine.event_history[event_count..]
+                .iter()
+                .any(|event| matches!(event, CommittedEvent::ZoneChange { object, .. } if *object == copy)),
+            "a fizzled copy ceases without a zone-change event"
+        );
+    }
+
+    #[test]
+    fn chain_lightning_pending_copy_choices_round_trip_through_snapshots() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+        put_on_battlefield(&mut state, PlayerId::P1, "Great Furnace");
+
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+        assert!(matches!(
+            pass_until_stack_resolves(&mut state),
+            Decision::ChooseSpellCopyPayment { .. }
+        ));
+        let payment_snapshot = state.snapshot();
+
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        let copy = state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .copy_source
+            .unwrap();
+        step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+        let target_snapshot = state.snapshot();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0)),
+        )
+        .unwrap();
+        let expected_hash = state.state_hash();
+
+        state.restore(&target_snapshot);
+        assert!(matches!(
+            state.engine.pending_spell_copy.as_ref().map(|p| p.stage),
+            Some(SpellCopyStage::Target)
+        ));
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0)),
+        )
+        .unwrap();
+        assert_eq!(state.state_hash(), expected_hash);
+
+        state.restore(&payment_snapshot);
+        step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+        assert_eq!(
+            state
+                .engine
+                .pending_spell_copy
+                .as_ref()
+                .unwrap()
+                .copy_source,
+            Some(copy),
+            "restoring before allocation must reproduce the same stable arena id"
+        );
+        step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0)),
+        )
+        .unwrap();
+        assert_eq!(state.state_hash(), expected_hash);
+    }
+
+    #[test]
+    fn chain_lightning_illegal_target_fizzles_before_damage_or_copy_offer() {
+        let mut state = ready_game_in_main1(1);
+        let bolt = put_in_hand(&mut state, PlayerId::P0, "Chain Lightning");
+        let creature = put_on_battlefield(&mut state, PlayerId::P1, "Clockwork Percussionist");
+        step(&mut state, Action::CastSpell(bolt)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(creature))).unwrap();
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(creature, Zone::Graveyard),
+        );
+
+        let _ = pass_until_stack_resolves(&mut state);
+        assert_eq!(state.objects.get(creature).damage, 0);
+        assert!(state.engine.pending_spell_copy.is_none());
+        assert_eq!(state.objects.get(bolt).zone, Zone::Graveyard);
+        assert!(state.stack.is_empty());
     }
 
     #[test]

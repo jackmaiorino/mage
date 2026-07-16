@@ -109,7 +109,7 @@ class ClientStrictnessTest(unittest.TestCase):
         try:
             client.reset(episode_id=0, env_seed=1, max_decisions=8)
             with self.assertRaises(ProtocolError):
-                client.step(4_294_967_296, "legal-action-v2:a")
+                client.step(4_294_967_296, "legal-action-v3:a")
         finally:
             client.close()
             self.tmp.cleanup()

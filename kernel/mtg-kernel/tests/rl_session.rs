@@ -305,7 +305,7 @@ fn rl_session_invalid_index_and_id_errors_do_not_mutate() {
 
     let before = current_snapshot(&session);
     let err = session
-        .step(0, 0, 0, "legal-action-v2:ffffffffffffffff")
+        .step(0, 0, 0, "legal-action-v3:ffffffffffffffff")
         .unwrap_err();
     assert_eq!(err.code, RlSessionErrorCode::SelectedActionIdUnknown);
     assert_eq!(current_snapshot(&session), before);
@@ -409,7 +409,7 @@ fn rl_session_step_before_reset_and_malformed_input_recover_cleanly() {
     let mut server = KernelRlJsonlServerV1::new();
 
     let step_before_reset =
-        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v2:0"));
+        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v3:0"));
     let step_value: KernelRlResponseV1 = serde_json::from_str(&step_before_reset).unwrap();
     match step_value {
         KernelRlResponseV1::Error {
@@ -482,7 +482,7 @@ fn rl_session_schema_one_requests_fail_before_session_mutation() {
         0,
         0,
         0,
-        "legal-action-v2:0",
+        "legal-action-v3:0",
     )));
     assert_eq!(still_no_session["response_type"], "error");
     assert_eq!(still_no_session["error"]["code"], "step_before_reset");
@@ -490,7 +490,7 @@ fn rl_session_schema_one_requests_fail_before_session_mutation() {
     let reset = parse_response(&server.handle_line(&reset_line("schema-two-reset", 16)));
     assert_eq!(reset["response_type"], "decision");
     assert_eq!(reset["schema_version"], RL_SESSION_SCHEMA_VERSION);
-    assert_eq!(reset["observation"]["schema_version"], 2);
+    assert_eq!(reset["observation"]["schema_version"], 3);
 
     let action = &reset["legal_actions"].as_array().unwrap()[0];
     let schema_one_step = json!({
@@ -631,7 +631,7 @@ fn rl_session_sequential_reset_rejects_stale_steps_and_retry_cache_after_reset()
 }
 
 #[test]
-fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
+fn rl_session_kernel_rl_env_process_smoke_is_v3_strict_and_hash_safe() {
     let mut child = Command::new(env!("CARGO_BIN_EXE_kernel_rl_env"))
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
@@ -670,7 +670,7 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
         first["provenance"]["schema_version"],
         RL_SESSION_SCHEMA_VERSION
     );
-    assert_eq!(first["observation"]["schema_version"], 2);
+    assert_eq!(first["observation"]["schema_version"], 3);
     assert_eq!(
         first["legal_actions"][0]["schema_version"],
         RL_SESSION_SCHEMA_VERSION

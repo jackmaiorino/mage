@@ -215,6 +215,8 @@ fn run_goldfish(state: &mut GameState) -> RunResult {
             | Decision::Discard { .. }
             | Decision::ChooseSpellMode { .. }
             | Decision::ChooseOptionalCost { .. }
+            | Decision::ChooseSpellCopyPayment { .. }
+            | Decision::ChooseSpellCopyRetarget { .. }
             | Decision::ChooseMadnessCast { .. } => {
                 unreachable!(
                     "the rally goldfish's library has no card that can produce this decision"

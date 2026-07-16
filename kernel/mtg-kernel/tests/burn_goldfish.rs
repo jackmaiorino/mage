@@ -77,6 +77,8 @@ fn kind_of(d: &Decision) -> Kind {
         | Decision::DeclareBlockers { .. }
         | Decision::ChooseSpellMode { .. }
         | Decision::ChooseOptionalCost { .. }
+        | Decision::ChooseSpellCopyPayment { .. }
+        | Decision::ChooseSpellCopyRetarget { .. }
         | Decision::ChooseMadnessCast { .. }
         | Decision::Halted { .. } => {
             unreachable!("the burn goldfish's library has no card that can produce this decision")
@@ -150,6 +152,8 @@ fn run_goldfish(state: &mut GameState) -> (Vec<Kind>, Vec<i32>) {
             | Decision::DeclareBlockers { .. }
             | Decision::ChooseSpellMode { .. }
             | Decision::ChooseOptionalCost { .. }
+            | Decision::ChooseSpellCopyPayment { .. }
+            | Decision::ChooseSpellCopyRetarget { .. }
             | Decision::ChooseMadnessCast { .. }
             | Decision::Halted { .. } => {
                 unreachable!(

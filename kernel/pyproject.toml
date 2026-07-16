@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mtg-kernel-rl"
-version = "0.1.0"
+version = "0.2.0"
 description = "Strict Python RL client and deterministic runner for the MTG kernel JSONL environment"
 requires-python = ">=3.11"
 dependencies = ["torch>=2.2,<3"]

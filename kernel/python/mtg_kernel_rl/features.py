@@ -1,4 +1,4 @@
-"""Path-aware v2 feature contract and actor-relative encoder."""
+"""Path-aware v3 feature contract and actor-relative encoder."""
 
 from __future__ import annotations
 
@@ -15,9 +15,9 @@ OPERATIONAL_ONLY = "operational_only"
 FORBIDDEN = "forbidden"
 CLASSIFICATIONS = (MODEL_INPUT, OPERATIONAL_ONLY, FORBIDDEN)
 
-FEATURE_SCHEMA_VERSION = "actor-relative-v2-python-5"
-FEATURE_REGISTRY_VERSION = "rust-observation-v2-action-v1-registry-5"
-ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-5"
+FEATURE_SCHEMA_VERSION = "actor-relative-v3-python-6"
+FEATURE_REGISTRY_VERSION = "rust-observation-v3-action-v1-registry-6"
+ENCODING_CONTRACT_VERSION = "actor-relative-node-graph-6"
 
 STATE_HASH_DIM = 96
 ACTION_HASH_DIM = 96
@@ -45,6 +45,7 @@ ENGINE_STAGES = [
     "pending_discard",
     "pending_optional_cost",
     "pending_optional_cost_sacrifice",
+    "pending_spell_copy",
     "pending_triggers",
     "halted",
 ]
@@ -64,6 +65,8 @@ ACTION_KINDS = [
     "choose_spell_mode",
     "choose_optional_cost_use",
     "choose_optional_cost_which",
+    "choose_spell_copy_payment",
+    "choose_spell_copy_retarget",
     "choose_madness_cast",
     "discard",
     "declare_attackers",
@@ -75,6 +78,7 @@ COST_KINDS = ["SacrificeLands"]
 OPTIONAL_COST_CHOICES = ["Decline", "Discard", "SacrificeLand"]
 DISCARD_RESUME_STAGES = ["none", "finish_cast", "finish_activation", "finish_spell_resolution", "finish_optional_cost"]
 TRIGGER_KINDS = ["triggered_ability", "madness_offer"]
+SPELL_COPY_STAGES = ["payment", "retarget", "target"]
 EFFECT_DURATIONS = ["end_of_turn"]
 PLAY_OR_CAST = ["play", "cast"]
 EXPIRY_KINDS = ["end_of_turn", "until_holders_next_turn"]
@@ -129,13 +133,13 @@ ACTION_FEATURE_DIM = (
     + CARD_REF_FEATURE_DIM
     + len(TARGET_KINDS)
     + 3
-    + 12
+    + 13
     + len(CAST_MODES)
     + len(COST_KINDS)
     + len(OPTIONAL_COST_CHOICES)
     + ACTION_HASH_DIM
 )
-STATE_FEATURE_DIM = len(PHASES) + 6 + (2 * 13) + 7 + 22 + len(SURFACE_STAGES) + 2 + 10 + STATE_HASH_DIM
+STATE_FEATURE_DIM = len(PHASES) + 6 + (2 * 13) + 7 + 24 + len(SURFACE_STAGES) + 2 + 10 + STATE_HASH_DIM
 CARD_TOKEN_VOCAB_SIZE = 65_537
 
 PLAYER_INDEXED_LISTS = {
@@ -173,6 +177,9 @@ PENDING_CONTEXT_SUBROLES = [
     ("pending_optional_cost_sacrifice", "source"),
     ("pending_optional_cost_sacrifice", "chosen", "[]"),
     ("pending_optional_cost_sacrifice", "spell_resume_source"),
+    ("pending_spell_copy", "parent"),
+    ("pending_spell_copy", "inherited_target", "object"),
+    ("pending_spell_copy", "copy"),
     ("pending_triggers", "[]", "source"),
 ]
 PRIVATE_CONTEXT_SUBROLES = [
@@ -215,6 +222,7 @@ ENGINE_SURFACE_TUPLE_CONTRACT = [
     "pending_optional_cost+optional_cost_use: optional-cost use gate",
     "pending_optional_cost+optional_cost_which: optional-cost discard-vs-sacrifice gate when both are payable",
     "pending_optional_cost_sacrifice+priority: sacrifice-land cost-target subdecision",
+    "pending_spell_copy+priority: spell-copy payment, retarget, or target subdecision",
     "pending_triggers+priority: trigger ordering subdecision",
     "halted+priority: halted engine branch with no surface reshape",
 ]
@@ -547,6 +555,7 @@ STACK_ITEM = ObjectSpec(
         "controller": Seat(),
         "targets": ListSpec(TARGET_REF),
         "stack_item_kind": E(STACK_KINDS),
+        "is_copy": B(MODEL_INPUT),
         "is_flashback": B(MODEL_INPUT),
         "mode_chosen": I(MODEL_INPUT, maximum=U8),
         "madness_offer": B(MODEL_INPUT),
@@ -650,6 +659,15 @@ PENDING_OPTIONAL_COST_SAC = ObjectSpec(
         "spell_resume_zone": Opt(E(ZONES)),
     }
 )
+PENDING_SPELL_COPY = ObjectSpec(
+    {
+        "parent": Opt(CARD_STABLE_REF),
+        "player": Seat(),
+        "inherited_target": TARGET_REF,
+        "stage": E(SPELL_COPY_STAGES),
+        "copy": Opt(CARD_STABLE_REF),
+    }
+)
 PENDING_TRIGGER = ObjectSpec(
     {
         "source": Opt(CARD_STABLE_REF),
@@ -671,6 +689,7 @@ ENGINE_CONTEXT = ObjectSpec(
         "pending_discard": Opt(PENDING_DISCARD),
         "pending_optional_cost": Opt(PENDING_OPTIONAL_COST),
         "pending_optional_cost_sacrifice": Opt(PENDING_OPTIONAL_COST_SAC),
+        "pending_spell_copy": Opt(PENDING_SPELL_COPY),
         "pending_triggers": ListSpec(PENDING_TRIGGER),
     }
 )
@@ -717,6 +736,7 @@ PENDING_CONTEXT_ROOTS = (
     ("pending_discard", PENDING_DISCARD, ("pending_discard",)),
     ("pending_optional_cost", PENDING_OPTIONAL_COST, ("pending_optional_cost",)),
     ("pending_optional_cost_sacrifice", PENDING_OPTIONAL_COST_SAC, ("pending_optional_cost_sacrifice",)),
+    ("pending_spell_copy", PENDING_SPELL_COPY, ("pending_spell_copy",)),
     ("pending_triggers", ListSpec(PENDING_TRIGGER), ("pending_triggers",)),
 )
 PRIVATE_CONTEXT_ROOTS = (
@@ -775,6 +795,8 @@ ACTION_VARIANTS = {
     "choose_spell_mode": ObjectSpec({"action_kind": E(["choose_spell_mode"]), "actor": Seat(), "source": CARD_STABLE_REF, "mode_index": I(MODEL_INPUT, maximum=U8), "mode_count": I(MODEL_INPUT, maximum=U8)}),
     "choose_optional_cost_use": ObjectSpec({"action_kind": E(["choose_optional_cost_use"]), "actor": Seat(), "use_cost": B(MODEL_INPUT)}),
     "choose_optional_cost_which": ObjectSpec({"action_kind": E(["choose_optional_cost_which"]), "actor": Seat(), "choice": E(OPTIONAL_COST_CHOICES)}),
+    "choose_spell_copy_payment": ObjectSpec({"action_kind": E(["choose_spell_copy_payment"]), "actor": Seat(), "source": CARD_STABLE_REF, "pay": B(MODEL_INPUT)}),
+    "choose_spell_copy_retarget": ObjectSpec({"action_kind": E(["choose_spell_copy_retarget"]), "actor": Seat(), "source": CARD_STABLE_REF, "change_target": B(MODEL_INPUT)}),
     "choose_madness_cast": ObjectSpec({"action_kind": E(["choose_madness_cast"]), "actor": Seat(), "card": CARD_STABLE_REF, "cast_it": B(MODEL_INPUT)}),
     "discard": ObjectSpec({"action_kind": E(["discard"]), "actor": Seat(), "cards": ListSpec(CARD_STABLE_REF)}),
     "declare_attackers": ObjectSpec({"action_kind": E(["declare_attackers"]), "actor": Seat(), "attackers": ListSpec(CARD_STABLE_REF)}),
@@ -1248,6 +1270,7 @@ def _state_features(obs: dict[str, Any]) -> list[float]:
         1.0 if engine["pending_discard"] else 0.0,
         1.0 if engine["pending_optional_cost"] else 0.0,
         1.0 if engine["pending_optional_cost_sacrifice"] else 0.0,
+        1.0 if engine["pending_spell_copy"] else 0.0,
         _number(len(engine["pending_triggers"]), 16.0),
     ]
     surface = p["surface_context"]
@@ -1579,6 +1602,7 @@ def _action_features(action: dict[str, Any], actor: str, registry: _NodeRegistry
         _number(semantic.get("mode_index", 0), 8.0),
         _number(semantic.get("mode_count", 0), 8.0),
         _flag(semantic.get("pay", False)),
+        _flag(semantic.get("change_target", False)),
         _flag(semantic.get("use_cost", False)),
         _flag(semantic.get("cast_it", False)),
         _number(len(semantic.get("cards", [])), 8.0),
@@ -1673,6 +1697,7 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
         "pending_discard",
         "pending_optional_cost",
         "pending_optional_cost_sacrifice",
+        "pending_spell_copy",
         "pending_triggers",
     )
     rust_stage_order = pending_keys
@@ -1698,6 +1723,7 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             "pending_discard": {(), ("pending_triggers",)},
             "pending_optional_cost": {()},
             "pending_optional_cost_sacrifice": {()},
+            "pending_spell_copy": {()},
             "pending_triggers": {()},
         }
         if tuple(extras) not in allowed_extras[stage]:
@@ -1746,6 +1772,20 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
     optional_sacrifice = engine["pending_optional_cost_sacrifice"]
     if optional_sacrifice is not None and len(optional_sacrifice["chosen"]) >= optional_sacrifice["remaining"]:
         raise FeatureSchemaError("pending_optional_cost_sacrifice must still need a land choice")
+
+    pending_spell_copy = engine["pending_spell_copy"]
+    if pending_spell_copy is not None:
+        parent = _require_ref_zone(pending_spell_copy["parent"], "pending_spell_copy.parent", ("Stack",))
+        stage = pending_spell_copy["stage"]
+        copy = pending_spell_copy["copy"]
+        if stage == "payment":
+            if copy is not None:
+                raise FeatureSchemaError("pending_spell_copy payment stage cannot already carry a copy")
+        else:
+            copy = _require_ref_zone(copy, "pending_spell_copy.copy", ("Stack",))
+            _require_ref_controller(copy, pending_spell_copy["player"], "pending_spell_copy.copy")
+            if copy["arena_id"] == parent["arena_id"]:
+                raise FeatureSchemaError("pending_spell_copy copy must be distinct from its parent")
 
 
 def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any], actor: str) -> None:
@@ -1805,6 +1845,9 @@ def _validate_engine_surface_tuple(projection: dict[str, Any], engine: dict[str,
         if engine_stage in ("pending_cast", "pending_activation") and engine["pending_discard"] is None:
             pending_key = engine_stage
             _require_actor(actor, engine[pending_key]["controller"], engine_stage)
+            return
+        if engine_stage == "pending_spell_copy":
+            _require_actor(actor, engine["pending_spell_copy"]["player"], engine_stage)
             return
         if engine_stage == "pending_optional_cost_sacrifice":
             _require_actor(actor, engine["pending_optional_cost_sacrifice"]["player"], engine_stage)
@@ -1869,10 +1912,43 @@ def _validate_engine_surface_tuple(projection: dict[str, Any], engine: dict[str,
 
 def _validate_observation_semantics(observation: dict[str, Any]) -> None:
     p = observation["projection"]
+    stack_by_key: dict[tuple[int, int], tuple[int, dict[str, Any]]] = {}
     for i, item in enumerate(p["stack"]):
         if item["stack_index"] != i:
             raise FeatureSchemaError("stack_index must match recorded stack position")
+        if item["is_copy"] and item["stack_item_kind"] != "spell":
+            raise FeatureSchemaError("only spell stack items may be marked as copies")
+        key = _stable_key(item["source"])
+        if key in stack_by_key:
+            raise FeatureSchemaError("stack contains duplicate stable object incarnations")
+        stack_by_key[key] = (i, item)
     _validate_engine_context(p["engine_context"])
+    pending_spell_copy = p["engine_context"]["pending_spell_copy"]
+    if pending_spell_copy is not None:
+        parent = _require_ref(pending_spell_copy["parent"], "pending_spell_copy.parent")
+        parent_entry = stack_by_key.get(_stable_key(parent))
+        if parent_entry is None or parent_entry[1]["stack_item_kind"] != "spell":
+            raise FeatureSchemaError("pending_spell_copy parent must resolve to a live spell on the stack")
+        parent_index, parent_item = parent_entry
+        if parent_item["targets"] != [pending_spell_copy["inherited_target"]]:
+            raise FeatureSchemaError("pending_spell_copy inherited_target must match its parent spell target")
+        if pending_spell_copy["stage"] == "payment":
+            if parent_index != len(p["stack"]) - 1:
+                raise FeatureSchemaError("pending_spell_copy payment parent must be the top stack item")
+        else:
+            copy = _require_ref(pending_spell_copy["copy"], "pending_spell_copy.copy")
+            copy_entry = stack_by_key.get(_stable_key(copy))
+            if copy_entry is None:
+                raise FeatureSchemaError("pending_spell_copy copy must resolve to a live stack item")
+            copy_index, copy_item = copy_entry
+            if not copy_item["is_copy"] or copy_item["stack_item_kind"] != "spell":
+                raise FeatureSchemaError("pending_spell_copy copy must resolve to a copied spell")
+            if copy_item["controller"] != pending_spell_copy["player"]:
+                raise FeatureSchemaError("pending_spell_copy stack-item controller must match the copying player")
+            if copy_item["targets"] != [pending_spell_copy["inherited_target"]]:
+                raise FeatureSchemaError("pending_spell_copy inherited_target must match the copied spell target")
+            if copy_index != len(p["stack"]) - 1 or copy_index != parent_index + 1:
+                raise FeatureSchemaError("pending_spell_copy copy must be directly above its parent on the stack")
     _validate_surface_context(p["surface_context"], p, observation["acting_player"])
     _validate_engine_surface_tuple(p, p["engine_context"], p["surface_context"], observation["acting_player"])
     for permission in p["exile_play_permissions"]:
@@ -1903,10 +1979,12 @@ def validate_legal_actions_contract(actions: Any, acting_player: str | None = No
     seen_stable: set[str] = set()
     for i, action in enumerate(actions):
         assert_action_classified(action)
-        if action["schema_version"] != 2:
+        if action["schema_version"] != 3:
             raise FeatureSchemaError("legal action schema mismatch")
         if action["selected_index"] != i:
             raise FeatureSchemaError("legal action selected_index is not contiguous")
+        if not action["stable_id"].startswith("legal-action-v3:"):
+            raise FeatureSchemaError("legal action stable_id must use the legal-action-v3 prefix")
         if action["stable_id"] in seen_stable:
             raise FeatureSchemaError("duplicate legal action stable_id")
         seen_stable.add(action["stable_id"])
@@ -1915,11 +1993,56 @@ def validate_legal_actions_contract(actions: Any, acting_player: str | None = No
     return actions
 
 
+def _validate_spell_copy_legal_actions(
+    observation: dict[str, Any], actions: list[dict[str, Any]]
+) -> None:
+    pending = observation["projection"]["engine_context"]["pending_spell_copy"]
+    if pending is None:
+        return
+    stage = pending["stage"]
+    if stage == "payment":
+        expected_kind = "choose_spell_copy_payment"
+        expected_source = _require_ref(pending["parent"], "pending_spell_copy.parent")
+        expected_flags = [True, False]
+        flag_key = "pay"
+    elif stage == "retarget":
+        expected_kind = "choose_spell_copy_retarget"
+        expected_source = _require_ref(pending["copy"], "pending_spell_copy.copy")
+        expected_flags = [True, False]
+        flag_key = "change_target"
+    else:
+        expected_kind = "choose_target"
+        expected_source = _require_ref(pending["copy"], "pending_spell_copy.copy")
+        expected_flags = None
+        flag_key = None
+
+    for action in actions:
+        semantic = action["semantic"]
+        if semantic["action_kind"] != expected_kind:
+            raise FeatureSchemaError(
+                f"pending_spell_copy {stage} stage requires only {expected_kind} legal actions"
+            )
+        if semantic["source"] != expected_source:
+            raise FeatureSchemaError(
+                "pending_spell_copy legal action source does not match the active parent/copy"
+            )
+        if stage == "target" and semantic["remaining"] != 1:
+            raise FeatureSchemaError("pending_spell_copy target action must choose its one target")
+
+    if expected_flags is not None:
+        actual_flags = [action["semantic"][flag_key] for action in actions]
+        if actual_flags != expected_flags:
+            raise FeatureSchemaError(
+                f"pending_spell_copy {stage} actions must be ordered yes then no"
+            )
+
+
 def encode_decision(observation: dict[str, Any], legal_actions: list[dict[str, Any]]) -> EncodedDecision:
     assert_observation_classified(observation)
-    if observation["schema_version"] != 2:
+    if observation["schema_version"] != 3:
         raise FeatureSchemaError("observation schema mismatch")
     validate_legal_actions_contract(legal_actions, observation["acting_player"])
+    _validate_spell_copy_legal_actions(observation, legal_actions)
     actor = observation["acting_player"]
     state = _state_features(observation)
     registry, object_rows, object_tokens, object_groups, object_node_ids, edge_rows, edge_sources, edge_targets = _objects(observation)
@@ -1994,7 +2117,7 @@ def every_action_variant_fixture(base_ref: dict[str, Any], target_ref: dict[str,
         second_ref = {**base_ref, "arena_id": base_ref["arena_id"] + 2, "card_db_id": base_ref["card_db_id"] + 2}
     target_object = {"target_kind": "object", "object": target_ref}
     return [
-        {"schema_version": 2, "selected_index": i, "stable_id": f"fixture-{i}", "display_text": f"text-{i}", "semantic": semantic}
+        {"schema_version": 3, "selected_index": i, "stable_id": f"legal-action-v3:fixture-{i}", "display_text": f"text-{i}", "semantic": semantic}
         for i, semantic in enumerate(
             [
                 {"action_kind": "pass", "actor": "p0"},
@@ -2011,6 +2134,8 @@ def every_action_variant_fixture(base_ref: dict[str, Any], target_ref: dict[str,
                 {"action_kind": "choose_spell_mode", "actor": "p0", "source": base_ref, "mode_index": 0, "mode_count": 2},
                 {"action_kind": "choose_optional_cost_use", "actor": "p0", "use_cost": True},
                 {"action_kind": "choose_optional_cost_which", "actor": "p0", "choice": "Discard"},
+                {"action_kind": "choose_spell_copy_payment", "actor": "p0", "source": base_ref, "pay": True},
+                {"action_kind": "choose_spell_copy_retarget", "actor": "p0", "source": base_ref, "change_target": True},
                 {"action_kind": "choose_madness_cast", "actor": "p0", "card": base_ref, "cast_it": True},
                 {"action_kind": "discard", "actor": "p0", "cards": [base_ref, second_ref]},
                 {"action_kind": "declare_attackers", "actor": "p0", "attackers": [base_ref, second_ref]},

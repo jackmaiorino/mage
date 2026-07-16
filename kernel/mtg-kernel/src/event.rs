@@ -508,29 +508,27 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
     }
 }
 
-/// 111.8/704.5d: "If a token is in a zone other than the battlefield, it
-/// ceases to exist. This is a state-based action." Removes `id` from
+/// Removes a virtual game object from whichever live zone indexes it.
+/// This covers 111.8/704.5d token cleanup and 707.10a spell copies leaving
+/// the stack. Removes `id` from
 /// whichever zone list it's currently tracked in (its owner's hand/library/
 /// graveyard, `state.exile`/`command`, or the stack) without adding it
 /// anywhere -- unlike every other zone transition, a token leaving the
 /// battlefield doesn't go *to* another real zone, it just stops being
-/// tracked. Called only by `trigger::sba_fixed_point`, and only for objects
-/// `CardDef::is_token` marks as a token -- see that field's doc.
+/// tracked. Token callers run from `trigger::sba_fixed_point`; copy callers
+/// run synchronously from spell resolution/countering.
 ///
 /// Returns whether `id` was actually still present (an already-ceased token
 /// is a legal, idempotent no-op call) -- `sba_fixed_point`'s fixed-point
 /// loop needs this to know whether the sweep made progress; unconditionally
 /// reporting "changed" here would loop forever re-"removing" the same
-/// already-gone token every pass.
+/// already-gone object every pass.
 ///
-/// Deliberately does *not* touch `GameObject::zone` (left as whatever
-/// non-battlefield zone the token most recently moved to, e.g.
-/// `Zone::Graveyard` for a sacrificed Blood Token): every other read of an
-/// object's zone reaches it by first scanning a zone's own list (`ps.hand`,
-/// `ps.graveyard`, `state.exile`, ...), which this function already empties
-/// the token out of, so a stale `.zone` on an unreachable `ObjectId` the
-/// arena still holds (ids are never freed -- see `ids.rs`'s module doc) is
-/// inert, not a live correctness gap.
+/// Deliberately does *not* touch `GameObject::zone` (left as the object's
+/// last physical marker). Live membership is authoritative from the zone
+/// indexes and `state.stack`, which this function removes it from. Arena ids
+/// are never freed, so snapshots and provenance may still refer to the inert
+/// historical identity without making it a live target.
 pub fn cease_to_exist(state: &mut GameState, id: ObjectId) -> bool {
     let owner = state.objects.get(id).owner;
     let zone = state.objects.get(id).zone;

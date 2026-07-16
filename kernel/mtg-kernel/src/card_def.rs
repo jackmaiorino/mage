@@ -24,11 +24,10 @@
 //! Mono Red Rally's 18 cards (6 shared with Burn: Lightning Bolt, Mountain,
 //! Red Elemental Blast, Relic of Progenitus, Searing Blaze, Voldaren
 //! Epicure) are implemented as of the Rally increment: Burning-Tree
-//! Emissary (ETB mana), Chain Lightning (mandatory damage always resolves;
-//! its optional pay-to-copy clause conditionally halts the walk when
-//! actually affordable rather than being silently declined -- see
-//! `effect::EffectOp::HaltIfAffectedCanPayCopyCost`'s doc and `build.rs::
-//! special_for`'s `"Chain Lightning"` comment), Clockwork Percussionist
+//! Emissary (ETB mana), Chain Lightning (mandatory damage plus the complete
+//! recursive pay/copy/retarget loop -- see `effect::EffectOp::
+//! OfferAffectedPlayerSpellCopy` and `engine::PendingSpellCopy`), Clockwork
+//! Percussionist
 //! (haste + dies-trigger impulse draw), End the
 //! Festivities (mass damage to the opponent + their creatures), Experimental
 //! Synthesizer (ETB/leaves impulse draw + sac-for-a-token ability), Galvanic
@@ -668,7 +667,7 @@ mod tests {
     }
 
     #[test]
-    fn chain_lightning_deals_3_damage_then_gates_on_the_copy_cost() {
+    fn chain_lightning_deals_3_damage_then_offers_the_copy_cost() {
         let id = card_id_by_name("Chain Lightning").expect("Chain Lightning in pool");
         let def = &CARD_DEFS[id as usize];
         assert_eq!(def.target_spec, TargetSpec::AnyTarget);
@@ -684,13 +683,13 @@ mod tests {
                 );
                 assert_eq!(
                     ops[1],
-                    EffectOp::HaltIfAffectedCanPayCopyCost {
+                    EffectOp::OfferAffectedPlayerSpellCopy {
                         affected: TargetRef::Target(0)
                     }
                 );
             }
             other => {
-                panic!("expected a 2-op Sequence (damage, then the copy-cost gate), got {other:?}")
+                panic!("expected a 2-op Sequence (damage, then the copy offer), got {other:?}")
             }
         }
     }

@@ -257,28 +257,16 @@ pub enum EffectOp {
         count: u8,
         duration: ImpulseDuration,
     },
-    /// Chain Lightning's "Then that player or that permanent's controller
-    /// may pay {R}{R}. If the player does, they may copy this spell and may
-    /// choose a new target for that copy": this kernel has no spell-copy
-    /// primitive at all (copying a spell, retargeting the copy, and the
-    /// copy's own susceptibility to being re-copied are all unmodeled). The
-    /// mandatory "deals 3 damage" leaf always runs first (unconditionally,
-    /// same generated function Lightning Bolt/Fiery Temper share); *this*
-    /// leaf runs after it and checks whether `affected` (whichever single
-    /// target the damage actually hit -- a player directly, or a
-    /// permanent's controller) could currently pay {R}{R}. If they
-    /// couldn't, declining is the *only* legal choice, so resolution simply
-    /// finishes (matches the real game exactly, not an approximation). If
-    /// they could, this is a genuine, live decision this kernel cannot
-    /// simulate -- rather than silently guessing "declines" (which would be
-    /// a real, hidden divergence from a possible real game), it halts the
-    /// walk explicitly via `EngineState::halted` / `Decision::Halted` with
-    /// `UnsupportedMechanic::SpellCopy`. Per external review: corpus
-    /// non-occurrence alone doesn't justify skipping this check, since
-    /// off-trace/search-driven play can reach board states where the
-    /// payment *is* affordable even if no recorded game ever cast this into
-    /// one.
-    HaltIfAffectedCanPayCopyCost {
+    /// Chain Lightning's post-damage "that player or that permanent's
+    /// controller may pay {R}{R}" branch. XMage asks this choice before it
+    /// attempts payment, even when payment will fail, so this always
+    /// suspends the current resolution in the engine's dedicated spell-copy
+    /// state machine; no SBA, trigger placement, zone
+    /// move, or priority window can occur until payment and optional
+    /// retargeting finish. This leaf must remain last in Chain Lightning's
+    /// generated sequence for the same reason `DiscardCards` must remain
+    /// last in its sequence.
+    OfferAffectedPlayerSpellCopy {
         affected: TargetRef,
     },
 }
@@ -387,6 +375,32 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
         }
         EffectOp::MoveObject { object, to_zone } => {
             let object = ctx.resolve_object(*object);
+            let live_stack_spell = state
+                .stack
+                .iter()
+                .find(|item| {
+                    item.source == object && item.kind == crate::state::StackItemKind::Spell
+                })
+                .cloned();
+            if *to_zone != Zone::Stack {
+                if let Some(item) = live_stack_spell {
+                    if item.is_copy {
+                        // A copied spell is not a card and never enters a
+                        // destination zone when it leaves the stack (707.10a).
+                        event::cease_to_exist(state, object);
+                        return;
+                    }
+                    if item.is_flashback {
+                        // Flashback's replacement applies to every attempted
+                        // move away from the stack, including being countered.
+                        event::propose_and_commit(
+                            state,
+                            event::ProposedEvent::zone_change(object, Zone::Exile),
+                        );
+                        return;
+                    }
+                }
+            }
             event::propose_and_commit(state, event::ProposedEvent::zone_change(object, *to_zone));
         }
         EffectOp::TapObject { object } => {
@@ -572,24 +586,19 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                     });
             }
         }
-        EffectOp::HaltIfAffectedCanPayCopyCost { affected } => {
+        EffectOp::OfferAffectedPlayerSpellCopy { affected } => {
             let target = ctx.resolve_target(*affected);
             let decider = match target {
                 Target::Player(p) => p,
                 Target::Object(id) => state.objects.get(id).controller,
             };
-            let pay_rr = crate::mana::Cost {
-                pips: &[
-                    crate::mana::Pip::Colored(ManaColor::R),
-                    crate::mana::Pip::Colored(ManaColor::R),
-                ],
-                generic: 0,
-                x_count: 0,
-            };
-            if crate::mana::can_pay(&pay_rr, 0, decider, state).is_some() {
-                state.engine.halted =
-                    Some((crate::engine::UnsupportedMechanic::SpellCopy, ctx.source));
-            }
+            state.engine.pending_spell_copy = Some(crate::engine::PendingSpellCopy {
+                resolving_source: ctx.source,
+                player: decider,
+                inherited_target: target,
+                stage: crate::engine::SpellCopyStage::Payment,
+                copy_source: None,
+            });
         }
     }
 }
@@ -606,6 +615,9 @@ fn eval_cond(cond: &EffectCond, ctx: &ExecCtx, state: &GameState) -> bool {
             state.players[ctx.controller.index()].lands_played_this_turn > 0
         }
         EffectCond::TargetInZone(idx, zone) => match ctx.targets.get(*idx as usize) {
+            Some(Target::Object(id)) if *zone == Zone::Stack => {
+                state.stack.iter().any(|item| item.source == *id)
+            }
             Some(Target::Object(id)) => state.objects.get(*id).zone == *zone,
             _ => false,
         },

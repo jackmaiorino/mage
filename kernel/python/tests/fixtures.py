@@ -10,9 +10,9 @@ from typing import Any
 
 PROVENANCE = {
     "protocol": "kernel_rl_jsonl",
-    "protocol_version": 2,
-    "schema_version": 2,
-    "kernel_version": "0.0.1-spike",
+    "protocol_version": 3,
+    "schema_version": 3,
+    "kernel_version": "0.0.2-spike",
     "surface_version": 2,
     "card_db_hash": 13755609902749199750,
 }
@@ -127,7 +127,7 @@ def observation() -> dict[str, Any]:
     p1_land = public_card(5, 11, "p1")
     exile_card = public_card(9, 40, "p0", "Exile")
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "kernel_version": PROVENANCE["kernel_version"],
         "surface_version": PROVENANCE["surface_version"],
         "card_db_hash": PROVENANCE["card_db_hash"],
@@ -156,6 +156,7 @@ def observation() -> dict[str, Any]:
                     "controller": "p0",
                     "targets": [{"target_kind": "player", "player": "p1"}],
                     "stack_item_kind": "spell",
+                    "is_copy": False,
                     "is_flashback": False,
                     "mode_chosen": 0,
                     "madness_offer": False,
@@ -200,6 +201,7 @@ def observation() -> dict[str, Any]:
                 "pending_discard": None,
                 "pending_optional_cost": None,
                 "pending_optional_cost_sacrifice": None,
+                "pending_spell_copy": None,
                 "pending_triggers": [],
             },
             "surface_context": {
@@ -226,9 +228,9 @@ def legal_actions(actor: str = "p0") -> list[dict[str, Any]]:
     src = stable_ref(1 if actor == "p0" else 101, 30, actor, "Hand")
     opponent = "p1" if actor == "p0" else "p0"
     return [
-        {"schema_version": 2, "selected_index": 0, "stable_id": f"legal-action-v2:{actor}:a", "semantic": {"action_kind": "pass", "actor": actor}, "display_text": "Pass"},
-        {"schema_version": 2, "selected_index": 1, "stable_id": f"legal-action-v2:{actor}:b", "semantic": {"action_kind": "cast_spell", "actor": actor, "source": src}, "display_text": "Cast Lightning Bolt"},
-        {"schema_version": 2, "selected_index": 2, "stable_id": f"legal-action-v2:{actor}:c", "semantic": {"action_kind": "choose_target", "actor": actor, "source": src, "remaining": 1, "target": {"target_kind": "player", "player": opponent}}, "display_text": "Target opponent"},
+        {"schema_version": 3, "selected_index": 0, "stable_id": f"legal-action-v3:{actor}:a", "semantic": {"action_kind": "pass", "actor": actor}, "display_text": "Pass"},
+        {"schema_version": 3, "selected_index": 1, "stable_id": f"legal-action-v3:{actor}:b", "semantic": {"action_kind": "cast_spell", "actor": actor, "source": src}, "display_text": "Cast Lightning Bolt"},
+        {"schema_version": 3, "selected_index": 2, "stable_id": f"legal-action-v3:{actor}:c", "semantic": {"action_kind": "choose_target", "actor": actor, "source": src, "remaining": 1, "target": {"target_kind": "player", "player": opponent}}, "display_text": "Target opponent"},
     ]
 
 
@@ -237,11 +239,11 @@ def complete_legal_actions() -> list[dict[str, Any]]:
     second = stable_ref(12, 31, "p0", "Hand")
     blocker = stable_ref(4, 21, "p1", "Battlefield")
     return [
-        {"schema_version": 2, "selected_index": 0, "stable_id": "a0", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"},
-        {"schema_version": 2, "selected_index": 1, "stable_id": "a1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": base, "remaining": 1, "target": {"target_kind": "object", "object": blocker}}, "display_text": "Target creature"},
-        {"schema_version": 2, "selected_index": 2, "stable_id": "a2", "semantic": {"action_kind": "declare_blockers_for_attacker", "actor": "p0", "attacker": base, "blockers": [blocker]}, "display_text": "Block"},
-        {"schema_version": 2, "selected_index": 3, "stable_id": "a3", "semantic": {"action_kind": "discard", "actor": "p0", "cards": [base, second]}, "display_text": "Discard two"},
-        {"schema_version": 2, "selected_index": 4, "stable_id": "a4", "semantic": {"action_kind": "order_triggers", "actor": "p0", "pending_sources": [base, second], "order": [1, 0]}, "display_text": "Order triggers"},
+        {"schema_version": 3, "selected_index": 0, "stable_id": "legal-action-v3:a0", "semantic": {"action_kind": "pass", "actor": "p0"}, "display_text": "Pass"},
+        {"schema_version": 3, "selected_index": 1, "stable_id": "legal-action-v3:a1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": base, "remaining": 1, "target": {"target_kind": "object", "object": blocker}}, "display_text": "Target creature"},
+        {"schema_version": 3, "selected_index": 2, "stable_id": "legal-action-v3:a2", "semantic": {"action_kind": "declare_blockers_for_attacker", "actor": "p0", "attacker": base, "blockers": [blocker]}, "display_text": "Block"},
+        {"schema_version": 3, "selected_index": 3, "stable_id": "legal-action-v3:a3", "semantic": {"action_kind": "discard", "actor": "p0", "cards": [base, second]}, "display_text": "Discard two"},
+        {"schema_version": 3, "selected_index": 4, "stable_id": "legal-action-v3:a4", "semantic": {"action_kind": "order_triggers", "actor": "p0", "pending_sources": [base, second], "order": [1, 0]}, "display_text": "Order triggers"},
     ]
 
 
@@ -261,7 +263,7 @@ def decision_response(request_id: str = "r0", episode_id: int = 0, step: int = 0
     obs = actor_observation(actor, step)
     return {
         "response_type": "decision",
-        "schema_version": 2,
+        "schema_version": 3,
         "request_id": request_id,
         "provenance": copy.deepcopy(PROVENANCE),
         "episode_id": episode_id,
@@ -287,7 +289,7 @@ def terminal_response(request_id: str = "r1", episode_id: int = 0, decisions: in
         raise ValueError(outcome)
     return {
         "response_type": "terminal",
-        "schema_version": 2,
+        "schema_version": 3,
         "request_id": request_id,
         "provenance": copy.deepcopy(PROVENANCE),
         "episode_id": episode_id,

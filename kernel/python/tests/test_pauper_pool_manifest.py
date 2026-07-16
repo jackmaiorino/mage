@@ -374,8 +374,8 @@ class PauperPoolManifestTest(unittest.TestCase):
             self.support["totals"],
             {
                 "pool_cards": 150,
-                "full_cards": 25,
-                "partial_cards": 1,
+                "full_cards": 26,
+                "partial_cards": 0,
                 "no_effect_cards": 124,
                 "token_dependencies": 3,
             },
@@ -385,6 +385,14 @@ class PauperPoolManifestTest(unittest.TestCase):
             for deck_id, counts in manifests.EXPECTED_MAINBOARD_SUPPORT.items()
         ]
         self.assertEqual(self.support["deck_mainboard_copy_totals"], expected_copy_totals)
+        self.assertEqual(
+            next(
+                row
+                for row in self.support["deck_mainboard_copy_totals"]
+                if row["deck_id"] == "Rally"
+            ),
+            {"deck_id": "Rally", "full": 60, "partial": 0, "no_effect": 0, "total": 60},
+        )
         registry_cards = {row["name"]: row for row in self.registry["cards"]}
         for row in self.support["cards"]:
             name = row["name"]
@@ -398,8 +406,8 @@ class PauperPoolManifestTest(unittest.TestCase):
             else:
                 self.assertTrue(row["blockers"])
         chain = next(row for row in self.support["cards"] if row["name"] == "Chain Lightning")
-        self.assertEqual(chain["support_status"], "partial")
-        self.assertEqual(chain["blockers"], ["affordable_spell_copy_branch_halts"])
+        self.assertEqual(chain["support_status"], "full")
+        self.assertEqual(chain["blockers"], [])
         self.assertEqual(
             self.support["token_dependencies"],
             [

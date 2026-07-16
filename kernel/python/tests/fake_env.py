@@ -57,16 +57,16 @@ def main() -> int:
             sys.stdout.flush()
             continue
         if scenario == "error_valid":
-            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "line one\nline two"}})
+            emit({"response_type": "error", "schema_version": 3, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "line one\nline two"}})
             continue
         if scenario == "error_bad_schema":
             emit({"response_type": "error", "schema_version": 1, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "bad"}})
             continue
         if scenario == "error_bad_request_id":
-            emit({"response_type": "error", "schema_version": 2, "request_id": "wrong", "error": {"code": "bad_request", "message": "bad"}})
+            emit({"response_type": "error", "schema_version": 3, "request_id": "wrong", "error": {"code": "bad_request", "message": "bad"}})
             continue
         if scenario == "error_empty_code":
-            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
+            emit({"response_type": "error", "schema_version": 3, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
             continue
         if req["request_type"] == "reset":
             episode_steps[req["episode_id"]] = 0
@@ -103,7 +103,7 @@ def main() -> int:
                 resp["legal_actions"].append(resp["legal_actions"][1].copy())
                 resp["legal_actions"][3] = json.loads(json.dumps(resp["legal_actions"][3]))
                 resp["legal_actions"][3]["selected_index"] = 3
-                resp["legal_actions"][3]["stable_id"] = "legal-action-v2:d"
+                resp["legal_actions"][3]["stable_id"] = "legal-action-v3:d"
                 resp["legal_actions"][3]["semantic"]["actor"] = "p1"
             elif scenario == "nonzero_reward":
                 resp["reward"] = [1, 0]

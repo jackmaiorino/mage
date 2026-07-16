@@ -9,8 +9,8 @@
   },
   "totals": {
     "pool_cards": 150,
-    "full_cards": 25,
-    "partial_cards": 1,
+    "full_cards": 26,
+    "partial_cards": 0,
     "no_effect_cards": 124,
     "token_dependencies": 3
   },
@@ -24,8 +24,8 @@
     },
     {
       "deck_id": "Rally",
-      "full": 58,
-      "partial": 2,
+      "full": 60,
+      "partial": 0,
       "no_effect": 0,
       "total": 60
     },
@@ -482,10 +482,8 @@
         "Deck - Mono Red Rally.dek"
       ],
       "registry_membership_matches": true,
-      "support_status": "partial",
-      "blockers": [
-        "affordable_spell_copy_branch_halts"
-      ]
+      "support_status": "full",
+      "blockers": []
     },
     {
       "name": "Citadel Gate",
