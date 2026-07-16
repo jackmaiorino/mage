@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 import hashlib
 import json
 import platform
@@ -11,12 +12,69 @@ from typing import Any
 import torch
 
 from . import __version__
+from .action_sampling import fixed_categorical_sampler_contract, sample_fixed_categorical
 from .client import Decision, KernelRlClient, Terminal
 from .determinism import SeedDerivation, configure_torch_determinism, derive_env_seed, derive_sample_seed, derive_uniform_index
 from .features import EncodedDecision, encode_decision
 from .model import KernelPolicyValueNet, greedy_action
 
 POLICIES = {"uniform", "greedy", "sampled"}
+RUNNER_ARTIFACT_SCHEMA_VERSION = 2
+V1_RUNNER_ARTIFACT_SCHEMA_VERSION = 1
+
+
+def _runner_sampled_action_selection_contract() -> dict[str, Any]:
+    return {
+        "categorical_sampler": fixed_categorical_sampler_contract(),
+        "inference": "torch.no_grad model forward; selector consumes detached logits",
+        "mode": "sampled_softmax",
+        "replacement": False,
+        "temperature_hex": "0x1.0000000000000p+0",
+    }
+
+
+def _runner_policy_action_selection_contract(policy: str) -> dict[str, Any]:
+    if policy == "uniform":
+        return {
+            "algorithm": "derive_uniform_index modulo legal_action_count",
+            "inference": "unused",
+            "mode": "uniform",
+        }
+    if policy == "greedy":
+        return {
+            "algorithm": "argmax over finite CPU float32 logits",
+            "inference": "torch.no_grad model forward",
+            "mode": "greedy",
+            "tie_break": "lowest legal-action index",
+        }
+    if policy == "sampled":
+        return _runner_sampled_action_selection_contract()
+    raise ValueError(f"unsupported policy {policy}")
+
+
+def _runner_seat_action_selection_contract(p0: str, p1: str) -> dict[str, Any]:
+    return {
+        "p0": _runner_policy_action_selection_contract(p0),
+        "p1": _runner_policy_action_selection_contract(p1),
+    }
+
+
+def _runner_seed_derivation_contract() -> dict[str, Any]:
+    contract = dataclasses.asdict(SeedDerivation())
+    contract["outputs"] = {
+        "environment_seed": "full unsigned 64-bit SplitMix64 output",
+        "sampled_action_seed": "SplitMix64 output & 0x7fff_ffff",
+        "uniform_action_index": "SplitMix64 output modulo legal_action_count",
+    }
+    contract["seat_encoding"] = {"p0": "0x5030", "p1": "0x5031"}
+    return contract
+
+
+RUNNER_ACTION_SELECTION_CONTRACT = {
+    policy: _runner_policy_action_selection_contract(policy)
+    for policy in sorted(POLICIES)
+}
+RUNNER_SEED_DERIVATION_CONTRACT = _runner_seed_derivation_contract()
 
 
 def sha256_file(path: str | Path) -> str:
@@ -60,10 +118,7 @@ def select_action(
     if policy == "greedy":
         return greedy_action(logits)
     seed = derive_sample_seed(base_seed, episode, decision.step, decision.acting_player)
-    generator = torch.Generator(device="cpu")
-    generator.manual_seed(seed)
-    probabilities = torch.softmax(logits, dim=0)
-    return int(torch.multinomial(probabilities, 1, generator=generator).item())
+    return sample_fixed_categorical(logits, seed)
 
 
 def _episode_record(episode: int, env_seed: int, terminal: Terminal, p0_policy: str, p1_policy: str) -> dict[str, Any]:
@@ -152,12 +207,13 @@ def run_episodes(
     if aggregate["halted"] != 0 or aggregate["truncated"] != 0:
         raise RuntimeError("halted/truncated episodes are not admissible")
     manifest = {
-        "artifact_schema_version": 1,
+        "artifact_schema_version": RUNNER_ARTIFACT_SCHEMA_VERSION,
+        "action_selection": _runner_seat_action_selection_contract(p0, p1),
         "package": {"name": "mtg-kernel-rl", "version": __version__},
         "runtime": {"python": platform.python_version(), "torch": torch.__version__},
         "environment": {"binary_sha256": env_sha},
         "protocol_provenance": provenance,
-        "seed_derivation": SeedDerivation().__dict__,
+        "seed_derivation": _runner_seed_derivation_contract(),
         "config": {
             "episodes": episodes,
             "base_seed": base_seed,

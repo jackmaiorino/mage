@@ -1,4 +1,4 @@
-"""Fresh-only sampled paired-evaluation artifacts and strict V2 validation."""
+"""Fresh-only sampled paired-evaluation artifacts and strict V3 validation."""
 
 from __future__ import annotations
 
@@ -6,6 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from .action_sampling import (
+    fixed_categorical_sampler_contract,
+)
 from .artifact_io import (
     CapturedFile,
     canonical_json_bytes,
@@ -31,9 +34,9 @@ from .path_safety import (
 )
 
 
-RUN_SCHEMA = "kernel_rl_paired_evaluation/v2"
-GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v2"
-PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v2"
+RUN_SCHEMA = "kernel_rl_paired_evaluation/v3"
+GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v3"
+PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v3"
 RUN_FILE_NAME = v1.RUN_FILE_NAME
 GAMES_FILE_NAME = v1.GAMES_FILE_NAME
 PAIRS_FILE_NAME = v1.PAIRS_FILE_NAME
@@ -52,7 +55,7 @@ MAX_PAIRS_BYTES = v1.MAX_PAIRS_BYTES
 
 ALGORITHM_CONTRACT = {
     **v1.ALGORITHM_CONTRACT,
-    "name": "sampled_head_vs_update_zero_paired/v1",
+    "name": "sampled_head_vs_update_zero_paired/v2",
 }
 ACTION_SEED_DERIVATION_CONTRACT = {
     "algorithm": "sha256(type-tagged big-endian length-prefixed fields)[:8] & 0x7fff_ffff_ffff_ffff",
@@ -61,6 +64,23 @@ ACTION_SEED_DERIVATION_CONTRACT = {
     "version": EVALUATOR_ACTION_SEED_DERIVATION_VERSION,
 }
 ACTION_SELECTION_CONTRACT = {
+    "categorical_sampler": fixed_categorical_sampler_contract(),
+    "inference": "torch.inference_mode",
+    "mode": "sampled_softmax",
+    "replacement": False,
+    "temperature_hex": "0x1.0000000000000p+0",
+}
+
+# V2 is intentionally frozen rather than reinterpreted as the V3 selector. These
+# identities make the release boundary explicit and support corruption tests.
+V2_RUN_SCHEMA = "kernel_rl_paired_evaluation/v2"
+V2_GAME_SCHEMA = "kernel_rl_paired_evaluation_game/v2"
+V2_PAIR_SCHEMA = "kernel_rl_paired_evaluation_pair/v2"
+V2_ALGORITHM_CONTRACT = {
+    **v1.ALGORITHM_CONTRACT,
+    "name": "sampled_head_vs_update_zero_paired/v1",
+}
+V2_ACTION_SELECTION_CONTRACT = {
     "action_rng": "fresh CPU torch.Generator per decision seeded by action_seed_derivation",
     "algorithm": "torch.multinomial(torch.softmax(finite CPU float32 logits, dim=0).detach(), 1, replacement=False, generator=action_generator)",
     "inference": "torch.inference_mode",
@@ -400,7 +420,7 @@ def _publish_sampled_evaluation(
 
 
 def validate_sampled_evaluation(root: str | Path) -> ValidatedEvaluation:
-    """Validate one complete sampled V2 evaluation without side effects."""
+    """Validate one complete sampled V3 evaluation without side effects."""
 
     root = ensure_real_dir(root)
     entries = scandir_no_follow(root)
@@ -443,6 +463,11 @@ __all__ = [
     "RUN_FILE_NAME",
     "RUN_SCHEMA",
     "SEAT_SCHEDULE_CONTRACT",
+    "V2_ACTION_SELECTION_CONTRACT",
+    "V2_ALGORITHM_CONTRACT",
+    "V2_GAME_SCHEMA",
+    "V2_PAIR_SCHEMA",
+    "V2_RUN_SCHEMA",
     "ValidatedEvaluation",
     "validate_sampled_evaluation",
 ]

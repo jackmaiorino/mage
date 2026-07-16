@@ -7,6 +7,7 @@ from typing import Any
 
 import torch
 
+from .action_sampling import sample_fixed_categorical
 from .artifact_io import json_values_equal_strict, read_regular_file_bytes
 from .artifacts import require_new_or_empty_dir
 from .client import Decision, KernelRlClient, Terminal
@@ -71,25 +72,7 @@ def _select_sampled_action(model: Any, decision: Decision, action_seed: int) -> 
         if not bool(torch.isfinite(value).all()):
             raise ValueError("sampled evaluation model produced non-finite value")
 
-    probabilities = torch.softmax(logits, dim=0).detach()
-    if (
-        probabilities.device.type != "cpu"
-        or probabilities.dtype != torch.float32
-        or probabilities.shape != logits.shape
-        or not bool(torch.isfinite(probabilities).all())
-    ):
-        raise ValueError("sampled evaluation softmax produced invalid probabilities")
-    action_generator = torch.Generator(device="cpu")
-    action_generator.manual_seed(action_seed)
-    selected = torch.multinomial(
-        probabilities,
-        1,
-        replacement=False,
-        generator=action_generator,
-    )
-    if selected.device.type != "cpu" or selected.dtype != torch.int64 or selected.shape != (1,):
-        raise ValueError("sampled evaluation multinomial returned an invalid selection")
-    selected_position = int(selected.item())
+    selected_position = sample_fixed_categorical(logits, action_seed)
     if selected_position < 0 or selected_position >= len(decision.legal_actions):
         raise ValueError("sampled model selected an out-of-range legal action")
     return selected_position

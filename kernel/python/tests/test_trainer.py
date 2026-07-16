@@ -26,10 +26,11 @@ import mtg_kernel_rl.artifact_io as artifact_io
 import mtg_kernel_rl.artifacts as artifacts_mod
 import mtg_kernel_rl.checkpoint_io as checkpoint_io
 from mtg_kernel_rl.checkpoint import load_checkpoint_file, save_checkpoint_file
+from mtg_kernel_rl.determinism import derive_train_learner_action_seed
 from mtg_kernel_rl.output_lock import OutputLock, OutputLockError
 from mtg_kernel_rl.path_safety import filesystem_file_identity
 from mtg_kernel_rl.model import KernelPolicyValueNet
-from mtg_kernel_rl.training_store import TrainingStore
+from mtg_kernel_rl.training_store import ALGORITHM_NAME, RUN_SCHEMA, TRAINER_ACTION_SELECTION_CONTRACT, TrainingStore
 from mtg_kernel_rl.trainer import _compute_loss_tensors, train
 import mtg_kernel_rl.trainer as trainer_mod
 
@@ -286,7 +287,9 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v11")
+            self.assertEqual(run["schema"], RUN_SCHEMA)
+            self.assertEqual(run["algorithm"]["name"], ALGORITHM_NAME)
+            self.assertEqual(run["samplers"]["learner"]["action_selection"], TRAINER_ACTION_SELECTION_CONTRACT)
             self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v9")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
@@ -801,6 +804,29 @@ class TrainerTest(unittest.TestCase):
         policy_only.backward()
         self.assertAlmostEqual(float(value_a.grad.item()), 0.0, places=7)
         self.assertAlmostEqual(float(value_b.grad.item()), 0.0, places=7)
+
+    def test_learner_selector_has_fixed_goldens_preserves_global_rng_and_keeps_log_prob_differentiable(self) -> None:
+        logits = torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32, requires_grad=True)
+        seeds = [derive_train_learner_action_seed(71_501, episode, 0) for episode in range(4)]
+        random.seed(567_890)
+        torch.manual_seed(678_901)
+        python_state = random.getstate()
+        torch_state = torch.get_rng_state().clone()
+
+        selections_and_log_probs = [trainer_mod._select_learner_action(logits, seed) for seed in seeds]
+
+        self.assertEqual([selected for selected, _log_prob in selections_and_log_probs], [1, 1, 0, 1])
+        self.assertEqual(random.getstate(), python_state)
+        self.assertTrue(torch.equal(torch.get_rng_state(), torch_state))
+        expected = torch.log_softmax(logits, dim=0)
+        for selected, log_prob in selections_and_log_probs:
+            self.assertTrue(torch.equal(log_prob, expected[selected]))
+            self.assertTrue(log_prob.requires_grad)
+        loss = -torch.stack([log_prob for _selected, log_prob in selections_and_log_probs]).sum()
+        loss.backward()
+        self.assertIsNotNone(logits.grad)
+        self.assertTrue(torch.isfinite(logits.grad).all())
+        self.assertGreater(float(torch.sum(torch.abs(logits.grad)).item()), 0.0)
 
     def test_opponent_has_no_model_forwards_and_both_learner_seats_train(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -2583,7 +2609,7 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            for version in range(1, 11):
+            for version in range(1, 12):
                 case(
                     f"old_v{version}_run_schema_rejected",
                     lambda p, version=version: write_json_atomic(
@@ -2700,7 +2726,7 @@ class TrainerTest(unittest.TestCase):
                         "forbidden training artifact field",
                     )
                 )
-            for version in range(1, 11):
+            for version in range(1, 12):
                 cases.append(
                     (
                         f"old_v{version}_run_schema",

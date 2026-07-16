@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import decimal
 import io
 import json
 import os
@@ -15,6 +16,7 @@ from unittest import mock
 
 import torch
 
+import mtg_kernel_rl.action_sampling as action_sampling_mod
 import mtg_kernel_rl.cli as cli_mod
 import mtg_kernel_rl.sampled_evaluator as sampled_mod
 from mtg_kernel_rl.artifact_io import canonical_json_bytes, read_json_file, sha256_bytes
@@ -34,6 +36,11 @@ from mtg_kernel_rl.sampled_evaluation_store import (
     PAIR_SCHEMA,
     RUN_SCHEMA,
     SEAT_SCHEDULE_CONTRACT,
+    V2_ACTION_SELECTION_CONTRACT,
+    V2_ALGORITHM_CONTRACT,
+    V2_GAME_SCHEMA,
+    V2_PAIR_SCHEMA,
+    V2_RUN_SCHEMA,
     validate_sampled_evaluation,
 )
 from mtg_kernel_rl.sampled_evaluator import _run_sampled_game, _select_sampled_action, evaluate_sampled
@@ -203,11 +210,98 @@ class SampledSelectorTest(unittest.TestCase):
         python_state = random.getstate()
         torch_state = torch.get_rng_state().clone()
         selected = [_select_sampled_action(FixedModel(), decision, seed) for seed in seeds]
-        self.assertEqual(selected, [1, 1, 2, 2, 2, 0])
+        self.assertEqual(selected, [1, 2, 1, 1, 2, 2])
         self.assertEqual(_select_sampled_action(FixedModel(), decision, seeds[0]), selected[0])
         self.assertGreater(len(set(selected)), 1)
         self.assertEqual(random.getstate(), python_state)
         self.assertTrue(torch.equal(torch.get_rng_state(), torch_state))
+
+    def test_selector_has_frozen_softmax_rng_and_boundary_vectors(self) -> None:
+        scale = 1 << 64
+        logits = torch.tensor([0.0, 1.0, 2.0], dtype=torch.float32)
+        expected_weights = (
+            1_660_770_942_083_389_871,
+            4_514_443_473_098_088_136,
+            12_271_529_658_528_073_609,
+        )
+        self.assertEqual(action_sampling_mod.fixed_softmax_mass(logits), expected_weights)
+        self.assertEqual(
+            action_sampling_mod.fixed_softmax_mass(torch.tensor([100.0, 101.0, 102.0], dtype=torch.float32)),
+            action_sampling_mod.fixed_softmax_mass(logits),
+        )
+        self.assertEqual(
+            action_sampling_mod.fixed_softmax_mass(torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32)),
+            (6_148_914_691_236_517_206, 6_148_914_691_236_517_205, 6_148_914_691_236_517_205),
+        )
+        self.assertEqual(
+            action_sampling_mod.fixed_softmax_mass(torch.tensor([0.0, -128.0, -129.0], dtype=torch.float32)),
+            (scale, 0, 0),
+        )
+        float32_max = torch.finfo(torch.float32).max
+        self.assertEqual(
+            action_sampling_mod.fixed_softmax_mass(torch.tensor([float32_max, -float32_max], dtype=torch.float32)),
+            (scale, 0),
+        )
+        self.assertEqual(
+            [action_sampling_mod.splitmix64_u64(seed) for seed in (0, 1, (1 << 63) - 1)],
+            [0xE220_A839_7B1D_CDAF, 0x910A_2DEC_8902_5CC1, 0x2A67_D755_2E03_9EA7],
+        )
+        boundary_weights = (2, 3, scale - 5)
+        self.assertEqual(
+            [
+                action_sampling_mod.select_categorical_u64(boundary_weights, draw)
+                for draw in (0, 1, 2, 4, 5, scale - 1)
+            ],
+            [0, 0, 1, 1, 2, 2],
+        )
+        with mock.patch.object(torch, "softmax", side_effect=AssertionError("Torch softmax must not be used")), mock.patch.object(
+            torch,
+            "multinomial",
+            side_effect=AssertionError("Torch multinomial must not be used"),
+        ):
+            self.assertEqual(action_sampling_mod.sample_fixed_categorical(logits, 0), 2)
+
+        original_context = decimal.getcontext().copy()
+        try:
+            decimal.getcontext().prec = 3
+            decimal.getcontext().rounding = decimal.ROUND_DOWN
+            self.assertEqual(action_sampling_mod.fixed_softmax_mass(logits), expected_weights)
+            self.assertEqual((decimal.getcontext().prec, decimal.getcontext().rounding), (3, decimal.ROUND_DOWN))
+        finally:
+            decimal.setcontext(original_context)
+
+    def test_selector_context_is_frozen_before_module_import(self) -> None:
+        script = r"""
+import decimal
+decimal.DefaultContext.prec = 3
+decimal.DefaultContext.rounding = decimal.ROUND_DOWN
+decimal.DefaultContext.Emin = -9
+decimal.DefaultContext.Emax = 9
+decimal.DefaultContext.capitals = 0
+decimal.DefaultContext.clamp = 1
+for signal in decimal.DefaultContext.traps:
+    decimal.DefaultContext.traps[signal] = True
+
+import torch
+from mtg_kernel_rl.action_sampling import fixed_softmax_mass
+
+print(",".join(str(value) for value in fixed_softmax_mass(torch.tensor([0.0, 1.0, 2.0], dtype=torch.float32))))
+"""
+        env = os.environ.copy()
+        python_root = str(Path(action_sampling_mod.__file__).resolve().parents[1])
+        env["PYTHONPATH"] = python_root + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            capture_output=True,
+            text=True,
+            env=env,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            result.stdout.strip(),
+            "1660770942083389871,4514443473098088136,12271529658528073609",
+        )
 
     def test_selector_rejects_bad_logits_values_and_seed_types(self) -> None:
         decision = self._decision()
@@ -242,8 +336,10 @@ class SampledSelectorTest(unittest.TestCase):
                     bad_seed,  # type: ignore[arg-type]
                 )
         valid_model = FixedModel((torch.tensor([0.0, 1.0, 2.0]), torch.tensor(0.0)))
-        with mock.patch.object(torch, "multinomial", return_value=torch.tensor([0], dtype=torch.int32)):
-            with self.assertRaisesRegex(ValueError, "invalid selection"):
+        with self.assertRaisesRegex(ValueError, r"sum to 2\*\*64"):
+            action_sampling_mod.select_categorical_u64((1, 2, 3), 0)
+        with mock.patch.object(sampled_mod, "sample_fixed_categorical", return_value=3):
+            with self.assertRaisesRegex(ValueError, "out-of-range legal action"):
                 _select_sampled_action(valid_model, decision, 0)
 
 
@@ -654,6 +750,19 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
 
             manifest_mutations = (
                 ("run-schema", lambda value: value.__setitem__("schema", "kernel_rl_paired_evaluation/v1")),
+                ("legacy-v2-run-schema", lambda value: value.__setitem__("schema", V2_RUN_SCHEMA)),
+                (
+                    "legacy-v2-artifact-schemas",
+                    lambda value: value.__setitem__(
+                        "artifact_schemas",
+                        {"game": V2_GAME_SCHEMA, "pair": V2_PAIR_SCHEMA, "run": V2_RUN_SCHEMA},
+                    ),
+                ),
+                ("legacy-v2-algorithm", lambda value: value.__setitem__("algorithm", V2_ALGORITHM_CONTRACT)),
+                (
+                    "legacy-v2-action-selection",
+                    lambda value: value.__setitem__("action_selection", V2_ACTION_SELECTION_CONTRACT),
+                ),
                 ("artifact-game", lambda value: value["artifact_schemas"].__setitem__("game", "bad")),
                 ("artifact-pair", lambda value: value["artifact_schemas"].__setitem__("pair", "bad")),
                 ("artifact-run", lambda value: value["artifact_schemas"].__setitem__("run", "bad")),
@@ -668,8 +777,17 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
                 ("selection-inference", lambda value: value["action_selection"].__setitem__("inference", "bad")),
                 ("selection-temperature", lambda value: value["action_selection"].__setitem__("temperature_hex", "0x0.0p+0")),
                 ("selection-replacement", lambda value: value["action_selection"].__setitem__("replacement", True)),
-                ("selection-rng", lambda value: value["action_selection"].__setitem__("action_rng", "bad")),
-                ("selection-algorithm", lambda value: value["action_selection"].__setitem__("algorithm", "bad")),
+                ("selection-rng", lambda value: value["action_selection"]["categorical_sampler"].__setitem__("action_rng", "bad")),
+                ("selection-algorithm", lambda value: value["action_selection"]["categorical_sampler"].__setitem__("algorithm", "bad")),
+                ("selection-version", lambda value: value["action_selection"]["categorical_sampler"].__setitem__("sampler_version", "bad")),
+                (
+                    "selection-decimal",
+                    lambda value: value["action_selection"]["categorical_sampler"]["decimal_softmax"].__setitem__("exp_precision_digits", 79),
+                ),
+                (
+                    "selection-mass",
+                    lambda value: value["action_selection"]["categorical_sampler"]["probability_mass"].__setitem__("total", "2**63"),
+                ),
                 ("seat-candidate-p0", lambda value: value["seat_schedule"].__setitem__("candidate_as_p0", "bad")),
                 ("seat-candidate-p1", lambda value: value["seat_schedule"].__setitem__("candidate_as_p1", "bad")),
                 ("seat-env", lambda value: value["seat_schedule"].__setitem__("paired_environment_seed", "bad")),

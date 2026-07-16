@@ -14,6 +14,7 @@ from typing import Any
 import torch
 
 from . import __version__
+from .action_sampling import fixed_categorical_sampler_contract
 from .artifact_io import (
     FORBIDDEN_TRAINING_JSON_KEYS,
     read_authoritative_json_capture,
@@ -52,14 +53,27 @@ from .model import INITIALIZER_TRAINER_SEEDED_V1, KernelPolicyValueNet, ModelCon
 from .path_safety import ensure_real_child_dir, ensure_real_file
 
 
-RUN_SCHEMA = "kernel_rl_train_run/v11"
-ALGORITHM_NAME = "terminal_reinforce_value/v1"
+RUN_SCHEMA = "kernel_rl_train_run/v12"
+ALGORITHM_NAME = "terminal_reinforce_value/v2"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
 MAX_DECISIONS = 10_000_000
 EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v2"
 SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
+
+
+def _trainer_action_selection_contract() -> dict[str, Any]:
+    return {
+        "categorical_sampler": fixed_categorical_sampler_contract(),
+        "inference": "autograd-enabled model forward; selector consumes detached logits; loss uses original logits",
+        "mode": "sampled_softmax",
+        "replacement": False,
+        "temperature_hex": "0x1.0000000000000p+0",
+    }
+
+
+TRAINER_ACTION_SELECTION_CONTRACT = _trainer_action_selection_contract()
 
 
 @dataclasses.dataclass(frozen=True, slots=True)
@@ -687,7 +701,7 @@ def _run_manifest_from_config(
         "optimizer": optimizer,
         "samplers": {
             "learner": {
-                "algorithm": "torch.multinomial(softmax(logits), replacement=false, generator=actor-local-cpu)",
+                "action_selection": _trainer_action_selection_contract(),
                 "seed_namespace": "train-learner-action/base_seed/episode_index/learner_decision_index",
                 "global_python_rng": "unused",
                 "global_torch_rng": "unused",

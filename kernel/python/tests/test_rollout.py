@@ -1,16 +1,88 @@
 from __future__ import annotations
 
 import filecmp
+import random
 import tempfile
 import unittest
 from pathlib import Path
 
-from mtg_kernel_rl.rollout import run_episodes
+import torch
 
-from fixtures import fake_launcher
+from mtg_kernel_rl.action_sampling import fixed_categorical_sampler_contract
+from mtg_kernel_rl.client import Decision
+from mtg_kernel_rl.rollout import (
+    RUNNER_ACTION_SELECTION_CONTRACT,
+    RUNNER_ARTIFACT_SCHEMA_VERSION,
+    RUNNER_SEED_DERIVATION_CONTRACT,
+    V1_RUNNER_ARTIFACT_SCHEMA_VERSION,
+    run_episodes,
+    select_action,
+)
+from mtg_kernel_rl.sampled_evaluation_store import ACTION_SELECTION_CONTRACT as EVALUATOR_ACTION_SELECTION_CONTRACT
+from mtg_kernel_rl.training_store import TRAINER_ACTION_SELECTION_CONTRACT
+
+from fixtures import PROVENANCE, actor_observation, fake_launcher, legal_actions
+
+
+class _FixedModelPolicy:
+    def logits_value(self, _encoded):  # type: ignore[no-untyped-def]
+        return torch.tensor([0.0, 1.0, 2.0], dtype=torch.float32), torch.tensor(0.0, dtype=torch.float32)
 
 
 class RolloutTest(unittest.TestCase):
+    def test_sampled_selector_has_fixed_goldens_and_preserves_global_rng(self) -> None:
+        cases = (
+            (0, 0, "p0"),
+            (0, 0, "p1"),
+            (1, 0, "p0"),
+            (0, 1, "p0"),
+        )
+        random.seed(123_456)
+        torch.manual_seed(234_567)
+        python_state = random.getstate()
+        torch_state = torch.get_rng_state().clone()
+        selected: list[int] = []
+        for episode, step, actor in cases:
+            decision = Decision(
+                episode,
+                step,
+                actor,
+                actor_observation(actor, step),
+                legal_actions(actor),
+                dict(PROVENANCE),
+            )
+            selected.append(
+                select_action(
+                    decision,
+                    policy="sampled",
+                    base_seed=71_501,
+                    episode=episode,
+                    model_policy=_FixedModelPolicy(),  # type: ignore[arg-type]
+                )
+            )
+        self.assertEqual(selected, [2, 2, 0, 2])
+        self.assertEqual(random.getstate(), python_state)
+        self.assertTrue(torch.equal(torch.get_rng_state(), torch_state))
+
+    def test_three_lanes_share_equal_nonaliased_categorical_contracts(self) -> None:
+        cores = (
+            EVALUATOR_ACTION_SELECTION_CONTRACT["categorical_sampler"],
+            TRAINER_ACTION_SELECTION_CONTRACT["categorical_sampler"],
+            RUNNER_ACTION_SELECTION_CONTRACT["sampled"]["categorical_sampler"],
+        )
+        expected = fixed_categorical_sampler_contract()
+        for core in cores:
+            self.assertEqual(core, expected)
+        self.assertEqual(len({id(core) for core in cores}), 3)
+        self.assertEqual(len({id(core["decimal_softmax"]) for core in cores}), 3)
+        self.assertEqual(len({id(core["probability_mass"]) for core in cores}), 3)
+
+        fresh = fixed_categorical_sampler_contract()
+        fresh["decimal_softmax"]["exp_precision_digits"] = 1
+        fresh["probability_mass"]["total"] = "2**1"
+        for core in cores:
+            self.assertEqual(core, expected)
+
     def test_fake_rollout_artifacts_are_byte_deterministic_and_terminal_only(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -29,6 +101,61 @@ class RolloutTest(unittest.TestCase):
             self.assertIn('"halted":0', run_text)
             self.assertIn('"truncated":0', run_text)
             self.assertIn('"terminal_outcome"', episodes_text)
+            manifest = run_episodes(
+                env_bin=launcher,
+                out_dir=tmp / "mixed",
+                episodes=2,
+                base_seed=71_502,
+                max_decisions=8,
+                p0="uniform",
+                p1="greedy",
+            )
+            self.assertEqual(
+                manifest["action_selection"],
+                {
+                    "p0": RUNNER_ACTION_SELECTION_CONTRACT["uniform"],
+                    "p1": RUNNER_ACTION_SELECTION_CONTRACT["greedy"],
+                },
+            )
+
+    def test_sampled_rollout_v2_contract_is_repeatable_and_v1_remains_distinct(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "valid")
+            out_a = tmp / "sampled-a"
+            out_b = tmp / "sampled-b"
+            manifest_a = run_episodes(
+                env_bin=launcher,
+                out_dir=out_a,
+                episodes=4,
+                base_seed=71_501,
+                max_decisions=8,
+                p0="sampled",
+                p1="sampled",
+            )
+            manifest_b = run_episodes(
+                env_bin=launcher,
+                out_dir=out_b,
+                episodes=4,
+                base_seed=71_501,
+                max_decisions=8,
+                p0="sampled",
+                p1="sampled",
+            )
+            self.assertEqual(manifest_a, manifest_b)
+            self.assertTrue(filecmp.cmp(out_a / "run.json", out_b / "run.json", shallow=False))
+            self.assertTrue(filecmp.cmp(out_a / "episodes.jsonl", out_b / "episodes.jsonl", shallow=False))
+            self.assertEqual(manifest_a["artifact_schema_version"], RUNNER_ARTIFACT_SCHEMA_VERSION)
+            self.assertEqual(
+                manifest_a["action_selection"],
+                {
+                    "p0": RUNNER_ACTION_SELECTION_CONTRACT["sampled"],
+                    "p1": RUNNER_ACTION_SELECTION_CONTRACT["sampled"],
+                },
+            )
+            self.assertEqual(manifest_a["seed_derivation"], RUNNER_SEED_DERIVATION_CONTRACT)
+            self.assertEqual(V1_RUNNER_ARTIFACT_SCHEMA_VERSION, 1)
+            self.assertNotEqual(manifest_a["artifact_schema_version"], V1_RUNNER_ARTIFACT_SCHEMA_VERSION)
 
 
 if __name__ == "__main__":

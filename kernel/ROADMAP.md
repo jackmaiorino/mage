@@ -8,11 +8,13 @@ Scope: the nine canonical Pauper decks below in best-of-one play. Sideboarding a
 
 The kernel is science-ready when it can train and evaluate policies over all nine pinned BO1 decks without unsupported cards or mechanics, reproduce every accepted run from a clean clone, and publish a complete seat-balanced 9x9 matchup matrix whose primary result uses sampled policy actions. Greedy evaluation remains a required secondary diagnostic, not the promotion result.
 
+These nine decks are the complete Pauper meta pool carried forward from the previous project. A result over Burn/Rally, a convenient subset, or only the newly implemented decks cannot close this roadmap: all nine mainboards must be implemented, trained against, and evaluated in the final full-pool protocol before any concluding science claim.
+
 The current checkpoint has a strong deterministic RL and artifact foundation, but card coverage is still effectively Burn plus Rally. The generated pool metadata now freezes all nine decks, and `cards_v1.json` declares their exact memberships for the 132 deck cards it contains; eighteen Spy cards are still absent from the registry, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
 
 The implementation order is:
 
-1. Finish certifying Burn and Rally. Chain Lightning's live copy branch is implemented; the remaining work is closing the residual reference-replay divergences.
+1. Preserve the certified Burn/Rally baseline. The two designated local corpora now pass tracked content-lock and provenance gates and each replay 40/40 with zero divergence.
 2. Build reusable card, target, cost, zone, trigger, combat, and token primitives.
 3. Terror.
 4. Faeries.
@@ -32,6 +34,7 @@ All of the following are required:
 - **Reference evidence:** each rules primitive has unit coverage, each deck has a deterministic public-engine golden, and fixed-provenance XMage traces replay without unexplained divergence.
 - **Deterministic environment:** deck construction, shuffling, policy sampling, seat swaps, observations, legal-action identities, checkpoints, and artifacts are versioned and reproducible from explicit seeds.
 - **Training integrity:** the already-proven constant-work, append-only training/checkpoint path remains crash-consistent and hash-validated for every deck configuration.
+- **Training viability:** before the long full-pool run, benchmark end-to-end throughput and the stable sampler over the observed legal-action-width distribution from all nine decks, then record the hardware and capacity estimate. A faster selector changes the sampler version and requires new deterministic vectors; it cannot silently replace the accepted algorithm.
 - **Evaluation integrity:** sampled-policy paired evaluation is primary; deterministic greedy paired evaluation is secondary. Both reject halted, truncated, inconsistent, or provenance-drifting runs.
 - **Pool evidence:** every diagonal mirror and every ordered cross-deck cell passes the gates below, producing the complete 9x9 report with seat strata, draws, paired uncertainty, and exact provenance.
 - **Reproducible finish:** a clean clone of the independent kernel repository passes CI and reproduces the published smoke, golden, and evaluation artifact digests without access to an XMage working tree at runtime.
@@ -64,10 +67,11 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 - Append-only, hash-linked training artifacts and checkpoints with constant-work update and recovery behavior.
 - Failure-boundary and path-safety proofs for training and evaluation publication.
 - Deterministic paired head-versus-update-zero evaluation with seat swaps, natural-terminal enforcement, W/D/L and seat strata, paired bootstrap intervals, an exact paired sign test, and immutable artifact validation.
-- Greedy V1 and sampled V2 evaluator lanes. Sampled V2 is currently a Burn-mirror, head-versus-update-zero contract with one actor-local action stream per physical seat, shared across the two pair legs; its stream keys exclude policy role and game/leg. Greedy remains the secondary lane.
+- Greedy V1 and sampled V3 evaluator lanes. Sampled V3 is currently a Burn-mirror, head-versus-update-zero contract with one actor-local action stream per physical seat, shared across the two pair legs; its stream keys exclude policy role and game/leg. V3 replaces the frozen Torch-dependent V2 selector with exact binary32-to-Decimal softmax, Hamilton-apportioned `2**64`-unit mass, and one SplitMix64 draw per decision. Greedy remains the secondary lane.
 - Source-level card behavior for the complete Burn and Rally mainboards. Chain Lightning now has explicit payment, retarget, target, repeat-copy, counter/fizzle, and copy-departure behavior; the RL observation/session contracts are schema v3.
+- Tracked Phase-0 content locks for `burn_mirror_v6` and `rally_mirror_v2`: all 40 trace paths, raw-byte sizes and SHA-256 digests per corpus, each `manifest.json`, and an aggregate digest are embedded into the replay gate. Designated-corpus replay now fails before parsing a trace on non-`LOCKED` status or any missing, extra, or changed replay input.
 - Generated `pauper_pool_v1.json` and `pauper_support_v1.json` metadata that pins all nine normalized 60+15 rosters, exact registry membership, current support blockers, token dependencies, source hashes, and raw pool/registry hashes.
-- The support manifest currently classifies 26 unique cards as `full`, zero as `partial`, and 124 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer; this is not yet a claim that Rally's full reference-parity gate has passed.
+- The support manifest currently classifies 26 unique cards as `full`, zero as `partial`, and 124 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer, and both designated content-locked, fixed-provenance reference corpora replay 40/40 with zero divergence.
 
 ### Card coverage
 
@@ -76,7 +80,7 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 | Archetype | Main registered | Main effect-backed | Side registered | Side effect-backed | Current limiting fact |
 |---|---:|---:|---:|---:|---|
 | Wildfire | 60/60 | 2/60 | 15/15 | 3/15 | Only Mountain is usable in the mainboard |
-| Rally | 60/60 | 60/60 | 15/15 | 8/15 | Mainboard effect-complete; reference-parity certification remains |
+| Rally | 60/60 | 60/60 | 15/15 | 8/15 | Locked fixed-provenance replay passes 40/40 |
 | Affinity | 60/60 | 7/60 | 15/15 | 5/15 | Great Furnace and Galvanic Blast only |
 | Elves | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
 | Spy | 21/60 | 0/60 | 4/15 | 0/15 | 39 main and 11 side copies are absent from the registry |
@@ -87,7 +91,9 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 
 The registry currently contains 135 definitions: 132 deck cards and three tokens. `pool_decks` now lists all nine sources in canonical order, and the eight already-present Spy cards declare exact Spy membership. Seven of those are Spy mainboard names shared with other decks; fourteen Spy mainboard names and four additional sideboard-only names still need new records.
 
-Chain Lightning's implementation checkpoint is backed by unit tests for unpayable and declined payment, copied-stack identity, retargeting, recursive copies, illegal-target fizzles, copy-aware counters and flashback replacement, target-pool filtering, RL serialization/action semantics, and snapshot/restore determinism. The local 40-game `rallymirror_v2_gen3` corpus contains 15 logged payment prompts, six accepted payments, six retarget prompts, and three accepted retargets. Replaying it with `REPLAY_REFERENCE_RULES_VERSION=2` removes all Chain-specific halt/decision divergences: 21 traces reach GameOver with matching winners, while 19 still stop on pre-existing candidate/suppression parity differences (17 cast-candidate multiset and two blocker-window mismatches). Because that local corpus has no `manifest.json`, it is useful behavior evidence but not yet the fixed-provenance Phase 0 acceptance artifact.
+Chain Lightning's implementation checkpoint is backed by unit tests for unpayable and declined payment, copied-stack identity, retargeting, recursive copies, illegal-target fizzles, copy-aware counters and flashback replacement, target-pool filtering, RL serialization/action semantics, and snapshot/restore determinism. The locked `rally_mirror_v2` corpus contains 40 games, 15 logged payment prompts, six accepted payments, six retarget prompts, and three accepted retargets. Its manifest pins ReferenceRules v2 and Java oracle commit `0723fc0c2be922af47b0ef0539f28114cc23b998`; the runtime provenance gate passes. Replay reaches GameOver in all 40 traces, matches all 40 winners, and reports zero divergence and zero halt. Closing the former residuals required mirroring Java's rendered-cast-candidate equivalence in the replay comparator while preserving exact chosen object identity, filtering attackers killed before blocker declaration, and matching XMage's deterministic generic-mana pool spending order.
+
+The formal Burn and Rally evidence is now content-locked locally by tracked metadata; `kernel/CORPUS_CONTENT_LOCKS.md` defines the byte-level algorithm. This makes mutation or substitution detectable, but it does not make the ignored corpus payloads available from a clean clone. Durable content-addressed storage, authenticated retrieval, and post-download digest verification remain part of the independent-repository release gate.
 
 Keyword representation is also not rules completeness. For example, defender is represented but not enforced when declaring attackers, trample still uses a no-trample combat path, and deathtouch, lifelink, protection, hexproof, and ward need real rules behavior.
 
@@ -113,7 +119,7 @@ These should be generic effect and decision primitives, not a growing per-card `
 - Keep the generated pool and support manifests current, with explicit `full`, `partial`, and `no_effect` states over all 150 deck cards.
 - Preserve the assertion that the authoritative deck set equals these nine canonical full-text hashes; `unresolved: []` must not be possible when a source or registry record was never included.
 - Preserve Chain Lightning's implemented copy, retarget, repeat-copy, counter/fizzle, schema-v3 RL, snapshot, and trace-parser regressions.
-- Resolve the remaining Rally reference candidate/suppression divergences and rerun against a fixed-provenance corpus.
+- Preserve the content-lock- and provenance-gated, zero-divergence 40/40 replays for `burn_mirror_v6` and `rally_mirror_v2`.
 - Preserve all Burn/Rally goldens, replays, RL contracts, and evaluator proofs.
 
 Exit: Burn and Rally pass every BO1 gate below with no conditional halt.
@@ -209,7 +215,7 @@ Every phase must pass gates in this order. A later gate cannot waive an earlier 
 
 ### 6. Cross-deck gate
 
-- Before phase promotion, run at least 16 paired seeds against every previously accepted deck under the separately versioned multi-deck seed contract described below. Current sampled V2 is not that contract.
+- Before phase promotion, run at least 16 paired seeds against every previously accepted deck under the separately versioned multi-deck seed contract described below. Current sampled V3 is not that contract.
 - Require natural terminals, exact rerun determinism, zero unsupported cards/mechanics, and explicit seat-stratified results.
 - After Spy, replace these smoke-sized gates with the final matrix protocol below.
 
@@ -219,13 +225,15 @@ Every phase must pass gates in this order. A later gate cannot waive an earlier 
 
 Science claims use actions sampled from the policy logits, with all sampling performed by an explicit, versioned deterministic RNG. The manifest records policy snapshot hashes, deck hashes, environment and policy seed derivation versions, pair count, temperature, and any logit transformation.
 
-#### Current sampled V2 seed contract
+#### Current sampled V3 seed and selector contract
 
-The current head-versus-update-zero V2 evaluator is a single-deck Burn mirror. For each pair it uses actor-local action RNG streams keyed by physical seat. The physical-P0 stream and physical-P1 stream are each shared across both pair legs; action-stream derivation intentionally excludes candidate/baseline role and game/leg. This is the frozen V2 common-random-number contract. It does not define a multi-deck shuffle or action schedule.
+Sampled V2 remains a frozen legacy identity: it selected with `torch.multinomial`, whose seeded categorical stream is not stable across supported Torch releases. Sampled V3 does not reinterpret that schema. It converts finite CPU binary32 logits exactly to Decimal, subtracts the maximum at 256-digit precision, evaluates exponentials at 80-digit round-half-even precision (with deltas strictly below -128 assigned zero mass), apportions exactly `2**64` units by largest remainder with legal-index tie-breaking, and selects by inverse CDF using the first SplitMix64-v1 output seeded by the action seed. Exact vectors cover the softmax weights, RNG outputs, CDF boundaries, translation invariance, and independence from process-global Python/Torch RNG state and Decimal context.
+
+V3 preserves V2's common-random-number schedule. For each pair it uses actor-local action RNG streams keyed by physical seat. The physical-P0 stream and physical-P1 stream are each shared across both pair legs; action-stream derivation intentionally excludes candidate/baseline role and game/leg. This is still a single-deck Burn-mirror contract, not a multi-deck shuffle or action schedule.
 
 #### Future multi-deck seed contract
 
-Cross-deck evaluation requires a new, separately versioned schema and seed-derivation contract. That protocol may key shuffle/determinization and action streams by logical deck role so that each deck carries the corresponding common-random-number streams when the decks swap physical seats. The exact mapping must be explicit in manifests and tested for seat-swap, row-order, and rerun invariance. It must not be retrofitted into V2 or described as behavior V2 already provides.
+Cross-deck evaluation requires a new, separately versioned schema and seed-derivation contract. That protocol may key shuffle/determinization and action streams by logical deck role so that each deck carries the corresponding common-random-number streams when the decks swap physical seats. The exact mapping must be explicit in manifests and tested for seat-swap, row-order, and rerun invariance. It must not be retrofitted into V3 or described as behavior V3 already provides.
 
 The primary report includes candidate-centric W/D/L, score, candidate-as-P0 and candidate-as-P1 strata, favorable/tied/unfavorable pairs, a deterministic paired-bootstrap 95% interval for draw-inclusive score, and the exact two-sided paired sign test. Halted, truncated, provenance-drifting, or inconsistent terminal rows invalidate the complete cell rather than becoming losses or draws.
 
@@ -280,7 +288,7 @@ Until this gate passes, reports must say "canonical-mainboard BO1," not "Pauper 
 This is the final engineering milestone, after the 9x9 BO1 matrix passes.
 
 1. Extract `kernel/` into an independent repository while preserving a documented commit mapping to this XMage checkpoint.
-2. Vendor the generated card database, token definitions, canonical deck manifests, and source hashes needed at build/runtime. XMage Java sources remain provenance and oracle inputs, not runtime dependencies.
+2. Vendor the generated card database, token definitions, canonical deck manifests, and source hashes needed at build/runtime. Publish the formal replay corpora to durable content-addressed storage and provide an authenticated retrieval command that verifies the tracked lock before use. XMage Java sources remain provenance and oracle inputs, not runtime dependencies.
 3. Pin Rust, Python, dependency-lock, schema, seed-derivation, and artifact-format versions.
 4. Add Linux and Windows CI that runs formatting/lint checks, `cargo test --locked`, the Python test suite, deck/hash validation, all unit/golden tests, and a bounded deterministic mirror/cross-deck smoke.
 5. From a brand-new clone with no parent XMage checkout, build the environment, run one training update, recover/validate its store, run sampled and greedy paired evaluation, and reproduce checked-in expected artifact digests.

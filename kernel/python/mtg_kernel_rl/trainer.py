@@ -13,6 +13,7 @@ from typing import Any
 
 import torch
 
+from .action_sampling import sample_fixed_categorical
 from .artifacts import (
     append_current_derived_caches,
     atomic_replace,
@@ -855,6 +856,16 @@ def _terminal_return(terminal: Terminal, learner_seat: str) -> int:
     return derived
 
 
+def _select_learner_action(logits: torch.Tensor, action_seed: int) -> tuple[int, torch.Tensor]:
+    """Select without Torch RNG while retaining differentiable Torch loss math."""
+
+    selected = sample_fixed_categorical(logits, action_seed)
+    log_prob = torch.log_softmax(logits, dim=0)[selected]
+    if not torch.isfinite(log_prob):
+        raise ValueError("selected learner log probability is non-finite")
+    return selected, log_prob
+
+
 def _encoded_policy_digest(encoded: Any, selected_index: int) -> str:
     return logical_state_hash(
         {
@@ -915,20 +926,12 @@ def _run_episode(
                 raise ValueError("model outputs must remain on CPU")
             if not torch.isfinite(logits).all() or not torch.isfinite(value).all():
                 raise ValueError("model produced non-finite learner output")
-            probabilities = torch.softmax(logits, dim=0)
-            if not torch.isfinite(probabilities).all() or float(probabilities.sum().item()) <= 0.0:
-                raise ValueError("learner probabilities are invalid")
             seed = derive_train_learner_action_seed(
                 state.run["trainer"]["base_seed"],
                 episode,
                 learner_decision_index,
             )
-            generator = torch.Generator(device="cpu")
-            generator.manual_seed(seed)
-            selected = int(torch.multinomial(probabilities.detach(), 1, generator=generator).item())
-            log_prob = torch.log_softmax(logits, dim=0)[selected]
-            if not torch.isfinite(log_prob):
-                raise ValueError("selected learner log probability is non-finite")
+            selected, log_prob = _select_learner_action(logits, seed)
             learner_terms.append((log_prob, value, 0))
             learner_digests.append(_encoded_policy_digest(encoded, selected))
             learner_decision_index += 1

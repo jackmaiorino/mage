@@ -63,7 +63,7 @@ MAX_PAIR_ROW_BYTES = 16 * 1024
 MAX_GAMES_BYTES = 128 * 1024 * 1024
 MAX_PAIRS_BYTES = 64 * 1024 * 1024
 EXACT_FRACTION_ENCODING = "unsigned-lowercase-hex-magnitude/v1"
-SOURCE_RUN_SCHEMA = "kernel_rl_train_run/v11"
+SOURCE_RUN_SCHEMA = "kernel_rl_train_run/v12"
 ALGORITHM_CONTRACT = {
     "descriptive_intervals": "fixed 95% Wilson over game-level outcomes",
     "name": "greedy_head_vs_update_zero_paired/v1",
