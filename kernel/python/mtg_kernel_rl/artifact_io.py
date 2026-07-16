@@ -175,6 +175,52 @@ def canonical_json_bytes(value: dict[str, Any]) -> bytes:
     return json.dumps(value, ensure_ascii=True, allow_nan=False, sort_keys=True, separators=(",", ":")).encode("utf-8") + b"\n"
 
 
+def json_values_equal_strict(left: Any, right: Any) -> bool:
+    """Compare JSON-like values recursively without bool/int/float coercion."""
+
+    if type(left) is not type(right):
+        return False
+    if type(left) is dict:
+        if set(left) != set(right):
+            return False
+        return all(json_values_equal_strict(left[key], right[key]) for key in left)
+    if type(left) is list:
+        return len(left) == len(right) and all(
+            json_values_equal_strict(left_item, right_item)
+            for left_item, right_item in zip(left, right)
+        )
+    if left is None or type(left) in (str, bool, int, float):
+        return bool(left == right)
+    return False
+
+
+def parse_canonical_json_bytes(
+    data: bytes,
+    *,
+    source: str = "JSON artifact",
+    max_bytes: int = MAX_DEFAULT_JSON_BYTES,
+) -> dict[str, Any]:
+    """Parse one bounded canonical JSON object already captured as bytes.
+
+    This is the byte-oriented counterpart to :func:`read_captured_json_file`.
+    It is useful for canonical JSONL readers that must capture a regular file
+    once and then validate each row without reopening the file.
+    """
+
+    if type(data) is not bytes:
+        raise TypeError("data must be bytes")
+    if type(max_bytes) is not int or max_bytes <= 0:
+        raise ValueError("max_bytes must be a positive integer and not bool")
+    if type(source) is not str or not source:
+        raise ValueError("source must be a nonempty string")
+    if len(data) > max_bytes:
+        raise ValueError(f"JSON artifact exceeds byte limit: {source}")
+    value = _parse_json_bytes(data, source)
+    if data != canonical_json_bytes(value):
+        raise ValueError(f"JSON artifact {source} is not canonical sorted ASCII JSON")
+    return value
+
+
 def _preflight_json_bytes(data: bytes) -> None:
     if not data:
         raise ValueError("JSON artifact is empty")

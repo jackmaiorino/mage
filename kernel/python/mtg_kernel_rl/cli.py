@@ -6,6 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .evaluator import evaluate
 from .rollout import POLICIES, run_episodes
 from .trainer import train
 
@@ -31,6 +32,16 @@ def build_parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--learning-rate", default=None, type=float)
     train_parser.add_argument("--value-coef", default=None, type=float)
     train_parser.add_argument("--max-decisions", default=None, type=int)
+    evaluate_parser = sub.add_parser("evaluate")
+    evaluate_parser.add_argument("--training-store", required=True, type=Path)
+    evaluate_parser.add_argument("--expected-candidate-head", required=True)
+    evaluate_parser.add_argument("--env-bin", required=True, type=Path)
+    evaluate_parser.add_argument("--out-dir", required=True, type=Path)
+    evaluate_parser.add_argument("--pairs", required=True, type=int)
+    evaluate_parser.add_argument("--base-seed", required=True, type=int)
+    evaluate_parser.add_argument("--bootstrap-replicates", required=True, type=int)
+    evaluate_parser.add_argument("--max-decisions", required=True, type=int)
+    evaluate_parser.add_argument("--timeout-ms", required=True, type=int)
     return parser
 
 
@@ -61,6 +72,29 @@ def main(argv: list[str] | None = None) -> int:
             max_decisions=args.max_decisions,
         )
         print(json.dumps(result, sort_keys=True, separators=(",", ":")))
+        return 0
+    if args.command == "evaluate":
+        result = evaluate(
+            training_store=args.training_store,
+            expected_candidate_head=args.expected_candidate_head,
+            env_bin=args.env_bin,
+            out_dir=args.out_dir,
+            pairs=args.pairs,
+            base_seed=args.base_seed,
+            bootstrap_replicates=args.bootstrap_replicates,
+            max_decisions=args.max_decisions,
+            timeout_ms=args.timeout_ms,
+        )
+        summary = {
+            "baseline_head": result.baseline_head,
+            "candidate_head": result.candidate_head,
+            "estimate_hex": result.estimate.hex(),
+            "game_count": result.game_count,
+            "pair_count": result.pair_count,
+            "run_sha256": result.run_sha256,
+            "total_half_points": result.total_half_points,
+        }
+        print(json.dumps(summary, ensure_ascii=True, sort_keys=True, separators=(",", ":")))
         return 0
     parser.error(f"unknown command {args.command}")
     return 2

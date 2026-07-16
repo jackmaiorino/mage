@@ -19,6 +19,11 @@ def main() -> int:
         with open(start_marker, "w", encoding="utf-8") as fh:
             fh.write("started\n")
     scenario = os.environ.get("FAKE_SCENARIO", "valid")
+    scenario_file = os.environ.get("FAKE_SCENARIO_FILE")
+    if scenario_file:
+        with open(scenario_file, "r", encoding="utf-8") as fh:
+            scenario = fh.read().strip()
+    request_log = os.environ.get("FAKE_REQUEST_LOG")
     if scenario == "timeout":
         time.sleep(60)
         return 0
@@ -27,7 +32,13 @@ def main() -> int:
     count = 0
     episode_steps: dict[int, int] = {}
     for line in sys.stdin:
+        if scenario_file:
+            with open(scenario_file, "r", encoding="utf-8") as fh:
+                scenario = fh.read().strip()
         req = json.loads(line)
+        if request_log:
+            with open(request_log, "a", encoding="utf-8", newline="\n") as fh:
+                fh.write(json.dumps(req, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n")
         count += 1
         if scenario == "duplicate_keys":
             sys.stdout.write('{"response_type":"decision","response_type":"decision"}\n')

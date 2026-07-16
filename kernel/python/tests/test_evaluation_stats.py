@@ -9,6 +9,8 @@ import mtg_kernel_rl
 from mtg_kernel_rl.determinism import derive_evaluation_bootstrap_seed
 from mtg_kernel_rl.evaluation_stats import (
     BootstrapSummary,
+    GameOutcomeSummary,
+    PairedGamePoints,
     ScoreSummary,
     SignTestResult,
     WilsonInterval,
@@ -18,6 +20,7 @@ from mtg_kernel_rl.evaluation_stats import (
     bootstrap_pair_half_points,
     exact_two_sided_sign_test,
     score_pair_half_points,
+    summarize_paired_game_points,
     wilson_interval,
 )
 
@@ -223,6 +226,34 @@ class EvaluationStatsTest(unittest.TestCase):
         )
         self.assertNotIn("wilson", {field.name for field in fields(ScoreSummary)})
 
+    def test_game_level_three_by_three_outcome_matrix_and_wilson_denominators(self) -> None:
+        points = [PairedGamePoints(p0, p1) for p0 in range(3) for p1 in range(3)]
+        result = summarize_paired_game_points(points)
+        self.assertIsInstance(result, GameOutcomeSummary)
+        self.assertEqual((result.pair_count, result.game_count), (9, 18))
+        self.assertEqual((result.candidate_wins, result.draws, result.baseline_wins), (6, 6, 6))
+        self.assertEqual((result.candidate_as_p0_wins, result.candidate_as_p1_wins), (3, 3))
+        self.assertEqual((result.candidate_win.successes, result.candidate_win.trials), (6, 18))
+        self.assertEqual((result.draw.successes, result.draw.trials), (6, 18))
+        self.assertEqual((result.baseline_win.successes, result.baseline_win.trials), (6, 18))
+        self.assertEqual((result.candidate_as_p0_win.successes, result.candidate_as_p0_win.trials), (3, 9))
+        self.assertEqual((result.candidate_as_p1_win.successes, result.candidate_as_p1_win.trials), (3, 9))
+        for interval in (
+            result.candidate_win,
+            result.draw,
+            result.baseline_win,
+            result.candidate_as_p0_win,
+            result.candidate_as_p1_win,
+        ):
+            self.assertEqual(interval.estimate_hex, (1 / 3).hex())
+
+    def test_paired_game_points_validate_and_retain_seats(self) -> None:
+        points = PairedGamePoints(2, 0)
+        self.assertEqual(points.total_half_points, 2)
+        for args in ((True, 0), (0, True), (-1, 0), (0, 3), (1.0, 0)):
+            with self.subTest(args=args), self.assertRaises((TypeError, ValueError)):
+                PairedGamePoints(*args)  # type: ignore[arg-type]
+
     def test_integrated_score_oracle_and_single_generator_materialization(self) -> None:
         pair_values = [4] * 10 + [2] * 3 + [0] * 2
         result = score_pair_half_points(
@@ -271,19 +302,23 @@ class EvaluationStatsTest(unittest.TestCase):
                 exact_two_sided_sign_test(unordered)  # type: ignore[arg-type]
 
     def test_wilson_bounds_reject_bool(self) -> None:
-        for args in ((True, 1), (0, True), (-1, 1), (2, 1), (0, 0), (0, 50_001)):
+        self.assertEqual(wilson_interval(0, 100_000).trials, 100_000)
+        for args in ((True, 1), (0, True), (-1, 1), (2, 1), (0, 0), (0, 100_001)):
             with self.subTest(args=args), self.assertRaises((TypeError, ValueError)):
                 wilson_interval(*args)  # type: ignore[arg-type]
 
     def test_package_root_exports_only_stable_evaluation_api(self) -> None:
         expected = {
             "BootstrapSummary",
+            "GameOutcomeSummary",
+            "PairedGamePoints",
             "ScoreSummary",
             "SignTestResult",
             "WilsonInterval",
             "bootstrap_pair_half_points",
             "exact_two_sided_sign_test",
             "score_pair_half_points",
+            "summarize_paired_game_points",
             "wilson_interval",
         }
         self.assertTrue(expected.issubset(set(mtg_kernel_rl.__all__)))

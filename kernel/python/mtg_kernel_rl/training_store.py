@@ -517,6 +517,12 @@ def _compatibility_tuple() -> dict[str, Any]:
     }
 
 
+def runtime_compatibility() -> dict[str, Any]:
+    """Return the deterministic runtime contract used by TrainingStore runs."""
+
+    return _compatibility_tuple()
+
+
 def _seed_derivation_dict() -> dict[str, Any]:
     data = dataclasses.asdict(TrainerSeedDerivation())
     data["namespaces"] = list(data["namespaces"])
@@ -1120,4 +1126,5 @@ __all__ = [
     "StoreReadCounts",
     "TrainingStore",
     "ValidatedChain",
+    "runtime_compatibility",
 ]

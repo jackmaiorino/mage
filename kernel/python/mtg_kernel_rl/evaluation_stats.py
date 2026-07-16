@@ -15,6 +15,7 @@ _MASK64 = 0xFFFF_FFFF_FFFF_FFFF
 _UINT64_CARDINALITY = 1 << 64
 _GOLDEN_RATIO_64 = 0x9E37_79B9_7F4A_7C15
 _MAX_PAIR_COUNT = 50_000
+_MAX_WILSON_TRIALS = 2 * _MAX_PAIR_COUNT
 _MIN_BOOTSTRAP_REPLICATES = 1_000
 _MAX_BOOTSTRAP_REPLICATES = 100_000
 _MAX_BOOTSTRAP_DRAWS = 50_000_000
@@ -89,6 +90,46 @@ class ScoreSummary:
     estimate: float
     bootstrap: BootstrapSummary
     sign_test: SignTestResult
+
+
+@dataclass(frozen=True)
+class PairedGamePoints:
+    """Candidate half-points from the two fixed seats in one pair."""
+
+    candidate_as_p0: int
+    candidate_as_p1: int
+
+    def __post_init__(self) -> None:
+        for name, value in (
+            ("candidate_as_p0", self.candidate_as_p0),
+            ("candidate_as_p1", self.candidate_as_p1),
+        ):
+            if type(value) is not int:
+                raise TypeError(f"{name} must be an integer and not bool")
+            if value < 0 or value > 2:
+                raise ValueError(f"{name} must be in [0, 2]")
+
+    @property
+    def total_half_points(self) -> int:
+        return self.candidate_as_p0 + self.candidate_as_p1
+
+
+@dataclass(frozen=True)
+class GameOutcomeSummary:
+    """Game-level W/D/L counts and descriptive fixed-95% Wilson intervals."""
+
+    pair_count: int
+    game_count: int
+    candidate_wins: int
+    draws: int
+    baseline_wins: int
+    candidate_as_p0_wins: int
+    candidate_as_p1_wins: int
+    candidate_win: WilsonInterval
+    draw: WilsonInterval
+    baseline_win: WilsonInterval
+    candidate_as_p0_win: WilsonInterval
+    candidate_as_p1_win: WilsonInterval
 
 
 class _SplitMix64:
@@ -295,7 +336,7 @@ def exact_two_sided_sign_test(pair_half_points: Iterable[int]) -> SignTestResult
 def wilson_interval(successes: int, trials: int) -> WilsonInterval:
     """Return the fixed-95% Wilson interval using deterministic Decimal arithmetic."""
 
-    trials = _validate_bounded_positive_int(trials, "trials", _MAX_PAIR_COUNT)
+    trials = _validate_bounded_positive_int(trials, "trials", _MAX_WILSON_TRIALS)
     if type(successes) is not int:
         raise TypeError("successes must be an integer and not bool")
     if successes < 0 or successes > trials:
@@ -335,6 +376,49 @@ def wilson_interval(successes: int, trials: int) -> WilsonInterval:
     )
 
 
+def summarize_paired_game_points(points: Iterable[PairedGamePoints]) -> GameOutcomeSummary:
+    """Retain seat-level game outcomes while deriving descriptive marginals."""
+
+    if isinstance(points, (Set, Mapping)):
+        raise TypeError("points must be ordered; sets and mappings are not supported")
+    try:
+        iterator = iter(points)
+    except TypeError as exc:
+        raise TypeError("points must be an iterable of PairedGamePoints") from exc
+    values: list[PairedGamePoints] = []
+    for index, value in enumerate(iterator):
+        if index >= _MAX_PAIR_COUNT:
+            raise ValueError(f"points must contain at most {_MAX_PAIR_COUNT} pairs")
+        if type(value) is not PairedGamePoints:
+            raise TypeError(f"points[{index}] must be a PairedGamePoints")
+        values.append(value)
+    if not values:
+        raise ValueError("points must contain at least one pair")
+
+    pair_count = len(values)
+    all_points = [point for pair in values for point in (pair.candidate_as_p0, pair.candidate_as_p1)]
+    candidate_wins = sum(point == 2 for point in all_points)
+    draws = sum(point == 1 for point in all_points)
+    baseline_wins = sum(point == 0 for point in all_points)
+    candidate_as_p0_wins = sum(pair.candidate_as_p0 == 2 for pair in values)
+    candidate_as_p1_wins = sum(pair.candidate_as_p1 == 2 for pair in values)
+    game_count = 2 * pair_count
+    return GameOutcomeSummary(
+        pair_count=pair_count,
+        game_count=game_count,
+        candidate_wins=candidate_wins,
+        draws=draws,
+        baseline_wins=baseline_wins,
+        candidate_as_p0_wins=candidate_as_p0_wins,
+        candidate_as_p1_wins=candidate_as_p1_wins,
+        candidate_win=wilson_interval(candidate_wins, game_count),
+        draw=wilson_interval(draws, game_count),
+        baseline_win=wilson_interval(baseline_wins, game_count),
+        candidate_as_p0_win=wilson_interval(candidate_as_p0_wins, pair_count),
+        candidate_as_p1_win=wilson_interval(candidate_as_p1_wins, pair_count),
+    )
+
+
 def score_pair_half_points(
     pair_half_points: Iterable[int],
     bootstrap_seed: int,
@@ -361,11 +445,14 @@ def score_pair_half_points(
 
 __all__ = [
     "BootstrapSummary",
+    "GameOutcomeSummary",
+    "PairedGamePoints",
     "ScoreSummary",
     "SignTestResult",
     "WilsonInterval",
     "bootstrap_pair_half_points",
     "exact_two_sided_sign_test",
     "score_pair_half_points",
+    "summarize_paired_game_points",
     "wilson_interval",
 ]
