@@ -133,56 +133,63 @@ class KernelPolicyValueNet(nn.Module):
         *,
         initializer: str = INITIALIZER_RUNNER_FIXED_V1,
         initializer_seed: int | None = None,
+        configure_runtime: bool = True,
     ) -> None:
         super().__init__()
-        configure_torch_determinism()
+        if configure_runtime:
+            configure_torch_determinism()
         config.validate()
         self.config = config
-        rng_state = torch.random.get_rng_state()
-        self.card_embedding = nn.Embedding(config.card_vocab_size, config.card_embedding_dim, padding_idx=0)
+        factory = {"device": "meta", "dtype": torch.float32}
+        self.card_embedding = nn.Embedding(config.card_vocab_size, config.card_embedding_dim, padding_idx=0, **factory)
         self.object_encoder = nn.Sequential(
-            nn.Linear(config.object_feature_dim + config.card_embedding_dim, config.hidden_dim),
+            nn.Linear(config.object_feature_dim + config.card_embedding_dim, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         pooled_dim = config.hidden_dim * config.object_group_count
         self.edge_encoder = nn.Sequential(
-            nn.Linear(config.edge_feature_dim + config.hidden_dim * 2, config.hidden_dim),
+            nn.Linear(config.edge_feature_dim + config.hidden_dim * 2, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         self.node_update = nn.Sequential(
-            nn.Linear(config.hidden_dim * 2, config.hidden_dim),
+            nn.Linear(config.hidden_dim * 2, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         self.state_encoder = nn.Sequential(
-            nn.Linear(config.state_dim + pooled_dim, config.hidden_dim),
+            nn.Linear(config.state_dim + pooled_dim, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         self.action_ref_encoder = nn.Sequential(
-            nn.Linear(config.action_ref_feature_dim + config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.action_ref_feature_dim + config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         self.action_encoder = nn.Sequential(
-            nn.Linear(config.action_feature_dim + config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.action_feature_dim + config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, config.hidden_dim),
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
             nn.Tanh(),
         )
         self.scorer = nn.Sequential(
-            nn.Linear(config.hidden_dim * 2, config.hidden_dim),
+            nn.Linear(config.hidden_dim * 2, config.hidden_dim, **factory),
             nn.Tanh(),
-            nn.Linear(config.hidden_dim, 1),
+            nn.Linear(config.hidden_dim, 1, **factory),
         )
-        self.value_head = nn.Sequential(nn.Linear(config.hidden_dim, config.hidden_dim), nn.Tanh(), nn.Linear(config.hidden_dim, 1))
+        self.value_head = nn.Sequential(
+            nn.Linear(config.hidden_dim, config.hidden_dim, **factory),
+            nn.Tanh(),
+            nn.Linear(config.hidden_dim, 1, **factory),
+        )
+        self.to_empty(device="cpu")
         if initializer == INITIALIZER_RUNNER_FIXED_V1:
             self.reset_deterministic_parameters()
         elif initializer == INITIALIZER_TRAINER_SEEDED_V1:
@@ -191,7 +198,6 @@ class KernelPolicyValueNet(nn.Module):
             self.reset_seeded_parameters(initializer_seed)
         else:
             raise ValueError(f"unsupported model initializer {initializer}")
-        torch.random.set_rng_state(rng_state)
 
     @classmethod
     def from_encoded(
@@ -214,9 +220,9 @@ class KernelPolicyValueNet(nn.Module):
         with torch.no_grad():
             for _name, param in self.named_parameters():
                 if param.ndim == 1:
-                    values = torch.linspace(-0.05, 0.05, param.numel(), dtype=param.dtype)
+                    values = torch.linspace(-0.05, 0.05, param.numel(), dtype=param.dtype, device=param.device)
                 else:
-                    values = torch.arange(param.numel(), dtype=param.dtype)
+                    values = torch.arange(param.numel(), dtype=param.dtype, device=param.device)
                     values = ((values % 31) - 15) / 200.0
                 param.copy_(values.reshape_as(param))
             self.card_embedding.weight[0].zero_()
@@ -229,10 +235,10 @@ class KernelPolicyValueNet(nn.Module):
         with torch.no_grad():
             for _name, param in self.named_parameters():
                 if param.ndim >= 2:
-                    values = torch.empty_like(param)
+                    values = torch.empty(param.shape, dtype=param.dtype, device=param.device)
                     torch.nn.init.xavier_uniform_(values, generator=generator)
                 else:
-                    values = torch.rand(param.shape, dtype=param.dtype, generator=generator) * 0.02 - 0.01
+                    values = torch.rand(param.shape, dtype=param.dtype, device=param.device, generator=generator) * 0.02 - 0.01
                 param.copy_(values)
             self.card_embedding.weight[0].zero_()
 

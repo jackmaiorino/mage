@@ -337,13 +337,41 @@ def load_adam_state(
     *,
     expected_step_count: int | None = None,
 ) -> None:
+    prepared_by_name = validate_adam_state_for_model(
+        model,
+        state,
+        learning_rate,
+        expected_step_count=expected_step_count,
+    )
+    optimizer.state.clear()
+    for name, param in _named_parameters(model):
+        slot = prepared_by_name[name]
+        if slot:
+            optimizer.state[param] = slot
+    export_adam_state(optimizer, model, learning_rate)
+
+
+def validate_adam_state_for_model(
+    model: KernelPolicyValueNet,
+    state: Any,
+    learning_rate: float,
+    *,
+    expected_step_count: int | None = None,
+) -> dict[str, dict[str, torch.Tensor]]:
+    """Validate canonical Adam state against model parameter order and metadata.
+
+    Returns cloned slot tensors keyed by parameter name. This is intentionally
+    optimizer-free so read-only chain validation can check Adam payloads without
+    constructing or mutating an optimizer.
+    """
+
     _validate_adam_state_metadata(state, learning_rate=learning_rate, optimizer_step_count=expected_step_count)
     named = _named_parameters(model)
     names = [name for name, _param in named]
     if state.get("param_names") != names:
         raise ValueError("optimizer_state param order mismatch")
     state_by_name = state.get("state")
-    prepared: list[tuple[torch.nn.Parameter, dict[str, torch.Tensor]]] = []
+    prepared: dict[str, dict[str, torch.Tensor]] = {}
     for name, param in named:
         raw_slot = state_by_name[name]
         slot: dict[str, torch.Tensor] = {}
@@ -358,12 +386,8 @@ def load_adam_state(
                     f"optimizer_state.{name}.{key}",
                     nonnegative=(key == "exp_avg_sq"),
                 )
-        prepared.append((param, slot))
-    optimizer.state.clear()
-    for param, slot in prepared:
-        if slot:
-            optimizer.state[param] = slot
-    export_adam_state(optimizer, model, learning_rate)
+        prepared[name] = slot
+    return prepared
 
 
 def assert_optimizer_finite(optimizer: torch.optim.Adam) -> None:
@@ -433,7 +457,7 @@ def validate_torch_rng_state(value: Any) -> None:
     generator = torch.Generator(device="cpu")
     try:
         generator.set_state(value.detach().clone())
-        probe = torch.rand(1, generator=generator)
+        probe = torch.rand(1, device="cpu", generator=generator)
     except RuntimeError as exc:
         raise ValueError("Torch CPU RNG state is not restorable") from exc
     if not torch.isfinite(probe).all():

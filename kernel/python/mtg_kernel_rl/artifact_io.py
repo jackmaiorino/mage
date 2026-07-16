@@ -25,6 +25,12 @@ class CapturedFile:
     sha256: str
 
 
+@dataclasses.dataclass(frozen=True)
+class CapturedJson:
+    value: dict[str, Any]
+    file: CapturedFile
+
+
 MAX_RUN_JSON_BYTES = 256 * 1024
 MAX_SMALL_JSON_BYTES = 16 * 1024
 MAX_UPDATE_JSON_BYTES = 16 * 1024 * 1024
@@ -304,17 +310,30 @@ def read_json_file(
     max_bytes: int = MAX_DEFAULT_JSON_BYTES,
     require_canonical: bool = True,
 ) -> dict[str, Any]:
+    return read_captured_json_file(path, max_bytes=max_bytes, require_canonical=require_canonical).value
+
+
+def read_captured_json_file(
+    path: str | Path,
+    *,
+    max_bytes: int = MAX_DEFAULT_JSON_BYTES,
+    require_canonical: bool = True,
+) -> CapturedJson:
     captured = read_regular_file_bytes(path, max_bytes=max_bytes, allow_empty=False)
     value = _parse_json_bytes(captured.data, path)
     if require_canonical and captured.data != canonical_json_bytes(value):
         raise ValueError(f"JSON artifact {path} is not canonical sorted ASCII JSON")
-    return value
+    return CapturedJson(value=value, file=captured)
 
 
 def read_authoritative_json(path: str | Path, kind: str) -> dict[str, Any]:
+    return read_authoritative_json_capture(path, kind).value
+
+
+def read_authoritative_json_capture(path: str | Path, kind: str) -> CapturedJson:
     if kind not in AUTHORITATIVE_JSON_LIMITS:
         raise ValueError(f"unknown authoritative JSON kind: {kind}")
-    return read_json_file(path, max_bytes=AUTHORITATIVE_JSON_LIMITS[kind], require_canonical=True)
+    return read_captured_json_file(path, max_bytes=AUTHORITATIVE_JSON_LIMITS[kind], require_canonical=True)
 
 
 def _is_candidate_boundary(value: str, index: int) -> bool:
