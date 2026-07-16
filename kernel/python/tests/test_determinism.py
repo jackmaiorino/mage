@@ -6,7 +6,13 @@ import unittest
 import torch
 
 from mtg_kernel_rl.determinism import (
+    EVALUATOR_SEED_DERIVATION_VERSION,
+    TRAINER_SEED_DERIVATION_VERSION,
+    EvaluatorSeedDerivation,
+    TrainerSeedDerivation,
     configure_torch_determinism,
+    derive_evaluation_bootstrap_seed,
+    derive_evaluation_env_seed,
     derive_model_init_seed,
     derive_train_env_seed,
     derive_train_learner_action_seed,
@@ -19,6 +25,36 @@ from fixtures import legal_actions, observation
 
 
 class TrainerDeterminismTest(unittest.TestCase):
+    def test_sha256_evaluator_seed_known_vectors_and_frozen_contract(self) -> None:
+        self.assertEqual(EVALUATOR_SEED_DERIVATION_VERSION, "kernel-python-rl-evaluator-sha256-v1")
+        self.assertEqual(derive_evaluation_bootstrap_seed(71501), 0x4389_D43A_6139_A202)
+        self.assertEqual(derive_evaluation_env_seed(71501, 0), 0x37E6_5017_E207_5B88)
+        self.assertEqual(derive_evaluation_env_seed(71501, 1), 0x5792_DDBA_A6C5_5F43)
+        self.assertEqual(derive_evaluation_env_seed(71501, 32), 0x5139_F8A6_C14F_1136)
+        self.assertEqual(
+            EvaluatorSeedDerivation().namespaces,
+            (
+                "evaluation-bootstrap/base_seed",
+                "evaluation-env/base_seed/pair_index",
+            ),
+        )
+        self.assertEqual(TRAINER_SEED_DERIVATION_VERSION, "kernel-python-rl-trainer-sha256-v1")
+        self.assertEqual(
+            TrainerSeedDerivation().namespaces,
+            (
+                "model-init/base_seed",
+                "train-env/base_seed/pair_index",
+                "train-learner-action/base_seed/episode_index/learner_decision_index",
+                "train-opponent-action/base_seed/episode_index/opponent_decision_index",
+            ),
+        )
+        self.assertNotEqual(derive_evaluation_env_seed(71501, 0), derive_train_env_seed(71501, 0))
+        for bad in (True, -1, 2**63):
+            with self.subTest(bad=bad), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_bootstrap_seed(bad)  # type: ignore[arg-type]
+            with self.subTest(pair_index=bad), self.assertRaises((TypeError, ValueError)):
+                derive_evaluation_env_seed(71501, bad)  # type: ignore[arg-type]
+
     def test_sha256_trainer_seed_known_vectors_and_separation(self) -> None:
         self.assertEqual(derive_model_init_seed(71501), 9076772781811365075)
         self.assertEqual(derive_train_env_seed(71501, 0), 7253935443031715823)

@@ -15,6 +15,7 @@ ENV_SEED_DOMAIN = 0x4556_5F52_4C5F_7631
 UNIFORM_POLICY_DOMAIN = 0x5059_5F55_4E49_7631
 SAMPLED_POLICY_DOMAIN = 0x5059_5F53414D_7631
 TRAINER_SEED_DERIVATION_VERSION = "kernel-python-rl-trainer-sha256-v1"
+EVALUATOR_SEED_DERIVATION_VERSION = "kernel-python-rl-evaluator-sha256-v1"
 
 _TORCH_CONFIGURED = False
 
@@ -128,8 +129,41 @@ def _trainer_seed(namespace: str, fields: list[tuple[str, int | str]]) -> int:
     return int.from_bytes(hasher.digest()[:8], "big") & UINT63_MAX
 
 
+def _evaluator_seed(namespace: str, fields: list[tuple[str, int]]) -> int:
+    if type(namespace) is not str or not namespace:
+        raise TypeError("namespace must be a nonempty string")
+    hasher = hashlib.sha256()
+    _atom(hasher, "version", EVALUATOR_SEED_DERIVATION_VERSION.encode("utf-8"))
+    _atom(hasher, "namespace", namespace.encode("utf-8"))
+    for name, value in fields:
+        if type(name) is not str or not name:
+            raise TypeError("field names must be nonempty strings")
+        if type(value) is not int or value < 0 or value > UINT63_MAX:
+            raise ValueError(f"{name} out of evaluator seed integer domain")
+        _atom(hasher, "field-name", name.encode("utf-8"))
+        _atom(hasher, "u63", value.to_bytes(8, "big"))
+    return int.from_bytes(hasher.digest()[:8], "big") & UINT63_MAX
+
+
 def derive_model_init_seed(base_seed: int) -> int:
     return _trainer_seed("model-init", [("base_seed", validate_uint63(base_seed, "base_seed"))])
+
+
+def derive_evaluation_bootstrap_seed(base_seed: int) -> int:
+    return _evaluator_seed(
+        "evaluation-bootstrap",
+        [("base_seed", validate_uint63(base_seed, "base_seed"))],
+    )
+
+
+def derive_evaluation_env_seed(base_seed: int, pair_index: int) -> int:
+    return _evaluator_seed(
+        "evaluation-env",
+        [
+            ("base_seed", validate_uint63(base_seed, "base_seed")),
+            ("pair_index", validate_uint63(pair_index, "pair_index")),
+        ],
+    )
 
 
 def derive_train_env_seed(base_seed: int, pair_index: int) -> int:
@@ -189,4 +223,14 @@ class TrainerSeedDerivation:
         "train-env/base_seed/pair_index",
         "train-learner-action/base_seed/episode_index/learner_decision_index",
         "train-opponent-action/base_seed/episode_index/opponent_decision_index",
+    )
+
+
+@dataclass(frozen=True)
+class EvaluatorSeedDerivation:
+    version: str = EVALUATOR_SEED_DERIVATION_VERSION
+    algorithm: str = "sha256(type-tagged big-endian length-prefixed fields)[:8] & 0x7fff_ffff_ffff_ffff"
+    namespaces: tuple[str, ...] = (
+        "evaluation-bootstrap/base_seed",
+        "evaluation-env/base_seed/pair_index",
     )
