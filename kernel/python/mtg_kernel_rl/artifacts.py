@@ -208,8 +208,8 @@ def _open_append_no_follow(identity: _AppendTargetIdentity, *, boundary_prefix: 
         flags |= os.O_NOFOLLOW
     inject_fault(f"{boundary_prefix}_open_before", identity.path)
     fd = os.open(str(identity.path), flags)
-    os.set_inheritable(fd, False)
     try:
+        os.set_inheritable(fd, False)
         opened = _identity_from_stat(identity.path, os.fstat(fd))
         if not _same_identity(identity, opened):
             raise ValueError(f"derived cache descriptor identity mismatch: {identity.path}")
@@ -218,8 +218,11 @@ def _open_append_no_follow(identity: _AppendTargetIdentity, *, boundary_prefix: 
             raise ValueError(f"derived cache path identity changed during open: {identity.path}")
         inject_fault(f"{boundary_prefix}_open_after", identity.path)
         return fd
-    except Exception:
-        os.close(fd)
+    except BaseException:
+        try:
+            os.close(fd)
+        except BaseException:
+            pass
         raise
 
 
