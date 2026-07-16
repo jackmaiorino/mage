@@ -1700,7 +1700,20 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
             // which is architecturally backwards for a kernel meant to run
             // standalone. Left unresolved by design; see the increment-14
             // report for the corpus-wide classification this backs.
-            let mut attackers = state.engine.combat.attackers.clone();
+            // An attacker that left the battlefield during the priority
+            // window after declaration is no longer in combat (506.4).
+            // Filter per attacker, not only at the step boundary: a mixed
+            // batch can contain both a surviving attacker and one killed by
+            // an instant, in which case Declare Blockers still happens but
+            // must not expose a phantom prompt for the dead creature.
+            let mut attackers: Vec<ObjectId> = state
+                .engine
+                .combat
+                .attackers
+                .iter()
+                .copied()
+                .filter(|&id| is_still_in_combat(state, id))
+                .collect();
             attackers.sort_by_key(|&id| std::cmp::Reverse(effective_power(state, id)));
             let legal_blockers = attackers
                 .iter()
@@ -3531,7 +3544,14 @@ fn apply_declare_blockers(
     if state.step != Step::DeclareBlockers || state.engine.combat.blockers_declared {
         return Err("no declare-blockers decision is pending".to_string());
     }
-    let attackers = state.engine.combat.attackers.clone();
+    let attackers: Vec<ObjectId> = state
+        .engine
+        .combat
+        .attackers
+        .iter()
+        .copied()
+        .filter(|&id| is_still_in_combat(state, id))
+        .collect();
     let mut used_blockers = Vec::new();
     for &(blocker, attacker) in &blocks {
         if !attackers.contains(&attacker) {
@@ -4464,6 +4484,37 @@ mod tests {
 
         advance_step(&mut state);
         assert_eq!(state.step, Step::DeclareBlockers);
+    }
+
+    #[test]
+    fn declare_blockers_filters_one_dead_attacker_from_a_mixed_batch() {
+        let mut state = empty_game();
+        let dead = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        let live = put_on_battlefield(&mut state, PlayerId::P0, "Masked Meower");
+        let blocker = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        state.active_player = PlayerId::P0;
+        state.step = Step::DeclareBlockers;
+        state.engine.combat.attackers = vec![dead, live];
+        state.engine.combat.attackers_declared = true;
+        state.objects.get_mut(dead).zone = Zone::Graveyard;
+
+        match advance_until_decision(&mut state) {
+            Decision::DeclareBlockers {
+                attackers,
+                legal_blockers,
+                ..
+            } => {
+                assert_eq!(attackers, vec![live]);
+                assert_eq!(legal_blockers, vec![(live, vec![blocker])]);
+            }
+            other => panic!("expected DeclareBlockers, got {other:?}"),
+        }
+
+        let err = step(&mut state, Action::DeclareBlockers(vec![(blocker, dead)])).unwrap_err();
+        assert!(
+            err.contains("is not an attacker this combat"),
+            "dead attackers must be rejected even through the direct engine API: {err}"
+        );
     }
 
     #[test]
@@ -5734,6 +5785,36 @@ mod tests {
             !state.players[0].battlefield.contains(&synth),
             "Experimental Synthesizer sacrificed itself to pay the cost"
         );
+    }
+
+    #[test]
+    fn synthesizer_generic_payment_preserves_red_for_bushwhacker() {
+        let mut state = ready_game_in_main1(0);
+        let synth = put_on_battlefield(&mut state, PlayerId::P0, "Experimental Synthesizer");
+        let bushwhacker = put_in_hand(&mut state, PlayerId::P0, "Goblin Bushwhacker");
+        state.players[0].mana_pool[mana::ManaColor::R.pool_index()] = 3;
+        state.players[0].mana_pool[mana::ManaColor::G.pool_index()] = 1;
+
+        step(&mut state, Action::ActivateAbility(synth, 0)).unwrap();
+        let decision = pass_until_stack_resolves(&mut state);
+        assert_eq!(
+            state.players[0].mana_pool[mana::ManaColor::R.pool_index()],
+            1
+        );
+        assert_eq!(
+            state.players[0].mana_pool[mana::ManaColor::G.pool_index()],
+            0
+        );
+
+        match decision {
+            Decision::CastSpellOrPass {
+                castable_spells, ..
+            } => assert!(
+                castable_spells.contains(&bushwhacker),
+                "the automatic generic payment must leave the red mana needed for Bushwhacker"
+            ),
+            other => panic!("expected CastSpellOrPass, got {other:?}"),
+        }
     }
 
     #[test]

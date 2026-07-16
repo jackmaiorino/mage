@@ -58,6 +58,21 @@ impl ManaColor {
     }
 }
 
+/// Deterministic policy for spending already-floating mana on generic
+/// requirements. Magic permits any color, so the choice is strategically
+/// observable whenever multiple colors remain. XMage's `ManaCostImpl`
+/// checks colorless, black, blue, white, green, then red; matching that
+/// order keeps automatic kernel payments aligned with the reference runner
+/// and, importantly for Rally, preserves red before green when possible.
+const GENERIC_POOL_PAYMENT_ORDER: [ManaColor; 6] = [
+    ManaColor::C,
+    ManaColor::B,
+    ManaColor::U,
+    ManaColor::W,
+    ManaColor::G,
+    ManaColor::R,
+];
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Pip {
     Colored(ManaColor),
@@ -320,7 +335,9 @@ fn pay_generic(
     pool_remaining: &mut [u8; 6],
     plan: &mut PaymentPlan,
 ) -> bool {
-    for (pi, amt) in pool_remaining.iter_mut().enumerate() {
+    for color in GENERIC_POOL_PAYMENT_ORDER {
+        let pi = color.pool_index();
+        let amt = &mut pool_remaining[pi];
         while needed > 0 && *amt > 0 {
             *amt -= 1;
             plan.pool_used[pi] += 1;
@@ -387,6 +404,22 @@ mod tests {
         let sources = vec![src(0, &[ManaColor::R]), src(1, &[ManaColor::G])];
         let plan = solve(&cost, 0, [0; 6], &sources).expect("should pay");
         assert_eq!(plan.taps.len(), 2);
+    }
+
+    #[test]
+    fn generic_pool_payment_matches_xmage_and_preserves_red_before_green() {
+        let cost = Cost {
+            pips: &[Pip::Colored(ManaColor::R)],
+            generic: 2,
+            x_count: 0,
+        };
+        let mut pool = [0u8; 6];
+        pool[ManaColor::R.pool_index()] = 3;
+        pool[ManaColor::G.pool_index()] = 1;
+
+        let plan = solve(&cost, 0, pool, &[]).expect("R3 G1 pays {2}{R}");
+        assert_eq!(plan.pool_used[ManaColor::R.pool_index()], 2);
+        assert_eq!(plan.pool_used[ManaColor::G.pool_index()], 1);
     }
 
     #[test]
