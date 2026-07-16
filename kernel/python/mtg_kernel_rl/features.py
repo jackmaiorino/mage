@@ -1769,7 +1769,7 @@ def _validate_surface_context(surface: dict[str, Any], projection: dict[str, Any
             raise FeatureSchemaError("declare_blockers stage requires current_attacker")
         if current_attacker["controller"] != projection["active_player"]:
             raise FeatureSchemaError("declare_blockers current_attacker must be controlled by the active player")
-        for attacker, blocker in private_blockers["accumulated"]:
+        for blocker, attacker in private_blockers["accumulated"]:
             if attacker["controller"] != projection["active_player"] or blocker["controller"] != actor:
                 raise FeatureSchemaError("declare_blockers accumulated tuple has impossible attacker/blocker ownership")
         for attacker, blockers in private_blockers["remaining"]:

@@ -240,6 +240,29 @@ class FeatureEncodingTest(unittest.TestCase):
         for _path, classification in obs_leaves + action_leaves:
             self.assertIn(classification, {"model_input", "operational_only", "forbidden"})
 
+    def test_accumulated_blockers_follow_rust_blocker_attacker_tuple_order(self) -> None:
+        blockers = complete_observation()
+        blockers["projection"]["active_player"] = "p1"
+        blocker = blockers["projection"]["battlefield"][0][0]["stable"]
+        attacker = blockers["projection"]["battlefield"][1][0]["stable"]
+        blockers["projection"]["surface_context"].update(
+            {
+                "current_stage": "declare_blockers_for_attacker",
+                "private_blockers": {
+                    "current_attacker": attacker,
+                    "accumulated": [[blocker, attacker]],
+                    "remaining": [],
+                },
+            }
+        )
+
+        assert_observation_classified(blockers)
+
+        swapped = copy.deepcopy(blockers)
+        swapped["projection"]["surface_context"]["private_blockers"]["accumulated"] = [[attacker, blocker]]
+        with self.assertRaisesRegex(FeatureSchemaError, "impossible attacker/blocker ownership"):
+            assert_observation_classified(swapped)
+
     def test_engine_surface_tuple_ladder_matches_rust_projection(self) -> None:
         base = complete_observation()
         p0_creature = base["projection"]["battlefield"][0][0]["stable"]
