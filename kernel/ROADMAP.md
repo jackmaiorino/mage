@@ -10,7 +10,7 @@ The kernel is science-ready when it can train and evaluate policies over all nin
 
 These nine decks are the complete Pauper meta pool carried forward from the previous project. A result over Burn/Rally, a convenient subset, or only the newly implemented decks cannot close this roadmap: all nine mainboards must be implemented, trained against, and evaluated in the final full-pool protocol before any concluding science claim.
 
-The current checkpoint has a strong deterministic RL and artifact foundation, but complete-deck coverage is still Burn plus Rally. Metadata-derived basic lands now work across the other decks, without making any incomplete deck runnable. The generated pool metadata freezes all nine decks, and the schema-v2 registry at the legacy `cards_v1.json` path declares exact memberships and fail-closed engine capabilities for the 132 deck cards it contains; eighteen Spy cards are still absent, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
+The current checkpoint has a strong deterministic RL and artifact foundation, but complete-deck coverage is still Burn plus Rally. Metadata-derived basic lands plus the reusable Counterspell/Dispel stack-interaction slice now work across the other decks, without making any incomplete deck runnable. The generated pool metadata freezes all nine decks, and the schema-v2 registry at the legacy `cards_v1.json` path declares exact memberships and fail-closed engine capabilities for the 132 deck cards it contains; eighteen Spy cards are still absent, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
 
 The implementation order is:
 
@@ -71,7 +71,9 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 - Source-level card behavior for the complete Burn and Rally mainboards. Chain Lightning now has explicit payment, retarget, target, repeat-copy, counter/fizzle, and copy-departure behavior; the RL observation/session contracts are schema v3.
 - Tracked Phase-0 content locks for `burn_mirror_v6` and `rally_mirror_v2`: all 40 trace paths, raw-byte sizes and SHA-256 digests per corpus, each `manifest.json`, and an aggregate digest are embedded into the replay gate. Designated-corpus replay now fails before parsing a trace on non-`LOCKED` status or any missing, extra, or changed replay input.
 - Generated `pauper_pool_v1.json` and `pauper_support_v1.json` metadata that pins all nine normalized 60+15 rosters, exact registry membership, current support blockers, token dependencies, source hashes, and raw pool/registry hashes.
-- The support manifest currently classifies 30 unique cards as `full`, zero as `partial`, and 120 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer, and both designated content-locked, fixed-provenance reference corpora replay 40/40 with zero divergence. The first Phase-1 substrate slice adds metadata-derived intrinsic mana for every registered basic land and a shared fail-closed engine-capability/preflight contract.
+- The support manifest currently classifies 32 unique cards as `full`, zero as `partial`, and 118 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer, and both designated content-locked, fixed-provenance reference corpora replay 40/40 with zero divergence. The first Phase-1 substrate slice adds metadata-derived intrinsic mana for every registered basic land and a shared fail-closed engine-capability/preflight contract.
+- Counterspell and Dispel now compose one generated counter-target effect with separate reusable any-spell and instant-spell stack filters. The target engine rejects a cast unless some complete mandatory target assignment exists, recursively filters dependent target prefixes, excludes the announcing spell itself, and silently retains the original printed mode index when only one modal branch is viable. These changes preserve schema-v3 observation/action/session identities while preventing targetless dead-end decisions.
+- `xmage_counter_reference_windows_v1.json` pins the raw manifest/trace hashes and six exact Counterspell/Dispel target selections from Caw-Gates, Terror, and Faeries XMage games, plus bounded visible graveyard deltas. The source run did not record its Java commit, so this evidence is explicitly a source-hash-backed micro-reference gate, not fixed-provenance whole-deck parity; the ignored materialization test rehashes and reparses the local source logs when available.
 
 ### Card coverage
 
@@ -85,9 +87,9 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 | Elves | 60/60 | 13/60 | 15/15 | 0/15 | Snow-Covered Forest works; spells remain fail-closed |
 | Spy | 21/60 | 4/60 | 4/15 | 1/15 | Forest/Swamp work; 39 main and 11 side copies are absent from the registry |
 | Burn | 60/60 | 60/60 | 15/15 | 11/15 | Mainboard is the current complete baseline |
-| Terror | 60/60 | 16/60 | 15/15 | 0/15 | Island works; the reusable blue spell core is next |
-| CawGates | 60/60 | 4/60 | 15/15 | 3/15 | Island works; Gates and spells remain fail-closed |
-| Faeries | 60/60 | 18/60 | 15/15 | 0/15 | Island works; creatures and spells remain fail-closed |
+| Terror | 60/60 | 22/60 | 15/15 | 0/15 | Island, Counterspell, and Dispel work; the remaining blue spell core is next |
+| CawGates | 60/60 | 8/60 | 15/15 | 5/15 | Island and Counterspell work; Gates and remaining spells stay fail-closed |
+| Faeries | 60/60 | 24/60 | 15/15 | 1/15 | Island, Counterspell, and Dispel work; creatures and remaining spells stay fail-closed |
 
 The registry currently contains 135 definitions: 132 deck cards and three tokens. `pool_decks` now lists all nine sources in canonical order, and the eight already-present Spy cards declare exact Spy membership. Seven of those are Spy mainboard names shared with other decks; fourteen Spy mainboard names and four additional sideboard-only names still need new records.
 

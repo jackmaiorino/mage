@@ -190,9 +190,15 @@ pub enum TargetSpec {
     /// computed from the first pick, not independently.
     PlayerThenTheirCreature,
     /// Exactly 1 target: any spell currently on the stack, regardless of
-    /// color (Pyroblast's counter mode -- color is checked at resolution,
-    /// not at targeting; see `EffectCond::TargetIsColor`).
+    /// card type or color (Counterspell; also Pyroblast's counter mode,
+    /// whose color is checked at resolution rather than targeting -- see
+    /// `EffectCond::TargetIsColor`).
     AnySpellOnStack,
+    /// Exactly 1 target: an instant spell currently on the stack (Dispel).
+    /// This filters by the targeted stack object's card definition, so both
+    /// physical instant spells and instant spell copies qualify while
+    /// activated/triggered abilities do not.
+    InstantSpellOnStack,
     /// Exactly 1 target: a *blue* spell currently on the stack (Red
     /// Elemental Blast's counter mode -- color is filtered at targeting).
     BlueSpellOnStack,
@@ -494,7 +500,7 @@ include!(concat!(env!("OUT_DIR"), "/card_defs.rs"));
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::effect::{ObjectRef, PlayerRef, TargetRef};
+    use crate::effect::{EffectCond, ObjectRef, PlayerRef, TargetRef};
     use crate::state::Zone;
 
     #[test]
@@ -508,7 +514,7 @@ mod tests {
 
     #[test]
     fn card_db_hash_v2_is_frozen() {
-        assert_eq!(KERNEL_CARDDB_HASH, 0xc934_c818_eb5f_f5fb);
+        assert_eq!(KERNEL_CARDDB_HASH, 0x5c13_381b_3494_f9af);
     }
 
     #[test]
@@ -577,7 +583,7 @@ mod tests {
             .iter()
             .filter(|def| def.capability == CardCapability::Full)
             .count();
-        assert_eq!(full, 33, "30 deck cards plus three required tokens");
+        assert_eq!(full, 35, "32 deck cards plus three required tokens");
         assert_eq!(
             CARD_DEFS
                 .iter()
@@ -588,12 +594,16 @@ mod tests {
 
         let supported = ["Island", "Counterspell", "Mountain"]
             .map(|name| card_id_by_name(name).expect("card in registry"));
-        let err = preflight_fully_supported_deck(&supported).expect_err("Counterspell is deferred");
+        assert!(preflight_fully_supported_deck(&supported).is_ok());
+        let unsupported = ["Island", "Tolarian Terror"]
+            .map(|name| card_id_by_name(name).expect("card in registry"));
+        let err = preflight_fully_supported_deck(&unsupported)
+            .expect_err("Tolarian Terror is still deferred");
         assert!(matches!(
             err,
             DeckPreflightError::NotFullySupported {
                 index: 1,
-                name: "Counterspell",
+                name: "Tolarian Terror",
                 capability: CardCapability::NoEffect,
                 ..
             }
@@ -746,6 +756,25 @@ mod tests {
         let def = &CARD_DEFS[id as usize];
         assert!(def.is_castable());
         assert_eq!(def.target_spec, TargetSpec::PlayerThenTheirCreature);
+    }
+
+    #[test]
+    fn counterspell_and_dispel_share_the_counter_program_with_distinct_filters() {
+        let counterspell = &CARD_DEFS[card_id_by_name("Counterspell").unwrap() as usize];
+        let dispel = &CARD_DEFS[card_id_by_name("Dispel").unwrap() as usize];
+
+        assert!(counterspell.has_full_support());
+        assert!(dispel.has_full_support());
+        assert_eq!(counterspell.target_spec, TargetSpec::AnySpellOnStack);
+        assert_eq!(dispel.target_spec, TargetSpec::InstantSpellOnStack);
+        assert_eq!((counterspell.spell_effect)(), (dispel.spell_effect)());
+        assert!(matches!(
+            (counterspell.spell_effect)(),
+            Some(EffectOp::Conditional {
+                cond: EffectCond::TargetInZone(0, Zone::Stack),
+                ..
+            })
+        ));
     }
 
     #[test]

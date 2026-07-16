@@ -536,6 +536,7 @@
     },
     {
       "name": "Counterspell",
+      "engine_capability": "full",
       "mana_cost": "{U}{U}",
       "mana_value": 2,
       "colors": [
@@ -677,6 +678,7 @@
     },
     {
       "name": "Dispel",
+      "engine_capability": "full",
       "mana_cost": "{U}",
       "mana_value": 1,
       "colors": [

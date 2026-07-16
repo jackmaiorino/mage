@@ -164,6 +164,10 @@ enum Special {
     /// a creature that player controls; 3/3 instead with landfall this
     /// turn (Searing Blaze).
     SearingBlaze,
+    /// Counter target spell, with the target pool selected independently
+    /// from the shared generated counter effect. Counterspell accepts any
+    /// spell; Dispel accepts only instant spells.
+    CounterTarget(StackSpellFilter),
     /// "Choose one -- Counter target spell if it's blue; or destroy target
     /// permanent if it's blue." (Pyroblast: unfiltered targeting, checked
     /// at resolution).
@@ -189,6 +193,12 @@ enum Special {
     RecklessImpulse,
 }
 
+#[derive(Clone, Copy)]
+enum StackSpellFilter {
+    Any,
+    Instant,
+}
+
 fn special_for(name: &str) -> Special {
     match name {
         // Great Furnace is intentionally explicit: unlike a basic land, its
@@ -206,6 +216,8 @@ fn special_for(name: &str) -> Special {
         "Grab the Prize" => Special::GrabThePrize,
         "Highway Robbery" => Special::HighwayRobbery,
         "Searing Blaze" => Special::SearingBlaze,
+        "Counterspell" => Special::CounterTarget(StackSpellFilter::Any),
+        "Dispel" => Special::CounterTarget(StackSpellFilter::Instant),
         "Pyroblast" => Special::Pyroblast,
         "Red Elemental Blast" => Special::RedElementalBlast,
         "End the Festivities" => Special::EndTheFestivities,
@@ -756,34 +768,57 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out).unwrap();
     }
 
+    // Reusable "counter target spell" resolution program. Target filters
+    // belong to `TargetSpec`; the effect itself is identical for
+    // Counterspell, Dispel, and Red Elemental Blast, and is nested under
+    // Pyroblast's resolution-time blue check. The zone guard makes a stale
+    // target a no-op, while `EffectOp::MoveObject` owns physical-card,
+    // flashback, and virtual-copy departure semantics.
+    writeln!(out, "fn counter_target_spell_effect() -> EffectOp {{").unwrap();
+    writeln!(out, "    EffectOp::Conditional {{").unwrap();
+    writeln!(
+        out,
+        "        cond: EffectCond::TargetInZone(0, Zone::Stack),"
+    )
+    .unwrap();
+    writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+    writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+    writeln!(out, "    }}").unwrap();
+    writeln!(out, "}}").unwrap();
+    writeln!(out).unwrap();
+    writeln!(
+        out,
+        "fn spell_effect_counter_target() -> Option<EffectOp> {{"
+    )
+    .unwrap();
+    writeln!(out, "    Some(counter_target_spell_effect())").unwrap();
+    writeln!(out, "}}").unwrap();
+    writeln!(out).unwrap();
+
     if cards
         .iter()
         .any(|c| matches!(special_for(&c.name), Special::Pyroblast))
     {
         // Primary mode: counter target spell if it's blue (unfiltered
         // targeting -- PyroblastCounterTargetEffect checks color at
-        // resolution, not TargetSpell's legality). Same guarded-move shape
-        // handles 608.2b fizzle (TargetInZone) and the color check
-        // (TargetIsColor) together via EffectCond::And.
+        // resolution, not TargetSpell's legality). The shared counter
+        // program handles the stale-stack-target guard and departure.
         writeln!(
             out,
             "fn spell_effect_pyroblast_mode1() -> Option<EffectOp> {{"
         )
         .unwrap();
         writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
-        writeln!(out, "        cond: EffectCond::And(").unwrap();
         writeln!(
             out,
-            "            Box::new(EffectCond::TargetInZone(0, Zone::Stack)),"
+            "        cond: EffectCond::TargetIsColor(0, ManaColor::U),"
         )
         .unwrap();
         writeln!(
             out,
-            "            Box::new(EffectCond::TargetIsColor(0, ManaColor::U)),"
+            "        then: Box::new(counter_target_spell_effect()),"
         )
         .unwrap();
-        writeln!(out, "        ),").unwrap();
-        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
         writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
         writeln!(out, "    }})").unwrap();
         writeln!(out, "}}").unwrap();
@@ -816,22 +851,13 @@ fn codegen(cards: &[CardJson]) -> String {
         .any(|c| matches!(special_for(&c.name), Special::RedElementalBlast))
     {
         // Primary mode: counter target blue spell (color pre-filtered by
-        // TargetSpec::BlueSpellOnStack at targeting time -- only the
-        // 608.2b fizzle re-check is needed at resolution).
+        // TargetSpec::BlueSpellOnStack at targeting time).
         writeln!(
             out,
             "fn spell_effect_red_elemental_blast_mode1() -> Option<EffectOp> {{"
         )
         .unwrap();
-        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
-        writeln!(
-            out,
-            "        cond: EffectCond::TargetInZone(0, Zone::Stack),"
-        )
-        .unwrap();
-        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
-        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
-        writeln!(out, "    }})").unwrap();
+        writeln!(out, "    spell_effect_counter_target()").unwrap();
         writeln!(out, "}}").unwrap();
         writeln!(out).unwrap();
         writeln!(out, "fn mode2_effect_red_elemental_blast() -> EffectOp {{").unwrap();
@@ -955,6 +981,16 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::SearingBlaze => (
                 "TargetSpec::PlayerThenTheirCreature",
                 "spell_effect_searing_blaze".to_string(),
+                "no_effect".to_string(),
+            ),
+            Special::CounterTarget(StackSpellFilter::Any) => (
+                "TargetSpec::AnySpellOnStack",
+                "spell_effect_counter_target".to_string(),
+                "no_effect".to_string(),
+            ),
+            Special::CounterTarget(StackSpellFilter::Instant) => (
+                "TargetSpec::InstantSpellOnStack",
+                "spell_effect_counter_target".to_string(),
                 "no_effect".to_string(),
             ),
             Special::Pyroblast => (

@@ -800,13 +800,11 @@ pub enum Decision {
         player: PlayerId,
         spell: ObjectId,
     },
-    /// Pyroblast/Red Elemental Blast only, this increment: which of the
-    /// spell's 2 modes to resolve (`CardDef::mode2`). Asked before
-    /// targeting, since the two modes have different `TargetSpec`s. Unlike
-    /// `ChooseCastMode`, always asked when `mode2.is_some()` -- both modes
-    /// are always legal to *choose* regardless of what's currently on the
-    /// battlefield/stack (601.2b: mode is chosen before targets, so
-    /// there's no "only one is affordable" shortcut to take here).
+    /// Pyroblast/Red Elemental Blast: which of the spell's 2 modes to
+    /// resolve (`CardDef::mode2`). Asked before targeting, since the modes
+    /// have different `TargetSpec`s, and only when both modes admit a
+    /// complete mandatory target assignment. If exactly one mode is viable
+    /// it is selected silently while retaining its original index.
     ChooseSpellMode {
         player: PlayerId,
         spell: ObjectId,
@@ -1016,6 +1014,7 @@ fn target_count(spec: TargetSpec) -> u8 {
         TargetSpec::None => 0,
         TargetSpec::AnyTarget
         | TargetSpec::AnySpellOnStack
+        | TargetSpec::InstantSpellOnStack
         | TargetSpec::BlueSpellOnStack
         | TargetSpec::AnyPermanent
         | TargetSpec::BluePermanent => 1,
@@ -1086,6 +1085,19 @@ pub fn legal_targets_for(
                 .map(|item| Target::Object(item.source))
                 .collect()
         }
+        TargetSpec::InstantSpellOnStack => {
+            let announcing = state.engine.pending_cast.as_ref().map(|p| p.spell);
+            state
+                .stack
+                .iter()
+                .filter(|item| item.kind == StackItemKind::Spell && Some(item.source) != announcing)
+                .filter(|item| {
+                    let def_idx = state.objects.get(item.source).card_def;
+                    card_def::CARD_DEFS[def_idx as usize].has_type(CardType::Instant)
+                })
+                .map(|item| Target::Object(item.source))
+                .collect()
+        }
         TargetSpec::BlueSpellOnStack => state
             .stack
             .iter()
@@ -1101,6 +1113,66 @@ pub fn legal_targets_for(
             .map(Target::Object)
             .collect(),
     }
+}
+
+/// Whether the already-chosen target prefix can be extended to a complete
+/// mandatory assignment. This deliberately explores dependent specs
+/// recursively: `PlayerThenTheirCreature` is viable only when at least one
+/// first-pick player has a legal second-pick creature, not merely because
+/// its unconditional first pool contains both players.
+fn target_prefix_can_complete(
+    spec: TargetSpec,
+    targets_chosen: &[Target],
+    state: &GameState,
+) -> bool {
+    let need = target_count(spec) as usize;
+    if targets_chosen.len() == need {
+        return true;
+    }
+    if targets_chosen.len() > need {
+        return false;
+    }
+    legal_targets_for(spec, targets_chosen, state)
+        .into_iter()
+        .any(|candidate| {
+            let mut next = targets_chosen.to_vec();
+            next.push(candidate);
+            target_prefix_can_complete(spec, &next, state)
+        })
+}
+
+/// The next legal target choices that still admit a complete mandatory
+/// assignment. Filtering at every prefix prevents a legal first pick from
+/// leading to an empty dependent second-pick decision.
+fn completable_next_targets_for(
+    spec: TargetSpec,
+    targets_chosen: &[Target],
+    state: &GameState,
+) -> Vec<Target> {
+    legal_targets_for(spec, targets_chosen, state)
+        .into_iter()
+        .filter(|candidate| {
+            let mut next = targets_chosen.to_vec();
+            next.push(*candidate);
+            target_prefix_can_complete(spec, &next, state)
+        })
+        .collect()
+}
+
+/// Modal indices whose target requirements can be completed in the current
+/// state. `mode_count` remains the card's stable printed mode count; this
+/// list only filters the currently offered schema-v3 action candidates.
+fn viable_spell_modes(def: &card_def::CardDef, state: &GameState) -> Vec<u8> {
+    let mut modes = Vec::with_capacity(if def.mode2.is_some() { 2 } else { 1 });
+    if target_prefix_can_complete(def.target_spec, &[], state) {
+        modes.push(0);
+    }
+    if let Some(mode2) = &def.mode2 {
+        if target_prefix_can_complete(mode2.target_spec, &[], state) {
+            modes.push(1);
+        }
+    }
+    modes
 }
 
 // ------------------------------------------------------------------ query
@@ -1278,6 +1350,9 @@ fn is_castable_now(player: PlayerId, id: ObjectId, is_flashback: bool, state: &G
     if !def.is_castable() {
         return false;
     }
+    if viable_spell_modes(def, state).is_empty() {
+        return false;
+    }
     // 601.3a/117.1a: sorcery-speed timing applies to every permanent-or-
     // sorcery spell (only Instant -- and Flash, not modeled by any card in
     // this pool -- may be cast anytime the caster has priority). Previously
@@ -1417,7 +1492,9 @@ fn is_plotted_castable_now(player: PlayerId, id: ObjectId, state: &GameState) ->
         return false;
     }
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
-    def.is_castable() && sorcery_speed_timing_ok(player, state)
+    def.is_castable()
+        && !viable_spell_modes(def, state).is_empty()
+        && sorcery_speed_timing_ok(player, state)
 }
 
 /// Hand cards `player` can currently afford to Plot (`CardDef::plot_cost`).
@@ -1465,7 +1542,9 @@ fn available_activatable_abilities(player: PlayerId, state: &GameState) -> Vec<(
             if ability.sorcery_speed_only && !sorcery_speed_timing_ok(player, state) {
                 continue;
             }
-            if can_pay_components(ability.cost, player, id, state) {
+            if can_pay_components(ability.cost, player, id, state)
+                && target_prefix_can_complete(ability.target_spec, &[], state)
+            {
                 out.push((id, i as u8));
             }
         }
@@ -2088,6 +2167,25 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
     let pending = state.engine.pending_cast.clone()?;
     let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
 
+    // Ordinary, Flashback, and Plotted casts are pre-filtered before they
+    // reach `begin_cast`, but Madness intentionally bypasses that offer-time
+    // gate and restored snapshots are untrusted. Re-check the complete
+    // mandatory target assignment against the announcing spell's real
+    // self-excluding stack state, and revert any impossible announcement
+    // instead of exposing an empty targeting decision.
+    let targeting_can_complete = match pending.mode_chosen {
+        Some(1) => def.mode2.as_ref().is_some_and(|mode| {
+            target_prefix_can_complete(mode.target_spec, &pending.targets_chosen, state)
+        }),
+        Some(_) => target_prefix_can_complete(def.target_spec, &pending.targets_chosen, state),
+        None => !viable_spell_modes(def, state).is_empty(),
+    };
+    if !targeting_can_complete {
+        let pending = state.engine.pending_cast.take().unwrap();
+        abort_cast(state, pending);
+        return None;
+    }
+
     // Kicker (Goblin Bushwhacker) is decided before targets/modes, same as
     // any other cast-time cost choice -- only asked when paying the base
     // cost *and* the kicker cost together is currently affordable; every
@@ -2109,12 +2207,24 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
         }
     }
 
-    // 601.2b: mode is chosen before targets (the two modes can have
-    // different target shapes) -- always asked when the card is modal,
-    // never auto-resolved (both modes are always legal to *choose*
-    // regardless of the battlefield/stack; see `Decision::ChooseSpellMode`'s
-    // doc).
+    // 601.2b/c: choose a mode before targets, but only a mode whose complete
+    // mandatory target assignment exists. If exactly one printed mode is
+    // viable there is no policy choice, so retain that mode's original
+    // index (including index 1) silently; if both are viable, expose the
+    // existing two-action schema-v3 decision unchanged.
     if def.mode2.is_some() && pending.mode_chosen.is_none() {
+        let viable_modes = viable_spell_modes(def, state);
+        if viable_modes.is_empty() {
+            // Defensive against a state mutation between the general gate
+            // above and this mode stage (none exists in today's pipeline).
+            let pending = state.engine.pending_cast.take().unwrap();
+            abort_cast(state, pending);
+            return None;
+        }
+        if viable_modes.len() == 1 {
+            state.engine.pending_cast.as_mut().unwrap().mode_chosen = Some(viable_modes[0]);
+            return drain_pending_cast_or_decide(state);
+        }
         return Some(Decision::ChooseSpellMode {
             player: pending.controller,
             spell: pending.spell,
@@ -2137,7 +2247,11 @@ fn drain_pending_cast_or_decide(state: &mut GameState) -> Option<Decision> {
             player: pending.controller,
             spell: pending.spell,
             remaining: need - pending.targets_chosen.len() as u8,
-            legal_targets: legal_targets_for(active_target_spec, &pending.targets_chosen, state),
+            legal_targets: completable_next_targets_for(
+                active_target_spec,
+                &pending.targets_chosen,
+                state,
+            ),
         });
     }
 
@@ -2248,7 +2362,11 @@ fn drain_pending_activation_or_decide(state: &mut GameState) -> Option<Decision>
             player: pending.controller,
             spell: pending.source,
             remaining: need - pending.targets_chosen.len() as u8,
-            legal_targets: legal_targets_for(pending.target_spec, &pending.targets_chosen, state),
+            legal_targets: completable_next_targets_for(
+                pending.target_spec,
+                &pending.targets_chosen,
+                state,
+            ),
         });
     }
 
@@ -3078,7 +3196,7 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
                 return apply_choose_spell_copy_target(state, t);
             }
             let (spec, chosen_so_far) = pending_target_spec_and_chosen(state).ok_or("no spell or ability is currently being targeted")?;
-            if !legal_targets_for(spec, &chosen_so_far, state).contains(&t) {
+            if !completable_next_targets_for(spec, &chosen_so_far, state).contains(&t) {
                 return Err(format!("{t:?} is not a legal target"));
             }
             if let Some(p) = state.engine.pending_cast.as_mut() {
@@ -3107,15 +3225,20 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
         }
         Action::ChooseSpellMode(mode) => {
             let p = state.priority_player;
-            let pending = state.engine.pending_cast.as_mut().ok_or("no spell is currently being cast")?;
+            let pending = state
+                .engine
+                .pending_cast
+                .as_ref()
+                .ok_or("no spell is currently being cast")?;
             if pending.mode_chosen.is_some() {
                 return Err("this cast's mode has already been chosen".to_string());
             }
             let def = &card_def::CARD_DEFS[state.objects.get(pending.spell).card_def as usize];
-            if def.mode2.is_none() || mode > 1 {
+            let viable_modes = viable_spell_modes(def, state);
+            if viable_modes.len() != 2 || !viable_modes.contains(&mode) {
                 return Err(format!("{mode} is not a legal spell mode for {p:?}'s cast"));
             }
-            pending.mode_chosen = Some(mode);
+            state.engine.pending_cast.as_mut().unwrap().mode_chosen = Some(mode);
             Ok(())
         }
         Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
@@ -4041,6 +4164,7 @@ mod tests {
     use super::*;
     use crate::card_def::card_id_by_name;
     use crate::effect::PlayerRef;
+    use crate::mana::ManaColor;
 
     fn empty_game() -> GameState {
         GameState::new_from_libraries(&[], &[], |c| format!("card-{c}"), 1)
@@ -5279,6 +5403,378 @@ mod tests {
     }
 
     #[test]
+    fn target_completability_filters_dependent_first_picks() {
+        let mut state = empty_game();
+        assert_eq!(
+            legal_targets_for(TargetSpec::PlayerThenTheirCreature, &[], &state),
+            vec![Target::Player(PlayerId::P0), Target::Player(PlayerId::P1)],
+            "the raw legality pool remains suitable for resolution-time partial-target checks"
+        );
+        assert!(!target_prefix_can_complete(
+            TargetSpec::PlayerThenTheirCreature,
+            &[],
+            &state
+        ));
+        assert!(
+            completable_next_targets_for(TargetSpec::PlayerThenTheirCreature, &[], &state)
+                .is_empty()
+        );
+
+        let creature = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        assert!(target_prefix_can_complete(
+            TargetSpec::PlayerThenTheirCreature,
+            &[],
+            &state
+        ));
+        assert_eq!(
+            completable_next_targets_for(TargetSpec::PlayerThenTheirCreature, &[], &state),
+            vec![Target::Player(PlayerId::P1)],
+            "P0 is a legal first target in isolation but cannot complete the dependent assignment"
+        );
+        assert_eq!(
+            completable_next_targets_for(
+                TargetSpec::PlayerThenTheirCreature,
+                &[Target::Player(PlayerId::P1)],
+                &state
+            ),
+            vec![Target::Object(creature)]
+        );
+    }
+
+    #[test]
+    fn mandatory_target_viability_gates_offers_and_dependent_target_choices() {
+        let mut state = ready_game_in_main1(2);
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        let counterspell = put_in_hand(&mut state, PlayerId::P0, "Counterspell");
+        let dispel = put_in_hand(&mut state, PlayerId::P0, "Dispel");
+        let blaze = put_in_hand(&mut state, PlayerId::P0, "Searing Blaze");
+
+        let empty_targets = castable_spells(PlayerId::P0, &state);
+        assert!(!empty_targets.contains(&counterspell));
+        assert!(!empty_targets.contains(&dispel));
+        assert!(!empty_targets.contains(&blaze));
+
+        let mut bypass = state.clone();
+        begin_cast(&mut bypass, PlayerId::P0, counterspell);
+        assert!(matches!(
+            advance_until_decision(&mut bypass),
+            Decision::CastSpellOrPass { .. }
+        ));
+        assert!(bypass.engine.pending_cast.is_none());
+        assert!(bypass.stack.is_empty());
+        assert!(bypass.players[0].hand.contains(&counterspell));
+
+        put_on_stack(&mut state, PlayerId::P1, "Guttersnipe");
+        let creature_spell_only = castable_spells(PlayerId::P0, &state);
+        assert!(creature_spell_only.contains(&counterspell));
+        assert!(!creature_spell_only.contains(&dispel));
+
+        put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt");
+        let with_instant = castable_spells(PlayerId::P0, &state);
+        assert!(with_instant.contains(&counterspell));
+        assert!(with_instant.contains(&dispel));
+        assert!(!with_instant.contains(&blaze));
+
+        let victim = put_on_battlefield(&mut state, PlayerId::P1, "Voldaren Epicure");
+        assert!(castable_spells(PlayerId::P0, &state).contains(&blaze));
+        step(&mut state, Action::CastSpell(blaze)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(legal_targets, vec![Target::Player(PlayerId::P1)]);
+            }
+            other => panic!("expected filtered first target, got {other:?}"),
+        }
+        let before = state.state_hash();
+        assert!(step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P0))
+        )
+        .is_err());
+        assert_eq!(
+            state.state_hash(),
+            before,
+            "an invalid dead-end pick is nonmutating"
+        );
+        step(
+            &mut state,
+            Action::ChooseTarget(Target::Player(PlayerId::P1)),
+        )
+        .unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(legal_targets, vec![Target::Object(victim)]);
+            }
+            other => panic!("expected dependent creature target, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn modal_spells_reject_zero_modes_and_silently_keep_the_only_original_index() {
+        for name in ["Pyroblast", "Red Elemental Blast"] {
+            let mut none = ready_game_in_main1(0);
+            none.players[0].mana_pool[ManaColor::R.pool_index()] = 1;
+            let spell = put_in_hand(&mut none, PlayerId::P0, name);
+            assert!(!castable_spells(PlayerId::P0, &none).contains(&spell));
+
+            // Defensive bypass regression: malformed/restored or Madness-like
+            // direct announcement with no viable mode reverts instead of
+            // panicking or emitting an empty target decision.
+            begin_cast(&mut none, PlayerId::P0, spell);
+            assert!(matches!(
+                advance_until_decision(&mut none),
+                Decision::CastSpellOrPass { .. }
+            ));
+            assert!(none.engine.pending_cast.is_none());
+            assert!(none.stack.is_empty());
+            assert!(none.players[0].hand.contains(&spell));
+
+            let mut only_counter = ready_game_in_main1(0);
+            only_counter.players[0].mana_pool[ManaColor::R.pool_index()] = 1;
+            let target = put_on_stack(&mut only_counter, PlayerId::P1, "Counterspell");
+            let spell = put_in_hand(&mut only_counter, PlayerId::P0, name);
+            step(&mut only_counter, Action::CastSpell(spell)).unwrap();
+            match advance_until_decision(&mut only_counter) {
+                Decision::ChooseTargets { legal_targets, .. } => {
+                    assert_eq!(legal_targets, vec![Target::Object(target)]);
+                }
+                other => panic!("{name}: sole mode 0 should skip mode choice, got {other:?}"),
+            }
+            assert_eq!(
+                only_counter
+                    .engine
+                    .pending_cast
+                    .as_ref()
+                    .unwrap()
+                    .mode_chosen,
+                Some(0)
+            );
+
+            let mut only_destroy = ready_game_in_main1(0);
+            only_destroy.players[0].mana_pool[ManaColor::R.pool_index()] = 1;
+            let permanent = put_on_battlefield(&mut only_destroy, PlayerId::P1, "Cryptic Serpent");
+            let spell = put_in_hand(&mut only_destroy, PlayerId::P0, name);
+            step(&mut only_destroy, Action::CastSpell(spell)).unwrap();
+            match advance_until_decision(&mut only_destroy) {
+                Decision::ChooseTargets { legal_targets, .. } => {
+                    assert_eq!(legal_targets, vec![Target::Object(permanent)]);
+                }
+                other => panic!("{name}: sole mode 1 should skip mode choice, got {other:?}"),
+            }
+            assert_eq!(
+                only_destroy
+                    .engine
+                    .pending_cast
+                    .as_ref()
+                    .unwrap()
+                    .mode_chosen,
+                Some(1),
+                "the sole viable second mode must retain printed index 1"
+            );
+
+            let mut both = ready_game_in_main1(0);
+            both.players[0].mana_pool[ManaColor::R.pool_index()] = 1;
+            put_on_stack(&mut both, PlayerId::P1, "Counterspell");
+            put_on_battlefield(&mut both, PlayerId::P1, "Cryptic Serpent");
+            let spell = put_in_hand(&mut both, PlayerId::P0, name);
+            step(&mut both, Action::CastSpell(spell)).unwrap();
+            let decision = advance_until_decision(&mut both);
+            assert!(matches!(
+                &decision,
+                Decision::ChooseSpellMode { mode_count: 2, .. }
+            ));
+            let mode_indices: Vec<u8> = crate::rl::legal_action_candidates_v1(
+                &crate::surface_v2::SurfaceDecision::Decision(decision),
+                &both,
+            )
+            .unwrap()
+            .into_iter()
+            .filter_map(|candidate| match candidate.record.semantic {
+                crate::rl::ActionSemanticV1::ChooseSpellMode {
+                    mode_index,
+                    mode_count: 2,
+                    ..
+                } => Some(mode_index),
+                _ => None,
+            })
+            .collect();
+            assert_eq!(mode_indices, vec![0, 1]);
+            let before = both.state_hash();
+            assert!(step(&mut both, Action::ChooseSpellMode(2)).is_err());
+            assert_eq!(both.state_hash(), before);
+            step(&mut both, Action::ChooseSpellMode(0)).unwrap();
+        }
+    }
+
+    #[test]
+    fn counterspell_targeting_excludes_its_announcing_stack_placeholder() {
+        let mut state = ready_game_in_main1(0);
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        let underlying = put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt");
+        let counterspell = put_in_hand(&mut state, PlayerId::P0, "Counterspell");
+        step(&mut state, Action::CastSpell(counterspell)).unwrap();
+        match advance_until_decision(&mut state) {
+            Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(legal_targets, vec![Target::Object(underlying)]);
+                assert!(!legal_targets.contains(&Target::Object(counterspell)));
+            }
+            other => panic!("expected Counterspell targets, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn counter_target_rl_identity_and_snapshot_restore_remain_schema_v3_stable() {
+        assert_eq!(crate::rl_session::RL_SESSION_SCHEMA_VERSION, 3);
+        let mut state = ready_game_in_main1(0);
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        put_on_battlefield(&mut state, PlayerId::P0, "Island");
+        let target = put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt");
+        let counter = put_in_hand(&mut state, PlayerId::P0, "Counterspell");
+        step(&mut state, Action::CastSpell(counter)).unwrap();
+        let decision = advance_until_decision(&mut state);
+
+        let action_id = crate::rl::legal_action_candidates_v1(
+            &crate::surface_v2::SurfaceDecision::Decision(decision),
+            &state,
+        )
+        .unwrap()
+        .into_iter()
+        .find_map(|candidate| match candidate.record.semantic {
+            crate::rl::ActionSemanticV1::ChooseTarget {
+                target: crate::rl::TargetRefV1::Object { object },
+                ..
+            } if object.arena_id == target.0 => Some(candidate.record.stable_id),
+            _ => None,
+        })
+        .expect("Counterspell target has a stable RL action id");
+        assert!(action_id.starts_with("legal-action-v3:"));
+
+        let hash = state.state_hash();
+        let snapshot = state.snapshot();
+        step(&mut state, Action::ChooseTarget(Target::Object(target))).unwrap();
+        let _ = advance_until_decision(&mut state);
+        assert_ne!(state.state_hash(), hash);
+
+        state.restore(&snapshot);
+        assert_eq!(state.state_hash(), hash);
+        let restored_decision = advance_until_decision(&mut state);
+        let restored_id = crate::rl::legal_action_candidates_v1(
+            &crate::surface_v2::SurfaceDecision::Decision(restored_decision),
+            &state,
+        )
+        .unwrap()
+        .into_iter()
+        .find_map(|candidate| match candidate.record.semantic {
+            crate::rl::ActionSemanticV1::ChooseTarget {
+                target: crate::rl::TargetRefV1::Object { object },
+                ..
+            } if object.arena_id == target.0 => Some(candidate.record.stable_id),
+            _ => None,
+        })
+        .expect("restored Counterspell target action");
+        assert_eq!(restored_id, action_id);
+    }
+
+    #[test]
+    fn counterspell_and_dispel_resolve_through_the_shared_counter_effect() {
+        for (counter_name, target_name, islands) in [
+            ("Counterspell", "Guttersnipe", 2),
+            ("Dispel", "Lightning Bolt", 1),
+        ] {
+            let mut state = ready_game_in_main1(0);
+            for _ in 0..islands {
+                put_on_battlefield(&mut state, PlayerId::P0, "Island");
+            }
+            let target = put_on_stack(&mut state, PlayerId::P1, target_name);
+            let counter = put_in_hand(&mut state, PlayerId::P0, counter_name);
+            step(&mut state, Action::CastSpell(counter)).unwrap();
+            step(&mut state, Action::ChooseTarget(Target::Object(target))).unwrap();
+            let terminal = pass_until_stack_resolves(&mut state);
+            assert!(matches!(terminal, Decision::CastSpellOrPass { .. }));
+            assert_eq!(state.objects.get(target).zone, Zone::Graveyard);
+            assert_eq!(state.objects.get(counter).zone, Zone::Graveyard);
+            assert!(state.stack.is_empty());
+        }
+    }
+
+    #[test]
+    fn counter_war_resolves_lifo_and_leaves_the_original_spell() {
+        let mut state = ready_game_in_main1(0);
+        for player in [PlayerId::P0, PlayerId::P1] {
+            put_on_battlefield(&mut state, player, "Island");
+            put_on_battlefield(&mut state, player, "Island");
+        }
+        let original = put_on_stack(&mut state, PlayerId::P1, "Lightning Bolt");
+        let first = put_in_hand(&mut state, PlayerId::P0, "Counterspell");
+        let second = put_in_hand(&mut state, PlayerId::P1, "Counterspell");
+
+        step(&mut state, Action::CastSpell(first)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(original))).unwrap();
+        assert!(matches!(
+            advance_until_decision(&mut state),
+            Decision::CastSpellOrPass {
+                player: PlayerId::P0,
+                ..
+            }
+        ));
+        step(&mut state, Action::Pass).unwrap();
+        assert!(matches!(
+            advance_until_decision(&mut state),
+            Decision::CastSpellOrPass {
+                player: PlayerId::P1,
+                ..
+            }
+        ));
+        step(&mut state, Action::CastSpell(second)).unwrap();
+        step(&mut state, Action::ChooseTarget(Target::Object(first))).unwrap();
+        let _ = advance_until_decision(&mut state);
+        pass_until_one_stack_item_resolves(&mut state);
+
+        assert_eq!(state.objects.get(first).zone, Zone::Graveyard);
+        assert_eq!(state.objects.get(second).zone, Zone::Graveyard);
+        assert_eq!(state.objects.get(original).zone, Zone::Stack);
+        assert_eq!(state.stack.len(), 1);
+        assert_eq!(state.stack[0].source, original);
+    }
+
+    #[test]
+    fn shared_counter_effect_preserves_flashback_and_copy_departure_and_stale_fizzle() {
+        for (is_copy, is_flashback) in [(false, true), (true, true)] {
+            let mut state = ready_game_in_main1(0);
+            put_on_battlefield(&mut state, PlayerId::P0, "Island");
+            let target = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+            state.stack.last_mut().unwrap().is_copy = is_copy;
+            state.stack.last_mut().unwrap().is_flashback = is_flashback;
+            let dispel = put_in_hand(&mut state, PlayerId::P0, "Dispel");
+            step(&mut state, Action::CastSpell(dispel)).unwrap();
+            step(&mut state, Action::ChooseTarget(Target::Object(target))).unwrap();
+            pass_until_stack_resolves(&mut state);
+            if is_copy {
+                assert_eq!(state.objects.get(target).zone, Zone::Stack);
+                assert!(!state.exile.contains(&target));
+                assert!(!state.players[1].graveyard.contains(&target));
+            } else {
+                assert_eq!(state.objects.get(target).zone, Zone::Exile);
+                assert!(state.exile.contains(&target));
+            }
+        }
+
+        let mut stale = ready_game_in_main1(0);
+        put_on_battlefield(&mut stale, PlayerId::P0, "Island");
+        put_on_battlefield(&mut stale, PlayerId::P0, "Island");
+        let target = put_on_stack(&mut stale, PlayerId::P1, "Lightning Bolt");
+        let counter = put_in_hand(&mut stale, PlayerId::P0, "Counterspell");
+        step(&mut stale, Action::CastSpell(counter)).unwrap();
+        step(&mut stale, Action::ChooseTarget(Target::Object(target))).unwrap();
+        stale.stack.retain(|item| item.source != target);
+        stale.objects.get_mut(target).zone = Zone::Graveyard;
+        pass_until_stack_resolves(&mut stale);
+        assert_eq!(stale.objects.get(target).zone, Zone::Graveyard);
+        assert_eq!(stale.objects.get(counter).zone, Zone::Graveyard);
+    }
+
+    #[test]
     fn pyroblast_counters_a_blue_spell_on_the_stack() {
         let mut state = ready_game_in_main1(1);
         let pyroblast = put_in_hand(&mut state, PlayerId::P0, "Pyroblast");
@@ -5374,7 +5870,7 @@ mod tests {
     }
 
     #[test]
-    fn spell_target_pools_include_copies_but_exclude_abilities_and_madness_offers() {
+    fn spell_target_pools_include_instant_copies_but_exclude_all_nonspell_items() {
         let mut state = empty_game();
         let physical = put_on_stack(&mut state, PlayerId::P0, "Counterspell");
         let copy = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
@@ -5384,6 +5880,20 @@ mod tests {
         state.stack.push(StackItem {
             kind: StackItemKind::ActivatedAbility,
             source: activated,
+            controller: PlayerId::P0,
+            targets: vec![],
+            is_copy: false,
+            inline_effect: Some(EffectOp::Sequence(vec![])),
+            discarded: vec![],
+            is_flashback: false,
+            mode_chosen: 0,
+            madness_offer: false,
+            kicked: false,
+        });
+        let triggered = put_on_battlefield(&mut state, PlayerId::P0, "Guttersnipe");
+        state.stack.push(StackItem {
+            kind: StackItemKind::TriggeredAbility,
+            source: triggered,
             controller: PlayerId::P0,
             targets: vec![],
             is_copy: false,
@@ -5409,13 +5919,48 @@ mod tests {
             kicked: false,
         });
 
-        for spec in [TargetSpec::AnySpellOnStack, TargetSpec::BlueSpellOnStack] {
+        for spec in [
+            TargetSpec::AnySpellOnStack,
+            TargetSpec::InstantSpellOnStack,
+            TargetSpec::BlueSpellOnStack,
+        ] {
             let targets = legal_targets_for(spec, &[], &state);
             assert!(targets.contains(&Target::Object(physical)));
             assert!(targets.contains(&Target::Object(copy)));
             assert!(!targets.contains(&Target::Object(activated)));
+            assert!(!targets.contains(&Target::Object(triggered)));
             assert!(!targets.contains(&Target::Object(madness)));
         }
+    }
+
+    #[test]
+    fn instant_spell_filter_preserves_raw_stack_order_across_mixed_spell_types() {
+        let mut state = empty_game();
+        assert!(legal_targets_for(TargetSpec::InstantSpellOnStack, &[], &state).is_empty());
+
+        let creature = put_on_stack(&mut state, PlayerId::P0, "Guttersnipe");
+        let sorcery = put_on_stack(&mut state, PlayerId::P1, "Faithless Looting");
+        let red_instant = put_on_stack(&mut state, PlayerId::P0, "Lightning Bolt");
+        let blue_instant_copy = put_on_stack(&mut state, PlayerId::P1, "Counterspell");
+        state.stack.last_mut().unwrap().is_copy = true;
+
+        assert_eq!(
+            legal_targets_for(TargetSpec::AnySpellOnStack, &[], &state),
+            vec![
+                Target::Object(creature),
+                Target::Object(sorcery),
+                Target::Object(red_instant),
+                Target::Object(blue_instant_copy),
+            ]
+        );
+        assert_eq!(
+            legal_targets_for(TargetSpec::InstantSpellOnStack, &[], &state),
+            vec![
+                Target::Object(red_instant),
+                Target::Object(blue_instant_copy),
+            ],
+            "instant filtering must not reorder qualifying physical spells or copies"
+        );
     }
 
     #[test]
@@ -5451,9 +5996,13 @@ mod tests {
         let serpent = put_on_battlefield(&mut state, PlayerId::P1, "Cryptic Serpent"); // blue creature
 
         step(&mut state, Action::CastSpell(pyroblast)).unwrap();
-        step(&mut state, Action::ChooseSpellMode(1)).unwrap(); // destroy mode
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(
+                    state.engine.pending_cast.as_ref().unwrap().mode_chosen,
+                    Some(1),
+                    "destroy is the sole viable mode and keeps printed index 1"
+                );
                 assert!(legal_targets.contains(&Target::Object(serpent)));
                 step(&mut state, Action::ChooseTarget(Target::Object(serpent))).unwrap();
             }
@@ -5471,9 +6020,13 @@ mod tests {
         let counterspell = put_on_stack(&mut state, PlayerId::P1, "Counterspell"); // blue: legal target
 
         step(&mut state, Action::CastSpell(reb)).unwrap();
-        step(&mut state, Action::ChooseSpellMode(0)).unwrap();
         match advance_until_decision(&mut state) {
             Decision::ChooseTargets { legal_targets, .. } => {
+                assert_eq!(
+                    state.engine.pending_cast.as_ref().unwrap().mode_chosen,
+                    Some(0),
+                    "counter is the sole viable mode"
+                );
                 assert!(
                     !legal_targets.contains(&Target::Object(bolt)),
                     "REB's counter mode should never even offer a non-blue spell as a target"

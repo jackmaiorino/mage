@@ -1,0 +1,218 @@
+{
+  "schema": "kernel_xmage_counter_reference_windows/v1",
+  "evidence_scope": "source-hash-backed XMage micro-reference windows; not fixed-provenance whole-deck parity",
+  "supports": [
+    "exact Counterspell and Dispel action-to-target linkage",
+    "name-level visible graveyard deltas across bounded windows"
+  ],
+  "does_not_support": [
+    "whole-deck replay parity",
+    "a fixed Java oracle commit",
+    "isolated reconstruction of every stack item"
+  ],
+  "oracle": {
+    "engine": "XMage Java",
+    "java_oracle_commit": null,
+    "provenance_status": "trace_and_manifest_digests_pinned_commit_unrecorded"
+  },
+  "run_manifest": {
+    "path": "local-training/local_pbt/cp7_eval_sweeps/golden_traces_v1/manifest.json",
+    "bytes": 4799,
+    "sha256": "4226b7f78fca1f024254713f7ce0228a16759c81bb6016ba2119397058fe9e30"
+  },
+  "traces": [
+    {
+      "id": "caw_gates_counterspell",
+      "path": "local-training/local_pbt/cp7_eval_sweeps/golden_traces_v1/game_logs/Pauper-Affinity-BC-P1CTL__Deck_-_Grixis_Affinity__vs__Deck_-_Caw-Gates/game_20260712_152203_0016.txt",
+      "bytes": 2090134,
+      "sha256": "87454014a8020b5b7e041f06941ff3113c9ef0306b14afa5314ef2f23fa2e605",
+      "scenario": 16,
+      "seed": 608650667,
+      "random_seed": "7640891576490364066",
+      "records": [
+        {
+          "decision_index": 133,
+          "line": 5357,
+          "action": "Counterspell [41f]: Cast Counterspell -> Myr Enforcer [68b]",
+          "source_card": "Counterspell",
+          "source_card_object_id": "41f345ec-8753-4d81-aef1-704b1b22eb72",
+          "target_card": "Myr Enforcer",
+          "target_card_types": [
+            "Artifact",
+            "Creature"
+          ],
+          "target_card_object_id": "68bf0917-8412-453b-9742-8bcfb1590b28",
+          "target_stack_object_id": "8911c2bd-44d5-4f0a-9f27-30538184696d",
+          "record_sha256": "56baedbc25ebc17eaf90bb7ac439a6c61c1991f26cc4087ca56209c56e99bf1a"
+        },
+        {
+          "decision_index": 135,
+          "line": 5728,
+          "action": "Counterspell [1a0]: Cast Counterspell -> Myr Enforcer [68b]",
+          "source_card": "Counterspell",
+          "source_card_object_id": "1a0b8d59-f766-461d-82a7-67a71f892adb",
+          "target_card": "Myr Enforcer",
+          "target_card_types": [
+            "Artifact",
+            "Creature"
+          ],
+          "target_card_object_id": "68bf0917-8412-453b-9742-8bcfb1590b28",
+          "target_stack_object_id": "8911c2bd-44d5-4f0a-9f27-30538184696d",
+          "record_sha256": "24c7bc3a77957ca8a267903af28336400f7b04dc596d44f189bef9b99bc43424"
+        }
+      ],
+      "state_window": {
+        "start_decision_index": 133,
+        "end_decision_index": 138,
+        "start_visible_state_sha256": "d164675e1ed74fad401cfee126a49e4f90ff5177d85a36fc262356cbe3f625bf",
+        "end_visible_state_sha256": "a73378f4689616dd9f14cc9649c47aab3685c5494ecbedb4f318e19a720ec521",
+        "self_graveyard_added": [
+          {
+            "name": "Counterspell",
+            "count": 2
+          }
+        ],
+        "opponent_graveyard_added": [
+          {
+            "name": "Mistvault Bridge",
+            "count": 1
+          },
+          {
+            "name": "Myr Enforcer",
+            "count": 1
+          },
+          {
+            "name": "Reckoner's Bargain",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "terror_counter_war",
+      "path": "local-training/local_pbt/cp7_eval_sweeps/golden_traces_v1/game_logs/Pauper-Affinity-BC-P1CTL__Deck_-_Grixis_Affinity__vs__Deck_-_Mono-Blue_Terror/game_20260712_143821_0003.txt",
+      "bytes": 1827154,
+      "sha256": "b16ae77e3f0541b5ed910bdd852b44865a54c5f052e20a1fa7500a2082a63646",
+      "scenario": 3,
+      "seed": 583994689,
+      "random_seed": "7640891576380802120",
+      "records": [
+        {
+          "decision_index": 82,
+          "line": 3808,
+          "action": "Counterspell [90b]: Cast Counterspell -> Blood Fountain [367]",
+          "source_card": "Counterspell",
+          "source_card_object_id": "90bd1d81-a44a-410a-bf00-45fefba16726",
+          "target_card": "Blood Fountain",
+          "target_card_types": [
+            "Artifact"
+          ],
+          "target_card_object_id": "36738fbb-1899-467e-af55-4e7f3f533b79",
+          "target_stack_object_id": "f3fafd1f-e98f-4a3c-8dbd-b784a1eb21a5",
+          "record_sha256": "9ecc06c440959b6eccd91a287884c9e97e89638353ea0cff9a089a6d59246d6b"
+        },
+        {
+          "decision_index": 83,
+          "line": 3850,
+          "action": "Dispel [98b]: Cast Dispel -> Counterspell [90b]",
+          "source_card": "Dispel",
+          "source_card_object_id": "98bf4d55-7299-460e-838b-90f1e0ab558d",
+          "target_card": "Counterspell",
+          "target_card_types": [
+            "Instant"
+          ],
+          "target_card_object_id": "90bd1d81-a44a-410a-bf00-45fefba16726",
+          "target_stack_object_id": "6189749b-d437-4c45-9c59-50da66b99a9b",
+          "record_sha256": "d685e3c72526573cc297bac0dc4ab634c592970a8600f463b964f31bd6c13e6d"
+        }
+      ],
+      "state_window": {
+        "start_decision_index": 82,
+        "end_decision_index": 85,
+        "start_visible_state_sha256": "af55a4c7a67ba98bf7da4b9992e9732f7b9e31d323ff4bf6142320098847b8ef",
+        "end_visible_state_sha256": "d3f66c6c4fa97e96cb7b00fc99e47953d078a569166c39543d344211f00065b1",
+        "self_graveyard_added": [
+          {
+            "name": "Counterspell",
+            "count": 1
+          },
+          {
+            "name": "Dispel",
+            "count": 1
+          }
+        ],
+        "opponent_graveyard_added": [
+          {
+            "name": "Cryogen Relic",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "faeries_dispel_pair",
+      "path": "local-training/local_pbt/cp7_eval_sweeps/golden_traces_v1/game_logs/Pauper-Affinity-BC-P1CTL__Deck_-_Grixis_Affinity__vs__Deck_-_Mono-Blue_Faeries/game_20260712_143616_0011.txt",
+      "bytes": 1031392,
+      "sha256": "40caa90c6503d3d28584018c3e28ff3f8c6aa8ff1a7d1dd5dd9814c66fa94edd",
+      "scenario": 11,
+      "seed": 500284620,
+      "random_seed": "7640891576866928069",
+      "records": [
+        {
+          "decision_index": 68,
+          "line": 3264,
+          "action": "Dispel [516]: Cast Dispel -> Toxin Analysis [6b2]",
+          "source_card": "Dispel",
+          "source_card_object_id": "516c1078-0b71-4469-895d-e91c7951d823",
+          "target_card": "Toxin Analysis",
+          "target_card_types": [
+            "Instant"
+          ],
+          "target_card_object_id": "6b28b9ba-3203-4806-b0a4-2e851726a98f",
+          "target_stack_object_id": "ea8fca35-2186-4a44-bbd4-699ef5cef678",
+          "record_sha256": "742d96a2c04955a223f966800627bc6e93bd8db1abe8dba1797b4a52a10ec768"
+        },
+        {
+          "decision_index": 69,
+          "line": 3433,
+          "action": "Dispel [235]: Cast Dispel -> Reckoner's Bargain [c79]",
+          "source_card": "Dispel",
+          "source_card_object_id": "2350ca07-1e0c-44ea-9d8e-a2fd18f7d8ae",
+          "target_card": "Reckoner's Bargain",
+          "target_card_types": [
+            "Instant"
+          ],
+          "target_card_object_id": "c799b0da-7443-4874-a9ef-855823f93fbb",
+          "target_stack_object_id": "42c342ba-45d7-4d25-8ff6-0edb49e5dc07",
+          "record_sha256": "f184e4e9a5c5f492b3cfba22796ca34a6268312f85004e888a3bde11883d2e32"
+        }
+      ],
+      "state_window": {
+        "start_decision_index": 68,
+        "end_decision_index": 71,
+        "start_visible_state_sha256": "6e197ff6b0e633c838965253d07c6194d15defe4a81a19f2d75ea06dbcf6dc37",
+        "end_visible_state_sha256": "65c3fb99d39d2212e34ee6b075e3471f7168bdfeb7d268ca4f9f9f0ba9f0689b",
+        "self_graveyard_added": [
+          {
+            "name": "Dispel",
+            "count": 2
+          }
+        ],
+        "opponent_graveyard_added": [
+          {
+            "name": "Mistvault Bridge",
+            "count": 1
+          },
+          {
+            "name": "Reckoner's Bargain",
+            "count": 1
+          },
+          {
+            "name": "Toxin Analysis",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ]
+}
