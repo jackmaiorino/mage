@@ -282,6 +282,7 @@ class PauperPoolManifestTest(unittest.TestCase):
                 manifests._validate_java_factory(Path(temporary))
 
     def test_registry_membership_exactly_matches_all_nine_rosters(self) -> None:
+        self.assertEqual(self.registry["version"], manifests.REGISTRY_SCHEMA_VERSION)
         expected_pool_decks = [spec[2] for spec in EXPECTED_SPECS]
         self.assertEqual(self.registry["pool_decks"], expected_pool_decks)
         expected_membership: dict[str, list[str]] = {}
@@ -374,15 +375,22 @@ class PauperPoolManifestTest(unittest.TestCase):
             self.support["totals"],
             {
                 "pool_cards": 150,
-                "full_cards": 26,
+                "full_cards": 30,
                 "partial_cards": 0,
-                "no_effect_cards": 124,
+                "no_effect_cards": 120,
                 "token_dependencies": 3,
             },
         )
         expected_copy_totals = [
-            {"deck_id": deck_id, **counts, "total": 60}
-            for deck_id, counts in manifests.EXPECTED_MAINBOARD_SUPPORT.items()
+            {"deck_id": "Wildfire", "full": 7, "partial": 0, "no_effect": 53, "total": 60},
+            {"deck_id": "Rally", "full": 60, "partial": 0, "no_effect": 0, "total": 60},
+            {"deck_id": "Affinity", "full": 8, "partial": 0, "no_effect": 52, "total": 60},
+            {"deck_id": "Elves", "full": 13, "partial": 0, "no_effect": 47, "total": 60},
+            {"deck_id": "Spy", "full": 4, "partial": 0, "no_effect": 56, "total": 60},
+            {"deck_id": "Burn", "full": 60, "partial": 0, "no_effect": 0, "total": 60},
+            {"deck_id": "Terror", "full": 16, "partial": 0, "no_effect": 44, "total": 60},
+            {"deck_id": "CawGates", "full": 4, "partial": 0, "no_effect": 56, "total": 60},
+            {"deck_id": "Faeries", "full": 18, "partial": 0, "no_effect": 42, "total": 60},
         ]
         self.assertEqual(self.support["deck_mainboard_copy_totals"], expected_copy_totals)
         self.assertEqual(
@@ -442,6 +450,36 @@ class PauperPoolManifestTest(unittest.TestCase):
                     "blockers": [],
                 },
             ],
+        )
+
+    def test_registry_capability_corruption_and_token_demotion_fail_closed(self) -> None:
+        _pool, rosters = manifests.build_pool_manifest(REPO_ROOT)
+
+        invalid = json.loads(json.dumps(self.registry))
+        next(row for row in invalid["cards"] if row["name"] == "Island")[
+            "engine_capability"
+        ] = "future_magic"
+        with self.assertRaisesRegex(manifests.ManifestError, "invalid engine_capability"):
+            manifests.normalize_registry(invalid, rosters)
+
+        demoted_token = json.loads(json.dumps(self.registry))
+        next(row for row in demoted_token["cards"] if row["name"] == "Blood Token")[
+            "engine_capability"
+        ] = "no_effect"
+        with self.assertRaisesRegex(
+            manifests.ManifestError, "Blood Token.*full engine_capability"
+        ):
+            manifests.normalize_registry(demoted_token, rosters)
+
+        self.assertEqual(
+            manifests._support_status(
+                "Counterspell", registry_card={"engine_capability": "partial"}
+            ),
+            ("partial", ["partial_program"]),
+        )
+        self.assertEqual(
+            manifests._support_status("Counterspell", registry_card={}),
+            ("no_effect", ["no_effect_program"]),
         )
 
     def test_generated_bytes_are_exact_and_corruption_fails_closed(self) -> None:

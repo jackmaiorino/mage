@@ -16,10 +16,10 @@
 //! remaining deferred card -- graveyard-card targeting doesn't fit any
 //! existing `TargetSpec` shape and is sideboard-only, so it's lower
 //! priority; see `still_deferred_burn_cards_are_out_of_scope_this_increment`.
-//! Every non-Burn card in the pool gets `no_effect` for both -- present in
-//! the table with correct name/cost/types (so ids are stable and the table
-//! is complete), but not castable, per the kernel's fail-closed invariant
-//! (see `lib.rs`).
+//! Definitions without an explicit registry `engine_capability` remain
+//! `NoEffect`. Supported ordinary permanents and intrinsic basic-land mana
+//! are generated from metadata only after that capability gate, so registry
+//! metadata alone can never make a card playable.
 //!
 //! Mono Red Rally's 18 cards (6 shared with Burn: Lightning Bolt, Mountain,
 //! Red Elemental Blast, Relic of Progenitus, Searing Blaze, Voldaren
@@ -45,6 +45,7 @@ use crate::effect::{
 use crate::mana::{Cost, ManaColor, Pip};
 use crate::state::Zone;
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CardType {
@@ -60,6 +61,32 @@ pub enum CardType {
 pub enum Supertype {
     Basic,
     Snow,
+}
+
+/// Fail-closed engine readiness for one registry definition. This is
+/// generated from `cards_v1.json` and is deliberately independent of card
+/// type: a fully supported land is executable even though it is played, not
+/// cast; a token can be fully supported even though it can only be created
+/// by another effect.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub enum CardCapability {
+    /// No executable program may be exposed by the engine.
+    NoEffect,
+    /// Some behavior is executable, but a full-deck preflight must reject
+    /// the definition because a reachable branch is still unsupported.
+    Partial,
+    /// Every reachable in-scope branch is implemented.
+    Full,
+}
+
+impl CardCapability {
+    pub const fn is_executable(self) -> bool {
+        !matches!(self, CardCapability::NoEffect)
+    }
+
+    pub const fn is_fully_supported(self) -> bool {
+        matches!(self, CardCapability::Full)
+    }
 }
 
 /// 105.1's subtype line, typed (per external review: "subtype queries
@@ -282,6 +309,7 @@ pub struct ModeDef {
 
 pub struct CardDef {
     pub name: &'static str,
+    pub capability: CardCapability,
     pub cost: Cost,
     pub types: &'static [CardType],
     /// This card's creature/land/artifact subtypes (105.1's subtype line),
@@ -360,8 +388,101 @@ impl CardDef {
     }
 
     pub fn is_castable(&self) -> bool {
-        (self.spell_effect)().is_some()
+        self.is_executable() && !self.is_land && !self.is_token
     }
+
+    pub const fn is_executable(&self) -> bool {
+        self.capability.is_executable()
+    }
+
+    pub const fn has_full_support(&self) -> bool {
+        self.capability.is_fully_supported()
+    }
+
+    pub fn mana_ability_program(&self) -> Option<EffectOp> {
+        self.is_executable()
+            .then(|| (self.mana_ability)())
+            .flatten()
+    }
+
+    pub const fn is_playable_land(&self) -> bool {
+        self.is_land && self.is_executable()
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum DeckPreflightError {
+    UnknownCardDefinition {
+        index: usize,
+        card_def: u16,
+    },
+    TokenInDeck {
+        index: usize,
+        card_def: u16,
+        name: &'static str,
+    },
+    NotFullySupported {
+        index: usize,
+        card_def: u16,
+        name: &'static str,
+        capability: CardCapability,
+    },
+}
+
+impl fmt::Display for DeckPreflightError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            DeckPreflightError::UnknownCardDefinition { index, card_def } => {
+                write!(f, "deck card {index} references unknown definition {card_def}")
+            }
+            DeckPreflightError::TokenInDeck {
+                index,
+                card_def,
+                name,
+            } => write!(
+                f,
+                "deck card {index} ({name}, definition {card_def}) is a token and cannot be a deck entry"
+            ),
+            DeckPreflightError::NotFullySupported {
+                index,
+                card_def,
+                name,
+                capability,
+            } => write!(
+                f,
+                "deck card {index} ({name}, definition {card_def}) is not fully supported: {capability:?}"
+            ),
+        }
+    }
+}
+
+impl std::error::Error for DeckPreflightError {}
+
+/// Rejects a deck at environment construction time unless every definition
+/// is explicitly `Full`. Missing records and newly added records whose
+/// capability was omitted both fail closed.
+pub fn preflight_fully_supported_deck(card_defs: &[u16]) -> Result<(), DeckPreflightError> {
+    for (index, &card_def) in card_defs.iter().enumerate() {
+        let Some(def) = CARD_DEFS.get(card_def as usize) else {
+            return Err(DeckPreflightError::UnknownCardDefinition { index, card_def });
+        };
+        if def.is_token {
+            return Err(DeckPreflightError::TokenInDeck {
+                index,
+                card_def,
+                name: def.name,
+            });
+        }
+        if !def.has_full_support() {
+            return Err(DeckPreflightError::NotFullySupported {
+                index,
+                card_def,
+                name: def.name,
+                capability: def.capability,
+            });
+        }
+    }
+    Ok(())
 }
 
 pub fn no_effect() -> Option<EffectOp> {
@@ -378,11 +499,16 @@ mod tests {
 
     #[test]
     fn card_defs_len_matches_pool() {
-        // 133 real pool cards + 2 tokens (Blood, created by Voldaren
+        // 132 real pool cards + 3 tokens (Blood, created by Voldaren
         // Epicure's ETB trigger; Human Soldier Token/Samurai Token, created
         // by Rally at the Hornburg/Experimental Synthesizer -- see
         // `trigger.rs`/`build.rs::activated_abilities_for`).
         assert_eq!(CARD_DEFS.len(), 135);
+    }
+
+    #[test]
+    fn card_db_hash_v2_is_frozen() {
+        assert_eq!(KERNEL_CARDDB_HASH, 0xc934_c818_eb5f_f5fb);
     }
 
     #[test]
@@ -408,28 +534,111 @@ mod tests {
     }
 
     #[test]
-    fn mountain_has_mana_ability_and_no_spell_effect() {
-        let id = card_id_by_name("Mountain").expect("Mountain in pool");
-        let def = &CARD_DEFS[id as usize];
-        assert!(def.is_land);
-        assert_eq!(def.produces_mana, &[ManaColor::R]);
-        assert!(!def.is_castable(), "lands aren't cast");
-        match (def.mana_ability)() {
-            Some(EffectOp::Sequence(ops)) => {
-                assert_eq!(
-                    ops,
-                    vec![
-                        EffectOp::TapObject {
-                            object: ObjectRef::ThisSource
-                        },
-                        EffectOp::AddMana {
-                            player: PlayerRef::Controller,
-                            colors: vec![ManaColor::R]
-                        },
-                    ]
-                );
+    fn intrinsic_basic_lands_derive_the_exact_subtype_mana_ability() {
+        for (name, color) in [
+            ("Mountain", ManaColor::R),
+            ("Island", ManaColor::U),
+            ("Forest", ManaColor::G),
+            ("Swamp", ManaColor::B),
+            ("Snow-Covered Forest", ManaColor::G),
+        ] {
+            let id = card_id_by_name(name).unwrap_or_else(|| panic!("{name} in pool"));
+            let def = &CARD_DEFS[id as usize];
+            assert!(def.is_land, "{name}");
+            assert!(def.supertypes.contains(&Supertype::Basic), "{name}");
+            assert_eq!(def.produces_mana, &[color], "{name}");
+            assert!(def.is_executable(), "{name}");
+            assert!(def.has_full_support(), "{name}");
+            assert!(!def.is_castable(), "lands aren't cast: {name}");
+            match def.mana_ability_program() {
+                Some(EffectOp::Sequence(ops)) => {
+                    assert_eq!(
+                        ops,
+                        vec![
+                            EffectOp::TapObject {
+                                object: ObjectRef::ThisSource
+                            },
+                            EffectOp::AddMana {
+                                player: PlayerRef::Controller,
+                                colors: vec![color]
+                            },
+                        ],
+                        "{name}"
+                    );
+                }
+                other => panic!("{name}: expected tap+add-mana sequence, got {other:?}"),
             }
-            other => panic!("expected tap+add-mana sequence, got {other:?}"),
+        }
+    }
+
+    #[test]
+    fn capability_is_the_fail_closed_source_for_programs_and_deck_preflight() {
+        let full = CARD_DEFS
+            .iter()
+            .filter(|def| def.capability == CardCapability::Full)
+            .count();
+        assert_eq!(full, 33, "30 deck cards plus three required tokens");
+        assert_eq!(
+            CARD_DEFS
+                .iter()
+                .filter(|def| def.capability == CardCapability::Partial)
+                .count(),
+            0
+        );
+
+        let supported = ["Island", "Counterspell", "Mountain"]
+            .map(|name| card_id_by_name(name).expect("card in registry"));
+        let err = preflight_fully_supported_deck(&supported).expect_err("Counterspell is deferred");
+        assert!(matches!(
+            err,
+            DeckPreflightError::NotFullySupported {
+                index: 1,
+                name: "Counterspell",
+                capability: CardCapability::NoEffect,
+                ..
+            }
+        ));
+        assert!(preflight_fully_supported_deck(&[
+            card_id_by_name("Island").unwrap(),
+            card_id_by_name("Mountain").unwrap(),
+        ])
+        .is_ok());
+        assert!(matches!(
+            preflight_fully_supported_deck(&[u16::MAX]),
+            Err(DeckPreflightError::UnknownCardDefinition { .. })
+        ));
+        assert!(matches!(
+            preflight_fully_supported_deck(&[card_id_by_name("Blood Token").unwrap()]),
+            Err(DeckPreflightError::TokenInDeck {
+                name: "Blood Token",
+                ..
+            })
+        ));
+    }
+
+    #[test]
+    fn unsupported_permanents_and_nonbasic_mana_metadata_remain_inert() {
+        let terror = &CARD_DEFS[card_id_by_name("Tolarian Terror").unwrap() as usize];
+        assert!(terror.has_type(CardType::Creature));
+        assert!(!terror.is_executable());
+        assert!(!terror.is_castable());
+        assert!((terror.spell_effect)().is_none());
+
+        for name in [
+            "Burning-Tree Emissary",
+            "Azorius Guildgate",
+            "Twisted Landscape",
+            "Vault of Whispers",
+        ] {
+            let def = &CARD_DEFS[card_id_by_name(name).unwrap() as usize];
+            assert!(
+                !def.produces_mana.is_empty(),
+                "test requires mana metadata: {name}"
+            );
+            assert!(
+                def.mana_ability_program().is_none(),
+                "metadata alone must not grant {name} a tappable mana ability"
+            );
         }
     }
 

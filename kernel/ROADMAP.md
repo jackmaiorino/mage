@@ -10,7 +10,7 @@ The kernel is science-ready when it can train and evaluate policies over all nin
 
 These nine decks are the complete Pauper meta pool carried forward from the previous project. A result over Burn/Rally, a convenient subset, or only the newly implemented decks cannot close this roadmap: all nine mainboards must be implemented, trained against, and evaluated in the final full-pool protocol before any concluding science claim.
 
-The current checkpoint has a strong deterministic RL and artifact foundation, but card coverage is still effectively Burn plus Rally. The generated pool metadata now freezes all nine decks, and `cards_v1.json` declares their exact memberships for the 132 deck cards it contains; eighteen Spy cards are still absent from the registry, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
+The current checkpoint has a strong deterministic RL and artifact foundation, but complete-deck coverage is still Burn plus Rally. Metadata-derived basic lands now work across the other decks, without making any incomplete deck runnable. The generated pool metadata freezes all nine decks, and the schema-v2 registry at the legacy `cards_v1.json` path declares exact memberships and fail-closed engine capabilities for the 132 deck cards it contains; eighteen Spy cards are still absent, and most registered cards still lack executable behavior. Card-pool expansion therefore precedes claims about general Pauper learning.
 
 The implementation order is:
 
@@ -71,23 +71,23 @@ Canonical order is part of the protocol and is reused for manifests, seed deriva
 - Source-level card behavior for the complete Burn and Rally mainboards. Chain Lightning now has explicit payment, retarget, target, repeat-copy, counter/fizzle, and copy-departure behavior; the RL observation/session contracts are schema v3.
 - Tracked Phase-0 content locks for `burn_mirror_v6` and `rally_mirror_v2`: all 40 trace paths, raw-byte sizes and SHA-256 digests per corpus, each `manifest.json`, and an aggregate digest are embedded into the replay gate. Designated-corpus replay now fails before parsing a trace on non-`LOCKED` status or any missing, extra, or changed replay input.
 - Generated `pauper_pool_v1.json` and `pauper_support_v1.json` metadata that pins all nine normalized 60+15 rosters, exact registry membership, current support blockers, token dependencies, source hashes, and raw pool/registry hashes.
-- The support manifest currently classifies 26 unique cards as `full`, zero as `partial`, and 124 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer, and both designated content-locked, fixed-provenance reference corpora replay 40/40 with zero divergence.
+- The support manifest currently classifies 30 unique cards as `full`, zero as `partial`, and 120 as `no_effect`. Rally and Burn are both 60/60 `full` at the mainboard card-behavior layer, and both designated content-locked, fixed-provenance reference corpora replay 40/40 with zero divergence. The first Phase-1 substrate slice adds metadata-derived intrinsic mana for every registered basic land and a shared fail-closed engine-capability/preflight contract.
 
 ### Card coverage
 
-"Effect-backed" means a card copy has an implemented spell or mana program. Registry metadata alone does not qualify. A land with no mana program can be played but is not a usable mana source; a spell mapped to `no_effect` is uncastable.
+"Effect-backed" means a card copy has explicit `full` engine capability plus its required spell, permanent, or mana program. Registry rules metadata alone does not qualify. A land mapped to `no_effect` cannot be played, and a spell mapped to `no_effect` cannot be cast.
 
 | Archetype | Main registered | Main effect-backed | Side registered | Side effect-backed | Current limiting fact |
 |---|---:|---:|---:|---:|---|
-| Wildfire | 60/60 | 2/60 | 15/15 | 3/15 | Only Mountain is usable in the mainboard |
+| Wildfire | 60/60 | 7/60 | 15/15 | 3/15 | Its Mountain, Forest, and Swamp copies are usable; spells/nonbasics remain fail-closed |
 | Rally | 60/60 | 60/60 | 15/15 | 8/15 | Locked fixed-provenance replay passes 40/40 |
-| Affinity | 60/60 | 7/60 | 15/15 | 5/15 | Great Furnace and Galvanic Blast only |
-| Elves | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
-| Spy | 21/60 | 0/60 | 4/15 | 0/15 | 39 main and 11 side copies are absent from the registry |
+| Affinity | 60/60 | 8/60 | 15/15 | 5/15 | Great Furnace, Swamp, and Galvanic Blast only |
+| Elves | 60/60 | 13/60 | 15/15 | 0/15 | Snow-Covered Forest works; spells remain fail-closed |
+| Spy | 21/60 | 4/60 | 4/15 | 1/15 | Forest/Swamp work; 39 main and 11 side copies are absent from the registry |
 | Burn | 60/60 | 60/60 | 15/15 | 11/15 | Mainboard is the current complete baseline |
-| Terror | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
-| CawGates | 60/60 | 0/60 | 15/15 | 3/15 | Entire mainboard is fail-closed |
-| Faeries | 60/60 | 0/60 | 15/15 | 0/15 | Entire deck is fail-closed |
+| Terror | 60/60 | 16/60 | 15/15 | 0/15 | Island works; the reusable blue spell core is next |
+| CawGates | 60/60 | 4/60 | 15/15 | 3/15 | Island works; Gates and spells remain fail-closed |
+| Faeries | 60/60 | 18/60 | 15/15 | 0/15 | Island works; creatures and spells remain fail-closed |
 
 The registry currently contains 135 definitions: 132 deck cards and three tokens. `pool_decks` now lists all nine sources in canonical order, and the eight already-present Spy cards declare exact Spy membership. Seven of those are Spy mainboard names shared with other decks; fourteen Spy mainboard names and four additional sideboard-only names still need new records.
 
@@ -127,9 +127,12 @@ Exit: Burn and Rally pass every BO1 gate below with no conditional halt.
 ### Phase 1 - General card substrate
 
 - Generate ordinary permanent resolution and mana behavior from card metadata.
+- Keep runtime support and generated support reports on the same per-definition capability declaration, and preflight both token-free 60-card decks before any science-facing environment shuffles or constructs state.
 - Replace fixed target shapes with zone/filter/cardinality descriptions.
 - Generalize costs, library operations, triggers, continuous effects, tokens, counters, and attachments.
 - Make every unsupported reachable branch explicit in the support manifest and runtime diagnostics.
+
+Schema-v3-neutral work may add fixed-color mana, exact-one filtered targets, deterministic draw/mill/counter/zone moves, graveyard-count cost reductions, and no-choice triggers. Before the first policy-visible ordered-library choice, variable target count, Escape selection, Ward payment, freeze marker, or other resumable multi-stage effect, make one deliberate schema-v4 migration: add a generic effect continuation/choice machine and perspective-safe known-library state, bump the Rust observation/legal-action/session contracts and every Python feature/model/policy/audit/trainer/checkpoint identity together, freeze v3, and reject cross-schema resume. Do not grow more card-specific `pending_*` state to avoid this boundary.
 
 Exit: foundational unit suites pass and an unsupported card cannot be mistaken for a playable one.
 

@@ -3,8 +3,9 @@
 
 This tool is intentionally stdlib-only.  It treats the Java
 ``DeterminizationSampler.pauperDefaults()`` declaration and its nine checked-in
-XMage deck files as the source of truth, while keeping the support declaration
-below explicit and reviewable.
+XMage deck files as the roster source of truth. Engine support is read from
+each registry record's fail-closed ``engine_capability`` field, shared with the
+Rust card-definition code generator.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ from xml.etree import ElementTree
 
 POOL_SCHEMA = "kernel_pauper_pool/v1"
 SUPPORT_SCHEMA = "kernel_pauper_support/v1"
+REGISTRY_SCHEMA_VERSION = 2
 PROTOCOL = "canonical-mainboard-bo1/v1"
 SOURCE_HASH_NORMALIZATION = "utf8_text_crlf_v1"
 MATERIALIZATION_ORDER = "utf8_card_name_then_copy_ordinal"
@@ -74,169 +76,6 @@ DECK_SPECS = (
 )
 
 
-# Every one of the 150 deck-card names is explicitly classified here.  "Full"
-# means its current spell/permanent/mana program covers every reachable BO1
-# branch. All names below the implemented group are explicitly no-effect at
-# this checkpoint (missing registry records receive an additional blocker in
-# the generated support manifest).
-FULL_SUPPORT_CARD_NAMES = (
-    "Burning-Tree Emissary",
-    "Chain Lightning",
-    "Clockwork Percussionist",
-    "End the Festivities",
-    "Experimental Synthesizer",
-    "Faithless Looting",
-    "Fiery Temper",
-    "Fireblast",
-    "Galvanic Blast",
-    "Goblin Bushwhacker",
-    "Goblin Tomb Raider",
-    "Grab the Prize",
-    "Great Furnace",
-    "Guttersnipe",
-    "Highway Robbery",
-    "Lava Dart",
-    "Lightning Bolt",
-    "Masked Meower",
-    "Mountain",
-    "Pyroblast",
-    "Rally at the Hornburg",
-    "Reckless Impulse",
-    "Red Elemental Blast",
-    "Searing Blaze",
-    "Sneaky Snacker",
-    "Voldaren Epicure",
-)
-
-PARTIAL_SUPPORT: dict[str, tuple[str, ...]] = {}
-
-NO_EFFECT_CARD_NAMES = (
-    "Annul",
-    "Avenging Hunter",
-    "Azorius Guildgate",
-    "Balustrade Spy",
-    "Basilisk Gate",
-    "Bind the Monster",
-    "Black Mage's Rod",
-    "Blood Fountain",
-    "Blue Elemental Blast",
-    "Brainstorm",
-    "Breath Weapon",
-    "Cast Down",
-    "Cast into the Fire",
-    "Citadel Gate",
-    "Cleansing Wildfire",
-    "Counterspell",
-    "Cryogen Relic",
-    "Cryptic Serpent",
-    "Deem Inferior",
-    "Deep Analysis",
-    "Dispel",
-    "Dread Return",
-    "Drossforge Bridge",
-    "Duress",
-    "Dust to Dust",
-    "Elves of Deep Shadow",
-    "Elvish Mystic",
-    "Envelop",
-    "Eviscerator's Insight",
-    "Extract a Confession",
-    "Faerie Macabre",
-    "Faerie Miscreant",
-    "Faerie Seer",
-    "Fanatical Offering",
-    "Flaring Pain",
-    "Force Spike",
-    "Forest",
-    "Fume Spitter",
-    "Fyndhorn Elves",
-    "Gatecreeper Vine",
-    "Generous Ent",
-    "Gingerbread Cabin",
-    "Gorilla Shaman",
-    "Guardian of the Guildpact",
-    "Gut Shot",
-    "Harrier Strix",
-    "Healer of the Glade",
-    "Heap Gate",
-    "Humbling Elder",
-    "Hunter's Blowgun",
-    "Hydroblast",
-    "Ichor Wellspring",
-    "Idyllic Beachfront",
-    "Island",
-    "Journey to Nowhere",
-    "Krark-Clan Shaman",
-    "Land Grant",
-    "Lead the Stampede",
-    "Lembas",
-    "Llanowar Elves",
-    "Lorien Revealed",
-    "Lotleth Giant",
-    "Lotus Petal",
-    "Makeshift Munitions",
-    "Masked Vandal",
-    "Mental Note",
-    "Mesmeric Fiend",
-    "Mistvault Bridge",
-    "Monstrous Emergence",
-    "Moon-Circuit Hacker",
-    "Murmuring Mystic",
-    "Myr Enforcer",
-    "Nihil Spellbomb",
-    "Ninja of the Deep Hours",
-    "Nyxborn Hydra",
-    "Of One Mind",
-    "Outlaw Medic",
-    "Overgrown Battlement",
-    "Piracy Charm",
-    "Ponder",
-    "Preordain",
-    "Priest of Titania",
-    "Prismatic Strands",
-    "Pulse of Murasa",
-    "Quirion Ranger",
-    "Reckoner's Bargain",
-    "Refurbished Familiar",
-    "Relic of Progenitus",
-    "Sacred Cat",
-    "Sagu Wildling",
-    "Saiba Cryptomancer",
-    "Saruli Caretaker",
-    "Sea Gate",
-    "Seat of the Synod",
-    "Silverbluff Bridge",
-    "Slagwoods Bridge",
-    "Sleep of the Dead",
-    "Snap",
-    "Snow-Covered Forest",
-    "Spell Pierce",
-    "Spellstutter Sprite",
-    "Spinewoods Paladin",
-    "Squadron Hawk",
-    "Steel Sabotage",
-    "Swamp",
-    "The Modern Age",
-    "Thought Scour",
-    "Thoughtcast",
-    "Thraben Charm",
-    "Timberwatch Elf",
-    "Tinder Wall",
-    "Tolarian Terror",
-    "Toxin Analysis",
-    "Troll of Khazad-dum",
-    "Troublemaker Ouphe",
-    "Twisted Landscape",
-    "Unexpected Fangs",
-    "Vault of Whispers",
-    "Vitu-Ghazi Inspector",
-    "Wall of Roots",
-    "Weather the Storm",
-    "Wellwisher",
-    "Winding Way",
-    "Writhing Chrysalis",
-)
-
 TOKEN_DEPENDENCIES = (
     ("Blood Token", ("Voldaren Epicure",)),
     ("Human Soldier Token", ("Rally at the Hornburg",)),
@@ -244,15 +83,15 @@ TOKEN_DEPENDENCIES = (
 )
 
 EXPECTED_MAINBOARD_SUPPORT = {
-    "Wildfire": {"full": 2, "partial": 0, "no_effect": 58},
+    "Wildfire": {"full": 7, "partial": 0, "no_effect": 53},
     "Rally": {"full": 60, "partial": 0, "no_effect": 0},
-    "Affinity": {"full": 7, "partial": 0, "no_effect": 53},
-    "Elves": {"full": 0, "partial": 0, "no_effect": 60},
-    "Spy": {"full": 0, "partial": 0, "no_effect": 60},
+    "Affinity": {"full": 8, "partial": 0, "no_effect": 52},
+    "Elves": {"full": 13, "partial": 0, "no_effect": 47},
+    "Spy": {"full": 4, "partial": 0, "no_effect": 56},
     "Burn": {"full": 60, "partial": 0, "no_effect": 0},
-    "Terror": {"full": 0, "partial": 0, "no_effect": 60},
-    "CawGates": {"full": 0, "partial": 0, "no_effect": 60},
-    "Faeries": {"full": 0, "partial": 0, "no_effect": 60},
+    "Terror": {"full": 16, "partial": 0, "no_effect": 44},
+    "CawGates": {"full": 4, "partial": 0, "no_effect": 56},
+    "Faeries": {"full": 18, "partial": 0, "no_effect": 42},
 }
 
 
@@ -525,8 +364,10 @@ def _expected_memberships(
 def normalize_registry(
     registry: dict[str, Any], rosters: dict[str, tuple[Counter[str], Counter[str]]]
 ) -> dict[str, Any]:
-    if registry.get("version") != 1:
-        raise ManifestError("cards_v1.json must have version 1")
+    if registry.get("version") != REGISTRY_SCHEMA_VERSION:
+        raise ManifestError(
+            f"cards_v1.json must have version {REGISTRY_SCHEMA_VERSION}"
+        )
     cards = registry.get("cards")
     if not isinstance(cards, list):
         raise ManifestError("cards_v1.json cards must be a list")
@@ -544,10 +385,17 @@ def normalize_registry(
         if name in seen:
             raise ManifestError(f"cards_v1.json duplicate card name {name!r}")
         seen.add(name)
+        capability = _registry_engine_capability(
+            card, context=f"cards_v1.json card {name!r}"
+        )
         if card.get("is_token") is True:
             token_names.add(name)
             if card.get("decks") != []:
                 raise ManifestError(f"token {name!r} must have empty deck membership")
+            if capability != "full":
+                raise ManifestError(
+                    f"token {name!r} must have full engine_capability"
+                )
             continue
         non_token_count += 1
         registered_non_tokens.add(name)
@@ -565,18 +413,27 @@ def normalize_registry(
     return registry
 
 
-def _support_status(name: str, *, registry_present: bool) -> tuple[str, list[str]]:
-    if name in FULL_SUPPORT_CARD_NAMES:
+def _registry_engine_capability(card: dict[str, Any], *, context: str) -> str:
+    capability = card.get("engine_capability", "no_effect")
+    if capability not in {"no_effect", "partial", "full"}:
+        raise ManifestError(
+            f"{context} has invalid engine_capability {capability!r}; "
+            "expected no_effect, partial, or full"
+        )
+    return capability
+
+
+def _support_status(
+    name: str, *, registry_card: dict[str, Any] | None
+) -> tuple[str, list[str]]:
+    if registry_card is None:
+        return "no_effect", ["missing_registry_record", "no_effect_program"]
+    status = _registry_engine_capability(registry_card, context=f"registry card {name!r}")
+    if status == "full":
         return "full", []
-    if name in PARTIAL_SUPPORT:
-        return "partial", list(PARTIAL_SUPPORT[name])
-    if name in NO_EFFECT_CARD_NAMES:
-        blockers = []
-        if not registry_present:
-            blockers.append("missing_registry_record")
-        blockers.append("no_effect_program")
-        return "no_effect", blockers
-    raise ManifestError(f"pool card {name!r} has no explicit support declaration")
+    if status == "partial":
+        return "partial", ["partial_program"]
+    return "no_effect", ["no_effect_program"]
 
 
 def build_support_manifest(
@@ -588,27 +445,13 @@ def build_support_manifest(
 ) -> dict[str, Any]:
     expected_memberships = _expected_memberships(rosters)
     pool_names = set(expected_memberships)
-    declaration_groups = (
-        set(FULL_SUPPORT_CARD_NAMES),
-        set(PARTIAL_SUPPORT),
-        set(NO_EFFECT_CARD_NAMES),
-    )
-    if any(declaration_groups[i] & declaration_groups[j] for i in range(3) for j in range(i + 1, 3)):
-        raise ManifestError("support declaration groups overlap")
-    declared_names = set().union(*declaration_groups)
-    if declared_names != pool_names:
-        raise ManifestError(
-            f"support declaration coverage drift: missing={_utf8_sort(pool_names - declared_names)!r}, "
-            f"extra={_utf8_sort(declared_names - pool_names)!r}"
-        )
-
     registry_cards = {card["name"]: card for card in registry["cards"]}
     cards: list[dict[str, Any]] = []
     status_unique_counts = Counter()
     for name in _utf8_sort(pool_names):
         registry_card = registry_cards.get(name)
         registry_present = registry_card is not None
-        status, blockers = _support_status(name, registry_present=registry_present)
+        status, blockers = _support_status(name, registry_card=registry_card)
         status_unique_counts[status] += 1
         mainboard = []
         sideboard = []
@@ -639,7 +482,7 @@ def build_support_manifest(
         counts = Counter({"full": 0, "partial": 0, "no_effect": 0})
         mainboard, _sideboard = rosters[spec.deck_id]
         for name, copies in mainboard.items():
-            status, _blockers = _support_status(name, registry_present=name in registry_cards)
+            status, _blockers = _support_status(name, registry_card=registry_cards.get(name))
             counts[status] += copies
         actual = {key: counts[key] for key in ("full", "partial", "no_effect")}
         if actual != EXPECTED_MAINBOARD_SUPPORT[spec.deck_id]:
@@ -658,6 +501,11 @@ def build_support_manifest(
             raise ManifestError(f"required token {token_name!r} is absent or not marked as a token")
         if any(producer not in registry_cards for producer in producers):
             raise ManifestError(f"required token {token_name!r} has an absent producer")
+        status, blockers = _support_status(token_name, registry_card=token)
+        if status != "full":
+            raise ManifestError(
+                f"required token {token_name!r} must have full engine capability, got {status!r}"
+            )
         token_dependencies.append(
             {
                 "name": token_name,
@@ -666,8 +514,8 @@ def build_support_manifest(
                 "expected_decks": [],
                 "declared_decks": list(token.get("decks", [])),
                 "registry_membership_matches": token.get("decks") == [],
-                "support_status": "full",
-                "blockers": [],
+                "support_status": status,
+                "blockers": blockers,
             }
         )
 

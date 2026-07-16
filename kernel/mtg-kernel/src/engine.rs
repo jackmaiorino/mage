@@ -297,8 +297,8 @@ pub enum UntilEndOfTurnEffect {
 
 /// Whether an `effect::EffectOp::ImpulseDraw`-exiled card's `PlayPermission`
 /// authorizes casting it (a spell) or playing it (a land) -- see that
-/// struct's doc. Computed once, at grant time, from `card_def::CardDef::
-/// is_land`; kept as its own explicit field (rather than re-deriving it from
+/// struct's doc. Computed once, at grant time, from the definition's
+/// executable cast/play capability; kept as its own explicit field (rather than re-deriving it from
 /// the card def every time a permission is checked) so a future permission
 /// shape that grants "play" without the card being a land in the normal
 /// sense (not needed by this pool) doesn't have to be inferred implicitly.
@@ -1275,7 +1275,7 @@ fn sacrificeable_lands(
 /// between the normal cost/alt-cost pair and the flashback cost).
 fn is_castable_now(player: PlayerId, id: ObjectId, is_flashback: bool, state: &GameState) -> bool {
     let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-    if !is_flashback && !def.is_castable() {
+    if !def.is_castable() {
         return false;
     }
     // 601.3a/117.1a: sorcery-speed timing applies to every permanent-or-
@@ -1351,7 +1351,8 @@ fn castable_spells(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
         }
         // Exile play permission (impulse draw): a permission only ever
         // authorizes *either* `Cast` or `Play` (never both -- decided once,
-        // at grant time, from `CardDef::is_land`); the `Cast` half is
+        // at grant time, from `CardDef::is_castable`/`is_playable_land`);
+        // the `Cast` half is
         // offered here through the *ordinary* `is_castable_now` check
         // (same timing/cost logic any hand card gets, per external review
         // -- no separate "impulse-castable" legality system), the `Play`
@@ -1430,8 +1431,10 @@ fn plot_action_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> 
         .copied()
         .filter(|&id| {
             let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-            def.plot_cost
-                .is_some_and(|cost| mana::can_pay(&cost, 0, player, state).is_some())
+            def.is_castable()
+                && def
+                    .plot_cost
+                    .is_some_and(|cost| mana::can_pay(&cost, 0, player, state).is_some())
         })
         .collect()
 }
@@ -1443,7 +1446,10 @@ fn available_mana_abilities(player: PlayerId, state: &GameState) -> Vec<ObjectId
         .copied()
         .filter(|&id| {
             let obj = state.objects.get(id);
-            !obj.tapped && (card_def::CARD_DEFS[obj.card_def as usize].mana_ability)().is_some()
+            !obj.tapped
+                && card_def::CARD_DEFS[obj.card_def as usize]
+                    .mana_ability_program()
+                    .is_some()
         })
         .collect()
 }
@@ -1452,6 +1458,9 @@ fn available_activatable_abilities(player: PlayerId, state: &GameState) -> Vec<(
     let mut out = Vec::new();
     for &id in &state.players[player.index()].battlefield {
         let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+        if !def.is_executable() {
+            continue;
+        }
         for (i, ability) in def.activated_abilities.iter().enumerate() {
             if ability.sorcery_speed_only && !sorcery_speed_timing_ok(player, state) {
                 continue;
@@ -1476,7 +1485,9 @@ fn land_drop_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
         .hand
         .iter()
         .copied()
-        .filter(|&id| card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_land)
+        .filter(|&id| {
+            card_def::CARD_DEFS[state.objects.get(id).card_def as usize].is_playable_land()
+        })
         .collect();
     // Impulse-drawn lands (Clockwork Percussionist/Experimental
     // Synthesizer/Reckless Impulse can exile a land off the top of the
@@ -1485,7 +1496,8 @@ fn land_drop_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
     // none of these cards grant an additional land play.
     for &id in &state.exile {
         if let Some(perm) = active_permission_for(player, id, state) {
-            if perm.play_or_cast == PlayOrCast::Play {
+            let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
+            if perm.play_or_cast == PlayOrCast::Play && def.is_playable_land() {
                 out.push(id);
             }
         }
@@ -1496,7 +1508,8 @@ fn land_drop_candidates(player: PlayerId, state: &GameState) -> Vec<ObjectId> {
 fn can_attack(state: &GameState, id: ObjectId) -> bool {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
-    def.has_type(CardType::Creature)
+    def.is_executable()
+        && def.has_type(CardType::Creature)
         && !obj.tapped
         && (!obj.summoning_sick || has_effective_keyword(state, id, Keywords::HASTE))
 }
@@ -1516,9 +1529,7 @@ fn eligible_attackers(state: &GameState) -> Vec<ObjectId> {
 fn legal_blockers_for(state: &GameState, attacker: ObjectId) -> Vec<ObjectId> {
     let attacker_obj = state.objects.get(attacker);
     let defender = attacker_obj.controller.opponent();
-    let attacker_flying = card_def::CARD_DEFS[attacker_obj.card_def as usize]
-        .keywords
-        .has(Keywords::FLYING);
+    let attacker_flying = has_effective_keyword(state, attacker, Keywords::FLYING);
     state.players[defender.index()]
         .battlefield
         .iter()
@@ -1529,12 +1540,12 @@ fn legal_blockers_for(state: &GameState, attacker: ObjectId) -> Vec<ObjectId> {
                 return false;
             }
             let def = &card_def::CARD_DEFS[obj.card_def as usize];
-            if !def.has_type(CardType::Creature) {
+            if !def.is_executable() || !def.has_type(CardType::Creature) {
                 return false;
             }
             if attacker_flying
-                && !def.keywords.has(Keywords::FLYING)
-                && !def.keywords.has(Keywords::REACH)
+                && !has_effective_keyword(state, id, Keywords::FLYING)
+                && !has_effective_keyword(state, id, Keywords::REACH)
             {
                 return false;
             }
@@ -1855,7 +1866,7 @@ fn drain_pending_discard_or_decide(state: &mut GameState) -> Option<Decision> {
 fn apply_discard(state: &mut GameState, chosen: Vec<ObjectId>, resume: DiscardResume) {
     for &id in &chosen {
         let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-        if def.madness_cost.is_some() {
+        if def.is_castable() && def.madness_cost.is_some() {
             // 702.83b: a discarded Madness card is exiled instead of
             // graveyarded, and "as that card is exiled this way" a real
             // triggered ability fires offering its owner the chance to
@@ -2701,7 +2712,7 @@ fn controls_an_artifact(controller: PlayerId, state: &GameState) -> bool {
         .iter()
         .any(|&id| {
             let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-            def.has_type(CardType::Artifact)
+            def.is_executable() && def.has_type(CardType::Artifact)
         })
 }
 
@@ -2721,9 +2732,11 @@ pub fn effective_power(state: &GameState, id: ObjectId) -> i32 {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
     let mut power = def.power.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
-    if let Some(boost) = static_self_boost_for(def.name) {
-        if (boost.condition)(obj.controller, state) {
-            power += boost.power;
+    if def.is_executable() {
+        if let Some(boost) = static_self_boost_for(def.name) {
+            if (boost.condition)(obj.controller, state) {
+                power += boost.power;
+            }
         }
     }
     for eff in &state.engine.until_end_of_turn {
@@ -2751,9 +2764,11 @@ pub fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
     let mut toughness = def.toughness.unwrap_or(0) as i32 + obj.counters.plus1_plus1 as i32;
-    if let Some(boost) = static_self_boost_for(def.name) {
-        if (boost.condition)(obj.controller, state) {
-            toughness += boost.toughness;
+    if def.is_executable() {
+        if let Some(boost) = static_self_boost_for(def.name) {
+            if (boost.condition)(obj.controller, state) {
+                toughness += boost.toughness;
+            }
         }
     }
     for eff in &state.engine.until_end_of_turn {
@@ -2784,6 +2799,9 @@ pub fn effective_toughness(state: &GameState, id: ObjectId) -> i32 {
 pub fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keywords) -> bool {
     let obj = state.objects.get(id);
     let def = &card_def::CARD_DEFS[obj.card_def as usize];
+    if !def.is_executable() {
+        return false;
+    }
     if def.keywords.has(kw) {
         return true;
     }
@@ -2810,9 +2828,8 @@ pub fn has_effective_keyword(state: &GameState, id: ObjectId, kw: Keywords) -> b
 }
 
 fn participates_in_wave(state: &GameState, id: ObjectId, first_strike_wave: bool) -> bool {
-    let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-    let has_fs = def.keywords.has(Keywords::FIRST_STRIKE);
-    let has_ds = def.keywords.has(Keywords::DOUBLE_STRIKE);
+    let has_fs = has_effective_keyword(state, id, Keywords::FIRST_STRIKE);
+    let has_ds = has_effective_keyword(state, id, Keywords::DOUBLE_STRIKE);
     if first_strike_wave {
         has_fs || has_ds
     } else {
@@ -2830,8 +2847,8 @@ fn combat_has_first_or_double_strike(state: &GameState) -> bool {
             .flat_map(|(_, bs)| bs.iter().copied()),
     );
     all_combatants.into_iter().any(|id| {
-        let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-        def.keywords.has(Keywords::FIRST_STRIKE) || def.keywords.has(Keywords::DOUBLE_STRIKE)
+        has_effective_keyword(state, id, Keywords::FIRST_STRIKE)
+            || has_effective_keyword(state, id, Keywords::DOUBLE_STRIKE)
     })
 }
 
@@ -2998,7 +3015,8 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
             if !available_mana_abilities(p, state).contains(&id) {
                 return Err(format!("{id} has no available mana ability for {p:?}"));
             }
-            let program = (card_def::CARD_DEFS[state.objects.get(id).card_def as usize].mana_ability)()
+            let program = card_def::CARD_DEFS[state.objects.get(id).card_def as usize]
+                .mana_ability_program()
                 .expect("checked available_mana_abilities above");
             let ctx = ExecCtx::no_targets(id, p);
             effect::execute(&program, &ctx, state);
@@ -3525,8 +3543,7 @@ fn apply_declare_attackers(state: &mut GameState, attackers: Vec<ObjectId>) -> R
     }
 
     for &id in &attackers {
-        let def = &card_def::CARD_DEFS[state.objects.get(id).card_def as usize];
-        if !def.keywords.has(Keywords::VIGILANCE) {
+        if !has_effective_keyword(state, id, Keywords::VIGILANCE) {
             event::propose_and_commit(state, ProposedEvent::tap(id));
         }
     }
@@ -6517,5 +6534,27 @@ mod tests {
             active_permission_for(PlayerId::P0, bolt_id, &state).is_none(),
             "a later re-arrival in exile must not resurrect a stale permission"
         );
+    }
+
+    #[test]
+    fn unsupported_exiled_land_stays_unplayable_even_with_a_forged_permission() {
+        let mut state = ready_game_in_main1(0);
+        let landscape = put_in_hand(&mut state, PlayerId::P0, "Twisted Landscape");
+        event::propose_and_commit(
+            &mut state,
+            ProposedEvent::zone_change(landscape, Zone::Exile),
+        );
+        state.engine.exile_play_permissions.push(PlayPermission {
+            object: landscape,
+            holder: PlayerId::P0,
+            zone_change_generation: state.objects.get(landscape).zone_change_count,
+            play_or_cast: PlayOrCast::Play,
+            expiry: PlayPermissionExpiry::EndOfTurn,
+        });
+
+        assert!(active_permission_for(PlayerId::P0, landscape, &state).is_some());
+        assert!(!land_drop_candidates(PlayerId::P0, &state).contains(&landscape));
+        assert!(step(&mut state, Action::PlayLand(landscape)).is_err());
+        assert_eq!(state.objects.get(landscape).zone, Zone::Exile);
     }
 }

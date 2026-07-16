@@ -426,6 +426,16 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
             token_def,
             controller,
         } => {
+            let token = crate::card_def::CARD_DEFS
+                .get(*token_def as usize)
+                .unwrap_or_else(|| panic!("CreateToken references unknown definition {token_def}"));
+            assert!(
+                token.is_token && token.is_executable() && token.has_full_support(),
+                "CreateToken requires a fully supported executable token definition, got {} ({:?}, is_token={})",
+                token.name,
+                token.capability,
+                token.is_token
+            );
             let controller = ctx.resolve_player(*controller, state);
             event::propose_and_commit(
                 state,
@@ -565,10 +575,15 @@ pub fn execute(op: &EffectOp, ctx: &ExecCtx, state: &mut GameState) {
                     }
                 };
                 let def = &crate::card_def::CARD_DEFS[state.objects.get(top).card_def as usize];
-                let play_or_cast = if def.is_land {
+                let play_or_cast = if def.is_playable_land() {
                     crate::engine::PlayOrCast::Play
-                } else {
+                } else if def.is_castable() {
                     crate::engine::PlayOrCast::Cast
+                } else {
+                    // Exiling still happened, but an unsupported definition
+                    // never receives an executable permission. This is the
+                    // runtime half of the fail-closed deck preflight.
+                    continue;
                 };
                 state
                     .engine
@@ -780,5 +795,69 @@ mod tests {
         execute(&op, &ctx, &mut state);
         assert!(state.objects.get(land).tapped);
         assert_eq!(state.players[0].mana_pool[ManaColor::R.pool_index()], 1);
+    }
+
+    #[test]
+    fn create_token_requires_and_materializes_a_full_token_definition() {
+        let mut state = two_card_libraries();
+        let ctx = ExecCtx::no_targets(ObjectId(0), PlayerId::P0);
+        let blood = crate::card_def::card_id_by_name("Blood Token").unwrap();
+        execute(
+            &EffectOp::CreateToken {
+                token_def: blood,
+                controller: PlayerRef::Controller,
+            },
+            &ctx,
+            &mut state,
+        );
+        let created = *state.players[0].battlefield.last().unwrap();
+        assert_eq!(state.objects.get(created).card_def, blood);
+        assert!(crate::card_def::CARD_DEFS[blood as usize].has_full_support());
+    }
+
+    #[test]
+    #[should_panic(expected = "CreateToken requires a fully supported executable token definition")]
+    fn create_token_fails_loudly_for_a_nontoken_definition() {
+        let mut state = two_card_libraries();
+        let ctx = ExecCtx::no_targets(ObjectId(0), PlayerId::P0);
+        execute(
+            &EffectOp::CreateToken {
+                token_def: crate::card_def::card_id_by_name("Island").unwrap(),
+                controller: PlayerRef::Controller,
+            },
+            &ctx,
+            &mut state,
+        );
+    }
+
+    #[test]
+    fn impulse_draw_exiles_but_does_not_authorize_an_unsupported_card() {
+        let landscape = crate::card_def::card_id_by_name("Twisted Landscape").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[landscape],
+            &[],
+            |card_def| {
+                crate::card_def::CARD_DEFS[card_def as usize]
+                    .name
+                    .to_string()
+            },
+            1,
+        );
+        let card = state.players[0].library[0];
+        let ctx = ExecCtx::no_targets(card, PlayerId::P0);
+
+        execute(
+            &EffectOp::ImpulseDraw {
+                count: 1,
+                duration: ImpulseDuration::EndOfTurn,
+            },
+            &ctx,
+            &mut state,
+        );
+
+        assert!(state.players[0].library.is_empty());
+        assert_eq!(state.objects.get(card).zone, Zone::Exile);
+        assert!(state.exile.contains(&card));
+        assert!(state.engine.exile_play_permissions.is_empty());
     }
 }

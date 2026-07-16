@@ -1,6 +1,7 @@
 //! mtg-kernel: fast, resumable, copy-on-write game core for a fixed Pauper pool.
 //!
-//! Scope: exactly the 132-card 8-deck pool (see the rules-surface matrix). The
+//! Scope: exactly the pinned nine-deck Pauper pool (150 unique roster names;
+//! 132 currently registered deck cards plus required tokens). The
 //! Java XMage engine remains the reference implementation and claim surface;
 //! this kernel is a training/search accelerator whose behavior is validated by
 //! golden-trace replay equivalence and branch differential testing against the

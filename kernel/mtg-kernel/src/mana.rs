@@ -210,7 +210,7 @@ pub fn gather_sources(player: PlayerId, state: &GameState) -> Vec<ManaSource> {
         // pay a later cost, tapping it and making it illegally unable to
         // attack afterward even though nothing in its own text lets anyone
         // tap it for mana more than once, on ETB, automatically.
-        if (def.mana_ability)().is_some() {
+        if def.mana_ability_program().is_some() {
             sources.push(ManaSource {
                 id,
                 choices: def.produces_mana.to_vec(),

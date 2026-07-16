@@ -5,21 +5,21 @@
     "pool_path": "kernel/data/pauper_pool_v1.json",
     "pool_raw_sha256": "92b44a36225471a42bdf03364a7eb22f7f7ce809864add70060c872a6adba2e7",
     "registry_path": "kernel/data/cards_v1.json",
-    "registry_raw_sha256": "3388fd28042bbf9530cf5094253da483b909d2cc41fac9640c2a77459c848cc2"
+    "registry_raw_sha256": "df5c3a64270fbb8f4460b7ea5faab9ad7b73d11156bc4bb379cde4bcdced7de6"
   },
   "totals": {
     "pool_cards": 150,
-    "full_cards": 26,
+    "full_cards": 30,
     "partial_cards": 0,
-    "no_effect_cards": 124,
+    "no_effect_cards": 120,
     "token_dependencies": 3
   },
   "deck_mainboard_copy_totals": [
     {
       "deck_id": "Wildfire",
-      "full": 2,
+      "full": 7,
       "partial": 0,
-      "no_effect": 58,
+      "no_effect": 53,
       "total": 60
     },
     {
@@ -31,23 +31,23 @@
     },
     {
       "deck_id": "Affinity",
-      "full": 7,
+      "full": 8,
       "partial": 0,
-      "no_effect": 53,
+      "no_effect": 52,
       "total": 60
     },
     {
       "deck_id": "Elves",
-      "full": 0,
+      "full": 13,
       "partial": 0,
-      "no_effect": 60,
+      "no_effect": 47,
       "total": 60
     },
     {
       "deck_id": "Spy",
-      "full": 0,
+      "full": 4,
       "partial": 0,
-      "no_effect": 60,
+      "no_effect": 56,
       "total": 60
     },
     {
@@ -59,23 +59,23 @@
     },
     {
       "deck_id": "Terror",
-      "full": 0,
+      "full": 16,
       "partial": 0,
-      "no_effect": 60,
+      "no_effect": 44,
       "total": 60
     },
     {
       "deck_id": "CawGates",
-      "full": 0,
+      "full": 4,
       "partial": 0,
-      "no_effect": 60,
+      "no_effect": 56,
       "total": 60
     },
     {
       "deck_id": "Faeries",
-      "full": 0,
+      "full": 18,
       "partial": 0,
-      "no_effect": 60,
+      "no_effect": 42,
       "total": 60
     }
   ],
@@ -1182,10 +1182,8 @@
         "Deck - Spy Combo.dek"
       ],
       "registry_membership_matches": true,
-      "support_status": "no_effect",
-      "blockers": [
-        "no_effect_program"
-      ]
+      "support_status": "full",
+      "blockers": []
     },
     {
       "name": "Fume Spitter",
@@ -1747,10 +1745,8 @@
         "Deck - Mono-Blue Faeries.dek"
       ],
       "registry_membership_matches": true,
-      "support_status": "no_effect",
-      "blockers": [
-        "no_effect_program"
-      ]
+      "support_status": "full",
+      "blockers": []
     },
     {
       "name": "Journey to Nowhere",
@@ -3066,10 +3062,8 @@
         "Deck - Elves.dek"
       ],
       "registry_membership_matches": true,
-      "support_status": "no_effect",
-      "blockers": [
-        "no_effect_program"
-      ]
+      "support_status": "full",
+      "blockers": []
     },
     {
       "name": "Spell Pierce",
@@ -3215,10 +3209,8 @@
         "Deck - Spy Combo.dek"
       ],
       "registry_membership_matches": true,
-      "support_status": "no_effect",
-      "blockers": [
-        "no_effect_program"
-      ]
+      "support_status": "full",
+      "blockers": []
     },
     {
       "name": "The Modern Age",

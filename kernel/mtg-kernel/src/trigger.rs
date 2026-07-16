@@ -202,7 +202,13 @@ const GOBLIN_BUSHWHACKER_TRIGGERS: [TriggeredAbilityDef; 1] = [TriggeredAbilityD
 /// doc on id stability). Every other card in the pool has no triggered
 /// ability implemented and falls through to `&[]`.
 pub fn triggers_for(card_def: u16) -> &'static [TriggeredAbilityDef] {
-    match crate::card_def::CARD_DEFS[card_def as usize].name {
+    let Some(card) = crate::card_def::CARD_DEFS.get(card_def as usize) else {
+        return &[];
+    };
+    if !card.is_executable() {
+        return &[];
+    }
+    match card.name {
         "Guttersnipe" => &GUTTERSNIPE_TRIGGERS,
         "Voldaren Epicure" => &VOLDAREN_EPICURE_TRIGGERS,
         "Sneaky Snacker" => &SNEAKY_SNACKER_TRIGGERS,
@@ -349,6 +355,9 @@ fn triggers_from_events(
     let draws_this_turn_at = draws_this_turn_snapshot(events, state);
     let mut new_triggers = Vec::new();
     for (id, obj) in state.objects.iter() {
+        if !crate::card_def::CARD_DEFS[obj.card_def as usize].is_executable() {
+            continue;
+        }
         for def in triggers_for(obj.card_def) {
             if obj.zone != def.home_zone {
                 continue;

@@ -5,7 +5,10 @@
 //! records, and a deterministic Burn-mirror rollout helper. It does not make
 //! any learning or strength claim.
 
-use crate::card_def::{card_id_by_name, CardType, Keywords, CARD_DEFS, KERNEL_CARDDB_HASH};
+use crate::card_def::{
+    card_id_by_name, preflight_fully_supported_deck, CardType, Keywords, CARD_DEFS,
+    KERNEL_CARDDB_HASH,
+};
 use crate::engine::{
     self, Action, CastMode, CostKind, Decision, OptionalCostChoice, PlayOrCast,
     PlayPermissionExpiry, UntilEndOfTurnEffect,
@@ -915,6 +918,8 @@ pub fn burn_deck_ids() -> Vec<u16> {
         60,
         "Mono-Red Burn mainboard should be exactly 60 cards"
     );
+    preflight_fully_supported_deck(&ids)
+        .expect("the runnable Burn environment requires a fully supported token-free mainboard");
     ids
 }
 
