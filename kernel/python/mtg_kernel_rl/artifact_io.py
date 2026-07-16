@@ -483,11 +483,10 @@ def _is_allowed_schema_reference(value: str) -> bool:
 
 
 def _has_http_scheme_token(value: str) -> bool:
-    folded = value.casefold()
     for index in range(len(value)):
         if not _is_candidate_boundary(value, index):
             continue
-        if folded.startswith("http:", index) or folded.startswith("https:", index):
+        if value[index : index + 5].casefold() == "http:" or value[index : index + 6].casefold() == "https:":
             return True
     return False
 
@@ -535,7 +534,7 @@ def _has_windows_root_relative_at(value: str, index: int) -> bool:
     return (
         _is_candidate_boundary(value, index)
         and value[index] == "\\"
-        and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?"))
+        and (index + 1 == len(value) or value[index + 1] != "\\")
     )
 
 

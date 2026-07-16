@@ -16,6 +16,7 @@ from mtg_kernel_rl.artifacts import (
     write_json_atomic,
 )
 from mtg_kernel_rl.artifact_io import MAX_SMALL_JSON_BYTES, read_authoritative_json, validate_training_json_privacy
+from mtg_kernel_rl.checkpoint import validate_checkpoint_metadata_privacy
 from mtg_kernel_rl.path_safety import atomic_quarantine, mkdir_no_follow
 
 
@@ -187,6 +188,18 @@ class ArtifactTest(unittest.TestCase):
             "artifact \\ home\\jack",
             "diagnostic=x \\ secret\\file",
             "ordinary \\ secret\\file",
+            r"\.ssh",
+            r"artifact=\.ssh",
+            r"note;\\.ssh",
+            r"\\.ssh",
+            r"\?secret",
+            r"artifact=\?secret",
+            r"note;\\?secret",
+            r"\\?secret",
+            r"\.\secret",
+            r"\..\secret",
+            r"artifact=\.\secret",
+            r"diagnostic:\..\secret",
             "\\\\server\\share\\run",
             "x='\\\\server\\share\\run'",
             "\\\\.\\C:\\Users\\Jack",
@@ -384,6 +397,51 @@ class ArtifactTest(unittest.TestCase):
             with self.subTest(value=value, expected="rejected_key"):
                 with self.assertRaises(ValueError):
                     validate_training_json_privacy({value: "blocked"})
+
+    def test_privacy_scan_generated_unicode_casefold_http_matrix(self) -> None:
+        prefixes = ["\u00df", "\u0130", "\ufb03"]
+        boundaries = [
+            (";", ""),
+            ("=", ""),
+            (" diagnostic=", ""),
+            ("(", ")"),
+        ]
+        schemes = ["http", "HtTp", "HTTP", "https", "HtTpS", "HTTPS"]
+        payloads = ["example.test/path", "%2Fhome%2Fjack", "C:%5CUsers%5CJack"]
+
+        for prefix in prefixes:
+            for boundary, suffix in boundaries:
+                for scheme in schemes:
+                    for payload in payloads:
+                        value = f"{prefix}{boundary}{scheme}:{payload}{suffix}"
+                        with self.subTest(value=value, expected="rejected_value"):
+                            with self.assertRaises(ValueError):
+                                validate_training_json_privacy({"metadata": value})
+                        with self.subTest(value=value, expected="rejected_key"):
+                            with self.assertRaises(ValueError):
+                                validate_training_json_privacy({value: "blocked"})
+
+    def test_checkpoint_scalar_metadata_rejects_root_dot_question_and_unicode_casefold_http(self) -> None:
+        rejected = [
+            r"\.ssh",
+            r"artifact=\.ssh",
+            r"\\.ssh",
+            r"\?secret",
+            r"artifact=\?secret",
+            r"\\?secret",
+            r"\.\secret",
+            r"\..\secret",
+            "\u00df;http:%2Fhome%2Fjack",
+            "\u0130;http:example.test/path",
+            "\ufb03=HTTPS:%2Fhome%2Fjack",
+        ]
+        for value in rejected:
+            with self.subTest(value=value, expected="rejected_value"):
+                with self.assertRaises(ValueError):
+                    validate_checkpoint_metadata_privacy({"metadata": {"label": value}})
+            with self.subTest(value=value, expected="rejected_key"):
+                with self.assertRaises(ValueError):
+                    validate_checkpoint_metadata_privacy({"metadata": {value: "blocked"}})
 
     def test_quarantine_and_mkdir_no_follow_preserve_external_link_sentinels(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

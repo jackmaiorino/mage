@@ -235,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v9")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v7")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v10")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v8")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1435,7 +1435,7 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            for version in range(1, 9):
+            for version in range(1, 10):
                 case(
                     f"old_v{version}_run_schema_rejected",
                     lambda p, version=version: write_json_atomic(
@@ -1443,7 +1443,7 @@ class TrainerTest(unittest.TestCase):
                         {**read_json_file(p / "run.json"), "schema": f"kernel_rl_train_run/v{version}"},
                     ),
                 )
-            for version in range(1, 7):
+            for version in range(1, 8):
                 case(
                     f"old_v{version}_artifact_boundary_rejected",
                     lambda p, version=version: write_json_atomic(
@@ -1504,6 +1504,14 @@ class TrainerTest(unittest.TestCase):
                 ("tab_chained_mixed_separator", "a\t/\tb\t\\\tc"),
                 ("backslash_root_relative", "diagnostic=x \\ secret\\file"),
                 ("backslash_root_relative_prose", "ordinary \\ secret\\file"),
+                ("root_relative_dot", r"\.ssh"),
+                ("root_relative_dot_assignment", r"artifact=\.ssh"),
+                ("double_root_relative_dot", r"\\.ssh"),
+                ("root_relative_question", r"\?secret"),
+                ("root_relative_question_assignment", r"artifact=\?secret"),
+                ("double_root_relative_question", r"\\?secret"),
+                ("root_relative_dot_nested", r"\.\secret"),
+                ("root_relative_dotdot_nested", r"\..\secret"),
                 ("authorityless_http_zero_slash", "http:example.test"),
                 ("authorityless_http_path", "http:example.test/path"),
                 ("authorityless_https_upper_zero_slash", "HTTPS:example.test"),
@@ -1515,6 +1523,9 @@ class TrainerTest(unittest.TestCase):
                 ("embedded_http_parenthesized", "(http:example.test/path)"),
                 ("encoded_posix_http", "http:%2Fhome%2Fjack"),
                 ("encoded_windows_https", "HTTPS:C:%5CUsers%5CJack"),
+                ("unicode_casefold_sharp_s_encoded_http", "\u00df;http:%2Fhome%2Fjack"),
+                ("unicode_casefold_dotted_i_authorityless_http", "\u0130;http:example.test/path"),
+                ("unicode_casefold_ligature_encoded_https", "\ufb03=HTTPS:%2Fhome%2Fjack"),
                 ("malformed_userinfo_uri", "https://user@example.test/path"),
             ]
             for name, text in privacy_rejections:
@@ -1535,15 +1546,15 @@ class TrainerTest(unittest.TestCase):
             cases.extend(
                 [
                     (
-                        "old_v8_run_schema",
-                        lambda p: mutate_run(p, lambda run: run.__setitem__("schema", "kernel_rl_train_run/v8")),
+                        "old_v9_run_schema",
+                        lambda p: mutate_run(p, lambda run: run.__setitem__("schema", "kernel_rl_train_run/v9")),
                         "schema mismatch",
                     ),
                     (
-                        "old_v6_artifact_boundary",
+                        "old_v7_artifact_boundary",
                         lambda p: mutate_run(
                             p,
-                            lambda run: run["artifact_boundary"].__setitem__("schema", "kernel_rl_artifact_boundary/v6"),
+                            lambda run: run["artifact_boundary"].__setitem__("schema", "kernel_rl_artifact_boundary/v7"),
                         ),
                         "training contract drift",
                     ),
