@@ -6,6 +6,8 @@ import json
 import os
 import random
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,11 +18,14 @@ import torch
 import mtg_kernel_rl.cli as cli_mod
 import mtg_kernel_rl.sampled_evaluator as sampled_mod
 from mtg_kernel_rl.artifact_io import canonical_json_bytes, read_json_file, sha256_bytes
+from mtg_kernel_rl.artifacts import set_fault_injector
 from mtg_kernel_rl.client import Decision, Terminal
 from mtg_kernel_rl.determinism import derive_evaluation_action_seed, derive_evaluation_bootstrap_seed
 from mtg_kernel_rl.evaluation_stats import PairedGamePoints, score_pair_half_points, summarize_paired_game_points
 from mtg_kernel_rl.evaluation_store import statistics_payload, validate_evaluation
 from mtg_kernel_rl.evaluator import EvaluationResult, evaluate
+from mtg_kernel_rl.output_lock import OutputLock
+from mtg_kernel_rl.path_safety import OUTPUT_LOCK_FILE_NAME
 from mtg_kernel_rl.sampled_evaluation_store import (
     ACTION_SEED_DERIVATION_CONTRACT,
     ACTION_SELECTION_CONTRACT,
@@ -44,8 +49,9 @@ def _train_fixture(
     scenario: str = "valid",
     until_update: int = 0,
     max_decisions: int = 8,
+    extra_env: dict[str, str] | None = None,
 ) -> tuple[Path, Path, str]:
-    launcher = fake_launcher(root, scenario)
+    launcher = fake_launcher(root, scenario, extra_env)
     store = root / "training-store"
     train(
         env_bin=launcher,
@@ -93,6 +99,10 @@ def _tree_bytes(root: Path) -> dict[str, bytes]:
     }
 
 
+def _artifact_bytes(root: Path) -> dict[str, bytes]:
+    return {name: (root / name).read_bytes() for name in ("games.jsonl", "pairs.jsonl", "run.json")}
+
+
 def _jsonl(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="ascii").splitlines()]
 
@@ -108,6 +118,65 @@ def _refresh_file_metadata(root: Path, manifest: dict, name: str) -> None:
         "sha256": sha256_bytes(data),
         "size_bytes": len(data),
     }
+
+
+def _create_directory_alias(test: unittest.TestCase, alias: Path, target: Path) -> None:
+    if os.name == "nt":
+        result = subprocess.run(
+            ["cmd", "/c", "mklink", "/J", str(alias), str(target)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            test.fail(f"Windows junction creation failed: {result.stdout} {result.stderr}")
+        return
+    try:
+        os.symlink(target, alias, target_is_directory=True)
+    except (NotImplementedError, OSError) as exc:
+        raise unittest.SkipTest(f"directory symlink unavailable: {exc}") from exc
+
+
+def _remove_directory_alias(alias: Path) -> None:
+    if os.name == "nt":
+        os.rmdir(alias)
+    else:
+        alias.unlink()
+
+
+_HARD_EXIT_SAMPLED_EVALUATOR = r"""
+import os
+import sys
+from pathlib import Path
+
+from mtg_kernel_rl.artifacts import set_fault_injector
+from mtg_kernel_rl.sampled_evaluator import evaluate_sampled
+
+store, head, launcher, out, wanted_boundary, wanted_name, marker = sys.argv[1:]
+marker_path = Path(marker)
+
+def injector(boundary, path):
+    if boundary == wanted_boundary and path is not None and path.name == wanted_name:
+        with marker_path.open("xb") as handle:
+            handle.write(b"reached")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os._exit(91)
+
+set_fault_injector(injector)
+evaluate_sampled(
+    training_store=Path(store),
+    expected_candidate_head=head,
+    env_bin=Path(launcher),
+    out_dir=Path(out),
+    pairs=1,
+    base_seed=4,
+    bootstrap_replicates=1000,
+    max_decisions=8,
+    timeout_ms=5000,
+)
+raise SystemExit(92)
+"""
 
 
 class SampledSelectorTest(unittest.TestCase):
@@ -391,6 +460,185 @@ class SampledEndToEndTest(unittest.TestCase):
         )
 
 
+class SampledPublicationProofTest(unittest.TestCase):
+    def test_data_file_faults_are_uncommitted_and_run_fault_is_postcommit(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            source_before = _tree_bytes(store)
+            cases = (
+                ("games.jsonl", {OUTPUT_LOCK_FILE_NAME, "games.jsonl"}, False),
+                ("pairs.jsonl", {OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl"}, False),
+                ("run.json", {OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"}, True),
+            )
+            for target_name, expected_entries, committed in cases:
+                with self.subTest(target=target_name):
+                    out = root / f"sampled-fault-{target_name.replace('.', '-')}"
+                    fired = {"value": False}
+
+                    def injector(boundary: str, path: Path | None) -> None:
+                        if (
+                            not fired["value"]
+                            and boundary == "json_replace_after"
+                            and path is not None
+                            and path.name == target_name
+                        ):
+                            fired["value"] = True
+                            raise RuntimeError(f"sampled fault after {target_name}")
+
+                    previous = set_fault_injector(injector)
+                    try:
+                        with self.assertRaisesRegex(RuntimeError, target_name.replace(".", r"\.")):
+                            _evaluate_fixture(launcher, store, head, out, pairs=1)
+                    finally:
+                        set_fault_injector(previous)
+                    self.assertTrue(fired["value"])
+                    self.assertEqual({path.name for path in out.iterdir()}, expected_entries)
+                    if committed:
+                        validated = validate_sampled_evaluation(out)
+                        self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+                    else:
+                        self.assertFalse((out / "run.json").exists())
+                        with self.assertRaises(ValueError):
+                            validate_sampled_evaluation(out)
+                    self.assertEqual(_tree_bytes(store), source_before)
+                    output_before_retry = _tree_bytes(out)
+                    with self.assertRaises(FileExistsError):
+                        _evaluate_fixture(launcher, store, head, out, pairs=1)
+                    self.assertEqual(_tree_bytes(out), output_before_retry)
+                    self.assertEqual(_tree_bytes(store), source_before)
+
+    def test_hard_exit_at_every_atomic_replace_boundary_is_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            source_before = _tree_bytes(store)
+            source_root = Path(__file__).resolve().parents[1]
+            tests_root = Path(__file__).resolve().parent
+            child_env = os.environ.copy()
+            child_env["PYTHONPATH"] = os.pathsep.join((str(source_root), str(tests_root)))
+            published_before = {
+                "games.jsonl": set(),
+                "pairs.jsonl": {"games.jsonl"},
+                "run.json": {"games.jsonl", "pairs.jsonl"},
+            }
+            for boundary in ("json_replace_before", "json_replace_after"):
+                for target_name in ("games.jsonl", "pairs.jsonl", "run.json"):
+                    with self.subTest(boundary=boundary, target=target_name):
+                        slug = f"sampled-{boundary}-{target_name.replace('.', '-')}"
+                        out = root / slug
+                        marker = root / f"{slug}.marker"
+                        completed = subprocess.run(
+                            [
+                                sys.executable,
+                                "-c",
+                                _HARD_EXIT_SAMPLED_EVALUATOR,
+                                str(store),
+                                head,
+                                str(launcher),
+                                str(out),
+                                boundary,
+                                target_name,
+                                str(marker),
+                            ],
+                            cwd=Path(__file__).resolve().parents[3],
+                            env=child_env,
+                            capture_output=True,
+                            text=True,
+                            timeout=60,
+                            check=False,
+                        )
+                        self.assertEqual(
+                            completed.returncode,
+                            91,
+                            msg=f"stdout={completed.stdout!r} stderr={completed.stderr!r}",
+                        )
+                        self.assertEqual(marker.read_bytes(), b"reached")
+                        self.assertNotIn(marker.name, {path.name for path in out.iterdir()})
+
+                        names = {path.name for path in out.iterdir()}
+                        expected = {OUTPUT_LOCK_FILE_NAME, *published_before[target_name]}
+                        if boundary == "json_replace_after":
+                            expected.add(target_name)
+                            self.assertEqual(names, expected)
+                        else:
+                            temp_names = names - expected
+                            self.assertEqual(len(temp_names), 1)
+                            temp_name = next(iter(temp_names))
+                            self.assertTrue(temp_name.startswith(f".{target_name}."), temp_name)
+                            self.assertTrue(temp_name.endswith(".tmp"), temp_name)
+
+                        with OutputLock(out):
+                            pass
+                        if boundary == "json_replace_after" and target_name == "run.json":
+                            validated = validate_sampled_evaluation(out)
+                            self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+                        else:
+                            with self.assertRaises(ValueError):
+                                validate_sampled_evaluation(out)
+                        self.assertEqual(_tree_bytes(store), source_before)
+                        output_before_retry = _tree_bytes(out)
+                        with self.assertRaises(FileExistsError):
+                            _evaluate_fixture(launcher, store, head, out, pairs=1)
+                        self.assertEqual(_tree_bytes(out), output_before_retry)
+                        self.assertEqual(_tree_bytes(store), source_before)
+
+    def test_runtime_failure_leaves_lock_only_and_same_root_is_retryable(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            scenario_file = root / "scenario.txt"
+            scenario_file.write_text("valid", encoding="utf-8")
+            launcher, store, head = _train_fixture(
+                root,
+                scenario="switchable",
+                extra_env={"FAKE_SCENARIO_FILE": str(scenario_file)},
+            )
+            out = root / "sampled-retry"
+            scenario_file.write_text("train_late_fault", encoding="utf-8")
+            with self.assertRaises(Exception):
+                _evaluate_fixture(launcher, store, head, out, pairs=1)
+            self.assertEqual({path.name for path in out.iterdir()}, {OUTPUT_LOCK_FILE_NAME})
+
+            scenario_file.write_text("valid", encoding="utf-8")
+            result = _evaluate_fixture(launcher, store, head, out, pairs=1)
+            self.assertEqual((result.total_half_points, result.estimate), (2, 0.5))
+            validate_sampled_evaluation(out)
+
+    def test_fresh_output_root_accepts_new_or_empty_and_rejects_dirty_or_reused(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+
+            new_root = root / "new-root"
+            _evaluate_fixture(launcher, store, head, new_root, pairs=1)
+            validate_sampled_evaluation(new_root)
+
+            empty_root = root / "empty-root"
+            empty_root.mkdir()
+            _evaluate_fixture(launcher, store, head, empty_root, pairs=1)
+            validate_sampled_evaluation(empty_root)
+
+            dirty_root = root / "dirty-root"
+            dirty_root.mkdir()
+            sentinel = dirty_root / "sentinel.txt"
+            sentinel.write_bytes(b"preserve-me")
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(launcher, store, head, dirty_root, pairs=1)
+            self.assertEqual(sentinel.read_bytes(), b"preserve-me")
+            self.assertEqual({path.name for path in dirty_root.iterdir()}, {OUTPUT_LOCK_FILE_NAME, "sentinel.txt"})
+
+            before = _tree_bytes(new_root)
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(launcher, store, head, new_root, pairs=1)
+            self.assertEqual(_tree_bytes(new_root), before)
+
+            file_root = root / "file-root"
+            file_root.write_bytes(b"not-a-directory")
+            with self.assertRaises((FileExistsError, ValueError)):
+                _evaluate_fixture(launcher, store, head, file_root, pairs=1)
+            self.assertEqual(file_root.read_bytes(), b"not-a-directory")
+
+
 class SampledVerifierCorruptionTest(unittest.TestCase):
     def test_contract_manifest_and_row_corruption_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -544,6 +792,190 @@ class SampledVerifierCorruptionTest(unittest.TestCase):
             (target / "run.json").write_bytes(canonical_json_bytes(manifest))
             with self.assertRaisesRegex(ValueError, "physical terminal"):
                 validate_sampled_evaluation(target)
+
+
+class SampledFilesystemBoundaryTest(unittest.TestCase):
+    def test_committed_verifier_rejects_file_symlinks_and_preserves_targets(self) -> None:
+        if not hasattr(os, "symlink"):
+            self.skipTest("file symlink primitive unavailable")
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside"
+            outside.mkdir()
+            probe_target = outside / "probe-target"
+            probe_target.write_bytes(b"probe")
+            probe = root / "probe-link"
+            try:
+                os.symlink(probe_target, probe)
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"file symlink unavailable: {exc}")
+            else:
+                probe.unlink()
+            launcher, store, head = _train_fixture(root)
+            pristine = root / "pristine-symlink"
+            _evaluate_fixture(launcher, store, head, pristine, pairs=1)
+            for name in (OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"):
+                with self.subTest(name=name):
+                    target = root / f"sampled-symlink-{name.replace('.', '-')}"
+                    shutil.copytree(pristine, target)
+                    artifact = target / name
+                    sentinel = outside / f"{name.replace('.', '-')}.sentinel"
+                    sentinel.write_bytes(artifact.read_bytes())
+                    expected = sentinel.read_bytes()
+                    artifact.unlink()
+                    os.symlink(sentinel, artifact)
+                    with self.assertRaises(ValueError):
+                        validate_sampled_evaluation(target)
+                    self.assertEqual(sentinel.read_bytes(), expected)
+
+    def test_committed_verifier_rejects_hardlinks_and_preserves_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside"
+            outside.mkdir()
+            launcher, store, head = _train_fixture(root)
+            pristine = root / "pristine-hardlink"
+            _evaluate_fixture(launcher, store, head, pristine, pairs=1)
+            for name in (OUTPUT_LOCK_FILE_NAME, "games.jsonl", "pairs.jsonl", "run.json"):
+                with self.subTest(name=name):
+                    target = root / f"sampled-hardlink-{name.replace('.', '-')}"
+                    shutil.copytree(pristine, target)
+                    artifact = target / name
+                    sentinel = outside / f"{name.replace('.', '-')}.hardlink"
+                    sentinel.write_bytes(artifact.read_bytes())
+                    expected = sentinel.read_bytes()
+                    artifact.unlink()
+                    try:
+                        os.link(sentinel, artifact)
+                    except OSError as exc:
+                        self.skipTest(f"hardlink unavailable on temporary filesystem: {exc}")
+                    with self.assertRaises(ValueError):
+                        validate_sampled_evaluation(target)
+                    self.assertEqual(sentinel.read_bytes(), expected)
+
+    def test_root_junction_or_symlink_is_rejected_for_verification_and_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = root / "pristine-root-alias"
+            _evaluate_fixture(launcher, store, head, pristine, pairs=1)
+            before = _artifact_bytes(pristine)
+            verify_alias = root / "verify-root-alias"
+            _create_directory_alias(self, verify_alias, pristine)
+            try:
+                with self.assertRaises(ValueError):
+                    validate_sampled_evaluation(verify_alias)
+                self.assertEqual(_artifact_bytes(pristine), before)
+            finally:
+                _remove_directory_alias(verify_alias)
+
+            outside = root / "outside-publication"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-sentinel")
+            publish_alias = root / "publish-root-alias"
+            _create_directory_alias(self, publish_alias, outside)
+            try:
+                with self.assertRaises(ValueError):
+                    _evaluate_fixture(launcher, store, head, publish_alias, pairs=1)
+                self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+                self.assertEqual({path.name for path in outside.iterdir()}, {"sentinel.txt"})
+            finally:
+                _remove_directory_alias(publish_alias)
+
+    def test_ancestor_directory_alias_with_real_final_component_is_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            real_parent = root / "real-parent"
+            real_parent.mkdir()
+            launcher, store, head = _train_fixture(real_parent)
+            alias_parent = root / "alias-parent"
+            _create_directory_alias(self, alias_parent, real_parent)
+            try:
+                result_root = alias_parent / "sampled-evaluation"
+                _evaluate_fixture(launcher, store, head, result_root, pairs=1)
+                validated = validate_sampled_evaluation(real_parent / "sampled-evaluation")
+                self.assertEqual((validated.total_half_points, validated.estimate), (2, 0.5))
+            finally:
+                _remove_directory_alias(alias_parent)
+
+    def test_exact_root_types_and_preexisting_aliases_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = root / "pristine-exact-root"
+            _evaluate_fixture(launcher, store, head, pristine, pairs=1)
+
+            wrong_type = root / "wrong-type"
+            shutil.copytree(pristine, wrong_type)
+            (wrong_type / "games.jsonl").unlink()
+            (wrong_type / "games.jsonl").mkdir()
+            with self.assertRaises(ValueError):
+                validate_sampled_evaluation(wrong_type)
+
+            outside = root / "outside"
+            outside.mkdir()
+            sentinel = outside / "sentinel.bin"
+            sentinel.write_bytes(b"do-not-change")
+            hardlink_root = root / "publish-hardlink"
+            hardlink_root.mkdir()
+            try:
+                os.link(sentinel, hardlink_root / "run.json")
+            except OSError as exc:
+                self.skipTest(f"hardlink unavailable on temporary filesystem: {exc}")
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(launcher, store, head, hardlink_root, pairs=1)
+            self.assertEqual(sentinel.read_bytes(), b"do-not-change")
+
+            directory_root = root / "publish-directory"
+            (directory_root / "run.json").mkdir(parents=True)
+            nested_sentinel = directory_root / "run.json" / "sentinel.txt"
+            nested_sentinel.write_bytes(b"nested-sentinel")
+            with self.assertRaises(FileExistsError):
+                _evaluate_fixture(launcher, store, head, directory_root, pairs=1)
+            self.assertEqual(nested_sentinel.read_bytes(), b"nested-sentinel")
+
+    def test_preexisting_publication_file_symlink_is_not_followed(self) -> None:
+        if not hasattr(os, "symlink"):
+            self.skipTest("file symlink primitive unavailable")
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            outside = root / "outside-symlink"
+            outside.mkdir()
+            sentinel = outside / "sentinel.json"
+            sentinel.write_bytes(b"external-sentinel")
+            out = root / "publication-symlink"
+            out.mkdir()
+            try:
+                os.symlink(sentinel, out / "run.json")
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest(f"file symlink unavailable: {exc}")
+            launcher, store, head = _train_fixture(root)
+            with self.assertRaises((FileExistsError, ValueError)):
+                _evaluate_fixture(launcher, store, head, out, pairs=1)
+            self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+
+    def test_child_junction_or_directory_symlink_is_rejected_without_following(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            root = Path(tmp_name)
+            launcher, store, head = _train_fixture(root)
+            pristine = root / "pristine-child-alias"
+            _evaluate_fixture(launcher, store, head, pristine, pairs=1)
+            outside = root / "outside-child"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-child-sentinel")
+            target = root / "child-alias"
+            shutil.copytree(pristine, target)
+            (target / "games.jsonl").unlink()
+            alias = target / "games.jsonl"
+            _create_directory_alias(self, alias, outside)
+            try:
+                with self.assertRaises(ValueError):
+                    validate_sampled_evaluation(target)
+                self.assertEqual(sentinel.read_bytes(), b"external-child-sentinel")
+            finally:
+                _remove_directory_alias(alias)
 
 
 class SampledRealEnvironmentTest(unittest.TestCase):
