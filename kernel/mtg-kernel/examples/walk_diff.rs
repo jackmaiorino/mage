@@ -1837,6 +1837,20 @@ fn decision_texts(
                 .map(|i| format!("effect-option#{i}"))
                 .collect(),
         )),
+        SurfaceDecision::Decision(Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        }) => {
+            let mut choices = legal_targets
+                .iter()
+                .map(|target| target_name(state, target, p0_name, p1_name))
+                .collect::<Vec<_>>();
+            if *can_finish {
+                choices.push("DONE".to_string());
+            }
+            Some(("SELECT_TARGETS", choices))
+        }
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => Some((
             "ORDER_TRIGGERS",
             vec![format!("identity_order({})", pending.len())],
@@ -1992,6 +2006,22 @@ fn apply_by_indices(
                 SurfaceAction::Action(Action::ChooseEffectOption(i0 as u16)),
             )
             .map_err(|e| format!("engine-step-error:walk:ChooseEffectOption:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        }) => {
+            let action = if let Some(&target) = legal_targets.get(i0) {
+                Action::ChooseEffectTarget(target)
+            } else if *can_finish && i0 == legal_targets.len() {
+                Action::FinishEffectSelection
+            } else {
+                return Err("apply_by_indices:index-out-of-range:ChooseEffectTargets".to_string());
+            };
+            surface
+                .apply(state, SurfaceAction::Action(action))
+                .map_err(|e| format!("engine-step-error:walk:ChooseEffectTargets:{e}"))
+        }
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => surface
             .apply(
                 state,

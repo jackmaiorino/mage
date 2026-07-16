@@ -764,6 +764,19 @@ fn fixed_continuation_action(decision: &SurfaceDecision) -> Result<SurfaceAction
         SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => {
             Ok(SurfaceAction::Action(Action::ChooseEffectOption(0)))
         }
+        SurfaceDecision::Decision(Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        }) => {
+            if let Some(&target) = legal_targets.first() {
+                Ok(SurfaceAction::Action(Action::ChooseEffectTarget(target)))
+            } else if *can_finish {
+                Ok(SurfaceAction::Action(Action::FinishEffectSelection))
+            } else {
+                Err("continuation:no-legal-effect-targets".to_string())
+            }
+        }
         SurfaceDecision::Decision(Decision::GameOver { .. }) => {
             Err("continuation:game-already-over".to_string())
         }

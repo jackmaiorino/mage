@@ -1593,6 +1593,43 @@ pub fn legal_action_candidates_v1(
                     )?;
                 }
             }
+            Decision::ChooseEffectTargets {
+                player,
+                source,
+                selected_count,
+                min_targets,
+                max_targets,
+                legal_targets,
+                can_finish,
+            } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *source)?;
+                for &target in legal_targets {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseEffectTarget {
+                            actor,
+                            source: source.clone(),
+                            target: target_ref(state, target)?,
+                            selected_count: *selected_count,
+                            min_targets: *min_targets,
+                            max_targets: *max_targets,
+                        },
+                        SurfaceAction::Action(Action::ChooseEffectTarget(target)),
+                    )?;
+                }
+                if *can_finish {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::FinishEffectSelection {
+                            actor,
+                            source,
+                            selected_count: *selected_count,
+                        },
+                        SurfaceAction::Action(Action::FinishEffectSelection),
+                    )?;
+                }
+            }
             Decision::ChooseOptionalCost {
                 player,
                 discard_payable,
@@ -1777,6 +1814,7 @@ pub fn acting_player_for_surface_decision(
             | Decision::ChooseKicker { player, .. }
             | Decision::ChooseSpellMode { player, .. }
             | Decision::ChooseEffectOption { player, .. }
+            | Decision::ChooseEffectTargets { player, .. }
             | Decision::ChooseOptionalCost { player, .. }
             | Decision::ChooseSpellCopyPayment { player, .. }
             | Decision::ChooseSpellCopyRetarget { player, .. }
@@ -3020,6 +3058,63 @@ fn target_refs_visible(
     Ok(out)
 }
 
+/// A pending effect selection may name a card in an otherwise-hidden zone
+/// only when this observer knows that exact incarnation. Winding Way's
+/// public reveal satisfies this for both observers; future private look or
+/// hand selections therefore fail closed for a non-chooser instead of
+/// leaking candidate identities through the generic pending context.
+fn effect_target_ref_visible(
+    state: &GameState,
+    target: Target,
+    acting_player: PlayerId,
+) -> Result<TargetRefV1> {
+    let Target::Object(object_id) = target else {
+        let Target::Player(player) = target else {
+            unreachable!("Target has only player and object variants")
+        };
+        return Ok(TargetRefV1::Player {
+            player: player.into(),
+        });
+    };
+    let object = state
+        .objects
+        .try_get(object_id)
+        .ok_or_else(|| RlContractError(format!("object id {} missing", object_id.0)))?;
+    if let Some(visible) = visible_card_ref(state, object_id, acting_player)? {
+        return Ok(TargetRefV1::Object { object: visible });
+    }
+
+    let known = match object.zone {
+        Zone::Library => state
+            .known_library_cards(acting_player, object.owner)
+            .iter()
+            .any(|entry| {
+                entry.object == object_id
+                    && entry.zone_change_count == object.zone_change_count
+                    && state.players[object.owner.index()]
+                        .library
+                        .get(entry.position as usize)
+                        .is_some_and(|&candidate| candidate == object_id)
+            }),
+        Zone::Hand => state
+            .known_hand_cards(acting_player, object.owner)
+            .iter()
+            .any(|entry| {
+                entry.object == object_id && entry.zone_change_count == object.zone_change_count
+            }),
+        _ => false,
+    };
+    if !known {
+        return Err(RlContractError(format!(
+            "pending effect target object {} is hidden from {:?}",
+            object_id.0, acting_player
+        )));
+    }
+    Ok(TargetRefV1::Object {
+        object: card_ref(state, object_id)?,
+    })
+}
+
 fn public_card(state: &GameState, id: ObjectId) -> Result<CardPublicV1> {
     let object = state
         .objects
@@ -3457,7 +3552,7 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
             .engine
             .pending_effect
             .as_ref()
-            .map(|pending| pending_effect_semantic_v4(state, pending))
+            .map(|pending| pending_effect_semantic_v4(state, acting_player, pending))
             .transpose()?,
         pending_triggers: state
             .engine
@@ -3481,6 +3576,7 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
 
 fn pending_effect_semantic_v4(
     state: &GameState,
+    acting_player: PlayerId,
     pending: &crate::effect::EffectContinuation,
 ) -> Result<PendingEffectSemanticV4> {
     let choice = pending
@@ -3498,6 +3594,40 @@ fn pending_effect_semantic_v4(
                     option_count: options.len().try_into().map_err(|_| {
                         RlContractError("effect option count exceeds u16".to_string())
                     })?,
+                }),
+                crate::effect::PendingEffectChoice::SelectTargets {
+                    player,
+                    path,
+                    selected,
+                    legal,
+                    min_targets,
+                    max_targets,
+                    ordered,
+                    purpose,
+                } => Ok(PendingEffectChoiceSemanticV4::Targets {
+                    player: (*player).into(),
+                    structural_path: path.clone(),
+                    selected_targets: selected
+                        .iter()
+                        .map(|candidate| {
+                            effect_target_ref_visible(state, candidate.target, acting_player)
+                        })
+                        .collect::<Result<Vec<_>>>()?,
+                    legal_targets: legal
+                        .iter()
+                        .map(|candidate| {
+                            effect_target_ref_visible(state, candidate.target, acting_player)
+                        })
+                        .collect::<Result<Vec<_>>>()?,
+                    min_targets: *min_targets,
+                    max_targets: *max_targets,
+                    can_finish: selected.len() >= usize::from(*min_targets),
+                    ordered: *ordered,
+                    purpose: match purpose {
+                        crate::effect::EffectTargetSelectionPurpose::OrderIntoGraveyard {
+                            ..
+                        } => TargetSelectionPurposeV4::CardSelection,
+                    },
                 }),
             }
         })

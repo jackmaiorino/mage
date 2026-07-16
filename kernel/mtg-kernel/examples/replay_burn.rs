@@ -766,6 +766,9 @@ fn run(
             SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => {
                 return Err("unhandled-decision:ChooseEffectOption".to_string())
             }
+            SurfaceDecision::Decision(Decision::ChooseEffectTargets { .. }) => {
+                return Err("unhandled-decision:ChooseEffectTargets".to_string())
+            }
             // `HarnessSurfaceV1::next_decision` always reshapes a raw
             // `Decision::DeclareBlockers` into `DeclareBlockersForAttacker`
             // sub-decisions before returning (see that module's doc) --
@@ -794,6 +797,7 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseEffectOption { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectTargets { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. })

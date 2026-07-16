@@ -191,6 +191,12 @@ enum Special {
     /// "Exile the top two cards of your library. Until the end of your next
     /// turn, you may play those cards." (Reckless Impulse, Rally-only).
     RecklessImpulse,
+    /// "Choose creature or land. Reveal the top four cards of your
+    /// library. Put all cards of the chosen type revealed this way into
+    /// your hand and the rest into your graveyard." The choice happens
+    /// during resolution, so it is the first real consumer of the generic
+    /// resumable `EffectOp::Choice` interpreter.
+    WindingWay,
 }
 
 #[derive(Clone, Copy)]
@@ -224,6 +230,7 @@ fn special_for(name: &str) -> Special {
         "Galvanic Blast" => Special::GalvanicBlast,
         "Rally at the Hornburg" => Special::RallyAtTheHornburg,
         "Reckless Impulse" => Special::RecklessImpulse,
+        "Winding Way" => Special::WindingWay,
         _ => Special::None,
     }
 }
@@ -620,6 +627,31 @@ fn codegen(cards: &[CardJson]) -> String {
         )
         .unwrap();
         writeln!(out, "    Some(EffectOp::ImpulseDraw {{ count: 2, duration: ImpulseDuration::UntilOwnersNextTurn }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards
+        .iter()
+        .any(|c| matches!(special_for(&c.name), Special::WindingWay))
+    {
+        // Printed order is policy semantics: zero is Creature, one is Land.
+        // The choice is made during resolution before the public reveal.
+        writeln!(out, "fn spell_effect_winding_way() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Choice {{").unwrap();
+        writeln!(out, "        controller: PlayerRef::Controller,").unwrap();
+        writeln!(out, "        options: vec![").unwrap();
+        for card_type in ["Creature", "Land"] {
+            writeln!(out, "            EffectOp::RevealTopAndPartitionByType {{").unwrap();
+            writeln!(out, "                player: PlayerRef::Controller,").unwrap();
+            writeln!(out, "                count: 4,").unwrap();
+            writeln!(out, "                card_type: CardType::{card_type},").unwrap();
+            writeln!(out, "                matching_to: Zone::Hand,").unwrap();
+            writeln!(out, "                rest_to: Zone::Graveyard,").unwrap();
+            writeln!(out, "            }},").unwrap();
+        }
+        writeln!(out, "        ],").unwrap();
+        writeln!(out, "    }})").unwrap();
         writeln!(out, "}}").unwrap();
         writeln!(out).unwrap();
     }
@@ -1021,6 +1053,11 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::RecklessImpulse => (
                 "TargetSpec::None",
                 "spell_effect_reckless_impulse".to_string(),
+                "no_effect".to_string(),
+            ),
+            Special::WindingWay => (
+                "TargetSpec::None",
+                "spell_effect_winding_way".to_string(),
                 "no_effect".to_string(),
             ),
         };

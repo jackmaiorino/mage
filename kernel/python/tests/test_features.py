@@ -177,6 +177,80 @@ def seat_swapped(obs, actions):
     return swapped_obs, swapped_actions
 
 
+def pending_effect_target_decision(can_finish: bool = True) -> tuple[dict, list[dict]]:
+    obs = complete_observation()
+    projection = obs["projection"]
+    source = deep_copy(projection["stack"][-1]["source"])
+    first = {
+        "target_kind": "object",
+        "object": deep_copy(obs["known_library_cards"][0][0]["card"]["stable"]),
+    }
+    second = {
+        "target_kind": "object",
+        "object": deep_copy(obs["known_library_cards"][1][0]["card"]["stable"]),
+    }
+    selected_targets = [first] if can_finish else []
+    legal_targets = [second] if can_finish else [first, second]
+    choice = {
+        "choice_kind": "targets",
+        "player": "p0",
+        "structural_path": [1, 0],
+        "selected_targets": selected_targets,
+        "legal_targets": legal_targets,
+        "min_targets": 1,
+        "max_targets": 2,
+        "can_finish": can_finish,
+        "ordered": True,
+        "purpose": "library_order",
+    }
+    projection["engine_context"].update(
+        {
+            "current_stage": "pending_effect",
+            "pending_effect": {
+                "source": source,
+                "controller": source["controller"],
+                "choice": choice,
+            },
+        }
+    )
+
+    selected_count = len(selected_targets)
+    actions = [
+        {
+            "schema_version": 4,
+            "selected_index": i,
+            "stable_id": f"legal-action-v4:pending-target-{i}",
+            "semantic": {
+                "action_kind": "choose_effect_target",
+                "actor": "p0",
+                "source": deep_copy(source),
+                "target": deep_copy(target),
+                "selected_count": selected_count,
+                "min_targets": 1,
+                "max_targets": 2,
+            },
+            "display_text": None,
+        }
+        for i, target in enumerate(legal_targets)
+    ]
+    if can_finish:
+        actions.append(
+            {
+                "schema_version": 4,
+                "selected_index": len(actions),
+                "stable_id": "legal-action-v4:pending-finish",
+                "semantic": {
+                    "action_kind": "finish_effect_selection",
+                    "actor": "p0",
+                    "source": deep_copy(source),
+                    "selected_count": selected_count,
+                },
+                "display_text": None,
+            }
+        )
+    return obs, actions
+
+
 class FeatureEncodingTest(unittest.TestCase):
     def test_observation_and_all_action_variants_are_classified(self) -> None:
         obs = complete_observation()
@@ -421,7 +495,43 @@ class FeatureEncodingTest(unittest.TestCase):
                 }
             )
             assert_observation_classified(obs)
-            digests.append(encoded_digest(encode_decision(obs, complete_legal_actions())))
+            choice_actions = complete_legal_actions()
+            if choice["choice_kind"] == "targets":
+                selected_count = len(choice["selected_targets"])
+                choice_actions = [
+                    {
+                        "schema_version": 4,
+                        "selected_index": index,
+                        "stable_id": f"legal-action-v4:typed-target-{index}",
+                        "semantic": {
+                            "action_kind": "choose_effect_target",
+                            "actor": "p0",
+                            "source": source,
+                            "target": legal_target,
+                            "selected_count": selected_count,
+                            "min_targets": choice["min_targets"],
+                            "max_targets": choice["max_targets"],
+                        },
+                        "display_text": None,
+                    }
+                    for index, legal_target in enumerate(choice["legal_targets"])
+                ]
+                if choice["can_finish"]:
+                    choice_actions.append(
+                        {
+                            "schema_version": 4,
+                            "selected_index": len(choice_actions),
+                            "stable_id": "legal-action-v4:typed-finish",
+                            "semantic": {
+                                "action_kind": "finish_effect_selection",
+                                "actor": "p0",
+                                "source": source,
+                                "selected_count": selected_count,
+                            },
+                            "display_text": None,
+                        }
+                    )
+            digests.append(encoded_digest(encode_decision(obs, choice_actions)))
         self.assertEqual(len(digests), len(set(digests)))
 
         actions = every_action_variant_fixture(base["own_hand"][0]["stable"], target, base["own_hand"][1]["stable"])
@@ -444,6 +554,107 @@ class FeatureEncodingTest(unittest.TestCase):
         encoded_reserved = encode_decision(base, reserved)
         reserved_representations = [action_representation(encoded_reserved, i) for i in range(len(reserved))]
         self.assertEqual(len(reserved_representations), len(set(reserved_representations)))
+
+    def test_pending_effect_target_choice_and_actions_cross_validate(self) -> None:
+        obs, actions = pending_effect_target_decision(can_finish=True)
+        encoded = encode_decision(obs, actions)
+        self.assertEqual(encoded.action_features.shape[0], 2)
+
+        required_obs, required_actions = pending_effect_target_decision(can_finish=False)
+        required_encoded = encode_decision(required_obs, required_actions)
+        self.assertEqual(required_encoded.action_features.shape[0], 2)
+
+    def test_pending_effect_target_observation_invariants_fail_closed(self) -> None:
+        base, _ = pending_effect_target_decision(can_finish=True)
+        choice_path = ("projection", "engine_context", "pending_effect", "choice")
+
+        def choice(obs):
+            value = obs
+            for key in choice_path:
+                value = value[key]
+            return value
+
+        wrong_actor = deep_copy(base)
+        choice(wrong_actor)["player"] = "p1"
+        wrong_source = deep_copy(base)
+        wrong_source["projection"]["engine_context"]["pending_effect"]["source"] = deep_copy(
+            wrong_source["own_hand"][0]["stable"]
+        )
+        wrong_source["projection"]["engine_context"]["pending_effect"]["source"]["zone"] = "Stack"
+        duplicate_selected = deep_copy(base)
+        choice(duplicate_selected)["selected_targets"].append(
+            deep_copy(choice(duplicate_selected)["selected_targets"][0])
+        )
+        overlap = deep_copy(base)
+        choice(overlap)["legal_targets"] = [deep_copy(choice(overlap)["selected_targets"][0])]
+        unreachable_minimum = deep_copy(base)
+        choice(unreachable_minimum).update(
+            {"selected_targets": [], "legal_targets": [], "can_finish": False}
+        )
+        legal_at_maximum = deep_copy(base)
+        choice(legal_at_maximum).update({"min_targets": 1, "max_targets": 1})
+        wrong_can_finish = deep_copy(base)
+        choice(wrong_can_finish)["can_finish"] = False
+
+        cases = {
+            "wrong chooser": wrong_actor,
+            "wrong resolving source": wrong_source,
+            "duplicate selected target": duplicate_selected,
+            "selected/legal overlap": overlap,
+            "unreachable minimum": unreachable_minimum,
+            "legal target at maximum": legal_at_maximum,
+            "wrong can_finish": wrong_can_finish,
+        }
+        for label, malformed in cases.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                assert_observation_classified(malformed)
+
+    def test_pending_effect_target_action_correspondence_fails_closed(self) -> None:
+        obs, actions = pending_effect_target_decision(can_finish=True)
+        pending_choice = obs["projection"]["engine_context"]["pending_effect"]["choice"]
+
+        wrong_source = deep_copy(actions)
+        wrong_source[0]["semantic"]["source"] = deep_copy(obs["own_hand"][0]["stable"])
+        wrong_target = deep_copy(actions)
+        wrong_target[0]["semantic"]["target"] = deep_copy(pending_choice["selected_targets"][0])
+        wrong_count = deep_copy(actions)
+        wrong_count[0]["semantic"]["selected_count"] = 0
+        wrong_bounds = deep_copy(actions)
+        wrong_bounds[0]["semantic"]["max_targets"] = 3
+        missing_target = [deep_copy(actions[1])]
+        missing_target[0]["selected_index"] = 0
+        duplicate_target = deep_copy(actions)
+        duplicate = deep_copy(duplicate_target[0])
+        duplicate["stable_id"] = "legal-action-v4:pending-target-duplicate"
+        duplicate_target.insert(1, duplicate)
+        for index, action in enumerate(duplicate_target):
+            action["selected_index"] = index
+        missing_finish = [deep_copy(actions[0])]
+        finish_first = [deep_copy(actions[1]), deep_copy(actions[0])]
+        for index, action in enumerate(finish_first):
+            action["selected_index"] = index
+
+        malformed_sets = {
+            "wrong source": wrong_source,
+            "wrong target": wrong_target,
+            "wrong selected count": wrong_count,
+            "wrong bounds": wrong_bounds,
+            "missing target": missing_target,
+            "duplicate target": duplicate_target,
+            "missing finish": missing_finish,
+            "finish before targets": finish_first,
+        }
+        for label, malformed in malformed_sets.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                encode_decision(obs, malformed)
+
+        required_obs, required_actions = pending_effect_target_decision(can_finish=False)
+        unexpected_finish = deep_copy(actions[1])
+        unexpected_finish["selected_index"] = len(required_actions)
+        unexpected_finish["semantic"]["selected_count"] = 0
+        required_actions.append(unexpected_finish)
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(required_obs, required_actions)
 
     def test_known_hand_perspective_safety_and_reserved_shape_errors_fail_closed(self) -> None:
         obs = complete_observation()

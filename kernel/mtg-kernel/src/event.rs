@@ -45,6 +45,11 @@ pub struct DamageProposed {
 pub struct ZoneChangeProposed {
     pub object: ObjectId,
     pub to_zone: Zone,
+    /// Preserve an already-known library identity if this move puts the
+    /// card into a hidden zone. Ordinary library-to-hand moves remain
+    /// secret; public reveal effects opt in after populating the existing
+    /// perspective-scoped library-knowledge table.
+    pub preserve_known_identity: bool,
     pub touched_by: Vec<ReplacementId>,
 }
 
@@ -113,6 +118,15 @@ impl ProposedEvent {
         ProposedEvent::ZoneChange(ZoneChangeProposed {
             object,
             to_zone,
+            preserve_known_identity: false,
+            touched_by: Vec::new(),
+        })
+    }
+    pub fn zone_change_preserving_known_identity(object: ObjectId, to_zone: Zone) -> ProposedEvent {
+        ProposedEvent::ZoneChange(ZoneChangeProposed {
+            object,
+            to_zone,
+            preserve_known_identity: true,
             touched_by: Vec::new(),
         })
     }
@@ -352,7 +366,7 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
         }
         ProposedEvent::ZoneChange(z) => {
             let from = state.objects.get(z.object).zone;
-            commit_zone_change(state, z.object, z.to_zone);
+            commit_zone_change(state, z.object, z.to_zone, z.preserve_known_identity);
             CommittedEvent::ZoneChange {
                 object: z.object,
                 from,
@@ -480,9 +494,39 @@ pub fn log_spell_cast(state: &mut GameState, spell: ObjectId, controller: Player
 /// Stack" (casting) is deliberately not reachable here: putting a spell on
 /// the stack is an engine action (see `engine::begin_cast`), never
 /// something a card's own effect program does.
-fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
+fn commit_zone_change(
+    state: &mut GameState,
+    id: ObjectId,
+    to_zone: Zone,
+    preserve_known_identity: bool,
+) {
     let owner = state.objects.get(id).owner;
     let from_zone = state.objects.get(id).zone;
+    let informed_observer_mask =
+        if preserve_known_identity && from_zone == Zone::Library && to_zone == Zone::Hand {
+            let position = state.players[owner.index()]
+                .library
+                .iter()
+                .position(|&candidate| candidate == id);
+            let generation = state.objects.get(id).zone_change_count;
+            position.map_or(0, |position| {
+                [PlayerId::P0, PlayerId::P1]
+                    .into_iter()
+                    .filter(|&observer| {
+                        state
+                            .known_library_cards(observer, owner)
+                            .iter()
+                            .any(|entry| {
+                                entry.position as usize == position
+                                    && entry.object == id
+                                    && entry.zone_change_count == generation
+                            })
+                    })
+                    .fold(0_u8, |mask, observer| mask | (1 << observer.index()))
+            })
+        } else {
+            0
+        };
 
     remove_from_zone(state, owner, id, from_zone);
     state.forget_hand_object(id);
@@ -532,6 +576,18 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
             state
                 .reveal_hand_card(observer, owner, id)
                 .expect("just moved this live public object into its owner's hand");
+        }
+    } else if to_zone == Zone::Hand && informed_observer_mask != 0 {
+        // A public library reveal followed by a move to hand keeps the
+        // revealed identity public. Install the fact only for observers who
+        // actually knew this exact position/object/incarnation before the
+        // move; the ordinary constructor above remains deliberately hidden.
+        for observer in [PlayerId::P0, PlayerId::P1] {
+            if informed_observer_mask & (1 << observer.index()) != 0 {
+                state
+                    .reveal_hand_card(observer, owner, id)
+                    .expect("known library object just moved into its owner's hand");
+            }
         }
     }
 }
@@ -643,6 +699,51 @@ mod tests {
         assert_eq!(state.objects.get(card).zone, Zone::Battlefield);
         assert!(state.players[0].battlefield.contains(&card));
         assert!(!state.players[0].hand.contains(&card));
+    }
+
+    #[test]
+    fn library_to_hand_preserves_identity_only_when_explicit_and_informed() {
+        let mut hidden_state = fresh_state();
+        let hidden = hidden_state.players[0].library[0];
+        propose_and_commit(
+            &mut hidden_state,
+            ProposedEvent::zone_change(hidden, Zone::Hand),
+        );
+        assert!(hidden_state
+            .known_hand_cards(PlayerId::P1, PlayerId::P0)
+            .is_empty());
+
+        let mut revealed_state = fresh_state();
+        let revealed = revealed_state.players[0].library[0];
+        let old_generation = revealed_state.objects.get(revealed).zone_change_count;
+        revealed_state.reveal_library_top(PlayerId::P1, PlayerId::P0, 1);
+        propose_and_commit(
+            &mut revealed_state,
+            ProposedEvent::zone_change_preserving_known_identity(revealed, Zone::Hand),
+        );
+        assert_eq!(
+            revealed_state
+                .known_hand_cards(PlayerId::P1, PlayerId::P0)
+                .iter()
+                .map(|entry| (entry.object, entry.zone_change_count))
+                .collect::<Vec<_>>(),
+            vec![(revealed, old_generation + 1)]
+        );
+        assert!(revealed_state
+            .known_hand_cards(PlayerId::P0, PlayerId::P0)
+            .is_empty());
+
+        let mut stale_state = fresh_state();
+        let stale = stale_state.players[0].library[0];
+        stale_state.reveal_library_top(PlayerId::P1, PlayerId::P0, 1);
+        stale_state.objects.get_mut(stale).zone_change_count += 1;
+        propose_and_commit(
+            &mut stale_state,
+            ProposedEvent::zone_change_preserving_known_identity(stale, Zone::Hand),
+        );
+        assert!(stale_state
+            .known_hand_cards(PlayerId::P1, PlayerId::P0)
+            .is_empty());
     }
 
     #[test]

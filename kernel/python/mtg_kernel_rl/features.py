@@ -2104,7 +2104,9 @@ def _require_actor(actor: str, owner: str, label: str) -> None:
         raise FeatureSchemaError(f"acting_player does not match Rust decision owner for {label}")
 
 
-def _validate_engine_context(engine: dict[str, Any]) -> None:
+def _validate_engine_context(
+    engine: dict[str, Any], actor: str, stack: list[dict[str, Any]]
+) -> None:
     pending_keys = (
         "pending_cast",
         "pending_activation",
@@ -2207,9 +2209,12 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
     if pending_effect is not None:
         source = _require_ref_zone(pending_effect["source"], "pending_effect.source", ("Stack",))
         _require_ref_controller(source, pending_effect["controller"], "pending_effect.source")
+        if not stack or stack[-1]["source"] != source:
+            raise FeatureSchemaError("pending_effect.source must be the top resolving stack item")
         choice = pending_effect["choice"]
         if choice is None:
             raise FeatureSchemaError("an observed pending_effect must be waiting for a choice")
+        _require_actor(actor, choice["player"], "pending_effect")
         choice_kind = choice["choice_kind"]
         if choice_kind == "options":
             if choice["option_count"] < 2:
@@ -2226,6 +2231,12 @@ def _validate_engine_context(engine: dict[str, Any]) -> None:
             legal_keys = [_sort_key(target) for target in choice["legal_targets"]]
             if len(selected_keys) != len(set(selected_keys)) or len(legal_keys) != len(set(legal_keys)):
                 raise FeatureSchemaError("pending effect target choices must not repeat targets")
+            if set(selected_keys).intersection(legal_keys):
+                raise FeatureSchemaError("pending effect selected_targets and legal_targets must be disjoint")
+            if selected_count + len(legal_keys) < choice["min_targets"]:
+                raise FeatureSchemaError("pending effect target choice cannot still reach min_targets")
+            if selected_count >= choice["max_targets"] and legal_keys:
+                raise FeatureSchemaError("pending effect target choice cannot expose legal targets at max_targets")
         elif choice_kind == "color":
             if not choice["legal_colors"] or len(choice["legal_colors"]) != len(set(choice["legal_colors"])):
                 raise FeatureSchemaError("pending effect color choice must expose unique legal colors")
@@ -2446,7 +2457,7 @@ def _validate_observation_semantics(observation: dict[str, Any]) -> None:
         paid_keys = [_stable_key(ref) for ref in item["paid_cost_refs"]]
         if len(paid_keys) != len(set(paid_keys)):
             raise FeatureSchemaError("paid_cost_refs must not repeat an object incarnation")
-    _validate_engine_context(p["engine_context"])
+    _validate_engine_context(p["engine_context"], observation["acting_player"], p["stack"])
     for owner_index, entries in enumerate(observation["known_library_cards"]):
         owner = "p0" if owner_index == 0 else "p1"
         positions: list[int] = []
@@ -2642,12 +2653,78 @@ def _validate_spell_copy_legal_actions(
             )
 
 
+def _validate_pending_effect_legal_actions(
+    observation: dict[str, Any], actions: list[dict[str, Any]]
+) -> None:
+    pending = observation["projection"]["engine_context"]["pending_effect"]
+    if pending is None or pending["choice"]["choice_kind"] != "targets":
+        return
+
+    choice = pending["choice"]
+    source = _require_ref(pending["source"], "pending_effect.source")
+    actor = observation["acting_player"]
+    selected_count = len(choice["selected_targets"])
+    target_actions: list[dict[str, Any]] = []
+    finish_actions: list[dict[str, Any]] = []
+
+    for action in actions:
+        semantic = action["semantic"]
+        kind = semantic["action_kind"]
+        if kind == "choose_effect_target":
+            target_actions.append(semantic)
+            if semantic["actor"] != actor or semantic["source"] != source:
+                raise FeatureSchemaError(
+                    "pending effect target action actor/source does not match the active choice"
+                )
+            if semantic["selected_count"] != selected_count:
+                raise FeatureSchemaError(
+                    "pending effect target action selected_count does not match selected_targets"
+                )
+            if semantic["min_targets"] != choice["min_targets"] or semantic["max_targets"] != choice["max_targets"]:
+                raise FeatureSchemaError(
+                    "pending effect target action bounds do not match the active choice"
+                )
+        elif kind == "finish_effect_selection":
+            finish_actions.append(semantic)
+            if semantic["actor"] != actor or semantic["source"] != source:
+                raise FeatureSchemaError(
+                    "pending effect finish action actor/source does not match the active choice"
+                )
+            if semantic["selected_count"] != selected_count:
+                raise FeatureSchemaError(
+                    "pending effect finish action selected_count does not match selected_targets"
+                )
+        else:
+            raise FeatureSchemaError(
+                "pending effect target choice requires only choose_effect_target and finish_effect_selection actions"
+            )
+
+    actual_targets = [semantic["target"] for semantic in target_actions]
+    if actual_targets != choice["legal_targets"]:
+        raise FeatureSchemaError(
+            "pending effect target actions must correspond one-for-one, in order, to legal_targets"
+        )
+    expected_finish_count = 1 if choice["can_finish"] else 0
+    if len(finish_actions) != expected_finish_count:
+        raise FeatureSchemaError(
+            "pending effect finish action must exist exactly when can_finish is true"
+        )
+    expected_kinds = ["choose_effect_target"] * len(choice["legal_targets"])
+    if choice["can_finish"]:
+        expected_kinds.append("finish_effect_selection")
+    if [action["semantic"]["action_kind"] for action in actions] != expected_kinds:
+        raise FeatureSchemaError(
+            "pending effect target actions must precede the optional finish action"
+        )
+
+
 def encode_decision(observation: dict[str, Any], legal_actions: list[dict[str, Any]]) -> EncodedDecision:
     assert_observation_classified(observation)
     if observation["schema_version"] != 4:
         raise FeatureSchemaError("observation schema mismatch")
     validate_legal_actions_contract(legal_actions, observation["acting_player"])
     _validate_spell_copy_legal_actions(observation, legal_actions)
+    _validate_pending_effect_legal_actions(observation, legal_actions)
     actor = observation["acting_player"]
     state = _state_features(observation)
     registry, object_rows, object_tokens, object_groups, object_node_ids, edge_rows, edge_sources, edge_targets = _objects(observation)

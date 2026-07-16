@@ -47,7 +47,7 @@ use crate::state::Zone;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum CardType {
     Land,
     Creature,
@@ -547,7 +547,7 @@ mod tests {
 
     #[test]
     fn card_db_hash_v2_is_frozen() {
-        assert_eq!(KERNEL_CARDDB_HASH, 0x5c13_381b_3494_f9af);
+        assert_eq!(KERNEL_CARDDB_HASH, 0x5fa2_7910_07c2_ae8d);
     }
 
     #[test]
@@ -616,7 +616,7 @@ mod tests {
             .iter()
             .filter(|def| def.capability == CardCapability::Full)
             .count();
-        assert_eq!(full, 35, "32 deck cards plus three required tokens");
+        assert_eq!(full, 36, "33 deck cards plus three required tokens");
         assert_eq!(
             CARD_DEFS
                 .iter()
@@ -628,6 +628,7 @@ mod tests {
         let supported = ["Island", "Counterspell", "Mountain"]
             .map(|name| card_id_by_name(name).expect("card in registry"));
         assert!(preflight_fully_supported_deck(&supported).is_ok());
+        assert!(preflight_fully_supported_deck(&[card_id_by_name("Winding Way").unwrap()]).is_ok());
         let unsupported = ["Island", "Tolarian Terror"]
             .map(|name| card_id_by_name(name).expect("card in registry"));
         let err = preflight_fully_supported_deck(&unsupported)
@@ -657,6 +658,36 @@ mod tests {
                 ..
             })
         ));
+    }
+
+    #[test]
+    fn winding_way_program_freezes_resolution_choice_and_printed_option_order() {
+        let winding = &CARD_DEFS[card_id_by_name("Winding Way").unwrap() as usize];
+        assert_eq!(winding.capability, CardCapability::Full);
+        assert_eq!(winding.target_spec, TargetSpec::None);
+        assert!(winding.is_castable());
+        assert_eq!(
+            (winding.spell_effect)(),
+            Some(EffectOp::Choice {
+                controller: PlayerRef::Controller,
+                options: vec![
+                    EffectOp::RevealTopAndPartitionByType {
+                        player: PlayerRef::Controller,
+                        count: 4,
+                        card_type: CardType::Creature,
+                        matching_to: Zone::Hand,
+                        rest_to: Zone::Graveyard,
+                    },
+                    EffectOp::RevealTopAndPartitionByType {
+                        player: PlayerRef::Controller,
+                        count: 4,
+                        card_type: CardType::Land,
+                        matching_to: Zone::Hand,
+                        rest_to: Zone::Graveyard,
+                    },
+                ],
+            })
+        );
     }
 
     #[test]

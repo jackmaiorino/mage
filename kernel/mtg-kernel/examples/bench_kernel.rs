@@ -204,6 +204,19 @@ fn random_action_for_decision(
         Decision::ChooseEffectOption { option_count, .. } => {
             Action::ChooseEffectOption(rng_below(rng, *option_count as usize) as u16)
         }
+        Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        } => {
+            let choice_count = legal_targets.len() + usize::from(*can_finish);
+            let choice = rng_below(rng, choice_count);
+            if choice < legal_targets.len() {
+                Action::ChooseEffectTarget(legal_targets[choice])
+            } else {
+                Action::FinishEffectSelection
+            }
+        }
         Decision::ChooseOptionalCost { .. } => {
             // Real payable flags, not this decision's own -- the H2 surface
             // reshape re-presents `ChooseOptionalCost` with a presentation-

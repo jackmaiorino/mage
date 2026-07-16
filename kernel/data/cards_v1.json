@@ -3932,6 +3932,7 @@
     },
     {
       "name": "Winding Way",
+      "engine_capability": "full",
       "mana_cost": "{1}{G}",
       "mana_value": 2,
       "colors": [

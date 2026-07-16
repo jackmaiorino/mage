@@ -841,6 +841,19 @@ pub enum Decision {
         source: ObjectId,
         option_count: u16,
     },
+    /// A generic resumable effect is selecting public targets/cards one at a
+    /// time. Winding Way uses the exact-count ordered form for one
+    /// graveyard batch; `can_finish` is reserved for variable-count generic
+    /// selections and is false throughout that ordering flow.
+    ChooseEffectTargets {
+        player: PlayerId,
+        source: ObjectId,
+        selected_count: u16,
+        min_targets: u16,
+        max_targets: u16,
+        legal_targets: Vec<Target>,
+        can_finish: bool,
+    },
     /// Highway Robbery only, this increment: a resolution-time optional
     /// cost (`effect::EffectOp::MayPayCostThen`). Always a real choice with
     /// at least 2 options (`Decline` plus whichever of `Discard`/
@@ -973,6 +986,12 @@ pub enum Action {
     /// Answers `Decision::ChooseEffectOption` with a zero-based program
     /// option index.
     ChooseEffectOption(u16),
+    /// Answers one target/card pick in `Decision::ChooseEffectTargets`.
+    ChooseEffectTarget(Target),
+    /// Completes a variable-count generic effect selection once its minimum
+    /// has been met. Exact graveyard ordering auto-completes its forced last
+    /// card and never offers this action.
+    FinishEffectSelection,
     ChooseOptionalCost(OptionalCostChoice),
     /// Answers `Decision::ChooseSpellCopyPayment`.
     ChooseSpellCopyPayment(bool),
@@ -1701,6 +1720,13 @@ pub fn advance_until_decision(state: &mut GameState) -> Decision {
         if let Some(d) = drain_pending_effect_or_decide(state) {
             return d;
         }
+        // Resuming one continuation stage can immediately yield a second
+        // generic choice (Winding Way's type choice followed by graveyard
+        // ordering). Restart at the top so that fresh choice is surfaced
+        // before ordinary priority/stack resolution can run again.
+        if state.engine.pending_effect.is_some() {
+            continue;
+        }
 
         if let Some(d) = drain_pending_discard_or_decide(state) {
             return d;
@@ -2140,18 +2166,60 @@ fn drain_pending_spell_copy_or_decide(state: &mut GameState) -> Option<Decision>
 /// again before interpreter execution resumes, matching the ordinary
 /// resolution path's pop-before-effects invariant.
 fn drain_pending_effect_or_decide(state: &mut GameState) -> Option<Decision> {
-    let pending = state.engine.pending_effect.as_ref()?;
-    if let Some(choice) = pending.choice.as_ref() {
-        return Some(Decision::ChooseEffectOption {
-            player: choice.player(),
-            source: pending.resolving_item.source,
-            option_count: choice
-                .option_count()
-                .try_into()
-                .expect("effect option count fits the u16 public contract"),
+    state.engine.pending_effect.as_ref()?;
+    if state
+        .engine
+        .pending_effect
+        .as_ref()
+        .is_some_and(|pending| pending.choice.is_some())
+    {
+        if effect::validate_pending_effect_choice(state).is_err() {
+            let source = state
+                .engine
+                .pending_effect
+                .as_ref()
+                .unwrap()
+                .resolving_item
+                .source;
+            state.engine.halted = Some((UnsupportedMechanic::InvalidEffectContinuation, source));
+            return None;
+        }
+        let pending = state.engine.pending_effect.as_ref().unwrap();
+        let choice = pending.choice.as_ref().unwrap();
+        return Some(match choice {
+            effect::PendingEffectChoice::ChooseOption {
+                player, options, ..
+            } => Decision::ChooseEffectOption {
+                player: *player,
+                source: pending.resolving_item.source,
+                option_count: options
+                    .len()
+                    .try_into()
+                    .expect("effect option count fits the u16 public contract"),
+            },
+            effect::PendingEffectChoice::SelectTargets {
+                player,
+                selected,
+                legal,
+                min_targets,
+                max_targets,
+                ..
+            } => Decision::ChooseEffectTargets {
+                player: *player,
+                source: pending.resolving_item.source,
+                selected_count: selected
+                    .len()
+                    .try_into()
+                    .expect("effect selected-target count fits the u16 public contract"),
+                min_targets: *min_targets,
+                max_targets: *max_targets,
+                legal_targets: legal.iter().map(|candidate| candidate.target).collect(),
+                can_finish: selected.len() >= usize::from(*min_targets),
+            },
         });
     }
 
+    let pending = state.engine.pending_effect.as_ref().unwrap();
     let item = pending.resolving_item.clone();
     match state.stack.pop() {
         Some(public_item) if public_item == item => {}
@@ -3382,6 +3450,8 @@ pub fn step(state: &mut GameState, action: Action) -> Result<(), String> {
         Action::ChooseEffectOption(option_index) => {
             effect::choose_resumable_option(state, option_index)
         }
+        Action::ChooseEffectTarget(target) => effect::choose_resumable_target(state, target),
+        Action::FinishEffectSelection => effect::finish_resumable_target_selection(state),
         Action::ChooseOptionalCost(choice) => apply_choose_optional_cost(state, choice),
         Action::ChooseSpellCopyPayment(pay) => apply_choose_spell_copy_payment(state, pay),
         Action::ChooseSpellCopyRetarget(change_target) => {
