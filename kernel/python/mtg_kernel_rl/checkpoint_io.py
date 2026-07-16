@@ -446,6 +446,48 @@ def _has_zip64_extra(extra: bytes) -> bool:
     return False
 
 
+def _parse_zip_extra_fields(extra: bytes, *, context: str) -> list[tuple[int, bytes]]:
+    fields: list[tuple[int, bytes]] = []
+    seen: set[int] = set()
+    pos = 0
+    while pos + 4 <= len(extra):
+        header_id, size = struct.unpack_from("<HH", extra, pos)
+        if header_id in seen:
+            raise ValueError(f"checkpoint ZIP {context} extra field contains duplicate IDs")
+        seen.add(header_id)
+        payload_start = pos + 4
+        payload_end = payload_start + size
+        if payload_end > len(extra):
+            raise ValueError(f"checkpoint ZIP {context} extra field is truncated")
+        fields.append((header_id, extra[payload_start:payload_end]))
+        pos = payload_end
+    if pos != len(extra):
+        raise ValueError(f"checkpoint ZIP {context} extra field has malformed residual bytes")
+    return fields
+
+
+def _validate_local_extra(extra: bytes, entry: _RawZipEntry, *, data_start: int) -> None:
+    fields = _parse_zip_extra_fields(extra, context="local")
+    if entry.flag_bits & 0x8:
+        if len(fields) != 1:
+            raise ValueError("checkpoint ZIP Torch local header must contain exactly one alignment extra")
+        header_id, payload = fields[0]
+        if header_id == 0x0001:
+            raise ValueError("checkpoint ZIP local ZIP64 extra is not allowed")
+        if header_id != 0x4246:
+            raise ValueError("checkpoint ZIP local extra field is not recognized")
+        if any(ch != ord("Z") for ch in payload):
+            raise ValueError("checkpoint ZIP Torch local alignment padding is malformed")
+        if data_start % 64 != 0:
+            raise ValueError("checkpoint ZIP Torch local payload is not 64-byte aligned")
+        return
+    if fields:
+        header_id, _payload = fields[0]
+        if header_id == 0x0001:
+            raise ValueError("checkpoint ZIP local ZIP64 extra is not allowed")
+        raise ValueError("checkpoint ZIP seekable local extra field is not allowed")
+
+
 def _validate_local_member_layout(data: bytes, entries: list[_RawZipEntry], *, central_directory_offset: int) -> None:
     records: list[tuple[int, int, str]] = []
     seen_names: set[str] = set()
@@ -506,6 +548,7 @@ def _parse_local_member_record(data: bytes, entry: _RawZipEntry, *, central_dire
         or int(mod_date) != entry.mod_date
     ):
         raise ValueError("checkpoint ZIP local header disagrees with central directory")
+    _validate_local_extra(data[extra_start:data_start], entry, data_start=data_start)
     if entry.flag_bits & 0x8:
         if local_crc != 0 or local_comp_size != 0 or local_file_size != 0:
             raise ValueError("checkpoint ZIP data-descriptor local header must have zero CRC and sizes")
@@ -921,7 +964,7 @@ def _validate_tensor_reduce(
         raise ValueError("checkpoint pickle tensor references unknown storage")
     if storage.key in storage_used:
         raise ValueError("checkpoint pickle reuses a storage alias")
-    if offset != 0:
+    if type(offset) is not int or offset != 0:
         raise ValueError("checkpoint pickle tensor storage offset must be zero")
     if type(shape) is not tuple or type(strides) is not tuple or len(shape) != len(strides):
         raise ValueError("checkpoint pickle tensor shape/stride mismatch")

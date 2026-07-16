@@ -235,8 +235,8 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v6")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v4")
+            self.assertEqual(run["schema"], "kernel_rl_train_run/v7")
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v5")
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -356,7 +356,7 @@ class TrainerTest(unittest.TestCase):
                 target = tmp / f"case_{name.replace('.', '_')}"
                 shutil.copytree(committed, target)
                 if name.startswith(".update"):
-                    tx = target / ".transactions" / "update-00000001-deadbeef"
+                    tx = target / ".transactions" / "update-00000001-1.2"
                     tx.mkdir(parents=True)
                     (tx / name).write_text("{}", encoding="utf-8")
                 else:
@@ -366,6 +366,159 @@ class TrainerTest(unittest.TestCase):
                     with self.assertRaises(ValueError):
                         train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
                     self.assertEqual(_snapshot_tree(target), before)
+
+    def test_bounded_temp_components_reject_without_mutation(self) -> None:
+        invalid_components = [
+            ("zero_pid", "0", "1"),
+            ("overflow_pid", str((1 << 32)), "1"),
+            ("zero_nonce", "1", "0"),
+            ("overflow_nonce", "1", str((1 << 64))),
+        ]
+        self.assertEqual(
+            trainer_mod._atomic_temp_target(f".run.json.{os.getpid()}.{time.monotonic_ns()}.tmp", frozenset({"run.json"})),
+            "run.json",
+        )
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+
+            for name, pid, nonce in invalid_components:
+                with self.subTest(location="premanifest", name=name):
+                    out = tmp / f"premanifest_{name}"
+                    out.mkdir()
+                    with OutputLock(out):
+                        pass
+                    (out / f".run.json.{pid}.{nonce}.tmp").write_text("{}", encoding="utf-8")
+                    before = _snapshot_tree(out)
+                    with self.assertRaises(ValueError):
+                        train(
+                            env_bin=launcher,
+                            out_dir=out,
+                            base_seed=71501,
+                            until_update=0,
+                            batch_episodes=2,
+                            learning_rate=0.001,
+                            value_coef=0.5,
+                            max_decisions=8,
+                        )
+                    self.assertEqual(_snapshot_tree(out), before)
+
+            committed = tmp / "committed_bounds"
+            train(
+                env_bin=launcher,
+                out_dir=committed,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            for name, pid, nonce in invalid_components:
+                with self.subTest(location="committed", name=name):
+                    target = tmp / f"committed_{name}"
+                    shutil.copytree(committed, target)
+                    (target / f".latest.json.{pid}.{nonce}.tmp").write_bytes((target / "latest.json").read_bytes())
+                    before = _snapshot_tree(target)
+                    with self.assertRaises(ValueError):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertEqual(_snapshot_tree(target), before)
+
+                with self.subTest(location="transaction", name=name):
+                    target = tmp / f"transaction_{name}"
+                    shutil.copytree(committed, target)
+                    tx = target / ".transactions" / "update-00000001-1.2"
+                    tx.mkdir(parents=True)
+                    (tx / f".update.json.{pid}.{nonce}.tmp").write_text("{}", encoding="utf-8")
+                    before = _snapshot_tree(target)
+                    with self.assertRaises(ValueError):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertEqual(_snapshot_tree(target), before)
+
+    def test_recovery_plan_prevalidates_all_quarantines_before_first_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            first = out / ".latest.json.1.2.tmp"
+            second = out / ".summary.json.1.3.tmp"
+            first.write_bytes((out / "latest.json").read_bytes())
+            second.write_bytes((out / "summary.json").read_bytes())
+            plan = trainer_mod._plan_uncommitted_artifact_recovery(
+                out,
+                head_update=0,
+                run_digest=trainer_mod.sha256_file(out / "run.json", max_bytes=256 * 1024, allow_empty=False),
+                compatibility=trainer_mod._compatibility_tuple(),
+            )
+            second.write_bytes(b"changed")
+            after_change = _snapshot_tree(out)
+            with self.assertRaises(ValueError):
+                trainer_mod._apply_uncommitted_artifact_recovery(out, plan)
+            self.assertEqual(_snapshot_tree(out), after_change)
+            self.assertTrue(first.exists())
+            self.assertTrue(second.exists())
+
+    def test_recovery_plan_empty_transactions_must_stay_empty_before_apply(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            out.mkdir()
+            transactions = out / ".transactions"
+            transactions.mkdir()
+            plan = trainer_mod._plan_uncommitted_artifact_recovery(out, head_update=-1, run_digest="r" * 64, compatibility={})
+            (transactions / "child.txt").write_text("x", encoding="utf-8")
+            after_insert = _snapshot_tree(out)
+            with self.assertRaises(ValueError):
+                trainer_mod._apply_uncommitted_artifact_recovery(out, plan)
+            self.assertEqual(_snapshot_tree(out), after_insert)
+
+    def test_recovery_plan_empty_directory_oserror_propagates_without_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            out.mkdir()
+            transactions = out / ".transactions"
+            transactions.mkdir()
+            plan = trainer_mod._plan_uncommitted_artifact_recovery(out, head_update=-1, run_digest="r" * 64, compatibility={})
+            before = _snapshot_tree(out)
+            original = trainer_mod.scandir_no_follow
+
+            def failing_scandir(path: Path) -> list[os.DirEntry[str]]:
+                if Path(path) == transactions:
+                    raise OSError("injected empty-dir check failure")
+                return original(path)
+
+            trainer_mod.scandir_no_follow = failing_scandir  # type: ignore[assignment]
+            try:
+                with self.assertRaises(OSError):
+                    trainer_mod._apply_uncommitted_artifact_recovery(out, plan)
+            finally:
+                trainer_mod.scandir_no_follow = original  # type: ignore[assignment]
+            self.assertEqual(_snapshot_tree(out), before)
+
+    def test_recovery_plan_missing_mkdir_target_must_stay_missing_before_apply(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            out.mkdir()
+            plan = trainer_mod._plan_uncommitted_artifact_recovery(out, head_update=-1, run_digest="r" * 64, compatibility={})
+            materialized = out / "updates"
+            materialized.mkdir()
+            (materialized / "child.txt").write_text("x", encoding="utf-8")
+            after_materialize = _snapshot_tree(out)
+            with self.assertRaises(ValueError):
+                trainer_mod._apply_uncommitted_artifact_recovery(out, plan)
+            self.assertEqual(_snapshot_tree(out), after_materialize)
 
     def test_fresh_run_json_hard_death_reuses_same_output_path(self) -> None:
         cases = [
@@ -444,14 +597,17 @@ class TrainerTest(unittest.TestCase):
             ("json_flush", "episodes.jsonl", True),
             ("json_fsync", "episodes.jsonl", True),
             ("json_replace_before", "episodes.jsonl", True),
+            ("json_replace_after", "episodes.jsonl", True),
             ("json_save", "updates.jsonl", True),
             ("json_flush", "updates.jsonl", True),
             ("json_fsync", "updates.jsonl", True),
             ("json_replace_before", "updates.jsonl", True),
+            ("json_replace_after", "updates.jsonl", True),
             ("json_save", "summary.json", True),
             ("json_flush", "summary.json", True),
             ("json_fsync", "summary.json", True),
             ("json_replace_before", "summary.json", True),
+            ("json_replace_after", "summary.json", True),
             ("post_latest_cleanup_before", "-", True),
         ]
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -919,8 +1075,8 @@ class TrainerTest(unittest.TestCase):
                 max_decisions=8,
             )
             tx_root = source / ".transactions"
-            reachable_tx = tx_root / "update-00000001-deadbeef"
-            future_tx = tx_root / "update-00000002-feedface"
+            reachable_tx = tx_root / "update-00000001-1.2"
+            future_tx = tx_root / "update-00000002-1.3"
             reachable_tx.mkdir(parents=True)
             shutil.copy2(source / "checkpoints" / "update-00000001.pt", reachable_tx / "checkpoint.pt")
             shutil.copy2(source / "updates" / "update-00000001.json", reachable_tx / "update.json")
@@ -944,18 +1100,18 @@ class TrainerTest(unittest.TestCase):
             malformed_case("unknown_transaction_name", lambda p: (p / ".transactions" / "not-an-update").mkdir(parents=True))
             malformed_case(
                 "nested_transaction_directory",
-                lambda p: (p / ".transactions" / "update-00000001-deadbeef" / "nested").mkdir(parents=True),
+                lambda p: (p / ".transactions" / "update-00000001-1.2" / "nested").mkdir(parents=True),
             )
             malformed_case(
                 "unknown_transaction_file",
                 lambda p: (
-                    (p / ".transactions" / "update-00000001-deadbeef").mkdir(parents=True),
-                    (p / ".transactions" / "update-00000001-deadbeef" / "evil.bin").write_bytes(b"x"),
+                    (p / ".transactions" / "update-00000001-1.2").mkdir(parents=True),
+                    (p / ".transactions" / "update-00000001-1.2" / "evil.bin").write_bytes(b"x"),
                 ),
             )
 
             def escaping_link(p: Path) -> None:
-                tx = p / ".transactions" / "update-00000001-deadbeef"
+                tx = p / ".transactions" / "update-00000001-1.2"
                 tx.mkdir(parents=True)
                 outside = tmp / "outside.pt"
                 outside.write_bytes(b"outside")
@@ -987,7 +1143,7 @@ class TrainerTest(unittest.TestCase):
             )
             if env_marker.exists():
                 env_marker.unlink()
-            tx = out / ".transactions" / "update-00000002-deadbeef"
+            tx = out / ".transactions" / "update-00000002-1.2"
             tx.mkdir(parents=True)
             shutil.copy2(out / "checkpoints" / "update-00000001.pt", tx / "checkpoint.pt")
             shutil.copy2(out / "updates" / "update-00000001.json", tx / "update.json")
@@ -1225,16 +1381,16 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v5_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v5"}))
+            case("old_v6_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v6"}))
             case(
-                "old_v3_artifact_boundary_rejected",
+                "old_v4_artifact_boundary_rejected",
                 lambda p: write_json_atomic(
                     p / "run.json",
                     {
                         **read_json_file(p / "run.json"),
                         "artifact_boundary": {
                             **read_json_file(p / "run.json")["artifact_boundary"],
-                            "schema": "kernel_rl_artifact_boundary/v3",
+                            "schema": "kernel_rl_artifact_boundary/v4",
                         },
                     },
                 ),
@@ -1576,7 +1732,8 @@ sys.exit(0)
             real_parent = tmp / "real_parent"
             real_parent.mkdir()
             out = real_parent / "run"
-            launcher = fake_launcher(tmp, "train_pair_slow")
+            env_marker = tmp / "alias-loser-env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair_slow", {"FAKE_START_MARKER": str(env_marker)})
             train(
                 env_bin=launcher,
                 out_dir=out,
@@ -1587,6 +1744,15 @@ sys.exit(0)
                 value_coef=0.5,
                 max_decisions=8,
             )
+            if env_marker.exists():
+                env_marker.unlink()
+            before_update0 = read_json_file(out / "updates" / "update-00000000.json")
+            before_sidecar0 = read_json_file(out / "checkpoints" / "update-00000000.json")
+            before_latest = read_json_file(out / "latest.json")
+            lock_path = out / ".mtg-kernel-train.lock"
+            lock_identity = filesystem_file_identity(lock_path)
+            if os.name == "nt":
+                self.assertEqual(lock_identity[0], "windows-file-id")
             if os.name == "nt":
                 alias_parent = tmp / "alias_parent"
                 completed = subprocess.run(
@@ -1605,31 +1771,89 @@ sys.exit(0)
                     raise unittest.SkipTest(f"POSIX symlink ancestor unavailable: {exc}") from exc
             alias_out = alias_parent / "run"
             env = _subprocess_env()
+            self.assertTrue(os.path.samefile(out, alias_out))
+            alias_lock = OutputLock(alias_out)
+            self.assertTrue(os.path.samefile(lock_path, alias_lock.path))
+            self.assertEqual(filesystem_file_identity(alias_lock.path), lock_identity)
+            self.assertEqual(len(list(out.glob(".mtg-kernel-train.lock"))), 1)
 
-            def args(root: Path) -> list[str]:
-                return [
-                    sys.executable,
-                    "-m",
-                    "mtg_kernel_rl",
-                    "train",
-                    "--env-bin",
-                    str(launcher),
-                    "--out-dir",
-                    str(root),
-                    "--resume",
-                    str(root / "latest.json"),
-                    "--until-update",
-                    "1",
-                ]
+            owner_script = tmp / "alias_owner.py"
+            owner_marker = tmp / "alias_owner.ready"
+            release_marker = tmp / "alias_owner.release"
+            owner_script.write_text(
+                """
+import sys
+import time
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLock
 
-            owner = subprocess.Popen(args(out), cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            time.sleep(0.25)
-            loser = subprocess.run(args(alias_out), cwd=Path.cwd(), env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
-            owner_code = owner.wait(timeout=30)
+root = Path(sys.argv[1])
+ready = Path(sys.argv[2])
+release = Path(sys.argv[3])
+with OutputLock(root) as lock:
+    ready.write_text(str(lock.path), encoding="utf-8")
+    while not release.exists():
+        time.sleep(0.05)
+""",
+                encoding="utf-8",
+            )
+            loser_script = tmp / "alias_loser.py"
+            loser_script.write_text(
+                """
+import sys
+from pathlib import Path
+from mtg_kernel_rl.output_lock import OutputLockError
+from mtg_kernel_rl.trainer import train
+
+launcher = Path(sys.argv[1])
+root = Path(sys.argv[2])
+try:
+    train(
+        env_bin=launcher,
+        out_dir=root,
+        resume=root / "latest.json",
+        until_update=1,
+    )
+except OutputLockError:
+    sys.exit(73)
+except Exception:
+    sys.exit(74)
+sys.exit(75)
+""",
+                encoding="utf-8",
+            )
+
+            owner = subprocess.Popen([sys.executable, str(owner_script), str(out), str(owner_marker), str(release_marker)], cwd=Path.cwd(), env=env)
+            try:
+                deadline = time.time() + 10
+                while not owner_marker.exists() and time.time() < deadline:
+                    self.assertIsNone(owner.poll())
+                    time.sleep(0.05)
+                self.assertTrue(owner_marker.exists())
+                self.assertIsNone(owner.poll())
+                self.assertTrue(os.path.samefile(lock_path, Path(owner_marker.read_text(encoding="utf-8"))))
+                loser = subprocess.run(
+                    [sys.executable, str(loser_script), str(launcher), str(alias_out)],
+                    cwd=Path.cwd(),
+                    env=env,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+                self.assertEqual(loser.returncode, 73)
+                self.assertIsNone(owner.poll())
+                self.assertFalse(env_marker.exists())
+                self.assertEqual(read_json_file(out / "latest.json"), before_latest)
+                self.assertEqual(read_json_file(out / "updates" / "update-00000000.json"), before_update0)
+                self.assertEqual(read_json_file(out / "checkpoints" / "update-00000000.json"), before_sidecar0)
+                self.assertEqual(sorted(p.name for p in (out / "updates").glob("update-*.json")), ["update-00000000.json"])
+                self.assertEqual(len(list(out.glob(".mtg-kernel-train.lock"))), 1)
+                self.assertEqual(filesystem_file_identity(lock_path), lock_identity)
+            finally:
+                release_marker.write_text("release", encoding="utf-8")
+                owner_code = owner.wait(timeout=30)
             self.assertEqual(owner_code, 0)
-            self.assertNotEqual(loser.returncode, 0)
-            self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
-            self.assertEqual(sorted(p.name for p in (out / "updates").glob("update-*.json")), ["update-00000000.json", "update-00000001.json"])
+            self.assertEqual(filesystem_file_identity(lock_path), lock_identity)
 
     def test_direct_output_root_link_or_reparse_fails_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:

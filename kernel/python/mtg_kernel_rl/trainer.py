@@ -86,7 +86,7 @@ from .path_safety import (
     scandir_no_follow,
 )
 
-RUN_SCHEMA = "kernel_rl_train_run/v6"
+RUN_SCHEMA = "kernel_rl_train_run/v7"
 ALGORITHM_NAME = "terminal_reinforce_value/v1"
 MAX_UPDATES = 1_000_000
 MAX_BATCH_EPISODES = 10_000
@@ -95,12 +95,14 @@ EPISODE_SUMMARY_SCHEMA = "kernel_rl_train_episode_summary/v2"
 SUMMARY_SCHEMA = "kernel_rl_train_summary/v2"
 HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
 GENERATION_RE = re.compile(r"^update-(\d{8})\.(json|pt)$")
-TRANSACTION_RE = re.compile(r"^update-(\d{8})-[0-9a-f]+$")
+TRANSACTION_RE = re.compile(r"^update-(\d{8})-([1-9][0-9]*)\.([1-9][0-9]*)$")
 
-_DECIMAL_COMPONENT_RE = re.compile(r"^(0|[1-9][0-9]*)$")
+_DECIMAL_COMPONENT_RE = re.compile(r"^[1-9][0-9]*$")
 _PREMANIFEST_TEMP_TARGETS = frozenset({"run.json"})
 _COMMITTED_ROOT_TEMP_TARGETS = frozenset({"latest.json", "episodes.jsonl", "updates.jsonl", "summary.json"})
 _TRANSACTION_TEMP_TARGETS = frozenset({"update.json", "sidecar.json"})
+_MAX_PID_COMPONENT = (1 << 32) - 1
+_MAX_MONOTONIC_COMPONENT = (1 << 64) - 1
 
 
 @dataclasses.dataclass
@@ -121,8 +123,15 @@ class TrainState:
 
 
 @dataclasses.dataclass(frozen=True)
+class _PlannedMkdir:
+    path: Path
+    parent_identity: Any
+
+
+@dataclasses.dataclass(frozen=True)
 class _RecoveryPlan:
-    mkdirs: tuple[Path, ...] = ()
+    root_identity: Any
+    mkdirs: tuple[_PlannedMkdir, ...] = ()
     quarantines: tuple[tuple[Any, str], ...] = ()
     remove_dirs: tuple[Any, ...] = ()
 
@@ -212,7 +221,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
     from . import artifact_io as json_contract
 
     return {
-        "schema": "kernel_rl_artifact_boundary/v4",
+        "schema": "kernel_rl_artifact_boundary/v5",
         "format": {
             "checkpoint_container": "torch-zip",
             "checkpoint_zip_root": zip_contract.TORCH_ZIP_ROOT,
@@ -220,7 +229,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
         },
         "safe_load": {
             "checkpoint_read": "single bounded regular non-link file read",
-            "raw_zip": "EOCD/ZIP64 locator/ZIP64 EOCD, central directory, complete local records, and signed Torch descriptors parsed from captured bytes before ZipFile",
+            "raw_zip": "EOCD/ZIP64 locator/ZIP64 EOCD, central directory, complete local records including authenticated local extra fields, and signed Torch descriptors parsed from captured bytes before ZipFile",
             "pickle_preflight": "restricted protocol-2 opcode interpreter validates exact dict root graph, storage persistent IDs, tensor reachability, and tensor rebuild metadata before torch.load",
             "torch_load": "io.BytesIO(the same captured bytes), map_location=cpu, weights_only=True, never falling back",
             "residual": "local trainer-artifact byte/object/tensor bounds, not a general arbitrary hostile-pickle sandbox",
@@ -249,7 +258,7 @@ def _artifact_boundary_contract() -> dict[str, Any]:
             "tensor_rank": zip_contract.MAX_PICKLE_TENSOR_RANK,
             "allowed_globals": sorted(zip_contract.ALLOWED_PICKLE_GLOBALS),
             "storage": "BINPERSID must be ('storage', allowed CPU storage type, canonical unique decimal key, 'cpu', bounded element count) and exactly match archive/data/<key> bytes",
-            "tensor_rebuild": "_rebuild_tensor_v2 only; unique storage reference, zero offset, rank <= 16, bounded nonnegative shape, exact positive contiguous strides, exact full-storage byte coverage, false requires_grad, empty OrderedDict metadata, and every constructed tensor declaration must be reachable from the exact dict root",
+            "tensor_rebuild": "_rebuild_tensor_v2 only; unique storage reference, exact integer zero offset, rank <= 16, bounded nonnegative shape, exact positive contiguous strides, exact full-storage byte coverage, false requires_grad, empty OrderedDict metadata, and every constructed tensor declaration must be reachable from the exact dict root",
         },
         "json_limits": {
             "depth": json_contract.MAX_JSON_DEPTH,
@@ -290,12 +299,13 @@ def _artifact_boundary_contract() -> dict[str, Any]:
             "creation": "all output, transaction, quarantine, lock-parent, and generation-directory creation is component-wise no-follow",
             "traversal": "os.scandir/lstat no-follow traversal and contained atomic quarantine rename after destination parents validate",
             "resume": "resume path must lexically equal selected latest.json",
-            "pre_manifest_recovery": "under the output lock, fresh bootstrap validates the entire root then may remove only empty real updates/checkpoints directories and canonical .run.json.<pid>.<n>.tmp files before run.json exists; unknown entries, nonempty directories, links, reparse points, malformed temps, and lock impostors fail closed with zero cleanup",
-            "resume_recovery": "resume builds an immutable debris plan, validates every latest-reachable committed generation while tolerating only planned debris, then revalidates identities and applies cleanup before rebuilding derived caches",
+            "pre_manifest_recovery": "under the output lock, fresh bootstrap validates the entire root then may remove only empty real updates/checkpoints directories and canonical bounded .run.json.<pid>.<monotonic_ns>.tmp files before run.json exists; unknown entries, nonempty directories, links, reparse points, malformed temps, and lock impostors fail closed with zero cleanup",
+            "resume_recovery": "resume builds an immutable debris plan, validates every latest-reachable committed generation while tolerating only planned debris, prevalidates the entire plan with zero mutation, then immediately revalidates identities per action before cleanup and derived-cache rebuild",
         },
         "privacy": {
             "scan": "authoritative JSON keys and values plus checkpoint scalar metadata",
-            "rejects": "generic POSIX absolute roots including / plus Windows drive-root, Windows root-relative, UNC, device/extended, file URI, and embedded absolute path fragments after Unicode boundary categories; exact non-file URI strings only are exempt",
+            "rejects": "generic POSIX absolute roots including / plus Windows drive-root, Windows root-relative, UNC, device/extended, file URI, controls/format-boundary embedded fragments, invalid or diagnostic URI spellings, and schema-fragment prefixes followed by local absolute paths",
+            "allows": "numeric versions, digests, arithmetic slash text, relative namespace labels, exact ordinary whole HTTP(S) URIs with valid authority, and validated whole schema reference tokens",
         },
     }
 
@@ -778,7 +788,7 @@ def _staged_generation_paths(transaction_dir: Path) -> dict[str, Path]:
 def _new_transaction_dir(out_dir: Path, update: int) -> Path:
     root = out_dir / ".transactions"
     mkdir_no_follow(root, parents=True, exist_ok=True)
-    path = root / f"update-{update:08d}-{os.getpid():x}{time.monotonic_ns():x}"
+    path = root / f"update-{update:08d}-{os.getpid()}.{time.monotonic_ns()}"
     mkdir_no_follow(path, mode=0o700)
     return path
 
@@ -816,10 +826,16 @@ def _atomic_temp_target(name: str, allowed_targets: frozenset[str]) -> str | Non
         if len(parts) != 2:
             raise ValueError(f"malformed temp file: {name}")
         pid, monotonic_ns = parts
-        if _DECIMAL_COMPONENT_RE.fullmatch(pid) is None or _DECIMAL_COMPONENT_RE.fullmatch(monotonic_ns) is None:
+        if not _valid_decimal_component(pid, _MAX_PID_COMPONENT) or not _valid_decimal_component(monotonic_ns, _MAX_MONOTONIC_COMPONENT):
             raise ValueError(f"malformed temp file: {name}")
         return target
     return None
+
+
+def _valid_decimal_component(value: str, maximum: int) -> bool:
+    if _DECIMAL_COMPONENT_RE.fullmatch(value) is None:
+        return False
+    return int(value) <= maximum
 
 
 def _reject_malformed_temp_for_allowed_targets(name: str, allowed_targets: frozenset[str]) -> None:
@@ -882,6 +898,8 @@ def _validate_transaction_tree(out_dir: Path, transaction_dir: Path, *, head_upd
     if match is None:
         raise ValueError(f"unknown transaction staging directory name: {transaction_dir.name}")
     update = int(match.group(1))
+    if not _valid_decimal_component(match.group(2), _MAX_PID_COMPONENT) or not _valid_decimal_component(match.group(3), _MAX_MONOTONIC_COMPONENT):
+        raise ValueError(f"unknown transaction staging directory name: {transaction_dir.name}")
     if update < 0 or update > MAX_UPDATES:
         raise ValueError("staging directory update out of bounds")
     allowed = {"checkpoint.pt", "update.json", "sidecar.json"}
@@ -913,7 +931,8 @@ def _plan_uncommitted_artifact_recovery(
     compatibility: dict[str, Any],
 ) -> _RecoveryPlan:
     ensure_real_child_dir(out_dir.parent, out_dir)
-    mkdirs: list[Path] = []
+    root_identity = capture_path_identity(out_dir)
+    mkdirs: list[_PlannedMkdir] = []
     quarantine_actions: list[tuple[Any, str]] = []
     remove_dirs: list[Any] = []
     transactions = out_dir / ".transactions"
@@ -959,7 +978,7 @@ def _plan_uncommitted_artifact_recovery(
     ):
         directory = out_dir / directory_name
         if not directory.exists():
-            mkdirs.append(directory)
+            mkdirs.append(_PlannedMkdir(path=directory, parent_identity=capture_path_identity(directory.parent)))
             continue
         ensure_real_child_dir(out_dir, directory)
         for entry in scandir_no_follow(directory):
@@ -983,6 +1002,7 @@ def _plan_uncommitted_artifact_recovery(
             _validate_orphan_generation_file(out_dir, path, update=update, kind=kind, run_digest=run_digest, compatibility=compatibility)
             quarantine_actions.append((capture_path_identity(path), "uncommitted"))
     return _RecoveryPlan(
+        root_identity=root_identity,
         mkdirs=tuple(mkdirs),
         quarantines=tuple(quarantine_actions),
         remove_dirs=tuple(remove_dirs),
@@ -990,16 +1010,49 @@ def _plan_uncommitted_artifact_recovery(
 
 
 def _apply_uncommitted_artifact_recovery(out_dir: Path, plan: _RecoveryPlan) -> None:
-    for directory in plan.mkdirs:
-        mkdir_no_follow(directory, parents=True, exist_ok=True)
+    _prevalidate_uncommitted_artifact_recovery(out_dir, plan)
+    for planned in plan.mkdirs:
+        try:
+            planned.path.lstat()
+        except FileNotFoundError:
+            pass
+        else:
+            raise ValueError(f"planned recovery directory already exists: {planned.path}")
+        mkdir_no_follow(planned.path, parents=True, exist_ok=False)
     for identity, reason in plan.quarantines:
         _revalidate_then_quarantine(out_dir, identity, reason)
     for identity in plan.remove_dirs:
+        if any(scandir_no_follow(Path(identity.path))):
+            raise ValueError(f"planned empty recovery directory became nonempty: {identity.path}")
+        _revalidate_then_rmdir(identity)
+
+
+def _prevalidate_uncommitted_artifact_recovery(out_dir: Path, plan: _RecoveryPlan) -> None:
+    revalidate_path_identity(plan.root_identity)
+    for planned in plan.mkdirs:
+        revalidate_path_identity(planned.parent_identity)
         try:
-            if not any(scandir_no_follow(Path(identity.path))):
-                _revalidate_then_rmdir(identity)
-        except OSError:
+            planned.path.lstat()
+        except FileNotFoundError:
             pass
+        else:
+            raise ValueError(f"planned recovery directory already exists: {planned.path}")
+    for identity, reason in plan.quarantines:
+        revalidate_path_identity(identity)
+        _prevalidate_quarantine_destination(out_dir, Path(identity.path), reason)
+    for identity in plan.remove_dirs:
+        revalidate_path_identity(identity)
+        if any(scandir_no_follow(Path(identity.path))):
+            raise ValueError(f"planned empty recovery directory became nonempty: {identity.path}")
+
+
+def _prevalidate_quarantine_destination(out_dir: Path, path: Path, reason: str) -> None:
+    if type(reason) is not str or re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,31}", reason) is None:
+        raise ValueError("quarantine reason must be one safe ASCII component")
+    _validate_path_contained(out_dir, path)
+    quarantine_root = out_dir / ".quarantine"
+    if quarantine_root.exists():
+        ensure_real_child_dir(out_dir, quarantine_root)
 
 
 def _validate_generation_bundle(

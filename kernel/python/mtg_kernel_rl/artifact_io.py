@@ -10,6 +10,7 @@ import os
 import re
 import stat
 import unicodedata
+import urllib.parse
 from pathlib import Path
 from typing import Any, Callable
 
@@ -62,8 +63,8 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
     "updated_at",
 }
 
-_URI_FULL_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*://[^\s]+$")
 _FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
+_SCHEMA_REF_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*#/properties(?:/[A-Za-z0-9_.-]+)+$")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -317,8 +318,47 @@ def read_authoritative_json(path: str | Path, kind: str) -> dict[str, Any]:
 def _is_candidate_boundary(value: str, index: int) -> bool:
     if index <= 0:
         return True
+    if value[index - 1].isspace():
+        return True
     category = unicodedata.category(value[index - 1])
-    return category[0] in {"Z", "P", "S"}
+    return category[0] in {"C", "Z", "P", "S"}
+
+
+def _contains_control_or_format(value: str) -> bool:
+    return any(unicodedata.category(ch)[0] == "C" for ch in value)
+
+
+def _is_allowed_whole_uri(value: str) -> bool:
+    if _contains_control_or_format(value) or "\\" in value or any(ch.isspace() for ch in value):
+        return False
+    try:
+        parsed = urllib.parse.urlsplit(value)
+    except ValueError:
+        return False
+    if parsed.scheme.casefold() not in {"http", "https"}:
+        return False
+    if not parsed.netloc or parsed.username is not None or parsed.password is not None:
+        return False
+    if any(ch.isspace() for ch in parsed.netloc):
+        return False
+    if ";" in parsed.netloc or "=" in parsed.netloc:
+        return False
+    try:
+        host = parsed.hostname
+        _port = parsed.port
+    except ValueError:
+        return False
+    if not host:
+        return False
+    if ";" in parsed.path and "=" in parsed.path:
+        return False
+    if any(part.startswith(("/", "\\")) or re.search(r"(^|[&;])[^=&;]+=(/|\\|[A-Za-z]:[\\/])", part) for part in (parsed.query, parsed.fragment)):
+        return False
+    return urllib.parse.urlunsplit(parsed) == value
+
+
+def _is_allowed_schema_reference(value: str) -> bool:
+    return not _contains_control_or_format(value) and "\\" not in value and _SCHEMA_REF_RE.fullmatch(value) is not None
 
 
 def _is_slash(ch: str) -> bool:
@@ -373,8 +413,6 @@ def _has_posix_root_at(value: str, index: int) -> bool:
         return False
     if value[index] != "/" or (index + 1 < len(value) and value[index + 1] == "/"):
         return False
-    if index > 0 and value[index - 1] == "#":
-        return False
     if index + 1 < len(value) and value[index + 1].isspace():
         return False
     return True
@@ -385,7 +423,7 @@ def _looks_like_absolute_path(value: str) -> bool:
         return False
     if _FILE_URI_RE.search(value):
         return True
-    if _URI_FULL_RE.fullmatch(value) and not value.casefold().startswith("file://"):
+    if _is_allowed_whole_uri(value) or _is_allowed_schema_reference(value):
         return False
     if value in ("/", "\\"):
         return True
