@@ -12,9 +12,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 4
 PROTOCOL_NAME = "kernel_rl_jsonl"
-PROTOCOL_VERSION = 2
+PROTOCOL_VERSION = 4
 MAX_LINE_BYTES = 8 * 1024 * 1024
 U32 = 4_294_967_295
 U64 = 18_446_744_073_709_551_615
@@ -42,6 +42,8 @@ class Decision:
     observation: dict[str, Any]
     legal_actions: list[dict[str, Any]]
     provenance: dict[str, Any]
+    deck_ids: tuple[str, str]
+    deck_hashes: tuple[int, int]
 
 
 @dataclass(frozen=True)
@@ -54,6 +56,8 @@ class Terminal:
     terminal_reward: list[int]
     decision_count: int
     provenance: dict[str, Any]
+    deck_ids: tuple[str, str]
+    deck_hashes: tuple[int, int]
 
 
 def _reject_duplicate_keys(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -202,7 +206,19 @@ def _validate_observation(value: Any, response: dict[str, Any], provenance: dict
         raise ProtocolError("observation must be an object")
     _keys(
         value,
-        ["schema_version", "kernel_version", "surface_version", "card_db_hash", "acting_player", "step_index", "projection", "own_hand", "visible_projection_hash"],
+        [
+            "schema_version",
+            "kernel_version",
+            "surface_version",
+            "card_db_hash",
+            "acting_player",
+            "step_index",
+            "projection",
+            "own_hand",
+            "known_library_cards",
+            "known_hand_cards",
+            "visible_projection_hash",
+        ],
         "observation",
     )
     if _int(value["schema_version"], "observation.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
@@ -232,6 +248,25 @@ def _validate_reward(value: Any, context: str) -> list[int]:
     reward = _list(value, context, length=2)
     out = [_int(reward[0], f"{context}[0]", minimum=I32_MIN, maximum=I32_MAX), _int(reward[1], f"{context}[1]", minimum=I32_MIN, maximum=I32_MAX)]
     return out
+
+
+def _validate_deck_identity(
+    deck_ids_value: Any,
+    deck_hashes_value: Any,
+    *,
+    context: str,
+) -> tuple[tuple[str, str], tuple[int, int]]:
+    deck_ids_raw = _list(deck_ids_value, f"{context}.deck_ids", length=2)
+    deck_hashes_raw = _list(deck_hashes_value, f"{context}.deck_hashes", length=2)
+    deck_ids = tuple(
+        _nonempty_str(value, f"{context}.deck_ids[{index}]")
+        for index, value in enumerate(deck_ids_raw)
+    )
+    deck_hashes = tuple(
+        _int(value, f"{context}.deck_hashes[{index}]", minimum=0, maximum=U64)
+        for index, value in enumerate(deck_hashes_raw)
+    )
+    return (deck_ids[0], deck_ids[1]), (deck_hashes[0], deck_hashes[1])
 
 
 def _stdout_reader(stream: Any, output: queue.Queue[bytes | BaseException], max_line_bytes: int) -> None:
@@ -296,6 +331,8 @@ class KernelRlClient:
         self._stderr_thread.start()
         self._request_counter = 0
         self._provenance: dict[str, Any] | None = None
+        self._deck_ids: tuple[str, str] | None = None
+        self._deck_hashes: tuple[int, int] | None = None
         self._episode_id: int | None = None
         self._expected_step: int | None = None
         self._closed = False
@@ -339,14 +376,28 @@ class KernelRlClient:
         self._request_counter += 1
         return f"py-{self._request_counter:012d}"
 
-    def reset(self, *, episode_id: int, env_seed: int, max_decisions: int) -> Decision:
-        self._episode_id = _int(episode_id, "episode_id", minimum=0, maximum=U64)
-        self._expected_step = 0
+    def reset(
+        self,
+        *,
+        episode_id: int,
+        env_seed: int,
+        max_decisions: int,
+        deck_ids: tuple[str, str] = ("Burn", "Burn"),
+    ) -> Decision:
+        validated_episode_id = _int(episode_id, "episode_id", minimum=0, maximum=U64)
+        if not isinstance(deck_ids, tuple) or len(deck_ids) != 2:
+            raise ProtocolError("deck_ids must be a two-item tuple")
+        normalized_deck_ids = tuple(
+            _nonempty_str(value, f"deck_ids[{index}]")
+            for index, value in enumerate(deck_ids)
+        )
+        requested_deck_ids = (normalized_deck_ids[0], normalized_deck_ids[1])
         request = {
             "request_type": "reset",
             "schema_version": SCHEMA_VERSION,
             "request_id": self._next_request_id(),
-            "episode_id": episode_id,
+            "deck_ids": list(requested_deck_ids),
+            "episode_id": validated_episode_id,
             "env_seed": _int(env_seed, "env_seed", minimum=0, maximum=U64),
             "max_decisions": _int(max_decisions, "max_decisions", minimum=0, maximum=U64),
         }
@@ -412,13 +463,31 @@ class KernelRlClient:
             sanitized = " ".join(message.split())[:240]
             raise ProtocolError(f"environment error {code}: {sanitized}")
         if response_type == "decision":
-            _keys(response, ["response_type", "schema_version", "request_id", "provenance", "episode_id", "step", "acting_player", "observation", "legal_actions", "reward"], "decision response")
+            _keys(response, ["response_type", "schema_version", "request_id", "provenance", "deck_ids", "deck_hashes", "episode_id", "step", "acting_player", "observation", "legal_actions", "reward"], "decision response")
             if _int(response["schema_version"], "decision.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
                 raise ProtocolError("decision schema mismatch")
             if _str(response["request_id"], "decision.request_id") != request["request_id"]:
                 raise ProtocolError("decision request_id mismatch")
             provenance = _validate_provenance(response["provenance"], self._provenance)
             self._provenance = provenance
+            deck_ids, deck_hashes = _validate_deck_identity(
+                response["deck_ids"], response["deck_hashes"], context="decision"
+            )
+            expected_deck_ids = (
+                tuple(request["deck_ids"])
+                if request["request_type"] == "reset"
+                else self._deck_ids
+            )
+            if expected_deck_ids is None or deck_ids != expected_deck_ids:
+                raise ProtocolError("decision deck_ids mismatch")
+            if (
+                request["request_type"] != "reset"
+                and self._deck_hashes is not None
+                and deck_hashes != self._deck_hashes
+            ):
+                raise ProtocolError("decision deck_hashes drift")
+            self._deck_ids = deck_ids
+            self._deck_hashes = deck_hashes
             episode_id = _int(response["episode_id"], "decision.episode_id", minimum=0, maximum=U64)
             if episode_id != request["episode_id"]:
                 raise ProtocolError("decision episode_id mismatch")
@@ -439,11 +508,20 @@ class KernelRlClient:
                 raise ProtocolError("intermediate decision reward must be [0, 0]")
             self._episode_id = episode_id
             self._expected_step = step
-            return Decision(episode_id, step, acting, observation, legal_actions, provenance)
+            return Decision(
+                episode_id,
+                step,
+                acting,
+                observation,
+                legal_actions,
+                provenance,
+                deck_ids,
+                deck_hashes,
+            )
         if response_type == "terminal":
             _keys(
                 response,
-                ["response_type", "schema_version", "request_id", "provenance", "episode_id", "terminal_outcome", "terminal_classification", "terminal_code", "winner", "terminal_reward", "terminal_reason", "decision_count"],
+                ["response_type", "schema_version", "request_id", "provenance", "deck_ids", "deck_hashes", "episode_id", "terminal_outcome", "terminal_classification", "terminal_code", "winner", "terminal_reward", "terminal_reason", "decision_count"],
                 "terminal response",
             )
             if _int(response["schema_version"], "terminal.schema_version", minimum=0, maximum=U32) != SCHEMA_VERSION:
@@ -452,6 +530,24 @@ class KernelRlClient:
                 raise ProtocolError("terminal request_id mismatch")
             provenance = _validate_provenance(response["provenance"], self._provenance)
             self._provenance = provenance
+            deck_ids, deck_hashes = _validate_deck_identity(
+                response["deck_ids"], response["deck_hashes"], context="terminal"
+            )
+            expected_deck_ids = (
+                tuple(request["deck_ids"])
+                if request["request_type"] == "reset"
+                else self._deck_ids
+            )
+            if expected_deck_ids is None or deck_ids != expected_deck_ids:
+                raise ProtocolError("terminal deck_ids mismatch")
+            if (
+                request["request_type"] != "reset"
+                and self._deck_hashes is not None
+                and deck_hashes != self._deck_hashes
+            ):
+                raise ProtocolError("terminal deck_hashes drift")
+            self._deck_ids = deck_ids
+            self._deck_hashes = deck_hashes
             episode_id = _int(response["episode_id"], "terminal.episode_id", minimum=0, maximum=U64)
             if episode_id != request["episode_id"]:
                 raise ProtocolError("terminal episode_id mismatch")
@@ -467,7 +563,18 @@ class KernelRlClient:
             _str(response["terminal_reason"], "terminal.terminal_reason")
             self._validate_terminal_tuple(outcome, classification, code, winner, reward)
             self._expected_step = None
-            return Terminal(episode_id, outcome, classification, code, winner, reward, decision_count, provenance)
+            return Terminal(
+                episode_id,
+                outcome,
+                classification,
+                code,
+                winner,
+                reward,
+                decision_count,
+                provenance,
+                deck_ids,
+                deck_hashes,
+            )
         raise ProtocolError(f"unsupported response_type {response_type}")
 
     @staticmethod

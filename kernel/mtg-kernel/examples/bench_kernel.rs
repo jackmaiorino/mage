@@ -201,6 +201,22 @@ fn random_action_for_decision(
         Decision::ChooseSpellMode { mode_count, .. } => {
             Action::ChooseSpellMode(rng_below(rng, *mode_count as usize) as u8)
         }
+        Decision::ChooseEffectOption { option_count, .. } => {
+            Action::ChooseEffectOption(rng_below(rng, *option_count as usize) as u16)
+        }
+        Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        } => {
+            let choice_count = legal_targets.len() + usize::from(*can_finish);
+            let choice = rng_below(rng, choice_count);
+            if choice < legal_targets.len() {
+                Action::ChooseEffectTarget(legal_targets[choice])
+            } else {
+                Action::FinishEffectSelection
+            }
+        }
         Decision::ChooseOptionalCost { .. } => {
             // Real payable flags, not this decision's own -- the H2 surface
             // reshape re-presents `ChooseOptionalCost` with a presentation-
@@ -219,6 +235,12 @@ fn random_action_for_decision(
                 options.push(OptionalCostChoice::SacrificeLand);
             }
             Action::ChooseOptionalCost(options[rng_below(rng, options.len())])
+        }
+        Decision::ChooseSpellCopyPayment { .. } => {
+            Action::ChooseSpellCopyPayment(rng_chance(rng, 1, 2))
+        }
+        Decision::ChooseSpellCopyRetarget { .. } => {
+            Action::ChooseSpellCopyRetarget(rng_chance(rng, 1, 2))
         }
         Decision::ChooseMadnessCast { .. } => Action::ChooseMadnessCast(rng_chance(rng, 1, 2)),
         Decision::Discard { count, choices, .. } => {
@@ -433,6 +455,7 @@ fn synthetic_state_of_size(total_objects: u32, seed: u64) -> GameState {
                 damage: 0,
                 counters: Counters::default(),
                 attachments: Vec::new(),
+                v4: mtg_kernel::state::ObjectStateV4::from_card_def(token_card_def),
                 plotted_turn: None,
                 zone_change_count: 0,
             });

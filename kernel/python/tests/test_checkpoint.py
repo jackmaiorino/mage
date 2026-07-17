@@ -70,10 +70,18 @@ class CheckpointTest(unittest.TestCase):
                 **dataclasses.asdict(TrainerSeedDerivation()),
                 "namespaces": list(TrainerSeedDerivation().namespaces),
             },
-            provenance={"protocol": "kernel_rl_jsonl", "protocol_version": 2, "schema_version": 2, "kernel_version": "0.0.1-spike", "surface_version": 2, "card_db_hash": 1},
+            provenance={"protocol": "kernel_rl_jsonl", "protocol_version": 4, "schema_version": 4, "kernel_version": "0.0.2-spike", "surface_version": 2, "card_db_hash": 1},
             compatibility=compatibility,
         )
         return payload, model, optimizer, compatibility
+
+    def test_checkpoint_rejects_legacy_v3_protocol_and_schema_provenance(self) -> None:
+        payload, _model, _optimizer, compatibility = self.make_payload()
+        for key in ("protocol_version", "schema_version"):
+            legacy = copy.deepcopy(payload)
+            legacy["provenance"][key] = 3
+            with self.subTest(key=key), self.assertRaisesRegex(ValueError, rf"{key} mismatch"):
+                validate_checkpoint_payload(legacy, run_digest="r" * 64, compatibility=compatibility)
 
     def assert_payload_equal(self, left: object, right: object, context: str = "$") -> None:
         if isinstance(left, torch.Tensor) or isinstance(right, torch.Tensor):

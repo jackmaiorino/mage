@@ -49,12 +49,16 @@ mod tests {
         state.restore(&snap);
         assert_eq!(state, snap.0);
         assert_eq!(state.state_hash(), snap.0.state_hash());
+        assert_eq!(
+            state.diagnostic_state_hash(),
+            snap.0.diagnostic_state_hash()
+        );
     }
 
     /// ~80 objects: two 40-card libraries, mid-game (some drawn, some on
-    /// battlefield). Object count is fixed at construction (zone moves
-    /// mutate in place, never allocate new objects), so this is a
-    /// representative object-count shape for any point in the game.
+    /// battlefield). Tokens and spell copies can grow the arena later, but
+    /// this remains the baseline object-count shape used by the v1 snapshot
+    /// performance budget.
     fn mid_game_state() -> GameState {
         let lib0: Vec<u16> = (0..40).collect();
         let lib1: Vec<u16> = (0..40).collect();

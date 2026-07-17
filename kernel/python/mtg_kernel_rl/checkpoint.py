@@ -18,13 +18,14 @@ from .checkpoint_io import (
     MAX_CHECKPOINT_FILE_BYTES,
     load_torch_zip_checkpoint,
 )
+from .client import PROTOCOL_NAME, PROTOCOL_VERSION, SCHEMA_VERSION
 from .determinism import TrainerSeedDerivation, validate_uint63
 from .model import KernelPolicyValueNet, ModelConfig
 from .path_safety import mkdir_no_follow
 
-CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v2"
+CHECKPOINT_SCHEMA = "kernel_rl_train_checkpoint/v3"
 SIDECAR_SCHEMA = "kernel_rl_train_checkpoint_sidecar/v2"
-UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v2"
+UPDATE_RECORD_SCHEMA = "kernel_rl_train_update_record/v3"
 LATEST_SCHEMA = "kernel_rl_train_latest/v2"
 ADAM_ALGORITHM = "adam/torch-cpu-canonical-v1"
 ADAM_SETTINGS = {
@@ -72,16 +73,20 @@ ALLOWED_LOGICAL_TENSOR_DTYPES = {
 def create_adam(model: KernelPolicyValueNet, learning_rate: float) -> torch.optim.Adam:
     if type(learning_rate) is not float or not math.isfinite(learning_rate) or learning_rate <= 0.0:
         raise ValueError("learning_rate must be a positive finite float")
-    return torch.optim.Adam(
-        model.parameters(),
-        lr=learning_rate,
-        betas=(0.9, 0.999),
-        eps=1e-8,
-        weight_decay=0.0,
-        amsgrad=False,
-        foreach=False,
-        fused=False,
-    )
+    # Adam's first construction can lazily import torch._dynamo. Keep those
+    # internal allocations on CPU even when a library caller uses a non-CPU
+    # process default device; the context restores that default on exit.
+    with torch.device("cpu"):
+        return torch.optim.Adam(
+            model.parameters(),
+            lr=learning_rate,
+            betas=(0.9, 0.999),
+            eps=1e-8,
+            weight_decay=0.0,
+            amsgrad=False,
+            foreach=False,
+            fused=False,
+        )
 
 
 def adam_config(learning_rate: float) -> dict[str, Any]:
@@ -337,13 +342,41 @@ def load_adam_state(
     *,
     expected_step_count: int | None = None,
 ) -> None:
+    prepared_by_name = validate_adam_state_for_model(
+        model,
+        state,
+        learning_rate,
+        expected_step_count=expected_step_count,
+    )
+    optimizer.state.clear()
+    for name, param in _named_parameters(model):
+        slot = prepared_by_name[name]
+        if slot:
+            optimizer.state[param] = slot
+    export_adam_state(optimizer, model, learning_rate)
+
+
+def validate_adam_state_for_model(
+    model: KernelPolicyValueNet,
+    state: Any,
+    learning_rate: float,
+    *,
+    expected_step_count: int | None = None,
+) -> dict[str, dict[str, torch.Tensor]]:
+    """Validate canonical Adam state against model parameter order and metadata.
+
+    Returns cloned slot tensors keyed by parameter name. This is intentionally
+    optimizer-free so read-only chain validation can check Adam payloads without
+    constructing or mutating an optimizer.
+    """
+
     _validate_adam_state_metadata(state, learning_rate=learning_rate, optimizer_step_count=expected_step_count)
     named = _named_parameters(model)
     names = [name for name, _param in named]
     if state.get("param_names") != names:
         raise ValueError("optimizer_state param order mismatch")
     state_by_name = state.get("state")
-    prepared: list[tuple[torch.nn.Parameter, dict[str, torch.Tensor]]] = []
+    prepared: dict[str, dict[str, torch.Tensor]] = {}
     for name, param in named:
         raw_slot = state_by_name[name]
         slot: dict[str, torch.Tensor] = {}
@@ -358,12 +391,8 @@ def load_adam_state(
                     f"optimizer_state.{name}.{key}",
                     nonnegative=(key == "exp_avg_sq"),
                 )
-        prepared.append((param, slot))
-    optimizer.state.clear()
-    for param, slot in prepared:
-        if slot:
-            optimizer.state[param] = slot
-    export_adam_state(optimizer, model, learning_rate)
+        prepared[name] = slot
+    return prepared
 
 
 def assert_optimizer_finite(optimizer: torch.optim.Adam) -> None:
@@ -433,7 +462,7 @@ def validate_torch_rng_state(value: Any) -> None:
     generator = torch.Generator(device="cpu")
     try:
         generator.set_state(value.detach().clone())
-        probe = torch.rand(1, generator=generator)
+        probe = torch.rand(1, device="cpu", generator=generator)
     except RuntimeError as exc:
         raise ValueError("Torch CPU RNG state is not restorable") from exc
     if not torch.isfinite(probe).all():
@@ -554,11 +583,14 @@ def _validate_provenance(value: Any) -> None:
     required = {"protocol", "protocol_version", "schema_version", "kernel_version", "surface_version", "card_db_hash"}
     if not isinstance(value, dict) or set(value) != required:
         raise ValueError("checkpoint provenance keys mismatch")
-    if value["protocol"] != "kernel_rl_jsonl":
+    if value["protocol"] != PROTOCOL_NAME:
         raise ValueError("checkpoint provenance protocol mismatch")
-    for key in ("protocol_version", "schema_version", "surface_version"):
-        if type(value[key]) is not int or value[key] < 0:
-            raise ValueError(f"checkpoint provenance {key} must be a nonnegative int")
+    if value["protocol_version"] != PROTOCOL_VERSION:
+        raise ValueError("checkpoint provenance protocol_version mismatch")
+    if value["schema_version"] != SCHEMA_VERSION:
+        raise ValueError("checkpoint provenance schema_version mismatch")
+    if type(value["surface_version"]) is not int or value["surface_version"] < 0:
+        raise ValueError("checkpoint provenance surface_version must be a nonnegative int")
     if type(value["kernel_version"]) is not str or not value["kernel_version"]:
         raise ValueError("checkpoint provenance kernel_version must be nonempty")
     if type(value["card_db_hash"]) is not int or value["card_db_hash"] < 0 or value["card_db_hash"] > 0xFFFF_FFFF_FFFF_FFFF:

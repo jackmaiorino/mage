@@ -1,29 +1,40 @@
 from __future__ import annotations
 
+import builtins
+from collections import Counter
+import io
 import math
 import os
 import hashlib
 import json
 import random
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
 import time
 import unittest
 from pathlib import Path
+from typing import Any
+from unittest import mock
 
 import torch
 
-from mtg_kernel_rl.artifacts import read_json_file, set_fault_injector, write_json_atomic
+from mtg_kernel_rl.artifacts import canonical_json_bytes, generation_paths, read_json_file, rebuild_derived_caches, set_fault_injector, write_json_atomic
+import mtg_kernel_rl.artifact_io as artifact_io
+import mtg_kernel_rl.artifacts as artifacts_mod
+import mtg_kernel_rl.checkpoint_io as checkpoint_io
 from mtg_kernel_rl.checkpoint import load_checkpoint_file, save_checkpoint_file
+from mtg_kernel_rl.determinism import derive_train_learner_action_seed
 from mtg_kernel_rl.output_lock import OutputLock, OutputLockError
 from mtg_kernel_rl.path_safety import filesystem_file_identity
 from mtg_kernel_rl.model import KernelPolicyValueNet
+from mtg_kernel_rl.training_store import ALGORITHM_NAME, RUN_SCHEMA, TRAINER_ACTION_SELECTION_CONTRACT, TrainingStore
 from mtg_kernel_rl.trainer import _compute_loss_tensors, train
 import mtg_kernel_rl.trainer as trainer_mod
 
-from fixtures import fake_launcher
+from fixtures import DECK_HASHES, DECK_IDS, fake_launcher
 
 
 def _state(path: Path, update: int) -> dict:
@@ -64,6 +75,40 @@ def _assert_generation_logical_equal(test: unittest.TestCase, left: Path, right:
     right_sidecar = read_json_file(right / "checkpoints" / f"update-{update:08d}.json")
     for key in ("schema", "update", "run_digest", "logical_state_sha256"):
         test.assertEqual(left_sidecar[key], right_sidecar[key], key)
+
+
+def _cache_bytes(root: Path) -> dict[str, bytes]:
+    return {name: (root / name).read_bytes() for name in ("episodes.jsonl", "updates.jsonl", "summary.json")}
+
+
+def _assert_derived_caches_match_clean_rebuild(test: unittest.TestCase, root: Path) -> None:
+    chain = TrainingStore(root).validate_latest()
+    with tempfile.TemporaryDirectory() as tmp_name:
+        rebuilt = Path(tmp_name) / "rebuilt"
+        rebuilt.mkdir()
+        rebuild_derived_caches(rebuilt, list(chain.update_records), chain.latest_record)
+        for name in ("episodes.jsonl", "updates.jsonl", "summary.json"):
+            test.assertEqual((root / name).read_bytes(), (rebuilt / name).read_bytes(), name)
+
+
+def _latest_for(root: Path, update: int) -> dict[str, Any]:
+    sidecar = read_json_file(root / "checkpoints" / f"update-{update:08d}.json")
+    return {"schema": "kernel_rl_train_latest/v2", "update": update, "run_digest": sidecar["run_digest"], "head": sidecar["head"]}
+
+
+def _pin_latest(root: Path, update: int) -> None:
+    write_json_atomic(root / "latest.json", _latest_for(root, update))
+
+
+def _trim_to_head(root: Path, head: int) -> None:
+    for directory, suffixes in ((root / "updates", (".json",)), (root / "checkpoints", (".json", ".pt"))):
+        for path in directory.iterdir():
+            match = trainer_mod.GENERATION_RE.fullmatch(path.name)
+            if match is not None and int(match.group(1)) > head and path.suffix in suffixes:
+                path.unlink()
+    _pin_latest(root, head)
+    chain = TrainingStore(root).validate_latest()
+    rebuild_derived_caches(root, list(chain.update_records), chain.latest_record)
 
 
 def _subprocess_env() -> dict[str, str]:
@@ -126,6 +171,13 @@ def injector(name, path):
         return
     if target_fragment != "-":
         if path is None or target_fragment not in Path(path).name:
+            return
+    if target_fragment == "summary.json" and name.startswith("json_"):
+        try:
+            latest = json.loads((out / "latest.json").read_text(encoding="utf-8"))
+        except Exception:
+            return
+        if latest.get("update") < 1:
             return
     marker.write_text(json.dumps({"boundary": name, "path": None if path is None else Path(path).name}, sort_keys=True), encoding="utf-8")
     os._exit(73)
@@ -216,6 +268,90 @@ def _assert_hard_kill_fired(
 
 
 class TrainerTest(unittest.TestCase):
+    def test_fresh_deck_identity_failure_persists_no_run_or_generation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            for scenario in ("deck_id_drift", "deck_hash_shape"):
+                with self.subTest(scenario=scenario):
+                    out = tmp / scenario
+                    with self.assertRaises(Exception):
+                        train(
+                            env_bin=fake_launcher(tmp, scenario),
+                            out_dir=out,
+                            base_seed=71501,
+                            until_update=0,
+                            batch_episodes=2,
+                            learning_rate=0.001,
+                            value_coef=0.5,
+                            max_decisions=8,
+                        )
+                    self.assertFalse((out / "run.json").exists())
+                    self.assertFalse((out / "latest.json").exists())
+
+    def test_resume_requested_deck_drift_fails_before_environment_launch_or_artifact_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            marker = tmp / "started.txt"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(marker)})
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            marker.unlink()
+            before = _snapshot_tree(out)
+            with self.assertRaisesRegex(ValueError, "deck_ids"):
+                train(
+                    env_bin=launcher,
+                    out_dir=out,
+                    resume=out / "latest.json",
+                    until_update=2,
+                    deck_ids=("Burn", "Rally"),
+                )
+            self.assertFalse(marker.exists())
+            self.assertEqual(_snapshot_tree(out), before)
+
+    def test_resume_resolved_deck_drift_fails_before_recovery_or_publication(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            scenario_file = tmp / "scenario.txt"
+            scenario_file.write_text("train_pair", encoding="utf-8")
+            launcher = fake_launcher(
+                tmp,
+                "switchable",
+                {"FAKE_SCENARIO_FILE": str(scenario_file)},
+            )
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=1,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            (out / "episodes.jsonl").unlink()
+            scenario_file.write_text("deck_id_drift", encoding="utf-8")
+            before = _snapshot_tree(out)
+            with self.assertRaises(Exception):
+                train(
+                    env_bin=launcher,
+                    out_dir=out,
+                    resume=out / "latest.json",
+                    until_update=2,
+                )
+            self.assertEqual(_snapshot_tree(out), before)
+            self.assertFalse((out / "episodes.jsonl").exists())
+            self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
+
     def test_fresh_update_zero_is_published_before_training_actions(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -235,8 +371,12 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(read_json_file(out / "updates" / "update-00000000.json")["update"], 0)
             self.assertTrue((out / "checkpoints" / "update-00000000.pt").is_file())
             run = read_json_file(out / "run.json")
-            self.assertEqual(run["schema"], "kernel_rl_train_run/v8")
-            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v6")
+            self.assertEqual(run["schema"], RUN_SCHEMA)
+            self.assertEqual(run["algorithm"]["name"], ALGORITHM_NAME)
+            self.assertEqual(run["samplers"]["learner"]["action_selection"], TRAINER_ACTION_SELECTION_CONTRACT)
+            self.assertEqual(run["artifact_boundary"]["schema"], "kernel_rl_artifact_boundary/v9")
+            self.assertEqual(tuple(run["environment"]["deck_ids"]), DECK_IDS)
+            self.assertEqual(tuple(run["environment"]["deck_hashes"]), DECK_HASHES)
 
     def test_fresh_reset_failure_and_pre_manifest_debris_are_recoverable_or_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -751,6 +891,29 @@ class TrainerTest(unittest.TestCase):
         self.assertAlmostEqual(float(value_a.grad.item()), 0.0, places=7)
         self.assertAlmostEqual(float(value_b.grad.item()), 0.0, places=7)
 
+    def test_learner_selector_has_fixed_goldens_preserves_global_rng_and_keeps_log_prob_differentiable(self) -> None:
+        logits = torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32, requires_grad=True)
+        seeds = [derive_train_learner_action_seed(71_501, episode, 0) for episode in range(4)]
+        random.seed(567_890)
+        torch.manual_seed(678_901)
+        python_state = random.getstate()
+        torch_state = torch.get_rng_state().clone()
+
+        selections_and_log_probs = [trainer_mod._select_learner_action(logits, seed) for seed in seeds]
+
+        self.assertEqual([selected for selected, _log_prob in selections_and_log_probs], [1, 1, 0, 1])
+        self.assertEqual(random.getstate(), python_state)
+        self.assertTrue(torch.equal(torch.get_rng_state(), torch_state))
+        expected = torch.log_softmax(logits, dim=0)
+        for selected, log_prob in selections_and_log_probs:
+            self.assertTrue(torch.equal(log_prob, expected[selected]))
+            self.assertTrue(log_prob.requires_grad)
+        loss = -torch.stack([log_prob for _selected, log_prob in selections_and_log_probs]).sum()
+        loss.backward()
+        self.assertIsNotNone(logits.grad)
+        self.assertTrue(torch.isfinite(logits.grad).all())
+        self.assertGreater(float(torch.sum(torch.abs(logits.grad)).item()), 0.0)
+
     def test_opponent_has_no_model_forwards_and_both_learner_seats_train(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -791,6 +954,8 @@ class TrainerTest(unittest.TestCase):
             self.assertTrue(record["optimizer_step"])
             self.assertEqual([row["learner_seat"] for row in record["episode_summaries"]], ["p0", "p1"])
             self.assertEqual([row["learner_decision_count"] for row in record["episode_summaries"]], [1, 1])
+            self.assertTrue(all(tuple(row["deck_ids"]) == DECK_IDS for row in record["episode_summaries"]))
+            self.assertTrue(all(tuple(row["deck_hashes"]) == DECK_HASHES for row in record["episode_summaries"]))
 
     def test_zero_decision_batch_commits_without_model_or_optimizer_mutation(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -816,6 +981,593 @@ class TrainerTest(unittest.TestCase):
             self.assertFalse(record["optimizer_step"])
             self.assertEqual(record["learner_decision_count"], 0)
             self.assertEqual(record["loss"], {"policy_sum_hex": None, "value_sum_hex": None, "loss_hex": None})
+            _assert_derived_caches_match_clean_rebuild(self, out)
+
+    def test_incremental_derived_caches_match_full_rebuild_after_each_update(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            _assert_derived_caches_match_clean_rebuild(self, out)
+            for update in (1, 2, 3):
+                train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=update)
+                _assert_derived_caches_match_clean_rebuild(self, out)
+                self.assertTrue((out / "episodes.jsonl").read_bytes().endswith(b"\n"))
+                self.assertTrue((out / "updates.jsonl").read_bytes().endswith(b"\n"))
+            summary = read_json_file(out / "summary.json")
+            self.assertEqual(summary["generations"], 4)
+            self.assertEqual(summary["completed_training_updates"], 3)
+            self.assertGreater(summary["learner_wins"], 0)
+            self.assertGreater(summary["learner_losses"], 0)
+            self.assertGreater(summary["draws"], 0)
+            self.assertEqual(summary["optimizer_steps"], 3)
+
+    def test_update_commit_path_reads_only_current_generation_and_appends_current_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=33,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            measurements: dict[int, dict[str, Any]] = {}
+            self.assertFalse(hasattr(trainer_mod, "_records_through"))
+
+            for head in (1, 4, 16, 32):
+                target = tmp / f"head_{head}"
+                shutil.copytree(source, target)
+                _trim_to_head(target, head)
+                chain = TrainingStore(target).validate_latest()
+                resume_snapshot = chain.load_resume(chain.head)
+                run = chain.run_record
+                next_update = head + 1
+                next_paths = generation_paths(source, next_update)
+                update_record = read_json_file(next_paths["update"])
+                payload = load_checkpoint_file(next_paths["checkpoint"])
+                before = _cache_bytes(target)
+
+                content_reads: list[str] = []
+                labeled_content_reads: list[tuple[str, str]] = []
+                active_reader_stack: list[str] = []
+                append_calls: list[dict[str, Any]] = []
+                original_json_read = artifact_io.read_regular_file_bytes
+                original_checkpoint_read = checkpoint_io.read_regular_file_bytes
+                original_rebuild = trainer_mod.rebuild_derived_caches
+                original_append = artifacts_mod._append_jsonl_no_read
+                original_os_open = os.open
+                original_builtin_open = builtins.open
+                original_io_open = io.open
+                original_os_close = os.close
+                original_os_fstat = os.fstat
+                target_abs = os.path.abspath(os.fspath(target))
+                target_cmp = os.path.normcase(target_abs)
+                outside_probe_area = tmp / f"outside-read-probes-{head}"
+                probe_paths = {
+                    "direct-read": target / "guard-direct-read-probe.txt",
+                    "directory": target / "guard-directory-probe",
+                    "caller-fd": target / "guard-fd-pass-through-probe.txt",
+                    "stateful-pathlike": target / "guard-stateful-pathlike-probe.txt",
+                    "write-only": target / "guard-write-only-probe.tmp",
+                    "outside-root": outside_probe_area / "outside-read-probe.txt",
+                    "outside-root-area": outside_probe_area,
+                }
+                probe_cleanup_order = (
+                    "direct-read",
+                    "caller-fd",
+                    "stateful-pathlike",
+                    "write-only",
+                    "outside-root",
+                    "directory",
+                    "outside-root-area",
+                )
+
+                def capture_path(path: Any) -> str | bytes | None:
+                    if isinstance(path, int):
+                        return None
+                    return os.fspath(path)
+
+                def absolute_captured_path(captured: str | bytes) -> str:
+                    return os.path.abspath(os.fsdecode(captured))
+
+                def measured_abs_path(path: Any) -> str | None:
+                    captured = capture_path(path)
+                    if captured is None:
+                        return None
+                    return classified_target_path(captured)
+
+                def classified_target_path(captured: str | bytes) -> str | None:
+                    path_abs = absolute_captured_path(captured)
+                    normalized_abs = os.path.normcase(path_abs)
+                    if os.path.commonpath([target_cmp, normalized_abs]) != target_cmp:
+                        return None
+                    return path_abs
+
+                def is_readable_os_open(flags: int) -> bool:
+                    if hasattr(os, "O_PATH") and flags & os.O_PATH:
+                        return False
+                    access_mode = flags & getattr(os, "O_ACCMODE", os.O_RDONLY | os.O_WRONLY | os.O_RDWR)
+                    return access_mode != os.O_WRONLY
+
+                def assert_no_relative_dir_fd_read(captured: str | bytes, flags: int, kwargs: dict[str, Any]) -> None:
+                    if kwargs.get("dir_fd") is None or not is_readable_os_open(flags):
+                        return
+                    if not os.path.isabs(captured):
+                        raise AssertionError("readable relative os.open with dir_fd cannot be classified portably")
+
+                def readable_mode(mode: Any) -> bool:
+                    mode_text = str(mode)
+                    return "r" in mode_text or "+" in mode_text
+
+                def assert_caller_fd_still_open(fd: int) -> None:
+                    try:
+                        original_os_fstat(fd)
+                    except OSError as exc:
+                        self.fail(f"caller-owned fd was closed by high-level open guard: {exc}")
+
+                class StatefulPathLike:
+                    def __init__(self, first: Path, second: Path) -> None:
+                        self.first = os.fspath(first)
+                        self.second = os.fspath(second)
+                        self.calls = 0
+
+                    def __fspath__(self) -> str:
+                        self.calls += 1
+                        if self.calls == 1:
+                            return self.first
+                        return self.second
+
+                def normalize_abs_path(path_abs: str) -> str:
+                    rel = os.path.relpath(path_abs, target_abs)
+                    parts = Path(rel).parts
+                    if len(parts) >= 3 and parts[0] == ".transactions":
+                        return "/".join(("<tx>", *parts[2:]))
+                    return "/".join(parts)
+
+                def normalize_path(path: str | Path) -> str:
+                    path_abs = measured_abs_path(path)
+                    if path_abs is None:
+                        return str(Path(path)).replace("\\", "/")
+                    return normalize_abs_path(path_abs)
+
+                def snapshot_tree(root: Path) -> dict[str, tuple[Any, ...]]:
+                    if not os.path.lexists(os.fspath(root)):
+                        return {".": ("missing",)}
+                    snapshot: dict[str, tuple[Any, ...]] = {}
+                    root_mode = root.lstat().st_mode
+                    descendants = (
+                        sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix())
+                        if stat.S_ISDIR(root_mode) and not stat.S_ISLNK(root_mode)
+                        else []
+                    )
+                    paths = [root, *descendants]
+                    for path in paths:
+                        rel = "." if path == root else path.relative_to(root).as_posix()
+                        info = path.lstat()
+                        mode = info.st_mode
+                        if stat.S_ISLNK(mode):
+                            snapshot[rel] = ("symlink", os.readlink(path))
+                        elif stat.S_ISDIR(mode):
+                            snapshot[rel] = ("dir",)
+                        elif stat.S_ISREG(mode):
+                            with original_builtin_open(os.fspath(path), "rb") as handle:
+                                data = handle.read()
+                            snapshot[rel] = ("file", len(data), hashlib.sha256(data).hexdigest())
+                        else:
+                            snapshot[rel] = ("other", stat.S_IFMT(mode))
+                    return snapshot
+
+                def remove_probe_path(path: Path) -> None:
+                    if not os.path.lexists(os.fspath(path)):
+                        return
+                    if stat.S_ISDIR(path.lstat().st_mode):
+                        path.rmdir()
+                    else:
+                        path.unlink()
+
+                def format_probe_failure(label: str, exc: BaseException) -> str:
+                    message = str(exc).replace("\n", " ")
+                    if len(message) > 300:
+                        message = message[:297] + "..."
+                    return f"{label}: {type(exc).__name__}: {message}"
+
+                def snapshot_delta(expected: dict[str, tuple[Any, ...]], actual: dict[str, tuple[Any, ...]]) -> str:
+                    expected_keys = set(expected)
+                    actual_keys = set(actual)
+                    added = sorted(actual_keys - expected_keys)
+                    removed = sorted(expected_keys - actual_keys)
+                    changed = sorted(key for key in expected_keys & actual_keys if expected[key] != actual[key])
+                    return (
+                        f"added={added[:5]} removed={removed[:5]} changed={changed[:5]} "
+                        f"counts=+{len(added)}/-{len(removed)}/~{len(changed)}"
+                    )
+
+                def collect_probe_absence_failures() -> list[str]:
+                    failures: list[str] = []
+                    for label, path in probe_paths.items():
+                        try:
+                            if os.path.lexists(os.fspath(path)):
+                                failures.append(f"{label}: probe path remained at {path}")
+                        except BaseException as exc:
+                            failures.append(format_probe_failure(f"{label} absence check", exc))
+                    return failures
+
+                def assert_probe_paths_absent() -> None:
+                    failures = collect_probe_absence_failures()
+                    if failures:
+                        raise AssertionError("probe path absence failures: " + "; ".join(failures))
+
+                def collect_probe_restoration_failures(
+                    pre_probe_target_snapshot: dict[str, tuple[Any, ...]],
+                    pre_probe_outside_snapshot: dict[str, tuple[Any, ...]],
+                ) -> list[str]:
+                    failures = collect_probe_absence_failures()
+                    try:
+                        target_snapshot = snapshot_tree(target)
+                        if target_snapshot != pre_probe_target_snapshot:
+                            failures.append(
+                                "target snapshot mismatch: "
+                                + snapshot_delta(pre_probe_target_snapshot, target_snapshot)
+                            )
+                    except BaseException as exc:
+                        failures.append(format_probe_failure("target snapshot verification", exc))
+                    try:
+                        outside_snapshot = snapshot_tree(outside_probe_area)
+                        if outside_snapshot != pre_probe_outside_snapshot:
+                            failures.append(
+                                "outside snapshot mismatch: "
+                                + snapshot_delta(pre_probe_outside_snapshot, outside_snapshot)
+                            )
+                    except BaseException as exc:
+                        failures.append(format_probe_failure("outside snapshot verification", exc))
+                    return failures
+
+                def handle_probe_cleanup_failures(primary: BaseException | None, failures: list[str]) -> None:
+                    if not failures:
+                        return
+                    details = "; ".join(failures)
+                    if primary is not None:
+                        add_note = getattr(primary, "add_note", None)
+                        if add_note is not None:
+                            try:
+                                add_note("probe cleanup/restoration failures: " + details)
+                            except BaseException:
+                                pass
+                        return
+                    raise AssertionError("probe cleanup/restoration failures: " + details)
+
+                def with_reader_label(label: str, path: str | Path, *args: Any, **kwargs: Any) -> Any:
+                    active_reader_stack.append(label)
+                    try:
+                        if label == "json":
+                            return original_json_read(path, *args, **kwargs)
+                        if label == "checkpoint":
+                            return original_checkpoint_read(path, *args, **kwargs)
+                        raise AssertionError(f"unknown reader label: {label}")
+                    finally:
+                        popped = active_reader_stack.pop()
+                        if popped != label:
+                            raise AssertionError(f"reader label stack corrupted: expected {label}, got {popped}")
+
+                def counted_json(path: str | Path, *args: Any, **kwargs: Any) -> Any:
+                    return with_reader_label("json", path, *args, **kwargs)
+
+                def counted_checkpoint(path: str | Path, *args: Any, **kwargs: Any) -> Any:
+                    return with_reader_label("checkpoint", path, *args, **kwargs)
+
+                def guarded_os_open(path: Any, flags: int, *args: Any, **kwargs: Any) -> int:
+                    captured = capture_path(path)
+                    open_path = path if captured is None else captured
+                    if captured is not None:
+                        assert_no_relative_dir_fd_read(captured, flags, kwargs)
+                    fd = original_os_open(open_path, flags, *args, **kwargs)
+                    try:
+                        if captured is None:
+                            return fd
+                        path_abs = classified_target_path(captured)
+                        if path_abs is None:
+                            return fd
+                        if not is_readable_os_open(flags):
+                            return fd
+                        opened = os.fstat(fd)
+                        if not stat.S_ISREG(opened.st_mode):
+                            return fd
+                        if len(active_reader_stack) != 1:
+                            raise AssertionError(
+                                f"unapproved readable regular-file open under output root: {normalize_abs_path(path_abs)}"
+                            )
+                        label = active_reader_stack[-1]
+                        normalized = normalize_abs_path(path_abs)
+                        content_reads.append(normalized)
+                        labeled_content_reads.append((label, normalized))
+                    except BaseException:
+                        try:
+                            os.close(fd)
+                        except BaseException:
+                            pass
+                        raise
+                    return fd
+
+                def guarded_builtin_open(file: Any, mode: Any = "r", *args: Any, **kwargs: Any) -> Any:
+                    captured = capture_path(file)
+                    if captured is None:
+                        return original_builtin_open(file, mode, *args, **kwargs)
+                    path_abs = classified_target_path(captured)
+                    if path_abs is not None and readable_mode(mode):
+                        raise AssertionError(f"unapproved readable open under output root: {normalize_abs_path(path_abs)}")
+                    return original_builtin_open(captured, mode, *args, **kwargs)
+
+                def guarded_io_open(file: Any, mode: Any = "r", *args: Any, **kwargs: Any) -> Any:
+                    captured = capture_path(file)
+                    if captured is None:
+                        return original_io_open(file, mode, *args, **kwargs)
+                    path_abs = classified_target_path(captured)
+                    if path_abs is not None and readable_mode(mode):
+                        raise AssertionError(f"unapproved readable io.open under output root: {normalize_abs_path(path_abs)}")
+                    return original_io_open(captured, mode, *args, **kwargs)
+
+                def assert_guard_non_vacuity() -> dict[str, str]:
+                    probe_results: dict[str, str] = {}
+                    primary: BaseException | None = None
+                    try:
+                        direct_probe = probe_paths["direct-read"]
+                        direct_probe.write_bytes(b"under-root-probe")
+                        outside_probe_area.mkdir()
+                        outside_probe = probe_paths["outside-root"]
+                        outside_probe.write_bytes(b"outside-root-probe")
+
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable regular-file open"):
+                            os.open(direct_probe, os.O_RDONLY)
+                        probe_results["os.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable open"):
+                            builtins.open(direct_probe, "rb")
+                        probe_results["builtins.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            io.open(direct_probe, "rb")
+                        probe_results["io.open under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            direct_probe.read_bytes()
+                        probe_results["Path.read_bytes under-root reader"] = "rejected"
+                        with self.assertRaisesRegex(AssertionError, "unapproved readable io.open"):
+                            direct_probe.read_text(encoding="utf-8")
+                        probe_results["Path.read_text under-root reader"] = "rejected"
+
+                        with self.assertRaisesRegex(AssertionError, "dir_fd cannot be classified"):
+                            os.open(os.path.join("updates", f"update-{head:08d}.json"), os.O_RDONLY, dir_fd=-1)
+                        probe_results["relative dir_fd readable os.open"] = "rejected before OS open"
+
+                        with builtins.open(outside_probe, "rb") as outside_handle:
+                            self.assertEqual(outside_handle.read(), b"outside-root-probe")
+                        probe_results["outside-root builtins.open reader"] = "allowed expected bytes"
+
+                        write_only_probe = probe_paths["write-only"]
+                        write_fd = os.open(write_only_probe, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+                        try:
+                            os.write(write_fd, b"write-only-probe")
+                        finally:
+                            os.close(write_fd)
+                        with original_builtin_open(os.fspath(write_only_probe), "rb") as write_only_handle:
+                            self.assertEqual(write_only_handle.read(), b"write-only-probe")
+                        probe_results["write-only under-root os.open"] = "allowed"
+
+                        directory_probe = probe_paths["directory"]
+                        directory_probe.mkdir()
+                        try:
+                            directory_fd = os.open(directory_probe, os.O_RDONLY)
+                        except OSError as exc:
+                            probe_results["directory os.open"] = f"unsupported by platform: {type(exc).__name__}"
+                        else:
+                            os.close(directory_fd)
+                            probe_results["directory os.open"] = "allowed and test closed fd"
+
+                        self.assertEqual(io.BytesIO(b"bytesio-probe").read(), b"bytesio-probe")
+                        probe_results["io.BytesIO"] = "usable"
+
+                        fd_probe = probe_paths["caller-fd"]
+                        fd_probe.write_bytes(b"fd-pass-through")
+                        builtin_fd = original_os_open(os.fspath(fd_probe), os.O_RDONLY)
+                        try:
+                            with builtins.open(builtin_fd, "rb", closefd=False) as builtin_handle:
+                                self.assertEqual(builtin_handle.read(), b"fd-pass-through")
+                            assert_caller_fd_still_open(builtin_fd)
+                        finally:
+                            original_os_close(builtin_fd)
+                        probe_results["builtins.open caller fd closefd=False"] = "caller fd remained open"
+                        io_fd = original_os_open(os.fspath(fd_probe), os.O_RDONLY)
+                        try:
+                            with io.open(io_fd, "rb", closefd=False) as io_handle:
+                                self.assertEqual(io_handle.read(), b"fd-pass-through")
+                            assert_caller_fd_still_open(io_fd)
+                        finally:
+                            original_os_close(io_fd)
+                        probe_results["io.open caller fd closefd=False"] = "caller fd remained open"
+
+                        stateful_probe = probe_paths["stateful-pathlike"]
+                        stateful_probe.write_bytes(b"stateful-probe")
+                        stateful_path = StatefulPathLike(stateful_probe, outside_probe)
+                        captured_stateful = os.fspath(stateful_probe)
+                        primary_exception = RuntimeError("injected classification failure")
+                        closed_fds: list[int] = []
+                        real_abspath = os.path.abspath
+
+                        def failing_abspath(value: str | bytes) -> str:
+                            if value == captured_stateful:
+                                raise primary_exception
+                            return real_abspath(value)
+
+                        def tracking_close(fd: int) -> None:
+                            closed_fds.append(fd)
+                            original_os_close(fd)
+
+                        with (
+                            mock.patch.object(os.path, "abspath", failing_abspath),
+                            mock.patch.object(os, "close", tracking_close),
+                        ):
+                            with self.assertRaisesRegex(RuntimeError, "injected classification failure") as raised:
+                                os.open(stateful_path, os.O_RDONLY)
+                        self.assertIs(raised.exception, primary_exception)
+                        self.assertEqual(stateful_path.calls, 1)
+                        self.assertEqual(len(closed_fds), 1)
+                        with self.assertRaises(OSError):
+                            original_os_fstat(closed_fds[0])
+                        probe_results["stateful os.PathLike classification failure"] = (
+                            "__fspath__ once, primary exception preserved, new fd closed once"
+                        )
+
+                        for open_name, open_fn, expected_message in (
+                            ("builtins.open", builtins.open, "classification failure"),
+                            ("io.open", io.open, "classification failure"),
+                        ):
+                            high_level_stateful = StatefulPathLike(stateful_probe, outside_probe)
+                            with mock.patch.object(os.path, "abspath", failing_abspath):
+                                with self.assertRaisesRegex(RuntimeError, expected_message) as high_level_raised:
+                                    open_fn(high_level_stateful, "rb")
+                            self.assertIs(high_level_raised.exception, primary_exception)
+                            self.assertEqual(high_level_stateful.calls, 1)
+                            probe_results[f"stateful os.PathLike {open_name}"] = "__fspath__ once, exception propagated"
+
+                        self.assertEqual(content_reads, [])
+                        self.assertEqual(labeled_content_reads, [])
+                        self.assertEqual(append_calls, [])
+                        return probe_results
+                    except BaseException as exc:
+                        primary = exc
+                        raise
+                    finally:
+                        cleanup_failures: list[str] = []
+                        for label in probe_cleanup_order:
+                            try:
+                                remove_probe_path(probe_paths[label])
+                            except BaseException as exc:
+                                cleanup_failures.append(format_probe_failure(f"{label} cleanup", exc))
+                        cleanup_failures.extend(
+                            collect_probe_restoration_failures(pre_probe_target_snapshot, pre_probe_outside_snapshot)
+                        )
+                        handle_probe_cleanup_failures(primary or sys.exc_info()[1], cleanup_failures)
+
+                def forbidden_rebuild(*_args: Any, **_kwargs: Any) -> None:
+                    raise AssertionError("steady-state commit must not rebuild derived caches")
+
+                def counted_append(identity: Any, data: bytes, *, boundary_prefix: str) -> None:
+                    append_calls.append(
+                        {
+                            "path": normalize_path(identity.path),
+                            "boundary": boundary_prefix,
+                            "data": bytes(data),
+                        }
+                    )
+                    return original_append(identity, data, boundary_prefix=boundary_prefix)
+
+                artifact_io.read_regular_file_bytes = counted_json
+                checkpoint_io.read_regular_file_bytes = counted_checkpoint
+                trainer_mod.rebuild_derived_caches = forbidden_rebuild  # type: ignore[assignment]
+                artifacts_mod._append_jsonl_no_read = counted_append  # type: ignore[assignment]
+                try:
+                    with (
+                        mock.patch.object(os, "open", guarded_os_open),
+                        mock.patch.object(builtins, "open", guarded_builtin_open),
+                        mock.patch.object(io, "open", guarded_io_open),
+                    ):
+                        assert_probe_paths_absent()
+                        pre_probe_target_snapshot = snapshot_tree(target)
+                        pre_probe_outside_snapshot = snapshot_tree(outside_probe_area)
+                        probe_results = assert_guard_non_vacuity()
+                        probe_results["target probe cleanup"] = "restored to byte/object-equivalent pre-probe tree"
+                        probe_results["outside probe cleanup"] = "restored to byte/object-equivalent pre-probe area"
+                        assert_probe_paths_absent()
+                        self.assertEqual(snapshot_tree(target), pre_probe_target_snapshot)
+                        self.assertEqual(snapshot_tree(outside_probe_area), pre_probe_outside_snapshot)
+                        head_digest, committed_payload = trainer_mod._commit_generation(
+                            out_dir=target,
+                            run=run,
+                            payload=payload,
+                            update_record=update_record,
+                            run_digest=chain.head.run_digest,
+                            parent_head=chain.head.head,
+                            previous_payload=resume_snapshot.checkpoint_payload,
+                            compatibility=run["compatibility"],
+                            learning_rate=run["optimizer"]["lr"],
+                        )
+                finally:
+                    artifact_io.read_regular_file_bytes = original_json_read
+                    checkpoint_io.read_regular_file_bytes = original_checkpoint_read
+                    trainer_mod.rebuild_derived_caches = original_rebuild  # type: ignore[assignment]
+                    artifacts_mod._append_jsonl_no_read = original_append  # type: ignore[assignment]
+
+                self.assertEqual(active_reader_stack, [])
+                self.assertEqual(head_digest, read_json_file(target / "latest.json")["head"])
+                self.assertEqual(committed_payload["completed_update"], next_update)
+                after = _cache_bytes(target)
+                expected_episode_append = b"".join(canonical_json_bytes(row) for row in update_record["episode_summaries"])
+                expected_update_append = canonical_json_bytes(update_record)
+                self.assertEqual(after["episodes.jsonl"], before["episodes.jsonl"] + expected_episode_append)
+                self.assertEqual(after["updates.jsonl"], before["updates.jsonl"] + expected_update_append)
+                _assert_derived_caches_match_clean_rebuild(self, target)
+                expected_labeled_read_multiset = Counter(
+                    {
+                        ("checkpoint", "<tx>/checkpoint.pt"): 2,
+                        ("json", "<tx>/update.json"): 1,
+                        ("json", "<tx>/sidecar.json"): 1,
+                        ("checkpoint", f"checkpoints/update-{next_update:08d}.pt"): 1,
+                        ("json", f"updates/update-{next_update:08d}.json"): 1,
+                        ("json", f"checkpoints/update-{next_update:08d}.json"): 1,
+                    }
+                )
+                expected_read_multiset = Counter({path: count for (_label, path), count in expected_labeled_read_multiset.items()})
+                actual_read_multiset = Counter(content_reads)
+                actual_labeled_read_multiset = Counter(labeled_content_reads)
+                self.assertEqual(actual_labeled_read_multiset, expected_labeled_read_multiset)
+                self.assertEqual(actual_read_multiset, expected_read_multiset)
+                forbidden_roots = {"run.json", "latest.json", "episodes.jsonl", "updates.jsonl", "summary.json"}
+                allowed_tx_reads = {"<tx>/checkpoint.pt", "<tx>/update.json", "<tx>/sidecar.json"}
+                allowed_final_reads = {
+                    f"checkpoints/update-{next_update:08d}.pt",
+                    f"updates/update-{next_update:08d}.json",
+                    f"checkpoints/update-{next_update:08d}.json",
+                }
+                for item in content_reads:
+                    self.assertNotIn(item, forbidden_roots, content_reads)
+                    self.assertFalse(item.startswith("updates/update-") and item not in allowed_final_reads, content_reads)
+                    self.assertFalse(item.startswith("checkpoints/update-") and item not in allowed_final_reads, content_reads)
+                    self.assertFalse(item.startswith("<tx>/") and item not in allowed_tx_reads, content_reads)
+                self.assertEqual(len(append_calls), 2)
+                self.assertEqual([call["boundary"] for call in append_calls], ["derived_episodes_append", "derived_updates_append"])
+                self.assertEqual([call["path"] for call in append_calls], ["episodes.jsonl", "updates.jsonl"])
+                self.assertEqual(append_calls[0]["data"], expected_episode_append)
+                self.assertEqual(append_calls[1]["data"], expected_update_append)
+                measurements[head] = {
+                    "read_count": len(content_reads),
+                    "read_multiset": dict(sorted(actual_read_multiset.items())),
+                    "labeled_read_multiset": {f"{label}:{path}": count for (label, path), count in sorted(actual_labeled_read_multiset.items())},
+                    "append_count": len(append_calls),
+                    "episode_append_bytes": len(expected_episode_append),
+                    "episode_append_sha256": hashlib.sha256(expected_episode_append).hexdigest(),
+                    "update_append_bytes": len(expected_update_append),
+                    "update_append_sha256": hashlib.sha256(expected_update_append).hexdigest(),
+                    "episode_rows": len(update_record["episode_summaries"]),
+                    "summary_bytes": len(after["summary.json"]),
+                    "probe_results": probe_results,
+                }
+
+            self.assertEqual({head: row["episode_rows"] for head, row in measurements.items()}, {1: 2, 4: 2, 16: 2, 32: 2})
+            self.assertEqual({head: row["read_count"] for head, row in measurements.items()}, {1: 7, 4: 7, 16: 7, 32: 7})
+            self.assertEqual({head: row["append_count"] for head, row in measurements.items()}, {1: 2, 4: 2, 16: 2, 32: 2})
 
     def test_later_episode_failure_leaves_latest_at_prior_head_and_no_rows(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -895,6 +1647,40 @@ class TrainerTest(unittest.TestCase):
                 train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1, learning_rate=0.002)
             with self.assertRaises(TypeError):
                 train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1, learning_rate=1)
+
+    def test_noop_resume_repairs_corrupt_truncated_deleted_and_partial_caches_exactly(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            clean = tmp / "clean"
+            train(
+                env_bin=launcher,
+                out_dir=clean,
+                base_seed=71501,
+                until_update=2,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            clean_cache = _cache_bytes(clean)
+            mutations = {
+                "corrupt": lambda path: path.write_bytes(b"not json cache\n"),
+                "truncate": lambda path: path.write_bytes(path.read_bytes()[: max(0, len(path.read_bytes()) // 2)]),
+                "delete": lambda path: path.unlink(),
+                "partial_append": lambda path: path.write_bytes(path.read_bytes() + b'{"partial":true'),
+            }
+            for cache_name in ("episodes.jsonl", "updates.jsonl", "summary.json"):
+                for mutation_name, mutate in mutations.items():
+                    with self.subTest(cache=cache_name, mutation=mutation_name):
+                        target = tmp / f"repair_{cache_name}_{mutation_name}".replace(".", "_")
+                        shutil.copytree(clean, target)
+                        mutate(target / cache_name)
+                        result = train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=2)
+                        self.assertEqual(result["completed_update"], 2)
+                        for name, data in clean_cache.items():
+                            self.assertEqual((target / name).read_bytes(), data, name)
+                        _assert_derived_caches_match_clean_rebuild(self, target)
 
     def test_transaction_faults_before_latest_replay_from_old_head(self) -> None:
         boundaries = [
@@ -992,6 +1778,302 @@ class TrainerTest(unittest.TestCase):
             self.assertEqual(result["completed_update"], 1)
             self.assertTrue((out / "episodes.jsonl").is_file())
 
+    def test_append_open_closes_descriptor_when_set_inheritable_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "episodes.jsonl"
+            path.write_bytes(b"")
+            identity = artifacts_mod._identity_from_lstat(path)
+            original_set_inheritable = artifacts_mod.os.set_inheritable
+            captured: dict[str, int] = {}
+
+            class SetInheritableFailure(RuntimeError):
+                pass
+
+            def failing_set_inheritable(fd: int, inheritable: bool) -> None:
+                captured["fd"] = fd
+                raise SetInheritableFailure("set_inheritable failed")
+
+            artifacts_mod.os.set_inheritable = failing_set_inheritable  # type: ignore[assignment]
+            try:
+                with self.assertRaises(SetInheritableFailure):
+                    artifacts_mod._open_append_no_follow(identity, boundary_prefix="derived_episodes_append")
+            finally:
+                artifacts_mod.os.set_inheritable = original_set_inheritable  # type: ignore[assignment]
+            with self.assertRaises(OSError):
+                os.fstat(captured["fd"])
+
+    def test_append_open_closes_descriptor_for_baseexception_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "episodes.jsonl"
+            path.write_bytes(b"")
+            identity = artifacts_mod._identity_from_lstat(path)
+            original_open = artifacts_mod.os.open
+            captured: dict[str, int] = {}
+
+            class BoundaryStop(BaseException):
+                pass
+
+            def counting_open(*args: Any, **kwargs: Any) -> int:
+                fd = original_open(*args, **kwargs)
+                captured["fd"] = fd
+                return fd
+
+            def injector(name: str, _path: Path | None) -> None:
+                if name == "derived_episodes_append_open_after":
+                    raise BoundaryStop()
+
+            previous = set_fault_injector(injector)
+            artifacts_mod.os.open = counting_open  # type: ignore[assignment]
+            try:
+                with self.assertRaises(BoundaryStop):
+                    artifacts_mod._open_append_no_follow(identity, boundary_prefix="derived_episodes_append")
+            finally:
+                set_fault_injector(previous)
+                artifacts_mod.os.open = original_open  # type: ignore[assignment]
+            with self.assertRaises(OSError):
+                os.fstat(captured["fd"])
+
+    def test_append_open_cleanup_close_failure_preserves_original_exception(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "episodes.jsonl"
+            path.write_bytes(b"")
+            identity = artifacts_mod._identity_from_lstat(path)
+            original_set_inheritable = artifacts_mod.os.set_inheritable
+            original_close = artifacts_mod.os.close
+            captured: dict[str, int] = {}
+
+            class OriginalFailure(RuntimeError):
+                pass
+
+            def failing_set_inheritable(fd: int, inheritable: bool) -> None:
+                captured["fd"] = fd
+                raise OriginalFailure("original failure")
+
+            def close_then_fail(fd: int) -> None:
+                original_close(fd)
+                raise OSError("close failure")
+
+            artifacts_mod.os.set_inheritable = failing_set_inheritable  # type: ignore[assignment]
+            artifacts_mod.os.close = close_then_fail  # type: ignore[assignment]
+            try:
+                with self.assertRaises(OriginalFailure):
+                    artifacts_mod._open_append_no_follow(identity, boundary_prefix="derived_episodes_append")
+            finally:
+                artifacts_mod.os.set_inheritable = original_set_inheritable  # type: ignore[assignment]
+                artifacts_mod.os.close = original_close  # type: ignore[assignment]
+            with self.assertRaises(OSError):
+                os.fstat(captured["fd"])
+
+    def test_successful_append_write_closes_owned_descriptor_once(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            path = Path(tmp_name) / "episodes.jsonl"
+            path.write_bytes(b"seed\n")
+            identity = artifacts_mod._identity_from_lstat(path)
+            original_open = artifacts_mod.os.open
+            original_close = artifacts_mod.os.close
+            state: dict[str, Any] = {"target_fd": None, "target_active": False, "target_closes": 0}
+
+            def counting_open(path_arg: str, *args: Any, **kwargs: Any) -> int:
+                fd = original_open(path_arg, *args, **kwargs)
+                if Path(path_arg) == identity.path:
+                    state["target_fd"] = fd
+                    state["target_active"] = True
+                return fd
+
+            def counting_close(fd: int) -> None:
+                if fd == state["target_fd"] and state["target_active"]:
+                    state["target_closes"] += 1
+                    state["target_active"] = False
+                original_close(fd)
+
+            artifacts_mod.os.open = counting_open  # type: ignore[assignment]
+            artifacts_mod.os.close = counting_close  # type: ignore[assignment]
+            try:
+                artifacts_mod._append_jsonl_no_read(identity, b"row\n", boundary_prefix="derived_episodes_append")
+            finally:
+                artifacts_mod.os.open = original_open  # type: ignore[assignment]
+                artifacts_mod.os.close = original_close  # type: ignore[assignment]
+            self.assertEqual(state["target_closes"], 1)
+            with self.assertRaises(OSError):
+                os.fstat(state["target_fd"])
+            self.assertEqual(path.read_bytes(), b"seed\nrow\n")
+
+    def test_incremental_jsonl_short_writes_complete_without_truncation(self) -> None:
+        for cache_name, boundary in (
+            ("episodes.jsonl", "derived_episodes_append_write_before"),
+            ("updates.jsonl", "derived_updates_append_write_before"),
+        ):
+            with self.subTest(cache_name=cache_name):
+                with tempfile.TemporaryDirectory() as tmp_name:
+                    tmp = Path(tmp_name)
+                    launcher = fake_launcher(tmp, "train_pair")
+                    out = tmp / "run"
+                    train(
+                        env_bin=launcher,
+                        out_dir=out,
+                        base_seed=71501,
+                        until_update=0,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+                    before = (out / cache_name).read_bytes()
+                    original_write = artifacts_mod.os.write
+                    patched = {"armed": False, "used": False}
+
+                    def injector(name: str, path: Path | None) -> None:
+                        if name == boundary and path is not None and path.name == cache_name and not patched["armed"]:
+                            patched["armed"] = True
+
+                            def short_write(fd: int, data: bytes) -> int:
+                                if patched["used"]:
+                                    return original_write(fd, data)
+                                patched["used"] = True
+                                prefix = data[: max(1, len(data) // 3)]
+                                return original_write(fd, prefix)
+
+                            artifacts_mod.os.write = short_write  # type: ignore[assignment]
+
+                    previous = set_fault_injector(injector)
+                    try:
+                        result = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+                    finally:
+                        set_fault_injector(previous)
+                        artifacts_mod.os.write = original_write  # type: ignore[assignment]
+                    self.assertTrue(patched["used"])
+                    self.assertEqual(result["completed_update"], 1)
+                    self.assertTrue((out / cache_name).read_bytes().startswith(before))
+                    _assert_derived_caches_match_clean_rebuild(self, out)
+
+    def test_incremental_jsonl_partial_write_failure_repairs_on_resume(self) -> None:
+        for cache_name, boundary in (
+            ("episodes.jsonl", "derived_episodes_append_write_before"),
+            ("updates.jsonl", "derived_updates_append_write_before"),
+        ):
+            with self.subTest(cache_name=cache_name):
+                with tempfile.TemporaryDirectory() as tmp_name:
+                    tmp = Path(tmp_name)
+                    launcher = fake_launcher(tmp, "train_pair")
+                    control = tmp / "control"
+                    train(
+                        env_bin=launcher,
+                        out_dir=control,
+                        base_seed=71501,
+                        until_update=2,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+                    out = tmp / "run"
+                    train(
+                        env_bin=launcher,
+                        out_dir=out,
+                        base_seed=71501,
+                        until_update=0,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+                    before = (out / cache_name).read_bytes()
+                    original_write = artifacts_mod.os.write
+                    patched = {"armed": False, "calls": 0}
+
+                    def injector(name: str, path: Path | None) -> None:
+                        if name == boundary and path is not None and path.name == cache_name and not patched["armed"]:
+                            patched["armed"] = True
+
+                            def partial_then_fail(fd: int, data: bytes) -> int:
+                                patched["calls"] += 1
+                                if patched["calls"] == 1:
+                                    prefix = data[: max(1, len(data) // 3)]
+                                    return original_write(fd, prefix)
+                                raise OSError("injected partial append failure")
+
+                            artifacts_mod.os.write = partial_then_fail  # type: ignore[assignment]
+
+                    previous = set_fault_injector(injector)
+                    try:
+                        with self.assertRaises(OSError):
+                            train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+                    finally:
+                        set_fault_injector(previous)
+                        artifacts_mod.os.write = original_write  # type: ignore[assignment]
+                    self.assertGreaterEqual(patched["calls"], 2)
+                    self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
+                    self.assertTrue((out / cache_name).read_bytes().startswith(before))
+                    recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+                    self.assertEqual(recovered["completed_update"], 1)
+                    _assert_derived_caches_match_clean_rebuild(self, out)
+                    continued = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
+                    self.assertEqual(continued["completed_update"], 2)
+                    _assert_generation_equal(self, out, control, 2)
+
+    def test_incremental_jsonl_zero_progress_write_failure_repairs_on_resume(self) -> None:
+        for cache_name, boundary in (
+            ("episodes.jsonl", "derived_episodes_append_write_before"),
+            ("updates.jsonl", "derived_updates_append_write_before"),
+        ):
+            with self.subTest(cache_name=cache_name):
+                with tempfile.TemporaryDirectory() as tmp_name:
+                    tmp = Path(tmp_name)
+                    launcher = fake_launcher(tmp, "train_pair")
+                    control = tmp / "control"
+                    train(
+                        env_bin=launcher,
+                        out_dir=control,
+                        base_seed=71501,
+                        until_update=1,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+                    control_result = train(env_bin=launcher, out_dir=control, resume=control / "latest.json", until_update=1)
+                    out = tmp / "run"
+                    train(
+                        env_bin=launcher,
+                        out_dir=out,
+                        base_seed=71501,
+                        until_update=0,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+                    before = _cache_bytes(out)
+                    original_write = artifacts_mod.os.write
+                    patched = {"armed": False, "used": False}
+
+                    def injector(name: str, path: Path | None) -> None:
+                        if name == boundary and path is not None and path.name == cache_name and not patched["armed"]:
+                            patched["armed"] = True
+
+                            def zero_write(fd: int, data: bytes) -> int:
+                                if patched["used"]:
+                                    return original_write(fd, data)
+                                patched["used"] = True
+                                return 0
+
+                            artifacts_mod.os.write = zero_write  # type: ignore[assignment]
+
+                    previous = set_fault_injector(injector)
+                    try:
+                        with self.assertRaises(OSError):
+                            train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+                    finally:
+                        set_fault_injector(previous)
+                        artifacts_mod.os.write = original_write  # type: ignore[assignment]
+                    self.assertTrue(patched["used"])
+                    self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
+                    self.assertEqual((out / cache_name).read_bytes(), before[cache_name])
+                    recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+                    self.assertEqual(recovered, control_result)
+                    self.assertEqual(_cache_bytes(out), _cache_bytes(control))
+                    _assert_generation_equal(self, out, control, 1)
+
     def test_latest_after_os_exit_leaves_debris_and_recovers_exactly(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
@@ -1062,25 +2144,32 @@ class TrainerTest(unittest.TestCase):
             ("json_replace_before", "latest.json", 0),
             ("latest_replace_before", "-", 0),
             ("latest_replace_after", "-", 1),
-            ("json_save", "episodes.jsonl", 0),
-            ("json_flush", "episodes.jsonl", 0),
-            ("json_fsync", "episodes.jsonl", 0),
-            ("json_replace_before", "episodes.jsonl", 0),
-            ("json_save", "updates.jsonl", 0),
-            ("json_flush", "updates.jsonl", 0),
-            ("json_fsync", "updates.jsonl", 0),
-            ("json_replace_before", "updates.jsonl", 0),
-            ("json_save", "summary.json", 0),
-            ("json_flush", "summary.json", 0),
-            ("json_fsync", "summary.json", 0),
-            ("json_replace_before", "summary.json", 0),
+            ("derived_episodes_append_open_before", "episodes.jsonl", 1),
+            ("derived_episodes_append_open_after", "episodes.jsonl", 1),
+            ("derived_episodes_append_write_before", "episodes.jsonl", 1),
+            ("derived_episodes_append_write_after", "episodes.jsonl", 1),
+            ("derived_episodes_append_fsync_before", "episodes.jsonl", 1),
+            ("derived_episodes_append_fsync_after", "episodes.jsonl", 1),
+            ("derived_updates_append_open_before", "updates.jsonl", 1),
+            ("derived_updates_append_open_after", "updates.jsonl", 1),
+            ("derived_updates_append_write_before", "updates.jsonl", 1),
+            ("derived_updates_append_write_after", "updates.jsonl", 1),
+            ("derived_updates_append_fsync_before", "updates.jsonl", 1),
+            ("derived_updates_append_fsync_after", "updates.jsonl", 1),
+            ("json_save", "summary.json", 1),
+            ("json_flush", "summary.json", 1),
+            ("json_fsync", "summary.json", 1),
+            ("json_replace_before", "summary.json", 1),
+            ("json_replace_after", "summary.json", 1),
+            ("derived_summary_publish_before", "summary.json", 1),
+            ("derived_summary_publish_after", "summary.json", 1),
             ("post_latest_cleanup_before", "-", 1),
         ]
         with tempfile.TemporaryDirectory() as tmp_name:
             tmp = Path(tmp_name)
             launcher = fake_launcher(tmp, "train_pair")
             control = tmp / "control"
-            train(
+            control_result = train(
                 env_bin=launcher,
                 out_dir=control,
                 base_seed=71501,
@@ -1108,10 +2197,17 @@ class TrainerTest(unittest.TestCase):
                     self.assertEqual(read_json_file(out / "latest.json")["update"], expected_head)
                     recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=expected_head)
                     self.assertEqual(recovered["completed_update"], expected_head)
-                    _assert_generation_equal(self, out, control, expected_head)
+                    expected = tmp / f"expected_{index}"
+                    shutil.copytree(control, expected)
+                    _trim_to_head(expected, expected_head)
+                    self.assertEqual(_cache_bytes(out), _cache_bytes(expected))
+                    _assert_generation_equal(self, out, expected, expected_head)
                     continued = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
                     self.assertEqual(continued["completed_update"], 2)
+                    self.assertEqual(continued, control_result)
+                    self.assertEqual(_cache_bytes(out), _cache_bytes(control))
                     _assert_generation_equal(self, out, control, 2)
+                    _assert_generation_logical_equal(self, out, control, 2)
 
     def test_recognized_transaction_debris_is_removed_but_malformed_trees_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1271,6 +2367,172 @@ class TrainerTest(unittest.TestCase):
                         self.fail("Windows junction coverage could not create mklink /J")
 
                 run_case("updates_junction", updates_junction)
+
+    def test_preflight_derived_cache_append_rejects_synthetic_symlink_stat_without_mutating_caches(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            out = Path(tmp_name) / "out"
+            out.mkdir()
+            (out / "episodes.jsonl").write_bytes(b'{"episode":0}\n')
+            (out / "updates.jsonl").write_bytes(b'{"update":0}\n')
+            (out / "summary.json").write_bytes(b'{"generations":1}\n')
+            before = _cache_bytes(out)
+            path_class = type(out)
+            original_lstat = path_class.lstat
+            synthetic_link = os.stat_result((stat.S_IFLNK | 0o777, 0, 0, 1, 0, 0, 0, 0, 0, 0))
+
+            for cache_name in ("episodes.jsonl", "updates.jsonl", "summary.json"):
+                cache_abs = os.path.abspath(os.fspath(out / cache_name))
+
+                def synthetic_lstat(self: Path, target_abs: str = cache_abs) -> os.stat_result:
+                    if os.path.abspath(os.fspath(self)) == target_abs:
+                        return synthetic_link
+                    return original_lstat(self)
+
+                with self.subTest(cache=cache_name):
+                    with mock.patch.object(path_class, "lstat", synthetic_lstat):
+                        with self.assertRaisesRegex(ValueError, "regular non-link file"):
+                            artifacts_mod.preflight_derived_cache_append(out)
+                    self.assertEqual(_cache_bytes(out), before)
+
+    def test_steady_state_cache_aliases_fail_before_authoritative_or_cache_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+            outside = tmp / "outside"
+            outside.mkdir()
+            sentinel = outside / "sentinel.txt"
+            sentinel.write_bytes(b"external-sentinel")
+            symlink_capable = False
+            if hasattr(os, "symlink"):
+                probe = tmp / "symlink-capability-probe"
+                try:
+                    os.symlink(sentinel, probe)
+                except (OSError, NotImplementedError):
+                    symlink_capable = False
+                else:
+                    symlink_capable = True
+                    probe.unlink()
+
+            def run_case(cache_name: str, alias_kind: str, mutator) -> None:  # type: ignore[no-untyped-def]
+                target = tmp / f"{cache_name}_{alias_kind}".replace(".", "_")
+                shutil.copytree(source, target)
+                mutator(target / cache_name)
+                before_target = _snapshot_tree(target)
+                before_outside = _snapshot_tree(outside)
+                with self.subTest(cache=cache_name, alias=alias_kind):
+                    with self.assertRaises((ValueError, FileNotFoundError, RuntimeError)):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=1)
+                    self.assertFalse(env_marker.exists())
+                    self.assertEqual(_snapshot_tree(target), before_target)
+                    self.assertEqual(_snapshot_tree(outside), before_outside)
+                    self.assertFalse((target / "updates" / "update-00000001.json").exists())
+                    self.assertEqual(read_json_file(target / "latest.json")["update"], 0)
+
+            for cache_name in ("episodes.jsonl", "updates.jsonl", "summary.json"):
+                if symlink_capable:
+                    def symlink_case(path: Path, target: Path = sentinel) -> None:
+                        path.unlink()
+                        os.symlink(target, path)
+
+                    run_case(cache_name, "symlink", symlink_case)
+
+                def hardlink_case(path: Path, name: str = cache_name) -> None:
+                    alias = outside / f"{name}.hardlink"
+                    alias.write_bytes(path.read_bytes())
+                    path.unlink()
+                    os.link(alias, path)
+
+                run_case(cache_name, "hardlink", hardlink_case)
+
+                def directory_case(path: Path) -> None:
+                    path.unlink()
+                    path.mkdir()
+
+                run_case(cache_name, "directory", directory_case)
+
+                if os.name == "nt":
+                    def junction_case(path: Path) -> None:
+                        path.unlink()
+                        completed = subprocess.run(
+                            ["cmd", "/c", "mklink", "/J", str(path), str(outside)],
+                            stdout=subprocess.DEVNULL,
+                            stderr=subprocess.DEVNULL,
+                            check=False,
+                        )
+                        if completed.returncode != 0:
+                            self.fail("Windows junction coverage could not create mklink /J")
+
+                    run_case(cache_name, "junction", junction_case)
+
+    def test_cache_replacement_after_latest_fails_closed_and_resume_repairs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            launcher = fake_launcher(tmp, "train_pair")
+            control = tmp / "control"
+            train(
+                env_bin=launcher,
+                out_dir=control,
+                base_seed=71501,
+                until_update=2,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            out = tmp / "run"
+            train(
+                env_bin=launcher,
+                out_dir=out,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            outside = tmp / "outside"
+            outside.mkdir()
+            sentinel = outside / "episodes.alias"
+            sentinel.write_bytes(b"external-sentinel")
+            fired = {"value": False}
+
+            def injector(name: str, _path: Path | None) -> None:
+                if name == "latest_replace_after" and not fired["value"]:
+                    fired["value"] = True
+                    (out / "episodes.jsonl").unlink()
+                    os.link(sentinel, out / "episodes.jsonl")
+
+            previous = set_fault_injector(injector)
+            try:
+                with self.assertRaises(ValueError):
+                    train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+            finally:
+                set_fault_injector(previous)
+            self.assertTrue(fired["value"])
+            self.assertEqual(read_json_file(out / "latest.json")["update"], 1)
+            self.assertEqual(sentinel.read_bytes(), b"external-sentinel")
+            (out / "episodes.jsonl").unlink()
+            (out / "episodes.jsonl").write_bytes(b"corrupt regular cache\n")
+            recovered = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=1)
+            self.assertEqual(recovered["completed_update"], 1)
+            _assert_derived_caches_match_clean_rebuild(self, out)
+            continued = train(env_bin=launcher, out_dir=out, resume=out / "latest.json", until_update=2)
+            self.assertEqual(continued["completed_update"], 2)
+            _assert_generation_equal(self, out, control, 2)
 
     def test_authoritative_hardlink_matrix_fails_before_env_launch_and_preserves_alias(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
@@ -1435,20 +2697,28 @@ class TrainerTest(unittest.TestCase):
             )
             case("missing_reachable_generation", lambda p: (p / "updates" / "update-00000000.json").unlink())
             case("unknown_generation_name", lambda p: (p / "updates" / "update-1.json").write_text("{}", encoding="utf-8"))
-            case("old_v7_run_schema_rejected", lambda p: write_json_atomic(p / "run.json", {**read_json_file(p / "run.json"), "schema": "kernel_rl_train_run/v7"}))
-            case(
-                "old_v5_artifact_boundary_rejected",
-                lambda p: write_json_atomic(
-                    p / "run.json",
-                    {
-                        **read_json_file(p / "run.json"),
-                        "artifact_boundary": {
-                            **read_json_file(p / "run.json")["artifact_boundary"],
-                            "schema": "kernel_rl_artifact_boundary/v5",
+            for version in range(1, 12):
+                case(
+                    f"old_v{version}_run_schema_rejected",
+                    lambda p, version=version: write_json_atomic(
+                        p / "run.json",
+                        {**read_json_file(p / "run.json"), "schema": f"kernel_rl_train_run/v{version}"},
+                    ),
+                )
+            for version in range(1, 9):
+                case(
+                    f"old_v{version}_artifact_boundary_rejected",
+                    lambda p, version=version: write_json_atomic(
+                        p / "run.json",
+                        {
+                            **read_json_file(p / "run.json"),
+                            "artifact_boundary": {
+                                **read_json_file(p / "run.json")["artifact_boundary"],
+                                "schema": f"kernel_rl_artifact_boundary/v{version}",
+                            },
                         },
-                    },
-                ),
-            )
+                    ),
+                )
             case(
                 "checkpoint_counter_drift",
                 lambda p: (
@@ -1458,6 +2728,196 @@ class TrainerTest(unittest.TestCase):
                     ))(load_checkpoint_file(p / "checkpoints" / "update-00000001.pt"))
                 ),
             )
+
+    def test_schema_and_privacy_manifest_rejections_fail_before_env_launch_without_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            env_marker = tmp / "env-started.marker"
+            launcher = fake_launcher(tmp, "train_pair", {"FAKE_START_MARKER": str(env_marker)})
+            source = tmp / "source"
+            train(
+                env_bin=launcher,
+                out_dir=source,
+                base_seed=71501,
+                until_update=0,
+                batch_episodes=2,
+                learning_rate=0.001,
+                value_coef=0.5,
+                max_decisions=8,
+            )
+            if env_marker.exists():
+                env_marker.unlink()
+
+            def mutate_run(path: Path, mutator) -> None:  # type: ignore[no-untyped-def]
+                run = read_json_file(path / "run.json")
+                mutator(run)
+                write_json_atomic(path / "run.json", run)
+
+            cases = []
+            privacy_rejections = [
+                ("posix_spaced_slash", "artifact / home/jack"),
+                ("posix_multi_spaced_slash", "artifact / home / jack"),
+                ("posix_multiword_spaced_slash", "artifact / home and / jack"),
+                ("diagnostic_multiword_spaced_slash", "diagnostic=x / home with spaces / jack"),
+                ("tab_multi_spaced_slash", "artifact\t/\thome with spaces\t/\tjack"),
+                ("chained_division", "a / b / c"),
+                ("tab_chained_division", "a\t/\tb\t/\tc"),
+                ("chained_mixed_separator", "a / b \\ c"),
+                ("tab_chained_mixed_separator", "a\t/\tb\t\\\tc"),
+                ("backslash_root_relative", "diagnostic=x \\ secret\\file"),
+                ("backslash_root_relative_prose", "ordinary \\ secret\\file"),
+                ("root_relative_dot", r"\.ssh"),
+                ("root_relative_dot_assignment", r"artifact=\.ssh"),
+                ("double_root_relative_dot", r"\\.ssh"),
+                ("root_relative_question", r"\?secret"),
+                ("root_relative_question_assignment", r"artifact=\?secret"),
+                ("double_root_relative_question", r"\\?secret"),
+                ("root_relative_dot_nested", r"\.\secret"),
+                ("root_relative_dotdot_nested", r"\..\secret"),
+                ("authorityless_http_zero_slash", "http:example.test"),
+                ("authorityless_http_path", "http:example.test/path"),
+                ("authorityless_https_upper_zero_slash", "HTTPS:example.test"),
+                ("authorityless_https_upper_path", "HTTPS:example.test/path"),
+                ("authorityless_http_one_slash", "http:/example.test/path"),
+                ("authorityless_http_multi_slash", "http:///example.test/path"),
+                ("embedded_http_assignment", "diagnostic=http:example.test/path"),
+                ("embedded_http_punctuation", "note;http:example.test/path"),
+                ("embedded_http_parenthesized", "(http:example.test/path)"),
+                ("encoded_posix_http", "http:%2Fhome%2Fjack"),
+                ("encoded_windows_https", "HTTPS:C:%5CUsers%5CJack"),
+                ("unicode_casefold_sharp_s_encoded_http", "\u00df;http:%2Fhome%2Fjack"),
+                ("unicode_casefold_dotted_i_authorityless_http", "\u0130;http:example.test/path"),
+                ("unicode_casefold_ligature_encoded_https", "\ufb03=HTTPS:%2Fhome%2Fjack"),
+                ("empty_file_uri", "file:"),
+                ("encoded_posix_file_uri", "file:%2Fhome%2Fuser"),
+                ("encoded_unc_file_uri", "FILE:%2F%2Fserver%2Fshare"),
+                ("encoded_windows_file_uri", "file:C:%5CUsers%5Cuser"),
+                ("embedded_file_assignment", "diagnostic=file:%2Fhome%2Fuser"),
+                ("embedded_file_punctuation", "note;FILE:C:%5CUsers%5Cuser"),
+                ("unicode_casefold_sharp_s_file_uri", "\u00df;file:%2Fhome%2Fuser"),
+                ("unicode_casefold_dotted_i_file_uri", "\u0130;FILE:C:%5CUsers%5Cuser"),
+                ("unicode_casefold_ligature_file_uri", "\ufb03=FiLe:%2F%2Fserver%2Fshare"),
+                ("malformed_userinfo_uri", "https://user@example.test/path"),
+            ]
+            for name, text in privacy_rejections:
+                cases.append(
+                    (
+                        f"{name}_value",
+                        lambda p, text=text: mutate_run(p, lambda run: run["algorithm"].__setitem__("loss", text)),
+                        "forbidden absolute path",
+                    )
+                )
+                cases.append(
+                    (
+                        f"{name}_key",
+                        lambda p, text=text: mutate_run(p, lambda run: run["algorithm"].__setitem__(text, "x")),
+                        "forbidden training artifact field",
+                    )
+                )
+            for version in range(1, 12):
+                cases.append(
+                    (
+                        f"old_v{version}_run_schema",
+                        lambda p, version=version: mutate_run(p, lambda run: run.__setitem__("schema", f"kernel_rl_train_run/v{version}")),
+                        "schema mismatch",
+                    )
+                )
+            for version in range(1, 9):
+                cases.append(
+                    (
+                        f"old_v{version}_artifact_boundary",
+                        lambda p, version=version: mutate_run(
+                            p,
+                            lambda run: run["artifact_boundary"].__setitem__("schema", f"kernel_rl_artifact_boundary/v{version}"),
+                        ),
+                        "training contract drift",
+                    )
+                )
+            for name, mutator, pattern in cases:
+                target = tmp / name
+                shutil.copytree(source, target)
+                mutator(target)
+                before = _snapshot_tree(target)
+                with self.subTest(name=name):
+                    with self.assertRaisesRegex(ValueError, pattern):
+                        train(env_bin=launcher, out_dir=target, resume=target / "latest.json", until_update=0)
+                    self.assertFalse(env_marker.exists())
+                    self.assertEqual(_snapshot_tree(target), before)
+
+    def test_environment_file_uri_kernel_version_fails_before_run_persistence_without_tree_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_name:
+            tmp = Path(tmp_name)
+            out = tmp / "run"
+            out.mkdir()
+            with OutputLock(out):
+                pass
+            before = _snapshot_tree(out)
+            env_marker = tmp / "env-started.marker"
+            script = tmp / "bad_kernel_version_env.py"
+            script.write_text(
+                """
+from __future__ import annotations
+
+import json
+import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path.cwd() / "kernel/python/tests"))
+from fixtures import decision_response
+
+marker = os.environ.get("BAD_KERNEL_VERSION_MARKER")
+if marker:
+    Path(marker).write_text("started\\n", encoding="utf-8")
+
+for line in sys.stdin:
+    request = json.loads(line)
+    version = os.environ["BAD_KERNEL_VERSION"]
+    response = decision_response(request["request_id"], request["episode_id"], 0, actor="p0")
+    response["provenance"]["kernel_version"] = version
+    response["observation"]["kernel_version"] = version
+    sys.stdout.write(json.dumps(response, separators=(",", ":")) + "\\n")
+    sys.stdout.flush()
+""",
+                encoding="utf-8",
+            )
+            if os.name == "nt":
+                launcher = tmp / "bad_kernel_version_env.cmd"
+                launcher.write_text(f'@echo off\n"{sys.executable}" "{script}"\n', encoding="utf-8")
+            else:
+                launcher = tmp / "bad_kernel_version_env.sh"
+                launcher.write_text(f'#!/usr/bin/env sh\nexec "{sys.executable}" "{script}"\n', encoding="utf-8")
+                launcher.chmod(0o700)
+
+            old_version = os.environ.get("BAD_KERNEL_VERSION")
+            old_marker = os.environ.get("BAD_KERNEL_VERSION_MARKER")
+            os.environ["BAD_KERNEL_VERSION"] = "file:%2Fhome%2Fuser"
+            os.environ["BAD_KERNEL_VERSION_MARKER"] = str(env_marker)
+            try:
+                with self.assertRaisesRegex(ValueError, "forbidden absolute path"):
+                    train(
+                        env_bin=launcher,
+                        out_dir=out,
+                        base_seed=71501,
+                        until_update=0,
+                        batch_episodes=2,
+                        learning_rate=0.001,
+                        value_coef=0.5,
+                        max_decisions=8,
+                    )
+            finally:
+                if old_version is None:
+                    os.environ.pop("BAD_KERNEL_VERSION", None)
+                else:
+                    os.environ["BAD_KERNEL_VERSION"] = old_version
+                if old_marker is None:
+                    os.environ.pop("BAD_KERNEL_VERSION_MARKER", None)
+                else:
+                    os.environ["BAD_KERNEL_VERSION_MARKER"] = old_marker
+            self.assertTrue(env_marker.is_file())
+            self.assertEqual(_snapshot_tree(out), before)
+            for name in ("run.json", "latest.json", "updates", "checkpoints", "episodes.jsonl", "updates.jsonl", "summary.json"):
+                self.assertFalse((out / name).exists(), name)
 
     def test_subprocess_continuous_split_and_future_exact_without_pt_byte_equality(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_name:
