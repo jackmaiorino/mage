@@ -9925,12 +9925,17 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
             pass(game);
         } else {
-            if (ACTIVATION_DIAG) {
+            // Capture the fail-close contract before any activation diagnostic
+            // can expose the selected ability, source state, or an exception.
+            boolean failClosedActivation = failClosedOnActivationFailure();
+            boolean activationDiagnostics = ACTIVATION_DIAG
+                    && activationFailureDiagnosticsAllowed(failClosedActivation);
+            if (activationDiagnostics) {
                 RLTrainer.threadLocalLogger.get().info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
             }
 
             // Double-check canActivate status right before activation
-            if (ACTIVATION_DIAG) {
+            if (activationDiagnostics) {
                 ActivatedAbility.ActivationStatus preActivateStatus = ability.canActivate(this.getId(), game);
                 MageObject sourceObj = game.getObject(ability.getSourceId());
                 String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
@@ -9945,7 +9950,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             // CRITICAL FIX: getPlayable() returns abilities from a COPIED game (createSimulationForPlayableCalc)
             // We need to get a fresh ability from the REAL game's object to avoid stale state issues
             ActivatedAbility freshAbility = resolveFreshAbility(ability, game);
-            if (ACTIVATION_DIAG && freshAbility != ability) {
+            if (activationDiagnostics && freshAbility != ability) {
                 RLTrainer.threadLocalLogger.get().info(
                         "FRESH-ABILITY: Got fresh ability from current game state");
             }
@@ -9954,7 +9959,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             currentAbility = freshAbility;
 
             // Log BEFORE attempting activation to capture pre-activation state
-            if (ACTIVATION_DIAG) {
+            if (activationDiagnostics) {
                 MageObject sourceObj = game.getObject(freshAbility.getSourceId());
                 String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
                 boolean sourceIsTapped = sourceObj instanceof mage.game.permanent.Permanent
@@ -9977,7 +9982,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             for (mage.abilities.costs.Cost cost : freshAbility.getCosts()) {
                 if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
                     abilitySourceToExcludeFromMana = freshAbility.getSourceId();
-                    if (ACTIVATION_DIAG) {
+                    if (activationDiagnostics) {
                         RLTrainer.threadLocalLogger.get().info(
                                 "TAP-SOURCE-COST: Will exclude source " + freshAbility.getSourceId() + " from mana producers");
                     }
@@ -10005,7 +10010,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                         if (!perm.getId().equals(freshAbility.getSourceId())) {
                             tapTargetCostReservations.add(perm.getId());
                             reserved++;
-                            if (ACTIVATION_DIAG) {
+                            if (activationDiagnostics) {
                                 RLTrainer.threadLocalLogger.get().info(
                                         "TAP-TARGET-COST: Reserved " + perm.getName() + " (" + perm.getId() + ") for TapTargetCost");
                             }
@@ -10015,14 +10020,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             // Activate using the fresh ability from the real game
-            if (ACTIVATION_DIAG) {
+            if (activationDiagnostics) {
                 RLTrainer.threadLocalLogger.get().info(
                         "CALLING: super.activateAbility() for " + freshAbility.getClass().getSimpleName());
             }
 
             // Enable activation tracing to capture all callbacks during activation
             activationTrace.get().clear();
-            traceEnabled.set(true);
+            traceEnabled.set(activationFailureDiagnosticsAllowed(failClosedActivation));
             
             // Pre-activation diagnostic trace
             ActivatedAbility.ActivationStatus preStatus = freshAbility.canActivate(this.getId(), game);
@@ -10042,18 +10047,30 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 activationResult = super.activateAbility(freshAbility, game);
                 trace("ACT: activateAbility returned " + activationResult);
             } catch (Exception e) {
-                trace("ACT: activateAbility threw " + e.getClass().getName() + ": " + e.getMessage());
                 activationResult = false;
                 activationException = e;
-                RLTrainer.threadLocalLogger.get().error(
-                        "ACTIVATION THREW EXCEPTION: " + e.getClass().getName() + ": " + e.getMessage());
-                e.printStackTrace();
+                // Benchmark fail-close must be checked before any exception
+                // text reaches trace, logger, or stderr. Production retains
+                // the legacy diagnostics exactly.
+                if (activationFailureDiagnosticsAllowed(failClosedActivation)) {
+                    trace("ACT: activateAbility threw " + e.getClass().getName() + ": " + e.getMessage());
+                    RLTrainer.threadLocalLogger.get().error(
+                            "ACTIVATION THREW EXCEPTION: " + e.getClass().getName() + ": " + e.getMessage());
+                    e.printStackTrace();
+                }
             } finally {
                 // Disable tracing after activation completes (success or failure)
                 traceEnabled.set(false);
             }
 
-            if (ACTIVATION_DIAG && !activationResult) {
+            // This guard precedes every post-failure diagnostic/logging path.
+            if (!activationResult && failClosedActivation) {
+                int failureCount = RL_ACTIVATION_FAILURES.incrementAndGet();
+                throw new IllegalStateException(
+                        "strict player activation failed; failure_count=" + failureCount);
+            }
+
+            if (activationDiagnostics && !activationResult) {
                 // Try to understand WHY it failed - check source state AFTER failure
                 mage.game.permanent.Permanent sourcePermAfter = game.getPermanent(freshAbility.getSourceId());
                 RLTrainer.threadLocalLogger.get().error(
@@ -10083,7 +10100,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 }
             }
 
-            if (ACTIVATION_DIAG) {
+            if (activationDiagnostics) {
                 RLTrainer.threadLocalLogger.get().info(String.format(
                         "ACTIVATION RESULT: %s", activationResult
                 ));
@@ -10133,6 +10150,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 pass(game);
             }
         }
+    }
+
+    /** Override only for isolated validation/benchmark players. */
+    protected boolean failClosedOnActivationFailure() {
+        return false;
+    }
+
+    static boolean activationFailureDiagnosticsAllowed(boolean failClosedActivation) {
+        return !failClosedActivation;
     }
 
     private static final boolean FORCEPASS_TELEMETRY = EnvConfig.bool("RL_FORCEPASS_TELEMETRY", false);
