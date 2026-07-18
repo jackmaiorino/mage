@@ -25,6 +25,12 @@ class CapturedFile:
     sha256: str
 
 
+@dataclasses.dataclass(frozen=True)
+class CapturedJson:
+    value: dict[str, Any]
+    file: CapturedFile
+
+
 MAX_RUN_JSON_BYTES = 256 * 1024
 MAX_SMALL_JSON_BYTES = 16 * 1024
 MAX_UPDATE_JSON_BYTES = 16 * 1024 * 1024
@@ -64,7 +70,6 @@ FORBIDDEN_TRAINING_JSON_KEYS = {
     "updated_at",
 }
 
-_FILE_URI_RE = re.compile(r"file://", re.IGNORECASE)
 _SCHEMA_REF_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]*#/properties(?:/[A-Za-z0-9_.-]+)+$")
 _DNS_LABEL_RE = re.compile(r"^[A-Za-z0-9-]{1,63}$")
 _ASCII_PORT_RE = re.compile(r"^[0-9]+$")
@@ -168,6 +173,52 @@ def _validate_json_tree(value: Any, context: str = "$") -> None:
 def canonical_json_bytes(value: dict[str, Any]) -> bytes:
     _validate_json_tree(value)
     return json.dumps(value, ensure_ascii=True, allow_nan=False, sort_keys=True, separators=(",", ":")).encode("utf-8") + b"\n"
+
+
+def json_values_equal_strict(left: Any, right: Any) -> bool:
+    """Compare JSON-like values recursively without bool/int/float coercion."""
+
+    if type(left) is not type(right):
+        return False
+    if type(left) is dict:
+        if set(left) != set(right):
+            return False
+        return all(json_values_equal_strict(left[key], right[key]) for key in left)
+    if type(left) is list:
+        return len(left) == len(right) and all(
+            json_values_equal_strict(left_item, right_item)
+            for left_item, right_item in zip(left, right)
+        )
+    if left is None or type(left) in (str, bool, int, float):
+        return bool(left == right)
+    return False
+
+
+def parse_canonical_json_bytes(
+    data: bytes,
+    *,
+    source: str = "JSON artifact",
+    max_bytes: int = MAX_DEFAULT_JSON_BYTES,
+) -> dict[str, Any]:
+    """Parse one bounded canonical JSON object already captured as bytes.
+
+    This is the byte-oriented counterpart to :func:`read_captured_json_file`.
+    It is useful for canonical JSONL readers that must capture a regular file
+    once and then validate each row without reopening the file.
+    """
+
+    if type(data) is not bytes:
+        raise TypeError("data must be bytes")
+    if type(max_bytes) is not int or max_bytes <= 0:
+        raise ValueError("max_bytes must be a positive integer and not bool")
+    if type(source) is not str or not source:
+        raise ValueError("source must be a nonempty string")
+    if len(data) > max_bytes:
+        raise ValueError(f"JSON artifact exceeds byte limit: {source}")
+    value = _parse_json_bytes(data, source)
+    if data != canonical_json_bytes(value):
+        raise ValueError(f"JSON artifact {source} is not canonical sorted ASCII JSON")
+    return value
 
 
 def _preflight_json_bytes(data: bytes) -> None:
@@ -305,17 +356,30 @@ def read_json_file(
     max_bytes: int = MAX_DEFAULT_JSON_BYTES,
     require_canonical: bool = True,
 ) -> dict[str, Any]:
+    return read_captured_json_file(path, max_bytes=max_bytes, require_canonical=require_canonical).value
+
+
+def read_captured_json_file(
+    path: str | Path,
+    *,
+    max_bytes: int = MAX_DEFAULT_JSON_BYTES,
+    require_canonical: bool = True,
+) -> CapturedJson:
     captured = read_regular_file_bytes(path, max_bytes=max_bytes, allow_empty=False)
     value = _parse_json_bytes(captured.data, path)
     if require_canonical and captured.data != canonical_json_bytes(value):
         raise ValueError(f"JSON artifact {path} is not canonical sorted ASCII JSON")
-    return value
+    return CapturedJson(value=value, file=captured)
 
 
 def read_authoritative_json(path: str | Path, kind: str) -> dict[str, Any]:
+    return read_authoritative_json_capture(path, kind).value
+
+
+def read_authoritative_json_capture(path: str | Path, kind: str) -> CapturedJson:
     if kind not in AUTHORITATIVE_JSON_LIMITS:
         raise ValueError(f"unknown authoritative JSON kind: {kind}")
-    return read_json_file(path, max_bytes=AUTHORITATIVE_JSON_LIMITS[kind], require_canonical=True)
+    return read_captured_json_file(path, max_bytes=AUTHORITATIVE_JSON_LIMITS[kind], require_canonical=True)
 
 
 def _is_candidate_boundary(value: str, index: int) -> bool:
@@ -353,6 +417,10 @@ def _is_word_like_for_path_prose(ch: str) -> bool:
 
 
 def _is_narrow_arithmetic_separator(value: str, index: int) -> bool:
+    if value[index] != "/":
+        return False
+    if value.count("/") + value.count("\\") != 1:
+        return False
     if index <= 0 or index + 1 >= len(value):
         return False
     if not value[index - 1].isspace() or not value[index + 1].isspace():
@@ -360,7 +428,14 @@ def _is_narrow_arithmetic_separator(value: str, index: int) -> bool:
     base = index - 2
     while base >= 0 and value[base].isspace():
         base -= 1
-    return base >= 0 and _is_word_like_for_path_prose(value[base])
+    if base < 0 or not _is_word_like_for_path_prose(value[base]):
+        return False
+    right = index + 1
+    while right < len(value) and value[right].isspace():
+        right += 1
+    if right >= len(value) or not _is_word_like_for_path_prose(value[right]):
+        return False
+    return True
 
 
 def _validate_dns_reg_name(host: str) -> bool:
@@ -458,11 +533,35 @@ def _is_allowed_whole_uri(value: str) -> bool:
         return False
     if any(part.startswith(("/", "\\")) or re.search(r"(^|[&;])[^=&;]+=(/|\\|[A-Za-z]:[\\/])", part) for part in (parsed.query, parsed.fragment)):
         return False
-    return urllib.parse.urlunsplit(parsed) == value
+    scheme_end = value.find(":")
+    if scheme_end <= 0:
+        return False
+    original_scheme = value[:scheme_end]
+    if original_scheme.casefold() != parsed.scheme.casefold():
+        return False
+    return urllib.parse.urlunsplit(parsed._replace(scheme=original_scheme)) == value
 
 
 def _is_allowed_schema_reference(value: str) -> bool:
     return not _contains_control_or_format(value) and "\\" not in value and _SCHEMA_REF_RE.fullmatch(value) is not None
+
+
+def _has_http_scheme_token(value: str) -> bool:
+    for index in range(len(value)):
+        if not _is_candidate_boundary(value, index):
+            continue
+        if value[index : index + 5].casefold() == "http:" or value[index : index + 6].casefold() == "https:":
+            return True
+    return False
+
+
+def _has_file_scheme_token(value: str) -> bool:
+    for index in range(len(value)):
+        if not _is_candidate_boundary(value, index):
+            continue
+        if value[index : index + 5].casefold() == "file:":
+            return True
+    return False
 
 
 def _is_slash(ch: str) -> bool:
@@ -508,8 +607,7 @@ def _has_windows_root_relative_at(value: str, index: int) -> bool:
     return (
         _is_candidate_boundary(value, index)
         and value[index] == "\\"
-        and (index + 1 == len(value) or value[index + 1] not in ("\\", ".", "?"))
-        and not _is_narrow_arithmetic_separator(value, index)
+        and (index + 1 == len(value) or value[index + 1] != "\\")
     )
 
 
@@ -526,9 +624,13 @@ def _has_posix_root_at(value: str, index: int) -> bool:
 def _looks_like_absolute_path(value: str) -> bool:
     if not value:
         return False
-    if _FILE_URI_RE.search(value):
+    if _has_file_scheme_token(value):
         return True
-    if _is_allowed_whole_uri(value) or _is_allowed_schema_reference(value):
+    if _is_allowed_whole_uri(value):
+        return False
+    if _has_http_scheme_token(value):
+        return True
+    if _is_allowed_schema_reference(value):
         return False
     if value in ("/", "\\"):
         return True

@@ -1831,6 +1831,26 @@ fn decision_texts(
             "CHOOSE_MODE",
             (0..*mode_count).map(|i| format!("mode#{i}")).collect(),
         )),
+        SurfaceDecision::Decision(Decision::ChooseEffectOption { option_count, .. }) => Some((
+            "CHOOSE_MODE",
+            (0..*option_count)
+                .map(|i| format!("effect-option#{i}"))
+                .collect(),
+        )),
+        SurfaceDecision::Decision(Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        }) => {
+            let mut choices = legal_targets
+                .iter()
+                .map(|target| target_name(state, target, p0_name, p1_name))
+                .collect::<Vec<_>>();
+            if *can_finish {
+                choices.push("DONE".to_string());
+            }
+            Some(("SELECT_TARGETS", choices))
+        }
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => Some((
             "ORDER_TRIGGERS",
             vec![format!("identity_order({})", pending.len())],
@@ -1838,6 +1858,10 @@ fn decision_texts(
         // Not in the Burn corpus this walker replays (Goblin Bushwhacker/
         // Kicker is Rally-only) -- same binary "CHOOSE_USE" shape as Madness.
         SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
+            Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()]))
+        }
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => {
             Some(("CHOOSE_USE", vec!["Yes".to_string(), "No".to_string()]))
         }
         // Not in the Burn corpus this walker replays (Chain Lightning is
@@ -1976,6 +2000,28 @@ fn apply_by_indices(
                 SurfaceAction::Action(Action::ChooseSpellMode(i0 as u8)),
             )
             .map_err(|e| format!("engine-step-error:walk:ChooseSpellMode:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseEffectOption(i0 as u16)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseEffectOption:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseEffectTargets {
+            legal_targets,
+            can_finish,
+            ..
+        }) => {
+            let action = if let Some(&target) = legal_targets.get(i0) {
+                Action::ChooseEffectTarget(target)
+            } else if *can_finish && i0 == legal_targets.len() {
+                Action::FinishEffectSelection
+            } else {
+                return Err("apply_by_indices:index-out-of-range:ChooseEffectTargets".to_string());
+            };
+            surface
+                .apply(state, SurfaceAction::Action(action))
+                .map_err(|e| format!("engine-step-error:walk:ChooseEffectTargets:{e}"))
+        }
         SurfaceDecision::Decision(Decision::OrderTriggers { pending, .. }) => surface
             .apply(
                 state,
@@ -1985,6 +2031,18 @@ fn apply_by_indices(
         SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => surface
             .apply(state, SurfaceAction::Action(Action::ChooseKicker(i0 == 0)))
             .map_err(|e| format!("engine-step-error:walk:ChooseKicker:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseSpellCopyPayment(i0 == 0)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseSpellCopyPayment:{e}")),
+        SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => surface
+            .apply(
+                state,
+                SurfaceAction::Action(Action::ChooseSpellCopyRetarget(i0 == 0)),
+            )
+            .map_err(|e| format!("engine-step-error:walk:ChooseSpellCopyRetarget:{e}")),
         SurfaceDecision::Decision(Decision::GameOver { .. })
         | SurfaceDecision::Decision(Decision::DeclareBlockers { .. })
         | SurfaceDecision::Decision(Decision::Halted { .. }) => {

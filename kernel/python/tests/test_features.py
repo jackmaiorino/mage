@@ -7,6 +7,11 @@ import unittest
 import torch
 
 from mtg_kernel_rl.features import (
+    ACTION_KINDS,
+    COST_KINDS,
+    EDGE_ROLES,
+    MANA_COLORS,
+    OBJECT_GROUPS,
     FeatureSchemaError,
     assert_action_classified,
     assert_observation_classified,
@@ -161,8 +166,127 @@ def seat_swapped(obs, actions):
     p = swapped_obs["projection"]
     for key in ("life_totals", "mana_pools", "hand_counts", "library_counts", "player_status", "battlefield", "graveyards"):
         p[key] = [p[key][1], p[key][0]]
+    for key in ("known_library_cards", "known_hand_cards"):
+        swapped_obs[key] = [swapped_obs[key][1], swapped_obs[key][0]]
+    for effect in p["continuous_effects"]:
+        effect["affected_players"] = sorted(effect["affected_players"], key=("p0", "p1").index)
+    for zone in p["battlefield"] + p["graveyards"] + [p["exile"]]:
+        for card in zone:
+            card["goaded_by"] = sorted(card["goaded_by"], key=lambda item: ("p0", "p1").index(item["player"]))
     swapped_actions = swap_seats_value(deep_copy(actions))
     return swapped_obs, swapped_actions
+
+
+def pending_effect_target_decision(can_finish: bool = True) -> tuple[dict, list[dict]]:
+    obs = complete_observation()
+    projection = obs["projection"]
+    source = deep_copy(projection["stack"][-1]["source"])
+    first = {
+        "target_kind": "object",
+        "object": deep_copy(obs["known_library_cards"][0][0]["card"]["stable"]),
+    }
+    second = {
+        "target_kind": "object",
+        "object": deep_copy(obs["known_library_cards"][1][0]["card"]["stable"]),
+    }
+    selected_targets = [first] if can_finish else []
+    legal_targets = [second] if can_finish else [first, second]
+    choice = {
+        "choice_kind": "targets",
+        "player": "p0",
+        "structural_path": [1, 0],
+        "selected_targets": selected_targets,
+        "legal_targets": legal_targets,
+        "min_targets": 1,
+        "max_targets": 2,
+        "can_finish": can_finish,
+        "ordered": True,
+        "purpose": "library_order",
+    }
+    projection["engine_context"].update(
+        {
+            "current_stage": "pending_effect",
+            "pending_effect": {
+                "source": source,
+                "controller": source["controller"],
+                "choice": choice,
+            },
+        }
+    )
+
+    selected_count = len(selected_targets)
+    actions = [
+        {
+            "schema_version": 4,
+            "selected_index": i,
+            "stable_id": f"legal-action-v4:pending-target-{i}",
+            "semantic": {
+                "action_kind": "choose_effect_target",
+                "actor": "p0",
+                "source": deep_copy(source),
+                "target": deep_copy(target),
+                "selected_count": selected_count,
+                "min_targets": 1,
+                "max_targets": 2,
+            },
+            "display_text": None,
+        }
+        for i, target in enumerate(legal_targets)
+    ]
+    if can_finish:
+        actions.append(
+            {
+                "schema_version": 4,
+                "selected_index": len(actions),
+                "stable_id": "legal-action-v4:pending-finish",
+                "semantic": {
+                    "action_kind": "finish_effect_selection",
+                    "actor": "p0",
+                    "source": deep_copy(source),
+                    "selected_count": selected_count,
+                },
+                "display_text": None,
+            }
+        )
+    return obs, actions
+
+
+def pending_effect_option_decision(option_count: int = 2) -> tuple[dict, list[dict]]:
+    obs = complete_observation()
+    projection = obs["projection"]
+    source = deep_copy(projection["stack"][-1]["source"])
+    projection["engine_context"].update(
+        {
+            "current_stage": "pending_effect",
+            "pending_effect": {
+                "source": source,
+                "controller": source["controller"],
+                "choice": {
+                    "choice_kind": "options",
+                    "player": "p0",
+                    "structural_path": [0],
+                    "option_count": option_count,
+                },
+            },
+        }
+    )
+    actions = [
+        {
+            "schema_version": 4,
+            "selected_index": option_index,
+            "stable_id": f"legal-action-v4:pending-option-{option_index}",
+            "semantic": {
+                "action_kind": "choose_effect_option",
+                "actor": "p0",
+                "source": deep_copy(source),
+                "option_index": option_index,
+                "option_count": option_count,
+            },
+            "display_text": None,
+        }
+        for option_index in range(option_count)
+    ]
+    return obs, actions
 
 
 class FeatureEncodingTest(unittest.TestCase):
@@ -173,6 +297,15 @@ class FeatureEncodingTest(unittest.TestCase):
         for action in actions:
             assert_action_classified(action)
         validate_legal_actions_contract(actions, "p0")
+        bad_prefix = deep_copy(actions)
+        bad_prefix[0]["stable_id"] = "fixture-0"
+        with self.assertRaises(FeatureSchemaError):
+            validate_legal_actions_contract(bad_prefix, "p0")
+        legacy_v3 = deep_copy(actions)
+        legacy_v3[0]["schema_version"] = 3
+        legacy_v3[0]["stable_id"] = "legal-action-v3:legacy"
+        with self.assertRaises(FeatureSchemaError):
+            validate_legal_actions_contract(legacy_v3, "p0")
         encoded = encode_decision(obs, actions)
         self.assertEqual(encoded.action_features.shape[0], len(actions))
         self.assertGreater(encoded.action_ref_features.shape[0], len(actions))
@@ -185,7 +318,7 @@ class FeatureEncodingTest(unittest.TestCase):
         obs["projection"]["unknown_leaf"] = 1
         with self.assertRaises(FeatureSchemaError):
             encode_decision(obs, legal_actions())
-        ambiguous = {"schema_version": 2, "selected_index": 0, "stable_id": "x", "display_text": None, "semantic": {"action_kind": "ambiguous", "reason": "text"}}
+        ambiguous = {"schema_version": 4, "selected_index": 0, "stable_id": "legal-action-v4:ambiguous", "display_text": None, "semantic": {"action_kind": "ambiguous", "reason": "text"}}
         with self.assertRaises(FeatureSchemaError):
             encode_decision(observation(), [ambiguous])
 
@@ -239,6 +372,430 @@ class FeatureEncodingTest(unittest.TestCase):
         self.assertGreater(len(action_leaves), 30)
         for _path, classification in obs_leaves + action_leaves:
             self.assertIn(classification, {"model_input", "operational_only", "forbidden"})
+
+    def test_comprehensive_v4_contract_identity_and_dimensions_are_reserved(self) -> None:
+        encoded = encode_decision(complete_observation(), complete_legal_actions())
+        self.assertEqual(encoded.schema.version, "actor-relative-v4-python-3")
+        self.assertEqual(encoded.schema.registry_version, "rust-observation-v4-action-v4-registry-3")
+        self.assertEqual(encoded.schema.state_dim, 211)
+        self.assertEqual(encoded.schema.object_feature_dim, 98)
+        self.assertEqual(encoded.schema.edge_feature_dim, 41)
+        self.assertEqual(encoded.schema.action_feature_dim, 195)
+        self.assertEqual(encoded.schema.object_group_count, 20)
+        self.assertEqual(encoded.schema.action_ref_feature_dim, 24)
+        self.assertEqual(encoded.schema.contract_digest, "697174215cd8c8b04ede32e7a8bf8ef3f8fcd47ad2b4fc024cd0b6646bcbca01")
+        self.assertEqual(encoded.schema.encoding_digest, "fa4e3db3845f2386cae233bf5538e43cf2b21c3cbdc3ca1f0d93b426ae22dab1")
+
+    def test_detached_historical_paid_cost_refs_get_dedicated_nodes(self) -> None:
+        obs = complete_observation()
+        actions = complete_legal_actions()
+        current_land = obs["projection"]["battlefield"][0][1]["stable"]
+        historical = obs["projection"]["stack"][0]["paid_cost_refs"][0]
+        self.assertEqual(current_land["arena_id"], historical["arena_id"])
+        self.assertNotEqual(current_land["zone_change_count"], historical["zone_change_count"])
+
+        encoded = encode_decision(obs, actions)
+        paid_group = OBJECT_GROUPS.index("paid_cost")
+        paid_nodes = torch.nonzero(encoded.object_groups == paid_group, as_tuple=False).flatten()
+        self.assertEqual(paid_nodes.numel(), 1)
+        paid_node = int(paid_nodes.item())
+        self.assertEqual(int(encoded.object_card_ids[paid_node]), historical["card_db_id"] + 1)
+        paid_role = EDGE_ROLES.index("paid_cost")
+        paid_edges = torch.nonzero(encoded.edge_features[:, paid_role] == 1.0, as_tuple=False).flatten()
+        self.assertEqual(paid_edges.numel(), 1)
+        self.assertEqual(int(encoded.edge_target_indices[int(paid_edges.item())]), paid_node)
+
+        without_paid = deep_copy(obs)
+        without_paid["projection"]["stack"][0]["paid_cost_refs"] = []
+        without_encoded = encode_decision(without_paid, actions)
+        self.assertEqual(encoded.object_features.shape[0], without_encoded.object_features.shape[0] + 1)
+        self.assertNotEqual(encoded_digest(encoded), encoded_digest(without_encoded))
+
+        mapping = {historical["arena_id"]: 303}
+        assert_encoded_equal(
+            self,
+            encoded,
+            encode_decision(remap_all_arena_references(obs, mapping), remap_all_arena_references(actions, mapping)),
+        )
+        changed_identity = deep_copy(obs)
+        changed_identity["projection"]["stack"][0]["paid_cost_refs"][0]["card_db_id"] += 1
+        self.assertNotEqual(encoded_digest(encoded), encoded_digest(encode_decision(changed_identity, actions)))
+        changed_zone = deep_copy(obs)
+        changed_zone["projection"]["stack"][0]["paid_cost_refs"][0]["zone"] = "Graveyard"
+        self.assertNotEqual(encoded_digest(encoded), encoded_digest(encode_decision(changed_zone, actions)))
+
+        duplicate = deep_copy(obs)
+        duplicate["projection"]["stack"][0]["paid_cost_refs"].append(deep_copy(historical))
+        conflicting = deep_copy(obs)
+        conflict_ref = deep_copy(current_land)
+        conflict_ref["card_db_id"] += 1
+        conflicting["projection"]["stack"][0]["paid_cost_refs"] = [conflict_ref]
+        for invalid in (duplicate, conflicting):
+            with self.assertRaises(FeatureSchemaError):
+                assert_observation_classified(invalid)
+
+    def test_reserved_v4_observation_families_all_affect_encoding(self) -> None:
+        base = complete_observation()
+        actions = complete_legal_actions()
+        base_digest = encoded_digest(encode_decision(base, actions))
+        card_path = lambda obs: obs["projection"]["battlefield"][0][0]
+        effect_path = lambda obs: obs["projection"]["continuous_effects"][0]
+        mutations = []
+
+        def add(label, mutate):
+            changed = deep_copy(base)
+            mutate(changed)
+            mutations.append((label, changed))
+
+        for counter in ("minus1_minus1", "minus0_minus1", "stun", "lore"):
+            add(f"counter {counter}", lambda obs, key=counter: card_path(obs)["counters"].__setitem__(key, card_path(obs)["counters"][key] + 1))
+        add("token", lambda obs: card_path(obs).__setitem__("is_token", False))
+        add("face", lambda obs: card_path(obs).__setitem__("face_index", 2))
+        add("chosen color", lambda obs: card_path(obs).__setitem__("chosen_color", "G"))
+        add("entered turn", lambda obs: card_path(obs).__setitem__("entered_battlefield_turn", 1))
+        add("ability kind", lambda obs: card_path(obs)["ability_uses_this_turn"][0].__setitem__("ability_kind", "activated"))
+        add("ability index", lambda obs: card_path(obs)["ability_uses_this_turn"][0].__setitem__("ability_index", 2))
+        add("ability uses", lambda obs: card_path(obs)["ability_uses_this_turn"][0].__setitem__("uses", 3))
+        add("skip untap", lambda obs: card_path(obs).__setitem__("skip_next_untap", False))
+        add("goad player", lambda obs: card_path(obs)["goaded_by"][0].__setitem__("player", "p0"))
+        add("goad expiry", lambda obs: card_path(obs)["goaded_by"][0].__setitem__("expires_at_turn", 3))
+        add("effective colors", lambda obs: card_path(obs)["characteristics"].__setitem__("effective_color_mask", 8))
+        add("effective subtypes", lambda obs: card_path(obs)["characteristics"].__setitem__("effective_subtype_ids", [1, 18]))
+        for keyword in ("lifelink", "hexproof", "indestructible", "protection_from_monocolored"):
+            add(f"keyword {keyword}", lambda obs, key=keyword: card_path(obs)["characteristics"]["effective_keywords"].__setitem__(key, False))
+        add("ward", lambda obs: card_path(obs)["characteristics"]["effective_keywords"].__setitem__("ward_generic", 3))
+        add("minimum blockers", lambda obs: card_path(obs)["characteristics"]["effective_keywords"].__setitem__("minimum_blockers", 3))
+        add("landwalk", lambda obs: card_path(obs)["characteristics"]["effective_keywords"].__setitem__("landwalk_mask", 4))
+        add("stack cast method", lambda obs: obs["projection"]["stack"][0].__setitem__("cast_method", "normal"))
+        add("stack face", lambda obs: obs["projection"]["stack"][0].__setitem__("face_index", 2))
+        add("stack x", lambda obs: obs["projection"]["stack"][0].__setitem__("x_value", 4))
+        add("stack paid refs", lambda obs: obs["projection"]["stack"][0].__setitem__("paid_cost_refs", [card_path(obs)["stable"]]))
+        add("spells cast", lambda obs: obs["projection"]["player_status"][0].__setitem__("spells_cast_this_turn", 3))
+        add("dungeon id", lambda obs: obs["projection"]["player_status"][0]["dungeon"].__setitem__("dungeon_id", 5))
+        add("dungeon room", lambda obs: obs["projection"]["player_status"][0]["dungeon"].__setitem__("room_id", 5))
+        add("completed dungeons", lambda obs: obs["projection"]["player_status"][0]["dungeon"].__setitem__("completed_dungeons", [1, 5]))
+        add("initiative", lambda obs: obs["projection"].__setitem__("initiative", "p0"))
+        effect_fields = {
+            "source": lambda obs: card_path(obs)["stable"],
+            "controller": lambda _obs: "p0",
+            "affected_objects": lambda obs: [card_path(obs)["stable"]],
+            "affected_players": lambda _obs: ["p0"],
+            "global": lambda _obs: False,
+            "duration": lambda _obs: "while_source_present",
+            "set_power": lambda _obs: 5,
+            "set_toughness": lambda _obs: 6,
+            "add_color_mask": lambda _obs: 4,
+            "remove_color_mask": lambda _obs: 1,
+            "add_subtype_ids": lambda _obs: [2, 10],
+            "remove_subtype_ids": lambda _obs: [3],
+            "add_keyword_mask": lambda _obs: 18,
+            "remove_keyword_mask": lambda _obs: 3,
+            "ward_generic_delta": lambda _obs: 3,
+            "minimum_blockers": lambda _obs: 4,
+            "add_landwalk_mask": lambda _obs: 4,
+            "remove_landwalk_mask": lambda _obs: 2,
+            "prevent_damage_from_color_mask": lambda _obs: 8,
+            "damage_cannot_be_prevented": lambda _obs: False,
+        }
+        for field, value in effect_fields.items():
+            add(f"effect {field}", lambda obs, key=field, make=value: effect_path(obs).__setitem__(key, make(obs)))
+        add("attached relation", lambda obs: obs["projection"]["object_relations"][0].__setitem__("attached_to", obs["projection"]["battlefield"][0][1]["stable"]))
+        add("exile relation", lambda obs: obs["projection"]["object_relations"][1].__setitem__("exiled_by", obs["projection"]["battlefield"][0][1]["stable"]))
+        add("known library", lambda obs: obs["known_library_cards"][0][0].__setitem__("position", 2))
+        add("known hand", lambda obs: obs["known_hand_cards"][1][0]["stable"].__setitem__("card_db_id", 33))
+
+        for label, changed in mutations:
+            with self.subTest(label=label):
+                self.assertNotEqual(base_digest, encoded_digest(encode_decision(changed, actions)))
+
+    def test_typed_pending_effect_choices_and_reserved_actions_are_distinct(self) -> None:
+        base = complete_observation()
+        source = base["projection"]["stack"][0]["source"]
+        target = base["projection"]["battlefield"][1][0]["stable"]
+        choices = [
+            {"choice_kind": "options", "player": "p0", "structural_path": [0], "option_count": 2},
+            {"choice_kind": "targets", "player": "p0", "structural_path": [1], "selected_targets": [{"target_kind": "player", "player": "p1"}], "legal_targets": [{"target_kind": "object", "object": target}], "min_targets": 1, "max_targets": 2, "can_finish": True, "ordered": True, "purpose": "damage_division"},
+            {"choice_kind": "color", "player": "p0", "structural_path": [2], "legal_colors": ["W", "R"]},
+            {"choice_kind": "number", "player": "p0", "structural_path": [3], "minimum": -2, "maximum": 4},
+            {"choice_kind": "boolean", "player": "p0", "structural_path": [4], "default": True, "purpose": "pay_cost"},
+        ]
+        for i, purpose in enumerate(("effect_targets", "card_selection", "permanent_selection", "player_selection", "cost_payment", "library_order", "search_result"), start=10):
+            choices.append({"choice_kind": "targets", "player": "p0", "structural_path": [i], "selected_targets": [], "legal_targets": [{"target_kind": "object", "object": target}], "min_targets": 0, "max_targets": 1, "can_finish": True, "ordered": False, "purpose": purpose})
+        for i, purpose in enumerate(("optional_effect", "shuffle"), start=30):
+            choices.append({"choice_kind": "boolean", "player": "p0", "structural_path": [i], "default": None, "purpose": purpose})
+        digests = []
+        for choice in choices:
+            obs = deep_copy(base)
+            obs["projection"]["engine_context"].update(
+                {
+                    "current_stage": "pending_effect",
+                    "pending_effect": {"source": source, "controller": "p0", "choice": choice},
+                }
+            )
+            assert_observation_classified(obs)
+            choice_actions = complete_legal_actions()
+            if choice["choice_kind"] == "options":
+                choice_actions = [
+                    {
+                        "schema_version": 4,
+                        "selected_index": option_index,
+                        "stable_id": f"legal-action-v4:typed-option-{option_index}",
+                        "semantic": {
+                            "action_kind": "choose_effect_option",
+                            "actor": "p0",
+                            "source": source,
+                            "option_index": option_index,
+                            "option_count": choice["option_count"],
+                        },
+                        "display_text": None,
+                    }
+                    for option_index in range(choice["option_count"])
+                ]
+            elif choice["choice_kind"] == "targets":
+                selected_count = len(choice["selected_targets"])
+                choice_actions = [
+                    {
+                        "schema_version": 4,
+                        "selected_index": index,
+                        "stable_id": f"legal-action-v4:typed-target-{index}",
+                        "semantic": {
+                            "action_kind": "choose_effect_target",
+                            "actor": "p0",
+                            "source": source,
+                            "target": legal_target,
+                            "selected_count": selected_count,
+                            "min_targets": choice["min_targets"],
+                            "max_targets": choice["max_targets"],
+                        },
+                        "display_text": None,
+                    }
+                    for index, legal_target in enumerate(choice["legal_targets"])
+                ]
+                if choice["can_finish"]:
+                    choice_actions.append(
+                        {
+                            "schema_version": 4,
+                            "selected_index": len(choice_actions),
+                            "stable_id": "legal-action-v4:typed-finish",
+                            "semantic": {
+                                "action_kind": "finish_effect_selection",
+                                "actor": "p0",
+                                "source": source,
+                                "selected_count": selected_count,
+                            },
+                            "display_text": None,
+                        }
+                    )
+            digests.append(encoded_digest(encode_decision(obs, choice_actions)))
+        self.assertEqual(len(digests), len(set(digests)))
+
+        actions = every_action_variant_fixture(base["own_hand"][0]["stable"], target, base["own_hand"][1]["stable"])
+        self.assertEqual(set(ACTION_KINDS), {action["semantic"]["action_kind"] for action in actions})
+        encoded = encode_decision(base, actions)
+        representations = [action_representation(encoded, i) for i in range(len(actions))]
+        self.assertEqual(len(representations), len(set(representations)))
+
+        land = base["projection"]["battlefield"][0][1]["stable"]
+        reserved = []
+        semantics = [
+            {"action_kind": "activate_mana_ability", "actor": "p0", "source": land, "mana_choice": color}
+            for color in [None, *MANA_COLORS]
+        ] + [
+            {"action_kind": "choose_cost_target", "actor": "p0", "source": base["own_hand"][0]["stable"], "cost_kind": cost, "remaining": 1, "candidate": land}
+            for cost in COST_KINDS
+        ]
+        for i, semantic in enumerate(semantics):
+            reserved.append({"schema_version": 4, "selected_index": i, "stable_id": f"legal-action-v4:reserved-{i}", "semantic": semantic, "display_text": None})
+        encoded_reserved = encode_decision(base, reserved)
+        reserved_representations = [action_representation(encoded_reserved, i) for i in range(len(reserved))]
+        self.assertEqual(len(reserved_representations), len(set(reserved_representations)))
+
+    def test_pending_effect_target_choice_and_actions_cross_validate(self) -> None:
+        obs, actions = pending_effect_target_decision(can_finish=True)
+        encoded = encode_decision(obs, actions)
+        self.assertEqual(encoded.action_features.shape[0], 2)
+
+        required_obs, required_actions = pending_effect_target_decision(can_finish=False)
+        required_encoded = encode_decision(required_obs, required_actions)
+        self.assertEqual(required_encoded.action_features.shape[0], 2)
+
+    def test_pending_effect_target_observation_invariants_fail_closed(self) -> None:
+        base, _ = pending_effect_target_decision(can_finish=True)
+        choice_path = ("projection", "engine_context", "pending_effect", "choice")
+
+        def choice(obs):
+            value = obs
+            for key in choice_path:
+                value = value[key]
+            return value
+
+        wrong_actor = deep_copy(base)
+        choice(wrong_actor)["player"] = "p1"
+        wrong_source = deep_copy(base)
+        wrong_source["projection"]["engine_context"]["pending_effect"]["source"] = deep_copy(
+            wrong_source["own_hand"][0]["stable"]
+        )
+        wrong_source["projection"]["engine_context"]["pending_effect"]["source"]["zone"] = "Stack"
+        duplicate_selected = deep_copy(base)
+        choice(duplicate_selected)["selected_targets"].append(
+            deep_copy(choice(duplicate_selected)["selected_targets"][0])
+        )
+        overlap = deep_copy(base)
+        choice(overlap)["legal_targets"] = [deep_copy(choice(overlap)["selected_targets"][0])]
+        unreachable_minimum = deep_copy(base)
+        choice(unreachable_minimum).update(
+            {"selected_targets": [], "legal_targets": [], "can_finish": False}
+        )
+        legal_at_maximum = deep_copy(base)
+        choice(legal_at_maximum).update({"min_targets": 1, "max_targets": 1})
+        wrong_can_finish = deep_copy(base)
+        choice(wrong_can_finish)["can_finish"] = False
+
+        cases = {
+            "wrong chooser": wrong_actor,
+            "wrong resolving source": wrong_source,
+            "duplicate selected target": duplicate_selected,
+            "selected/legal overlap": overlap,
+            "unreachable minimum": unreachable_minimum,
+            "legal target at maximum": legal_at_maximum,
+            "wrong can_finish": wrong_can_finish,
+        }
+        for label, malformed in cases.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                assert_observation_classified(malformed)
+
+    def test_pending_effect_target_action_correspondence_fails_closed(self) -> None:
+        obs, actions = pending_effect_target_decision(can_finish=True)
+        pending_choice = obs["projection"]["engine_context"]["pending_effect"]["choice"]
+
+        wrong_source = deep_copy(actions)
+        wrong_source[0]["semantic"]["source"] = deep_copy(obs["own_hand"][0]["stable"])
+        wrong_target = deep_copy(actions)
+        wrong_target[0]["semantic"]["target"] = deep_copy(pending_choice["selected_targets"][0])
+        wrong_count = deep_copy(actions)
+        wrong_count[0]["semantic"]["selected_count"] = 0
+        wrong_bounds = deep_copy(actions)
+        wrong_bounds[0]["semantic"]["max_targets"] = 3
+        missing_target = [deep_copy(actions[1])]
+        missing_target[0]["selected_index"] = 0
+        duplicate_target = deep_copy(actions)
+        duplicate = deep_copy(duplicate_target[0])
+        duplicate["stable_id"] = "legal-action-v4:pending-target-duplicate"
+        duplicate_target.insert(1, duplicate)
+        for index, action in enumerate(duplicate_target):
+            action["selected_index"] = index
+        missing_finish = [deep_copy(actions[0])]
+        finish_first = [deep_copy(actions[1]), deep_copy(actions[0])]
+        for index, action in enumerate(finish_first):
+            action["selected_index"] = index
+
+        malformed_sets = {
+            "wrong source": wrong_source,
+            "wrong target": wrong_target,
+            "wrong selected count": wrong_count,
+            "wrong bounds": wrong_bounds,
+            "missing target": missing_target,
+            "duplicate target": duplicate_target,
+            "missing finish": missing_finish,
+            "finish before targets": finish_first,
+        }
+        for label, malformed in malformed_sets.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                encode_decision(obs, malformed)
+
+        required_obs, required_actions = pending_effect_target_decision(can_finish=False)
+        unexpected_finish = deep_copy(actions[1])
+        unexpected_finish["selected_index"] = len(required_actions)
+        unexpected_finish["semantic"]["selected_count"] = 0
+        required_actions.append(unexpected_finish)
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(required_obs, required_actions)
+
+    def test_pending_effect_option_action_correspondence_fails_closed(self) -> None:
+        obs, actions = pending_effect_option_decision(option_count=2)
+
+        wrong_source = deep_copy(actions)
+        wrong_source[0]["semantic"]["source"] = deep_copy(obs["own_hand"][0]["stable"])
+        wrong_count = deep_copy(actions)
+        wrong_count[0]["semantic"]["option_count"] = 3
+        wrong_order = list(reversed(deep_copy(actions)))
+        for selected_index, action in enumerate(wrong_order):
+            action["selected_index"] = selected_index
+        missing_option = [deep_copy(actions[0])]
+        unrelated_action = [deep_copy(action) for action in complete_legal_actions()[:2]]
+        for selected_index, action in enumerate(unrelated_action):
+            action["selected_index"] = selected_index
+
+        malformed_sets = {
+            "wrong source": wrong_source,
+            "wrong option count": wrong_count,
+            "wrong option order": wrong_order,
+            "missing option": missing_option,
+            "unrelated actions": unrelated_action,
+        }
+        for label, malformed in malformed_sets.items():
+            with self.subTest(label=label), self.assertRaises(FeatureSchemaError):
+                encode_decision(obs, malformed)
+
+    def test_known_hand_perspective_safety_and_reserved_shape_errors_fail_closed(self) -> None:
+        obs = complete_observation()
+        assert_observation_classified(obs)
+        self.assertEqual(obs["known_hand_cards"][0], [])
+        swapped_obs, swapped_actions = seat_swapped(obs, complete_legal_actions())
+        assert_encoded_equal(self, encode_decision(obs, complete_legal_actions()), encode_decision(swapped_obs, swapped_actions))
+
+        own_leak = deep_copy(obs)
+        own_leak["known_hand_cards"][0] = [deep_copy(own_leak["own_hand"][0])]
+        wrong_owner = deep_copy(obs)
+        wrong_owner["known_hand_cards"][1][0]["stable"]["owner"] = "p0"
+        wrong_zone = deep_copy(obs)
+        wrong_zone["known_hand_cards"][1][0]["stable"]["zone"] = "Library"
+        bad_ability_order = deep_copy(obs)
+        bad_ability_order["projection"]["battlefield"][0][0]["ability_uses_this_turn"] = list(reversed(bad_ability_order["projection"]["battlefield"][0][0]["ability_uses_this_turn"]))
+        bad_subtypes = deep_copy(obs)
+        bad_subtypes["projection"]["battlefield"][0][0]["characteristics"]["effective_subtype_ids"] = [17, 1]
+        bad_mask = deep_copy(obs)
+        bad_mask["projection"]["continuous_effects"][0]["prevent_damage_from_color_mask"] = 64
+        bad_relation = deep_copy(obs)
+        bad_relation["projection"]["object_relations"][0]["attached_to"] = stable_ref(999, 10, "p0", "Battlefield")
+        for case in (own_leak, wrong_owner, wrong_zone, bad_ability_order, bad_subtypes, bad_mask, bad_relation):
+            with self.assertRaises(FeatureSchemaError):
+                assert_observation_classified(case)
+
+        invalid_actions = every_action_variant_fixture(obs["own_hand"][0]["stable"], obs["projection"]["battlefield"][1][0]["stable"], obs["own_hand"][1]["stable"])
+        by_kind = {action["semantic"]["action_kind"]: action for action in invalid_actions}
+        bad_target = deep_copy(by_kind["choose_effect_target"])
+        bad_target["semantic"]["selected_count"] = bad_target["semantic"]["max_targets"]
+        bad_number = deep_copy(by_kind["choose_effect_number"])
+        bad_number["semantic"]["number"] = bad_number["semantic"]["maximum"] + 1
+        bad_mana = deep_copy(by_kind["activate_mana_ability"])
+        bad_mana["semantic"]["mana_choice"] = "X"
+        for action in (bad_target, bad_number, bad_mana):
+            with self.assertRaises(FeatureSchemaError):
+                assert_action_classified(action)
+
+    def test_accumulated_blockers_follow_rust_blocker_attacker_tuple_order(self) -> None:
+        blockers = complete_observation()
+        blockers["projection"]["active_player"] = "p1"
+        blocker = blockers["projection"]["battlefield"][0][0]["stable"]
+        attacker = blockers["projection"]["battlefield"][1][0]["stable"]
+        blockers["projection"]["surface_context"].update(
+            {
+                "current_stage": "declare_blockers_for_attacker",
+                "private_blockers": {
+                    "current_attacker": attacker,
+                    "accumulated": [[blocker, attacker]],
+                    "remaining": [],
+                },
+            }
+        )
+
+        assert_observation_classified(blockers)
+
+        swapped = copy.deepcopy(blockers)
+        swapped["projection"]["surface_context"]["private_blockers"]["accumulated"] = [[attacker, blocker]]
+        with self.assertRaisesRegex(FeatureSchemaError, "impossible attacker/blocker ownership"):
+            assert_observation_classified(swapped)
 
     def test_engine_surface_tuple_ladder_matches_rust_projection(self) -> None:
         base = complete_observation()
@@ -373,6 +930,157 @@ class FeatureEncodingTest(unittest.TestCase):
             with self.subTest(label=label):
                 assert_observation_classified(obs)
                 encode_decision(obs, complete_legal_actions())
+
+    def test_spell_copy_state_machine_and_actions_are_encoded_fail_closed(self) -> None:
+        def spell_copy_observation(stage: str) -> tuple[dict, dict, dict | None]:
+            obs = complete_observation()
+            obs["acting_player"] = "p1"
+            obs["projection"]["priority_player"] = "p1"
+            obs["known_hand_cards"] = [[], []]
+            engine = obs["projection"]["engine_context"]
+            engine["current_stage"] = "pending_spell_copy"
+            parent = obs["projection"]["stack"][0]["source"]
+            obs["projection"]["stack"][0]["targets"] = [
+                {"target_kind": "player", "player": "p1"}
+            ]
+            copy_ref = None
+            if stage != "payment":
+                copy_ref = stable_ref(68, parent["card_db_id"], "p1", "Stack", controller="p1")
+                obs["projection"]["stack"].append(
+                    {
+                        "stack_index": 1,
+                        "source": copy_ref,
+                        "controller": "p1",
+                        "targets": [{"target_kind": "player", "player": "p1"}],
+                        "stack_item_kind": "spell",
+                        "is_copy": True,
+                        "is_flashback": False,
+                        "mode_chosen": 0,
+                        "madness_offer": False,
+                        "kicked": False,
+                        "cast_method": "normal",
+                        "face_index": 0,
+                        "x_value": 0,
+                        "paid_cost_refs": [],
+                    }
+                )
+            engine["pending_spell_copy"] = {
+                "parent": parent,
+                "player": "p1",
+                "inherited_target": {"target_kind": "player", "player": "p1"},
+                "stage": stage,
+                "copy": copy_ref,
+            }
+            return obs, parent, copy_ref
+
+        payment, parent, _ = spell_copy_observation("payment")
+        payment_actions = [
+            {
+                "schema_version": 4,
+                "selected_index": i,
+                "stable_id": f"legal-action-v4:copy-pay-{i}",
+                "semantic": {"action_kind": "choose_spell_copy_payment", "actor": "p1", "source": parent, "pay": pay},
+                "display_text": None,
+            }
+            for i, pay in enumerate((True, False))
+        ]
+        assert_observation_classified(payment)
+        payment_encoded = encode_decision(payment, payment_actions)
+        self.assertNotEqual(action_representation(payment_encoded, 0), action_representation(payment_encoded, 1))
+
+        retarget, _, copy_ref = spell_copy_observation("retarget")
+        assert copy_ref is not None
+        retarget_actions = [
+            {
+                "schema_version": 4,
+                "selected_index": i,
+                "stable_id": f"legal-action-v4:copy-retarget-{i}",
+                "semantic": {
+                    "action_kind": "choose_spell_copy_retarget",
+                    "actor": "p1",
+                    "source": copy_ref,
+                    "change_target": change_target,
+                },
+                "display_text": None,
+            }
+            for i, change_target in enumerate((True, False))
+        ]
+        assert_observation_classified(retarget)
+        retarget_encoded = encode_decision(retarget, retarget_actions)
+        self.assertNotEqual(action_representation(retarget_encoded, 0), action_representation(retarget_encoded, 1))
+
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, retarget_actions)
+        wrong_payment_source = deep_copy(payment_actions)
+        wrong_payment_source[0]["semantic"]["source"] = copy_ref
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, wrong_payment_source)
+        wrong_payment_order = deep_copy(payment_actions)
+        wrong_payment_order[0]["semantic"]["pay"] = False
+        wrong_payment_order[1]["semantic"]["pay"] = True
+        with self.assertRaises(FeatureSchemaError):
+            encode_decision(payment, wrong_payment_order)
+
+        target, _, target_copy = spell_copy_observation("target")
+        assert target_copy is not None
+        target_actions = [
+            {
+                "schema_version": 4,
+                "selected_index": i,
+                "stable_id": f"legal-action-v4:copy-target-{i}",
+                "semantic": {
+                    "action_kind": "choose_target",
+                    "actor": "p1",
+                    "source": target_copy,
+                    "remaining": 1,
+                    "target": {"target_kind": "player", "player": player},
+                },
+                "display_text": None,
+            }
+            for i, player in enumerate(("p0", "p1"))
+        ]
+        assert_observation_classified(target)
+        encode_decision(target, target_actions)
+
+        invalid_payment = deep_copy(payment)
+        invalid_payment["projection"]["engine_context"]["pending_spell_copy"]["copy"] = parent
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_payment)
+
+        invalid_missing_copy = deep_copy(retarget)
+        invalid_missing_copy["projection"]["engine_context"]["pending_spell_copy"]["copy"] = None
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_missing_copy)
+
+        invalid_copy_marker = deep_copy(retarget)
+        invalid_copy_marker["projection"]["stack"][1]["is_copy"] = False
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_copy_marker)
+
+        invalid_parent_target = deep_copy(payment)
+        invalid_parent_target["projection"]["engine_context"]["pending_spell_copy"]["inherited_target"] = {
+            "target_kind": "player",
+            "player": "p0",
+        }
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_parent_target)
+
+        invalid_copy_target = deep_copy(retarget)
+        invalid_copy_target["projection"]["stack"][1]["targets"] = [
+            {"target_kind": "player", "player": "p0"}
+        ]
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_copy_target)
+
+        invalid_controller = deep_copy(retarget)
+        invalid_controller["projection"]["stack"][1]["controller"] = "p0"
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_controller)
+
+        invalid_actor = deep_copy(retarget)
+        invalid_actor["acting_player"] = "p0"
+        with self.assertRaises(FeatureSchemaError):
+            assert_observation_classified(invalid_actor)
 
     def test_invalid_engine_surface_context_combinations_fail(self) -> None:
         bad = complete_observation()
@@ -734,7 +1442,7 @@ class FeatureEncodingTest(unittest.TestCase):
         mutated_obs["own_hand"][0]["card_name"] = "Different"
         mutated_obs["projection"]["battlefield"][0][0]["card_name"] = "Renamed"
         mutated_obs["projection"]["continuous_effects"][0]["timestamp"] = 777
-        mutated_actions[0]["stable_id"] = "changed"
+        mutated_actions[0]["stable_id"] = "legal-action-v4:changed"
         mutated_actions[1]["display_text"] = "Changed text"
         a = encode_decision(obs, actions)
         b = encode_decision(mutated_obs, mutated_actions)
@@ -828,8 +1536,8 @@ class FeatureEncodingTest(unittest.TestCase):
         obs["projection"]["combat"]["attacker_to_ordered_blockers"] = [[obs["projection"]["battlefield"][0][0]["stable"], [first["stable"]]]]
         src = obs["own_hand"][0]["stable"]
         actions = [
-            {"schema_version": 2, "selected_index": 0, "stable_id": "t0", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": first["stable"]}}, "display_text": None},
-            {"schema_version": 2, "selected_index": 1, "stable_id": "t1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": second["stable"]}}, "display_text": None},
+            {"schema_version": 4, "selected_index": 0, "stable_id": "legal-action-v4:t0", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": first["stable"]}}, "display_text": None},
+            {"schema_version": 4, "selected_index": 1, "stable_id": "legal-action-v4:t1", "semantic": {"action_kind": "choose_target", "actor": "p0", "source": src, "remaining": 1, "target": {"target_kind": "object", "object": second["stable"]}}, "display_text": None},
         ]
         encoded = encode_decision(obs, actions)
         self.assertNotEqual(action_representation(encoded, 0), action_representation(encoded, 1))
@@ -866,10 +1574,15 @@ class FeatureEncodingTest(unittest.TestCase):
                 "controller": "p0",
                 "targets": [{"target_kind": "player", "player": "p1"}],
                 "stack_item_kind": "spell",
+                "is_copy": False,
                 "is_flashback": False,
                 "mode_chosen": 0,
                 "madness_offer": False,
                 "kicked": False,
+                "cast_method": "normal",
+                "face_index": 0,
+                "x_value": 0,
+                "paid_cost_refs": [],
             }
         )
         reversed_stack = deep_copy(changed)
@@ -1015,10 +1728,15 @@ class FeatureEncodingTest(unittest.TestCase):
                 "controller": "p0",
                 "targets": [],
                 "stack_item_kind": "spell",
+                "is_copy": False,
                 "is_flashback": False,
                 "mode_chosen": 0,
                 "madness_offer": False,
                 "kicked": False,
+                "cast_method": "normal",
+                "face_index": 0,
+                "x_value": 0,
+                "paid_cost_refs": [],
             }
         )
         second = obs["own_hand"][1]["stable"]
@@ -1060,7 +1778,7 @@ class FeatureEncodingTest(unittest.TestCase):
         obs = complete_observation()
         src = stable_ref(1, 30, "p0", "Hand")
         other = stable_ref(12, 31, "p0", "Hand")
-        base = {"schema_version": 2, "selected_index": 0, "stable_id": "x", "display_text": None}
+        base = {"schema_version": 4, "selected_index": 0, "stable_id": "legal-action-v4:x", "display_text": None}
         pairs = [
             (
                 {**base, "semantic": {"action_kind": "order_triggers", "actor": "p0", "pending_sources": [src, other], "order": [0, 1]}},

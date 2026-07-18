@@ -8,10 +8,11 @@
 //! - a card with empty deck coverage (`"decks": []`)
 //!
 //! `u16` ids are assigned in JSON array order (stable: the file is a
-//! checked-in fixed pool, not regenerated per build). Only Mono-Red Burn's
-//! basic Mountain, its 4 "N damage to any target" burn spells, and its 4
-//! creatures get a real `spell_effect/mana_ability` program; see
-//! `special_for` and the module doc in `src/card_def.rs`.
+//! checked-in fixed pool, not regenerated per build). Executability and
+//! full-support status come from each record's fail-closed
+//! `engine_capability`; ordinary supported permanents and intrinsic basic-
+//! land mana are generated from metadata, while exceptional rules text is
+//! still composed explicitly below.
 
 use serde::Deserialize;
 use std::collections::HashSet;
@@ -20,11 +21,16 @@ use std::fmt::Write as _;
 use std::fs;
 use std::path::Path;
 
-const EXPECTED_SCHEMA_VERSION: u32 = 1;
+const EXPECTED_SCHEMA_VERSION: u32 = 2;
 
 #[derive(Debug, Deserialize)]
 struct CardJson {
     name: String,
+    /// Absent means `no_effect`: adding a registry record can never make a
+    /// card playable accidentally. `partial` is executable but is rejected
+    /// by the full-deck preflight; `full` is both executable and accepted.
+    #[serde(default)]
+    engine_capability: EngineCapabilityJson,
     mana_cost: String,
     #[serde(default)]
     types: Vec<String>,
@@ -47,6 +53,15 @@ struct CardJson {
     /// since tokens are never cast, only created by another card's effect).
     #[serde(default)]
     is_token: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Default)]
+#[serde(rename_all = "snake_case")]
+enum EngineCapabilityJson {
+    #[default]
+    NoEffect,
+    Partial,
+    Full,
 }
 
 #[derive(Debug, Deserialize)]
@@ -85,6 +100,12 @@ fn main() {
         if c.decks.is_empty() && !c.is_token {
             panic!("cards_v1.json: card {:?} has empty deck coverage", c.name);
         }
+        if c.is_token && c.engine_capability != EngineCapabilityJson::Full {
+            panic!(
+                "cards_v1.json: token {:?} must be explicitly full so CreateToken cannot materialize unsupported behavior",
+                c.name
+            );
+        }
     }
 
     let out = codegen(&data.cards);
@@ -100,9 +121,13 @@ fn main() {
 /// invariant -- graveyard-card targeting doesn't fit any `TargetSpec` shape
 /// built so far and it's sideboard-only, so it's lower priority than the 5
 /// cards this increment adds.
+#[derive(Clone, Copy)]
 enum Special {
     None,
-    Mountain,
+    /// Great Furnace's explicit `{T}: Add {R}` program. Basic-land mana is
+    /// not a name special: it is derived from Basic + Land + one
+    /// `produces_mana` color in `codegen`.
+    GreatFurnace,
     /// Deals `amount` damage to any target (Lightning Bolt, Fiery Temper,
     /// Fireblast, Lava Dart). Fireblast's/Lava Dart's real alt cost /
     /// flashback, and Fiery Temper's Madness, are modeled via the separate
@@ -114,20 +139,10 @@ enum Special {
     /// controller may pay {R}{R}. If the player does, they may copy this
     /// spell and may choose a new target for that copy." (Chain Lightning,
     /// Rally-only). The mandatory damage is byte-for-byte
-    /// `BurnAnyTarget(3)`'s shape; the optional-copy continuation is a
-    /// conditional fail-closed (`effect::EffectOp::HaltIfAffectedCanPayCopyCost`)
-    /// rather than either a silent "always decline" or an unconditional
-    /// defer -- see that leaf's doc, and the increment report for the
-    /// external-review citation (corpus non-occurrence doesn't justify
-    /// skipping the check; off-trace/search play can reach an affordable
-    /// board state even if no recorded game ever does).
+    /// `BurnAnyTarget(3)`'s shape; the optional-copy continuation suspends
+    /// resolution in the engine's dedicated payment/copy/retarget state
+    /// machine -- see `effect::EffectOp::OfferAffectedPlayerSpellCopy`.
     ChainLightning,
-    /// Resolves straight onto the battlefield; any keyword/triggered
-    /// ability is layered on separately (`keywords_for` for
-    /// static keywords, `src/trigger.rs`'s hand-written `triggers_for`
-    /// table for triggered abilities -- see that module for Guttersnipe/
-    /// Voldaren Epicure/Sneaky Snacker's real texts).
-    VanillaCreature,
     /// "Draw `draw` cards, then discard `discard` cards" (Faithless
     /// Looting: 2 and 2). The discard is a resolution effect (not a cost),
     /// so it's `EffectOp::DiscardCards`, staged via
@@ -149,6 +164,10 @@ enum Special {
     /// a creature that player controls; 3/3 instead with landfall this
     /// turn (Searing Blaze).
     SearingBlaze,
+    /// Counter target spell, with the target pool selected independently
+    /// from the shared generated counter effect. Counterspell accepts any
+    /// spell; Dispel accepts only instant spells.
+    CounterTarget(StackSpellFilter),
     /// "Choose one -- Counter target spell if it's blue; or destroy target
     /// permanent if it's blue." (Pyroblast: unfiltered targeting, checked
     /// at resolution).
@@ -172,41 +191,30 @@ enum Special {
     /// "Exile the top two cards of your library. Until the end of your next
     /// turn, you may play those cards." (Reckless Impulse, Rally-only).
     RecklessImpulse,
+    /// "Choose creature or land. Reveal the top four cards of your
+    /// library. Put all cards of the chosen type revealed this way into
+    /// your hand and the rest into your graveyard." The choice happens
+    /// during resolution, so it is the first real consumer of the generic
+    /// resumable `EffectOp::Choice` interpreter.
+    WindingWay,
+}
+
+#[derive(Clone, Copy)]
+enum StackSpellFilter {
+    Any,
+    Instant,
 }
 
 fn special_for(name: &str) -> Special {
     match name {
-        // Great Furnace is a second "tap for {R}" land, textually identical
-        // to Mountain (its only difference -- also being an Artifact, for
-        // Metalcraft/affinity synergy -- is carried by `CardJson::types`,
-        // not by this shape).
-        "Mountain" | "Great Furnace" => Special::Mountain,
+        // Great Furnace is intentionally explicit: unlike a basic land, its
+        // mana ability is rules text, not intrinsic to a basic land type.
+        "Great Furnace" => Special::GreatFurnace,
         "Lightning Bolt" => Special::BurnAnyTarget(3),
         "Fiery Temper" => Special::BurnAnyTarget(3),
         "Fireblast" => Special::BurnAnyTarget(4),
         "Lava Dart" => Special::BurnAnyTarget(1),
         "Chain Lightning" => Special::ChainLightning,
-        // Every one of these resolves onto the battlefield with no other
-        // cast-time effect: Burning-Tree Emissary's ETB mana add, Clockwork
-        // Percussionist's dies-trigger impulse draw, Experimental
-        // Synthesizer's enters-or-leaves impulse draw + its own sac
-        // activated ability, Goblin Bushwhacker's Kicker/ETB pump, and
-        // Goblin Tomb Raider's static self-boost are all layered on
-        // separately (`keywords_for`, `kicker_cost_for`,
-        // `activated_abilities_for`, `src/trigger.rs`'s `triggers_for`
-        // table, and `engine::static_self_boost_for`) -- exactly the same
-        // "spell/ability shape and triggered/static shape are orthogonal"
-        // split `VanillaCreature`'s own doc already establishes for
-        // Guttersnipe/Voldaren Epicure/Sneaky Snacker.
-        "Guttersnipe"
-        | "Masked Meower"
-        | "Voldaren Epicure"
-        | "Sneaky Snacker"
-        | "Burning-Tree Emissary"
-        | "Clockwork Percussionist"
-        | "Experimental Synthesizer"
-        | "Goblin Bushwhacker"
-        | "Goblin Tomb Raider" => Special::VanillaCreature,
         "Faithless Looting" => Special::DrawThenDiscard {
             draw: 2,
             discard: 2,
@@ -214,12 +222,15 @@ fn special_for(name: &str) -> Special {
         "Grab the Prize" => Special::GrabThePrize,
         "Highway Robbery" => Special::HighwayRobbery,
         "Searing Blaze" => Special::SearingBlaze,
+        "Counterspell" => Special::CounterTarget(StackSpellFilter::Any),
+        "Dispel" => Special::CounterTarget(StackSpellFilter::Instant),
         "Pyroblast" => Special::Pyroblast,
         "Red Elemental Blast" => Special::RedElementalBlast,
         "End the Festivities" => Special::EndTheFestivities,
         "Galvanic Blast" => Special::GalvanicBlast,
         "Rally at the Hornburg" => Special::RallyAtTheHornburg,
         "Reckless Impulse" => Special::RecklessImpulse,
+        "Winding Way" => Special::WindingWay,
         _ => Special::None,
     }
 }
@@ -369,6 +380,59 @@ fn cost_src(mana_cost: &str) -> String {
     )
 }
 
+fn intrinsic_basic_mana_color(card: &CardJson) -> Option<&'static str> {
+    let is_basic_land = card.is_land
+        && card.types.iter().any(|card_type| card_type == "Land")
+        && card.supertypes.iter().any(|supertype| supertype == "Basic");
+    if !is_basic_land {
+        return None;
+    }
+
+    let intrinsic: Vec<&'static str> = card
+        .subtypes
+        .iter()
+        .filter_map(|subtype| match subtype.as_str() {
+            "Plains" => Some("W"),
+            "Island" => Some("U"),
+            "Swamp" => Some("B"),
+            "Mountain" => Some("R"),
+            "Forest" => Some("G"),
+            _ => None,
+        })
+        .collect();
+    if intrinsic.len() != 1 {
+        panic!(
+            "cards_v1.json: intrinsic basic land {:?} must have exactly one basic land subtype, got {:?}",
+            card.name, card.subtypes
+        );
+    }
+    let expected = intrinsic[0];
+    if card.produces_mana.len() != 1 || card.produces_mana[0] != expected {
+        panic!(
+            "cards_v1.json: intrinsic basic land {:?} subtype requires produces_mana {:?}, got {:?}",
+            card.name, expected, card.produces_mana
+        );
+    }
+    Some(expected)
+}
+
+fn is_ordinary_permanent(card: &CardJson) -> bool {
+    !card.is_land
+        && !card.is_token
+        && card
+            .types
+            .iter()
+            .any(|card_type| matches!(card_type.as_str(), "Artifact" | "Creature" | "Enchantment"))
+}
+
+fn capability_src(capability: EngineCapabilityJson) -> &'static str {
+    match capability {
+        EngineCapabilityJson::NoEffect => "CardCapability::NoEffect",
+        EngineCapabilityJson::Partial => "CardCapability::Partial",
+        EngineCapabilityJson::Full => "CardCapability::Full",
+    }
+}
+
 fn codegen(cards: &[CardJson]) -> String {
     let mut out = String::new();
     writeln!(
@@ -383,21 +447,38 @@ fn codegen(cards: &[CardJson]) -> String {
     // possible: EffectOp contains Vec/Box and can't live in a const
     // initializer directly, but a `fn() -> Option<EffectOp>` can, and it
     // builds the (small) tree fresh each call.
-    writeln!(out, "fn mana_ability_mountain() -> Option<EffectOp> {{").unwrap();
-    writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
-    writeln!(
-        out,
-        "        EffectOp::TapObject {{ object: ObjectRef::ThisSource }},"
-    )
-    .unwrap();
-    writeln!(out, "        EffectOp::AddMana {{ player: PlayerRef::Controller, colors: vec![ManaColor::R] }},").unwrap();
-    writeln!(out, "    ]))").unwrap();
-    writeln!(out, "}}").unwrap();
-    writeln!(out).unwrap();
+    for (suffix, color) in [
+        ("w", "W"),
+        ("u", "U"),
+        ("b", "B"),
+        ("r", "R"),
+        ("g", "G"),
+        ("c", "C"),
+    ] {
+        let used = cards.iter().any(|card| {
+            card.engine_capability != EngineCapabilityJson::NoEffect
+                && (intrinsic_basic_mana_color(card) == Some(color)
+                    || (color == "R" && matches!(special_for(&card.name), Special::GreatFurnace)))
+        });
+        if !used {
+            continue;
+        }
+        writeln!(out, "fn mana_ability_add_{suffix}() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Sequence(vec![").unwrap();
+        writeln!(
+            out,
+            "        EffectOp::TapObject {{ object: ObjectRef::ThisSource }},"
+        )
+        .unwrap();
+        writeln!(out, "        EffectOp::AddMana {{ player: PlayerRef::Controller, colors: vec![ManaColor::{color}] }},").unwrap();
+        writeln!(out, "    ]))").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
 
     writeln!(
         out,
-        "fn spell_effect_vanilla_creature() -> Option<EffectOp> {{"
+        "fn spell_effect_ordinary_permanent() -> Option<EffectOp> {{"
     )
     .unwrap();
     writeln!(out, "    Some(EffectOp::MoveObject {{ object: ObjectRef::ThisSource, to_zone: Zone::Battlefield }})").unwrap();
@@ -440,8 +521,8 @@ fn codegen(cards: &[CardJson]) -> String {
         // "Deals 3 damage to any target. Then that player or that
         // permanent's controller may pay {R}{R}. If the player does, they
         // may copy this spell...": mandatory damage first (identical shape
-        // to `BurnAnyTarget(3)`), then the conditional halt-gate -- see
-        // `EffectOp::HaltIfAffectedCanPayCopyCost`'s doc.
+        // to `BurnAnyTarget(3)`), then the resolution-suspending copy offer
+        // -- see `EffectOp::OfferAffectedPlayerSpellCopy`'s doc.
         writeln!(
             out,
             "fn spell_effect_chain_lightning() -> Option<EffectOp> {{"
@@ -455,7 +536,7 @@ fn codegen(cards: &[CardJson]) -> String {
         .unwrap();
         writeln!(
             out,
-            "        EffectOp::HaltIfAffectedCanPayCopyCost {{ affected: TargetRef::Target(0) }},"
+            "        EffectOp::OfferAffectedPlayerSpellCopy {{ affected: TargetRef::Target(0) }},"
         )
         .unwrap();
         writeln!(out, "    ]))").unwrap();
@@ -546,6 +627,31 @@ fn codegen(cards: &[CardJson]) -> String {
         )
         .unwrap();
         writeln!(out, "    Some(EffectOp::ImpulseDraw {{ count: 2, duration: ImpulseDuration::UntilOwnersNextTurn }})").unwrap();
+        writeln!(out, "}}").unwrap();
+        writeln!(out).unwrap();
+    }
+
+    if cards
+        .iter()
+        .any(|c| matches!(special_for(&c.name), Special::WindingWay))
+    {
+        // Printed order is policy semantics: zero is Creature, one is Land.
+        // The choice is made during resolution before the public reveal.
+        writeln!(out, "fn spell_effect_winding_way() -> Option<EffectOp> {{").unwrap();
+        writeln!(out, "    Some(EffectOp::Choice {{").unwrap();
+        writeln!(out, "        controller: PlayerRef::Controller,").unwrap();
+        writeln!(out, "        options: vec![").unwrap();
+        for card_type in ["Creature", "Land"] {
+            writeln!(out, "            EffectOp::RevealTopAndPartitionByType {{").unwrap();
+            writeln!(out, "                player: PlayerRef::Controller,").unwrap();
+            writeln!(out, "                count: 4,").unwrap();
+            writeln!(out, "                card_type: CardType::{card_type},").unwrap();
+            writeln!(out, "                matching_to: Zone::Hand,").unwrap();
+            writeln!(out, "                rest_to: Zone::Graveyard,").unwrap();
+            writeln!(out, "            }},").unwrap();
+        }
+        writeln!(out, "        ],").unwrap();
+        writeln!(out, "    }})").unwrap();
         writeln!(out, "}}").unwrap();
         writeln!(out).unwrap();
     }
@@ -694,34 +800,57 @@ fn codegen(cards: &[CardJson]) -> String {
         writeln!(out).unwrap();
     }
 
+    // Reusable "counter target spell" resolution program. Target filters
+    // belong to `TargetSpec`; the effect itself is identical for
+    // Counterspell, Dispel, and Red Elemental Blast, and is nested under
+    // Pyroblast's resolution-time blue check. The zone guard makes a stale
+    // target a no-op, while `EffectOp::MoveObject` owns physical-card,
+    // flashback, and virtual-copy departure semantics.
+    writeln!(out, "fn counter_target_spell_effect() -> EffectOp {{").unwrap();
+    writeln!(out, "    EffectOp::Conditional {{").unwrap();
+    writeln!(
+        out,
+        "        cond: EffectCond::TargetInZone(0, Zone::Stack),"
+    )
+    .unwrap();
+    writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
+    writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
+    writeln!(out, "    }}").unwrap();
+    writeln!(out, "}}").unwrap();
+    writeln!(out).unwrap();
+    writeln!(
+        out,
+        "fn spell_effect_counter_target() -> Option<EffectOp> {{"
+    )
+    .unwrap();
+    writeln!(out, "    Some(counter_target_spell_effect())").unwrap();
+    writeln!(out, "}}").unwrap();
+    writeln!(out).unwrap();
+
     if cards
         .iter()
         .any(|c| matches!(special_for(&c.name), Special::Pyroblast))
     {
         // Primary mode: counter target spell if it's blue (unfiltered
         // targeting -- PyroblastCounterTargetEffect checks color at
-        // resolution, not TargetSpell's legality). Same guarded-move shape
-        // handles 608.2b fizzle (TargetInZone) and the color check
-        // (TargetIsColor) together via EffectCond::And.
+        // resolution, not TargetSpell's legality). The shared counter
+        // program handles the stale-stack-target guard and departure.
         writeln!(
             out,
             "fn spell_effect_pyroblast_mode1() -> Option<EffectOp> {{"
         )
         .unwrap();
         writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
-        writeln!(out, "        cond: EffectCond::And(").unwrap();
         writeln!(
             out,
-            "            Box::new(EffectCond::TargetInZone(0, Zone::Stack)),"
+            "        cond: EffectCond::TargetIsColor(0, ManaColor::U),"
         )
         .unwrap();
         writeln!(
             out,
-            "            Box::new(EffectCond::TargetIsColor(0, ManaColor::U)),"
+            "        then: Box::new(counter_target_spell_effect()),"
         )
         .unwrap();
-        writeln!(out, "        ),").unwrap();
-        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
         writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
         writeln!(out, "    }})").unwrap();
         writeln!(out, "}}").unwrap();
@@ -754,22 +883,13 @@ fn codegen(cards: &[CardJson]) -> String {
         .any(|c| matches!(special_for(&c.name), Special::RedElementalBlast))
     {
         // Primary mode: counter target blue spell (color pre-filtered by
-        // TargetSpec::BlueSpellOnStack at targeting time -- only the
-        // 608.2b fizzle re-check is needed at resolution).
+        // TargetSpec::BlueSpellOnStack at targeting time).
         writeln!(
             out,
             "fn spell_effect_red_elemental_blast_mode1() -> Option<EffectOp> {{"
         )
         .unwrap();
-        writeln!(out, "    Some(EffectOp::Conditional {{").unwrap();
-        writeln!(
-            out,
-            "        cond: EffectCond::TargetInZone(0, Zone::Stack),"
-        )
-        .unwrap();
-        writeln!(out, "        then: Box::new(EffectOp::MoveObject {{ object: ObjectRef::Target(0), to_zone: Zone::Graveyard }}),").unwrap();
-        writeln!(out, "        else_: Box::new(EffectOp::Sequence(vec![])),").unwrap();
-        writeln!(out, "    }})").unwrap();
+        writeln!(out, "    spell_effect_counter_target()").unwrap();
         writeln!(out, "}}").unwrap();
         writeln!(out).unwrap();
         writeln!(out, "fn mode2_effect_red_elemental_blast() -> EffectOp {{").unwrap();
@@ -854,16 +974,16 @@ fn codegen(cards: &[CardJson]) -> String {
             None => "None".to_string(),
         };
 
-        let (target_spec_src, spell_effect_src, mana_ability_src) = match special {
+        let (target_spec_src, mut spell_effect_src, mut mana_ability_src) = match special {
             Special::None => (
                 "TargetSpec::None",
                 "no_effect".to_string(),
                 "no_effect".to_string(),
             ),
-            Special::Mountain => (
+            Special::GreatFurnace => (
                 "TargetSpec::None",
                 "no_effect".to_string(),
-                "mana_ability_mountain".to_string(),
+                "mana_ability_add_r".to_string(),
             ),
             Special::BurnAnyTarget(amount) => (
                 "TargetSpec::AnyTarget",
@@ -873,11 +993,6 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::ChainLightning => (
                 "TargetSpec::AnyTarget",
                 "spell_effect_chain_lightning".to_string(),
-                "no_effect".to_string(),
-            ),
-            Special::VanillaCreature => (
-                "TargetSpec::None",
-                "spell_effect_vanilla_creature".to_string(),
                 "no_effect".to_string(),
             ),
             Special::DrawThenDiscard { draw, discard } => (
@@ -898,6 +1013,16 @@ fn codegen(cards: &[CardJson]) -> String {
             Special::SearingBlaze => (
                 "TargetSpec::PlayerThenTheirCreature",
                 "spell_effect_searing_blaze".to_string(),
+                "no_effect".to_string(),
+            ),
+            Special::CounterTarget(StackSpellFilter::Any) => (
+                "TargetSpec::AnySpellOnStack",
+                "spell_effect_counter_target".to_string(),
+                "no_effect".to_string(),
+            ),
+            Special::CounterTarget(StackSpellFilter::Instant) => (
+                "TargetSpec::InstantSpellOnStack",
+                "spell_effect_counter_target".to_string(),
                 "no_effect".to_string(),
             ),
             Special::Pyroblast => (
@@ -930,10 +1055,59 @@ fn codegen(cards: &[CardJson]) -> String {
                 "spell_effect_reckless_impulse".to_string(),
                 "no_effect".to_string(),
             ),
+            Special::WindingWay => (
+                "TargetSpec::None",
+                "spell_effect_winding_way".to_string(),
+                "no_effect".to_string(),
+            ),
         };
+
+        let executable = c.engine_capability != EngineCapabilityJson::NoEffect;
+        if executable && matches!(special, Special::None) && is_ordinary_permanent(c) {
+            spell_effect_src = "spell_effect_ordinary_permanent".to_string();
+        }
+
+        let intrinsic_basic_color = intrinsic_basic_mana_color(c);
+        if let (true, Some(color)) = (executable, intrinsic_basic_color) {
+            let suffix = color.to_ascii_lowercase();
+            // Validate the metadata symbol through the same closed color set
+            // used to render `CardDef::produces_mana` before naming the
+            // generated one-color ability.
+            color_variant(color);
+            mana_ability_src = format!("mana_ability_add_{suffix}");
+        }
+
+        let has_spell_program = spell_effect_src != "no_effect";
+        let has_mana_program = mana_ability_src != "no_effect";
+        if executable && !c.is_token {
+            if c.is_land && !has_mana_program {
+                panic!(
+                    "cards_v1.json: executable land {:?} has no generated mana program",
+                    c.name
+                );
+            }
+            if !c.is_land && !has_spell_program {
+                panic!(
+                    "cards_v1.json: executable nonland {:?} has no generated spell program",
+                    c.name
+                );
+            }
+        }
+        if !executable && (has_spell_program || has_mana_program) {
+            panic!(
+                "cards_v1.json: no-effect card {:?} unexpectedly received an executable program",
+                c.name
+            );
+        }
 
         writeln!(out, "    CardDef {{").unwrap();
         writeln!(out, "        name: {:?},", c.name).unwrap();
+        writeln!(
+            out,
+            "        capability: {},",
+            capability_src(c.engine_capability)
+        )
+        .unwrap();
         writeln!(
             out,
             "        cost: Cost {{ pips: &[{pips_src}], generic: {generic}, x_count: {x_count} }},"
@@ -987,11 +1161,12 @@ fn codegen(cards: &[CardJson]) -> String {
     writeln!(out).unwrap();
 
     // ---- content hash --------------------------------------------------
-    // Hashes gameplay-relevant fields only (name/cost/types/subtypes/power/
-    // toughness/is_land/produces_mana/decks), in array order, so
+    // Hashes gameplay-relevant fields only (name/cost/types/subtypes/
+    // supertypes/power/toughness/is_land/produces_mana/colors/is_token/
+    // engine_capability/decks), in array order, so
     // metadata-only regenerations of cards_v1.json (timestamps, java_file
     // paths, complexity tags) don't churn the constant.
-    let mut canon = String::new();
+    let mut canon = String::from("kernel_carddb/v2\n");
     for c in cards {
         canon.push_str(&c.name);
         canon.push('|');
@@ -1001,6 +1176,8 @@ fn codegen(cards: &[CardJson]) -> String {
         canon.push('|');
         canon.push_str(&c.subtypes.join(","));
         canon.push('|');
+        canon.push_str(&c.supertypes.join(","));
+        canon.push('|');
         canon.push_str(&c.power.map(|p| p.to_string()).unwrap_or_default());
         canon.push('|');
         canon.push_str(&c.toughness.map(|t| t.to_string()).unwrap_or_default());
@@ -1008,6 +1185,16 @@ fn codegen(cards: &[CardJson]) -> String {
         canon.push_str(if c.is_land { "L" } else { "-" });
         canon.push('|');
         canon.push_str(&c.produces_mana.join(","));
+        canon.push('|');
+        canon.push_str(&c.colors.join(","));
+        canon.push('|');
+        canon.push_str(if c.is_token { "T" } else { "-" });
+        canon.push('|');
+        canon.push_str(match c.engine_capability {
+            EngineCapabilityJson::NoEffect => "no_effect",
+            EngineCapabilityJson::Partial => "partial",
+            EngineCapabilityJson::Full => "full",
+        });
         canon.push('|');
         canon.push_str(&c.decks.join(","));
         canon.push('\n');

@@ -1,7 +1,10 @@
-use mtg_kernel::rl::{derive_env_seed, derive_policy_seed, record_burn_mirror_episode};
+use mtg_kernel::rl::{
+    burn_deck_hash, derive_env_seed, derive_policy_seed, record_burn_mirror_episode,
+};
 use mtg_kernel::rl_session::{
     KernelRlJsonlServerV1, KernelRlResponseV1, RlEpisodeSessionV1, RlSessionErrorCode,
-    RlSessionResponseV1, RL_SESSION_PROTOCOL_VERSION, RL_SESSION_SCHEMA_VERSION,
+    RlSessionResponseV1, CANONICAL_BURN_DECK_ID, RL_SESSION_PROTOCOL_VERSION,
+    RL_SESSION_SCHEMA_VERSION,
 };
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
@@ -13,10 +16,28 @@ fn reset_line(request_id: &str, max_decisions: u64) -> String {
 }
 
 fn reset_line_for_episode(request_id: &str, episode_id: u64, max_decisions: u64) -> String {
+    reset_line_for_decks(
+        request_id,
+        episode_id,
+        max_decisions,
+        [
+            CANONICAL_BURN_DECK_ID.to_string(),
+            CANONICAL_BURN_DECK_ID.to_string(),
+        ],
+    )
+}
+
+fn reset_line_for_decks(
+    request_id: &str,
+    episode_id: u64,
+    max_decisions: u64,
+    deck_ids: [String; 2],
+) -> String {
     json!({
         "request_type": "reset",
         "schema_version": RL_SESSION_SCHEMA_VERSION,
         "request_id": request_id,
+        "deck_ids": deck_ids,
         "episode_id": episode_id,
         "env_seed": derive_env_seed(5151, episode_id),
         "max_decisions": max_decisions,
@@ -101,6 +122,11 @@ fn rl_session_decision_response_has_no_full_state_diagnostic_hash() {
     let value = parse_response(&output);
 
     assert_eq!(value["response_type"], "decision");
+    assert_eq!(value["deck_ids"], json!(["Burn", "Burn"]));
+    assert_eq!(
+        value["deck_hashes"],
+        json!([burn_deck_hash(), burn_deck_hash()])
+    );
     assert!(!contains_key(&value, "diagnostic_state_hash"));
     assert!(!contains_key(
         &value,
@@ -122,6 +148,11 @@ fn rl_session_terminal_response_has_provenance_and_no_diagnostic_hash() {
     assert_eq!(value["terminal_classification"], "truncated");
     assert_eq!(value["terminal_code"], "decision_cap");
     assert_eq!(value["terminal_reward"], json!([0, 0]));
+    assert_eq!(value["deck_ids"], json!(["Burn", "Burn"]));
+    assert_eq!(
+        value["deck_hashes"],
+        json!([burn_deck_hash(), burn_deck_hash()])
+    );
     assert_eq!(value["provenance"]["protocol"], "kernel_rl_jsonl");
     assert_eq!(
         value["provenance"]["protocol_version"],
@@ -149,6 +180,115 @@ fn rl_session_reset_response_is_deterministic_for_identical_inputs() {
     let first = server.handle_line(&line);
     let second = server.handle_line(&line);
     assert_eq!(first, second);
+}
+
+#[test]
+fn rl_session_deck_aware_reset_pins_identity_on_every_response() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let reset = parse_response(&server.handle_line(&reset_line("deck-pinned-reset", 8)));
+    let expected_ids = json!(["Burn", "Burn"]);
+    let expected_hashes = json!([burn_deck_hash(), burn_deck_hash()]);
+    assert_eq!(reset["deck_ids"], expected_ids);
+    assert_eq!(reset["deck_hashes"], expected_hashes);
+
+    let stepped = parse_response(&server.handle_line(&step_line_from_decision(
+        "deck-pinned-step",
+        &reset,
+        0,
+    )));
+    assert_ne!(stepped["response_type"], "error");
+    assert_eq!(stepped["deck_ids"], expected_ids);
+    assert_eq!(stepped["deck_hashes"], expected_hashes);
+
+    let terminal = parse_response(&server.handle_line(&reset_line("deck-pinned-terminal", 0)));
+    assert_eq!(terminal["response_type"], "terminal");
+    assert_eq!(terminal["deck_ids"], expected_ids);
+    assert_eq!(terminal["deck_hashes"], expected_hashes);
+}
+
+#[test]
+fn rl_session_reset_requires_exact_deck_id_shape_before_session_creation() {
+    let mut server = KernelRlJsonlServerV1::new();
+    for (request_id, deck_ids) in [
+        ("missing-decks", None),
+        ("one-deck", Some(json!(["Burn"]))),
+        ("three-decks", Some(json!(["Burn", "Burn", "Burn"]))),
+        ("non-string-deck", Some(json!(["Burn", 7]))),
+    ] {
+        let mut request = json!({
+            "request_type": "reset",
+            "schema_version": RL_SESSION_SCHEMA_VERSION,
+            "request_id": request_id,
+            "episode_id": 0,
+            "env_seed": derive_env_seed(5151, 0),
+            "max_decisions": 16,
+        });
+        if let Some(deck_ids) = deck_ids {
+            request["deck_ids"] = deck_ids;
+        }
+        let rejected = parse_response(&server.handle_line(&request.to_string()));
+        assert_eq!(rejected["response_type"], "error", "{request_id}");
+        assert_eq!(
+            rejected["error"]["code"], "malformed_request",
+            "{request_id}"
+        );
+    }
+
+    let still_no_session = parse_response(&server.handle_line(&step_line(
+        "after-malformed-decks",
+        0,
+        0,
+        0,
+        "legal-action-v4:0",
+    )));
+    assert_eq!(still_no_session["error"]["code"], "step_before_reset");
+}
+
+#[test]
+fn rl_session_unknown_deck_reset_is_typed_and_does_not_replace_active_session() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let active = parse_response(&server.handle_line(&reset_line("active-before-unknown", 16)));
+    let rejected = parse_response(&server.handle_line(&reset_line_for_decks(
+        "unknown-deck-reset",
+        99,
+        16,
+        ["Burn".to_string(), "Terror".to_string()],
+    )));
+    assert_eq!(rejected["response_type"], "error");
+    assert_eq!(rejected["error"]["code"], "unsupported_deck");
+    assert!(rejected["error"]["message"]
+        .as_str()
+        .unwrap()
+        .contains("seat 1"));
+
+    let valid = parse_response(&server.handle_line(&step_line_from_decision(
+        "active-after-unknown",
+        &active,
+        0,
+    )));
+    assert_ne!(valid["response_type"], "error");
+    assert_eq!(valid["episode_id"], active["episode_id"]);
+    assert_eq!(valid["step"], 1);
+    assert_eq!(valid["deck_ids"], active["deck_ids"]);
+    assert_eq!(valid["deck_hashes"], active["deck_hashes"]);
+}
+
+#[test]
+fn rl_session_reset_retry_cache_identity_includes_deck_ids() {
+    let mut server = KernelRlJsonlServerV1::new();
+    let burn = reset_line("deck-cache-reset", 16);
+    let first = server.handle_line(&burn);
+    assert_eq!(server.handle_line(&burn), first);
+
+    let changed_decks = reset_line_for_decks(
+        "deck-cache-reset",
+        0,
+        16,
+        ["Burn".to_string(), "Terror".to_string()],
+    );
+    let rejected = parse_response(&server.handle_line(&changed_decks));
+    assert_eq!(rejected["response_type"], "error");
+    assert_eq!(rejected["error"]["code"], "request_id_reuse_mismatch");
 }
 
 #[test]
@@ -305,7 +445,7 @@ fn rl_session_invalid_index_and_id_errors_do_not_mutate() {
 
     let before = current_snapshot(&session);
     let err = session
-        .step(0, 0, 0, "legal-action-v2:ffffffffffffffff")
+        .step(0, 0, 0, "legal-action-v4:ffffffffffffffff")
         .unwrap_err();
     assert_eq!(err.code, RlSessionErrorCode::SelectedActionIdUnknown);
     assert_eq!(current_snapshot(&session), before);
@@ -409,7 +549,7 @@ fn rl_session_step_before_reset_and_malformed_input_recover_cleanly() {
     let mut server = KernelRlJsonlServerV1::new();
 
     let step_before_reset =
-        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v2:0"));
+        server.handle_line(&step_line("early-step", 0, 0, 0, "legal-action-v4:0"));
     let step_value: KernelRlResponseV1 = serde_json::from_str(&step_before_reset).unwrap();
     match step_value {
         KernelRlResponseV1::Error {
@@ -468,6 +608,7 @@ fn rl_session_schema_one_requests_fail_before_session_mutation() {
         "request_type": "reset",
         "schema_version": 1,
         "request_id": "schema-one-reset",
+        "deck_ids": ["Burn", "Burn"],
         "episode_id": 0,
         "env_seed": derive_env_seed(5151, 0),
         "max_decisions": 16,
@@ -482,15 +623,15 @@ fn rl_session_schema_one_requests_fail_before_session_mutation() {
         0,
         0,
         0,
-        "legal-action-v2:0",
+        "legal-action-v4:0",
     )));
     assert_eq!(still_no_session["response_type"], "error");
     assert_eq!(still_no_session["error"]["code"], "step_before_reset");
 
-    let reset = parse_response(&server.handle_line(&reset_line("schema-two-reset", 16)));
+    let reset = parse_response(&server.handle_line(&reset_line("schema-four-reset", 16)));
     assert_eq!(reset["response_type"], "decision");
     assert_eq!(reset["schema_version"], RL_SESSION_SCHEMA_VERSION);
-    assert_eq!(reset["observation"]["schema_version"], 2);
+    assert_eq!(reset["observation"]["schema_version"], 4);
 
     let action = &reset["legal_actions"].as_array().unwrap()[0];
     let schema_one_step = json!({
@@ -523,6 +664,7 @@ fn rl_session_unknown_request_fields_are_rejected_without_mutation() {
         "request_type": "reset",
         "schema_version": RL_SESSION_SCHEMA_VERSION,
         "request_id": "unknown-reset",
+        "deck_ids": ["Burn", "Burn"],
         "episode_id": 99,
         "env_seed": derive_env_seed(5151, 99),
         "max_decisions": 16,
@@ -532,6 +674,10 @@ fn rl_session_unknown_request_fields_are_rejected_without_mutation() {
     let rejected_reset = parse_response(&server.handle_line(&unknown_reset));
     assert_eq!(rejected_reset["response_type"], "error");
     assert_eq!(rejected_reset["error"]["code"], "malformed_request");
+    assert_eq!(
+        rejected_reset["error"]["message"],
+        "request does not match the v4 protocol schema"
+    );
 
     let reset = server.handle_line(&reset_line("strict-reset", 16));
     let reset_value = parse_response(&reset);
@@ -631,7 +777,7 @@ fn rl_session_sequential_reset_rejects_stale_steps_and_retry_cache_after_reset()
 }
 
 #[test]
-fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
+fn rl_session_kernel_rl_env_process_smoke_is_v4_strict_and_hash_safe() {
     let mut child = Command::new(env!("CARGO_BIN_EXE_kernel_rl_env"))
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
@@ -646,6 +792,7 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
         "request_type": "reset",
         "schema_version": 1,
         "request_id": "process-schema-one-reset",
+        "deck_ids": ["Burn", "Burn"],
         "episode_id": 0,
         "env_seed": derive_env_seed(5151, 0),
         "max_decisions": 16,
@@ -665,12 +812,17 @@ fn rl_session_kernel_rl_env_process_smoke_is_v2_strict_and_hash_safe() {
     reader.read_line(&mut first_line).unwrap();
     let first = parse_response(first_line.trim_end());
     assert_eq!(first["response_type"], "decision");
+    assert_eq!(first["deck_ids"], json!(["Burn", "Burn"]));
+    assert_eq!(
+        first["deck_hashes"],
+        json!([burn_deck_hash(), burn_deck_hash()])
+    );
     assert_eq!(first["schema_version"], RL_SESSION_SCHEMA_VERSION);
     assert_eq!(
         first["provenance"]["schema_version"],
         RL_SESSION_SCHEMA_VERSION
     );
-    assert_eq!(first["observation"]["schema_version"], 2);
+    assert_eq!(first["observation"]["schema_version"], 4);
     assert_eq!(
         first["legal_actions"][0]["schema_version"],
         RL_SESSION_SCHEMA_VERSION

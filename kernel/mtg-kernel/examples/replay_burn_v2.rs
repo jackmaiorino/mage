@@ -53,10 +53,16 @@
 //!    `(episode_id, target_slot, accumulated_targets)` -- see that
 //!    function's doc. Fails the whole run (non-zero exit, no replay
 //!    attempted) if either check fails.
-//! 5. **Corpus provenance gate**, also run before any replay: reads the
-//!    corpus directory's own `manifest.json` and calls
-//!    `surface_v2::verify_corpus_provenance` against `H2_JAVA_ORACLE_COMMIT`.
-//!    Fails loudly (non-zero exit) on mismatch.
+//! 5. **Corpus content-lock and provenance gates**, also run before any
+//!    replay. The two designated Phase-0 corpora (`burn_mirror_v6` and
+//!    `rally_mirror_v2`) must exactly match the tracked manifest, trace set,
+//!    sizes, and SHA-256 digests in `kernel/corpus_content_locks_v1.json`, and
+//!    their manifest status must be `LOCKED`. Historical corpora remain
+//!    unblocked by this content-lock gate, are explicitly reported as
+//!    untracked, and remain subject to the existing provenance gate.
+//!    The driver then calls `surface_v2::verify_corpus_provenance` against
+//!    `H2_JAVA_ORACLE_COMMIT`. Either designated-lock or provenance mismatch
+//!    fails loudly (non-zero exit) before trace parsing or replay.
 //!
 //! Everything else -- candidate/UUID translation, the `DECLARE_ATTACKS`/
 //! `DECLARE_BLOCKS` full-permutation-with-DONE-prefix format, the
@@ -76,8 +82,11 @@ use mtg_kernel::state::{GameState, Target, Zone};
 use mtg_kernel::surface_v2::{HarnessSurfaceV2, SuppressionReason, SurfaceAction, SurfaceDecision};
 use mtg_kernel::trace::{self, DecisionRecord, GoldenTrace};
 use mtg_kernel::trigger::PendingTrigger;
+use serde::Deserialize;
+use sha2::{Digest, Sha256};
 
 use std::collections::{BTreeMap, HashMap};
+use std::fs;
 use std::path::{Path, PathBuf};
 
 const DONE: &str = "sentinel:DONE";
@@ -91,7 +100,27 @@ fn main() {
         .map(PathBuf::from)
         .expect("usage: replay_burn_v2 <v4 corpus dir>");
 
-    // --- Gate 1: corpus provenance (see this file's module doc, point 5) ---
+    // --- Gate 1: tracked content identity (module doc, point 5) ---------
+    match verify_invoked_corpus_content_lock(&root) {
+        Ok(Some(report)) => println!(
+            "content-lock check: PASS (corpus={} traces={} aggregate_sha256={} status=LOCKED)",
+            report.directory, report.trace_count, report.aggregate_sha256
+        ),
+        Ok(None) => eprintln!(
+            "WARNING: content-lock check: UNTRACKED (corpus directory={}); \
+             this corpus is unblocked by the content-lock gate but remains subject to the provenance gate; \
+             any result has no tracked content-lock guarantee.",
+            root.file_name()
+                .and_then(|name| name.to_str())
+                .unwrap_or("<non-UTF8>")
+        ),
+        Err(error) => {
+            eprintln!("CONTENT-LOCK CHECK FAILED -- refusing to replay:\n{error}");
+            std::process::exit(1);
+        }
+    }
+
+    // --- Gate 2: corpus provenance (see this file's module doc, point 5) ---
     match load_manifest(&root) {
         Some(manifest) => {
             match mtg_kernel::surface_v2::verify_corpus_provenance(&manifest.java_oracle_commit) {
@@ -118,11 +147,21 @@ fn main() {
             );
         }
         None => {
+            let reference_rules_version = std::env::var("REPLAY_REFERENCE_RULES_VERSION")
+                .ok()
+                .and_then(|value| value.parse::<u32>().ok())
+                .unwrap_or(1);
+            let skip_compensation = reference_rules_version >= 2;
+            SKIP_V1_EXILED_EVER_COMPENSATION
+                .store(skip_compensation, std::sync::atomic::Ordering::Relaxed);
             eprintln!(
                 "WARNING: no readable manifest.json at {}; skipping provenance check \
                  (not a hard failure -- but replay results against an unverified corpus carry no provenance guarantee). \
-                 reference_rules_version unknown -- defaulting to v1 exiled_ever compensation APPLIED.",
-                root.display()
+                 reference_rules_version={} from REPLAY_REFERENCE_RULES_VERSION/default; \
+                 v1 exiled_ever compensation {}.",
+                root.display(),
+                reference_rules_version,
+                if skip_compensation { "SKIPPED" } else { "APPLIED" }
             );
         }
     }
@@ -137,7 +176,7 @@ fn main() {
         println!("  ERR {e}");
     }
 
-    // --- Gate 2: corpus invariant validation (see this file's module doc, point 4) ---
+    // --- Gate 3: corpus invariant validation (see this file's module doc, point 4) ---
     let invariants = validate_corpus_invariants(&traces);
     println!("\n--- corpus invariant validation ---");
     println!(
@@ -367,6 +406,332 @@ fn main() {
             );
         }
     }
+}
+
+// ==================== corpus content lock ====================
+
+const CONTENT_LOCK_CATALOG_JSON: &str = include_str!("../../corpus_content_locks_v1.json");
+
+#[derive(Clone, Debug, Deserialize)]
+struct ContentLockCatalog {
+    schema_version: u32,
+    corpora: Vec<CorpusContentLock>,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+struct CorpusContentLock {
+    directory: String,
+    manifest_corpus: String,
+    required_status: String,
+    manifest: LockedFile,
+    traces: Vec<LockedTrace>,
+    aggregate_sha256: String,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+struct LockedFile {
+    size: u64,
+    sha256: String,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+struct LockedTrace {
+    path: String,
+    size: u64,
+    sha256: String,
+}
+
+struct ContentLockReport {
+    directory: String,
+    trace_count: usize,
+    aggregate_sha256: String,
+}
+
+fn content_locks_for_directory<'a>(
+    catalog: &'a ContentLockCatalog,
+    directory: &str,
+) -> Vec<&'a CorpusContentLock> {
+    catalog
+        .corpora
+        .iter()
+        .filter(|lock| lock.directory.eq_ignore_ascii_case(directory))
+        .collect()
+}
+
+fn verify_invoked_corpus_content_lock(root: &Path) -> Result<Option<ContentLockReport>, String> {
+    let catalog: ContentLockCatalog = serde_json::from_str(CONTENT_LOCK_CATALOG_JSON)
+        .map_err(|error| format!("tracked content-lock catalog is invalid JSON: {error}"))?;
+    if catalog.schema_version != 1 {
+        return Err(format!(
+            "unsupported tracked content-lock schema {} (expected 1)",
+            catalog.schema_version
+        ));
+    }
+
+    let directory = match root.file_name().and_then(|name| name.to_str()) {
+        Some(directory) => directory,
+        None => return Ok(None),
+    };
+    // Treat case-only path aliases as the same designated corpus. This is
+    // mandatory on case-insensitive filesystems (notably Windows), where a
+    // caller can spell the same physical directory with arbitrary casing.
+    // Content verification still rejects a distinct directory that merely
+    // borrows a designated name on a case-sensitive filesystem.
+    let matching = content_locks_for_directory(&catalog, directory);
+    let lock = match matching.as_slice() {
+        [] => return Ok(None),
+        [lock] => *lock,
+        _ => {
+            return Err(format!(
+                "tracked content-lock catalog has duplicate directory {directory:?}"
+            ))
+        }
+    };
+
+    verify_corpus_against_content_lock(root, lock)?;
+    Ok(Some(ContentLockReport {
+        directory: lock.directory.clone(),
+        trace_count: lock.traces.len(),
+        aggregate_sha256: lock.aggregate_sha256.clone(),
+    }))
+}
+
+fn verify_corpus_against_content_lock(root: &Path, lock: &CorpusContentLock) -> Result<(), String> {
+    validate_content_lock_definition(lock)?;
+    if !root.is_dir() {
+        return Err(format!(
+            "designated corpus root is missing or is not a directory: {}",
+            root.display()
+        ));
+    }
+
+    // Status and corpus identity deliberately precede every trace read. A
+    // manifest that is no longer explicitly LOCKED is not formal evidence,
+    // even if its bytes happened to match some other catalog entry.
+    let manifest_path = root.join("manifest.json");
+    let manifest_bytes = fs::read(&manifest_path).map_err(|error| {
+        format!(
+            "missing or unreadable designated manifest {}: {error}",
+            manifest_path.display()
+        )
+    })?;
+    let manifest_value: serde_json::Value = serde_json::from_slice(&manifest_bytes)
+        .map_err(|error| format!("designated manifest is invalid JSON: {error}"))?;
+    let actual_status = manifest_value
+        .get("status")
+        .and_then(serde_json::Value::as_str)
+        .unwrap_or("<missing>");
+    if actual_status != "LOCKED" || actual_status != lock.required_status {
+        return Err(format!(
+            "manifest status mismatch: expected LOCKED, found {actual_status:?}"
+        ));
+    }
+    let actual_corpus = manifest_value
+        .get("corpus")
+        .and_then(serde_json::Value::as_str)
+        .unwrap_or("<missing>");
+    if actual_corpus != lock.manifest_corpus {
+        return Err(format!(
+            "manifest corpus mismatch: expected {:?}, found {actual_corpus:?}",
+            lock.manifest_corpus
+        ));
+    }
+
+    verify_locked_bytes("manifest.json", &manifest_bytes, &lock.manifest)?;
+
+    let actual_traces = collect_replay_trace_paths(root)?;
+    let expected_traces: BTreeMap<&str, &LockedTrace> = lock
+        .traces
+        .iter()
+        .map(|trace| (trace.path.as_str(), trace))
+        .collect();
+    let missing: Vec<&str> = expected_traces
+        .keys()
+        .filter(|path| !actual_traces.contains_key(**path))
+        .copied()
+        .collect();
+    let extra: Vec<&str> = actual_traces
+        .keys()
+        .filter(|path| !expected_traces.contains_key(path.as_str()))
+        .map(String::as_str)
+        .collect();
+    if !missing.is_empty() || !extra.is_empty() {
+        return Err(format!(
+            "trace-set mismatch: missing={missing:?} extra={extra:?}"
+        ));
+    }
+
+    for trace in &lock.traces {
+        let path = actual_traces
+            .get(&trace.path)
+            .expect("trace sets were checked immediately above");
+        let bytes = fs::read(path)
+            .map_err(|error| format!("failed to read locked trace {}: {error}", path.display()))?;
+        verify_locked_bytes(
+            &trace.path,
+            &bytes,
+            &LockedFile {
+                size: trace.size,
+                sha256: trace.sha256.clone(),
+            },
+        )?;
+    }
+
+    Ok(())
+}
+
+fn validate_content_lock_definition(lock: &CorpusContentLock) -> Result<(), String> {
+    if lock.required_status != "LOCKED" {
+        return Err(format!(
+            "tracked lock for {} does not require literal LOCKED status",
+            lock.directory
+        ));
+    }
+    if !is_lower_sha256(&lock.manifest.sha256) {
+        return Err(format!(
+            "tracked lock for {} has invalid manifest SHA-256",
+            lock.directory
+        ));
+    }
+    if !is_lower_sha256(&lock.aggregate_sha256) {
+        return Err(format!(
+            "tracked lock for {} has invalid aggregate SHA-256",
+            lock.directory
+        ));
+    }
+    for trace in &lock.traces {
+        if !is_lower_sha256(&trace.sha256) {
+            return Err(format!(
+                "tracked lock for {} has invalid SHA-256 for {}",
+                lock.directory, trace.path
+            ));
+        }
+    }
+    for pair in lock.traces.windows(2) {
+        if pair[0].path >= pair[1].path {
+            return Err(format!(
+                "tracked trace paths for {} are not strictly sorted: {:?} then {:?}",
+                lock.directory, pair[0].path, pair[1].path
+            ));
+        }
+    }
+    let computed = content_lock_aggregate(lock);
+    if computed != lock.aggregate_sha256 {
+        return Err(format!(
+            "tracked aggregate mismatch for {}: catalog={} computed={computed}",
+            lock.directory, lock.aggregate_sha256
+        ));
+    }
+    Ok(())
+}
+
+fn collect_replay_trace_paths(root: &Path) -> Result<BTreeMap<String, PathBuf>, String> {
+    fn walk(
+        root: &Path,
+        directory: &Path,
+        traces: &mut BTreeMap<String, PathBuf>,
+    ) -> Result<(), String> {
+        let entries = fs::read_dir(directory).map_err(|error| {
+            format!(
+                "failed to enumerate designated corpus directory {}: {error}",
+                directory.display()
+            )
+        })?;
+        for entry in entries {
+            let entry = entry.map_err(|error| {
+                format!(
+                    "failed to enumerate designated corpus directory {}: {error}",
+                    directory.display()
+                )
+            })?;
+            let path = entry.path();
+            if path.is_dir() {
+                walk(root, &path, traces)?;
+            } else if path.extension().is_some_and(|extension| extension == "txt")
+                && path
+                    .file_name()
+                    .is_some_and(|name| name.to_string_lossy().starts_with("game_"))
+            {
+                let relative = path
+                    .strip_prefix(root)
+                    .map_err(|error| format!("cannot relativize {}: {error}", path.display()))?;
+                let components: Result<Vec<&str>, String> = relative
+                    .components()
+                    .map(|component| {
+                        component.as_os_str().to_str().ok_or_else(|| {
+                            format!("locked trace path is not UTF-8: {}", path.display())
+                        })
+                    })
+                    .collect();
+                let lock_path = components?.join("/");
+                if traces.insert(lock_path.clone(), path.clone()).is_some() {
+                    return Err(format!("duplicate normalized trace path {lock_path:?}"));
+                }
+            }
+        }
+        Ok(())
+    }
+
+    let mut traces = BTreeMap::new();
+    walk(root, root, &mut traces)?;
+    Ok(traces)
+}
+
+fn verify_locked_bytes(label: &str, bytes: &[u8], lock: &LockedFile) -> Result<(), String> {
+    let actual_size = bytes.len() as u64;
+    if actual_size != lock.size {
+        return Err(format!(
+            "locked file size mismatch for {label}: expected {}, found {actual_size}",
+            lock.size
+        ));
+    }
+    let actual_sha256 = sha256_hex(bytes);
+    if actual_sha256 != lock.sha256 {
+        return Err(format!(
+            "locked file SHA-256 mismatch for {label}: expected {}, found {actual_sha256}",
+            lock.sha256
+        ));
+    }
+    Ok(())
+}
+
+fn content_lock_aggregate(lock: &CorpusContentLock) -> String {
+    let mut digest = Sha256::new();
+    for trace in &lock.traces {
+        digest.update(b"trace\0");
+        digest.update(trace.path.as_bytes());
+        digest.update(b"\0");
+        digest.update(trace.size.to_string().as_bytes());
+        digest.update(b"\0");
+        digest.update(trace.sha256.as_bytes());
+        digest.update(b"\n");
+    }
+    digest.update(b"manifest\0manifest.json\0");
+    digest.update(lock.manifest.size.to_string().as_bytes());
+    digest.update(b"\0");
+    digest.update(lock.manifest.sha256.as_bytes());
+    digest.update(b"\n");
+    lowercase_hex(&digest.finalize())
+}
+
+fn sha256_hex(bytes: &[u8]) -> String {
+    lowercase_hex(&Sha256::digest(bytes))
+}
+
+fn lowercase_hex(bytes: &[u8]) -> String {
+    let mut hex = String::with_capacity(bytes.len() * 2);
+    for byte in bytes {
+        use std::fmt::Write as _;
+        write!(&mut hex, "{byte:02x}").expect("writing to String cannot fail");
+    }
+    hex
+}
+
+fn is_lower_sha256(value: &str) -> bool {
+    value.len() == 64
+        && value
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
 }
 
 // ==================== corpus provenance ====================
@@ -1279,6 +1644,12 @@ fn run(
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => {
                 return Err("unhandled-decision:ChooseSpellMode".to_string())
             }
+            SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => {
+                return Err("unhandled-decision:ChooseEffectOption".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseEffectTargets { .. }) => {
+                return Err("unhandled-decision:ChooseEffectTargets".to_string())
+            }
             SurfaceDecision::Decision(Decision::ChooseKicker { player, .. }) => {
                 // Ground truth, not a guess (unlike ChooseCastMode/
                 // ChooseOptionalCost/ChooseMadnessCast): Goblin Bushwhacker's
@@ -1307,17 +1678,69 @@ fn run(
                     )
                     .map_err(|e| format!("engine-step-error:ChooseKicker:{e}"))?;
             }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. }) => {
+                let logged = ctx.next(player).filter(|rec| {
+                    rec.action_type == "CHOOSE_USE"
+                        && rec.source_name == "Pay {R}{R} to copy the spell?"
+                });
+                let pay = if let Some(&rec) = logged {
+                    debug_verbose(t, &state, player, rec, "ChooseSpellCopyPayment");
+                    let pay = rec.chosen_indices.first() == Some(&0);
+                    ctx.advance(player);
+                    outcome.decisions_consumed += 1;
+                    pay
+                } else if !engine::pending_spell_copy_cost_is_payable(&state) {
+                    // ChainLightningEffect calls chooseUse before constructing
+                    // and paying its Cost, so the engine exposes this decision.
+                    // ComputerPlayerRL's trace logger omits the prompt when RR
+                    // cannot be paid; either answer then has the same state, so
+                    // decline it without consuming the next real record.
+                    false
+                } else {
+                    let next = ctx
+                        .next(player)
+                        .map(|rec| format!("{}:{}", rec.action_type, rec.source_name))
+                        .unwrap_or_else(|| "trace-exhausted".to_string());
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseSpellCopyPayment-vs-{next}"
+                    ));
+                };
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseSpellCopyPayment(pay)),
+                    )
+                    .map_err(|e| format!("engine-step-error:ChooseSpellCopyPayment:{e}"))?;
+            }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. }) => {
+                let &rec = ctx
+                    .next(player)
+                    .ok_or_else(|| "trace-exhausted:ChooseSpellCopyRetarget".to_string())?;
+                debug_verbose(t, &state, player, rec, "ChooseSpellCopyRetarget");
+                if rec.action_type != "CHOOSE_USE"
+                    || !rec.source_name.starts_with("Change this 1 of 1 target:")
+                {
+                    return Err(format!(
+                        "decision-kind-mismatch:ChooseSpellCopyRetarget-vs-{}:{}",
+                        rec.action_type, rec.source_name
+                    ));
+                }
+                let change_target = rec.chosen_indices.first() == Some(&0);
+                ctx.advance(player);
+                outcome.decisions_consumed += 1;
+                surface
+                    .apply(
+                        &mut state,
+                        SurfaceAction::Action(Action::ChooseSpellCopyRetarget(change_target)),
+                    )
+                    .map_err(|e| format!("engine-step-error:ChooseSpellCopyRetarget:{e}"))?;
+            }
             SurfaceDecision::Decision(Decision::Halted { mechanic, source }) => {
                 // Terminal, same class as GameOver -- not a divergence (see
                 // ReplayOutcome::halted's doc and engine::Decision::Halted's
-                // own doc). The kernel has already proven, at this exact
-                // board state, that the unmodeled branch (Chain Lightning's
-                // spell-copy continuation) is live rather than vacuous, and
-                // stopped rather than guess. Reference-side ground truth for
-                // "was this really live" is cross-checkable against the
-                // corpus's own "Pay {R}{R} to copy the spell?" CHOOSE_USE
-                // lines (deliberately not parsed into a trace record --
-                // Halted consumes none -- but real, and greppable for audit).
+                // own doc). No currently supported Pauper card should reach
+                // this branch, but retaining it keeps older/future
+                // fail-closed runtime artifacts classifiable.
                 let source_name = state.objects.get(source).name.clone();
                 outcome.halted = Some(format!("{mechanic:?}:{source_name}"));
                 return Ok(());
@@ -1341,6 +1764,8 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::DeclareBlockers { player, .. })
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectOption { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectTargets { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. })
         // `OrderTriggers` itself consumes no trace record either (see that
@@ -1362,6 +1787,8 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         // here preemptively rather than waiting for a corpus trace to prove
         // it, since the shape (and the fix) are identical.
         | SurfaceDecision::Decision(Decision::ChooseCastMode { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. })
         // Not in this corpus (Goblin Bushwhacker/Kicker is Rally-only), but
         // the same "consumes no trace record" shape as `ChooseCastMode`
         // applies identically -- grouped here for the same reason.
@@ -1878,18 +2305,10 @@ fn check_state(
 enum KernelChoice {
     Pass,
     PlayLand(ObjectId),
-    CastSpell(ObjectId),
+    CastSpell,
     ActivateMana(ObjectId),
     ActivateAbility(ObjectId, u8),
     PlotSpell(ObjectId),
-}
-
-fn cast_zone_tag(state: &GameState, id: ObjectId) -> &'static str {
-    match state.objects.get(id).zone {
-        Zone::Graveyard => "graveyard",
-        Zone::Exile => "exile",
-        _ => "hand",
-    }
 }
 
 /// Mana-ability candidates are an equivalence class by *what mana they add*,
@@ -1913,6 +2332,22 @@ fn mana_ability_key(state: &GameState, id: ObjectId) -> String {
     format!("mana:{:?}", def.produces_mana)
 }
 
+/// `ComputerPlayerRL` de-duplicates non-mana actions by `ability.toString()`.
+/// For the cast paths implemented by this kernel, that rendered identity is
+/// determined by the cast mode: an ordinary cast from hand and an
+/// impulse-exile permission both render as `Cast <name>`, while Flashback and
+/// casting a previously Plotted card render as distinct options. Keep those
+/// modes separate without reintroducing zone identity into ordinary casts.
+fn cast_candidate_key(state: &GameState, id: ObjectId) -> String {
+    let object = state.objects.get(id);
+    let mode = match object.zone {
+        Zone::Graveyard => "flashback",
+        Zone::Exile if object.plotted_turn.is_some() => "plotted",
+        _ => "normal",
+    };
+    format!("cast:{}:{mode}", object.name)
+}
+
 #[allow(clippy::too_many_arguments)]
 fn candidate_key(
     state: &GameState,
@@ -1932,7 +2367,12 @@ fn candidate_key(
         return Some(format!("land:{name}"));
     }
     if castable_spells.contains(&id) {
-        return Some(format!("cast:{name}:{}", cast_zone_tag(state, id)));
+        // ComputerPlayerRL de-duplicates non-mana choices by the rendered
+        // ability text. Ordinary casts from hand and impulse exile therefore
+        // share a bucket, but Flashback and a cast using Plot remain distinct
+        // rendered options. Preserve the exact trace object separately when
+        // applying the chosen action below.
+        return Some(cast_candidate_key(state, id));
     }
     if mana_abilities.contains(&id) {
         return Some(mana_ability_key(state, id));
@@ -1944,6 +2384,27 @@ fn candidate_key(
         return Some(format!("plot:{name}"));
     }
     None
+}
+
+fn replay_action_for_choice(
+    choice: &KernelChoice,
+    trace_object: Option<ObjectId>,
+    castable_spells: &[ObjectId],
+) -> Result<Action, String> {
+    Ok(match choice {
+        KernelChoice::Pass => Action::Pass,
+        KernelChoice::PlayLand(id) => Action::PlayLand(*id),
+        KernelChoice::CastSpell => {
+            let id = trace_object.ok_or("chosen-cast-missing-object-id:CastSpellOrPass")?;
+            if !castable_spells.contains(&id) {
+                return Err("chosen-cast-object-not-kernel-castable:CastSpellOrPass".to_string());
+            }
+            Action::CastSpell(id)
+        }
+        KernelChoice::ActivateMana(id) => Action::ActivateManaAbility(*id),
+        KernelChoice::ActivateAbility(id, idx) => Action::ActivateAbility(*id, *idx),
+        KernelChoice::PlotSpell(id) => Action::PlotSpell(*id),
+    })
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -1967,12 +2428,8 @@ fn apply_cast_spell_or_pass(
     }
     for &id in castable_spells {
         by_key
-            .entry(format!(
-                "cast:{}:{}",
-                state.objects.get(id).name,
-                cast_zone_tag(state, id)
-            ))
-            .or_insert(KernelChoice::CastSpell(id));
+            .entry(cast_candidate_key(state, id))
+            .or_insert(KernelChoice::CastSpell);
     }
     for &id in mana_abilities {
         by_key
@@ -2056,16 +2513,13 @@ fn apply_cast_spell_or_pass(
     let chosen_key = trace_keys
         .get(idx)
         .ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
-
-    let action = match by_key.get(chosen_key) {
-        Some(KernelChoice::Pass) => Action::Pass,
-        Some(KernelChoice::PlayLand(id)) => Action::PlayLand(*id),
-        Some(KernelChoice::CastSpell(id)) => Action::CastSpell(*id),
-        Some(KernelChoice::ActivateMana(id)) => Action::ActivateManaAbility(*id),
-        Some(KernelChoice::ActivateAbility(id, idx)) => Action::ActivateAbility(*id, *idx),
-        Some(KernelChoice::PlotSpell(id)) => Action::PlotSpell(*id),
-        None => return Err("chosen-not-in-kernel-candidates:CastSpellOrPass".to_string()),
-    };
+    let chosen_trace_object = *trace_ids
+        .get(idx)
+        .ok_or("chosen-index-out-of-range:CastSpellOrPass")?;
+    let choice = by_key
+        .get(chosen_key)
+        .ok_or("chosen-not-in-kernel-candidates:CastSpellOrPass")?;
+    let action = replay_action_for_choice(choice, chosen_trace_object, castable_spells)?;
     surface
         .apply(state, SurfaceAction::Action(action))
         .map_err(|e| format!("engine-step-error:CastSpellOrPass:{e}"))
@@ -2656,6 +3110,167 @@ fn translate_blocker_candidates(
 mod tests {
     use super::*;
 
+    struct TempCorpus {
+        root: PathBuf,
+    }
+
+    impl TempCorpus {
+        fn new() -> Self {
+            static NEXT_ID: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+            let id = NEXT_ID.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+            let root = std::env::temp_dir().join(format!(
+                "mtg-kernel-content-lock-{}-{id}",
+                std::process::id()
+            ));
+            let _ = fs::remove_dir_all(&root);
+            fs::create_dir_all(root.join("nested")).unwrap();
+            fs::write(
+                root.join("manifest.json"),
+                br#"{"corpus":"fixture","status":"LOCKED"}"#,
+            )
+            .unwrap();
+            fs::write(root.join("game_alpha.txt"), b"alpha").unwrap();
+            fs::write(root.join("nested/game_beta.txt"), b"beta").unwrap();
+            Self { root }
+        }
+
+        fn lock(&self) -> CorpusContentLock {
+            let manifest_bytes = fs::read(self.root.join("manifest.json")).unwrap();
+            let traces = collect_replay_trace_paths(&self.root)
+                .unwrap()
+                .into_iter()
+                .map(|(path, file)| {
+                    let bytes = fs::read(file).unwrap();
+                    LockedTrace {
+                        path,
+                        size: bytes.len() as u64,
+                        sha256: sha256_hex(&bytes),
+                    }
+                })
+                .collect();
+            let mut lock = CorpusContentLock {
+                directory: "fixture".to_string(),
+                manifest_corpus: "fixture".to_string(),
+                required_status: "LOCKED".to_string(),
+                manifest: LockedFile {
+                    size: manifest_bytes.len() as u64,
+                    sha256: sha256_hex(&manifest_bytes),
+                },
+                traces,
+                aggregate_sha256: String::new(),
+            };
+            lock.aggregate_sha256 = content_lock_aggregate(&lock);
+            lock
+        }
+    }
+
+    impl Drop for TempCorpus {
+        fn drop(&mut self) {
+            let _ = fs::remove_dir_all(&self.root);
+        }
+    }
+
+    #[test]
+    fn tracked_content_lock_catalog_is_sorted_and_self_consistent() {
+        let catalog: ContentLockCatalog = serde_json::from_str(CONTENT_LOCK_CATALOG_JSON).unwrap();
+        assert_eq!(catalog.schema_version, 1);
+        assert_eq!(catalog.corpora.len(), 2);
+        assert_eq!(catalog.corpora[0].directory, "burn_mirror_v6");
+        assert_eq!(catalog.corpora[1].directory, "rally_mirror_v2");
+        for lock in &catalog.corpora {
+            assert_eq!(lock.traces.len(), 40);
+            validate_content_lock_definition(lock).unwrap();
+        }
+    }
+
+    #[test]
+    fn tracked_content_lock_selection_cannot_be_bypassed_by_path_case() {
+        let catalog: ContentLockCatalog = serde_json::from_str(CONTENT_LOCK_CATALOG_JSON).unwrap();
+        let matching = content_locks_for_directory(&catalog, "BURN_MIRROR_V6");
+        assert_eq!(matching.len(), 1);
+        assert_eq!(matching[0].directory, "burn_mirror_v6");
+    }
+
+    #[test]
+    fn content_lock_accepts_exact_fixture() {
+        let corpus = TempCorpus::new();
+        verify_corpus_against_content_lock(&corpus.root, &corpus.lock()).unwrap();
+    }
+
+    #[test]
+    fn historical_corpus_without_a_tracked_lock_remains_unblocked() {
+        let corpus = TempCorpus::new();
+        assert!(verify_invoked_corpus_content_lock(&corpus.root)
+            .unwrap()
+            .is_none());
+    }
+
+    #[test]
+    fn content_lock_rejects_same_size_trace_mutation() {
+        let corpus = TempCorpus::new();
+        let lock = corpus.lock();
+        fs::write(corpus.root.join("game_alpha.txt"), b"ALPHA").unwrap();
+        let error = verify_corpus_against_content_lock(&corpus.root, &lock).unwrap_err();
+        assert!(
+            error.contains("SHA-256 mismatch for game_alpha.txt"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    fn content_lock_rejects_manifest_mutation() {
+        let corpus = TempCorpus::new();
+        let lock = corpus.lock();
+        fs::write(
+            corpus.root.join("manifest.json"),
+            b"{\"corpus\":\"fixture\",\"status\":\"LOCKED\"}\n",
+        )
+        .unwrap();
+        let error = verify_corpus_against_content_lock(&corpus.root, &lock).unwrap_err();
+        assert!(error.contains("size mismatch for manifest.json"), "{error}");
+    }
+
+    #[test]
+    fn content_lock_rejects_missing_trace() {
+        let corpus = TempCorpus::new();
+        let lock = corpus.lock();
+        fs::remove_file(corpus.root.join("nested/game_beta.txt")).unwrap();
+        let error = verify_corpus_against_content_lock(&corpus.root, &lock).unwrap_err();
+        assert!(
+            error.contains("missing=[\"nested/game_beta.txt\"]"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    fn content_lock_rejects_extra_trace() {
+        let corpus = TempCorpus::new();
+        let lock = corpus.lock();
+        fs::write(corpus.root.join("nested/game_extra.txt"), b"extra").unwrap();
+        let error = verify_corpus_against_content_lock(&corpus.root, &lock).unwrap_err();
+        assert!(
+            error.contains("extra=[\"nested/game_extra.txt\"]"),
+            "{error}"
+        );
+    }
+
+    #[test]
+    fn content_lock_rejects_non_locked_manifest_before_trace_hashing() {
+        let corpus = TempCorpus::new();
+        let lock = corpus.lock();
+        fs::write(
+            corpus.root.join("manifest.json"),
+            br#"{"corpus":"fixture","status":"DRAFT"}"#,
+        )
+        .unwrap();
+        fs::write(corpus.root.join("game_alpha.txt"), b"ALPHA").unwrap();
+        let error = verify_corpus_against_content_lock(&corpus.root, &lock).unwrap_err();
+        assert!(
+            error.contains("expected LOCKED, found \"DRAFT\""),
+            "{error}"
+        );
+    }
+
     fn decision_record_ex(
         action_type: &str,
         candidate_texts: &[&str],
@@ -2983,6 +3598,157 @@ mod tests {
         assert_ne!(cast_key, plot_key);
     }
 
+    #[test]
+    fn candidate_key_collapses_same_name_casts_across_hand_and_impulse_exile() {
+        let impulse = card_def::card_id_by_name("Reckless Impulse").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[impulse, impulse],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
+        let hand_id = state.draw_card(PlayerId::P0).unwrap();
+        let exile_id = state.draw_card(PlayerId::P0).unwrap();
+        state.objects.get_mut(exile_id).zone = Zone::Exile;
+        let castable_spells = [hand_id, exile_id];
+
+        let hand_key = candidate_key(
+            &state,
+            hand_id,
+            "Cast Reckless Impulse",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+        let exile_key = candidate_key(
+            &state,
+            exile_id,
+            "Cast Reckless Impulse",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+
+        assert_eq!(hand_key, "cast:Reckless Impulse:normal");
+        assert_eq!(exile_key, hand_key);
+    }
+
+    #[test]
+    fn candidate_key_keeps_normal_and_flashback_casts_distinct() {
+        let looting = card_def::card_id_by_name("Faithless Looting").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[looting, looting],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
+        let hand_id = state.draw_card(PlayerId::P0).unwrap();
+        let graveyard_id = state.draw_card(PlayerId::P0).unwrap();
+        state.objects.get_mut(graveyard_id).zone = Zone::Graveyard;
+        let castable_spells = [hand_id, graveyard_id];
+
+        let hand_key = candidate_key(
+            &state,
+            hand_id,
+            "Cast Faithless Looting",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+        let flashback_key = candidate_key(
+            &state,
+            graveyard_id,
+            "Flashback {2}{R}",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+
+        assert_eq!(hand_key, "cast:Faithless Looting:normal");
+        assert_eq!(flashback_key, "cast:Faithless Looting:flashback");
+        assert_ne!(hand_key, flashback_key);
+    }
+
+    #[test]
+    fn candidate_key_keeps_normal_and_plotted_casts_distinct() {
+        let robbery = card_def::card_id_by_name("Highway Robbery").unwrap();
+        let mut state = GameState::new_from_libraries(
+            &[robbery, robbery],
+            &[],
+            |id| CARD_DEFS[id as usize].name.to_string(),
+            1,
+        );
+        let hand_id = state.draw_card(PlayerId::P0).unwrap();
+        let plotted_id = state.draw_card(PlayerId::P0).unwrap();
+        let plotted = state.objects.get_mut(plotted_id);
+        plotted.zone = Zone::Exile;
+        plotted.plotted_turn = Some(0);
+        let castable_spells = [hand_id, plotted_id];
+
+        let hand_key = candidate_key(
+            &state,
+            hand_id,
+            "Cast Highway Robbery",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+        let plotted_key = candidate_key(
+            &state,
+            plotted_id,
+            "Cast Highway Robbery using Plot",
+            &[],
+            &castable_spells,
+            &[],
+            &[],
+            &[],
+        )
+        .unwrap();
+
+        assert_eq!(hand_key, "cast:Highway Robbery:normal");
+        assert_eq!(plotted_key, "cast:Highway Robbery:plotted");
+        assert_ne!(hand_key, plotted_key);
+    }
+
+    #[test]
+    fn collapsed_cast_bucket_applies_the_exact_trace_object() {
+        let hand_id = ObjectId(7);
+        let exile_id = ObjectId(11);
+        let action = replay_action_for_choice(
+            &KernelChoice::CastSpell,
+            Some(exile_id),
+            &[hand_id, exile_id],
+        )
+        .unwrap();
+        assert_eq!(action, Action::CastSpell(exile_id));
+
+        let err = replay_action_for_choice(
+            &KernelChoice::CastSpell,
+            Some(ObjectId(99)),
+            &[hand_id, exile_id],
+        )
+        .unwrap_err();
+        assert_eq!(
+            err,
+            "chosen-cast-object-not-kernel-castable:CastSpellOrPass"
+        );
+    }
+
     // ---- check_state: the strengthened checks -------------------------
 
     #[test]
@@ -3101,6 +3867,7 @@ mod tests {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: mtg_kernel::state::ObjectStateV4::from_card_def(mountain),
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -3118,6 +3885,7 @@ mod tests {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: mtg_kernel::state::ObjectStateV4::from_card_def(lightning_bolt),
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -3196,6 +3964,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(guttersnipe),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3212,6 +3981,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(mountain),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3283,6 +4053,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(fireblast),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3358,6 +4129,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(fiery_temper),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3426,6 +4198,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: mtg_kernel::state::ObjectStateV4::from_card_def(card_def),
             plotted_turn: None,
             zone_change_count: 0,
         });

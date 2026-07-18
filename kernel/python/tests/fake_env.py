@@ -19,6 +19,11 @@ def main() -> int:
         with open(start_marker, "w", encoding="utf-8") as fh:
             fh.write("started\n")
     scenario = os.environ.get("FAKE_SCENARIO", "valid")
+    scenario_file = os.environ.get("FAKE_SCENARIO_FILE")
+    if scenario_file:
+        with open(scenario_file, "r", encoding="utf-8") as fh:
+            scenario = fh.read().strip()
+    request_log = os.environ.get("FAKE_REQUEST_LOG")
     if scenario == "timeout":
         time.sleep(60)
         return 0
@@ -27,7 +32,13 @@ def main() -> int:
     count = 0
     episode_steps: dict[int, int] = {}
     for line in sys.stdin:
+        if scenario_file:
+            with open(scenario_file, "r", encoding="utf-8") as fh:
+                scenario = fh.read().strip()
         req = json.loads(line)
+        if request_log:
+            with open(request_log, "a", encoding="utf-8", newline="\n") as fh:
+                fh.write(json.dumps(req, ensure_ascii=True, sort_keys=True, separators=(",", ":")) + "\n")
         count += 1
         if scenario == "duplicate_keys":
             sys.stdout.write('{"response_type":"decision","response_type":"decision"}\n')
@@ -46,18 +57,24 @@ def main() -> int:
             sys.stdout.flush()
             continue
         if scenario == "error_valid":
-            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "line one\nline two"}})
+            emit({"response_type": "error", "schema_version": 4, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "line one\nline two"}})
+            continue
+        if scenario == "error_legacy_v3":
+            emit({"response_type": "error", "schema_version": 3, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "bad"}})
             continue
         if scenario == "error_bad_schema":
             emit({"response_type": "error", "schema_version": 1, "request_id": req["request_id"], "error": {"code": "bad_request", "message": "bad"}})
             continue
         if scenario == "error_bad_request_id":
-            emit({"response_type": "error", "schema_version": 2, "request_id": "wrong", "error": {"code": "bad_request", "message": "bad"}})
+            emit({"response_type": "error", "schema_version": 4, "request_id": "wrong", "error": {"code": "bad_request", "message": "bad"}})
             continue
         if scenario == "error_empty_code":
-            emit({"response_type": "error", "schema_version": 2, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
+            emit({"response_type": "error", "schema_version": 4, "request_id": req["request_id"], "error": {"code": "", "message": "bad"}})
             continue
         if req["request_type"] == "reset":
+            if req.get("deck_ids") != ["Burn", "Burn"]:
+                emit({"response_type": "error", "schema_version": 4, "request_id": req["request_id"], "error": {"code": "unsupported_deck", "message": "fake environment only supports Burn/Burn"}})
+                continue
             episode_steps[req["episode_id"]] = 0
             if scenario == "train_pair_slow":
                 time.sleep(2.0)
@@ -92,10 +109,14 @@ def main() -> int:
                 resp["legal_actions"].append(resp["legal_actions"][1].copy())
                 resp["legal_actions"][3] = json.loads(json.dumps(resp["legal_actions"][3]))
                 resp["legal_actions"][3]["selected_index"] = 3
-                resp["legal_actions"][3]["stable_id"] = "legal-action-v2:d"
+                resp["legal_actions"][3]["stable_id"] = "legal-action-v4:d"
                 resp["legal_actions"][3]["semantic"]["actor"] = "p1"
             elif scenario == "nonzero_reward":
                 resp["reward"] = [1, 0]
+            elif scenario == "deck_id_drift":
+                resp["deck_ids"][1] = "Rally"
+            elif scenario == "deck_hash_shape":
+                resp["deck_hashes"] = [resp["deck_hashes"][0]]
             emit(resp)
         else:
             if scenario == "train_pair_assert_latest0" and count == 2:
@@ -131,6 +152,10 @@ def main() -> int:
             elif scenario == "provenance_drift":
                 resp = decision_response(req["request_id"], req["episode_id"], req["expected_step"] + 1)
                 resp["provenance"]["card_db_hash"] += 1
+                emit(resp)
+            elif scenario == "deck_hash_drift":
+                resp = decision_response(req["request_id"], req["episode_id"], req["expected_step"] + 1)
+                resp["deck_hashes"][0] += 1
                 emit(resp)
             elif scenario == "invalid_terminal":
                 resp = terminal_response(req["request_id"], req["episode_id"], req["expected_step"] + 1)

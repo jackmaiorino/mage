@@ -1432,6 +1432,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(card_id),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -1630,6 +1631,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -1671,6 +1673,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -1699,12 +1702,14 @@ mod tests {
             source: id,
             controller: PlayerId::P0,
             targets: vec![Target::Player(PlayerId::P1)],
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: false,
             kicked: false,
+            v4: crate::state::StackStateV4::spell(crate::state::CastMethodV4::Normal),
         });
 
         let _second = surface.next_decision(&mut state);
@@ -1744,6 +1749,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -1887,6 +1893,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2056,6 +2063,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2204,6 +2212,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2426,6 +2435,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2544,6 +2554,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(temper_def),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2563,6 +2574,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(lava_dart_def),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2576,12 +2588,14 @@ mod tests {
             source: temper,
             controller: PlayerId::P0,
             targets: vec![],
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: true,
             kicked: false,
+            v4: crate::state::StackStateV4::default(),
         });
         state.engine.priority_passes = [true, true];
         state.step = Step::Main1;
@@ -2690,6 +2704,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(temper_def),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2706,6 +2721,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(lava_dart_def),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2721,12 +2737,14 @@ mod tests {
             source: temper,
             controller: PlayerId::P0,
             targets: vec![],
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
             madness_offer: true,
             kicked: false,
+            v4: crate::state::StackStateV4::default(),
         });
         state.engine.priority_passes = [true, true];
         state.step = Step::Main1;
@@ -2851,6 +2869,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bolt),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -2991,6 +3010,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(bushwhacker_def),
             plotted_turn: None,
             zone_change_count: 0,
         });
@@ -3008,6 +3028,7 @@ mod tests {
             damage: 0,
             counters: Default::default(),
             attachments: Vec::new(),
+            v4: crate::state::ObjectStateV4::from_card_def(raider_def),
             plotted_turn: None,
             zone_change_count: 0,
         });

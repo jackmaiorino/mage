@@ -731,6 +731,12 @@ fn run(
             SurfaceDecision::Decision(Decision::ChooseKicker { .. }) => {
                 return Err("unhandled-decision:ChooseKicker".to_string())
             }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { .. }) => {
+                return Err("unhandled-decision:ChooseSpellCopyPayment".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { .. }) => {
+                return Err("unhandled-decision:ChooseSpellCopyRetarget".to_string())
+            }
             SurfaceDecision::Decision(Decision::Halted { .. }) => {
                 return Err("unhandled-decision:Halted".to_string())
             }
@@ -756,6 +762,12 @@ fn run(
             // reasoning as ChooseCastMode/OrderTriggers above).
             SurfaceDecision::Decision(Decision::ChooseSpellMode { .. }) => {
                 return Err("unhandled-decision:ChooseSpellMode".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseEffectOption { .. }) => {
+                return Err("unhandled-decision:ChooseEffectOption".to_string())
+            }
+            SurfaceDecision::Decision(Decision::ChooseEffectTargets { .. }) => {
+                return Err("unhandled-decision:ChooseEffectTargets".to_string())
             }
             // `HarnessSurfaceV1::next_decision` always reshapes a raw
             // `Decision::DeclareBlockers` into `DeclareBlockersForAttacker`
@@ -784,7 +796,11 @@ fn decision_player(d: &SurfaceDecision, state: &GameState) -> Option<PlayerId> {
         | SurfaceDecision::Decision(Decision::DeclareBlockers { player, .. })
         | SurfaceDecision::Decision(Decision::Discard { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseSpellMode { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectOption { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseEffectTargets { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseOptionalCost { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyPayment { player, .. })
+        | SurfaceDecision::Decision(Decision::ChooseSpellCopyRetarget { player, .. })
         | SurfaceDecision::Decision(Decision::ChooseMadnessCast { player, .. }) => Some(*player),
         // The defending player -- same as `Decision::DeclareBlockers`'s own
         // `player` field before the surface reshaped it per attacker.

@@ -1,22 +1,26 @@
 use mtg_kernel::card_def::{card_id_by_name, CardType, TargetSpec, CARD_DEFS};
 use mtg_kernel::engine::{
     self, Action, CastMode, DiscardResume, EffectDuration, Layers, PendingCast, PendingDiscard,
-    PlayOrCast, PlayPermission, PlayPermissionExpiry, UntilEndOfTurnEffect,
+    PendingSpellCopy, PlayOrCast, PlayPermission, PlayPermissionExpiry, SpellCopyStage,
+    UntilEndOfTurnEffect,
 };
 use mtg_kernel::ids::{ObjectId, PlayerId};
 use mtg_kernel::rl::{
     build_run_manifest, burn_deck_hash, card_name, derive_env_seed, derive_policy_seed,
-    legal_action_candidates_v1, make_legal_action_v1, observe_v2, record_burn_mirror_episode,
-    ActionSemanticV1, EpisodeTerminalSummaryV1, GitDirtyFlagV1, GitMetadataV1, LegalActionV1,
-    ObservationV2, PlayerSeatV1, TerminalClassificationV1, TerminalOutcomeV1,
-    AUDIT_EPISODE_JSONL_FILENAME, AUDIT_EPISODE_SCHEMA_VERSION, LEGAL_ACTION_SCHEMA_VERSION,
-    MANIFEST_SCHEMA_VERSION, OBSERVATION_SCHEMA_VERSION, POLICY_EPISODE_JSONL_FILENAME,
-    POLICY_EPISODE_SCHEMA_VERSION,
+    legal_action_candidates_v1, make_legal_action_v1, observe_v2, parse_audit_episode_jsonl,
+    parse_policy_episode_jsonl, parse_run_manifest_json, record_burn_mirror_episode,
+    validate_policy_episode_records, validate_rollout_artifact_bundle, write_rollout_artifacts,
+    ActionSemanticV1, EngineDecisionStageV2, EpisodeTerminalSummaryV1, GitDirtyFlagV1,
+    GitMetadataV1, LegalActionV1, ObservationV2, PlayerSeatV1, PolicyEpisodeRecordV2,
+    SpellCopyStageV2, TerminalClassificationV1, TerminalOutcomeV1, AUDIT_EPISODE_JSONL_FILENAME,
+    AUDIT_EPISODE_SCHEMA_VERSION, LEGAL_ACTION_SCHEMA_VERSION, MANIFEST_SCHEMA_VERSION,
+    OBSERVATION_SCHEMA_VERSION, POLICY_EPISODE_JSONL_FILENAME, POLICY_EPISODE_SCHEMA_VERSION,
 };
 use mtg_kernel::state::{
     Counters, GameObject, GameState, StackItem, StackItemKind, Step, Target, Zone,
+    DIAGNOSTIC_STATE_HASH_ALGORITHM,
 };
-use mtg_kernel::surface_v2::{HarnessSurfaceV2, SurfaceAction};
+use mtg_kernel::surface_v2::{HarnessSurfaceV2, SurfaceAction, SurfaceDecision};
 use serde::Serialize;
 use serde_json::Value;
 use std::collections::BTreeSet;
@@ -61,6 +65,7 @@ fn make_object(state: &mut GameState, player: PlayerId, name: &str, zone: Zone) 
         damage: 0,
         counters: Counters::default(),
         attachments: Vec::new(),
+        v4: mtg_kernel::state::ObjectStateV4::from_card_def(card_def),
         plotted_turn: None,
         zone_change_count: 0,
     });
@@ -160,7 +165,7 @@ fn rl_contract_serde_roundtrip_and_schema_versions() {
         .remove(0)
         .record;
     assert_eq!(action.schema_version, LEGAL_ACTION_SCHEMA_VERSION);
-    assert!(action.stable_id.starts_with("legal-action-v2:"));
+    assert!(action.stable_id.starts_with("legal-action-v4:"));
     let action_roundtrip: LegalActionV1 =
         serde_json::from_str(&serde_json::to_string(&action).unwrap()).unwrap();
     assert_eq!(action_roundtrip, action);
@@ -239,6 +244,356 @@ fn rl_contract_observation_perspective_safety_excludes_hidden_identities() {
             "hidden arena id {hidden} leaked"
         );
     }
+}
+
+#[test]
+fn rl_contract_library_knowledge_is_visible_only_to_the_informed_observer() {
+    let p0 = ids(&["Lightning Bolt", "Mountain", "Fireblast"]);
+    let p1 = ids(&["Fiery Temper", "Lava Dart", "Highway Robbery"]);
+    let mut informed = GameState::new_from_libraries(&p0, &p1, card_name, 123);
+    let uninformed = informed.clone();
+    informed.reveal_library_top(PlayerId::P0, PlayerId::P1, 2);
+
+    let p0_obs = observe_for_test(&informed, PlayerId::P0, 3);
+    assert_eq!(p0_obs.known_library_cards[1].len(), 2);
+    assert_eq!(p0_obs.known_library_cards[1][0].position, 0);
+    assert_eq!(
+        p0_obs.known_library_cards[1][0].card.card_name,
+        "Fiery Temper"
+    );
+    assert_eq!(p0_obs.known_library_cards[1][1].card.card_name, "Lava Dart");
+    assert_ne!(
+        p0_obs.visible_projection_hash,
+        observe_for_test(&uninformed, PlayerId::P0, 3).visible_projection_hash
+    );
+
+    let p1_informed_state_obs = observe_for_test(&informed, PlayerId::P1, 3);
+    let p1_uninformed_state_obs = observe_for_test(&uninformed, PlayerId::P1, 3);
+    assert!(p1_informed_state_obs.known_library_cards[0].is_empty());
+    assert!(p1_informed_state_obs.known_library_cards[1].is_empty());
+    assert_eq!(
+        serde_json::to_vec(&p1_informed_state_obs).unwrap(),
+        serde_json::to_vec(&p1_uninformed_state_obs).unwrap(),
+        "another observer's private library knowledge leaked into P1's bytes"
+    );
+}
+
+#[test]
+fn rl_contract_revealed_opponent_hand_knowledge_is_scoped_hashed_and_invalidated() {
+    let mut informed = empty_state();
+    let card = make_object(&mut informed, PlayerId::P1, "Fiery Temper", Zone::Hand);
+    let uninformed = informed.clone();
+    let uninformed_hash = informed.state_hash();
+
+    informed
+        .reveal_hand_card(PlayerId::P0, PlayerId::P1, card)
+        .unwrap();
+    assert_ne!(informed.state_hash(), uninformed_hash);
+    let knowledge_snapshot = informed.snapshot();
+    let knowledge_hash = informed.state_hash();
+
+    let p0_view = observe_for_test(&informed, PlayerId::P0, 9);
+    assert!(p0_view.known_hand_cards[0].is_empty());
+    assert_eq!(p0_view.known_hand_cards[1].len(), 1);
+    assert_eq!(p0_view.known_hand_cards[1][0].card_name, "Fiery Temper");
+    assert_ne!(
+        p0_view.visible_projection_hash,
+        observe_for_test(&uninformed, PlayerId::P0, 9).visible_projection_hash
+    );
+
+    let p1_informed = observe_for_test(&informed, PlayerId::P1, 9);
+    let p1_uninformed = observe_for_test(&uninformed, PlayerId::P1, 9);
+    assert!(p1_informed.known_hand_cards[1].is_empty());
+    assert_eq!(
+        serde_json::to_vec(&p1_informed).unwrap(),
+        serde_json::to_vec(&p1_uninformed).unwrap(),
+        "another observer's private hand knowledge leaked into the owner's bytes"
+    );
+
+    let generation_before = informed.objects.get(card).zone_change_count;
+    assert!(informed.move_hand_to_battlefield(PlayerId::P1, card));
+    assert_eq!(
+        informed.objects.get(card).zone_change_count,
+        generation_before + 1
+    );
+    assert!(
+        observe_for_test(&informed, PlayerId::P0, 10).known_hand_cards[1].is_empty(),
+        "a revealed hand identity must disappear when that incarnation leaves hand"
+    );
+    assert!(
+        observe_for_test(&informed, PlayerId::P1, 10).known_hand_cards[1].is_empty(),
+        "own hand knowledge is represented only by own_hand, never duplicated here"
+    );
+
+    informed.restore(&knowledge_snapshot);
+    assert_eq!(informed.state_hash(), knowledge_hash);
+    assert_eq!(
+        observe_for_test(&informed, PlayerId::P0, 9).known_hand_cards[1][0].card_name,
+        "Fiery Temper"
+    );
+}
+
+#[test]
+fn rl_contract_paid_cost_refs_keep_known_hand_cards_without_leaking_unknown_ones() {
+    let mut state = empty_state();
+    let source = make_object(
+        &mut state,
+        PlayerId::P1,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    let known = make_object(&mut state, PlayerId::P1, "Fiery Temper", Zone::Hand);
+    let unknown = make_object(&mut state, PlayerId::P1, "Lava Dart", Zone::Hand);
+    state
+        .reveal_hand_card(PlayerId::P0, PlayerId::P1, known)
+        .unwrap();
+    let known_ref = mtg_kernel::state::PaidCostRefV4::capture(&state, known);
+    let unknown_ref = mtg_kernel::state::PaidCostRefV4::capture(&state, unknown);
+    state.stack.push(StackItem {
+        kind: StackItemKind::TriggeredAbility,
+        source,
+        controller: PlayerId::P1,
+        targets: Vec::new(),
+        is_copy: false,
+        inline_effect: None,
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+        v4: mtg_kernel::state::StackStateV4 {
+            paid_cost_refs: vec![known_ref, unknown_ref],
+            ..mtg_kernel::state::StackStateV4::default()
+        },
+    });
+
+    let informed = observe_for_test(&state, PlayerId::P0, 4);
+    assert_eq!(informed.projection.stack[0].paid_cost_refs.len(), 1);
+    assert_eq!(
+        informed.projection.stack[0].paid_cost_refs[0].arena_id,
+        known.0
+    );
+    let mut visible_ids = BTreeSet::new();
+    collect_arena_ids(&serde_json::to_value(&informed).unwrap(), &mut visible_ids);
+    assert!(visible_ids.contains(&(known.0 as u64)));
+    assert!(
+        !visible_ids.contains(&(unknown.0 as u64)),
+        "an unknown opponent-hand cost identity leaked"
+    );
+
+    let owner = observe_for_test(&state, PlayerId::P1, 4);
+    assert_eq!(
+        owner.projection.stack[0]
+            .paid_cost_refs
+            .iter()
+            .map(|card| card.arena_id)
+            .collect::<Vec<_>>(),
+        vec![known.0, unknown.0],
+        "the owner must retain both identities through ordinary own-hand visibility"
+    );
+
+    mtg_kernel::event::propose_and_commit(
+        &mut state,
+        mtg_kernel::event::ProposedEvent::zone_change(known, Zone::Library),
+    );
+    assert!(state
+        .known_hand_cards(PlayerId::P0, PlayerId::P1)
+        .is_empty());
+    let historical = observe_for_test(&state, PlayerId::P0, 5);
+    assert_eq!(historical.projection.stack[0].paid_cost_refs.len(), 1);
+    assert_eq!(
+        historical.projection.stack[0].paid_cost_refs[0].zone,
+        Zone::Hand
+    );
+    assert_eq!(
+        historical.projection.stack[0].paid_cost_refs[0].zone_change_count,
+        known_ref.zone_change_count
+    );
+    assert_eq!(state.objects.get(known).zone, Zone::Library);
+    assert_ne!(
+        state.objects.get(known).zone_change_count,
+        known_ref.zone_change_count
+    );
+}
+
+#[test]
+fn rl_contract_public_paid_cost_provenance_survives_later_hidden_zone_changes() {
+    let mut state = empty_state();
+    let source = make_object(
+        &mut state,
+        PlayerId::P0,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    let paid = make_object(&mut state, PlayerId::P1, "Mountain", Zone::Graveyard);
+    let payment_ref = mtg_kernel::state::PaidCostRefV4::capture(&state, paid);
+    state.stack.push(StackItem {
+        kind: StackItemKind::TriggeredAbility,
+        source,
+        controller: PlayerId::P0,
+        targets: Vec::new(),
+        is_copy: false,
+        inline_effect: None,
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+        v4: mtg_kernel::state::StackStateV4 {
+            paid_cost_refs: vec![payment_ref],
+            ..mtg_kernel::state::StackStateV4::default()
+        },
+    });
+
+    mtg_kernel::event::propose_and_commit(
+        &mut state,
+        mtg_kernel::event::ProposedEvent::zone_change(paid, Zone::Library),
+    );
+    mtg_kernel::event::propose_and_commit(
+        &mut state,
+        mtg_kernel::event::ProposedEvent::zone_change(paid, Zone::Hand),
+    );
+    let observed = observe_for_test(&state, PlayerId::P0, 8);
+    assert_eq!(observed.projection.stack[0].paid_cost_refs.len(), 1);
+    let historical = &observed.projection.stack[0].paid_cost_refs[0];
+    assert_eq!(historical.arena_id, paid.0);
+    assert_eq!(historical.zone, Zone::Graveyard);
+    assert_eq!(historical.zone_change_count, payment_ref.zone_change_count);
+    assert_eq!(state.objects.get(paid).zone, Zone::Hand);
+    assert_ne!(
+        state.objects.get(paid).zone_change_count,
+        historical.zone_change_count
+    );
+}
+
+#[test]
+fn rl_contract_known_library_draw_transfers_only_informed_identity_to_known_hand() {
+    let p0 = ids(&["Mountain"]);
+    let p1 = ids(&["Fiery Temper"]);
+    let mut state = GameState::new_from_libraries(&p0, &p1, card_name, 44);
+    state.reveal_library_top(PlayerId::P0, PlayerId::P1, 1);
+    state.draw_card(PlayerId::P1).unwrap();
+
+    let p0 = observe_for_test(&state, PlayerId::P0, 1);
+    assert!(p0.known_library_cards[1].is_empty());
+    assert_eq!(p0.known_hand_cards[1][0].card_name, "Fiery Temper");
+    let p1 = observe_for_test(&state, PlayerId::P1, 1);
+    assert!(p1.known_hand_cards[1].is_empty());
+}
+
+#[test]
+fn rl_contract_public_zone_returns_to_hand_remain_known_but_library_moves_do_not() {
+    let mut state = empty_state();
+    state.step = Step::Main1;
+    let public = make_object(
+        &mut state,
+        PlayerId::P0,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    let generation = state.objects.get(public).zone_change_count;
+    mtg_kernel::event::propose_and_commit(
+        &mut state,
+        mtg_kernel::event::ProposedEvent::zone_change(public, Zone::Hand),
+    );
+    assert_eq!(state.objects.get(public).zone_change_count, generation + 1);
+    let opponent = observe_for_test(&state, PlayerId::P1, 1);
+    assert_eq!(
+        opponent.known_hand_cards[0][0].card_name,
+        "Voldaren Epicure"
+    );
+    let owner = observe_for_test(&state, PlayerId::P0, 1);
+    assert!(owner.known_hand_cards[0].is_empty());
+    assert_eq!(owner.own_hand[0].card_name, "Voldaren Epicure");
+
+    let hidden = make_object(&mut state, PlayerId::P0, "Lightning Bolt", Zone::Library);
+    mtg_kernel::event::propose_and_commit(
+        &mut state,
+        mtg_kernel::event::ProposedEvent::zone_change(hidden, Zone::Hand),
+    );
+    let opponent = observe_for_test(&state, PlayerId::P1, 2);
+    assert_eq!(opponent.known_hand_cards[0].len(), 1);
+    assert_eq!(
+        opponent.known_hand_cards[0][0].card_name,
+        "Voldaren Epicure"
+    );
+}
+
+#[test]
+fn rl_contract_registry_metadata_is_materialized_in_public_v4_objects() {
+    let mut state = empty_state();
+    let emissary = make_object(
+        &mut state,
+        PlayerId::P0,
+        "Burning-Tree Emissary",
+        Zone::Battlefield,
+    );
+    let blood = make_object(&mut state, PlayerId::P0, "Blood Token", Zone::Battlefield);
+    state.objects.get_mut(emissary).counters = Counters {
+        plus1_plus1: 300,
+        minus1_minus1: 2,
+        minus0_minus1: 1,
+        stun: 4,
+        lore: 5,
+    };
+
+    let def = &CARD_DEFS[state.objects.get(emissary).card_def as usize];
+    let mut expected_subtypes: Vec<_> = def
+        .subtypes
+        .iter()
+        .map(|subtype| subtype.stable_id())
+        .collect();
+    expected_subtypes.sort_unstable();
+    expected_subtypes.dedup();
+    assert_eq!(
+        state.objects.get(emissary).v4.effective_subtype_ids,
+        expected_subtypes
+    );
+    assert_eq!(
+        state.objects.get(emissary).v4.effective_color_mask,
+        mtg_kernel::card_def::mana_color_mask(mtg_kernel::mana::ManaColor::R)
+            | mtg_kernel::card_def::mana_color_mask(mtg_kernel::mana::ManaColor::G)
+    );
+    assert!(!state.objects.get(emissary).v4.is_token);
+    assert!(state.objects.get(blood).v4.is_token);
+
+    let observation = observe_for_test(&state, PlayerId::P0, 0);
+    let public = first_battlefield_card(&observation, PlayerSeatV1::P0, "Burning-Tree Emissary");
+    assert_eq!(public.counters.plus1_plus1, 300);
+    assert_eq!(public.counters.minus1_minus1, 2);
+    assert_eq!(public.counters.minus0_minus1, 1);
+    assert_eq!(public.counters.stun, 4);
+    assert_eq!(public.counters.lore, 5);
+    assert_eq!(
+        public.characteristics.effective_subtype_ids,
+        expected_subtypes
+    );
+    assert!(first_battlefield_card(&observation, PlayerSeatV1::P0, "Blood Token").is_token);
+}
+
+#[test]
+fn rl_contract_object_relations_are_semantic_and_stale_links_fail_closed() {
+    let mut state = empty_state();
+    let attachment = make_object(&mut state, PlayerId::P0, "Blood Token", Zone::Battlefield);
+    let host = make_object(
+        &mut state,
+        PlayerId::P0,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    state.objects.get_mut(attachment).v4.attached_to = Some(mtg_kernel::state::ObjectLinkV4 {
+        object: host,
+        zone_change_count: state.objects.get(host).zone_change_count,
+    });
+    let observed = observe_for_test(&state, PlayerId::P0, 0);
+    let relations = serde_json::to_value(&observed.projection.object_relations).unwrap();
+    assert_eq!(relations[0]["relation_kind"], "attached_to");
+    assert_eq!(relations[0]["object"]["arena_id"], attachment.0);
+    assert_eq!(relations[0]["attached_to"]["arena_id"], host.0);
+
+    state.objects.get_mut(host).zone_change_count += 1;
+    let error = observe_v2(&state, &HarnessSurfaceV2::new(), PlayerId::P0, 0).unwrap_err();
+    assert!(error.to_string().contains("stale object incarnation"));
 }
 
 #[test]
@@ -476,12 +831,18 @@ fn rl_contract_stack_items_expose_explicit_public_kind() {
             source,
             controller,
             targets: Vec::new(),
+            is_copy: false,
             inline_effect: None,
             discarded: Vec::new(),
             is_flashback: false,
             mode_chosen: 0,
             madness_offer,
             kicked: false,
+            v4: if kind == StackItemKind::Spell {
+                mtg_kernel::state::StackStateV4::spell(mtg_kernel::state::CastMethodV4::Normal)
+            } else {
+                mtg_kernel::state::StackStateV4::default()
+            },
         });
     }
 
@@ -492,6 +853,130 @@ fn rl_contract_stack_items_expose_explicit_public_kind() {
     assert_eq!(stack[2]["stack_item_kind"], "triggered_ability");
     assert_eq!(stack[3]["stack_item_kind"], "madness_offer");
     assert!(!contains_key(&stack, "is_trigger_or_ability"));
+}
+
+#[test]
+fn rl_contract_spell_copy_state_and_binary_actions_are_explicit() {
+    let mut state = empty_state();
+    state.active_player = PlayerId::P0;
+    state.priority_player = PlayerId::P0;
+    state.step = Step::Main1;
+    make_object(&mut state, PlayerId::P1, "Great Furnace", Zone::Battlefield);
+    make_object(&mut state, PlayerId::P1, "Great Furnace", Zone::Battlefield);
+    let parent = make_object(&mut state, PlayerId::P0, "Chain Lightning", Zone::Stack);
+    state.stack.push(StackItem {
+        kind: StackItemKind::Spell,
+        source: parent,
+        controller: PlayerId::P0,
+        targets: vec![Target::Player(PlayerId::P1)],
+        is_copy: false,
+        inline_effect: None,
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+        v4: mtg_kernel::state::StackStateV4::spell(mtg_kernel::state::CastMethodV4::Normal),
+    });
+    state.engine.pending_spell_copy = Some(PendingSpellCopy {
+        resolving_source: parent,
+        player: PlayerId::P1,
+        inherited_target: Target::Player(PlayerId::P1),
+        stage: SpellCopyStage::Payment,
+        copy_source: None,
+    });
+
+    let payment_obs = observe_for_test(&state, PlayerId::P1, 4);
+    assert_eq!(
+        payment_obs.projection.engine_context.current_stage,
+        EngineDecisionStageV2::PendingSpellCopy
+    );
+    let pending = payment_obs
+        .projection
+        .engine_context
+        .pending_spell_copy
+        .as_ref()
+        .expect("payment continuation is public");
+    assert_eq!(pending.stage, SpellCopyStageV2::Payment);
+    assert_eq!(pending.parent.as_ref().unwrap().arena_id, parent.0);
+    assert!(pending.copy.is_none());
+    assert!(!payment_obs.projection.stack[0].is_copy);
+
+    let payment_decision = engine::advance_until_decision(&mut state);
+    let payment_actions =
+        legal_action_candidates_v1(&SurfaceDecision::Decision(payment_decision), &state).unwrap();
+    assert_eq!(payment_actions.len(), 2);
+    assert!(matches!(
+        payment_actions[0].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyPayment {
+            actor: PlayerSeatV1::P1,
+            pay: true,
+            ..
+        }
+    ));
+    assert!(matches!(
+        payment_actions[1].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyPayment {
+            actor: PlayerSeatV1::P1,
+            pay: false,
+            ..
+        }
+    ));
+
+    engine::step(&mut state, Action::ChooseSpellCopyPayment(true)).unwrap();
+    let copy = state
+        .engine
+        .pending_spell_copy
+        .as_ref()
+        .unwrap()
+        .copy_source
+        .unwrap();
+    let retarget_obs = observe_for_test(&state, PlayerId::P1, 5);
+    let pending = retarget_obs
+        .projection
+        .engine_context
+        .pending_spell_copy
+        .as_ref()
+        .unwrap();
+    assert_eq!(pending.stage, SpellCopyStageV2::Retarget);
+    assert_eq!(pending.copy.as_ref().unwrap().arena_id, copy.0);
+    assert_eq!(retarget_obs.projection.stack.len(), 2);
+    assert!(!retarget_obs.projection.stack[0].is_copy);
+    assert!(retarget_obs.projection.stack[1].is_copy);
+
+    let retarget_decision = engine::advance_until_decision(&mut state);
+    let retarget_actions =
+        legal_action_candidates_v1(&SurfaceDecision::Decision(retarget_decision), &state).unwrap();
+    assert_eq!(retarget_actions.len(), 2);
+    assert!(matches!(
+        retarget_actions[0].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyRetarget {
+            actor: PlayerSeatV1::P1,
+            change_target: true,
+            ..
+        }
+    ));
+    assert!(matches!(
+        retarget_actions[1].record.semantic,
+        ActionSemanticV1::ChooseSpellCopyRetarget {
+            actor: PlayerSeatV1::P1,
+            change_target: false,
+            ..
+        }
+    ));
+
+    engine::step(&mut state, Action::ChooseSpellCopyRetarget(true)).unwrap();
+    let target_obs = observe_for_test(&state, PlayerId::P1, 6);
+    assert_eq!(
+        target_obs
+            .projection
+            .engine_context
+            .pending_spell_copy
+            .as_ref()
+            .unwrap()
+            .stage,
+        SpellCopyStageV2::Target
+    );
 }
 
 #[test]
@@ -885,6 +1370,386 @@ fn rl_contract_legal_action_ids_are_structured_unique_and_display_independent() 
 }
 
 #[test]
+fn rl_contract_reserved_typed_choices_and_actions_have_exact_v4_wire_shapes() {
+    use mtg_kernel::mana::ManaColor;
+    use mtg_kernel::rl::{
+        BooleanChoicePurposeV4, PendingEffectChoiceSemanticV4, TargetRefV1,
+        TargetSelectionPurposeV4,
+    };
+
+    let mut state = empty_state();
+    make_object(
+        &mut state,
+        PlayerId::P0,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    let source = first_battlefield_card(
+        &observe_for_test(&state, PlayerId::P0, 0),
+        PlayerSeatV1::P0,
+        "Voldaren Epicure",
+    )
+    .stable
+    .clone();
+    let target = TargetRefV1::Player {
+        player: PlayerSeatV1::P1,
+    };
+
+    let targets = PendingEffectChoiceSemanticV4::Targets {
+        player: PlayerSeatV1::P0,
+        structural_path: vec![2, 1],
+        selected_targets: vec![target.clone()],
+        legal_targets: vec![target.clone()],
+        min_targets: 0,
+        max_targets: 2,
+        can_finish: true,
+        ordered: true,
+        purpose: TargetSelectionPurposeV4::CardSelection,
+    };
+    let targets_json = serde_json::to_value(targets).unwrap();
+    assert_eq!(targets_json["choice_kind"], "targets");
+    assert_eq!(targets_json["purpose"], "card_selection");
+    assert_eq!(targets_json["ordered"], true);
+
+    let boolean = PendingEffectChoiceSemanticV4::Boolean {
+        player: PlayerSeatV1::P1,
+        structural_path: vec![0],
+        default: Some(false),
+        purpose: BooleanChoicePurposeV4::Shuffle,
+    };
+    let boolean_json = serde_json::to_value(boolean).unwrap();
+    assert_eq!(boolean_json["choice_kind"], "boolean");
+    assert_eq!(boolean_json["purpose"], "shuffle");
+
+    let semantics = vec![
+        ActionSemanticV1::ChooseEffectTarget {
+            actor: PlayerSeatV1::P0,
+            source: source.clone(),
+            target: target.clone(),
+            selected_count: 1,
+            min_targets: 0,
+            max_targets: 2,
+        },
+        ActionSemanticV1::FinishEffectSelection {
+            actor: PlayerSeatV1::P0,
+            source: source.clone(),
+            selected_count: 1,
+        },
+        ActionSemanticV1::ChooseEffectColor {
+            actor: PlayerSeatV1::P0,
+            source: source.clone(),
+            color: ManaColor::R,
+        },
+        ActionSemanticV1::ChooseEffectNumber {
+            actor: PlayerSeatV1::P0,
+            source: source.clone(),
+            number: 3,
+            minimum: 0,
+            maximum: 5,
+        },
+        ActionSemanticV1::ChooseEffectBoolean {
+            actor: PlayerSeatV1::P0,
+            source: source.clone(),
+            value: true,
+        },
+        ActionSemanticV1::FinishTargetSelection {
+            actor: PlayerSeatV1::P0,
+            source,
+            selected_count: 2,
+        },
+    ];
+    let actions: Vec<_> = semantics
+        .into_iter()
+        .enumerate()
+        .map(|(index, semantic)| make_legal_action_v1(index as u32, semantic, None).unwrap())
+        .collect();
+    let stable_ids: Vec<_> = actions
+        .iter()
+        .map(|action| action.stable_id.as_str())
+        .collect();
+    assert_eq!(
+        stable_ids,
+        vec![
+            "legal-action-v4:16d67be112c3e80b",
+            "legal-action-v4:23c7819511bc912c",
+            "legal-action-v4:248a1391b07dccb0",
+            "legal-action-v4:9955e40522887330",
+            "legal-action-v4:41dbdb0c5ce04513",
+            "legal-action-v4:76516736379e762f",
+        ],
+        "reserved semantic wire changes must deliberately update these exact ids"
+    );
+    assert_eq!(
+        actions
+            .iter()
+            .map(
+                |action| serde_json::to_value(&action.semantic).unwrap()["action_kind"]
+                    .as_str()
+                    .unwrap()
+                    .to_string()
+            )
+            .collect::<Vec<_>>(),
+        vec![
+            "choose_effect_target",
+            "finish_effect_selection",
+            "choose_effect_color",
+            "choose_effect_number",
+            "choose_effect_boolean",
+            "finish_target_selection",
+        ]
+    );
+}
+
+#[test]
+fn rl_contract_mana_choice_generic_costs_and_effect_durations_are_reserved() {
+    use mtg_kernel::engine::{CostKind, Decision};
+    use mtg_kernel::mana::ManaColor;
+
+    let mut state = empty_state();
+    state.step = Step::Main1;
+    let island = make_object(&mut state, PlayerId::P0, "Island", Zone::Battlefield);
+    let decision = SurfaceDecision::Decision(Decision::CastSpellOrPass {
+        player: PlayerId::P0,
+        castable_spells: Vec::new(),
+        mana_abilities: vec![island],
+        land_drops: Vec::new(),
+        activatable_abilities: Vec::new(),
+        plot_actions: Vec::new(),
+    });
+    let actions = legal_action_candidates_v1(&decision, &state).unwrap();
+    assert!(matches!(
+        actions[0].record.semantic,
+        ActionSemanticV1::ActivateManaAbility {
+            mana_choice: Some(ManaColor::U),
+            ..
+        }
+    ));
+    assert_eq!(
+        actions[0].record.stable_id, "legal-action-v4:477dcbe7e756ee24",
+        "adding mana-choice semantics must remain an intentional stable-id change"
+    );
+    let SurfaceAction::Action(activation) = actions[0].surface_action.clone() else {
+        panic!("mana semantic must map to an engine action");
+    };
+    engine::step(&mut state, activation).unwrap();
+    let observed = observe_for_test(&state, PlayerId::P0, 1);
+    let island = first_battlefield_card(&observed, PlayerSeatV1::P0, "Island");
+    assert_eq!(island.ability_uses_this_turn.len(), 1);
+    assert_eq!(
+        serde_json::to_value(island.ability_uses_this_turn[0]).unwrap()["ability_kind"],
+        "mana"
+    );
+    assert_eq!(island.ability_uses_this_turn[0].ability_index, 0);
+    assert_eq!(island.ability_uses_this_turn[0].uses, 1);
+
+    let costs = [
+        CostKind::SacrificeLands,
+        CostKind::SacrificePermanents,
+        CostKind::SacrificeCreatures,
+        CostKind::SacrificeArtifacts,
+        CostKind::DiscardCards,
+        CostKind::ExileFromGraveyard,
+        CostKind::TapPermanents,
+        CostKind::ReturnPermanentsToHand,
+        CostKind::PayLife,
+        CostKind::RemoveCounters,
+        CostKind::PutCounters,
+    ];
+    assert_eq!(
+        costs
+            .iter()
+            .map(|cost| serde_json::to_value(cost)
+                .unwrap()
+                .as_str()
+                .unwrap()
+                .to_string())
+            .collect::<Vec<_>>(),
+        vec![
+            "SacrificeLands",
+            "SacrificePermanents",
+            "SacrificeCreatures",
+            "SacrificeArtifacts",
+            "DiscardCards",
+            "ExileFromGraveyard",
+            "TapPermanents",
+            "ReturnPermanentsToHand",
+            "PayLife",
+            "RemoveCounters",
+            "PutCounters",
+        ]
+    );
+
+    let durations = [
+        mtg_kernel::rl::EffectDurationV2::EndOfTurn,
+        mtg_kernel::rl::EffectDurationV2::UntilControllersNextTurn,
+        mtg_kernel::rl::EffectDurationV2::WhileAttached,
+        mtg_kernel::rl::EffectDurationV2::WhileSourcePresent,
+    ];
+    assert_eq!(
+        durations
+            .iter()
+            .map(|duration| serde_json::to_value(duration)
+                .unwrap()
+                .as_str()
+                .unwrap()
+                .to_string())
+            .collect::<Vec<_>>(),
+        vec![
+            "end_of_turn",
+            "until_controllers_next_turn",
+            "while_attached",
+            "while_source_present",
+        ]
+    );
+}
+
+#[test]
+fn rl_contract_pending_effect_reuses_the_public_resolving_stack_source() {
+    let mut state = empty_state();
+    let source = make_object(&mut state, PlayerId::P0, "Voldaren Epicure", Zone::Hand);
+    let resolving_item = StackItem {
+        kind: StackItemKind::TriggeredAbility,
+        source,
+        controller: PlayerId::P0,
+        targets: Vec::new(),
+        is_copy: false,
+        inline_effect: None,
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+        v4: mtg_kernel::state::StackStateV4::default(),
+    };
+    let effect = mtg_kernel::effect::EffectOp::Choice {
+        controller: mtg_kernel::effect::PlayerRef::Controller,
+        options: vec![
+            mtg_kernel::effect::EffectOp::GainLife {
+                player: mtg_kernel::effect::PlayerRef::Controller,
+                amount: 1,
+            },
+            mtg_kernel::effect::EffectOp::GainLife {
+                player: mtg_kernel::effect::PlayerRef::Controller,
+                amount: 2,
+            },
+        ],
+    };
+    assert_eq!(
+        mtg_kernel::effect::begin_resumable_resolution(
+            &effect,
+            &mtg_kernel::effect::ExecCtx::no_targets(source, PlayerId::P0),
+            resolving_item,
+            &mut state,
+        )
+        .unwrap(),
+        mtg_kernel::effect::ResumableProgress::Suspended
+    );
+
+    let opponent_view = observe_for_test(&state, PlayerId::P1, 7);
+    assert!(opponent_view.known_hand_cards[0].is_empty());
+    let projected_source = opponent_view
+        .projection
+        .engine_context
+        .pending_effect
+        .as_ref()
+        .unwrap()
+        .source
+        .as_ref()
+        .expect("a resolving stack source stays public after leaving a public zone");
+    assert_eq!(projected_source.arena_id, source.0);
+    assert_eq!(projected_source.zone, Zone::Hand);
+}
+
+#[test]
+fn rl_contract_live_generic_option_choice_projects_and_keeps_exact_action_ids() {
+    let mut state = empty_state();
+    state.step = Step::Main1;
+    state.active_player = PlayerId::P0;
+    state.priority_player = PlayerId::P0;
+    let source = make_object(
+        &mut state,
+        PlayerId::P0,
+        "Voldaren Epicure",
+        Zone::Battlefield,
+    );
+    state.stack.push(StackItem {
+        kind: StackItemKind::TriggeredAbility,
+        source,
+        controller: PlayerId::P0,
+        targets: Vec::new(),
+        is_copy: false,
+        inline_effect: Some(mtg_kernel::effect::EffectOp::Choice {
+            controller: mtg_kernel::effect::PlayerRef::Controller,
+            options: vec![
+                mtg_kernel::effect::EffectOp::GainLife {
+                    player: mtg_kernel::effect::PlayerRef::Controller,
+                    amount: 2,
+                },
+                mtg_kernel::effect::EffectOp::LoseLife {
+                    player: mtg_kernel::effect::PlayerRef::Controller,
+                    amount: 3,
+                },
+            ],
+        }),
+        discarded: Vec::new(),
+        is_flashback: false,
+        mode_chosen: 0,
+        madness_offer: false,
+        kicked: false,
+        v4: mtg_kernel::state::StackStateV4::default(),
+    });
+    state.engine.priority_passes = [true, true];
+
+    let decision = engine::advance_until_decision(&mut state);
+    let observation = observe_for_test(&state, PlayerId::P0, 22);
+    let choice = serde_json::to_value(
+        observation
+            .projection
+            .engine_context
+            .pending_effect
+            .as_ref()
+            .unwrap()
+            .choice
+            .as_ref()
+            .unwrap(),
+    )
+    .unwrap();
+    assert_eq!(choice["choice_kind"], "options");
+    assert_eq!(choice["option_count"], 2);
+
+    let candidates =
+        legal_action_candidates_v1(&SurfaceDecision::Decision(decision), &state).unwrap();
+    assert_eq!(candidates.len(), 2);
+    let ids: Vec<_> = candidates
+        .iter()
+        .map(|candidate| candidate.record.stable_id.as_str())
+        .collect();
+    assert_eq!(
+        ids,
+        vec![
+            "legal-action-v4:6851ecf7178d6c8a",
+            "legal-action-v4:c00d3dd4f6e51099",
+        ]
+    );
+    assert!(matches!(
+        candidates[0].record.semantic,
+        ActionSemanticV1::ChooseEffectOption {
+            option_index: 0,
+            option_count: 2,
+            ..
+        }
+    ));
+
+    let SurfaceAction::Action(action) = candidates[0].surface_action.clone() else {
+        panic!("generic option must map to an engine action");
+    };
+    engine::step(&mut state, action).unwrap();
+    engine::advance_until_decision(&mut state);
+    assert_eq!(state.players[0].life, 22);
+    assert!(state.engine.pending_effect.is_none());
+}
+
+#[test]
 fn rl_contract_identical_seeds_produce_identical_policy_and_audit_records() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
@@ -902,13 +1767,20 @@ fn rl_contract_identical_seeds_produce_identical_policy_and_audit_records() {
 }
 
 #[test]
-fn rl_contract_episode_records_use_independent_v2_schema_versions() {
+fn rl_contract_episode_records_use_independent_schema_versions_and_pin_hash_algorithm() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
     let run = record_burn_mirror_episode(0, env_seed, policy_seed, 64).unwrap();
 
+    assert_eq!(AUDIT_EPISODE_SCHEMA_VERSION, 5);
+    assert_eq!(MANIFEST_SCHEMA_VERSION, 5);
+    assert_eq!(POLICY_EPISODE_SCHEMA_VERSION, 4);
     let audit_header = serde_json::to_value(&run.audit_records[0]).unwrap();
     assert_eq!(audit_header["schema_version"], AUDIT_EPISODE_SCHEMA_VERSION);
+    assert_eq!(
+        audit_header["diagnostic_state_hash_algorithm"],
+        DIAGNOSTIC_STATE_HASH_ALGORITHM
+    );
     assert!(audit_header.get("game_id").is_some());
     assert!(audit_header.get("env_seed").is_some());
     assert!(audit_header.get("policy_seed").is_some());
@@ -922,6 +1794,9 @@ fn rl_contract_episode_records_use_independent_v2_schema_versions() {
     assert!(policy_header.get("game_id").is_none());
     assert!(policy_header.get("env_seed").is_none());
     assert!(policy_header.get("policy_seed").is_none());
+    assert!(policy_header
+        .get("diagnostic_state_hash_algorithm")
+        .is_none());
 
     let policy_decision = run
         .policy_records
@@ -967,6 +1842,312 @@ fn rl_contract_episode_records_use_independent_v2_schema_versions() {
 }
 
 #[test]
+fn rl_contract_audit_reader_fails_closed_on_legacy_missing_or_unknown_hash_contracts() {
+    let run =
+        record_burn_mirror_episode(0, derive_env_seed(9999, 0), derive_policy_seed(9999, 0), 16)
+            .unwrap();
+    let valid_jsonl = records_to_jsonl(&run.audit_records);
+    assert_eq!(
+        parse_audit_episode_jsonl(&valid_jsonl).unwrap(),
+        run.audit_records
+    );
+
+    let mut values = run
+        .audit_records
+        .iter()
+        .map(|record| serde_json::to_value(record).unwrap())
+        .collect::<Vec<_>>();
+    values[0]["diagnostic_state_hash_algorithm"] = Value::String("unknown-v99".to_string());
+    let unknown = records_to_jsonl(&values);
+    assert!(parse_audit_episode_jsonl(&unknown)
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported diagnostic_state_hash_algorithm"));
+
+    values[0]["diagnostic_state_hash_algorithm"] =
+        Value::String(DIAGNOSTIC_STATE_HASH_ALGORITHM.to_string());
+    values[0]["schema_version"] = Value::from(AUDIT_EPISODE_SCHEMA_VERSION - 1);
+    let legacy = records_to_jsonl(&values);
+    assert!(parse_audit_episode_jsonl(&legacy)
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported audit schema_version"));
+
+    values[0]["schema_version"] = Value::from(AUDIT_EPISODE_SCHEMA_VERSION);
+    values[0]
+        .as_object_mut()
+        .unwrap()
+        .remove("diagnostic_state_hash_algorithm");
+    let missing = records_to_jsonl(&values);
+    assert!(parse_audit_episode_jsonl(&missing)
+        .unwrap_err()
+        .to_string()
+        .contains("missing field `diagnostic_state_hash_algorithm`"));
+
+    let mut mixed = run
+        .audit_records
+        .iter()
+        .map(|record| serde_json::to_value(record).unwrap())
+        .collect::<Vec<_>>();
+    mixed[1]["schema_version"] = Value::from(AUDIT_EPISODE_SCHEMA_VERSION - 1);
+    assert!(parse_audit_episode_jsonl(&records_to_jsonl(&mixed))
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported audit schema_version"));
+
+    mixed[1]["schema_version"] = Value::from(AUDIT_EPISODE_SCHEMA_VERSION);
+    assert!(parse_audit_episode_jsonl(&records_to_jsonl(&mixed[1..]))
+        .unwrap_err()
+        .to_string()
+        .contains("out-of-order episode_id/step"));
+}
+
+#[test]
+fn rl_contract_policy_reader_rejects_empty_legacy_mixed_and_headerless_streams() {
+    let run =
+        record_burn_mirror_episode(0, derive_env_seed(9999, 0), derive_policy_seed(9999, 0), 16)
+            .unwrap();
+    let valid_jsonl = records_to_jsonl(&run.policy_records);
+    assert_eq!(
+        parse_policy_episode_jsonl(&valid_jsonl).unwrap(),
+        run.policy_records
+    );
+    assert!(parse_policy_episode_jsonl(&valid_jsonl[0..0])
+        .unwrap_err()
+        .to_string()
+        .contains("policy stream is empty"));
+
+    let mut values = run
+        .policy_records
+        .iter()
+        .map(|record| serde_json::to_value(record).unwrap())
+        .collect::<Vec<_>>();
+    values[0]["schema_version"] = Value::from(POLICY_EPISODE_SCHEMA_VERSION - 1);
+    assert!(parse_policy_episode_jsonl(&records_to_jsonl(&values))
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported policy schema_version"));
+
+    values[0]["schema_version"] = Value::from(POLICY_EPISODE_SCHEMA_VERSION);
+    values[1]["schema_version"] = Value::from(POLICY_EPISODE_SCHEMA_VERSION - 1);
+    assert!(parse_policy_episode_jsonl(&records_to_jsonl(&values))
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported policy schema_version"));
+
+    values[1]["schema_version"] = Value::from(POLICY_EPISODE_SCHEMA_VERSION);
+    assert!(parse_policy_episode_jsonl(&records_to_jsonl(&values[1..]))
+        .unwrap_err()
+        .to_string()
+        .contains("out-of-order episode_id/step"));
+}
+
+#[test]
+fn rl_contract_policy_reader_rejects_unknown_fields_and_duplicate_keys_recursively() {
+    let run =
+        record_burn_mirror_episode(0, derive_env_seed(9999, 0), derive_policy_seed(9999, 0), 16)
+            .unwrap();
+    let values = run
+        .policy_records
+        .iter()
+        .map(|record| serde_json::to_value(record).unwrap())
+        .collect::<Vec<_>>();
+    let decision_index = values
+        .iter()
+        .position(|value| value["record_type"] == "decision")
+        .expect("test episode must contain a policy decision");
+    assert!(!values[decision_index]["legal_actions"]
+        .as_array()
+        .unwrap()
+        .is_empty());
+
+    for location in ["record", "observation", "action"] {
+        for key in ["diagnostic_state_hash", "env_seed", "unknown_field"] {
+            let mut corrupted = values.clone();
+            let target = match location {
+                "record" => &mut corrupted[decision_index],
+                "observation" => &mut corrupted[decision_index]["observation"],
+                "action" => &mut corrupted[decision_index]["legal_actions"][0],
+                _ => unreachable!(),
+            };
+            target[key] = Value::from(0x5afe_u64);
+            let error = parse_policy_episode_jsonl(&records_to_jsonl(&corrupted))
+                .unwrap_err()
+                .to_string();
+            assert!(
+                error.contains("does not exactly match the policy schema"),
+                "{location} injection of {key} was not rejected strictly: {error}"
+            );
+        }
+    }
+
+    let valid_lines = values
+        .iter()
+        .map(|value| serde_json::to_string(value).unwrap())
+        .collect::<Vec<_>>();
+    let decision_line = &valid_lines[decision_index];
+    let duplicate_lines = [
+        decision_line.replacen('{', "{\"record_type\":\"decision\",", 1),
+        decision_line.replacen(
+            "\"observation\":{",
+            &format!("\"observation\":{{\"schema_version\":{OBSERVATION_SCHEMA_VERSION},"),
+            1,
+        ),
+        decision_line.replacen(
+            "\"legal_actions\":[{",
+            &format!("\"legal_actions\":[{{\"schema_version\":{LEGAL_ACTION_SCHEMA_VERSION},"),
+            1,
+        ),
+    ];
+    for (location, duplicate_line) in ["record", "observation", "action"]
+        .into_iter()
+        .zip(duplicate_lines)
+    {
+        assert_ne!(duplicate_line, *decision_line);
+        let mut corrupted_lines = valid_lines.clone();
+        corrupted_lines[decision_index] = duplicate_line;
+        let error = parse_policy_episode_jsonl(&(corrupted_lines.join("\n") + "\n"))
+            .unwrap_err()
+            .to_string();
+        assert!(
+            error.contains("duplicate JSON object key"),
+            "{location} duplicate key was not rejected before typed bundle acceptance: {error}"
+        );
+    }
+}
+
+#[test]
+fn rl_contract_bundle_validation_is_one_to_one_and_precedes_writes() {
+    let base_seed = 9999;
+    let max_decisions = 16;
+    let run = record_burn_mirror_episode(
+        0,
+        derive_env_seed(base_seed, 0),
+        derive_policy_seed(base_seed, 0),
+        max_decisions,
+    )
+    .unwrap();
+    let unique = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    let out_dir = std::env::temp_dir().join(format!(
+        "mtg-kernel-invalid-bundle-{}-{unique}",
+        std::process::id()
+    ));
+    assert!(!out_dir.exists());
+    let manifest = build_run_manifest(
+        1,
+        base_seed,
+        max_decisions,
+        Vec::new(),
+        &out_dir,
+        std::slice::from_ref(&run.terminal),
+        GitMetadataV1 {
+            commit: "test".to_string(),
+            dirty: GitDirtyFlagV1::Clean,
+        },
+    )
+    .unwrap();
+    validate_rollout_artifact_bundle(&run.audit_records, &run.policy_records, &manifest).unwrap();
+
+    let mut selected_action_corruption = run.policy_records.clone();
+    let changed = selected_action_corruption.iter_mut().find_map(|record| {
+        let PolicyEpisodeRecordV2::Decision {
+            legal_actions,
+            selected_index,
+            selected_action_id,
+            ..
+        } = record
+        else {
+            return None;
+        };
+        if legal_actions.len() < 2 {
+            return None;
+        }
+        let replacement = if *selected_index == 0 { 1 } else { 0 };
+        *selected_index = replacement;
+        *selected_action_id = legal_actions[replacement as usize].stable_id.clone();
+        Some(())
+    });
+    assert!(
+        changed.is_some(),
+        "test episode needs one multi-action decision"
+    );
+    validate_policy_episode_records(&selected_action_corruption).unwrap();
+    assert!(validate_rollout_artifact_bundle(
+        &run.audit_records,
+        &selected_action_corruption,
+        &manifest
+    )
+    .unwrap_err()
+    .to_string()
+    .contains("audit/policy decision mismatch"));
+
+    let mut header_corruption = run.policy_records.clone();
+    let PolicyEpisodeRecordV2::Header { kernel_version, .. } = &mut header_corruption[0] else {
+        panic!("first policy record must be a header");
+    };
+    kernel_version.push_str("-corrupt");
+    validate_policy_episode_records(&header_corruption).unwrap();
+    assert!(
+        validate_rollout_artifact_bundle(&run.audit_records, &header_corruption, &manifest)
+            .unwrap_err()
+            .to_string()
+            .contains("shared header mismatch")
+    );
+
+    let mut terminal_corruption = run.policy_records.clone();
+    let terminal = terminal_corruption.last_mut().unwrap();
+    let PolicyEpisodeRecordV2::Terminal {
+        terminal_outcome,
+        terminal_classification,
+        terminal_code,
+        winner,
+        terminal_reward,
+        ..
+    } = terminal
+    else {
+        panic!("last policy record must be terminal");
+    };
+    *terminal_outcome = TerminalOutcomeV1::Halted;
+    *terminal_classification = TerminalClassificationV1::Halted;
+    *terminal_code = mtg_kernel::rl::TerminalSafeCodeV2::FailClosed;
+    *winner = None;
+    *terminal_reward = [0, 0];
+    validate_policy_episode_records(&terminal_corruption).unwrap();
+    assert!(
+        validate_rollout_artifact_bundle(&run.audit_records, &terminal_corruption, &manifest)
+            .unwrap_err()
+            .to_string()
+            .contains("audit/policy terminal mismatch")
+    );
+
+    let mut manifest_corruption = manifest.clone();
+    manifest_corruption.game_count += 1;
+    assert!(validate_rollout_artifact_bundle(
+        &run.audit_records,
+        &run.policy_records,
+        &manifest_corruption
+    )
+    .unwrap_err()
+    .to_string()
+    .contains("manifest counts"));
+
+    assert!(write_rollout_artifacts(
+        &out_dir,
+        &run.audit_records,
+        &selected_action_corruption,
+        &manifest,
+    )
+    .is_err());
+    assert!(
+        !out_dir.exists(),
+        "invalid bundle validation must finish before creating the output directory"
+    );
+}
+
+#[test]
 fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
     let env_seed = derive_env_seed(9999, 0);
     let policy_seed = derive_policy_seed(9999, 0);
@@ -982,6 +2163,7 @@ fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
         let value: Value = serde_json::from_str(line).unwrap();
         for forbidden in [
             "diagnostic_state_hash",
+            "diagnostic_state_hash_algorithm",
             "state_hash",
             "env_seed",
             "policy_seed",
@@ -1020,6 +2202,7 @@ fn rl_contract_policy_stream_is_safe_and_audit_stream_is_privileged() {
     assert!(policy_jsonl.contains("terminal_code"));
     assert!(!policy_jsonl.contains("terminal_reason"));
     assert!(audit_jsonl.contains("diagnostic_state_hash"));
+    assert!(audit_jsonl.contains(DIAGNOSTIC_STATE_HASH_ALGORITHM));
     assert!(audit_jsonl.contains("env_seed"));
     assert!(audit_jsonl.contains("policy_seed"));
     assert!(audit_jsonl.contains(&audit_game_id));
@@ -1127,6 +2310,10 @@ fn rl_contract_terminal_outcome_accounting_is_explicit() {
 
     let value = serde_json::to_value(&manifest).unwrap();
     assert_eq!(value["schema_version"], MANIFEST_SCHEMA_VERSION);
+    assert_eq!(
+        value["diagnostic_state_hash_algorithm"],
+        DIAGNOSTIC_STATE_HASH_ALGORITHM
+    );
     assert!(value["aggregate"].get("wins").is_none());
     assert!(value["aggregate"].get("losses").is_none());
     assert_eq!(value["aggregate"]["p0_wins"], 1);
@@ -1141,6 +2328,33 @@ fn rl_contract_terminal_outcome_accounting_is_explicit() {
     );
     assert!(manifest.streams[0].policy_safe);
     assert!(manifest.streams[1].contains_hidden_state_diagnostics);
+
+    let valid_json = serde_json::to_string(&manifest).unwrap();
+    assert_eq!(parse_run_manifest_json(&valid_json).unwrap(), manifest);
+
+    let mut unknown_algorithm = value.clone();
+    unknown_algorithm["diagnostic_state_hash_algorithm"] = Value::String("unknown-v99".to_string());
+    assert!(parse_run_manifest_json(&unknown_algorithm.to_string())
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported diagnostic_state_hash_algorithm"));
+
+    let mut legacy = value.clone();
+    legacy["schema_version"] = Value::from(MANIFEST_SCHEMA_VERSION - 1);
+    assert!(parse_run_manifest_json(&legacy.to_string())
+        .unwrap_err()
+        .to_string()
+        .contains("unsupported manifest schema_version"));
+
+    let mut missing_algorithm = value;
+    missing_algorithm
+        .as_object_mut()
+        .unwrap()
+        .remove("diagnostic_state_hash_algorithm");
+    assert!(parse_run_manifest_json(&missing_algorithm.to_string())
+        .unwrap_err()
+        .to_string()
+        .contains("missing field `diagnostic_state_hash_algorithm`"));
 }
 
 #[test]

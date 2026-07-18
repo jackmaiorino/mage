@@ -45,6 +45,11 @@ pub struct DamageProposed {
 pub struct ZoneChangeProposed {
     pub object: ObjectId,
     pub to_zone: Zone,
+    /// Preserve an already-known library identity if this move puts the
+    /// card into a hidden zone. Ordinary library-to-hand moves remain
+    /// secret; public reveal effects opt in after populating the existing
+    /// perspective-scoped library-knowledge table.
+    pub preserve_known_identity: bool,
     pub touched_by: Vec<ReplacementId>,
 }
 
@@ -113,6 +118,15 @@ impl ProposedEvent {
         ProposedEvent::ZoneChange(ZoneChangeProposed {
             object,
             to_zone,
+            preserve_known_identity: false,
+            touched_by: Vec::new(),
+        })
+    }
+    pub fn zone_change_preserving_known_identity(object: ObjectId, to_zone: Zone) -> ProposedEvent {
+        ProposedEvent::ZoneChange(ZoneChangeProposed {
+            object,
+            to_zone,
+            preserve_known_identity: true,
             touched_by: Vec::new(),
         })
     }
@@ -352,7 +366,7 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
         }
         ProposedEvent::ZoneChange(z) => {
             let from = state.objects.get(z.object).zone;
-            commit_zone_change(state, z.object, z.to_zone);
+            commit_zone_change(state, z.object, z.to_zone, z.preserve_known_identity);
             CommittedEvent::ZoneChange {
                 object: z.object,
                 from,
@@ -425,6 +439,11 @@ pub fn commit(state: &mut GameState, event: ProposedEvent) {
                 damage: 0,
                 counters: Default::default(),
                 attachments: Vec::new(),
+                v4: {
+                    let mut v4 = crate::state::ObjectStateV4::from_card_def(t.token_def);
+                    v4.entered_battlefield_turn = Some(state.turn);
+                    v4
+                },
                 plotted_turn: None,
                 zone_change_count: 0,
             });
@@ -475,14 +494,53 @@ pub fn log_spell_cast(state: &mut GameState, spell: ObjectId, controller: Player
 /// Stack" (casting) is deliberately not reachable here: putting a spell on
 /// the stack is an engine action (see `engine::begin_cast`), never
 /// something a card's own effect program does.
-fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
+fn commit_zone_change(
+    state: &mut GameState,
+    id: ObjectId,
+    to_zone: Zone,
+    preserve_known_identity: bool,
+) {
     let owner = state.objects.get(id).owner;
     let from_zone = state.objects.get(id).zone;
+    let informed_observer_mask =
+        if preserve_known_identity && from_zone == Zone::Library && to_zone == Zone::Hand {
+            let position = state.players[owner.index()]
+                .library
+                .iter()
+                .position(|&candidate| candidate == id);
+            let generation = state.objects.get(id).zone_change_count;
+            position.map_or(0, |position| {
+                [PlayerId::P0, PlayerId::P1]
+                    .into_iter()
+                    .filter(|&observer| {
+                        state
+                            .known_library_cards(observer, owner)
+                            .iter()
+                            .any(|entry| {
+                                entry.position as usize == position
+                                    && entry.object == id
+                                    && entry.zone_change_count == generation
+                            })
+                    })
+                    .fold(0_u8, |mask, observer| mask | (1 << observer.index()))
+            })
+        } else {
+            0
+        };
 
     remove_from_zone(state, owner, id, from_zone);
+    state.forget_hand_object(id);
+    state.clear_object_relations(id);
 
     match to_zone {
-        Zone::Library => state.players[owner.index()].library.insert(0, id),
+        Zone::Library => {
+            // A generic zone change does not carry enough visibility
+            // information to say which observers know the inserted card.
+            // Clear conservatively; a library effect that explicitly
+            // reveals the result can repopulate knowledge afterward.
+            state.clear_library_knowledge(owner);
+            state.players[owner.index()].library.insert(0, id);
+        }
         Zone::Hand => state.players[owner.index()].hand.push(id),
         Zone::Battlefield => state.players[owner.index()].battlefield.push(id),
         Zone::Graveyard => state.players[owner.index()].graveyard.push(id),
@@ -491,50 +549,79 @@ fn commit_zone_change(state: &mut GameState, id: ObjectId, to_zone: Zone) {
         Zone::Stack => panic!("MoveObject to Stack is an engine action, not an effect leaf"),
     }
 
-    let obj = state.objects.get_mut(id);
-    obj.zone = to_zone;
-    // CR 400.7's zone-change identity: bumped on *every* zone change,
-    // regardless of which zones, so `engine::PlayPermission::
-    // zone_change_generation` can tell "still sitting where it was granted"
-    // apart from "moved since, for any reason" without needing a
-    // zone-specific special case.
-    obj.zone_change_count += 1;
-    if to_zone == Zone::Battlefield {
-        obj.tapped = false;
-        obj.summoning_sick = true;
-        obj.damage = 0;
-        obj.counters = Default::default();
-        obj.attachments.clear();
+    let turn = state.turn;
+    {
+        let obj = state.objects.get_mut(id);
+        obj.zone = to_zone;
+        // CR 400.7's zone-change identity: bumped on *every* zone change,
+        // regardless of which zones, so `engine::PlayPermission::
+        // zone_change_generation` can tell "still sitting where it was granted"
+        // apart from "moved since, for any reason" without needing a
+        // zone-specific special case.
+        obj.zone_change_count += 1;
+        obj.v4.reset_for_zone_change(obj.card_def, to_zone, turn);
+        if to_zone == Zone::Battlefield {
+            obj.tapped = false;
+            obj.summoning_sick = true;
+            obj.damage = 0;
+            obj.counters = Default::default();
+            obj.attachments.clear();
+        }
+    }
+    if to_zone == Zone::Hand && from_zone != Zone::Library {
+        // Returning a publicly identified card to hand does not make that
+        // identity secret again. The owner sees it through `own_hand`; the
+        // other observer receives an incarnation-bound known-hand fact.
+        for observer in [PlayerId::P0, PlayerId::P1] {
+            state
+                .reveal_hand_card(observer, owner, id)
+                .expect("just moved this live public object into its owner's hand");
+        }
+    } else if to_zone == Zone::Hand && informed_observer_mask != 0 {
+        // A public library reveal followed by a move to hand keeps the
+        // revealed identity public. Install the fact only for observers who
+        // actually knew this exact position/object/incarnation before the
+        // move; the ordinary constructor above remains deliberately hidden.
+        for observer in [PlayerId::P0, PlayerId::P1] {
+            if informed_observer_mask & (1 << observer.index()) != 0 {
+                state
+                    .reveal_hand_card(observer, owner, id)
+                    .expect("known library object just moved into its owner's hand");
+            }
+        }
     }
 }
 
-/// 111.8/704.5d: "If a token is in a zone other than the battlefield, it
-/// ceases to exist. This is a state-based action." Removes `id` from
+/// Removes a virtual game object from whichever live zone indexes it.
+/// This covers 111.8/704.5d token cleanup and 707.10a spell copies leaving
+/// the stack. Removes `id` from
 /// whichever zone list it's currently tracked in (its owner's hand/library/
 /// graveyard, `state.exile`/`command`, or the stack) without adding it
 /// anywhere -- unlike every other zone transition, a token leaving the
 /// battlefield doesn't go *to* another real zone, it just stops being
-/// tracked. Called only by `trigger::sba_fixed_point`, and only for objects
-/// `CardDef::is_token` marks as a token -- see that field's doc.
+/// tracked. Token callers run from `trigger::sba_fixed_point`; copy callers
+/// run synchronously from spell resolution/countering.
 ///
 /// Returns whether `id` was actually still present (an already-ceased token
 /// is a legal, idempotent no-op call) -- `sba_fixed_point`'s fixed-point
 /// loop needs this to know whether the sweep made progress; unconditionally
 /// reporting "changed" here would loop forever re-"removing" the same
-/// already-gone token every pass.
+/// already-gone object every pass.
 ///
-/// Deliberately does *not* touch `GameObject::zone` (left as whatever
-/// non-battlefield zone the token most recently moved to, e.g.
-/// `Zone::Graveyard` for a sacrificed Blood Token): every other read of an
-/// object's zone reaches it by first scanning a zone's own list (`ps.hand`,
-/// `ps.graveyard`, `state.exile`, ...), which this function already empties
-/// the token out of, so a stale `.zone` on an unreachable `ObjectId` the
-/// arena still holds (ids are never freed -- see `ids.rs`'s module doc) is
-/// inert, not a live correctness gap.
+/// Deliberately does *not* touch `GameObject::zone` (left as the object's
+/// last physical marker). Live membership is authoritative from the zone
+/// indexes and `state.stack`, which this function removes it from. Arena ids
+/// are never freed, so snapshots and provenance may still refer to the inert
+/// historical identity without making it a live target.
 pub fn cease_to_exist(state: &mut GameState, id: ObjectId) -> bool {
     let owner = state.objects.get(id).owner;
     let zone = state.objects.get(id).zone;
-    remove_from_zone(state, owner, id, zone)
+    let removed = remove_from_zone(state, owner, id, zone);
+    if removed {
+        state.forget_hand_object(id);
+        state.clear_object_relations(id);
+    }
+    removed
 }
 
 /// Returns whether `id` was actually present in `zone`'s list before being
@@ -546,7 +633,21 @@ fn remove_from_zone(state: &mut GameState, owner: PlayerId, id: ObjectId, zone: 
         before != v.len()
     }
     match zone {
-        Zone::Library => drop_from(&mut state.players[owner.index()].library, id),
+        Zone::Library => {
+            let position = state.players[owner.index()]
+                .library
+                .iter()
+                .position(|&candidate| candidate == id);
+            let removed = drop_from(&mut state.players[owner.index()].library, id);
+            if let Some(position) = position {
+                // At present every generic library departure is from a
+                // publicly determined position (draw/top-card exile). A
+                // future hidden search must use its own knowledge-aware
+                // library operation instead of this generic zone move.
+                state.note_library_removal(owner, position);
+            }
+            removed
+        }
         Zone::Hand => drop_from(&mut state.players[owner.index()].hand, id),
         Zone::Battlefield => drop_from(&mut state.players[owner.index()].battlefield, id),
         Zone::Graveyard => drop_from(&mut state.players[owner.index()].graveyard, id),
@@ -598,6 +699,51 @@ mod tests {
         assert_eq!(state.objects.get(card).zone, Zone::Battlefield);
         assert!(state.players[0].battlefield.contains(&card));
         assert!(!state.players[0].hand.contains(&card));
+    }
+
+    #[test]
+    fn library_to_hand_preserves_identity_only_when_explicit_and_informed() {
+        let mut hidden_state = fresh_state();
+        let hidden = hidden_state.players[0].library[0];
+        propose_and_commit(
+            &mut hidden_state,
+            ProposedEvent::zone_change(hidden, Zone::Hand),
+        );
+        assert!(hidden_state
+            .known_hand_cards(PlayerId::P1, PlayerId::P0)
+            .is_empty());
+
+        let mut revealed_state = fresh_state();
+        let revealed = revealed_state.players[0].library[0];
+        let old_generation = revealed_state.objects.get(revealed).zone_change_count;
+        revealed_state.reveal_library_top(PlayerId::P1, PlayerId::P0, 1);
+        propose_and_commit(
+            &mut revealed_state,
+            ProposedEvent::zone_change_preserving_known_identity(revealed, Zone::Hand),
+        );
+        assert_eq!(
+            revealed_state
+                .known_hand_cards(PlayerId::P1, PlayerId::P0)
+                .iter()
+                .map(|entry| (entry.object, entry.zone_change_count))
+                .collect::<Vec<_>>(),
+            vec![(revealed, old_generation + 1)]
+        );
+        assert!(revealed_state
+            .known_hand_cards(PlayerId::P0, PlayerId::P0)
+            .is_empty());
+
+        let mut stale_state = fresh_state();
+        let stale = stale_state.players[0].library[0];
+        stale_state.reveal_library_top(PlayerId::P1, PlayerId::P0, 1);
+        stale_state.objects.get_mut(stale).zone_change_count += 1;
+        propose_and_commit(
+            &mut stale_state,
+            ProposedEvent::zone_change_preserving_known_identity(stale, Zone::Hand),
+        );
+        assert!(stale_state
+            .known_hand_cards(PlayerId::P1, PlayerId::P0)
+            .is_empty());
     }
 
     #[test]

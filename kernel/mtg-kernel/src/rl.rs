@@ -5,30 +5,38 @@
 //! records, and a deterministic Burn-mirror rollout helper. It does not make
 //! any learning or strength claim.
 
-use crate::card_def::{card_id_by_name, CardType, Keywords, CARD_DEFS, KERNEL_CARDDB_HASH};
+use crate::card_def::{
+    card_id_by_name, preflight_fully_supported_deck, CardType, Keywords, CARD_DEFS,
+    KERNEL_CARDDB_HASH,
+};
 use crate::engine::{
     self, Action, CastMode, CostKind, Decision, OptionalCostChoice, PlayOrCast,
     PlayPermissionExpiry, UntilEndOfTurnEffect,
 };
 use crate::event::{self, ProposedEvent};
 use crate::ids::{ObjectId, PlayerId};
+use crate::mana::ManaColor;
 use crate::rl_session::{RlEpisodeSessionV1, RlSessionResponseV1};
-use crate::state::{GameObject, GameState, SplitMix64, StackItem, StackItemKind, Target, Zone};
+use crate::state::{
+    CastMethodV4, DungeonStateV4, GameObject, GameState, PaidCostRefV4, SplitMix64, StackItem,
+    StackItemKind, Target, Zone, DIAGNOSTIC_STATE_HASH_ALGORITHM,
+};
 use crate::surface_v2::{SurfaceAction, SurfaceDecision, H2_PREDICATE_VERSION};
 use crate::KERNEL_VERSION;
-use serde::{Deserialize, Serialize};
+use serde::de::{self, MapAccess, SeqAccess, Visitor};
+use serde::{Deserialize, Deserializer, Serialize};
 use std::collections::BTreeSet;
 use std::fmt;
 use std::fs::{self, File};
-use std::io::{BufWriter, Write};
+use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::path::{Path, PathBuf};
 
 pub const OBSERVATION_SCHEMA_VERSION_V1: u32 = 1;
-pub const OBSERVATION_SCHEMA_VERSION: u32 = 2;
-pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 2;
-pub const AUDIT_EPISODE_SCHEMA_VERSION: u32 = 2;
-pub const POLICY_EPISODE_SCHEMA_VERSION: u32 = 2;
-pub const MANIFEST_SCHEMA_VERSION: u32 = 2;
+pub const OBSERVATION_SCHEMA_VERSION: u32 = 4;
+pub const LEGAL_ACTION_SCHEMA_VERSION: u32 = 4;
+pub const AUDIT_EPISODE_SCHEMA_VERSION: u32 = 5;
+pub const POLICY_EPISODE_SCHEMA_VERSION: u32 = 4;
+pub const MANIFEST_SCHEMA_VERSION: u32 = 5;
 pub const DEFAULT_MAX_DECISIONS: u64 = 200_000;
 pub const BURN_MIRROR_MATCHUP: &str = "burn_mirror";
 pub const AUDIT_EPISODE_JSONL_FILENAME: &str = "audit_episodes.jsonl";
@@ -63,6 +71,98 @@ impl From<serde_json::Error> for RlContractError {
 
 type Result<T> = std::result::Result<T, RlContractError>;
 
+/// A raw JSON value whose deserializer rejects duplicate object keys at every
+/// nesting level. `serde_json::Value` otherwise accepts duplicates using
+/// last-key-wins semantics, which is unsafe at the policy artifact boundary.
+struct StrictJsonValue(serde_json::Value);
+
+impl<'de> Deserialize<'de> for StrictJsonValue {
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct StrictJsonValueVisitor;
+
+        impl<'de> Visitor<'de> for StrictJsonValueVisitor {
+            type Value = StrictJsonValue;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+                formatter.write_str("a JSON value without duplicate object keys")
+            }
+
+            fn visit_bool<E>(self, value: bool) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::Bool(value)))
+            }
+
+            fn visit_i64<E>(self, value: i64) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::Number(value.into())))
+            }
+
+            fn visit_u64<E>(self, value: u64) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::Number(value.into())))
+            }
+
+            fn visit_f64<E>(self, value: f64) -> std::result::Result<Self::Value, E>
+            where
+                E: de::Error,
+            {
+                serde_json::Number::from_f64(value)
+                    .map(serde_json::Value::Number)
+                    .map(StrictJsonValue)
+                    .ok_or_else(|| E::custom("non-finite JSON number"))
+            }
+
+            fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::String(
+                    value.to_string(),
+                )))
+            }
+
+            fn visit_string<E>(self, value: String) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::String(value)))
+            }
+
+            fn visit_none<E>(self) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::Null))
+            }
+
+            fn visit_unit<E>(self) -> std::result::Result<Self::Value, E> {
+                Ok(StrictJsonValue(serde_json::Value::Null))
+            }
+
+            fn visit_seq<A>(self, mut sequence: A) -> std::result::Result<Self::Value, A::Error>
+            where
+                A: SeqAccess<'de>,
+            {
+                let mut values = Vec::new();
+                while let Some(value) = sequence.next_element::<StrictJsonValue>()? {
+                    values.push(value.0);
+                }
+                Ok(StrictJsonValue(serde_json::Value::Array(values)))
+            }
+
+            fn visit_map<A>(self, mut map: A) -> std::result::Result<Self::Value, A::Error>
+            where
+                A: MapAccess<'de>,
+            {
+                let mut values = serde_json::Map::new();
+                while let Some(key) = map.next_key::<String>()? {
+                    if values.contains_key(&key) {
+                        return Err(<A::Error as de::Error>::custom(format!(
+                            "duplicate JSON object key `{key}`"
+                        )));
+                    }
+                    let value = map.next_value::<StrictJsonValue>()?;
+                    values.insert(key, value.0);
+                }
+                Ok(StrictJsonValue(serde_json::Value::Object(values)))
+            }
+        }
+
+        deserializer.deserialize_any(StrictJsonValueVisitor)
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum PlayerSeatV1 {
@@ -82,7 +182,11 @@ impl From<PlayerId> for PlayerSeatV1 {
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct CountersV1 {
-    pub plus1_plus1: i8,
+    pub plus1_plus1: i16,
+    pub minus1_minus1: i16,
+    pub minus0_minus1: i16,
+    pub stun: i16,
+    pub lore: i16,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -114,6 +218,12 @@ pub struct CardPrivateV1 {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct KnownLibraryCardV4 {
+    pub position: u32,
+    pub card: CardPrivateV1,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct CardTypeFlagsV2 {
     pub land: bool,
     pub creature: bool,
@@ -135,6 +245,13 @@ pub struct KeywordFlagsV2 {
     pub deathtouch: bool,
     pub menace: bool,
     pub defender: bool,
+    pub lifelink: bool,
+    pub hexproof: bool,
+    pub indestructible: bool,
+    pub protection_from_monocolored: bool,
+    pub ward_generic: u16,
+    pub minimum_blockers: u8,
+    pub landwalk_mask: u8,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -144,7 +261,22 @@ pub struct CardCharacteristicsV2 {
     pub base_toughness: Option<i32>,
     pub effective_power: Option<i32>,
     pub effective_toughness: Option<i32>,
+    pub effective_color_mask: u8,
+    pub effective_subtype_ids: Vec<u16>,
     pub effective_keywords: KeywordFlagsV2,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct AbilityUsePublicV4 {
+    pub ability_kind: crate::state::AbilityKindV4,
+    pub ability_index: u16,
+    pub uses: u16,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct GoadPublicV4 {
+    pub player: PlayerSeatV1,
+    pub expires_at_turn: u32,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -157,6 +289,13 @@ pub struct CardPublicV2 {
     pub counters: CountersV1,
     pub attachments: Vec<u32>,
     pub plotted_turn: Option<u32>,
+    pub is_token: bool,
+    pub face_index: u8,
+    pub chosen_color: Option<ManaColor>,
+    pub entered_battlefield_turn: Option<u32>,
+    pub ability_uses_this_turn: Vec<AbilityUsePublicV4>,
+    pub skip_next_untap: bool,
+    pub goaded_by: Vec<GoadPublicV4>,
     pub characteristics: CardCharacteristicsV2,
 }
 
@@ -207,10 +346,15 @@ pub struct StackItemPublicV2 {
     pub controller: PlayerSeatV1,
     pub targets: Vec<TargetRefV1>,
     pub stack_item_kind: StackItemKindV2,
+    pub is_copy: bool,
     pub is_flashback: bool,
     pub mode_chosen: u8,
     pub madness_offer: bool,
     pub kicked: bool,
+    pub cast_method: Option<CastMethodV4>,
+    pub face_index: u8,
+    pub x_value: u16,
+    pub paid_cost_refs: Vec<CardStableRefV1>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -219,6 +363,8 @@ pub struct PlayerStatusV1 {
     pub lands_played_this_turn: u8,
     pub drew_from_empty: bool,
     pub draws_this_turn: u32,
+    pub spells_cast_this_turn: u16,
+    pub dungeon: DungeonStateV4,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -250,17 +396,51 @@ pub struct CombatStatePublicV2 {
 #[serde(rename_all = "snake_case")]
 pub enum EffectDurationV2 {
     EndOfTurn,
+    UntilControllersNextTurn,
+    WhileAttached,
+    WhileSourcePresent,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct ContinuousEffectPublicV2 {
+    pub source: Option<CardStableRefV1>,
+    pub controller: Option<PlayerSeatV1>,
     pub affected_objects: Vec<CardStableRefV1>,
+    pub affected_players: Vec<PlayerSeatV1>,
+    pub global: bool,
     pub layers: u8,
     pub timestamp: u64,
     pub duration: EffectDurationV2,
     pub power_delta: i32,
     pub toughness_delta: i32,
     pub grants_haste: bool,
+    pub set_power: Option<i32>,
+    pub set_toughness: Option<i32>,
+    pub add_color_mask: u8,
+    pub remove_color_mask: u8,
+    pub add_subtype_ids: Vec<u16>,
+    pub remove_subtype_ids: Vec<u16>,
+    pub add_keyword_mask: u32,
+    pub remove_keyword_mask: u32,
+    pub ward_generic_delta: i16,
+    pub minimum_blockers: Option<u8>,
+    pub add_landwalk_mask: u8,
+    pub remove_landwalk_mask: u8,
+    pub prevent_damage_from_color_mask: u8,
+    pub damage_cannot_be_prevented: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(tag = "relation_kind", rename_all = "snake_case")]
+pub enum ObjectRelationPublicV4 {
+    AttachedTo {
+        object: CardStableRefV1,
+        attached_to: CardStableRefV1,
+    },
+    ExiledBy {
+        object: CardStableRefV1,
+        exiled_by: CardStableRefV1,
+    },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -295,6 +475,8 @@ pub enum EngineDecisionStageV2 {
     PendingDiscard,
     PendingOptionalCost,
     PendingOptionalCostSacrifice,
+    PendingSpellCopy,
+    PendingEffect,
     PendingTriggers,
     Halted,
 }
@@ -364,6 +546,99 @@ pub struct PendingOptionalCostSacrificeSemanticV2 {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
+pub enum SpellCopyStageV2 {
+    Payment,
+    Retarget,
+    Target,
+}
+
+impl From<engine::SpellCopyStage> for SpellCopyStageV2 {
+    fn from(value: engine::SpellCopyStage) -> Self {
+        match value {
+            engine::SpellCopyStage::Payment => SpellCopyStageV2::Payment,
+            engine::SpellCopyStage::Retarget => SpellCopyStageV2::Retarget,
+            engine::SpellCopyStage::Target => SpellCopyStageV2::Target,
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingSpellCopySemanticV2 {
+    pub parent: Option<CardStableRefV1>,
+    pub player: PlayerSeatV1,
+    pub inherited_target: TargetRefV1,
+    pub stage: SpellCopyStageV2,
+    pub copy: Option<CardStableRefV1>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TargetSelectionPurposeV4 {
+    EffectTargets,
+    CardSelection,
+    PermanentSelection,
+    PlayerSelection,
+    DamageDivision,
+    CostPayment,
+    LibraryOrder,
+    SearchResult,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum BooleanChoicePurposeV4 {
+    OptionalEffect,
+    Shuffle,
+    PayCost,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(tag = "choice_kind", rename_all = "snake_case")]
+pub enum PendingEffectChoiceSemanticV4 {
+    Options {
+        player: PlayerSeatV1,
+        structural_path: Vec<u16>,
+        option_count: u16,
+    },
+    Targets {
+        player: PlayerSeatV1,
+        structural_path: Vec<u16>,
+        selected_targets: Vec<TargetRefV1>,
+        legal_targets: Vec<TargetRefV1>,
+        min_targets: u16,
+        max_targets: u16,
+        can_finish: bool,
+        ordered: bool,
+        purpose: TargetSelectionPurposeV4,
+    },
+    Color {
+        player: PlayerSeatV1,
+        structural_path: Vec<u16>,
+        legal_colors: Vec<ManaColor>,
+    },
+    Number {
+        player: PlayerSeatV1,
+        structural_path: Vec<u16>,
+        minimum: i32,
+        maximum: i32,
+    },
+    Boolean {
+        player: PlayerSeatV1,
+        structural_path: Vec<u16>,
+        default: Option<bool>,
+        purpose: BooleanChoicePurposeV4,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct PendingEffectSemanticV4 {
+    pub source: Option<CardStableRefV1>,
+    pub controller: PlayerSeatV1,
+    pub choice: Option<PendingEffectChoiceSemanticV4>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
 pub enum PendingTriggerKindV2 {
     TriggeredAbility,
     MadnessOffer,
@@ -390,6 +665,8 @@ pub struct EngineContextV2 {
     pub pending_discard: Option<PendingDiscardSemanticV2>,
     pub pending_optional_cost: Option<PendingOptionalCostSemanticV2>,
     pub pending_optional_cost_sacrifice: Option<PendingOptionalCostSacrificeSemanticV2>,
+    pub pending_spell_copy: Option<PendingSpellCopySemanticV2>,
+    pub pending_effect: Option<PendingEffectSemanticV4>,
     pub pending_triggers: Vec<PendingTriggerSemanticV2>,
 }
 
@@ -446,6 +723,7 @@ pub struct PublicObservationProjectionV2 {
     pub phase: ZoneIndependentStepV1,
     pub active_player: PlayerSeatV1,
     pub priority_player: PlayerSeatV1,
+    pub initiative: Option<PlayerSeatV1>,
     pub life_totals: [i32; 2],
     pub mana_pools: [[u8; 6]; 2],
     pub hand_counts: [usize; 2],
@@ -457,6 +735,7 @@ pub struct PublicObservationProjectionV2 {
     pub stack: Vec<StackItemPublicV2>,
     pub combat: CombatStatePublicV2,
     pub continuous_effects: Vec<ContinuousEffectPublicV2>,
+    pub object_relations: Vec<ObjectRelationPublicV4>,
     pub exile_play_permissions: Vec<ExilePlayPermissionPublicV2>,
     pub engine_context: EngineContextV2,
     pub surface_context: HarnessSurfaceContextV2,
@@ -521,6 +800,12 @@ pub struct ObservationV2 {
     pub step_index: u64,
     pub projection: PublicObservationProjectionV2,
     pub own_hand: Vec<CardPrivateV1>,
+    /// Acting-observer-only positional knowledge, indexed by library owner
+    /// `[P0, P1]`. The other observer's knowledge matrix row is never
+    /// serialized.
+    pub known_library_cards: [Vec<KnownLibraryCardV4>; 2],
+    /// Acting-observer-only revealed hand identities, indexed by hand owner.
+    pub known_hand_cards: [Vec<CardPrivateV1>; 2],
     pub visible_projection_hash: u64,
 }
 
@@ -541,6 +826,7 @@ pub enum ActionSemanticV1 {
     ActivateManaAbility {
         actor: PlayerSeatV1,
         source: CardStableRefV1,
+        mana_choice: Option<ManaColor>,
     },
     ActivateAbility {
         actor: PlayerSeatV1,
@@ -580,6 +866,47 @@ pub enum ActionSemanticV1 {
         mode_index: u8,
         mode_count: u8,
     },
+    ChooseEffectOption {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        option_index: u16,
+        option_count: u16,
+    },
+    ChooseEffectTarget {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        target: TargetRefV1,
+        selected_count: u16,
+        min_targets: u16,
+        max_targets: u16,
+    },
+    FinishEffectSelection {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        selected_count: u16,
+    },
+    ChooseEffectColor {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        color: ManaColor,
+    },
+    ChooseEffectNumber {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        number: i32,
+        minimum: i32,
+        maximum: i32,
+    },
+    ChooseEffectBoolean {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        value: bool,
+    },
+    FinishTargetSelection {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        selected_count: u16,
+    },
     ChooseOptionalCostUse {
         actor: PlayerSeatV1,
         use_cost: bool,
@@ -587,6 +914,16 @@ pub enum ActionSemanticV1 {
     ChooseOptionalCostWhich {
         actor: PlayerSeatV1,
         choice: OptionalCostChoice,
+    },
+    ChooseSpellCopyPayment {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        pay: bool,
+    },
+    ChooseSpellCopyRetarget {
+        actor: PlayerSeatV1,
+        source: CardStableRefV1,
+        change_target: bool,
     },
     ChooseMadnessCast {
         actor: PlayerSeatV1,
@@ -674,6 +1011,7 @@ pub enum TerminalSafeCodeV2 {
 pub enum EpisodeRecordV1 {
     Header {
         schema_version: u32,
+        diagnostic_state_hash_algorithm: String,
         stream_safety: String,
         kernel_version: String,
         surface_version: u32,
@@ -831,6 +1169,7 @@ pub struct VariableMetadataV1 {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RunManifestV1 {
     pub schema_version: u32,
+    pub diagnostic_state_hash_algorithm: String,
     pub kernel_version: String,
     pub surface_version: u32,
     pub card_db_hash: u64,
@@ -875,6 +1214,8 @@ pub fn burn_deck_ids() -> Vec<u16> {
         60,
         "Mono-Red Burn mainboard should be exactly 60 cards"
     );
+    preflight_fully_supported_deck(&ids)
+        .expect("the runnable Burn environment requires a fully supported token-free mainboard");
     ids
 }
 
@@ -981,6 +1322,7 @@ pub fn observe_v2(
         phase: state.step.into(),
         active_player: state.active_player.into(),
         priority_player: state.priority_player.into(),
+        initiative: state.initiative.map(Into::into),
         life_totals: [state.players[0].life, state.players[1].life],
         mana_pools: [state.players[0].mana_pool, state.players[1].mana_pool],
         hand_counts: [state.players[0].hand.len(), state.players[1].hand.len()],
@@ -1004,6 +1346,7 @@ pub fn observe_v2(
         stack: stack_public_v2(state, acting_player)?,
         combat: combat_public_v2(state)?,
         continuous_effects: continuous_effects_public_v2(state, acting_player)?,
+        object_relations: object_relations_public_v4(state, acting_player)?,
         exile_play_permissions: exile_play_permissions_public_v2(state)?,
         engine_context: engine_context_v2(state, acting_player)?,
         surface_context: surface_context_v2(state, surface, acting_player)?,
@@ -1022,6 +1365,8 @@ pub fn observe_v2(
         step_index,
         projection,
         own_hand,
+        known_library_cards: known_library_cards_v4(state, acting_player)?,
+        known_hand_cards: known_hand_cards_v4(state, acting_player)?,
         visible_projection_hash: 0,
     };
     obs.visible_projection_hash = visible_projection_hash_v2(&obs)?;
@@ -1042,7 +1387,7 @@ pub fn make_legal_action_v1(
     Ok(LegalActionV1 {
         schema_version: LEGAL_ACTION_SCHEMA_VERSION,
         selected_index,
-        stable_id: format!("legal-action-v2:{hash:016x}"),
+        stable_id: format!("legal-action-v4:{hash:016x}"),
         semantic,
         display_text,
     })
@@ -1080,6 +1425,15 @@ pub fn legal_action_candidates_v1(
                         ActionSemanticV1::ActivateManaAbility {
                             actor,
                             source: card_ref(state, id)?,
+                            mana_choice: {
+                                let choices = CARD_DEFS[state.objects.get(id).card_def as usize]
+                                    .produces_mana;
+                                if choices.len() == 1 {
+                                    Some(choices[0])
+                                } else {
+                                    None
+                                }
+                            },
                         },
                         SurfaceAction::Action(Action::ActivateManaAbility(id)),
                     )?;
@@ -1219,6 +1573,63 @@ pub fn legal_action_candidates_v1(
                     )?;
                 }
             }
+            Decision::ChooseEffectOption {
+                player,
+                source,
+                option_count,
+            } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *source)?;
+                for option_index in 0..*option_count {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseEffectOption {
+                            actor,
+                            source: source.clone(),
+                            option_index,
+                            option_count: *option_count,
+                        },
+                        SurfaceAction::Action(Action::ChooseEffectOption(option_index)),
+                    )?;
+                }
+            }
+            Decision::ChooseEffectTargets {
+                player,
+                source,
+                selected_count,
+                min_targets,
+                max_targets,
+                legal_targets,
+                can_finish,
+            } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *source)?;
+                for &target in legal_targets {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseEffectTarget {
+                            actor,
+                            source: source.clone(),
+                            target: target_ref(state, target)?,
+                            selected_count: *selected_count,
+                            min_targets: *min_targets,
+                            max_targets: *max_targets,
+                        },
+                        SurfaceAction::Action(Action::ChooseEffectTarget(target)),
+                    )?;
+                }
+                if *can_finish {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::FinishEffectSelection {
+                            actor,
+                            source,
+                            selected_count: *selected_count,
+                        },
+                        SurfaceAction::Action(Action::FinishEffectSelection),
+                    )?;
+                }
+            }
             Decision::ChooseOptionalCost {
                 player,
                 discard_payable,
@@ -1252,6 +1663,36 @@ pub fn legal_action_candidates_v1(
                             "unsupported surfaced ChooseOptionalCost flags {other:?}; expected H2 use-gate or which-gate sentinel"
                         )));
                     }
+                }
+            }
+            Decision::ChooseSpellCopyPayment { player, spell } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *spell)?;
+                for pay in [true, false] {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseSpellCopyPayment {
+                            actor,
+                            source: source.clone(),
+                            pay,
+                        },
+                        SurfaceAction::Action(Action::ChooseSpellCopyPayment(pay)),
+                    )?;
+                }
+            }
+            Decision::ChooseSpellCopyRetarget { player, copy } => {
+                let actor = (*player).into();
+                let source = card_ref(state, *copy)?;
+                for change_target in [true, false] {
+                    push_action(
+                        &mut out,
+                        ActionSemanticV1::ChooseSpellCopyRetarget {
+                            actor,
+                            source: source.clone(),
+                            change_target,
+                        },
+                        SurfaceAction::Action(Action::ChooseSpellCopyRetarget(change_target)),
+                    )?;
                 }
             }
             Decision::ChooseMadnessCast { player, card } => {
@@ -1372,7 +1813,11 @@ pub fn acting_player_for_surface_decision(
             | Decision::ChooseCastMode { player, .. }
             | Decision::ChooseKicker { player, .. }
             | Decision::ChooseSpellMode { player, .. }
+            | Decision::ChooseEffectOption { player, .. }
+            | Decision::ChooseEffectTargets { player, .. }
             | Decision::ChooseOptionalCost { player, .. }
+            | Decision::ChooseSpellCopyPayment { player, .. }
+            | Decision::ChooseSpellCopyRetarget { player, .. }
             | Decision::ChooseMadnessCast { player, .. }
             | Decision::Discard { player, .. }
             | Decision::DeclareAttackers { player, .. }
@@ -1399,6 +1844,7 @@ pub fn record_burn_mirror_episode(
         format!("burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{episode_id:06}");
     let mut audit_records = vec![EpisodeRecordV1::Header {
         schema_version: AUDIT_EPISODE_SCHEMA_VERSION,
+        diagnostic_state_hash_algorithm: DIAGNOSTIC_STATE_HASH_ALGORITHM.to_string(),
         stream_safety: "privileged_audit_contains_hidden_state_diagnostics".to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
@@ -1419,7 +1865,7 @@ pub fn record_burn_mirror_episode(
     }];
     let mut policy_records = vec![PolicyEpisodeRecordV2::Header {
         schema_version: POLICY_EPISODE_SCHEMA_VERSION,
-        stream_safety: "policy_safe_model_visible_v2".to_string(),
+        stream_safety: "policy_safe_model_visible_v4".to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
         card_db_hash: KERNEL_CARDDB_HASH,
@@ -1520,6 +1966,7 @@ pub fn build_run_manifest(
     let deck_hash = burn_deck_hash();
     Ok(RunManifestV1 {
         schema_version: MANIFEST_SCHEMA_VERSION,
+        diagnostic_state_hash_algorithm: DIAGNOSTIC_STATE_HASH_ALGORITHM.to_string(),
         kernel_version: KERNEL_VERSION.to_string(),
         surface_version: H2_PREDICATE_VERSION,
         card_db_hash: KERNEL_CARDDB_HASH,
@@ -1594,12 +2041,738 @@ pub fn git_metadata() -> GitMetadataV1 {
     GitMetadataV1 { commit, dirty }
 }
 
+/// Parses and validates a privileged audit JSONL stream. Validation is
+/// deliberately fail-closed: every episode must begin with a current-schema
+/// header naming the exact diagnostic hash algorithm, and must end with its
+/// matching terminal record before another header begins.
+pub fn parse_audit_episode_jsonl(input: &str) -> Result<Vec<EpisodeRecordV1>> {
+    let mut records = Vec::new();
+    for (line_index, line) in input.lines().enumerate() {
+        if line.trim().is_empty() {
+            return Err(RlContractError(format!(
+                "audit JSONL line {} is empty",
+                line_index + 1
+            )));
+        }
+        let record = serde_json::from_str(line).map_err(|error| {
+            RlContractError(format!(
+                "invalid audit JSONL record on line {}: {error}",
+                line_index + 1
+            ))
+        })?;
+        records.push(record);
+    }
+    validate_audit_episode_records(&records)?;
+    Ok(records)
+}
+
+pub fn read_audit_episode_jsonl(path: &Path) -> Result<Vec<EpisodeRecordV1>> {
+    let file = File::open(path)?;
+    let mut input = String::new();
+    for line in BufReader::new(file).lines() {
+        input.push_str(&line?);
+        input.push('\n');
+    }
+    parse_audit_episode_jsonl(&input)
+}
+
+pub fn validate_audit_episode_records(records: &[EpisodeRecordV1]) -> Result<()> {
+    if records.is_empty() {
+        return Err(RlContractError("audit stream is empty".to_string()));
+    }
+    let mut current_episode: Option<(u64, u64)> = None;
+    let mut seen_episode_ids = BTreeSet::new();
+    for (record_index, record) in records.iter().enumerate() {
+        match record {
+            EpisodeRecordV1::Header {
+                schema_version,
+                diagnostic_state_hash_algorithm,
+                episode_id,
+                ..
+            } => {
+                if current_episode.is_some() {
+                    return Err(RlContractError(format!(
+                        "audit header at record {record_index} begins before the previous episode terminal"
+                    )));
+                }
+                validate_audit_schema_version(*schema_version, record_index)?;
+                if diagnostic_state_hash_algorithm != DIAGNOSTIC_STATE_HASH_ALGORITHM {
+                    return Err(RlContractError(format!(
+                        "unsupported diagnostic_state_hash_algorithm at audit record {record_index}: {diagnostic_state_hash_algorithm:?}; expected {DIAGNOSTIC_STATE_HASH_ALGORITHM:?}"
+                    )));
+                }
+                if !seen_episode_ids.insert(*episode_id) {
+                    return Err(RlContractError(format!(
+                        "duplicate audit episode_id {episode_id} at record {record_index}"
+                    )));
+                }
+                current_episode = Some((*episode_id, 0));
+            }
+            EpisodeRecordV1::Decision {
+                schema_version,
+                episode_id,
+                step,
+                acting_player,
+                observation,
+                observation_projection_hash,
+                legal_actions,
+                selected_index,
+                selected_action_id,
+                ..
+            } => {
+                validate_audit_schema_version(*schema_version, record_index)?;
+                if current_episode != Some((*episode_id, *step)) {
+                    return Err(RlContractError(format!(
+                        "audit decision at record {record_index} has out-of-order episode_id/step ({episode_id}, {step})"
+                    )));
+                }
+                let context = format!("audit record {record_index}");
+                validate_episode_decision_payload(
+                    &context,
+                    *step,
+                    *acting_player,
+                    observation,
+                    legal_actions,
+                    *selected_index,
+                    selected_action_id,
+                )?;
+                if *observation_projection_hash != observation.visible_projection_hash {
+                    return Err(RlContractError(format!(
+                        "audit observation_projection_hash mismatch at record {record_index}"
+                    )));
+                }
+                current_episode = Some((*episode_id, step + 1));
+            }
+            EpisodeRecordV1::Terminal {
+                schema_version,
+                episode_id,
+                terminal_outcome,
+                terminal_classification,
+                winner,
+                terminal_reward,
+                decision_count,
+                ..
+            } => {
+                validate_audit_schema_version(*schema_version, record_index)?;
+                if current_episode != Some((*episode_id, *decision_count)) {
+                    return Err(RlContractError(format!(
+                        "audit terminal at record {record_index} has mismatched episode_id/decision_count ({episode_id}, {decision_count})"
+                    )));
+                }
+                validate_terminal_tuple(
+                    *episode_id,
+                    *terminal_outcome,
+                    *terminal_classification,
+                    *winner,
+                    *terminal_reward,
+                )?;
+                current_episode = None;
+            }
+        }
+    }
+    if let Some((episode_id, _)) = current_episode {
+        return Err(RlContractError(format!(
+            "audit episode {episode_id} is missing its terminal record"
+        )));
+    }
+    Ok(())
+}
+
+fn validate_audit_schema_version(schema_version: u32, record_index: usize) -> Result<()> {
+    if schema_version != AUDIT_EPISODE_SCHEMA_VERSION {
+        return Err(RlContractError(format!(
+            "unsupported audit schema_version {schema_version} at record {record_index}; expected {AUDIT_EPISODE_SCHEMA_VERSION}"
+        )));
+    }
+    Ok(())
+}
+
+pub fn parse_policy_episode_jsonl(input: &str) -> Result<Vec<PolicyEpisodeRecordV2>> {
+    let mut records = Vec::new();
+    for (line_index, line) in input.lines().enumerate() {
+        if line.trim().is_empty() {
+            return Err(RlContractError(format!(
+                "policy JSONL line {} is empty",
+                line_index + 1
+            )));
+        }
+        let raw = serde_json::from_str::<StrictJsonValue>(line).map_err(|error| {
+            RlContractError(format!(
+                "invalid policy JSONL record on line {}: {error}",
+                line_index + 1
+            ))
+        })?;
+        let record: PolicyEpisodeRecordV2 =
+            serde_json::from_value(raw.0.clone()).map_err(|error| {
+                RlContractError(format!(
+                    "invalid policy JSONL record on line {}: {error}",
+                    line_index + 1
+                ))
+            })?;
+        let canonical = serde_json::to_value(&record).map_err(|error| {
+            RlContractError(format!(
+                "could not canonicalize policy JSONL record on line {}: {error}",
+                line_index + 1
+            ))
+        })?;
+        if raw.0 != canonical {
+            return Err(RlContractError(format!(
+                "policy JSONL record on line {} does not exactly match the policy schema; unknown, forbidden, or omitted fields are rejected",
+                line_index + 1
+            )));
+        }
+        records.push(record);
+    }
+    validate_policy_episode_records(&records)?;
+    Ok(records)
+}
+
+pub fn read_policy_episode_jsonl(path: &Path) -> Result<Vec<PolicyEpisodeRecordV2>> {
+    let file = File::open(path)?;
+    let mut input = String::new();
+    for line in BufReader::new(file).lines() {
+        input.push_str(&line?);
+        input.push('\n');
+    }
+    parse_policy_episode_jsonl(&input)
+}
+
+pub fn validate_policy_episode_records(records: &[PolicyEpisodeRecordV2]) -> Result<()> {
+    if records.is_empty() {
+        return Err(RlContractError("policy stream is empty".to_string()));
+    }
+    let mut current_episode: Option<(u64, u64)> = None;
+    let mut seen_episode_ids = BTreeSet::new();
+    for (record_index, record) in records.iter().enumerate() {
+        match record {
+            PolicyEpisodeRecordV2::Header {
+                schema_version,
+                episode_id,
+                ..
+            } => {
+                if current_episode.is_some() {
+                    return Err(RlContractError(format!(
+                        "policy header at record {record_index} begins before the previous episode terminal"
+                    )));
+                }
+                validate_policy_schema_version(*schema_version, record_index)?;
+                if !seen_episode_ids.insert(*episode_id) {
+                    return Err(RlContractError(format!(
+                        "duplicate policy episode_id {episode_id} at record {record_index}"
+                    )));
+                }
+                current_episode = Some((*episode_id, 0));
+            }
+            PolicyEpisodeRecordV2::Decision {
+                schema_version,
+                episode_id,
+                step,
+                acting_player,
+                observation,
+                legal_actions,
+                selected_index,
+                selected_action_id,
+                ..
+            } => {
+                validate_policy_schema_version(*schema_version, record_index)?;
+                if current_episode != Some((*episode_id, *step)) {
+                    return Err(RlContractError(format!(
+                        "policy decision at record {record_index} has out-of-order episode_id/step ({episode_id}, {step})"
+                    )));
+                }
+                let context = format!("policy record {record_index}");
+                validate_episode_decision_payload(
+                    &context,
+                    *step,
+                    *acting_player,
+                    observation,
+                    legal_actions,
+                    *selected_index,
+                    selected_action_id,
+                )?;
+                current_episode = Some((*episode_id, step + 1));
+            }
+            PolicyEpisodeRecordV2::Terminal {
+                schema_version,
+                episode_id,
+                terminal_outcome,
+                terminal_classification,
+                terminal_code,
+                winner,
+                terminal_reward,
+                decision_count,
+            } => {
+                validate_policy_schema_version(*schema_version, record_index)?;
+                if current_episode != Some((*episode_id, *decision_count)) {
+                    return Err(RlContractError(format!(
+                        "policy terminal at record {record_index} has mismatched episode_id/decision_count ({episode_id}, {decision_count})"
+                    )));
+                }
+                validate_terminal_tuple(
+                    *episode_id,
+                    *terminal_outcome,
+                    *terminal_classification,
+                    *winner,
+                    *terminal_reward,
+                )?;
+                if *terminal_code != terminal_safe_code_for_classification(*terminal_classification)
+                {
+                    return Err(RlContractError(format!(
+                        "policy terminal_code mismatch at record {record_index}"
+                    )));
+                }
+                current_episode = None;
+            }
+        }
+    }
+    if let Some((episode_id, _)) = current_episode {
+        return Err(RlContractError(format!(
+            "policy episode {episode_id} is missing its terminal record"
+        )));
+    }
+    Ok(())
+}
+
+fn validate_policy_schema_version(schema_version: u32, record_index: usize) -> Result<()> {
+    if schema_version != POLICY_EPISODE_SCHEMA_VERSION {
+        return Err(RlContractError(format!(
+            "unsupported policy schema_version {schema_version} at record {record_index}; expected {POLICY_EPISODE_SCHEMA_VERSION}"
+        )));
+    }
+    Ok(())
+}
+
+fn validate_episode_decision_payload(
+    context: &str,
+    step: u64,
+    acting_player: PlayerSeatV1,
+    observation: &ObservationV2,
+    legal_actions: &[LegalActionV1],
+    selected_index: u32,
+    selected_action_id: &str,
+) -> Result<()> {
+    if observation.schema_version != OBSERVATION_SCHEMA_VERSION
+        || observation.step_index != step
+        || observation.acting_player != acting_player
+    {
+        return Err(RlContractError(format!(
+            "{context} observation metadata mismatch"
+        )));
+    }
+    if observation.visible_projection_hash != visible_projection_hash_v2(observation)? {
+        return Err(RlContractError(format!(
+            "{context} observation visible_projection_hash mismatch"
+        )));
+    }
+    let mut stable_ids = BTreeSet::new();
+    for (index, action) in legal_actions.iter().enumerate() {
+        if action.schema_version != LEGAL_ACTION_SCHEMA_VERSION
+            || action.selected_index as usize != index
+        {
+            return Err(RlContractError(format!(
+                "{context} legal action metadata mismatch at action {index}"
+            )));
+        }
+        let expected = make_legal_action_v1(
+            action.selected_index,
+            action.semantic.clone(),
+            action.display_text.clone(),
+        )?;
+        if action.stable_id != expected.stable_id || !stable_ids.insert(&action.stable_id) {
+            return Err(RlContractError(format!(
+                "{context} legal action stable_id mismatch or duplicate at action {index}"
+            )));
+        }
+    }
+    let selected = legal_actions.get(selected_index as usize).ok_or_else(|| {
+        RlContractError(format!(
+            "{context} selected_index {selected_index} is out of range"
+        ))
+    })?;
+    if selected.stable_id != selected_action_id {
+        return Err(RlContractError(format!(
+            "{context} selected_action_id mismatch"
+        )));
+    }
+    Ok(())
+}
+
+fn validate_terminal_tuple(
+    episode_id: u64,
+    outcome: TerminalOutcomeV1,
+    classification: TerminalClassificationV1,
+    winner: Option<PlayerSeatV1>,
+    reward: [i32; 2],
+) -> Result<()> {
+    let valid = matches!(
+        (outcome, classification, winner, reward),
+        (
+            TerminalOutcomeV1::P0Win,
+            TerminalClassificationV1::Natural,
+            Some(PlayerSeatV1::P0),
+            [1, -1],
+        ) | (
+            TerminalOutcomeV1::P1Win,
+            TerminalClassificationV1::Natural,
+            Some(PlayerSeatV1::P1),
+            [-1, 1],
+        ) | (
+            TerminalOutcomeV1::Draw,
+            TerminalClassificationV1::Natural,
+            None,
+            [0, 0]
+        ) | (
+            TerminalOutcomeV1::Truncated,
+            TerminalClassificationV1::Truncated,
+            None,
+            [0, 0]
+        ) | (
+            TerminalOutcomeV1::Halted,
+            TerminalClassificationV1::Halted,
+            None,
+            [0, 0]
+        )
+    );
+    if valid {
+        Ok(())
+    } else {
+        Err(RlContractError(format!(
+            "invalid terminal tuple for episode {episode_id}: outcome={outcome:?} classification={classification:?} winner={winner:?} reward={reward:?}"
+        )))
+    }
+}
+
+fn terminal_safe_code_for_classification(
+    classification: TerminalClassificationV1,
+) -> TerminalSafeCodeV2 {
+    match classification {
+        TerminalClassificationV1::Natural => TerminalSafeCodeV2::NaturalGameOver,
+        TerminalClassificationV1::Truncated => TerminalSafeCodeV2::DecisionCap,
+        TerminalClassificationV1::Halted => TerminalSafeCodeV2::FailClosed,
+    }
+}
+
+pub fn parse_run_manifest_json(input: &str) -> Result<RunManifestV1> {
+    let manifest: RunManifestV1 = serde_json::from_str(input)
+        .map_err(|error| RlContractError(format!("invalid run manifest: {error}")))?;
+    validate_run_manifest(&manifest)?;
+    Ok(manifest)
+}
+
+pub fn read_run_manifest(path: &Path) -> Result<RunManifestV1> {
+    let mut input = String::new();
+    for line in BufReader::new(File::open(path)?).lines() {
+        input.push_str(&line?);
+        input.push('\n');
+    }
+    parse_run_manifest_json(&input)
+}
+
+pub fn validate_run_manifest(manifest: &RunManifestV1) -> Result<()> {
+    if manifest.schema_version != MANIFEST_SCHEMA_VERSION {
+        return Err(RlContractError(format!(
+            "unsupported manifest schema_version {}; expected {MANIFEST_SCHEMA_VERSION}",
+            manifest.schema_version
+        )));
+    }
+    if manifest.diagnostic_state_hash_algorithm != DIAGNOSTIC_STATE_HASH_ALGORITHM {
+        return Err(RlContractError(format!(
+            "unsupported diagnostic_state_hash_algorithm in manifest: {:?}; expected {:?}",
+            manifest.diagnostic_state_hash_algorithm, DIAGNOSTIC_STATE_HASH_ALGORITHM
+        )));
+    }
+    Ok(())
+}
+
+pub fn validate_rollout_artifact_bundle(
+    audit_records: &[EpisodeRecordV1],
+    policy_records: &[PolicyEpisodeRecordV2],
+    manifest: &RunManifestV1,
+) -> Result<()> {
+    validate_audit_episode_records(audit_records)?;
+    validate_policy_episode_records(policy_records)?;
+    validate_run_manifest(manifest)?;
+    if audit_records.len() != policy_records.len() {
+        return Err(RlContractError(format!(
+            "audit/policy record-count mismatch: {} != {}",
+            audit_records.len(),
+            policy_records.len()
+        )));
+    }
+
+    let mut episode_ids = Vec::new();
+    let mut env_seeds = Vec::new();
+    let mut policy_seeds = Vec::new();
+    let mut aggregate = RunAggregateV1 {
+        p0_wins: 0,
+        p1_wins: 0,
+        draws: 0,
+        truncated: 0,
+        halted: 0,
+        total_decisions: 0,
+    };
+    for (record_index, (audit, policy)) in
+        audit_records.iter().zip(policy_records.iter()).enumerate()
+    {
+        match (audit, policy) {
+            (
+                EpisodeRecordV1::Header {
+                    stream_safety: audit_safety,
+                    kernel_version: audit_kernel,
+                    surface_version: audit_surface,
+                    card_db_hash: audit_card_db,
+                    matchup: audit_matchup,
+                    episode_id: audit_episode,
+                    game_id,
+                    env_seed,
+                    policy_seed,
+                    deck_identifiers: audit_decks,
+                    library_setup,
+                    ..
+                },
+                PolicyEpisodeRecordV2::Header {
+                    stream_safety: policy_safety,
+                    kernel_version: policy_kernel,
+                    surface_version: policy_surface,
+                    card_db_hash: policy_card_db,
+                    matchup: policy_matchup,
+                    episode_id: policy_episode,
+                    episode_key,
+                    deck_identifiers: policy_decks,
+                    ..
+                },
+            ) => {
+                if audit_safety != "privileged_audit_contains_hidden_state_diagnostics"
+                    || policy_safety != "policy_safe_model_visible_v4"
+                {
+                    return Err(RlContractError(format!(
+                        "stream_safety mismatch at paired header record {record_index}"
+                    )));
+                }
+                if audit_kernel != policy_kernel
+                    || audit_surface != policy_surface
+                    || audit_card_db != policy_card_db
+                    || audit_matchup != policy_matchup
+                    || audit_episode != policy_episode
+                    || audit_decks != policy_decks
+                {
+                    return Err(RlContractError(format!(
+                        "audit/policy shared header mismatch at record {record_index}"
+                    )));
+                }
+                if audit_kernel != &manifest.kernel_version
+                    || audit_surface != &manifest.surface_version
+                    || audit_card_db != &manifest.card_db_hash
+                    || audit_matchup != &manifest.matchup
+                    || audit_decks != &manifest.deck.deck_identifiers
+                    || library_setup.deck_hashes != manifest.deck.deck_hashes
+                {
+                    return Err(RlContractError(format!(
+                        "header/manifest provenance mismatch at record {record_index}"
+                    )));
+                }
+                if library_setup.env_seed != *env_seed
+                    || game_id
+                        != &format!(
+                            "burn_mirror_env_{env_seed:016x}_policy_{policy_seed:016x}_game_{audit_episode:06}"
+                        )
+                    || episode_key != &format!("burn_mirror_episode_{policy_episode:06}")
+                {
+                    return Err(RlContractError(format!(
+                        "episode header identity mismatch at record {record_index}"
+                    )));
+                }
+                episode_ids.push(*audit_episode);
+                env_seeds.push(*env_seed);
+                policy_seeds.push(*policy_seed);
+            }
+            (
+                EpisodeRecordV1::Decision {
+                    episode_id: audit_episode,
+                    step: audit_step,
+                    acting_player: audit_actor,
+                    observation: audit_observation,
+                    legal_actions: audit_actions,
+                    selected_index: audit_selected_index,
+                    selected_action_id: audit_selected_id,
+                    reward: audit_reward,
+                    ..
+                },
+                PolicyEpisodeRecordV2::Decision {
+                    episode_id: policy_episode,
+                    step: policy_step,
+                    acting_player: policy_actor,
+                    observation: policy_observation,
+                    legal_actions: policy_actions,
+                    selected_index: policy_selected_index,
+                    selected_action_id: policy_selected_id,
+                    reward: policy_reward,
+                    ..
+                },
+            ) => {
+                if audit_episode != policy_episode
+                    || audit_step != policy_step
+                    || audit_actor != policy_actor
+                    || audit_observation != policy_observation
+                    || audit_actions != policy_actions
+                    || audit_selected_index != policy_selected_index
+                    || audit_selected_id != policy_selected_id
+                    || audit_reward != policy_reward
+                {
+                    return Err(RlContractError(format!(
+                        "audit/policy decision mismatch at paired record {record_index}"
+                    )));
+                }
+                if audit_observation.kernel_version != manifest.kernel_version
+                    || audit_observation.surface_version != manifest.surface_version
+                    || audit_observation.card_db_hash != manifest.card_db_hash
+                {
+                    return Err(RlContractError(format!(
+                        "decision/manifest provenance mismatch at paired record {record_index}"
+                    )));
+                }
+            }
+            (
+                EpisodeRecordV1::Terminal {
+                    episode_id: audit_episode,
+                    terminal_outcome: audit_outcome,
+                    terminal_classification: audit_classification,
+                    winner: audit_winner,
+                    terminal_reward: audit_reward,
+                    decision_count: audit_decisions,
+                    ..
+                },
+                PolicyEpisodeRecordV2::Terminal {
+                    episode_id: policy_episode,
+                    terminal_outcome: policy_outcome,
+                    terminal_classification: policy_classification,
+                    winner: policy_winner,
+                    terminal_reward: policy_reward,
+                    decision_count: policy_decisions,
+                    ..
+                },
+            ) => {
+                if audit_episode != policy_episode
+                    || audit_outcome != policy_outcome
+                    || audit_classification != policy_classification
+                    || audit_winner != policy_winner
+                    || audit_reward != policy_reward
+                    || audit_decisions != policy_decisions
+                {
+                    return Err(RlContractError(format!(
+                        "audit/policy terminal mismatch at paired record {record_index}"
+                    )));
+                }
+                if *audit_decisions > manifest.max_decisions {
+                    return Err(RlContractError(format!(
+                        "episode {audit_episode} decision_count {audit_decisions} exceeds manifest max_decisions {}",
+                        manifest.max_decisions
+                    )));
+                }
+                aggregate.total_decisions += audit_decisions;
+                match audit_outcome {
+                    TerminalOutcomeV1::P0Win => aggregate.p0_wins += 1,
+                    TerminalOutcomeV1::P1Win => aggregate.p1_wins += 1,
+                    TerminalOutcomeV1::Draw => aggregate.draws += 1,
+                    TerminalOutcomeV1::Truncated => aggregate.truncated += 1,
+                    TerminalOutcomeV1::Halted => aggregate.halted += 1,
+                }
+            }
+            _ => {
+                return Err(RlContractError(format!(
+                    "audit/policy record-type mismatch at paired record {record_index}"
+                )));
+            }
+        }
+    }
+
+    if manifest.game_count != episode_ids.len() as u64
+        || manifest.seed.episode_ids != episode_ids
+        || manifest.seed.env_seeds != env_seeds
+        || manifest.seed.policy_seeds != policy_seeds
+        || manifest.aggregate != aggregate
+    {
+        return Err(RlContractError(
+            "manifest counts, episode ids, seeds, or aggregate do not match the streams"
+                .to_string(),
+        ));
+    }
+    for ((episode_id, env_seed), policy_seed) in episode_ids
+        .iter()
+        .zip(env_seeds.iter())
+        .zip(policy_seeds.iter())
+    {
+        if derive_env_seed(manifest.seed.base_seed, *episode_id) != *env_seed
+            || derive_policy_seed(manifest.seed.base_seed, *episode_id) != *policy_seed
+        {
+            return Err(RlContractError(format!(
+                "manifest seed derivation mismatch for episode {episode_id}"
+            )));
+        }
+    }
+    if manifest.output_files.policy_episode_jsonl != POLICY_EPISODE_JSONL_FILENAME
+        || manifest.output_files.audit_episode_jsonl != AUDIT_EPISODE_JSONL_FILENAME
+        || manifest.output_files.manifest_json != MANIFEST_FILENAME
+    {
+        return Err(RlContractError(
+            "manifest output filenames do not match the artifact contract".to_string(),
+        ));
+    }
+    if manifest.streams.len() != 2 {
+        return Err(RlContractError(
+            "manifest must describe exactly the policy and audit streams".to_string(),
+        ));
+    }
+    let policy_stream = manifest
+        .streams
+        .iter()
+        .find(|stream| stream.filename == POLICY_EPISODE_JSONL_FILENAME)
+        .ok_or_else(|| RlContractError("manifest is missing the policy stream".to_string()))?;
+    let audit_stream = manifest
+        .streams
+        .iter()
+        .find(|stream| stream.filename == AUDIT_EPISODE_JSONL_FILENAME)
+        .ok_or_else(|| RlContractError("manifest is missing the audit stream".to_string()))?;
+    if !policy_stream.policy_safe
+        || policy_stream.contains_hidden_state_diagnostics
+        || audit_stream.policy_safe
+        || !audit_stream.contains_hidden_state_diagnostics
+    {
+        return Err(RlContractError(
+            "manifest stream safety flags do not match the artifact contract".to_string(),
+        ));
+    }
+    Ok(())
+}
+
+pub fn read_and_validate_rollout_artifacts(
+    out_dir: &Path,
+) -> Result<(
+    Vec<EpisodeRecordV1>,
+    Vec<PolicyEpisodeRecordV2>,
+    RunManifestV1,
+)> {
+    let audit = read_audit_episode_jsonl(&out_dir.join(AUDIT_EPISODE_JSONL_FILENAME))?;
+    let policy = read_policy_episode_jsonl(&out_dir.join(POLICY_EPISODE_JSONL_FILENAME))?;
+    let manifest = read_run_manifest(&out_dir.join(MANIFEST_FILENAME))?;
+    validate_rollout_artifact_bundle(&audit, &policy, &manifest)?;
+    Ok((audit, policy, manifest))
+}
+
 pub fn write_rollout_artifacts(
     out_dir: &Path,
     audit_records: &[EpisodeRecordV1],
     policy_records: &[PolicyEpisodeRecordV2],
     manifest: &RunManifestV1,
 ) -> Result<()> {
+    validate_rollout_artifact_bundle(audit_records, policy_records, manifest)?;
+    if manifest.variable_metadata.out_dir != out_dir.display().to_string() {
+        return Err(RlContractError(format!(
+            "manifest out_dir {:?} does not match write destination {:?}",
+            manifest.variable_metadata.out_dir,
+            out_dir.display().to_string()
+        )));
+    }
     fs::create_dir_all(out_dir)?;
     write_jsonl_atomic(&out_dir.join(AUDIT_EPISODE_JSONL_FILENAME), audit_records)?;
     write_jsonl_atomic(&out_dir.join(POLICY_EPISODE_JSONL_FILENAME), policy_records)?;
@@ -1787,6 +2960,8 @@ fn player_status_v1(player: &crate::state::PlayerState) -> PlayerStatusV1 {
         lands_played_this_turn: player.lands_played_this_turn,
         drew_from_empty: player.drew_from_empty,
         draws_this_turn: player.draws_this_turn,
+        spells_cast_this_turn: player.spells_cast_this_turn,
+        dungeon: player.dungeon.clone(),
     }
 }
 
@@ -1840,6 +3015,21 @@ fn visible_card_refs(
     Ok(out)
 }
 
+fn paid_cost_card_refs(refs: &[PaidCostRefV4], acting_player: PlayerId) -> Vec<CardStableRefV1> {
+    refs.iter()
+        .copied()
+        .filter(|paid| paid.visible_to(acting_player))
+        .map(|paid| CardStableRefV1 {
+            arena_id: paid.object.0,
+            card_db_id: paid.card_def,
+            owner: paid.owner.into(),
+            controller: paid.controller.into(),
+            zone: paid.zone,
+            zone_change_count: paid.zone_change_count,
+        })
+        .collect()
+}
+
 fn target_ref_visible(
     state: &GameState,
     target: Target,
@@ -1868,6 +3058,63 @@ fn target_refs_visible(
     Ok(out)
 }
 
+/// A pending effect selection may name a card in an otherwise-hidden zone
+/// only when this observer knows that exact incarnation. Winding Way's
+/// public reveal satisfies this for both observers; future private look or
+/// hand selections therefore fail closed for a non-chooser instead of
+/// leaking candidate identities through the generic pending context.
+fn effect_target_ref_visible(
+    state: &GameState,
+    target: Target,
+    acting_player: PlayerId,
+) -> Result<TargetRefV1> {
+    let Target::Object(object_id) = target else {
+        let Target::Player(player) = target else {
+            unreachable!("Target has only player and object variants")
+        };
+        return Ok(TargetRefV1::Player {
+            player: player.into(),
+        });
+    };
+    let object = state
+        .objects
+        .try_get(object_id)
+        .ok_or_else(|| RlContractError(format!("object id {} missing", object_id.0)))?;
+    if let Some(visible) = visible_card_ref(state, object_id, acting_player)? {
+        return Ok(TargetRefV1::Object { object: visible });
+    }
+
+    let known = match object.zone {
+        Zone::Library => state
+            .known_library_cards(acting_player, object.owner)
+            .iter()
+            .any(|entry| {
+                entry.object == object_id
+                    && entry.zone_change_count == object.zone_change_count
+                    && state.players[object.owner.index()]
+                        .library
+                        .get(entry.position as usize)
+                        .is_some_and(|&candidate| candidate == object_id)
+            }),
+        Zone::Hand => state
+            .known_hand_cards(acting_player, object.owner)
+            .iter()
+            .any(|entry| {
+                entry.object == object_id && entry.zone_change_count == object.zone_change_count
+            }),
+        _ => false,
+    };
+    if !known {
+        return Err(RlContractError(format!(
+            "pending effect target object {} is hidden from {:?}",
+            object_id.0, acting_player
+        )));
+    }
+    Ok(TargetRefV1::Object {
+        object: card_ref(state, object_id)?,
+    })
+}
+
 fn public_card(state: &GameState, id: ObjectId) -> Result<CardPublicV1> {
     let object = state
         .objects
@@ -1881,6 +3128,10 @@ fn public_card(state: &GameState, id: ObjectId) -> Result<CardPublicV1> {
         damage: object.damage,
         counters: CountersV1 {
             plus1_plus1: object.counters.plus1_plus1,
+            minus1_minus1: object.counters.minus1_minus1,
+            minus0_minus1: object.counters.minus0_minus1,
+            stun: object.counters.stun,
+            lore: object.counters.lore,
         },
         attachments: object.attachments.iter().map(|id| id.0).collect(),
         plotted_turn: object.plotted_turn,
@@ -1900,9 +3151,37 @@ fn public_card_v2(state: &GameState, id: ObjectId) -> Result<CardPublicV2> {
         damage: object.damage,
         counters: CountersV1 {
             plus1_plus1: object.counters.plus1_plus1,
+            minus1_minus1: object.counters.minus1_minus1,
+            minus0_minus1: object.counters.minus0_minus1,
+            stun: object.counters.stun,
+            lore: object.counters.lore,
         },
         attachments: object.attachments.iter().map(|id| id.0).collect(),
         plotted_turn: object.plotted_turn,
+        is_token: object.v4.is_token,
+        face_index: object.v4.face_index,
+        chosen_color: object.v4.chosen_color,
+        entered_battlefield_turn: object.v4.entered_battlefield_turn,
+        ability_uses_this_turn: object
+            .v4
+            .ability_uses_this_turn
+            .iter()
+            .map(|entry| AbilityUsePublicV4 {
+                ability_kind: entry.ability_kind,
+                ability_index: entry.ability_index,
+                uses: entry.uses,
+            })
+            .collect(),
+        skip_next_untap: object.v4.skip_next_untap,
+        goaded_by: object
+            .v4
+            .goaded_by
+            .iter()
+            .map(|entry| GoadPublicV4 {
+                player: entry.player.into(),
+                expires_at_turn: entry.expires_at_turn,
+            })
+            .collect(),
         characteristics: card_characteristics_v2(state, id),
     })
 }
@@ -1926,6 +3205,61 @@ fn private_card(state: &GameState, id: ObjectId) -> Result<CardPrivateV1> {
     })
 }
 
+fn known_library_cards_v4(
+    state: &GameState,
+    observer: PlayerId,
+) -> Result<[Vec<KnownLibraryCardV4>; 2]> {
+    let mut result: [Vec<KnownLibraryCardV4>; 2] = std::array::from_fn(|_| Vec::new());
+    for owner in [PlayerId::P0, PlayerId::P1] {
+        for entry in state.known_library_cards(observer, owner) {
+            let library = &state.players[owner.index()].library;
+            let Some(&object) = library.get(entry.position as usize) else {
+                return Err(RlContractError(format!(
+                    "known library position {} is outside {:?}'s library",
+                    entry.position, owner
+                )));
+            };
+            if object != entry.object
+                || state.objects.get(object).zone_change_count != entry.zone_change_count
+            {
+                return Err(RlContractError(
+                    "known library entry does not match the live object incarnation".to_string(),
+                ));
+            }
+            result[owner.index()].push(KnownLibraryCardV4 {
+                position: entry.position,
+                card: private_card(state, object)?,
+            });
+        }
+    }
+    Ok(result)
+}
+
+fn known_hand_cards_v4(state: &GameState, observer: PlayerId) -> Result<[Vec<CardPrivateV1>; 2]> {
+    let mut result: [Vec<CardPrivateV1>; 2] = std::array::from_fn(|_| Vec::new());
+    for owner in [PlayerId::P0, PlayerId::P1] {
+        if owner == observer {
+            continue;
+        }
+        for entry in state.known_hand_cards(observer, owner) {
+            let object = state.objects.try_get(entry.object).ok_or_else(|| {
+                RlContractError(format!("known hand object {} is missing", entry.object))
+            })?;
+            if object.owner != owner
+                || object.zone != Zone::Hand
+                || object.zone_change_count != entry.zone_change_count
+                || !state.players[owner.index()].hand.contains(&entry.object)
+            {
+                return Err(RlContractError(
+                    "known hand entry does not match the live object incarnation".to_string(),
+                ));
+            }
+            result[owner.index()].push(private_card(state, entry.object)?);
+        }
+    }
+    Ok(result)
+}
+
 fn card_characteristics_v2(state: &GameState, id: ObjectId) -> CardCharacteristicsV2 {
     let object = state.objects.get(id);
     let def = &CARD_DEFS[object.card_def as usize];
@@ -1945,6 +3279,8 @@ fn card_characteristics_v2(state: &GameState, id: ObjectId) -> CardCharacteristi
         base_toughness,
         effective_power: has_pt.then(|| engine::effective_power(state, id)),
         effective_toughness: has_pt.then(|| engine::effective_toughness(state, id)),
+        effective_color_mask: object.v4.effective_color_mask,
+        effective_subtype_ids: object.v4.effective_subtype_ids.clone(),
         effective_keywords: KeywordFlagsV2 {
             flying: engine::has_effective_keyword(state, id, Keywords::FLYING),
             reach: engine::has_effective_keyword(state, id, Keywords::REACH),
@@ -1956,6 +3292,25 @@ fn card_characteristics_v2(state: &GameState, id: ObjectId) -> CardCharacteristi
             deathtouch: engine::has_effective_keyword(state, id, Keywords::DEATHTOUCH),
             menace: engine::has_effective_keyword(state, id, Keywords::MENACE),
             defender: engine::has_effective_keyword(state, id, Keywords::DEFENDER),
+            lifelink: engine::has_effective_keyword(state, id, Keywords::LIFELINK),
+            hexproof: engine::has_effective_keyword(state, id, Keywords::HEXPROOF),
+            indestructible: engine::has_effective_keyword(state, id, Keywords::INDESTRUCTIBLE),
+            protection_from_monocolored: engine::has_effective_keyword(
+                state,
+                id,
+                Keywords::PROTECTION_FROM_MONOCOLORED,
+            ),
+            ward_generic: object.v4.ward_generic,
+            minimum_blockers: object.v4.minimum_blockers_override.unwrap_or_else(|| {
+                if !def.has_type(CardType::Creature) {
+                    0
+                } else if engine::has_effective_keyword(state, id, Keywords::MENACE) {
+                    2
+                } else {
+                    1
+                }
+            }),
+            landwalk_mask: object.v4.landwalk_mask,
         },
     }
 }
@@ -1989,6 +3344,51 @@ fn combat_public_v2(state: &GameState) -> Result<CombatStatePublicV2> {
     })
 }
 
+fn object_relations_public_v4(
+    state: &GameState,
+    acting_player: PlayerId,
+) -> Result<Vec<ObjectRelationPublicV4>> {
+    let mut out = Vec::new();
+    for (id, object) in state.objects.iter() {
+        let Some(source) = visible_card_ref(state, id, acting_player)? else {
+            continue;
+        };
+        if let Some(link) = object.v4.attached_to {
+            let target = state.objects.try_get(link.object).ok_or_else(|| {
+                RlContractError("attached_to relation points at a missing object".to_string())
+            })?;
+            if target.zone_change_count != link.zone_change_count {
+                return Err(RlContractError(
+                    "attached_to relation points at a stale object incarnation".to_string(),
+                ));
+            }
+            if let Some(attached_to) = visible_card_ref(state, link.object, acting_player)? {
+                out.push(ObjectRelationPublicV4::AttachedTo {
+                    object: source.clone(),
+                    attached_to,
+                });
+            }
+        }
+        if let Some(link) = object.v4.exiled_by {
+            let target = state.objects.try_get(link.object).ok_or_else(|| {
+                RlContractError("exiled_by relation points at a missing object".to_string())
+            })?;
+            if target.zone_change_count != link.zone_change_count {
+                return Err(RlContractError(
+                    "exiled_by relation points at a stale object incarnation".to_string(),
+                ));
+            }
+            if let Some(exiled_by) = visible_card_ref(state, link.object, acting_player)? {
+                out.push(ObjectRelationPublicV4::ExiledBy {
+                    object: source,
+                    exiled_by,
+                });
+            }
+        }
+    }
+    Ok(out)
+}
+
 fn continuous_effects_public_v2(
     state: &GameState,
     acting_player: PlayerId,
@@ -2014,13 +3414,31 @@ fn continuous_effects_public_v2(
                     continue;
                 }
                 out.push(ContinuousEffectPublicV2 {
+                    source: None,
+                    controller: None,
                     affected_objects,
+                    affected_players: Vec::new(),
+                    global: false,
                     layers: layer.0,
                     timestamp: *timestamp,
                     duration,
                     power_delta: *power,
                     toughness_delta: *toughness,
                     grants_haste: *grant_haste,
+                    set_power: None,
+                    set_toughness: None,
+                    add_color_mask: 0,
+                    remove_color_mask: 0,
+                    add_subtype_ids: Vec::new(),
+                    remove_subtype_ids: Vec::new(),
+                    add_keyword_mask: if *grant_haste { Keywords::HASTE.0 } else { 0 },
+                    remove_keyword_mask: 0,
+                    ward_generic_delta: 0,
+                    minimum_blockers: None,
+                    add_landwalk_mask: 0,
+                    remove_landwalk_mask: 0,
+                    prevent_damage_from_color_mask: 0,
+                    damage_cannot_be_prevented: false,
                 });
             }
         }
@@ -2068,6 +3486,10 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
         EngineDecisionStageV2::PendingOptionalCost
     } else if state.engine.pending_optional_cost_sacrifice.is_some() {
         EngineDecisionStageV2::PendingOptionalCostSacrifice
+    } else if state.engine.pending_spell_copy.is_some() {
+        EngineDecisionStageV2::PendingSpellCopy
+    } else if state.engine.pending_effect.is_some() {
+        EngineDecisionStageV2::PendingEffect
     } else if !state.engine.pending_triggers.is_empty() {
         EngineDecisionStageV2::PendingTriggers
     } else {
@@ -2120,6 +3542,18 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
             .as_ref()
             .map(|p| pending_optional_cost_sacrifice_semantic_v2(state, acting_player, p))
             .transpose()?,
+        pending_spell_copy: state
+            .engine
+            .pending_spell_copy
+            .as_ref()
+            .map(|p| pending_spell_copy_semantic_v2(state, acting_player, p))
+            .transpose()?,
+        pending_effect: state
+            .engine
+            .pending_effect
+            .as_ref()
+            .map(|pending| pending_effect_semantic_v4(state, acting_player, pending))
+            .transpose()?,
         pending_triggers: state
             .engine
             .pending_triggers
@@ -2137,6 +3571,74 @@ fn engine_context_v2(state: &GameState, acting_player: PlayerId) -> Result<Engin
                 })
             })
             .collect::<Result<Vec<_>>>()?,
+    })
+}
+
+fn pending_effect_semantic_v4(
+    state: &GameState,
+    acting_player: PlayerId,
+    pending: &crate::effect::EffectContinuation,
+) -> Result<PendingEffectSemanticV4> {
+    let choice = pending
+        .choice
+        .as_ref()
+        .map(|choice| -> Result<PendingEffectChoiceSemanticV4> {
+            match choice {
+                crate::effect::PendingEffectChoice::ChooseOption {
+                    player,
+                    path,
+                    options,
+                } => Ok(PendingEffectChoiceSemanticV4::Options {
+                    player: (*player).into(),
+                    structural_path: path.clone(),
+                    option_count: options.len().try_into().map_err(|_| {
+                        RlContractError("effect option count exceeds u16".to_string())
+                    })?,
+                }),
+                crate::effect::PendingEffectChoice::SelectTargets {
+                    player,
+                    path,
+                    selected,
+                    legal,
+                    min_targets,
+                    max_targets,
+                    ordered,
+                    purpose,
+                } => Ok(PendingEffectChoiceSemanticV4::Targets {
+                    player: (*player).into(),
+                    structural_path: path.clone(),
+                    selected_targets: selected
+                        .iter()
+                        .map(|candidate| {
+                            effect_target_ref_visible(state, candidate.target, acting_player)
+                        })
+                        .collect::<Result<Vec<_>>>()?,
+                    legal_targets: legal
+                        .iter()
+                        .map(|candidate| {
+                            effect_target_ref_visible(state, candidate.target, acting_player)
+                        })
+                        .collect::<Result<Vec<_>>>()?,
+                    min_targets: *min_targets,
+                    max_targets: *max_targets,
+                    can_finish: selected.len() >= usize::from(*min_targets),
+                    ordered: *ordered,
+                    purpose: match purpose {
+                        crate::effect::EffectTargetSelectionPurpose::OrderIntoGraveyard {
+                            ..
+                        } => TargetSelectionPurposeV4::CardSelection,
+                    },
+                }),
+            }
+        })
+        .transpose()?;
+    Ok(PendingEffectSemanticV4 {
+        // A resolving stack item's source was already public as part of that
+        // stack item. Reuse the same unconditional public source reference even
+        // if the underlying card has since moved to a normally hidden zone.
+        source: Some(card_ref(state, pending.resolving_item.source)?),
+        controller: pending.resolving_item.controller.into(),
+        choice,
     })
 }
 
@@ -2244,6 +3746,24 @@ fn pending_optional_cost_sacrifice_semantic_v2(
         chosen: visible_card_refs(state, &p.chosen, acting_player)?,
         spell_resume_source,
         spell_resume_zone,
+    })
+}
+
+fn pending_spell_copy_semantic_v2(
+    state: &GameState,
+    acting_player: PlayerId,
+    p: &engine::PendingSpellCopy,
+) -> Result<PendingSpellCopySemanticV2> {
+    Ok(PendingSpellCopySemanticV2 {
+        parent: visible_card_ref(state, p.resolving_source, acting_player)?,
+        player: p.player.into(),
+        inherited_target: target_ref(state, p.inherited_target)?,
+        stage: p.stage.into(),
+        copy: p
+            .copy_source
+            .map(|id| visible_card_ref(state, id, acting_player))
+            .transpose()?
+            .flatten(),
     })
 }
 
@@ -2379,7 +3899,7 @@ fn stack_item_public_v1(
             .iter()
             .map(|&target| target_ref(state, target))
             .collect::<Result<Vec<_>>>()?,
-        is_trigger_or_ability: item.inline_effect.is_some(),
+        is_trigger_or_ability: item.kind != StackItemKind::Spell,
         is_flashback: item.is_flashback,
         mode_chosen: item.mode_chosen,
         madness_offer: item.madness_offer,
@@ -2404,16 +3924,26 @@ fn stack_item_public_v2(
     stack_index: u32,
     item: &StackItem,
 ) -> Result<StackItemPublicV2> {
+    if (item.kind == StackItemKind::Spell) != item.v4.cast_method.is_some() {
+        return Err(RlContractError(
+            "spell stack items require a cast method and abilities must not carry one".to_string(),
+        ));
+    }
     Ok(StackItemPublicV2 {
         stack_index,
         source: card_ref(state, item.source)?,
         controller: item.controller.into(),
         targets: target_refs_visible(state, &item.targets, acting_player)?,
         stack_item_kind: item.kind.into(),
+        is_copy: item.is_copy,
         is_flashback: item.is_flashback,
         mode_chosen: item.mode_chosen,
         madness_offer: item.madness_offer,
         kicked: item.kicked,
+        cast_method: item.v4.cast_method,
+        face_index: item.v4.face_index,
+        x_value: item.v4.x_value,
+        paid_cost_refs: paid_cost_card_refs(&item.v4.paid_cost_refs, acting_player),
     })
 }
 
@@ -2464,6 +3994,8 @@ fn visible_projection_hash_v2(observation: &ObservationV2) -> Result<u64> {
         step_index: u64,
         projection: &'a PublicObservationProjectionV2,
         own_hand: &'a [CardPrivateV1],
+        known_library_cards: &'a [Vec<KnownLibraryCardV4>; 2],
+        known_hand_cards: &'a [Vec<CardPrivateV1>; 2],
     }
 
     stable_hash_json(&ObservationHashInput {
@@ -2475,6 +4007,8 @@ fn visible_projection_hash_v2(observation: &ObservationV2) -> Result<u64> {
         step_index: observation.step_index,
         projection: &observation.projection,
         own_hand: &observation.own_hand,
+        known_library_cards: &observation.known_library_cards,
+        known_hand_cards: &observation.known_hand_cards,
     })
 }
 
