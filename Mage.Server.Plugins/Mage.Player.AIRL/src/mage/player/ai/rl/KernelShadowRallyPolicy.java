@@ -12,10 +12,13 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.RedManaAbility;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
@@ -52,6 +55,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private static final Set<String> USE_KINDS = kinds(
             "choose_kicker", "choose_effect_boolean", "choose_optional_cost_use",
             "choose_madness_cast");
+    private static final Map<String, Integer> RALLY_TOKEN_CARD_IDS = rallyTokenCardIds();
 
     private transient final XMageRallyBridgeProcessClient bridge;
     private final long episodeId;
@@ -60,6 +64,8 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private final RallyCanonicalDecisionPolicy delegate;
     private final SeededUniformMirrorPolicy simulationPolicyTemplate;
     private final Map<UUID, Integer> initialArenaIds;
+    private final Map<UUID, Integer> dynamicArenaIds = new LinkedHashMap<>();
+    private final Map<Integer, UUID> dynamicArenaUuids = new LinkedHashMap<>();
 
     private long requestOrdinal;
     private long physicalDecisionCount;
@@ -185,7 +191,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
      * than assuming the two engines use the same menu order.
      */
     public synchronized ActivatedAbility choosePriorityAbility(
-            List<? extends ActivatedAbility> xmageAbilities) {
+            List<? extends ActivatedAbility> xmageAbilities, Game game) {
         requireLive();
         if (xmageAbilities == null || xmageAbilities.isEmpty()) {
             throw fail("priority ability menu must be nonempty", null);
@@ -197,8 +203,10 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
         List<ActivatedAbility> abilitiesByRustRow;
         try {
+            bindPriorityTokenSources(
+                    xmageAbilities, decision.getActionSemantics(), game);
             abilitiesByRustRow = mapPriorityRows(
-                    xmageAbilities, decision.getActionSemantics(), initialArenaIds);
+                    xmageAbilities, decision.getActionSemantics(), allArenaIds());
         } catch (KernelShadowPolicyViolation error) {
             throw fail(error.getMessage(), error);
         }
@@ -619,7 +627,8 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         if (requestOrdinal == Long.MAX_VALUE) {
             throw fail("bridge request ordinal exhausted", null);
         }
-        String id = "xmage-shadow-" + episodeId + "-" + requestOrdinal;
+        String id = "xmage-shadow-" + episodeId + "-"
+                + physicalSeat.wire() + "-" + requestOrdinal;
         requestOrdinal++;
         return id;
     }
@@ -896,6 +905,185 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     "initialArenaIds does not cover 0..119");
         }
         return Collections.unmodifiableMap(copy);
+    }
+
+    private Map<UUID, Integer> allArenaIds() {
+        if (dynamicArenaIds.isEmpty()) {
+            return initialArenaIds;
+        }
+        Map<UUID, Integer> combined = new LinkedHashMap<>(initialArenaIds);
+        combined.putAll(dynamicArenaIds);
+        return combined;
+    }
+
+    /**
+     * Bind generated Rally tokens from the only stable correspondence shared
+     * by both engines: token definition, controller seat, creation order, and
+     * the Rust arena id. Original deck cards remain fixed by the opening
+     * 0..119 bijection.
+     */
+    private void bindPriorityTokenSources(
+            List<? extends ActivatedAbility> xmageAbilities,
+            List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
+            Game game) {
+        if (game == null || rustRows == null || xmageAbilities == null) {
+            throw new KernelShadowPolicyViolation(
+                    "priority token binding requires live XMage state");
+        }
+
+        Map<String, Map<Integer, JsonObject>> rustByIdentity = new LinkedHashMap<>();
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : rustRows) {
+            if (semantic == null || "pass".equals(semantic.getActionKind())) {
+                continue;
+            }
+            JsonObject row = parseSemantic(semantic, semantic.getActionKind());
+            JsonObject source = requiredObject(row, "source", "priority source");
+            int arenaId = requiredUnsignedInt(source, "arena_id", "priority source");
+            if (arenaId < 120 || initialArenaIds.containsValue(arenaId)
+                    || dynamicArenaUuids.containsKey(arenaId)) {
+                continue;
+            }
+            int cardDbId = requiredUnsignedInt(source, "card_db_id", "priority source");
+            String controller = requiredStringValue(source, "controller", "priority source");
+            requireString(source, "zone", "Battlefield", "priority token source");
+            String identity = controller + "|" + cardDbId;
+            JsonObject previous = rustByIdentity
+                    .computeIfAbsent(identity, ignored -> new LinkedHashMap<>())
+                    .put(arenaId, source);
+            if (previous != null && !previous.equals(source)) {
+                throw new KernelShadowPolicyViolation(
+                        "priority token arena id has conflicting semantics");
+            }
+        }
+
+        for (Map.Entry<String, Map<Integer, JsonObject>> group : rustByIdentity.entrySet()) {
+            List<JsonObject> rustSources = new ArrayList<>(group.getValue().values());
+            rustSources.sort(Comparator.comparingInt(source ->
+                    requiredUnsignedInt(source, "arena_id", "priority token source")));
+
+            List<Permanent> xmageSources = new ArrayList<>();
+            Set<UUID> seen = new HashSet<>();
+            for (ActivatedAbility ability : xmageAbilities) {
+                if (ability == null || ability instanceof PassAbility
+                        || ability.getSourceId() == null || !seen.add(ability.getSourceId())
+                        || initialArenaIds.containsKey(ability.getSourceId())
+                        || dynamicArenaIds.containsKey(ability.getSourceId())) {
+                    continue;
+                }
+                Permanent permanent = game.getPermanent(ability.getSourceId());
+                Integer cardDbId = permanent == null
+                        ? null : RALLY_TOKEN_CARD_IDS.get(permanent.getName());
+                if (permanent == null || cardDbId == null) {
+                    continue;
+                }
+                String identity = seatFor(permanent.getControllerId(), game)
+                        + "|" + cardDbId;
+                if (group.getKey().equals(identity)) {
+                    xmageSources.add(permanent);
+                }
+            }
+            xmageSources.sort(Comparator.comparingInt(permanent ->
+                    battlefieldIndex(permanent.getId(), game)));
+            if (xmageSources.size() != rustSources.size()) {
+                continue;
+            }
+            for (int i = 0; i < xmageSources.size(); i++) {
+                Permanent permanent = xmageSources.get(i);
+                JsonObject rustSource = rustSources.get(i);
+                int arenaId = requiredUnsignedInt(
+                        rustSource, "arena_id", "priority token source");
+                int cardDbId = requiredUnsignedInt(
+                        rustSource, "card_db_id", "priority token source");
+                Integer actualCardDbId = RALLY_TOKEN_CARD_IDS.get(permanent.getName());
+                if (actualCardDbId == null || actualCardDbId != cardDbId) {
+                    throw new KernelShadowPolicyViolation(
+                            "priority token definition changed during binding");
+                }
+                UUID previousUuid = dynamicArenaUuids.put(arenaId, permanent.getId());
+                Integer previousArena = dynamicArenaIds.put(permanent.getId(), arenaId);
+                if ((previousUuid != null && !previousUuid.equals(permanent.getId()))
+                        || (previousArena != null && previousArena != arenaId)) {
+                    throw new KernelShadowPolicyViolation(
+                            "priority token binding is not one-to-one");
+                }
+            }
+        }
+    }
+
+    private String seatFor(UUID playerId, Game game) {
+        if (playerId == null || game == null || game.getStartingPlayerId() == null) {
+            return "none";
+        }
+        if (playerId.equals(game.getStartingPlayerId())) {
+            return "p0";
+        }
+        if (game.getPlayers().containsKey(playerId)) {
+            return "p1";
+        }
+        return "none";
+    }
+
+    private static int battlefieldIndex(UUID permanentId, Game game) {
+        int index = 0;
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (permanent != null && permanent.getId().equals(permanentId)) {
+                return index;
+            }
+            index++;
+        }
+        throw new KernelShadowPolicyViolation(
+                "priority token source is absent from the battlefield");
+    }
+
+    private static JsonObject requiredObject(
+            JsonObject object, String field, String label) {
+        JsonElement value = object.get(field);
+        if (value == null || !value.isJsonObject()) {
+            throw new KernelShadowPolicyViolation(label + " lacks object field " + field);
+        }
+        return value.getAsJsonObject();
+    }
+
+    private static int requiredUnsignedInt(
+            JsonObject object, String field, String label) {
+        JsonElement value = object.get(field);
+        if (value == null || !value.isJsonPrimitive()
+                || !value.getAsJsonPrimitive().isNumber()) {
+            throw new KernelShadowPolicyViolation(label + " lacks integer field " + field);
+        }
+        String wire = value.getAsString();
+        if (!wire.matches("0|[1-9][0-9]*")) {
+            throw new KernelShadowPolicyViolation(label + " has invalid integer field " + field);
+        }
+        try {
+            long parsed = Long.parseLong(wire);
+            if (parsed > Integer.MAX_VALUE) {
+                throw new KernelShadowPolicyViolation(
+                        label + " integer field exceeds Java range: " + field);
+            }
+            return (int) parsed;
+        } catch (NumberFormatException error) {
+            throw new KernelShadowPolicyViolation(
+                    label + " has invalid integer field " + field, error);
+        }
+    }
+
+    private static String requiredStringValue(
+            JsonObject object, String field, String label) {
+        JsonElement value = object.get(field);
+        if (value == null || !value.isJsonPrimitive()
+                || !value.getAsJsonPrimitive().isString()) {
+            throw new KernelShadowPolicyViolation(label + " lacks string field " + field);
+        }
+        return value.getAsString();
+    }
+
+    private static Map<String, Integer> rallyTokenCardIds() {
+        Map<String, Integer> ids = new LinkedHashMap<>();
+        ids.put("Blood Token", 132);
+        ids.put("Human Soldier Token", 133);
+        ids.put("Samurai Token", 134);
+        return Collections.unmodifiableMap(ids);
     }
 
     private static List<ActivatedAbility> mapPriorityRows(

@@ -150,17 +150,17 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 throw violation("XMage playable menu contains null ability");
             }
         }
+        Ability forcedPass = passOnlyPriorityResult(playable, mirrorPolicy);
+        if (forcedPass != null) {
+            forcedNoPolicySelections++;
+            return forcedPass;
+        }
         if (mirrorPolicy instanceof KernelShadowRallyPolicy) {
             List<ActivatedAbility> priorityMenu = new ArrayList<>(playable.size() + 1);
             priorityMenu.addAll(playable);
             priorityMenu.add(new PassAbility());
             return ((KernelShadowRallyPolicy) mirrorPolicy)
-                    .choosePriorityAbility(priorityMenu);
-        }
-        Ability forcedPass = passOnlyPriorityResult(playable, mirrorPolicy);
-        if (forcedPass != null) {
-            forcedNoPolicySelections++;
-            return forcedPass;
+                    .choosePriorityAbility(priorityMenu, game);
         }
         playable.add(0, new PassAbility());
         List<Integer> selected = genericChoose(
