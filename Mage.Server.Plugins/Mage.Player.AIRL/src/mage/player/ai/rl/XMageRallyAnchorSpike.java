@@ -83,10 +83,14 @@ public final class XMageRallyAnchorSpike {
         }
         DeckTemplates decks = DeckTemplates.load(deckPath);
 
-        List<String> command = Arrays.asList(
+        List<String> command = new ArrayList<>(Arrays.asList(
                 args.scorerExecutable.toString(),
                 "--original-store-root",
-                args.storeRoot.toString());
+                args.storeRoot.toString()));
+        if (args.teacherExportPath != null) {
+            command.add("--xmage-cp7-teacher-jsonl");
+            command.add(args.teacherExportPath.toString());
+        }
         long sampleStart = System.nanoTime();
         try (XMageRallyBridgeProcessClient bridge =
                      XMageRallyBridgeProcessClient.start(
@@ -810,6 +814,7 @@ public final class XMageRallyAnchorSpike {
         final int pairCount;
         final OpponentMode opponentMode;
         final int cp7Skill;
+        final Path teacherExportPath;
 
         Args(Path repoRoot,
              Path scorerExecutable,
@@ -818,7 +823,8 @@ public final class XMageRallyAnchorSpike {
              long firstEpisodeId,
              int pairCount,
              OpponentMode opponentMode,
-             int cp7Skill) throws Exception {
+             int cp7Skill,
+             Path teacherExportPath) throws Exception {
             this.repoRoot = repoRoot.toRealPath();
             this.scorerExecutable = scorerExecutable.toRealPath();
             this.storeRoot = storeRoot.toRealPath();
@@ -827,6 +833,7 @@ public final class XMageRallyAnchorSpike {
             this.pairCount = pairCount;
             this.opponentMode = opponentMode;
             this.cp7Skill = cp7Skill;
+            this.teacherExportPath = teacherExportPath;
         }
 
         static Args parse(String[] raw) throws Exception {
@@ -846,11 +853,13 @@ public final class XMageRallyAnchorSpike {
             allowed.add("--pairs");
             allowed.add("--opponent");
             allowed.add("--cp7-skill");
+            allowed.add("--teacher-export");
             if (!values.keySet().containsAll(required)
                     || !allowed.containsAll(values.keySet())) {
                 throw new IllegalArgumentException(
                         "required arguments: " + required
-                                + "; optional: --pairs, --opponent, --cp7-skill");
+                                + "; optional: --pairs, --opponent, --cp7-skill,"
+                                + " --teacher-export");
             }
             long baseSeed = Long.parseLong(values.get("--base-seed"));
             long firstEpisode = Long.parseLong(values.get("--first-episode"));
@@ -859,13 +868,26 @@ public final class XMageRallyAnchorSpike {
                     values.getOrDefault("--opponent", "uniform"));
             int cp7Skill = Integer.parseInt(
                     values.getOrDefault("--cp7-skill", "7"));
+            Path teacherExportPath = null;
+            if (values.containsKey("--teacher-export")) {
+                Path requested = Paths.get(values.get("--teacher-export"))
+                        .toAbsolutePath().normalize();
+                Path parent = requested.getParent();
+                if (parent == null || requested.getFileName() == null) {
+                    throw new IllegalArgumentException(
+                            "teacher export must name a file inside an existing directory");
+                }
+                teacherExportPath = parent.toRealPath().resolve(requested.getFileName());
+            }
             if (baseSeed < 0L || firstEpisode < 0L
                     || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128
-                    || cp7Skill < 1 || cp7Skill > 10) {
+                    || cp7Skill < 1 || cp7Skill > 10
+                    || (teacherExportPath != null && opponentMode != OpponentMode.CP7)) {
                 throw new IllegalArgumentException(
                         "base seed must be nonnegative, first episode must be even,"
                                 + " pairs must be in [1,128],"
-                                + " and CP7 skill must be in [1,10]");
+                                + " CP7 skill must be in [1,10],"
+                                + " and teacher export requires opponent cp7");
             }
             try {
                 Math.addExact(firstEpisode, Math.subtractExact(
@@ -881,7 +903,8 @@ public final class XMageRallyAnchorSpike {
                     firstEpisode,
                     pairCount,
                     opponentMode,
-                    cp7Skill);
+                    cp7Skill,
+                    teacherExportPath);
         }
     }
 
