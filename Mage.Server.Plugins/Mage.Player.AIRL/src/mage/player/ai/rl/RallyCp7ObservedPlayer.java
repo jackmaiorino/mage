@@ -11,7 +11,9 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
@@ -37,6 +39,7 @@ public final class RallyCp7ObservedPlayer extends ComputerPlayer7 {
     private static final long serialVersionUID = 1L;
 
     private final transient RallyCp7DecisionObserver.DispatchState observerState;
+    private transient boolean suppressPriorityPassObservation;
 
     public RallyCp7ObservedPlayer(String name, RangeOfInfluence range, int skill,
                                   RallyCp7DecisionObserver observer) {
@@ -99,13 +102,21 @@ public final class RallyCp7ObservedPlayer extends ComputerPlayer7 {
                     }
                 }
             }
-            activateAbility((ActivatedAbility) ability, game);
+            if (!activateAbility((ActivatedAbility) ability, game)) {
+                throw new IllegalStateException(
+                        "XMage rejected an observed CP7 priority action");
+            }
             if (ability.isUsesStack()) {
                 usedStack = true;
             }
         }
         if (usedStack) {
-            pass(game);
+            suppressPriorityPassObservation = true;
+            try {
+                pass(game);
+            } finally {
+                suppressPriorityPassObservation = false;
+            }
         }
     }
 
@@ -113,10 +124,32 @@ public final class RallyCp7ObservedPlayer extends ComputerPlayer7 {
     @Override
     public void pass(Game game) {
         requireLiveGameOrSimulation(game);
-        emit(game, RallyCp7DecisionObserver.Kind.PRIORITY_PASS,
-                null, null, "", Collections.emptyList(),
-                Collections.emptyList(), true);
+        // HarnessSurfaceV2 auto-passes the same nonstrategic XMage phases,
+        // including stack-bearing combat-damage windows. Observing one there
+        // could consume a coincidentally matching decision from a future phase.
+        if (shouldObservePriorityPass(
+                game.isSimulation(), suppressPriorityPassObservation,
+                game.getTurnStepType())) {
+            List<ActivatedAbility> priorityMenu = new ArrayList<>(
+                    getPlayable(game, true, Zone.ALL, false));
+            priorityMenu.add(new PassAbility());
+            emit(game, RallyCp7DecisionObserver.Kind.PRIORITY_PASS,
+                    null, null, "", priorityMenu,
+                    Collections.emptyList(), true);
+        }
         super.pass(game);
+    }
+
+    static boolean shouldObservePriorityPass(
+            boolean simulation, boolean suppressed, PhaseStep step) {
+        return !simulation && !suppressed && isStrategicPriorityWindow(step);
+    }
+
+    private static boolean isStrategicPriorityWindow(PhaseStep step) {
+        return step == PhaseStep.PRECOMBAT_MAIN
+                || step == PhaseStep.DECLARE_ATTACKERS
+                || step == PhaseStep.DECLARE_BLOCKERS
+                || step == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     @Override

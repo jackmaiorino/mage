@@ -1,5 +1,6 @@
 package mage.player.ai.rl;
 
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 
 import java.util.ArrayList;
@@ -15,9 +16,31 @@ public final class RallyCp7ObservedPlayerSelfTest {
 
     public static void main(String[] args) {
         testOrderingCardinalityAndSimulationSuppression();
+        testPriorityPassRouting();
         testCopySharesOneSequence();
         testObserverFailurePropagates();
         System.out.println("RallyCp7ObservedPlayerSelfTest: PASS");
+    }
+
+    private static void testPriorityPassRouting() {
+        check(RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        false, false, PhaseStep.PRECOMBAT_MAIN),
+                "precombat-main pass must be observed");
+        check(RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        false, false, PhaseStep.POSTCOMBAT_MAIN),
+                "postcombat-main pass must be observed");
+        check(!RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        false, false, PhaseStep.COMBAT_DAMAGE),
+                "combat-damage hard pass must remain policy-free");
+        check(!RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        false, false, PhaseStep.BEGIN_COMBAT),
+                "begin-combat hard pass must remain policy-free");
+        check(!RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        true, false, PhaseStep.PRECOMBAT_MAIN),
+                "simulation pass must be suppressed");
+        check(!RallyCp7ObservedPlayer.shouldObservePriorityPass(
+                        false, true, PhaseStep.PRECOMBAT_MAIN),
+                "automatic post-action pass must be suppressed");
     }
 
     private static void testOrderingCardinalityAndSimulationSuppression() {

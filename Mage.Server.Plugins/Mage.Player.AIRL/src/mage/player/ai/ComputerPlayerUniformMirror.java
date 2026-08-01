@@ -134,7 +134,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 priorityMenu.add(new PassAbility());
                 KernelShadowRallyPolicy shadow = (KernelShadowRallyPolicy) mirrorPolicy;
                 boolean matches = shadow.matchesCurrentPriorityMenu(priorityMenu, game);
-                if (matches && game.getTurnStepType() == PhaseStep.BEGIN_COMBAT) {
+                if (matches && shadowPriorityDirectDispatch(game.getTurnStepType())) {
                     game.getState().setPriorityPlayerId(getId());
                     game.firePriorityEvent(getId());
                     ActivatedAbility selectedAbility =
@@ -155,10 +155,15 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         }
     }
 
+    private static boolean shadowPriorityDirectDispatch(PhaseStep step) {
+        return step == PhaseStep.BEGIN_COMBAT;
+    }
+
     private static boolean phaseCatchupWindow(PhaseStep step) {
         return step == PhaseStep.BEGIN_COMBAT
                 || step == PhaseStep.DECLARE_ATTACKERS
-                || step == PhaseStep.DECLARE_BLOCKERS;
+                || step == PhaseStep.DECLARE_BLOCKERS
+                || step == PhaseStep.POSTCOMBAT_MAIN;
     }
 
     /**
@@ -1018,6 +1023,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 {1, 2, 0}, {2, 1, 0}, {2, 0, 1}}, "n=3");
 
         assertProductionTriggerCacheSeam();
+        assertShadowPriorityRoutingSeam();
         assertPassOnlyPrioritySeam();
         assertSourceDistinctPlayableSeam();
         assertForcedBloodTargetCallback();
@@ -1028,6 +1034,33 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         String exile1 = cardKeyComponents("exile", "p0", 1, "Twin", "TST", "1", "CardClass");
         if (exile0.equals(exile1)) {
             throw new IllegalStateException("duplicate exiled card identities collided");
+        }
+    }
+
+    private static void assertShadowPriorityRoutingSeam() {
+        if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE)
+                || shadowPriorityDirectDispatch(PhaseStep.COMBAT_DAMAGE)) {
+            throw new IllegalStateException(
+                    "combat-damage priority escaped the hard-pass gate");
+        }
+        if (!phaseCatchupWindow(PhaseStep.BEGIN_COMBAT)
+                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT)) {
+            throw new IllegalStateException(
+                    "begin-combat catchup no longer dispatches shadow priority");
+        }
+        if (!phaseCatchupWindow(PhaseStep.DECLARE_ATTACKERS)
+                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_ATTACKERS)
+                || !phaseCatchupWindow(PhaseStep.DECLARE_BLOCKERS)
+                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_BLOCKERS)
+                || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN)
+                || shadowPriorityDirectDispatch(PhaseStep.POSTCOMBAT_MAIN)) {
+            throw new IllegalStateException(
+                    "combat and postcombat catchup routing changed");
+        }
+        if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN)
+                || shadowPriorityDirectDispatch(PhaseStep.PRECOMBAT_MAIN)) {
+            throw new IllegalStateException(
+                    "ordinary empty-stack main phase entered shadow catchup routing");
         }
     }
 
