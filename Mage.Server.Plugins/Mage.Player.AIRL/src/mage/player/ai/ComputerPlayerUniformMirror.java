@@ -23,6 +23,7 @@ import mage.cards.c.ChainLightning;
 import mage.cards.g.GoblinBushwhacker;
 import mage.choices.Choice;
 import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -123,10 +124,41 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     public boolean priority(Game game) {
         game.resumeTimer(getTurnControlledBy());
         try {
+            if (mirrorPolicy instanceof KernelShadowRallyPolicy
+                    && phaseCatchupWindow(game.getTurnStepType())) {
+                List<ActivatedAbility> playable = querySourceDistinctPlayable(
+                        (hidden, fromZone, hideDuplicates) ->
+                                getPlayable(game, hidden, fromZone, hideDuplicates));
+                List<ActivatedAbility> priorityMenu = new ArrayList<>(playable.size() + 1);
+                priorityMenu.addAll(playable);
+                priorityMenu.add(new PassAbility());
+                KernelShadowRallyPolicy shadow = (KernelShadowRallyPolicy) mirrorPolicy;
+                boolean matches = shadow.matchesCurrentPriorityMenu(priorityMenu, game);
+                if (matches && game.getTurnStepType() == PhaseStep.BEGIN_COMBAT) {
+                    game.getState().setPriorityPlayerId(getId());
+                    game.firePriorityEvent(getId());
+                    ActivatedAbility selectedAbility =
+                            shadow.choosePriorityAbility(priorityMenu, game);
+                    act(game, selectedAbility);
+                    return !(selectedAbility instanceof PassAbility);
+                }
+                if (!matches) {
+                    game.getState().setPriorityPlayerId(getId());
+                    game.firePriorityEvent(getId());
+                    pass(game);
+                    return false;
+                }
+            }
             return priorityPlay(game);
         } finally {
             game.pauseTimer(getTurnControlledBy());
         }
+    }
+
+    private static boolean phaseCatchupWindow(PhaseStep step) {
+        return step == PhaseStep.BEGIN_COMBAT
+                || step == PhaseStep.DECLARE_ATTACKERS
+                || step == PhaseStep.DECLARE_BLOCKERS;
     }
 
     /**
@@ -215,12 +247,20 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
+        if (target instanceof TargetCardInHand) {
+            return chooseTarget(
+                    outcome, getHand(), (TargetCardInHand) target, source, game);
+        }
         return chooseTarget(outcome, target, source, game);
     }
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game,
                           Map<String, Serializable> options) {
+        if (target instanceof TargetCardInHand) {
+            return chooseTarget(
+                    outcome, getHand(), (TargetCardInHand) target, source, game);
+        }
         return chooseTarget(outcome, target, source, game);
     }
 
@@ -228,6 +268,10 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (target == null) {
             return false;
+        }
+        if (target instanceof TargetCardInHand) {
+            return chooseTarget(
+                    outcome, getHand(), (TargetCardInHand) target, source, game);
         }
         if ("starting player".equalsIgnoreCase(target.getTargetName())) {
             throw violation("starting-player prompt reached policy despite fixed P0 setup");
@@ -263,7 +307,9 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             if (legal.isEmpty()) {
                 break;
             }
-            UUID selected = chooseCanonicalOne("target", legal, game, source);
+            UUID selected = mirrorPolicy instanceof KernelShadowRallyPolicy
+                    ? ((KernelShadowRallyPolicy) mirrorPolicy).chooseTarget(legal, game)
+                    : chooseCanonicalOne("target", legal, game, source);
             if (selected == null) {
                 break;
             }
@@ -347,7 +393,9 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             if (menu.isEmpty()) {
                 break;
             }
-            Card selected = chooseCanonicalOne("card_target", menu, game, source);
+            Card selected = mirrorPolicy instanceof KernelShadowRallyPolicy
+                    ? ((KernelShadowRallyPolicy) mirrorPolicy).chooseCardTarget(menu)
+                    : chooseCanonicalOne("card_target", menu, game, source);
             if (selected == null) {
                 break;
             }
@@ -582,6 +630,48 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         return true;
     }
 
+    /** Preserve a nested shadow-protocol failure that the legacy act path wraps. */
+    @Override
+    protected void act(Game game, ActivatedAbility ability) {
+        try {
+            super.act(game, ability);
+        } catch (IllegalStateException error) {
+            if (mirrorPolicy instanceof KernelShadowRallyPolicy) {
+                KernelShadowRallyPolicy shadow = (KernelShadowRallyPolicy) mirrorPolicy;
+                if (shadow.isFailed()) {
+                    throw violation("shadow policy failed during activation: "
+                            + shadow.getFirstFailure());
+                }
+            }
+            throw error;
+        } finally {
+            traceShadowLands("act", game);
+        }
+    }
+
+    @Override
+    public boolean playMana(Ability ability,
+                            mage.abilities.costs.mana.ManaCost unpaid,
+                            String promptText,
+                            Game game) {
+        try {
+            return super.playMana(ability, unpaid, promptText, game);
+        } finally {
+            traceShadowLands("pay_mana", game);
+        }
+    }
+
+    private void traceShadowLands(String event, Game game) {
+        if (Boolean.getBoolean("xmage.rally.traceActions")
+                && mirrorPolicy instanceof KernelShadowRallyPolicy) {
+            System.err.println("XMAGE_RALLY_LAND_TRACE seat=" + physicalSeat
+                    + " event=" + event
+                    + " phase=" + (game == null ? "none" : game.getTurnStepType())
+                    + " lands=" + ((KernelShadowRallyPolicy) mirrorPolicy)
+                    .describeXmageLands(game));
+        }
+    }
+
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         if (target == null || source == null) {
@@ -631,18 +721,32 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         if (eligible.isEmpty()) {
             return;
         }
-        List<IndexedCandidate<Permanent>> canonical = canonicalize(eligible, game, null);
-        boolean[] include = mirrorPolicy.chooseAttackers(canonical.size());
+        List<Permanent> selectedAttackers = new ArrayList<>();
+        if (mirrorPolicy instanceof KernelShadowRallyPolicy) {
+            List<UUID> selectedIds = ((KernelShadowRallyPolicy) mirrorPolicy)
+                    .chooseAttackerIds(eligible, game);
+            for (UUID selectedId : selectedIds) {
+                Permanent selected = game.getPermanent(selectedId);
+                if (selected == null || !eligible.contains(selected)) {
+                    throw violation("shadow attacker identity is absent from the XMage menu");
+                }
+                selectedAttackers.add(selected);
+            }
+        } else {
+            List<IndexedCandidate<Permanent>> canonical = canonicalize(eligible, game, null);
+            boolean[] include = mirrorPolicy.chooseAttackers(canonical.size());
+            for (int i = 0; i < canonical.size(); i++) {
+                if (include[i]) {
+                    selectedAttackers.add(canonical.get(i).candidate);
+                }
+            }
+        }
         List<UUID> defenders = new ArrayList<>(game.getCombat().getDefenders());
         if (defenders.isEmpty()) {
             throw violation("attack declaration has no legal defender");
         }
         boolean any = false;
-        for (int i = 0; i < canonical.size(); i++) {
-            if (!include[i]) {
-                continue;
-            }
-            Permanent attacker = canonical.get(i).candidate;
+        for (Permanent attacker : selectedAttackers) {
             List<UUID> legalDefenders = new ArrayList<>();
             for (UUID defender : defenders) {
                 if (attacker.canAttack(defender, game)) {
@@ -679,6 +783,29 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             return;
         }
         List<Permanent> available = new ArrayList<>(getAvailableBlockers(game));
+        if (mirrorPolicy instanceof KernelShadowRallyPolicy) {
+            List<KernelShadowRallyPolicy.BlockAssignment> assignments =
+                    ((KernelShadowRallyPolicy) mirrorPolicy)
+                            .chooseBlockAssignments(attackers, available, game);
+            boolean any = false;
+            Set<UUID> usedBlockers = new HashSet<>();
+            for (KernelShadowRallyPolicy.BlockAssignment assignment : assignments) {
+                Permanent attacker = game.getPermanent(assignment.getAttackerId());
+                Permanent blocker = game.getPermanent(assignment.getBlockerId());
+                if (attacker == null || blocker == null
+                        || !attackers.contains(attacker) || !available.contains(blocker)
+                        || !usedBlockers.add(blocker.getId())
+                        || !blocker.canBlock(attacker.getId(), game)) {
+                    throw violation("shadow blocker assignment is not live and legal in XMage");
+                }
+                declareBlocker(getId(), blocker.getId(), attacker.getId(), game);
+                any = true;
+            }
+            if (any) {
+                game.getPlayers().resetPassed();
+            }
+            return;
+        }
         List<IndexedCandidate<Permanent>> orderedAttackers = canonicalize(attackers, game, source);
         boolean any = false;
         for (IndexedCandidate<Permanent> indexedAttacker : orderedAttackers) {

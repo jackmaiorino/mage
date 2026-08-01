@@ -85,33 +85,70 @@ public final class XMageRallyAnchorSpike {
                 args.scorerExecutable.toString(),
                 "--original-store-root",
                 args.storeRoot.toString());
-        long pairStart = System.nanoTime();
+        long sampleStart = System.nanoTime();
         try (XMageRallyBridgeProcessClient bridge =
                      XMageRallyBridgeProcessClient.start(
                              command,
                              BRIDGE_TIMEOUT_MILLIS,
                              XMageRallyBridgeProcessClient.DEFAULT_MAX_LINE_BYTES,
                              System.err)) {
-            LegResult first = runLeg(bridge, decks, args.baseSeed, args.firstEpisodeId);
-            LegResult second = runLeg(bridge, decks, args.baseSeed, args.firstEpisodeId + 1L);
-            if (first.pairIndex != second.pairIndex
-                    || first.environmentSeed != second.environmentSeed) {
-                throw new IllegalStateException("paired episodes did not share environment seed");
+            int candidateWins = 0;
+            int opponentWins = 0;
+            int draws = 0;
+            long totalTurns = 0L;
+            long totalRustSteps = 0L;
+            for (int pairOrdinal = 0; pairOrdinal < args.pairCount; pairOrdinal++) {
+                long firstEpisode = Math.addExact(
+                        args.firstEpisodeId, Math.multiplyExact(2L, pairOrdinal));
+                long pairStart = System.nanoTime();
+                LegResult first = runLeg(bridge, decks, args.baseSeed, firstEpisode);
+                LegResult second = runLeg(bridge, decks, args.baseSeed, firstEpisode + 1L);
+                if (first.pairIndex != second.pairIndex
+                        || first.environmentSeed != second.environmentSeed) {
+                    throw new IllegalStateException(
+                            "paired episodes did not share environment seed");
+                }
+                if (first.candidateSeat == second.candidateSeat) {
+                    throw new IllegalStateException(
+                            "paired episodes did not swap candidate seat");
+                }
+                for (LegResult leg : Arrays.asList(first, second)) {
+                    if ("draw".equals(leg.winner)) {
+                        draws++;
+                    } else if (leg.winner.equals(leg.candidateSeat.wire())) {
+                        candidateWins++;
+                    } else {
+                        opponentWins++;
+                    }
+                    totalTurns = Math.addExact(totalTurns, leg.turns);
+                    totalRustSteps = Math.addExact(totalRustSteps, leg.rustSteps);
+                }
+                long pairElapsedMillis =
+                        (System.nanoTime() - pairStart) / 1_000_000L;
+                System.out.println("XMAGE_RALLY_ANCHOR_PAIR PASS"
+                        + " base_seed=" + args.baseSeed
+                        + " episodes=" + first.episodeId + "," + second.episodeId
+                        + " pair_index=" + first.pairIndex
+                        + " environment_seed=" + unsignedHex(first.environmentSeed)
+                        + " candidate_seats=" + first.candidateSeat.wire()
+                        + "," + second.candidateSeat.wire()
+                        + " winners=" + first.winner + "," + second.winner
+                        + " turns=" + first.turns + "," + second.turns
+                        + " rust_steps=" + first.rustSteps + "," + second.rustSteps
+                        + " elapsed_ms=" + pairElapsedMillis);
             }
-            if (first.candidateSeat == second.candidateSeat) {
-                throw new IllegalStateException("paired episodes did not swap candidate seat");
-            }
-            long elapsedMillis = (System.nanoTime() - pairStart) / 1_000_000L;
+            long elapsedMillis = (System.nanoTime() - sampleStart) / 1_000_000L;
+            int games = Math.multiplyExact(args.pairCount, 2);
             System.out.println("XMAGE_RALLY_ANCHOR_SPIKE PASS"
                     + " base_seed=" + args.baseSeed
-                    + " episodes=" + first.episodeId + "," + second.episodeId
-                    + " pair_index=" + first.pairIndex
-                    + " environment_seed=" + unsignedHex(first.environmentSeed)
-                    + " candidate_seats=" + first.candidateSeat.wire()
-                    + "," + second.candidateSeat.wire()
-                    + " winners=" + first.winner + "," + second.winner
-                    + " turns=" + first.turns + "," + second.turns
-                    + " rust_steps=" + first.rustSteps + "," + second.rustSteps
+                    + " first_episode=" + args.firstEpisodeId
+                    + " pairs=" + args.pairCount
+                    + " games=" + games
+                    + " candidate_wins=" + candidateWins
+                    + " opponent_wins=" + opponentWins
+                    + " draws=" + draws
+                    + " total_turns=" + totalTurns
+                    + " total_rust_steps=" + totalRustSteps
                     + " elapsed_ms=" + elapsedMillis);
         }
     }
@@ -551,17 +588,20 @@ public final class XMageRallyAnchorSpike {
         final Path storeRoot;
         final long baseSeed;
         final long firstEpisodeId;
+        final int pairCount;
 
         Args(Path repoRoot,
              Path scorerExecutable,
              Path storeRoot,
              long baseSeed,
-             long firstEpisodeId) throws Exception {
+             long firstEpisodeId,
+             int pairCount) throws Exception {
             this.repoRoot = repoRoot.toRealPath();
             this.scorerExecutable = scorerExecutable.toRealPath();
             this.storeRoot = storeRoot.toRealPath();
             this.baseSeed = baseSeed;
             this.firstEpisodeId = firstEpisodeId;
+            this.pairCount = pairCount;
         }
 
         static Args parse(String[] raw) throws Exception {
@@ -574,25 +614,38 @@ public final class XMageRallyAnchorSpike {
                     throw new IllegalArgumentException("duplicate argument: " + raw[i]);
                 }
             }
-            Set<String> expected = new HashSet<>(Arrays.asList(
+            Set<String> required = new HashSet<>(Arrays.asList(
                     "--repo-root", "--scorer-exe", "--store-root",
                     "--base-seed", "--first-episode"));
-            if (!expected.equals(values.keySet())) {
-                throw new IllegalArgumentException("required arguments: " + expected);
+            Set<String> allowed = new HashSet<>(required);
+            allowed.add("--pairs");
+            if (!values.keySet().containsAll(required)
+                    || !allowed.containsAll(values.keySet())) {
+                throw new IllegalArgumentException(
+                        "required arguments: " + required + "; optional: --pairs");
             }
             long baseSeed = Long.parseLong(values.get("--base-seed"));
             long firstEpisode = Long.parseLong(values.get("--first-episode"));
+            int pairCount = Integer.parseInt(values.getOrDefault("--pairs", "1"));
             if (baseSeed < 0L || firstEpisode < 0L
-                    || (firstEpisode & 1L) != 0L || firstEpisode == Long.MAX_VALUE) {
+                    || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128) {
                 throw new IllegalArgumentException(
-                        "base seed must be nonnegative and first episode must be even");
+                        "base seed must be nonnegative, first episode must be even,"
+                                + " and pairs must be in [1,128]");
+            }
+            try {
+                Math.addExact(firstEpisode, Math.subtractExact(
+                        Math.multiplyExact(2L, pairCount), 1L));
+            } catch (ArithmeticException error) {
+                throw new IllegalArgumentException("episode range overflows", error);
             }
             return new Args(
                     Paths.get(values.get("--repo-root")),
                     Paths.get(values.get("--scorer-exe")),
                     Paths.get(values.get("--store-root")),
                     baseSeed,
-                    firstEpisode);
+                    firstEpisode,
+                    pairCount);
         }
     }
 }

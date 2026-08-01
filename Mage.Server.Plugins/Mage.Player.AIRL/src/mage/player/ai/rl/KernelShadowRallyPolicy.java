@@ -3,6 +3,7 @@ package mage.player.ai.rl;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import mage.MageObject;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
@@ -12,6 +13,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.RedManaAbility;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -199,12 +201,26 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         String category = "noncombat_activate_ability_or_spell";
         ensureCounterCapacity(1);
         XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        try {
+            bindPriorityTokenSources(
+                    xmageAbilities, decision.getActionSemantics(), game);
+        } catch (KernelShadowPolicyViolation error) {
+            throw fail(error.getMessage(), error);
+        }
+        if (decision.getLegalActionCount() != xmageAbilities.size()) {
+            throw fail(category + " legal width mismatch: XMage=" + xmageAbilities.size()
+                    + " kernel=" + decision.getLegalActionCount()
+                    + " phase=" + game.getTurnStepType()
+                    + " xmage_rows=" + xmagePrioritySummary(xmageAbilities, game)
+                    + " kernel_rows=" + rustPrioritySummary(decision.getActionSemantics())
+                    + " bound_sources=" + boundSourceSummary(
+                    decision.getActionSemantics(), game)
+                    + " xmage_lands=" + xmageLandSummary(game), null);
+        }
         validateSurfaceDecision(decision, category, xmageAbilities.size());
 
         List<ActivatedAbility> abilitiesByRustRow;
         try {
-            bindPriorityTokenSources(
-                    xmageAbilities, decision.getActionSemantics(), game);
             abilitiesByRustRow = mapPriorityRows(
                     xmageAbilities, decision.getActionSemantics(), allArenaIds());
         } catch (KernelShadowPolicyViolation error) {
@@ -225,6 +241,152 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         ActivatedAbility result = abilitiesByRustRow.get(selected);
         stepExactlyOnce(decision, selected);
         recordSurfaceOutcome(category, abilitiesByRustRow.size(), selected);
+        return result;
+    }
+
+    /**
+     * Return true only when a legacy XMage auto-pass window corresponds to
+     * this seat's current native priority menu. Expected phase-skipping
+     * mismatches are observational and do not fail or advance the bridge.
+     */
+    public synchronized boolean matchesCurrentPriorityMenu(
+            List<? extends ActivatedAbility> xmageAbilities, Game game) {
+        requireLive();
+        if (xmageAbilities == null || xmageAbilities.isEmpty() || game == null) {
+            return false;
+        }
+        XMageRallyBridgeProtocol.DecisionBody decision = bridge.getCurrentDecision();
+        if (decision == null || decision.getActingPlayer() != physicalSeat
+                || !"surface".equals(decision.getDecisionKind())
+                || decision.getLegalActionCount() != xmageAbilities.size()
+                || decision.getActionSemantics() == null) {
+            return false;
+        }
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic
+                : decision.getActionSemantics()) {
+            if (semantic == null || !PRIORITY_KINDS.contains(semantic.getActionKind())) {
+                return false;
+            }
+        }
+        try {
+            bindPriorityTokenSources(
+                    xmageAbilities, decision.getActionSemantics(), game);
+            mapPriorityRows(
+                    xmageAbilities, decision.getActionSemantics(), allArenaIds());
+            return true;
+        } catch (KernelShadowPolicyViolation expectedPhaseMismatch) {
+            return false;
+        }
+    }
+
+    /** Select a card callback by Rust stable arena identity, not XMage rank. */
+    public synchronized Card chooseCardTarget(List<? extends Card> xmageMenu) {
+        requireLive();
+        if (xmageMenu == null || xmageMenu.isEmpty()) {
+            throw fail("card-target menu must be nonempty", null);
+        }
+        String category = "card_target";
+        ensureCounterCapacity(1);
+        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        validateSurfaceDecision(decision, category, xmageMenu.size());
+
+        List<UUID> xmageIds = new ArrayList<>(xmageMenu.size());
+        Map<UUID, Card> cardsById = new LinkedHashMap<>();
+        for (Card card : xmageMenu) {
+            UUID id = card == null ? null : card.getId();
+            if (card != null && cardsById.put(id, card) != null) {
+                throw fail("card-target menu repeats a card UUID", null);
+            }
+            xmageIds.add(id);
+        }
+
+        List<UUID> idsByRustRow;
+        try {
+            idsByRustRow = mapCardTargetRows(
+                    xmageIds, decision.getActionSemantics(), allArenaIds());
+        } catch (KernelShadowPolicyViolation error) {
+            throw fail(error.getMessage(), error);
+        }
+
+        int selected;
+        if (modelControlled) {
+            selected = requireModelSelection(decision);
+        } else {
+            try {
+                selected = delegate.chooseNoncombat(category, idsByRustRow.size());
+            } catch (RuntimeException error) {
+                throw fail("opponent delegate failed for " + category, error);
+            }
+        }
+        validateSelectedIndex(selected, idsByRustRow.size());
+        UUID selectedId = idsByRustRow.get(selected);
+        Card result = selectedId == null ? null : cardsById.get(selectedId);
+        if (selectedId != null && result == null) {
+            throw fail("selected card-target identity is absent from XMage menu", null);
+        }
+        if (Boolean.getBoolean("xmage.rally.traceActions")) {
+            System.err.println("XMAGE_RALLY_CARD_TARGET_TRACE episode=" + episodeId
+                    + " step=" + decision.getStep()
+                    + " rust=" + decision.getActionSemantics().get(selected).getCanonicalJson()
+                    + " xmage_arena_id=" + allArenaIds().get(selectedId)
+                    + " xmage_card=" + (result == null ? "STOP" : result.getName()));
+        }
+        stepExactlyOnce(decision, selected);
+        recordSurfaceOutcome(category, idsByRustRow.size(), selected);
+        return result;
+    }
+
+    /** Select a live object, player, or STOP target by Rust stable identity. */
+    public synchronized UUID chooseTarget(List<UUID> xmageMenu, Game game) {
+        requireLive();
+        if (xmageMenu == null || xmageMenu.isEmpty() || game == null) {
+            throw fail("target menu and game must be nonempty", null);
+        }
+        ensureCounterCapacity(1);
+        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        boolean cardIdentity = decision.getActionSemantics().stream()
+                .anyMatch(semantic -> semantic != null
+                        && ("discard".equals(semantic.getActionKind())
+                        || "choose_cost_target".equals(semantic.getActionKind())));
+        String category = cardIdentity ? "card_target" : "target";
+        validateSurfaceDecision(decision, category, xmageMenu.size());
+
+        List<UUID> idsByRustRow;
+        try {
+            if (cardIdentity) {
+                idsByRustRow = mapCardTargetRows(
+                        xmageMenu, decision.getActionSemantics(), allArenaIds());
+            } else {
+                bindTargetTokenObjects(
+                        xmageMenu, decision.getActionSemantics(), game);
+                idsByRustRow = mapTargetRows(
+                        xmageMenu, decision.getActionSemantics(), allArenaIds(),
+                        targetPlayerIds(game));
+            }
+        } catch (KernelShadowPolicyViolation error) {
+            throw fail(error.getMessage(), error);
+        }
+
+        int selected;
+        if (modelControlled) {
+            selected = requireModelSelection(decision);
+        } else {
+            try {
+                selected = delegate.chooseNoncombat(category, idsByRustRow.size());
+            } catch (RuntimeException error) {
+                throw fail("opponent delegate failed for " + category, error);
+            }
+        }
+        validateSelectedIndex(selected, idsByRustRow.size());
+        UUID result = idsByRustRow.get(selected);
+        if (Boolean.getBoolean("xmage.rally.traceActions")) {
+            System.err.println("XMAGE_RALLY_TARGET_TRACE episode=" + episodeId
+                    + " step=" + decision.getStep()
+                    + " rust=" + decision.getActionSemantics().get(selected).getCanonicalJson()
+                    + " xmage_uuid=" + (result == null ? "STOP" : result));
+        }
+        stepExactlyOnce(decision, selected);
+        recordSurfaceOutcome(category, idsByRustRow.size(), selected);
         return result;
     }
 
@@ -265,32 +427,191 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
     @Override
     public synchronized boolean[] chooseAttackers(int canonicalEligibleCount) {
-        return chooseCombatGroup(
-                "declare_attackers", "attacker_inclusion",
-                "choose_attacker_inclusion", canonicalEligibleCount, false);
+        throw fail("live attacker selection requires XMage permanent identities", null);
     }
 
     @Override
     public synchronized boolean[] chooseBlockers(int canonicalLegalBlockerCount) {
-        return chooseCombatGroup(
-                "declare_blocker_for_attacker", "blocker_inclusion",
-                "choose_blocker_inclusion", canonicalLegalBlockerCount, true);
+        throw fail("live blocker selection requires XMage permanent identities", null);
     }
 
     @Override
     public synchronized int chooseBlocker(int canonicalLegalBlockerCount) {
-        boolean[] included = chooseBlockers(canonicalLegalBlockerCount);
-        int selected = -1;
-        for (int i = 0; i < included.length; i++) {
-            if (!included[i]) {
-                continue;
-            }
-            if (selected >= 0) {
-                throw fail("single-blocker callback received a multiple-blocker selection", null);
-            }
-            selected = i;
+        throw fail("live blocker selection requires XMage permanent identities", null);
+    }
+
+    /**
+     * Consume one native attacker scan and return the selected XMage
+     * permanent identities in native scan order.
+     */
+    public synchronized List<UUID> chooseAttackerIds(
+            List<? extends Permanent> xmageEligible, Game game) {
+        requireLive();
+        List<Permanent> eligible = requireCombatPermanents(
+                xmageEligible, game, "attacker");
+        if (eligible.isEmpty()) {
+            return Collections.emptyList();
         }
-        return selected;
+
+        String category = "declare_attackers";
+        int candidateCount = eligible.size();
+        ensureCounterCapacity(candidateCount);
+        boolean[] delegated = delegatedCombatSelection(category, candidateCount, false);
+        List<UUID> selected = new ArrayList<>();
+        Set<UUID> used = new HashSet<>();
+        Long physicalDecisionId = null;
+        XMageRallyBridgeProtocol.DecisionBody firstDecision = requireCurrentDecision();
+
+        for (int substep = 0; substep < candidateCount; substep++) {
+            XMageRallyBridgeProtocol.DecisionBody decision = substep == 0
+                    ? firstDecision : requireCurrentDecision();
+            BinaryShape shape = validateCombatDecision(
+                    decision, category, "attacker_inclusion",
+                    "choose_attacker_inclusion", candidateCount,
+                    substep, physicalDecisionId);
+            if (physicalDecisionId == null) {
+                physicalDecisionId = decision.getPhysicalDecisionId();
+            }
+            Permanent attacker;
+            try {
+                attacker = resolveCombatPermanent(
+                        shape.attacker, eligible, used, game,
+                        "attacker substep " + substep);
+            } catch (KernelShadowPolicyViolation error) {
+                throw fail(error.getMessage(), error);
+            }
+            if (!used.add(attacker.getId())) {
+                throw fail("attacker aggregate repeats an XMage identity", null);
+            }
+
+            int selectedIndex = selectedCombatIndex(decision, delegated, substep, category);
+            if (selectedIndex == 1) {
+                selected.add(attacker.getId());
+            }
+            traceCombatSelection(decision, shape.attacker, attacker, selectedIndex, null);
+            stepExactlyOnce(decision, selectedIndex);
+            policyActionSelections++;
+            policyLeafEvaluations++;
+        }
+        if (used.size() != candidateCount) {
+            throw fail("attacker mapping did not consume the complete XMage menu", null);
+        }
+        recordCombatOutcome(category, candidateCount, selected.size());
+        return Collections.unmodifiableList(selected);
+    }
+
+    /**
+     * Consume every consecutive native blocker group for this declaration.
+     * Native stable refs choose both the attacker group and each blocker, so
+     * neither engine's iteration order becomes policy meaning.
+     */
+    public synchronized List<BlockAssignment> chooseBlockAssignments(
+            List<? extends Permanent> xmageAttackers,
+            List<? extends Permanent> xmageAvailableBlockers,
+            Game game) {
+        requireLive();
+        List<Permanent> pendingAttackers = requireCombatPermanents(
+                xmageAttackers, game, "blocking attacker");
+        List<Permanent> availableBlockers = requireCombatPermanents(
+                xmageAvailableBlockers, game, "available blocker");
+        if (!hasLegalBlockerPair(pendingAttackers, availableBlockers, game)) {
+            return Collections.emptyList();
+        }
+
+        List<BlockAssignment> assignments = new ArrayList<>();
+        while (hasLegalBlockerPair(pendingAttackers, availableBlockers, game)) {
+            XMageRallyBridgeProtocol.DecisionBody firstDecision = requireCurrentDecision();
+            if (!"blocker_inclusion".equals(firstDecision.getDecisionKind())) {
+                throw fail("XMage has a blocker group but kernel decision kind is "
+                        + firstDecision.getDecisionKind(), null);
+            }
+            validateCommonDecision(firstDecision);
+
+            BinaryShape firstShape;
+            try {
+                firstShape = validateBinarySemanticOrder(
+                        firstDecision, "choose_blocker_inclusion");
+            } catch (KernelShadowPolicyViolation error) {
+                throw fail(error.getMessage(), error);
+            }
+            List<Permanent> attackersWithChoices = attackersWithLegalBlockers(
+                    pendingAttackers, availableBlockers, game);
+            Permanent attacker;
+            try {
+                attacker = resolveCombatPermanent(
+                        firstShape.attacker, attackersWithChoices,
+                        Collections.emptySet(), game, "blocker group attacker");
+            } catch (KernelShadowPolicyViolation error) {
+                throw fail(error.getMessage(), error);
+            }
+
+            List<Permanent> legalBlockers = legalBlockersFor(
+                    attacker, availableBlockers, game);
+            int candidateCount = legalBlockers.size();
+            String category = "declare_blocker_for_attacker";
+            ensureCounterCapacity(candidateCount);
+            boolean[] delegated = delegatedCombatSelection(
+                    category, candidateCount, true);
+            Set<UUID> usedBlockers = new HashSet<>();
+            List<Permanent> selectedForAttacker = new ArrayList<>();
+            Long physicalDecisionId = null;
+
+            for (int substep = 0; substep < candidateCount; substep++) {
+                XMageRallyBridgeProtocol.DecisionBody decision = substep == 0
+                        ? firstDecision : requireCurrentDecision();
+                BinaryShape shape = validateCombatDecision(
+                        decision, category, "blocker_inclusion",
+                        "choose_blocker_inclusion", candidateCount,
+                        substep, physicalDecisionId);
+                if (physicalDecisionId == null) {
+                    physicalDecisionId = decision.getPhysicalDecisionId();
+                }
+                Permanent boundAttacker;
+                Permanent blocker;
+                try {
+                    boundAttacker = resolveCombatPermanent(
+                            shape.attacker, Collections.singletonList(attacker),
+                            Collections.emptySet(), game,
+                            "blocker attacker substep " + substep);
+                    blocker = resolveCombatPermanent(
+                            shape.blocker, legalBlockers, usedBlockers, game,
+                            "blocker substep " + substep);
+                } catch (KernelShadowPolicyViolation error) {
+                    throw fail(error.getMessage(), error);
+                }
+                if (!boundAttacker.getId().equals(attacker.getId())) {
+                    throw fail("blocker aggregate changed its fixed attacker", null);
+                }
+                if (!usedBlockers.add(blocker.getId())) {
+                    throw fail("blocker aggregate repeats an XMage identity", null);
+                }
+
+                int selectedIndex = selectedCombatIndex(
+                        decision, delegated, substep, category);
+                if (selectedIndex == 1) {
+                    selectedForAttacker.add(blocker);
+                    assignments.add(new BlockAssignment(
+                            blocker.getId(), attacker.getId()));
+                }
+                traceCombatSelection(
+                        decision, shape.blocker, blocker, selectedIndex, attacker);
+                stepExactlyOnce(decision, selectedIndex);
+                policyActionSelections++;
+                policyLeafEvaluations++;
+            }
+            if (usedBlockers.size() != candidateCount) {
+                throw fail("blocker mapping did not consume the complete XMage menu", null);
+            }
+            availableBlockers.removeAll(selectedForAttacker);
+            pendingAttackers.remove(attacker);
+            recordCombatOutcome(category, candidateCount, selectedForAttacker.size());
+        }
+
+        XMageRallyBridgeProtocol.DecisionBody remaining = bridge.getCurrentDecision();
+        if (remaining != null && "blocker_inclusion".equals(remaining.getDecisionKind())) {
+            throw fail("kernel retains a blocker group after XMage exhausted legal pairs", null);
+        }
+        return Collections.unmodifiableList(assignments);
     }
 
     @Override
@@ -338,90 +659,262 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         return firstFailure;
     }
 
-    private boolean[] chooseCombatGroup(
-            String category,
-            String decisionKind,
-            String semanticKind,
-            int candidateCount,
-            boolean blockerGroup) {
-        requireLive();
-        if (candidateCount <= 0) {
-            throw fail(category + " candidate count must be positive", null);
-        }
-        ensureCounterCapacity(candidateCount);
+    /** Opt-in live diagnostic used by the Rally spike's mana trace. */
+    public synchronized String describeXmageLands(Game game) {
+        return xmageLandSummary(game);
+    }
 
-        boolean[] delegated = null;
-        XMageRallyBridgeProtocol.DecisionBody firstDecision = requireCurrentDecision();
-        validateCombatDecision(
-                firstDecision, category, decisionKind, semanticKind,
-                candidateCount, 0, null);
-        if (!modelControlled) {
-            try {
-                delegated = blockerGroup
-                        ? delegate.chooseBlockers(candidateCount)
-                        : delegate.chooseAttackers(candidateCount);
-            } catch (RuntimeException error) {
-                throw fail("opponent delegate failed for " + category, error);
-            }
-            if (delegated == null || delegated.length != candidateCount) {
-                throw fail("opponent delegate returned an invalid " + category + " vector", null);
-            }
+    private List<Permanent> requireCombatPermanents(
+            List<? extends Permanent> candidates, Game game, String label) {
+        if (candidates == null || game == null) {
+            throw fail(label + " candidate surface requires a live game", null);
         }
-
-        boolean[] selected = new boolean[candidateCount];
-        Long physicalDecisionId = null;
-        String fixedAttacker = null;
-        Set<String> candidateObjects = new HashSet<>();
-        for (int substep = 0; substep < candidateCount; substep++) {
-            XMageRallyBridgeProtocol.DecisionBody decision = substep == 0
-                    ? firstDecision : requireCurrentDecision();
-            BinaryShape shape = validateCombatDecision(
-                    decision, category, decisionKind, semanticKind,
-                    candidateCount, substep, physicalDecisionId);
-            if (physicalDecisionId == null) {
-                physicalDecisionId = decision.getPhysicalDecisionId();
+        List<Permanent> live = new ArrayList<>(candidates.size());
+        Set<UUID> seen = new HashSet<>();
+        for (Permanent candidate : candidates) {
+            UUID id = candidate == null ? null : candidate.getId();
+            Permanent permanent = id == null ? null : game.getPermanent(id);
+            if (permanent == null || !seen.add(id)) {
+                throw fail(label + " candidate surface contains a null, stale, or duplicate identity",
+                        null);
             }
-            if (blockerGroup) {
-                if (shape.blocker == null) {
-                    throw fail("blocker inclusion semantic lacks a blocker binding", null);
-                }
-                if (fixedAttacker == null) {
-                    fixedAttacker = shape.attacker;
-                } else if (!fixedAttacker.equals(shape.attacker)) {
-                    throw fail("blocker aggregate spans multiple attackers", null);
-                }
-                if (!candidateObjects.add(shape.blocker)) {
-                    throw fail("blocker aggregate repeats a blocker binding", null);
-                }
-            } else {
-                if (!candidateObjects.add(shape.attacker)) {
-                    throw fail("attacker aggregate repeats an attacker binding", null);
-                }
-            }
-
-            int selectedIndex = modelControlled
-                    ? requireModelSelection(decision)
-                    : (delegated[substep] ? 1 : 0);
-            if (selectedIndex != 0 && selectedIndex != 1) {
-                throw fail(category + " selected a non-binary action index", null);
-            }
-            selected[substep] = selectedIndex == 1;
-            stepExactlyOnce(decision, selectedIndex);
-            policyActionSelections++;
-            policyLeafEvaluations++;
+            live.add(permanent);
         }
+        return live;
+    }
 
-        int includedCount = 0;
-        for (boolean include : selected) {
-            if (include) {
-                includedCount++;
-            }
+    private boolean[] delegatedCombatSelection(
+            String category, int candidateCount, boolean blockerGroup) {
+        if (modelControlled) {
+            return null;
         }
+        boolean[] delegated;
+        try {
+            delegated = blockerGroup
+                    ? delegate.chooseBlockers(candidateCount)
+                    : delegate.chooseAttackers(candidateCount);
+        } catch (RuntimeException error) {
+            throw fail("opponent delegate failed for " + category, error);
+        }
+        if (delegated == null || delegated.length != candidateCount) {
+            throw fail("opponent delegate returned an invalid " + category + " vector", null);
+        }
+        return delegated;
+    }
+
+    private int selectedCombatIndex(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            boolean[] delegated,
+            int substep,
+            String category) {
+        int selectedIndex = modelControlled
+                ? requireModelSelection(decision)
+                : delegated[substep] ? 1 : 0;
+        if (selectedIndex != 0 && selectedIndex != 1) {
+            throw fail(category + " selected a non-binary action index", null);
+        }
+        return selectedIndex;
+    }
+
+    private void recordCombatOutcome(String category, int legalCount, int includedCount) {
         physicalDecisionCount++;
         increment(physicalDecisionCategories, category);
-        increment(outcomeHistogram, category + "|legal=" + candidateCount
+        increment(outcomeHistogram, category + "|legal=" + legalCount
                 + "|included=" + includedCount);
+    }
+
+    private static boolean hasLegalBlockerPair(
+            List<Permanent> attackers, List<Permanent> blockers, Game game) {
+        for (Permanent attacker : attackers) {
+            for (Permanent blocker : blockers) {
+                if (blocker.canBlock(attacker.getId(), game)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static List<Permanent> attackersWithLegalBlockers(
+            List<Permanent> attackers, List<Permanent> blockers, Game game) {
+        List<Permanent> result = new ArrayList<>();
+        for (Permanent attacker : attackers) {
+            for (Permanent blocker : blockers) {
+                if (blocker.canBlock(attacker.getId(), game)) {
+                    result.add(attacker);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private static List<Permanent> legalBlockersFor(
+            Permanent attacker, List<Permanent> blockers, Game game) {
+        List<Permanent> result = new ArrayList<>();
+        for (Permanent blocker : blockers) {
+            if (blocker.canBlock(attacker.getId(), game)) {
+                result.add(blocker);
+            }
+        }
+        return result;
+    }
+
+    private Permanent resolveCombatPermanent(
+            JsonObject stable,
+            List<? extends Permanent> candidates,
+            Set<UUID> used,
+            Game game,
+            String label) {
+        StableCombatRef reference = stableCombatRef(stable, label);
+        List<UUID> candidateIds = new ArrayList<>(candidates.size());
+        for (Permanent candidate : candidates) {
+            candidateIds.add(candidate.getId());
+        }
+        UUID bound = mapBoundCombatUuid(
+                reference.arenaId, candidateIds, allArenaIds(), used, label);
+        if (bound != null) {
+            Permanent permanent = game.getPermanent(bound);
+            validateCombatPermanent(permanent, reference, game, label);
+            return permanent;
+        }
+        if (reference.arenaId < 120) {
+            throw new KernelShadowPolicyViolation(
+                    label + " has no XMage binding for opening arena id "
+                            + reference.arenaId);
+        }
+
+        List<Permanent> compatible = new ArrayList<>();
+        for (Permanent candidate : candidates) {
+            UUID id = candidate.getId();
+            if (used.contains(id) || initialArenaIds.containsKey(id)
+                    || dynamicArenaIds.containsKey(id)) {
+                continue;
+            }
+            Integer cardDbId = RALLY_TOKEN_CARD_IDS.get(candidate.getName());
+            if (cardDbId != null && cardDbId == reference.cardDbId
+                    && reference.controller.equals(
+                    seatFor(candidate.getControllerId(), game))) {
+                compatible.add(candidate);
+            }
+        }
+        compatible.sort(Comparator.comparingInt(permanent ->
+                battlefieldIndex(permanent.getId(), game)));
+        if (compatible.isEmpty()) {
+            throw new KernelShadowPolicyViolation(
+                    label + " cannot bind generated arena id " + reference.arenaId
+                            + " card_db_id=" + reference.cardDbId);
+        }
+        // Native attacker/blocker candidates filter the battlefield Vec in
+        // place, while XMage's Battlefield exposes LinkedHashMap insertion
+        // order. Pair equal unbound tokens by that shared creation rank.
+        Permanent selected = compatible.get(0);
+        putDynamicArenaBinding(selected.getId(), reference.arenaId, label);
+        validateCombatPermanent(selected, reference, game, label);
         return selected;
+    }
+
+    private static UUID mapBoundCombatUuid(
+            int arenaId,
+            List<UUID> candidateIds,
+            Map<UUID, Integer> arenaIds,
+            Set<UUID> used,
+            String label) {
+        UUID matched = null;
+        int matches = 0;
+        for (UUID id : candidateIds) {
+            Integer candidateArena = arenaIds.get(id);
+            if (candidateArena != null && candidateArena == arenaId) {
+                matched = id;
+                matches++;
+            }
+        }
+        if (matches > 1) {
+            throw new KernelShadowPolicyViolation(
+                    label + " maps one arena id to multiple XMage candidates");
+        }
+        if (matched != null && used.contains(matched)) {
+            throw new KernelShadowPolicyViolation(
+                    label + " repeats an already consumed XMage candidate");
+        }
+        return matched;
+    }
+
+    private void validateCombatPermanent(
+            Permanent permanent, StableCombatRef reference, Game game, String label) {
+        if (permanent == null || game.getPermanent(permanent.getId()) == null) {
+            throw new KernelShadowPolicyViolation(label + " resolved a stale permanent");
+        }
+        if (!reference.controller.equals(seatFor(permanent.getControllerId(), game))) {
+            throw new KernelShadowPolicyViolation(label + " controller does not match Rust");
+        }
+        if (!reference.owner.equals(seatFor(permanent.getOwnerId(), game))) {
+            throw new KernelShadowPolicyViolation(label + " owner does not match Rust");
+        }
+        if (reference.arenaId >= 120) {
+            Integer cardDbId = RALLY_TOKEN_CARD_IDS.get(permanent.getName());
+            if (cardDbId == null || cardDbId != reference.cardDbId) {
+                throw new KernelShadowPolicyViolation(
+                        label + " generated token definition does not match Rust");
+            }
+        }
+    }
+
+    private void putDynamicArenaBinding(UUID id, int arenaId, String label) {
+        if (id == null || arenaId < 120 || initialArenaIds.containsKey(id)
+                || initialArenaIds.containsValue(arenaId)) {
+            throw new KernelShadowPolicyViolation(label + " has an invalid dynamic binding");
+        }
+        Integer previousArena = dynamicArenaIds.get(id);
+        UUID previousUuid = dynamicArenaUuids.get(arenaId);
+        if ((previousArena != null && previousArena != arenaId)
+                || (previousUuid != null && !previousUuid.equals(id))) {
+            throw new KernelShadowPolicyViolation(label + " dynamic binding is not one-to-one");
+        }
+        dynamicArenaIds.put(id, arenaId);
+        dynamicArenaUuids.put(arenaId, id);
+    }
+
+    private static StableCombatRef stableCombatRef(JsonObject stable, String label) {
+        if (stable == null) {
+            throw new KernelShadowPolicyViolation(label + " lacks a stable reference");
+        }
+        int arenaId = requiredUnsignedInt(stable, "arena_id", label);
+        int cardDbId = requiredUnsignedInt(stable, "card_db_id", label);
+        String owner = requiredStringValue(stable, "owner", label);
+        String controller = requiredStringValue(stable, "controller", label);
+        requireSeatWire(owner, label + " owner");
+        requireSeatWire(controller, label + " controller");
+        requireString(stable, "zone", "Battlefield", label);
+        requiredUnsignedInt(stable, "zone_change_count", label);
+        return new StableCombatRef(arenaId, cardDbId, owner, controller);
+    }
+
+    private static void requireSeatWire(String seat, String label) {
+        if (!"p0".equals(seat) && !"p1".equals(seat)) {
+            throw new KernelShadowPolicyViolation(label + " is not p0 or p1");
+        }
+    }
+
+    private void traceCombatSelection(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            JsonObject stable,
+            Permanent permanent,
+            int selectedIndex,
+            Permanent fixedAttacker) {
+        if (!Boolean.getBoolean("xmage.rally.traceActions")) {
+            return;
+        }
+        System.err.println("XMAGE_RALLY_COMBAT_TRACE episode=" + episodeId
+                + " step=" + decision.getStep()
+                + " kind=" + decision.getDecisionKind()
+                + " rust_arena_id=" + requiredUnsignedInt(
+                stable, "arena_id", "combat trace")
+                + " xmage=" + permanent.getName()
+                + " xmage_uuid=" + permanent.getId()
+                + " fixed_attacker=" + (fixedAttacker == null
+                ? "none" : fixedAttacker.getId())
+                + " include=" + (selectedIndex == 1));
     }
 
     private void validateActiveBindingAtConstruction() {
@@ -498,7 +991,12 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         if (decision.getSubstepIndex() != substep
                 || decision.getSubstepCount() != candidateCount
                 || decision.getLegalActionCount() != 2) {
-            throw fail(category + " aggregate substep shape mismatch at " + substep, null);
+            throw fail(category + " aggregate substep shape mismatch at " + substep
+                    + ": xmage_candidates=" + candidateCount
+                    + " kernel_substep=" + decision.getSubstepIndex()
+                    + "/" + decision.getSubstepCount()
+                    + " kernel_legal=" + decision.getLegalActionCount()
+                    + " semantics=" + rustCombatSummary(decision.getActionSemantics()), null);
         }
         if (substep == 0 && physicalDecisionId != null) {
             throw fail(category + " received an invalid initial physical binding", null);
@@ -523,7 +1021,13 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         }
         if (decision.getActingPlayer() != physicalSeat) {
             throw fail("kernel acting seat " + decision.getActingPlayer().wire()
-                    + " does not match XMage seat " + physicalSeat.wire(), null);
+                    + " does not match XMage seat " + physicalSeat.wire()
+                    + ": step=" + decision.getStep()
+                    + " kind=" + decision.getDecisionKind()
+                    + " substep=" + decision.getSubstepIndex()
+                    + "/" + decision.getSubstepCount()
+                    + " semantics=" + rustCombatSummary(
+                    decision.getActionSemantics()), null);
         }
         if (decision.getCandidateSeat() == physicalSeat != modelControlled
                 || decision.isCandidateControlsCurrentActor() != modelControlled) {
@@ -584,6 +1088,11 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             }
             if (applied == null) {
                 throw fail("bridge step response omitted applied_action", null);
+            }
+            if (Boolean.getBoolean("xmage.rally.traceActions")) {
+                System.err.println("XMAGE_RALLY_ACTION_TRACE episode=" + episodeId
+                        + " step=" + decision.getStep()
+                        + " semantic=" + applied.getSemantic().getCanonicalJson());
             }
         } catch (XMageRallyBridgeProcessClient.BridgeFailure error) {
             throw fail("bridge step failed for episode " + episodeId
@@ -686,16 +1195,16 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         requireString(no, "actor", decision.getActingPlayer().wire(), expectedKind);
         requireString(yes, "actor", decision.getActingPlayer().wire(), expectedKind);
 
-        String noAttacker = requiredCanonicalField(no, "attacker", expectedKind);
-        String yesAttacker = requiredCanonicalField(yes, "attacker", expectedKind);
+        JsonObject noAttacker = requiredObject(no, "attacker", expectedKind);
+        JsonObject yesAttacker = requiredObject(yes, "attacker", expectedKind);
         if (!noAttacker.equals(yesAttacker)) {
             throw new KernelShadowPolicyViolation(
                     expectedKind + " binary rows bind different attackers");
         }
-        String blocker = null;
+        JsonObject blocker = null;
         if ("choose_blocker_inclusion".equals(expectedKind)) {
-            String noBlocker = requiredCanonicalField(no, "blocker", expectedKind);
-            String yesBlocker = requiredCanonicalField(yes, "blocker", expectedKind);
+            JsonObject noBlocker = requiredObject(no, "blocker", expectedKind);
+            JsonObject yesBlocker = requiredObject(yes, "blocker", expectedKind);
             if (!noBlocker.equals(yesBlocker)) {
                 throw new KernelShadowPolicyViolation(
                         expectedKind + " binary rows bind different blockers");
@@ -780,15 +1289,6 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         JsonObject object = parsed.getAsJsonObject();
         requireString(object, "action_kind", expectedKind, expectedKind);
         return object;
-    }
-
-    private static String requiredCanonicalField(
-            JsonObject object, String field, String label) {
-        JsonElement value = object.get(field);
-        if (value == null || value.isJsonNull()) {
-            throw new KernelShadowPolicyViolation(label + " lacks " + field);
-        }
-        return value.toString();
     }
 
     private static void requireString(
@@ -914,6 +1414,92 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         Map<UUID, Integer> combined = new LinkedHashMap<>(initialArenaIds);
         combined.putAll(dynamicArenaIds);
         return combined;
+    }
+
+    private Map<String, UUID> targetPlayerIds(Game game) {
+        UUID startingPlayer = game.getStartingPlayerId();
+        if (startingPlayer == null || !game.getPlayers().containsKey(startingPlayer)) {
+            throw new KernelShadowPolicyViolation(
+                    "target mapping requires the live starting player");
+        }
+        UUID otherPlayer = null;
+        for (UUID playerId : game.getPlayers().keySet()) {
+            if (playerId == null || playerId.equals(startingPlayer)) {
+                continue;
+            }
+            if (otherPlayer != null) {
+                throw new KernelShadowPolicyViolation(
+                        "target mapping requires exactly two players");
+            }
+            otherPlayer = playerId;
+        }
+        if (otherPlayer == null) {
+            throw new KernelShadowPolicyViolation(
+                    "target mapping requires exactly two players");
+        }
+        Map<String, UUID> result = new LinkedHashMap<>();
+        result.put("p0", startingPlayer);
+        result.put("p1", otherPlayer);
+        return result;
+    }
+
+    /** Bulk-bind every unbound generated token visible in one target menu. */
+    private void bindTargetTokenObjects(
+            List<UUID> xmageIds,
+            List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
+            Game game) {
+        Map<String, Map<Integer, StableCombatRef>> rustByIdentity = new LinkedHashMap<>();
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : rustRows) {
+            TargetSemanticRef target = targetSemanticRef(semantic);
+            if (!"object".equals(target.kind) || target.arenaId < 120
+                    || dynamicArenaUuids.containsKey(target.arenaId)) {
+                continue;
+            }
+            StableCombatRef stable = stableCombatRef(
+                    target.stable, "target token object");
+            String identity = stable.controller + "|" + stable.cardDbId;
+            StableCombatRef previous = rustByIdentity
+                    .computeIfAbsent(identity, ignored -> new LinkedHashMap<>())
+                    .put(stable.arenaId, stable);
+            if (previous != null) {
+                throw new KernelShadowPolicyViolation(
+                        "target token arena id is repeated");
+            }
+        }
+
+        for (Map.Entry<String, Map<Integer, StableCombatRef>> group
+                : rustByIdentity.entrySet()) {
+            List<StableCombatRef> rustTargets = new ArrayList<>(group.getValue().values());
+            rustTargets.sort(Comparator.comparingInt(target -> target.arenaId));
+
+            List<Permanent> xmageTargets = new ArrayList<>();
+            Set<UUID> seen = new HashSet<>();
+            for (UUID id : xmageIds) {
+                if (id == null || !seen.add(id) || initialArenaIds.containsKey(id)
+                        || dynamicArenaIds.containsKey(id)) {
+                    continue;
+                }
+                Permanent permanent = game.getPermanent(id);
+                Integer cardDbId = permanent == null
+                        ? null : RALLY_TOKEN_CARD_IDS.get(permanent.getName());
+                if (permanent != null && cardDbId != null
+                        && group.getKey().equals(
+                        seatFor(permanent.getControllerId(), game) + "|" + cardDbId)) {
+                    xmageTargets.add(permanent);
+                }
+            }
+            xmageTargets.sort(Comparator.comparingInt(permanent ->
+                    battlefieldIndex(permanent.getId(), game)));
+            if (xmageTargets.size() != rustTargets.size()) {
+                throw new KernelShadowPolicyViolation(
+                        "target token identity count differs between XMage and Rust");
+            }
+            for (int i = 0; i < rustTargets.size(); i++) {
+                putDynamicArenaBinding(
+                        xmageTargets.get(i).getId(), rustTargets.get(i).arenaId,
+                        "target token object");
+            }
+        }
     }
 
     /**
@@ -1086,6 +1672,275 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         return Collections.unmodifiableMap(ids);
     }
 
+    private String xmagePrioritySummary(
+            List<? extends ActivatedAbility> abilities, Game game) {
+        List<String> rows = new ArrayList<>(abilities.size());
+        Map<UUID, Integer> bindings = allArenaIds();
+        for (ActivatedAbility ability : abilities) {
+            if (ability instanceof PassAbility) {
+                rows.add("pass");
+                continue;
+            }
+            UUID sourceId = ability == null ? null : ability.getSourceId();
+            MageObject source = game == null || sourceId == null
+                    ? null : game.getObject(sourceId);
+            rows.add(priorityAbilityKind(ability) + "@"
+                    + bindings.get(sourceId) + ":"
+                    + (source == null ? "unknown" : source.getName()) + ":"
+                    + (sourceId == null || game == null
+                    ? "unknown" : String.valueOf(game.getState().getZone(sourceId))));
+        }
+        return rows.toString();
+    }
+
+    private static String rustPrioritySummary(
+            List<XMageRallyBridgeProtocol.ActionSemantic> semantics) {
+        List<String> rows = new ArrayList<>(semantics.size());
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : semantics) {
+            if (semantic == null || "pass".equals(semantic.getActionKind())) {
+                rows.add("pass");
+                continue;
+            }
+            JsonObject source = requiredObject(
+                    parseSemantic(semantic, semantic.getActionKind()),
+                    "source", "priority source");
+            rows.add(semantic.getActionKind() + "@"
+                    + requiredUnsignedInt(source, "arena_id", "priority source")
+                    + ":db" + requiredUnsignedInt(
+                    source, "card_db_id", "priority source")
+                    + ":" + requiredStringValue(source, "zone", "priority source"));
+        }
+        return rows.toString();
+    }
+
+    private static String rustCombatSummary(
+            List<XMageRallyBridgeProtocol.ActionSemantic> semantics) {
+        List<String> rows = new ArrayList<>();
+        if (semantics != null) {
+            for (XMageRallyBridgeProtocol.ActionSemantic semantic : semantics) {
+                rows.add(semantic == null ? "null" : semantic.getCanonicalJson());
+            }
+        }
+        return rows.toString();
+    }
+
+    private String boundSourceSummary(
+            List<XMageRallyBridgeProtocol.ActionSemantic> semantics, Game game) {
+        List<String> rows = new ArrayList<>();
+        Map<UUID, Integer> bindings = allArenaIds();
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : semantics) {
+            if (semantic == null || "pass".equals(semantic.getActionKind())) {
+                continue;
+            }
+            JsonObject source = requiredObject(
+                    parseSemantic(semantic, semantic.getActionKind()),
+                    "source", "priority source");
+            int arenaId = requiredUnsignedInt(source, "arena_id", "priority source");
+            UUID sourceId = null;
+            for (Map.Entry<UUID, Integer> binding : bindings.entrySet()) {
+                if (binding.getValue() == arenaId) {
+                    sourceId = binding.getKey();
+                    break;
+                }
+            }
+            MageObject object = sourceId == null || game == null
+                    ? null : game.getObject(sourceId);
+            rows.add(arenaId + ":"
+                    + (object == null ? "missing" : object.getName()) + ":"
+                    + (sourceId == null || game == null
+                    ? "unknown" : String.valueOf(game.getState().getZone(sourceId))));
+        }
+        return rows.toString();
+    }
+
+    private String xmageLandSummary(Game game) {
+        List<String> rows = new ArrayList<>();
+        if (game == null) {
+            return rows.toString();
+        }
+        Map<UUID, Integer> bindings = allArenaIds();
+        for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+            if (permanent != null && permanent.isLand(game)) {
+                rows.add(bindings.get(permanent.getId()) + ":"
+                        + seatFor(permanent.getControllerId(), game) + ":"
+                        + permanent.getName() + ":tapped=" + permanent.isTapped());
+            }
+        }
+        return rows.toString();
+    }
+
+    private static String priorityAbilityKind(ActivatedAbility ability) {
+        if (ability instanceof PlayLandAbility) {
+            return "play_land";
+        }
+        if (ability instanceof SpellAbility) {
+            return "cast_spell";
+        }
+        if (ability instanceof ManaAbility) {
+            return "activate_mana_ability";
+        }
+        return "activate_ability";
+    }
+
+    private static List<UUID> mapCardTargetRows(
+            List<UUID> xmageIds,
+            List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
+            Map<UUID, Integer> arenaIds) {
+        if (xmageIds == null || rustRows == null || arenaIds == null
+                || xmageIds.size() != rustRows.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "card-target semantic and XMage widths differ");
+        }
+        List<UUID> mapped = new ArrayList<>(rustRows.size());
+        Set<UUID> used = new HashSet<>();
+        boolean usedStop = false;
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : rustRows) {
+            Integer arenaId = cardTargetArenaId(semantic);
+            UUID unique = null;
+            int matches = 0;
+            for (UUID id : xmageIds) {
+                boolean match = arenaId == null
+                        ? id == null
+                        : id != null && arenaId.equals(arenaIds.get(id));
+                if (match) {
+                    unique = id;
+                    matches++;
+                }
+            }
+            if (matches != 1 || (unique == null ? usedStop : used.contains(unique))) {
+                throw new KernelShadowPolicyViolation(
+                        "card-target row did not map to exactly one unused XMage card: kind="
+                                + semantic.getActionKind() + " arena_id=" + arenaId
+                                + " matches=" + matches);
+            }
+            if (unique == null) {
+                usedStop = true;
+            } else {
+                used.add(unique);
+            }
+            mapped.add(unique);
+        }
+        if (used.size() + (usedStop ? 1 : 0) != xmageIds.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "card-target mapping did not consume the complete XMage menu");
+        }
+        return mapped;
+    }
+
+    private static List<UUID> mapTargetRows(
+            List<UUID> xmageIds,
+            List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
+            Map<UUID, Integer> arenaIds,
+            Map<String, UUID> playerIds) {
+        if (xmageIds == null || rustRows == null || arenaIds == null
+                || playerIds == null || xmageIds.size() != rustRows.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "target semantic and XMage widths differ");
+        }
+        List<UUID> mapped = new ArrayList<>(rustRows.size());
+        Set<UUID> used = new HashSet<>();
+        boolean usedStop = false;
+        for (XMageRallyBridgeProtocol.ActionSemantic semantic : rustRows) {
+            TargetSemanticRef target = targetSemanticRef(semantic);
+            UUID unique = null;
+            int matches = 0;
+            for (UUID id : xmageIds) {
+                boolean match;
+                if ("stop".equals(target.kind)) {
+                    match = id == null;
+                } else if ("player".equals(target.kind)) {
+                    match = id != null && id.equals(playerIds.get(target.player));
+                } else {
+                    match = id != null && target.arenaId.equals(arenaIds.get(id));
+                }
+                if (match) {
+                    unique = id;
+                    matches++;
+                }
+            }
+            if (matches != 1 || (unique == null ? usedStop : used.contains(unique))) {
+                throw new KernelShadowPolicyViolation(
+                        "target row did not map to exactly one unused XMage identity: kind="
+                                + target.kind + " player=" + target.player
+                                + " arena_id=" + target.arenaId + " matches=" + matches);
+            }
+            if (unique == null) {
+                usedStop = true;
+            } else {
+                used.add(unique);
+            }
+            mapped.add(unique);
+        }
+        if (used.size() + (usedStop ? 1 : 0) != xmageIds.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "target mapping did not consume the complete XMage menu");
+        }
+        return mapped;
+    }
+
+    private static TargetSemanticRef targetSemanticRef(
+            XMageRallyBridgeProtocol.ActionSemantic semantic) {
+        if (semantic == null) {
+            throw new KernelShadowPolicyViolation("target semantic row is null");
+        }
+        String kind = semantic.getActionKind();
+        JsonObject row = parseSemantic(semantic, kind);
+        if ("finish_target_selection".equals(kind)
+                || "finish_effect_selection".equals(kind)) {
+            return TargetSemanticRef.stop();
+        }
+        if (!"choose_target".equals(kind) && !"choose_effect_target".equals(kind)) {
+            throw new KernelShadowPolicyViolation(
+                    "unsupported target semantic kind " + kind);
+        }
+        JsonObject target = requiredObject(row, "target", kind);
+        String targetKind = requiredStringValue(target, "target_kind", kind);
+        if ("player".equals(targetKind)) {
+            String player = requiredStringValue(target, "player", kind);
+            requireSeatWire(player, kind + " player target");
+            return TargetSemanticRef.player(player);
+        }
+        if ("object".equals(targetKind)) {
+            JsonObject stable = requiredObject(target, "object", kind);
+            return TargetSemanticRef.object(
+                    requiredUnsignedInt(stable, "arena_id", kind + " object"), stable);
+        }
+        throw new KernelShadowPolicyViolation(
+                "unsupported target_kind " + targetKind);
+    }
+
+    private static Integer cardTargetArenaId(
+            XMageRallyBridgeProtocol.ActionSemantic semantic) {
+        String kind = semantic.getActionKind();
+        JsonObject row = parseSemantic(semantic, kind);
+        if ("finish_target_selection".equals(kind)
+                || "finish_effect_selection".equals(kind)) {
+            return null;
+        }
+        JsonObject stable;
+        if ("discard".equals(kind)) {
+            JsonElement cards = row.get("cards");
+            if (cards == null || !cards.isJsonArray()
+                    || cards.getAsJsonArray().size() != 1
+                    || !cards.getAsJsonArray().get(0).isJsonObject()) {
+                throw new KernelShadowPolicyViolation(
+                        "discard card-target row must contain one stable card");
+            }
+            stable = cards.getAsJsonArray().get(0).getAsJsonObject();
+        } else if ("choose_cost_target".equals(kind)) {
+            stable = requiredObject(row, "candidate", kind);
+        } else if ("choose_target".equals(kind)
+                || "choose_effect_target".equals(kind)) {
+            JsonObject target = requiredObject(row, "target", kind);
+            requireString(target, "target_kind", "object", kind);
+            stable = requiredObject(target, "object", kind);
+        } else {
+            throw new KernelShadowPolicyViolation(
+                    "unsupported card-target semantic kind " + kind);
+        }
+        return requiredUnsignedInt(stable, "arena_id", kind + " card");
+    }
+
     private static List<ActivatedAbility> mapPriorityRows(
             List<? extends ActivatedAbility> xmageAbilities,
             List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
@@ -1232,6 +2087,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             throw new IllegalStateException("surface category semantic self-test failed");
         }
         assertPrioritySemanticMapping();
+        assertCardTargetSemanticMapping();
+        assertTargetSemanticMapping();
+        assertCombatStableIdentityMapping();
     }
 
     private static void assertPrioritySemanticMapping() {
@@ -1287,18 +2145,148 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                         + "\"source\":{\"arena_id\":" + arenaId + "}}");
     }
 
+    private static void assertCardTargetSemanticMapping() {
+        UUID first = UUID.randomUUID();
+        UUID second = UUID.randomUUID();
+        Map<UUID, Integer> bindings = new LinkedHashMap<>();
+        bindings.put(first, 3);
+        bindings.put(second, 8);
+        List<XMageRallyBridgeProtocol.ActionSemantic> rust = Arrays.asList(
+                discardSemantic(3), discardSemantic(8));
+        List<UUID> mapped = mapCardTargetRows(
+                Arrays.asList(second, first), rust, bindings);
+        if (!mapped.equals(Arrays.asList(first, second))) {
+            throw new IllegalStateException("card-target semantic row mapping failed");
+        }
+    }
+
+    private static XMageRallyBridgeProtocol.ActionSemantic discardSemantic(int arenaId) {
+        return new XMageRallyBridgeProtocol.ActionSemantic(
+                "discard",
+                "{\"action_kind\":\"discard\",\"actor\":\"p0\","
+                        + "\"cards\":[{\"arena_id\":" + arenaId + "}]}");
+    }
+
+    private static void assertTargetSemanticMapping() {
+        UUID object = UUID.randomUUID();
+        UUID p0 = UUID.randomUUID();
+        UUID p1 = UUID.randomUUID();
+        Map<UUID, Integer> bindings = new LinkedHashMap<>();
+        bindings.put(object, 121);
+        Map<String, UUID> players = new LinkedHashMap<>();
+        players.put("p0", p0);
+        players.put("p1", p1);
+        List<XMageRallyBridgeProtocol.ActionSemantic> rust = Arrays.asList(
+                targetPlayerSemantic("choose_target", "p1"),
+                targetObjectSemantic("choose_target", 121),
+                targetPlayerSemantic("choose_effect_target", "p0"),
+                new XMageRallyBridgeProtocol.ActionSemantic(
+                        "finish_effect_selection",
+                        "{\"action_kind\":\"finish_effect_selection\","
+                                + "\"actor\":\"p0\",\"selected_count\":1}"));
+        List<UUID> mapped = mapTargetRows(
+                Arrays.asList(object, null, p0, p1), rust, bindings, players);
+        if (!mapped.equals(Arrays.asList(p1, object, p0, null))) {
+            throw new IllegalStateException("target semantic row mapping failed");
+        }
+    }
+
+    private static XMageRallyBridgeProtocol.ActionSemantic targetPlayerSemantic(
+            String kind, String player) {
+        return new XMageRallyBridgeProtocol.ActionSemantic(
+                kind,
+                "{\"action_kind\":\"" + kind + "\",\"actor\":\"p0\","
+                        + "\"target\":{\"target_kind\":\"player\","
+                        + "\"player\":\"" + player + "\"}}");
+    }
+
+    private static XMageRallyBridgeProtocol.ActionSemantic targetObjectSemantic(
+            String kind, int arenaId) {
+        return new XMageRallyBridgeProtocol.ActionSemantic(
+                kind,
+                "{\"action_kind\":\"" + kind + "\",\"actor\":\"p0\","
+                        + "\"target\":{\"target_kind\":\"object\","
+                        + "\"object\":{\"arena_id\":" + arenaId + "}}}");
+    }
+
+    private static void assertCombatStableIdentityMapping() {
+        UUID battlefieldIndexTwo = UUID.randomUUID();
+        UUID battlefieldIndexTen = UUID.randomUUID();
+        Map<UUID, Integer> bindings = new LinkedHashMap<>();
+        bindings.put(battlefieldIndexTwo, 2);
+        bindings.put(battlefieldIndexTen, 10);
+        JsonObject stable = JsonParser.parseString(
+                "{\"arena_id\":10,\"card_db_id\":44,"
+                        + "\"owner\":\"p0\",\"controller\":\"p0\","
+                        + "\"zone\":\"Battlefield\",\"zone_change_count\":1}")
+                .getAsJsonObject();
+        StableCombatRef reference = stableCombatRef(stable, "combat self-test");
+        UUID mapped = mapBoundCombatUuid(
+                reference.arenaId,
+                Arrays.asList(battlefieldIndexTen, battlefieldIndexTwo),
+                bindings, Collections.emptySet(), "combat self-test");
+        if (!battlefieldIndexTen.equals(mapped) || reference.cardDbId != 44) {
+            throw new IllegalStateException(
+                    "combat stable identity mapping used XMage candidate rank");
+        }
+        try {
+            mapBoundCombatUuid(
+                    reference.arenaId,
+                    Arrays.asList(battlefieldIndexTwo, battlefieldIndexTen),
+                    bindings, Collections.singleton(battlefieldIndexTen),
+                    "combat self-test duplicate");
+            throw new IllegalStateException(
+                    "combat stable identity mapping accepted a repeated candidate");
+        } catch (KernelShadowPolicyViolation expected) {
+            // Expected fail-closed duplicate rejection.
+        }
+    }
+
     public static void main(String[] args) {
         runFocusedSelfTest();
         System.out.println("KernelShadowRallyPolicy focused self-test PASS");
     }
 
     private static final class BinaryShape {
-        private final String attacker;
-        private final String blocker;
+        private final JsonObject attacker;
+        private final JsonObject blocker;
 
-        private BinaryShape(String attacker, String blocker) {
+        private BinaryShape(JsonObject attacker, JsonObject blocker) {
             this.attacker = attacker;
             this.blocker = blocker;
+        }
+    }
+
+    private static final class StableCombatRef {
+        private final int arenaId;
+        private final int cardDbId;
+        private final String owner;
+        private final String controller;
+
+        private StableCombatRef(
+                int arenaId, int cardDbId, String owner, String controller) {
+            this.arenaId = arenaId;
+            this.cardDbId = cardDbId;
+            this.owner = owner;
+            this.controller = controller;
+        }
+    }
+
+    public static final class BlockAssignment {
+        private final UUID blockerId;
+        private final UUID attackerId;
+
+        private BlockAssignment(UUID blockerId, UUID attackerId) {
+            this.blockerId = blockerId;
+            this.attackerId = attackerId;
+        }
+
+        public UUID getBlockerId() {
+            return blockerId;
+        }
+
+        public UUID getAttackerId() {
+            return attackerId;
         }
     }
 
@@ -1311,6 +2299,33 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
         public KernelShadowPolicyViolation(String message, Throwable cause) {
             super(message, cause);
+        }
+    }
+
+    private static final class TargetSemanticRef {
+        private final String kind;
+        private final String player;
+        private final Integer arenaId;
+        private final JsonObject stable;
+
+        private TargetSemanticRef(
+                String kind, String player, Integer arenaId, JsonObject stable) {
+            this.kind = kind;
+            this.player = player;
+            this.arenaId = arenaId;
+            this.stable = stable;
+        }
+
+        private static TargetSemanticRef stop() {
+            return new TargetSemanticRef("stop", null, null, null);
+        }
+
+        private static TargetSemanticRef player(String player) {
+            return new TargetSemanticRef("player", player, null, null);
+        }
+
+        private static TargetSemanticRef object(int arenaId, JsonObject stable) {
+            return new TargetSemanticRef("object", null, arenaId, stable);
         }
     }
 }
