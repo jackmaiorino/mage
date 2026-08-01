@@ -30,6 +30,8 @@ public final class XMageRallyBridgeProtocol {
 
     public static final String ORIGINAL_AUTHORITY_KIND =
             "original-promoted2-generation384-store";
+    public static final String SELECTED_GENERATION_AUTHORITY_KIND =
+            "original-promoted2-validated-store-generation";
     public static final String SOURCE_RUN_SHA256 =
             "2c9b7423004428c0e2bb138afafc15ec65957f6bd98c4587bea704fbf9549aae";
     public static final long SOURCE_GENERATION = 384L;
@@ -251,6 +253,27 @@ public final class XMageRallyBridgeProtocol {
                     samplerContractSha256);
             if (sourceGeneration != SOURCE_GENERATION
                     || loadedGeneration != SOURCE_GENERATION) {
+                throw new IllegalArgumentException("checkpoint generation identity mismatch");
+            }
+        }
+
+        void requireSelectedOriginalGeneration(long expectedGeneration) {
+            requireNonnegative(expectedGeneration, "expected checkpoint generation");
+            requireEqual("authority_kind", SELECTED_GENERATION_AUTHORITY_KIND, authorityKind);
+            requireEqual("source_run_sha256", SOURCE_RUN_SHA256, sourceRunSha256);
+            requireEqual("loaded_run_sha256", SOURCE_RUN_SHA256, loadedRunSha256);
+            requireEqual("loaded_checkpoint_sha256", sourceCheckpointSha256,
+                    loadedCheckpointSha256);
+            requireEqual("loaded_payload_sha256", sourcePayloadSha256, loadedPayloadSha256);
+            requireEqual("loaded_train_state_sha256", sourceTrainStateSha256,
+                    loadedTrainStateSha256);
+            requireEqual("environment_trajectory_contract", ENVIRONMENT_TRAJECTORY_CONTRACT,
+                    environmentTrajectoryContract);
+            requireEqual("sampler_identity", SAMPLER_IDENTITY, samplerIdentity);
+            requireEqual("sampler_contract_sha256", SAMPLER_CONTRACT_SHA256,
+                    samplerContractSha256);
+            if (sourceGeneration != expectedGeneration
+                    || loadedGeneration != expectedGeneration) {
                 throw new IllegalArgumentException("checkpoint generation identity mismatch");
             }
         }

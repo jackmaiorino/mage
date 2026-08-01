@@ -60,6 +60,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
     private final PrintStream diagnostics;
     private final ExecutorService ioExecutor;
     private final Thread stderrThread;
+    private final Long expectedCheckpointGeneration;
     private final Set<String> usedRequestIds = new HashSet<>();
     private final AtomicBoolean resourcesClosed = new AtomicBoolean();
     private final Object failureLock = new Object();
@@ -79,7 +80,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                           long exchangeTimeoutMillis,
                                           int maxLineBytes,
                                           PrintStream diagnostics,
-                                          long clientId) {
+                                          long clientId,
+                                          Long expectedCheckpointGeneration) {
         this.process = process;
         this.requestOutput = process.getOutputStream();
         this.responseReader = new BoundedUtf8LineReader(process.getInputStream(), maxLineBytes);
@@ -87,6 +89,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         this.exchangeTimeoutMillis = exchangeTimeoutMillis;
         this.maxLineBytes = maxLineBytes;
         this.diagnostics = diagnostics;
+        this.expectedCheckpointGeneration = expectedCheckpointGeneration;
         this.ioExecutor = Executors.newSingleThreadExecutor(
                 daemonThreadFactory("XMAGE-RALLY-BRIDGE-IO-" + clientId));
         this.stderrThread = startStderrDrainer(
@@ -104,6 +107,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                                        PrintStream diagnostics)
             throws IOException {
         List<String> checkedCommand = validateDirectCommand(command);
+        Long expectedCheckpointGeneration = selectedGeneration(checkedCommand);
         if (exchangeTimeoutMillis <= 0L
                 || exchangeTimeoutMillis > MAX_EXCHANGE_TIMEOUT_MILLIS) {
             throw new IllegalArgumentException(
@@ -123,7 +127,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         Process process = builder.start();
         return new XMageRallyBridgeProcessClient(
                 process, exchangeTimeoutMillis, maxLineBytes,
-                diagnostics, CLIENT_IDS.incrementAndGet());
+                diagnostics, CLIENT_IDS.incrementAndGet(), expectedCheckpointGeneration);
     }
 
     public synchronized XMageRallyBridgeProtocol.Response reset(String requestId,
@@ -348,7 +352,12 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             if (!request.getRequestId().equals(response.getRequestId())) {
                 throw new IllegalArgumentException("response request_id does not echo request");
             }
-            response.getCheckpoint().requireExactOriginalAuthority();
+            if (expectedCheckpointGeneration == null) {
+                response.getCheckpoint().requireExactOriginalAuthority();
+            } else {
+                response.getCheckpoint().requireSelectedOriginalGeneration(
+                        expectedCheckpointGeneration);
+            }
             if (response.getBody() instanceof XMageRallyBridgeProtocol.ErrorResponseBody) {
                 XMageRallyBridgeProtocol.ErrorResponseBody error =
                         (XMageRallyBridgeProtocol.ErrorResponseBody) response.getBody();
@@ -619,6 +628,27 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                             + basename);
         }
         return copy;
+    }
+
+    private static Long selectedGeneration(List<String> command) {
+        Long selected = null;
+        for (int index = 1; index < command.size(); index++) {
+            if (!"--generation".equals(command.get(index))) {
+                continue;
+            }
+            if (selected != null || index + 1 >= command.size()) {
+                throw new IllegalArgumentException("invalid bridge generation selection");
+            }
+            try {
+                selected = Long.parseLong(command.get(++index));
+            } catch (NumberFormatException error) {
+                throw new IllegalArgumentException("invalid bridge generation selection", error);
+            }
+            if (selected < 0L) {
+                throw new IllegalArgumentException("bridge generation must be nonnegative");
+            }
+        }
+        return selected;
     }
 
     private static Thread startStderrDrainer(InputStream stderr,
