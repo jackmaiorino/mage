@@ -57,7 +57,9 @@ public final class RallyCp7ObservedPlayer extends ComputerPlayer7 {
     @Override
     public boolean chooseMulligan(Game game) {
         List<Card> candidates = new ArrayList<>(getHand().getCards(game));
-        boolean result = super.chooseMulligan(game);
+        // The native Rally environment has no mulligan decision. Both seats
+        // keep the exact seven cards produced by the bound library order.
+        boolean result = false;
         emit(game, RallyCp7DecisionObserver.Kind.MULLIGAN, null, getHand(),
                 "", candidates, Collections.singletonList(result), true);
         return result;
