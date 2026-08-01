@@ -351,6 +351,18 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                 rust.add(semantic.getActionKind() + "@" + arena);
             }
         }
+        String rustSelected = "none";
+        if (current != null && current.getSelectedActionIndex() != null) {
+            int selectedIndex = current.getSelectedActionIndex();
+            if (current.getActionSemantics() == null
+                    || selectedIndex < 0
+                    || selectedIndex >= current.getActionSemantics().size()) {
+                rustSelected = selectedIndex + ":invalid";
+            } else {
+                rustSelected = selectedIndex + ":"
+                        + current.getActionSemantics().get(selectedIndex).getActionKind();
+            }
+        }
         System.err.println("XMAGE_RALLY_CP7_PASS_TRACE"
                 + " episode=" + episodeId
                 + " outcome=" + outcome
@@ -362,6 +374,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                 + " rust_step=" + (current == null ? -1 : current.getStep())
                 + " rust_kind=" + (current == null ? "none"
                 : current.getDecisionKind())
+                + " rust_selected=" + rustSelected
                 + " xmage=" + xmage
                 + " rust=" + rust);
     }

@@ -146,10 +146,23 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                     return !(selectedAbility instanceof PassAbility);
                 }
                 if (!matches) {
+                    ActivatedAbility selected = null;
+                    if (shadow.isModelControlled()
+                            && game.getTurnStepType() == PhaseStep.POSTCOMBAT_MAIN
+                            && game.getStack().isEmpty()
+                            && getId().equals(game.getActivePlayerId())) {
+                        selected = shadow
+                                .chooseSelectedPriorityAbilityAtPostcombatRendezvous(
+                                        priorityMenu, game);
+                    }
                     game.getState().setPriorityPlayerId(getId());
                     game.firePriorityEvent(getId());
-                    pass(game);
-                    return false;
+                    if (selected == null) {
+                        pass(game);
+                        return false;
+                    }
+                    act(game, selected);
+                    return !(selected instanceof PassAbility);
                 }
             }
             return priorityPlay(game);

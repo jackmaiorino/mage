@@ -130,6 +130,7 @@ public final class XMageRallyAnchorSpike {
             long totalTurns = 0L;
             long totalRustSteps = 0L;
             long totalPhysicalDecisions = 0L;
+            long totalCandidatePriorityProjections = 0L;
             long totalCp7Steps = 0L;
             long totalCp7PhysicalDecisions = 0L;
             long totalCp7ForcedEvents = 0L;
@@ -176,6 +177,9 @@ public final class XMageRallyAnchorSpike {
                     totalRustSteps = Math.addExact(totalRustSteps, leg.rustSteps);
                     totalPhysicalDecisions = Math.addExact(
                             totalPhysicalDecisions, leg.physicalDecisions);
+                    totalCandidatePriorityProjections = Math.addExact(
+                            totalCandidatePriorityProjections,
+                            leg.candidatePriorityProjections);
                     totalCp7Steps = Math.addExact(totalCp7Steps, leg.cp7Steps);
                     totalCp7PhysicalDecisions = Math.addExact(
                             totalCp7PhysicalDecisions, leg.cp7PhysicalDecisions);
@@ -210,6 +214,13 @@ public final class XMageRallyAnchorSpike {
                         + " rust_steps=" + first.rustSteps + "," + second.rustSteps
                         + " physical_decisions=" + first.physicalDecisions
                         + "," + second.physicalDecisions
+                        + " candidate_priority_projections="
+                        + first.candidatePriorityProjections + ","
+                        + second.candidatePriorityProjections
+                        + " alignment="
+                        + alignment(Math.addExact(
+                        first.candidatePriorityProjections,
+                        second.candidatePriorityProjections))
                         + " elapsed_ms=" + pairElapsedMillis);
             }
             long elapsedMillis = (System.nanoTime() - sampleStart) / 1_000_000L;
@@ -244,6 +255,9 @@ public final class XMageRallyAnchorSpike {
                     + " total_turns=" + totalTurns
                     + " total_rust_steps=" + totalRustSteps
                     + " total_physical_decisions=" + totalPhysicalDecisions
+                    + " total_candidate_priority_projections="
+                    + totalCandidatePriorityProjections
+                    + " alignment=" + alignment(totalCandidatePriorityProjections)
                     + " total_cp7_steps=" + totalCp7Steps
                     + " total_cp7_physical_decisions=" + totalCp7PhysicalDecisions
                     + " total_cp7_forced_events=" + totalCp7ForcedEvents
@@ -434,6 +448,14 @@ public final class XMageRallyAnchorSpike {
         long rustSteps = nativeTerminal.getTerminal().getPolicyStepCount();
         long physicalDecisions =
                 nativeTerminal.getTerminal().getPhysicalDecisionCount();
+        KernelShadowRallyPolicy candidatePolicy =
+                candidateSeat == XMageRallyBridgeProtocol.Seat.P0
+                        ? p0Policy : p1Policy;
+        if (candidatePolicy == null) {
+            throw new IllegalStateException("candidate policy is missing at terminal");
+        }
+        long candidatePriorityProjections =
+                candidatePolicy.getSelectedPriorityProjectionCount();
         long cp7Steps = cp7Mapper == null ? 0L : cp7Mapper.getAppliedPolicySteps();
         long cp7PhysicalDecisions = cp7Mapper == null
                 ? 0L : cp7Mapper.getAppliedPhysicalDecisionCount();
@@ -451,6 +473,9 @@ public final class XMageRallyAnchorSpike {
                 + " turns=" + game.getTurnNum()
                 + " rust_steps=" + rustSteps
                 + " physical_decisions=" + physicalDecisions
+                + " candidate_priority_projections="
+                + candidatePriorityProjections
+                + " alignment=" + alignment(candidatePriorityProjections)
                 + " cp7_steps=" + cp7Steps
                 + " cp7_physical_decisions=" + cp7PhysicalDecisions
                 + " cp7_forced_events=" + cp7ForcedEvents
@@ -466,6 +491,7 @@ public final class XMageRallyAnchorSpike {
                 game.getTurnNum(),
                 rustSteps,
                 physicalDecisions,
+                candidatePriorityProjections,
                 cp7Steps,
                 cp7PhysicalDecisions,
                 cp7ForcedEvents,
@@ -479,6 +505,12 @@ public final class XMageRallyAnchorSpike {
     private static int opponentWin(LegResult leg) {
         return !"draw".equals(leg.winner)
                 && !leg.winner.equals(leg.candidateSeat.wire()) ? 1 : 0;
+    }
+
+    private static String alignment(long candidatePriorityProjections) {
+        return candidatePriorityProjections == 0L
+                ? "no_selected_action_projection"
+                : "selected_action_projection";
     }
 
     private static void mergeCounts(
@@ -795,6 +827,7 @@ public final class XMageRallyAnchorSpike {
         final int turns;
         final long rustSteps;
         final long physicalDecisions;
+        final long candidatePriorityProjections;
         final long cp7Steps;
         final long cp7PhysicalDecisions;
         final long cp7ForcedEvents;
@@ -808,6 +841,7 @@ public final class XMageRallyAnchorSpike {
                   int turns,
                   long rustSteps,
                   long physicalDecisions,
+                  long candidatePriorityProjections,
                   long cp7Steps,
                   long cp7PhysicalDecisions,
                   long cp7ForcedEvents,
@@ -820,6 +854,7 @@ public final class XMageRallyAnchorSpike {
             this.turns = turns;
             this.rustSteps = rustSteps;
             this.physicalDecisions = physicalDecisions;
+            this.candidatePriorityProjections = candidatePriorityProjections;
             this.cp7Steps = cp7Steps;
             this.cp7PhysicalDecisions = cp7PhysicalDecisions;
             this.cp7ForcedEvents = cp7ForcedEvents;

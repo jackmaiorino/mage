@@ -58,6 +58,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             "choose_kicker", "choose_effect_boolean", "choose_optional_cost_use",
             "choose_madness_cast");
     private static final Map<String, Integer> RALLY_TOKEN_CARD_IDS = rallyTokenCardIds();
+    private static final Map<String, Integer> RALLY_CARD_IDS = rallyCardIds();
 
     private transient final XMageRallyBridgeProcessClient bridge;
     private final long episodeId;
@@ -73,6 +74,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private long physicalDecisionCount;
     private long policyActionSelections;
     private long policyLeafEvaluations;
+    private long selectedPriorityProjectionCount;
     private final Map<String, Long> physicalDecisionCategories = new LinkedHashMap<>();
     private final Map<String, Long> outcomeHistogram = new LinkedHashMap<>();
     private boolean failed;
@@ -260,14 +262,21 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                 || !"surface".equals(decision.getDecisionKind())
                 || decision.getLegalActionCount() != xmageAbilities.size()
                 || decision.getActionSemantics() == null) {
+            tracePriorityMenuMatch("shape_mismatch", xmageAbilities, game, decision);
             return false;
         }
         for (XMageRallyBridgeProtocol.ActionSemantic semantic
                 : decision.getActionSemantics()) {
             if (semantic == null || !PRIORITY_KINDS.contains(semantic.getActionKind())) {
+                tracePriorityMenuMatch(
+                        "nonpriority_semantic", xmageAbilities, game, decision);
                 return false;
             }
         }
+        Map<UUID, Integer> dynamicArenaIdsBefore =
+                new LinkedHashMap<>(dynamicArenaIds);
+        Map<Integer, UUID> dynamicArenaUuidsBefore =
+                new LinkedHashMap<>(dynamicArenaUuids);
         try {
             bindPriorityTokenSources(
                     xmageAbilities, decision.getActionSemantics(), game);
@@ -275,8 +284,248 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     xmageAbilities, decision.getActionSemantics(), allArenaIds());
             return true;
         } catch (KernelShadowPolicyViolation expectedPhaseMismatch) {
+            dynamicArenaIds.clear();
+            dynamicArenaIds.putAll(dynamicArenaIdsBefore);
+            dynamicArenaUuids.clear();
+            dynamicArenaUuids.putAll(dynamicArenaUuidsBefore);
+            tracePriorityMenuMatch("mapping_mismatch", xmageAbilities, game, decision);
             return false;
         }
+    }
+
+    /**
+     * Consume the Rust-selected priority row at the caller-verified active,
+     * empty-stack postcombat rendezvous when XMage exposes that exact stable
+     * action inside a non-identical menu. A missing or ambiguous selected row
+     * fails closed, and no substitute action is ever submitted to Rust.
+     */
+    public synchronized ActivatedAbility chooseSelectedPriorityAbilityAtPostcombatRendezvous(
+            List<? extends ActivatedAbility> xmageAbilities, Game game) {
+        requireLive();
+        if (!modelControlled) {
+            return null;
+        }
+        if (xmageAbilities == null || xmageAbilities.isEmpty() || game == null) {
+            throw fail("postcombat selected-action projection lacks a live XMage menu", null);
+        }
+        if (game.getTurnStepType() != mage.constants.PhaseStep.POSTCOMBAT_MAIN
+                || !game.getStack().isEmpty()
+                || !physicalSeat.wire().equals(
+                seatFor(game.getActivePlayerId(), game))) {
+            throw fail("selected-action projection escaped the active empty-stack"
+                    + " postcombat rendezvous", null);
+        }
+        XMageRallyBridgeProtocol.DecisionBody decision = bridge.getCurrentDecision();
+        if (decision == null) {
+            throw fail(bridge.getTerminal() == null
+                    ? "bridge has neither decision nor terminal at postcombat rendezvous"
+                    : "kernel reached terminal before the postcombat rendezvous", null);
+        }
+        if (decision.getEpisodeId() != episodeId) {
+            throw fail("postcombat rendezvous crossed the bound episode", null);
+        }
+        if (decision.getActingPlayer() != physicalSeat) {
+            return null;
+        }
+        validateCommonDecision(decision);
+        if (!"surface".equals(decision.getDecisionKind())
+                || decision.getSubstepIndex() != 0
+                || decision.getSubstepCount() != 1
+                || decision.getActionSemantics() == null) {
+            tracePriorityMenuMatch(
+                    "selected_projection_not_priority_surface",
+                    xmageAbilities, game, decision);
+            return null;
+        }
+        try {
+            for (XMageRallyBridgeProtocol.ActionSemantic semantic
+                    : decision.getActionSemantics()) {
+                if (semantic == null) {
+                    throw new KernelShadowPolicyViolation(
+                            "candidate postcombat rendezvous contains a null semantic");
+                }
+                validateSemanticActor(semantic, physicalSeat.wire());
+                if (!PRIORITY_KINDS.contains(semantic.getActionKind())) {
+                    tracePriorityMenuMatch(
+                            "selected_projection_not_priority_semantic",
+                            xmageAbilities, game, decision);
+                    return null;
+                }
+            }
+        } catch (KernelShadowPolicyViolation error) {
+            throw fail(error.getMessage(), error);
+        }
+
+        int selectedIndex = requireModelSelection(decision);
+        XMageRallyBridgeProtocol.ActionSemantic selectedSemantic =
+                decision.getActionSemantics().get(selectedIndex);
+        if (!"pass".equals(selectedSemantic.getActionKind())
+                && priorityArenaId(selectedSemantic) >= 120) {
+            throw fail("selected-action projection requires an original deck object"
+                    + " or pass; generated token identity lacks full-menu authority", null);
+        }
+        ActivatedAbility selected;
+        try {
+            selected = mapSelectedPriorityRow(
+                    xmageAbilities,
+                    selectedSemantic,
+                    allArenaIds());
+            validateSelectedPriorityProjection(selectedSemantic, selected, game);
+        } catch (KernelShadowPolicyViolation expectedPhaseMismatch) {
+            tracePriorityMenuMatch(
+                    "selected_row_absent", xmageAbilities, game, decision);
+            throw fail(
+                    "Rust-selected priority row is absent at the active empty-stack"
+                            + " postcombat rendezvous",
+                    expectedPhaseMismatch);
+        }
+
+        if (selectedPriorityProjectionCount == Long.MAX_VALUE) {
+            throw fail("selected-priority projection counter exhausted", null);
+        }
+        ensureCounterCapacity(1);
+        tracePriorityMenuMatch(
+                "selected_row_catchup", xmageAbilities, game, decision);
+        stepExactlyOnce(decision, selectedIndex);
+        selectedPriorityProjectionCount++;
+        recordSurfaceOutcome(
+                "noncombat_activate_ability_or_spell",
+                decision.getLegalActionCount(), selectedIndex);
+        return selected;
+    }
+
+    private void validateSelectedPriorityProjection(
+            XMageRallyBridgeProtocol.ActionSemantic semantic,
+            ActivatedAbility selected,
+            Game game) {
+        String kind = semantic.getActionKind();
+        if ("pass".equals(kind)) {
+            if (!(selected instanceof PassAbility)) {
+                throw new KernelShadowPolicyViolation(
+                        "selected pass projection did not resolve to XMage pass");
+            }
+            return;
+        }
+        JsonObject row = parseSemantic(semantic, kind);
+        JsonObject source = requiredObject(row, "source", "selected projection source");
+        int arenaId = requiredUnsignedInt(
+                source, "arena_id", "selected projection source");
+        UUID sourceId = selected.getSourceId();
+        MageObject live = sourceId == null ? null : game.getObject(sourceId);
+        Integer mappedArena = sourceId == null ? null : initialArenaIds.get(sourceId);
+        Integer liveCardDbId = live == null ? null : RALLY_CARD_IDS.get(live.getName());
+        String expectedZone = requiredStringValue(
+                source, "zone", "selected projection source");
+        mage.constants.Zone liveZone = sourceId == null
+                ? null : game.getState().getZone(sourceId);
+        int expectedZoneChange = requiredUnsignedInt(
+                source, "zone_change_count", "selected projection source");
+        if (expectedZoneChange == Integer.MAX_VALUE) {
+            throw new KernelShadowPolicyViolation(
+                    "selected projection source zone-change count cannot be translated");
+        }
+        // XMage materializes the loaded deck in Library before the first
+        // hand move; Rust starts those same original objects in Library at
+        // zone-change count zero. Their stable transport relation is +1.
+        int expectedXMageZoneChange = expectedZoneChange + 1;
+        int expectedCardDbId = requiredUnsignedInt(
+                source, "card_db_id", "selected projection source");
+        String expectedOwner = requiredStringValue(
+                source, "owner", "selected projection source");
+        String expectedController = requiredStringValue(
+                source, "controller", "selected projection source");
+        int liveZoneChange = sourceId == null
+                ? -1 : game.getState().getZoneChangeCounter(sourceId);
+        String liveOwner = live == null ? "none" : seatFor(game.getOwnerId(live), game);
+        String liveController = sourceId == null
+                ? "none" : seatFor(game.getControllerId(sourceId), game);
+        if (live == null || mappedArena == null || mappedArena != arenaId
+                || liveCardDbId == null
+                || liveCardDbId != expectedCardDbId
+                || liveZone == null
+                || !expectedZone.equalsIgnoreCase(liveZone.name())
+                || liveZoneChange != expectedXMageZoneChange
+                || !expectedOwner.equals(liveOwner)
+                || !expectedController.equals(liveController)) {
+            throw new KernelShadowPolicyViolation(
+                    "selected projection source does not match live XMage identity:"
+                            + " expected=" + arenaId + "/" + expectedCardDbId
+                            + "/" + expectedZone + "/zcc" + expectedZoneChange
+                            + "(xmage=" + expectedXMageZoneChange + ")"
+                            + "/" + expectedOwner + "/" + expectedController
+                            + " actual=" + mappedArena + "/" + liveCardDbId
+                            + "/" + (liveZone == null ? "none" : liveZone.name())
+                            + "/zcc" + liveZoneChange + "/" + liveOwner
+                            + "/" + liveController);
+        }
+        if ("cast_spell".equals(kind)) {
+            if (!(selected instanceof SpellAbility) || liveZone != mage.constants.Zone.HAND) {
+                throw new KernelShadowPolicyViolation(
+                        "selected cast projection is not an ordinary hand spell");
+            }
+            return;
+        }
+        if ("play_land".equals(kind)) {
+            if (!(selected instanceof PlayLandAbility)
+                    || liveZone != mage.constants.Zone.HAND) {
+                throw new KernelShadowPolicyViolation(
+                        "selected land projection is not an ordinary hand land");
+            }
+            return;
+        }
+        if ("activate_mana_ability".equals(kind)) {
+            String manaChoice = requiredStringValue(
+                    row, "mana_choice", "selected mana projection");
+            if (!(selected instanceof ManaAbility)
+                    || liveZone != mage.constants.Zone.BATTLEFIELD
+                    || liveCardDbId != 76 || !"Mountain".equals(live.getName())
+                    || !"R".equals(manaChoice)) {
+                throw new KernelShadowPolicyViolation(
+                        "selected mana projection is not the proven red Mountain form");
+            }
+            return;
+        }
+        throw new KernelShadowPolicyViolation(
+                "selected projection rejects unproved priority kind " + kind);
+    }
+
+    private void tracePriorityMenuMatch(
+            String outcome,
+            List<? extends ActivatedAbility> xmageAbilities,
+            Game game,
+            XMageRallyBridgeProtocol.DecisionBody decision) {
+        if (!Boolean.getBoolean("xmage.rally.traceCp7Mapper")) {
+            return;
+        }
+        String selected = "none";
+        String rustRows = "none";
+        if (decision != null) {
+            Integer index = decision.getSelectedActionIndex();
+            if (index != null) {
+                if (decision.getActionSemantics() == null
+                        || index < 0 || index >= decision.getActionSemantics().size()) {
+                    selected = index + ":invalid";
+                } else {
+                    selected = index + ":"
+                            + decision.getActionSemantics().get(index).getCanonicalJson();
+                }
+            }
+            rustRows = rustCombatSummary(decision.getActionSemantics());
+        }
+        System.err.println("XMAGE_RALLY_CANDIDATE_PRIORITY_TRACE"
+                + " episode=" + episodeId
+                + " outcome=" + outcome
+                + " turn=" + (game == null ? -1 : game.getTurnNum())
+                + " phase=" + (game == null ? "none" : game.getTurnStepType())
+                + " stack=" + (game == null ? -1 : game.getStack().size())
+                + " rust_actor=" + (decision == null ? "none"
+                : decision.getActingPlayer().wire())
+                + " rust_step=" + (decision == null ? -1 : decision.getStep())
+                + " rust_kind=" + (decision == null ? "none"
+                : decision.getDecisionKind())
+                + " rust_selected=" + selected
+                + " xmage=" + xmagePrioritySummary(xmageAbilities, game)
+                + " rust=" + rustRows);
     }
 
     /** Select a card callback by Rust stable arena identity, not XMage rank. */
@@ -627,6 +876,10 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     @Override
     public synchronized long getPolicyLeafEvaluations() {
         return policyLeafEvaluations;
+    }
+
+    public synchronized long getSelectedPriorityProjectionCount() {
+        return selectedPriorityProjectionCount;
     }
 
     @Override
@@ -1672,6 +1925,26 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         return Collections.unmodifiableMap(ids);
     }
 
+    private static Map<String, Integer> rallyCardIds() {
+        Map<String, Integer> ids = new LinkedHashMap<>();
+        ids.put("Clockwork Percussionist", 16);
+        ids.put("Voldaren Epicure", 127);
+        ids.put("Goblin Bushwhacker", 44);
+        ids.put("Goblin Tomb Raider", 45);
+        ids.put("Burning-Tree Emissary", 10);
+        ids.put("Galvanic Blast", 41);
+        ids.put("Experimental Synthesizer", 30);
+        ids.put("Lightning Bolt", 66);
+        ids.put("Reckless Impulse", 93);
+        ids.put("Rally at the Hornburg", 92);
+        ids.put("Great Furnace", 48);
+        ids.put("Mountain", 76);
+        ids.put("Chain Lightning", 13);
+        ids.put("End the Festivities", 27);
+        ids.putAll(RALLY_TOKEN_CARD_IDS);
+        return Collections.unmodifiableMap(ids);
+    }
+
     private String xmagePrioritySummary(
             List<? extends ActivatedAbility> abilities, Game game) {
         List<String> rows = new ArrayList<>(abilities.size());
@@ -1977,6 +2250,36 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         return mapped;
     }
 
+    private static ActivatedAbility mapSelectedPriorityRow(
+            List<? extends ActivatedAbility> xmageAbilities,
+            XMageRallyBridgeProtocol.ActionSemantic rustRow,
+            Map<UUID, Integer> arenaIds) {
+        if (xmageAbilities == null || rustRow == null || arenaIds == null) {
+            throw new KernelShadowPolicyViolation(
+                    "selected priority mapping requires nonnull inputs");
+        }
+        String kind = rustRow.getActionKind();
+        if (!PRIORITY_KINDS.contains(kind)) {
+            throw new KernelShadowPolicyViolation(
+                    "selected priority row has nonpriority kind " + kind);
+        }
+        Integer arenaId = "pass".equals(kind) ? null : priorityArenaId(rustRow);
+        ActivatedAbility selected = null;
+        int matches = 0;
+        for (ActivatedAbility ability : xmageAbilities) {
+            if (priorityAbilityMatches(ability, kind, arenaId, arenaIds)) {
+                selected = ability;
+                matches++;
+            }
+        }
+        if (matches != 1 || selected == null) {
+            throw new KernelShadowPolicyViolation(
+                    "selected priority row did not map to exactly one XMage ability: kind="
+                            + kind + " arena_id=" + arenaId + " matches=" + matches);
+        }
+        return selected;
+    }
+
     private static boolean priorityAbilityMatches(
             ActivatedAbility ability,
             String kind,
@@ -2134,6 +2437,28 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                 Collections.singletonList(rust.get(4)), bindings);
         if (singleton.size() != 1 || singleton.get(0) != pass) {
             throw new IllegalStateException("singleton Rust pass mapping failed");
+        }
+
+        ActivatedAbility selectedOnly = mapSelectedPriorityRow(
+                Arrays.asList(pass, activated, mana, land, spell), rust.get(1), bindings);
+        if (selectedOnly != spell) {
+            throw new IllegalStateException("selected priority row mapping failed");
+        }
+        try {
+            mapSelectedPriorityRow(
+                    Collections.singletonList(pass), rust.get(1), bindings);
+            throw new IllegalStateException(
+                    "selected priority row mapping accepted an absent action");
+        } catch (KernelShadowPolicyViolation expected) {
+            // Expected fail-closed absence.
+        }
+        try {
+            mapSelectedPriorityRow(
+                    Arrays.asList(spell, spell, pass), rust.get(1), bindings);
+            throw new IllegalStateException(
+                    "selected priority row mapping accepted an ambiguous action");
+        } catch (KernelShadowPolicyViolation expected) {
+            // Expected fail-closed ambiguity.
         }
     }
 
