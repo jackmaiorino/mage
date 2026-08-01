@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Fast engineering spike for the promoted checkpoint on the XMage Rally surface.
@@ -118,6 +119,39 @@ public final class XMageRallyAnchorSpike {
                                     DeckTemplates decks,
                                     long baseSeed,
                                     long episodeId) throws Exception {
+        AtomicReference<LegResult> result = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        Thread gameThread = new Thread(() -> {
+            try {
+                result.set(runLegInGameThread(bridge, decks, baseSeed, episodeId));
+            } catch (Throwable error) {
+                failure.set(error);
+            }
+        }, "GAME-XMAGE-RALLY-ANCHOR-e" + episodeId);
+        gameThread.setDaemon(false);
+        gameThread.start();
+        gameThread.join();
+        Throwable error = failure.get();
+        if (error instanceof Exception) {
+            throw (Exception) error;
+        }
+        if (error instanceof Error) {
+            throw (Error) error;
+        }
+        if (error != null) {
+            throw new IllegalStateException("game thread failed", error);
+        }
+        if (result.get() == null) {
+            throw new IllegalStateException("game thread returned no result");
+        }
+        return result.get();
+    }
+
+    private static LegResult runLegInGameThread(
+            XMageRallyBridgeProcessClient bridge,
+            DeckTemplates decks,
+            long baseSeed,
+            long episodeId) throws Exception {
         long start = System.nanoTime();
         bridge.reset("anchor-reset-" + episodeId, episodeId, baseSeed);
         XMageRallyBridgeProtocol.DecisionBody resetDecision = bridge.getCurrentDecision();
