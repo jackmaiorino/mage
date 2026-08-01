@@ -39,6 +39,26 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
 
     public static final int DEFAULT_MAX_LINE_BYTES = 1_048_576;
     public static final long DEFAULT_EXCHANGE_TIMEOUT_MILLIS = 30_000L;
+    public static final String CP7_BEHAVIOR_CLONE_ADAM_STEP_PROPERTY =
+            "xmage.rally.cp7BehaviorClone.adamStep";
+    public static final String CP7_BEHAVIOR_CLONE_MANIFEST_SHA256_PROPERTY =
+            "xmage.rally.cp7BehaviorClone.manifestSha256";
+    public static final String CP7_BEHAVIOR_CLONE_PAYLOAD_SHA256_PROPERTY =
+            "xmage.rally.cp7BehaviorClone.payloadSha256";
+    public static final String CP7_BEHAVIOR_CLONE_TRAIN_STATE_SHA256_PROPERTY =
+            "xmage.rally.cp7BehaviorClone.trainStateSha256";
+    public static final String CP7_BEHAVIOR_CLONE_MODEL_PARAMETER_SHA256_PROPERTY =
+            "xmage.rally.cp7BehaviorClone.modelParameterSha256";
+    public static final String XMAGE_CP7_OUTCOME_ADAM_STEP_PROPERTY =
+            "xmage.rally.cp7Outcome.adamStep";
+    public static final String XMAGE_CP7_OUTCOME_MANIFEST_SHA256_PROPERTY =
+            "xmage.rally.cp7Outcome.manifestSha256";
+    public static final String XMAGE_CP7_OUTCOME_PAYLOAD_SHA256_PROPERTY =
+            "xmage.rally.cp7Outcome.payloadSha256";
+    public static final String XMAGE_CP7_OUTCOME_TRAIN_STATE_SHA256_PROPERTY =
+            "xmage.rally.cp7Outcome.trainStateSha256";
+    public static final String XMAGE_CP7_OUTCOME_MODEL_PARAMETER_SHA256_PROPERTY =
+            "xmage.rally.cp7Outcome.modelParameterSha256";
 
     private static final int MIN_MAX_LINE_BYTES = 128;
     private static final int MAX_MAX_LINE_BYTES = 16 * 1_048_576;
@@ -61,6 +81,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
     private final ExecutorService ioExecutor;
     private final Thread stderrThread;
     private final Long expectedCheckpointGeneration;
+    private final Cp7BehaviorCloneExpectation expectedCp7BehaviorClone;
+    private final XMageCp7OutcomeExpectation expectedXMageCp7Outcome;
     private final Set<String> usedRequestIds = new HashSet<>();
     private final AtomicBoolean resourcesClosed = new AtomicBoolean();
     private final Object failureLock = new Object();
@@ -81,7 +103,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                           int maxLineBytes,
                                           PrintStream diagnostics,
                                           long clientId,
-                                          Long expectedCheckpointGeneration) {
+                                          Long expectedCheckpointGeneration,
+                                          Cp7BehaviorCloneExpectation expectedCp7BehaviorClone,
+                                          XMageCp7OutcomeExpectation expectedXMageCp7Outcome) {
         this.process = process;
         this.requestOutput = process.getOutputStream();
         this.responseReader = new BoundedUtf8LineReader(process.getInputStream(), maxLineBytes);
@@ -90,6 +114,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         this.maxLineBytes = maxLineBytes;
         this.diagnostics = diagnostics;
         this.expectedCheckpointGeneration = expectedCheckpointGeneration;
+        this.expectedCp7BehaviorClone = expectedCp7BehaviorClone;
+        this.expectedXMageCp7Outcome = expectedXMageCp7Outcome;
         this.ioExecutor = Executors.newSingleThreadExecutor(
                 daemonThreadFactory("XMAGE-RALLY-BRIDGE-IO-" + clientId));
         this.stderrThread = startStderrDrainer(
@@ -108,6 +134,18 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             throws IOException {
         List<String> checkedCommand = validateDirectCommand(command);
         Long expectedCheckpointGeneration = selectedGeneration(checkedCommand);
+        boolean selectsCp7BehaviorClone = selectsCp7BehaviorClone(checkedCommand);
+        boolean selectsXMageCp7Outcome = selectsXMageCp7Outcome(checkedCommand);
+        if ((selectsCp7BehaviorClone && selectsXMageCp7Outcome)
+                || (expectedCheckpointGeneration != null
+                && (selectsCp7BehaviorClone || selectsXMageCp7Outcome))) {
+            throw new IllegalArgumentException(
+                    "bridge generation and derivative selections are mutually exclusive");
+        }
+        Cp7BehaviorCloneExpectation expectedCp7BehaviorClone = selectsCp7BehaviorClone
+                ? Cp7BehaviorCloneExpectation.fromSystemProperties() : null;
+        XMageCp7OutcomeExpectation expectedXMageCp7Outcome = selectsXMageCp7Outcome
+                ? XMageCp7OutcomeExpectation.fromSystemProperties() : null;
         if (exchangeTimeoutMillis <= 0L
                 || exchangeTimeoutMillis > MAX_EXCHANGE_TIMEOUT_MILLIS) {
             throw new IllegalArgumentException(
@@ -127,7 +165,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         Process process = builder.start();
         return new XMageRallyBridgeProcessClient(
                 process, exchangeTimeoutMillis, maxLineBytes,
-                diagnostics, CLIENT_IDS.incrementAndGet(), expectedCheckpointGeneration);
+                diagnostics, CLIENT_IDS.incrementAndGet(), expectedCheckpointGeneration,
+                expectedCp7BehaviorClone, expectedXMageCp7Outcome);
     }
 
     public synchronized XMageRallyBridgeProtocol.Response reset(String requestId,
@@ -352,7 +391,11 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             if (!request.getRequestId().equals(response.getRequestId())) {
                 throw new IllegalArgumentException("response request_id does not echo request");
             }
-            if (expectedCheckpointGeneration == null) {
+            if (expectedXMageCp7Outcome != null) {
+                expectedXMageCp7Outcome.require(response.getCheckpoint());
+            } else if (expectedCp7BehaviorClone != null) {
+                expectedCp7BehaviorClone.require(response.getCheckpoint());
+            } else if (expectedCheckpointGeneration == null) {
                 response.getCheckpoint().requireExactOriginalAuthority();
             } else {
                 response.getCheckpoint().requireSelectedOriginalGeneration(
@@ -649,6 +692,184 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             }
         }
         return selected;
+    }
+
+    private static boolean selectsCp7BehaviorClone(List<String> command) {
+        boolean selected = false;
+        for (int index = 1; index < command.size(); index++) {
+            if (!"--cp7-behavior-clone-root".equals(command.get(index))) {
+                continue;
+            }
+            if (selected || index + 1 >= command.size()) {
+                throw new IllegalArgumentException(
+                        "invalid bridge CP7 behavior-clone selection");
+            }
+            selected = true;
+            index++;
+        }
+        return selected;
+    }
+
+    private static boolean selectsXMageCp7Outcome(List<String> command) {
+        boolean selected = false;
+        for (int index = 1; index < command.size(); index++) {
+            if (!"--xmage-cp7-outcome-root".equals(command.get(index))) {
+                continue;
+            }
+            if (selected || index + 1 >= command.size()) {
+                throw new IllegalArgumentException(
+                        "invalid bridge XMage CP7 outcome selection");
+            }
+            selected = true;
+            index++;
+        }
+        return selected;
+    }
+
+    private static final class Cp7BehaviorCloneExpectation {
+        private final long adamStep;
+        private final String manifestSha256;
+        private final String payloadSha256;
+        private final String trainStateSha256;
+        private final String modelParameterSha256;
+
+        private Cp7BehaviorCloneExpectation(long adamStep,
+                                            String manifestSha256,
+                                            String payloadSha256,
+                                            String trainStateSha256,
+                                            String modelParameterSha256) {
+            this.adamStep = adamStep;
+            this.manifestSha256 = manifestSha256;
+            this.payloadSha256 = payloadSha256;
+            this.trainStateSha256 = trainStateSha256;
+            this.modelParameterSha256 = modelParameterSha256;
+        }
+
+        private static Cp7BehaviorCloneExpectation fromSystemProperties() {
+            String adamStep = System.getProperty(CP7_BEHAVIOR_CLONE_ADAM_STEP_PROPERTY);
+            String manifest = System.getProperty(CP7_BEHAVIOR_CLONE_MANIFEST_SHA256_PROPERTY);
+            String payload = System.getProperty(CP7_BEHAVIOR_CLONE_PAYLOAD_SHA256_PROPERTY);
+            String trainState = System.getProperty(
+                    CP7_BEHAVIOR_CLONE_TRAIN_STATE_SHA256_PROPERTY);
+            String model = System.getProperty(
+                    CP7_BEHAVIOR_CLONE_MODEL_PARAMETER_SHA256_PROPERTY);
+            int supplied = 0;
+            for (String value : Arrays.asList(
+                    adamStep, manifest, payload, trainState, model)) {
+                if (value != null) {
+                    supplied++;
+                }
+            }
+            if (supplied == 0) {
+                return new Cp7BehaviorCloneExpectation(
+                        XMageRallyBridgeProtocol.CP7_BEHAVIOR_CLONE_ADAM_STEP,
+                        XMageRallyBridgeProtocol.CP7_BEHAVIOR_CLONE_MANIFEST_SHA256,
+                        XMageRallyBridgeProtocol.CP7_BEHAVIOR_CLONE_PAYLOAD_SHA256,
+                        XMageRallyBridgeProtocol.CP7_BEHAVIOR_CLONE_TRAIN_STATE_SHA256,
+                        XMageRallyBridgeProtocol.CP7_BEHAVIOR_CLONE_MODEL_PARAMETER_SHA256);
+            }
+            if (supplied != 5) {
+                throw new IllegalArgumentException(
+                        "all CP7 behavior-clone identity properties must be supplied together");
+            }
+            long parsedAdamStep;
+            try {
+                parsedAdamStep = Long.parseLong(adamStep);
+            } catch (NumberFormatException error) {
+                throw new IllegalArgumentException(
+                        "invalid CP7 behavior-clone Adam step property", error);
+            }
+            if (parsedAdamStep < 0L
+                    || !isLowerHexSha256(manifest)
+                    || !isLowerHexSha256(payload)
+                    || !isLowerHexSha256(trainState)
+                    || !isLowerHexSha256(model)) {
+                throw new IllegalArgumentException(
+                        "invalid CP7 behavior-clone identity properties");
+            }
+            return new Cp7BehaviorCloneExpectation(
+                    parsedAdamStep, manifest, payload, trainState, model);
+        }
+
+        private void require(XMageRallyBridgeProtocol.CheckpointIdentity checkpoint) {
+            checkpoint.requireCp7BehaviorCloneAuthority(
+                    adamStep, manifestSha256, payloadSha256,
+                    trainStateSha256, modelParameterSha256);
+        }
+
+        private static boolean isLowerHexSha256(String value) {
+            if (value == null || value.length() != 64) {
+                return false;
+            }
+            for (int index = 0; index < value.length(); index++) {
+                char character = value.charAt(index);
+                if (!((character >= '0' && character <= '9')
+                        || (character >= 'a' && character <= 'f'))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private static final class XMageCp7OutcomeExpectation {
+        private final long adamStep;
+        private final String manifestSha256;
+        private final String payloadSha256;
+        private final String trainStateSha256;
+        private final String modelParameterSha256;
+
+        private XMageCp7OutcomeExpectation(long adamStep,
+                                           String manifestSha256,
+                                           String payloadSha256,
+                                           String trainStateSha256,
+                                           String modelParameterSha256) {
+            this.adamStep = adamStep;
+            this.manifestSha256 = manifestSha256;
+            this.payloadSha256 = payloadSha256;
+            this.trainStateSha256 = trainStateSha256;
+            this.modelParameterSha256 = modelParameterSha256;
+        }
+
+        private static XMageCp7OutcomeExpectation fromSystemProperties() {
+            String adamStep = System.getProperty(XMAGE_CP7_OUTCOME_ADAM_STEP_PROPERTY);
+            String manifest = System.getProperty(XMAGE_CP7_OUTCOME_MANIFEST_SHA256_PROPERTY);
+            String payload = System.getProperty(XMAGE_CP7_OUTCOME_PAYLOAD_SHA256_PROPERTY);
+            String trainState = System.getProperty(
+                    XMAGE_CP7_OUTCOME_TRAIN_STATE_SHA256_PROPERTY);
+            String model = System.getProperty(
+                    XMAGE_CP7_OUTCOME_MODEL_PARAMETER_SHA256_PROPERTY);
+            for (String value : Arrays.asList(
+                    adamStep, manifest, payload, trainState, model)) {
+                if (value == null) {
+                    throw new IllegalArgumentException(
+                            "all XMage CP7 outcome identity properties are required");
+                }
+            }
+            long parsedAdamStep;
+            try {
+                parsedAdamStep = Long.parseLong(adamStep);
+            } catch (NumberFormatException error) {
+                throw new IllegalArgumentException(
+                        "invalid XMage CP7 outcome Adam step property", error);
+            }
+            if (parsedAdamStep < 0L
+                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(manifest)
+                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(payload)
+                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(trainState)
+                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(model)) {
+                throw new IllegalArgumentException(
+                        "invalid XMage CP7 outcome identity properties");
+            }
+            return new XMageCp7OutcomeExpectation(
+                    parsedAdamStep, manifest, payload, trainState, model);
+        }
+
+        private void require(XMageRallyBridgeProtocol.CheckpointIdentity checkpoint) {
+            checkpoint.requireXMageCp7OutcomeAuthority(
+                    adamStep, manifestSha256, payloadSha256,
+                    trainStateSha256, modelParameterSha256);
+        }
     }
 
     private static Thread startStderrDrainer(InputStream stderr,

@@ -125,7 +125,10 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         game.resumeTimer(getTurnControlledBy());
         try {
             if (mirrorPolicy instanceof KernelShadowRallyPolicy
-                    && phaseCatchupWindow(game.getTurnStepType())) {
+                    && phaseCatchupWindow(
+                            game.getTurnStepType(),
+                            !game.getStack().isEmpty(),
+                            getId().equals(game.getActivePlayerId()))) {
                 List<ActivatedAbility> playable = querySourceDistinctPlayable(
                         (hidden, fromZone, hideDuplicates) ->
                                 getPlayable(game, hidden, fromZone, hideDuplicates));
@@ -159,8 +162,11 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         return step == PhaseStep.BEGIN_COMBAT;
     }
 
-    private static boolean phaseCatchupWindow(PhaseStep step) {
-        return step == PhaseStep.BEGIN_COMBAT
+    private static boolean phaseCatchupWindow(
+            PhaseStep step, boolean stackNonempty, boolean candidateActive) {
+        return (step == PhaseStep.PRECOMBAT_MAIN
+                && (stackNonempty || !candidateActive))
+                || step == PhaseStep.BEGIN_COMBAT
                 || step == PhaseStep.DECLARE_ATTACKERS
                 || step == PhaseStep.DECLARE_BLOCKERS
                 || step == PhaseStep.POSTCOMBAT_MAIN;
@@ -1038,29 +1044,37 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     }
 
     private static void assertShadowPriorityRoutingSeam() {
-        if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE)
+        if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE, true, true)
                 || shadowPriorityDirectDispatch(PhaseStep.COMBAT_DAMAGE)) {
             throw new IllegalStateException(
                     "combat-damage priority escaped the hard-pass gate");
         }
-        if (!phaseCatchupWindow(PhaseStep.BEGIN_COMBAT)
+        if (!phaseCatchupWindow(PhaseStep.BEGIN_COMBAT, false, true)
                 || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT)) {
             throw new IllegalStateException(
                     "begin-combat catchup no longer dispatches shadow priority");
         }
-        if (!phaseCatchupWindow(PhaseStep.DECLARE_ATTACKERS)
+        if (!phaseCatchupWindow(PhaseStep.DECLARE_ATTACKERS, false, true)
                 || shadowPriorityDirectDispatch(PhaseStep.DECLARE_ATTACKERS)
-                || !phaseCatchupWindow(PhaseStep.DECLARE_BLOCKERS)
+                || !phaseCatchupWindow(PhaseStep.DECLARE_BLOCKERS, false, true)
                 || shadowPriorityDirectDispatch(PhaseStep.DECLARE_BLOCKERS)
-                || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN)
+                || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN, false, true)
                 || shadowPriorityDirectDispatch(PhaseStep.POSTCOMBAT_MAIN)) {
             throw new IllegalStateException(
                     "combat and postcombat catchup routing changed");
         }
-        if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN)
+        if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, false, true)
                 || shadowPriorityDirectDispatch(PhaseStep.PRECOMBAT_MAIN)) {
             throw new IllegalStateException(
                     "ordinary empty-stack main phase entered shadow catchup routing");
+        }
+        if (!phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, true, true)) {
+            throw new IllegalStateException(
+                    "nonempty-stack precombat main missed shadow catchup routing");
+        }
+        if (!phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, false, false)) {
+            throw new IllegalStateException(
+                    "nonactive empty-stack precombat main missed shadow catchup routing");
         }
     }
 

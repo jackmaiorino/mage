@@ -37,7 +37,7 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Fast engineering spike for the promoted checkpoint on the XMage Rally surface.
+ * Fast engineering spike for pinned checkpoints on the XMage Rally surface.
  *
  * <p>This is a paired external-anchor harness, not by itself a statistical
  * claim. It keeps one exact Rust checkpoint process alive, swaps the candidate
@@ -83,17 +83,29 @@ public final class XMageRallyAnchorSpike {
         }
         DeckTemplates decks = DeckTemplates.load(deckPath);
 
-        List<String> command = new ArrayList<>(Arrays.asList(
-                args.scorerExecutable.toString(),
-                "--original-store-root",
-                args.storeRoot.toString()));
-        if (args.checkpointGeneration != null) {
-            command.add("--generation");
-            command.add(Long.toString(args.checkpointGeneration));
+        List<String> command = new ArrayList<>();
+        command.add(args.scorerExecutable.toString());
+        if (args.outcomeRoot != null) {
+            command.add("--xmage-cp7-outcome-root");
+            command.add(args.outcomeRoot.toString());
+        } else if (args.behaviorCloneRoot != null) {
+            command.add("--cp7-behavior-clone-root");
+            command.add(args.behaviorCloneRoot.toString());
+        } else {
+            command.add("--original-store-root");
+            command.add(args.storeRoot.toString());
+            if (args.checkpointGeneration != null) {
+                command.add("--generation");
+                command.add(Long.toString(args.checkpointGeneration));
+            }
         }
         if (args.teacherExportPath != null) {
             command.add("--xmage-cp7-teacher-jsonl");
             command.add(args.teacherExportPath.toString());
+        }
+        if (args.outcomeExportPath != null) {
+            command.add("--xmage-cp7-outcome-jsonl");
+            command.add(args.outcomeExportPath.toString());
         }
         long sampleStart = System.nanoTime();
         try (XMageRallyBridgeProcessClient bridge =
@@ -205,8 +217,12 @@ public final class XMageRallyAnchorSpike {
             System.out.println("XMAGE_RALLY_ANCHOR_SPIKE PASS"
                     + " base_seed=" + args.baseSeed
                     + " checkpoint_generation="
-                    + (args.checkpointGeneration == null
-                    ? "default" : args.checkpointGeneration)
+                    + (args.outcomeRoot != null
+                    ? "xmage_cp7_outcome_reinforce"
+                    : (args.behaviorCloneRoot != null
+                    ? "cp7_behavior_clone"
+                    : (args.checkpointGeneration == null
+                    ? "default" : args.checkpointGeneration)))
                     + " opponent=" + args.opponentMode.wire
                     + " cp7_skill=" + args.cp7Skill
                     + " first_episode=" + args.firstEpisodeId
@@ -822,7 +838,10 @@ public final class XMageRallyAnchorSpike {
         final OpponentMode opponentMode;
         final int cp7Skill;
         final Path teacherExportPath;
+        final Path outcomeExportPath;
         final Long checkpointGeneration;
+        final Path behaviorCloneRoot;
+        final Path outcomeRoot;
 
         Args(Path repoRoot,
              Path scorerExecutable,
@@ -833,17 +852,24 @@ public final class XMageRallyAnchorSpike {
              OpponentMode opponentMode,
              int cp7Skill,
              Path teacherExportPath,
-             Long checkpointGeneration) throws Exception {
+             Path outcomeExportPath,
+             Long checkpointGeneration,
+             Path behaviorCloneRoot,
+             Path outcomeRoot) throws Exception {
             this.repoRoot = repoRoot.toRealPath();
             this.scorerExecutable = scorerExecutable.toRealPath();
-            this.storeRoot = storeRoot.toRealPath();
+            this.storeRoot = storeRoot == null ? null : storeRoot.toRealPath();
             this.baseSeed = baseSeed;
             this.firstEpisodeId = firstEpisodeId;
             this.pairCount = pairCount;
             this.opponentMode = opponentMode;
             this.cp7Skill = cp7Skill;
             this.teacherExportPath = teacherExportPath;
+            this.outcomeExportPath = outcomeExportPath;
             this.checkpointGeneration = checkpointGeneration;
+            this.behaviorCloneRoot = behaviorCloneRoot == null
+                    ? null : behaviorCloneRoot.toRealPath();
+            this.outcomeRoot = outcomeRoot == null ? null : outcomeRoot.toRealPath();
         }
 
         static Args parse(String[] raw) throws Exception {
@@ -857,20 +883,25 @@ public final class XMageRallyAnchorSpike {
                 }
             }
             Set<String> required = new HashSet<>(Arrays.asList(
-                    "--repo-root", "--scorer-exe", "--store-root",
+                    "--repo-root", "--scorer-exe",
                     "--base-seed", "--first-episode"));
             Set<String> allowed = new HashSet<>(required);
+            allowed.add("--store-root");
+            allowed.add("--behavior-clone-root");
+            allowed.add("--outcome-root");
             allowed.add("--pairs");
             allowed.add("--opponent");
             allowed.add("--cp7-skill");
             allowed.add("--teacher-export");
+            allowed.add("--outcome-export");
             allowed.add("--generation");
             if (!values.keySet().containsAll(required)
                     || !allowed.containsAll(values.keySet())) {
                 throw new IllegalArgumentException(
                         "required arguments: " + required
                                 + "; optional: --pairs, --opponent, --cp7-skill,"
-                                + " --teacher-export, --generation");
+                                + " --store-root, --behavior-clone-root, --outcome-root,"
+                                + " --teacher-export, --outcome-export, --generation");
             }
             long baseSeed = Long.parseLong(values.get("--base-seed"));
             long firstEpisode = Long.parseLong(values.get("--first-episode"));
@@ -881,6 +912,9 @@ public final class XMageRallyAnchorSpike {
                     values.getOrDefault("--cp7-skill", "7"));
             Long checkpointGeneration = values.containsKey("--generation")
                     ? Long.parseLong(values.get("--generation")) : null;
+            boolean hasStoreRoot = values.containsKey("--store-root");
+            boolean hasBehaviorCloneRoot = values.containsKey("--behavior-clone-root");
+            boolean hasOutcomeRoot = values.containsKey("--outcome-root");
             Path teacherExportPath = null;
             if (values.containsKey("--teacher-export")) {
                 Path requested = Paths.get(values.get("--teacher-export"))
@@ -892,17 +926,37 @@ public final class XMageRallyAnchorSpike {
                 }
                 teacherExportPath = parent.toRealPath().resolve(requested.getFileName());
             }
+            Path outcomeExportPath = null;
+            if (values.containsKey("--outcome-export")) {
+                Path requested = Paths.get(values.get("--outcome-export"))
+                        .toAbsolutePath().normalize();
+                Path parent = requested.getParent();
+                if (parent == null || requested.getFileName() == null) {
+                    throw new IllegalArgumentException(
+                            "outcome export must name a file inside an existing directory");
+                }
+                outcomeExportPath = parent.toRealPath().resolve(requested.getFileName());
+            }
             if (baseSeed < 0L || firstEpisode < 0L
                     || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128
                     || cp7Skill < 1 || cp7Skill > 10
+                    || (hasStoreRoot ? 1 : 0) + (hasBehaviorCloneRoot ? 1 : 0)
+                    + (hasOutcomeRoot ? 1 : 0) != 1
+                    || (checkpointGeneration != null
+                    && (hasBehaviorCloneRoot || hasOutcomeRoot))
                     || (checkpointGeneration != null && checkpointGeneration < 0L)
-                    || (teacherExportPath != null && opponentMode != OpponentMode.CP7)) {
+                    || (teacherExportPath != null && opponentMode != OpponentMode.CP7)
+                    || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)
+                    || (teacherExportPath != null && outcomeExportPath != null)) {
                 throw new IllegalArgumentException(
                         "base seed must be nonnegative, first episode must be even,"
                                 + " pairs must be in [1,128],"
                                 + " CP7 skill must be in [1,10],"
+                                + " exactly one original or derivative root must be selected,"
+                                + " generation applies only to the original Store,"
                                 + " generation must be nonnegative,"
-                                + " and teacher export requires opponent cp7");
+                                + " exports require opponent cp7,"
+                                + " and teacher/outcome exports are mutually exclusive");
             }
             try {
                 Math.addExact(firstEpisode, Math.subtractExact(
@@ -913,14 +967,18 @@ public final class XMageRallyAnchorSpike {
             return new Args(
                     Paths.get(values.get("--repo-root")),
                     Paths.get(values.get("--scorer-exe")),
-                    Paths.get(values.get("--store-root")),
+                    hasStoreRoot ? Paths.get(values.get("--store-root")) : null,
                     baseSeed,
                     firstEpisode,
                     pairCount,
                     opponentMode,
                     cp7Skill,
                     teacherExportPath,
-                    checkpointGeneration);
+                    outcomeExportPath,
+                    checkpointGeneration,
+                    hasBehaviorCloneRoot
+                            ? Paths.get(values.get("--behavior-clone-root")) : null,
+                    hasOutcomeRoot ? Paths.get(values.get("--outcome-root")) : null);
         }
     }
 

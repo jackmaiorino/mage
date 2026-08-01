@@ -10,7 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Typed values for the exact promoted(2) generation-384 checkpoint shadow.
+ * Typed values for the exact promoted(2) checkpoint and its pinned derivatives.
  *
  * <p>The wire service owns the MTG state and sampling. Java supplies only a
  * reset seed or the index that XMage actually selected. Every response carries
@@ -32,6 +32,10 @@ public final class XMageRallyBridgeProtocol {
             "original-promoted2-generation384-store";
     public static final String SELECTED_GENERATION_AUTHORITY_KIND =
             "original-promoted2-validated-store-generation";
+    public static final String CP7_BEHAVIOR_CLONE_AUTHORITY_KIND =
+            "cp7-behavior-clone-derivative-v1";
+    public static final String XMAGE_CP7_OUTCOME_AUTHORITY_KIND =
+            "xmage-cp7-outcome-reinforce-derivative-v1";
     public static final String SOURCE_RUN_SHA256 =
             "2c9b7423004428c0e2bb138afafc15ec65957f6bd98c4587bea704fbf9549aae";
     public static final long SOURCE_GENERATION = 384L;
@@ -45,6 +49,15 @@ public final class XMageRallyBridgeProtocol {
             "fc471f85d28293d72b42dc61de628859173bd67426e251a51bfbbe86c7d586d8";
     public static final String MODEL_PARAMETER_SHA256 =
             "db58dbe3f1f76b5bdf3bae4de657711dc818393b2bf1eeae88c02d8866b4d01d";
+    public static final long CP7_BEHAVIOR_CLONE_ADAM_STEP = 141L;
+    public static final String CP7_BEHAVIOR_CLONE_MANIFEST_SHA256 =
+            "6ba733fead0d36c26cd24630245fa6f2a1216ae60c73f46d45e83b4cc714676c";
+    public static final String CP7_BEHAVIOR_CLONE_PAYLOAD_SHA256 =
+            "de1132f6b8b55975154133b91a2f2ea90bc1159676a041057fd827e728eca4e1";
+    public static final String CP7_BEHAVIOR_CLONE_TRAIN_STATE_SHA256 =
+            "64df1692fae7f78d0d4d4a4d6489325d253125276ca578c94912c9bd12374b56";
+    public static final String CP7_BEHAVIOR_CLONE_MODEL_PARAMETER_SHA256 =
+            "3f4da9d761771cf0d7cfe2da19b52dd93dd0bc59466d92318cc11fc850d8c4dc";
     public static final String ENVIRONMENT_TRAJECTORY_CONTRACT = "legacy-v1";
     public static final String SAMPLER_IDENTITY =
             "f32-q8-expq63-hamilton-splitmix64-v1";
@@ -274,6 +287,84 @@ public final class XMageRallyBridgeProtocol {
                     samplerContractSha256);
             if (sourceGeneration != expectedGeneration
                     || loadedGeneration != expectedGeneration) {
+                throw new IllegalArgumentException("checkpoint generation identity mismatch");
+            }
+        }
+
+        void requireExactCp7BehaviorCloneAuthority() {
+            requireCp7BehaviorCloneAuthority(
+                    CP7_BEHAVIOR_CLONE_ADAM_STEP,
+                    CP7_BEHAVIOR_CLONE_MANIFEST_SHA256,
+                    CP7_BEHAVIOR_CLONE_PAYLOAD_SHA256,
+                    CP7_BEHAVIOR_CLONE_TRAIN_STATE_SHA256,
+                    CP7_BEHAVIOR_CLONE_MODEL_PARAMETER_SHA256);
+        }
+
+        void requireCp7BehaviorCloneAuthority(
+                long expectedAdamStep,
+                String expectedManifestSha256,
+                String expectedPayloadSha256,
+                String expectedTrainStateSha256,
+                String expectedModelParameterSha256) {
+            requireNonnegative(expectedAdamStep, "expected CP7 behavior-clone Adam step");
+            requireEqual("authority_kind", CP7_BEHAVIOR_CLONE_AUTHORITY_KIND, authorityKind);
+            requireEqual("source_run_sha256", SOURCE_RUN_SHA256, sourceRunSha256);
+            requireEqual("source_checkpoint_sha256", SOURCE_CHECKPOINT_SHA256,
+                    sourceCheckpointSha256);
+            requireEqual("source_sidecar_sha256", SOURCE_SIDECAR_SHA256, sourceSidecarSha256);
+            requireEqual("source_payload_sha256", SOURCE_PAYLOAD_SHA256, sourcePayloadSha256);
+            requireEqual("source_train_state_sha256", SOURCE_TRAIN_STATE_SHA256,
+                    sourceTrainStateSha256);
+            requireEqual("loaded_run_sha256", SOURCE_RUN_SHA256, loadedRunSha256);
+            requireEqual("loaded_checkpoint_sha256", expectedManifestSha256,
+                    loadedCheckpointSha256);
+            requireEqual("loaded_payload_sha256", expectedPayloadSha256,
+                    loadedPayloadSha256);
+            requireEqual("loaded_train_state_sha256", expectedTrainStateSha256,
+                    loadedTrainStateSha256);
+            requireEqual("model_parameter_sha256", expectedModelParameterSha256,
+                    modelParameterSha256);
+            requireEqual("environment_trajectory_contract", ENVIRONMENT_TRAJECTORY_CONTRACT,
+                    environmentTrajectoryContract);
+            requireEqual("sampler_identity", SAMPLER_IDENTITY, samplerIdentity);
+            requireEqual("sampler_contract_sha256", SAMPLER_CONTRACT_SHA256,
+                    samplerContractSha256);
+            if (sourceGeneration != SOURCE_GENERATION
+                    || loadedGeneration != expectedAdamStep) {
+                throw new IllegalArgumentException("checkpoint generation identity mismatch");
+            }
+        }
+
+        void requireXMageCp7OutcomeAuthority(
+                long expectedAdamStep,
+                String expectedManifestSha256,
+                String expectedPayloadSha256,
+                String expectedTrainStateSha256,
+                String expectedModelParameterSha256) {
+            requireNonnegative(expectedAdamStep, "expected XMage CP7 outcome Adam step");
+            requireEqual("authority_kind", XMAGE_CP7_OUTCOME_AUTHORITY_KIND, authorityKind);
+            requireEqual("source_run_sha256", SOURCE_RUN_SHA256, sourceRunSha256);
+            requireEqual("source_checkpoint_sha256", SOURCE_CHECKPOINT_SHA256,
+                    sourceCheckpointSha256);
+            requireEqual("source_sidecar_sha256", SOURCE_SIDECAR_SHA256, sourceSidecarSha256);
+            requireEqual("source_payload_sha256", SOURCE_PAYLOAD_SHA256, sourcePayloadSha256);
+            requireEqual("source_train_state_sha256", SOURCE_TRAIN_STATE_SHA256,
+                    sourceTrainStateSha256);
+            requireEqual("loaded_run_sha256", SOURCE_RUN_SHA256, loadedRunSha256);
+            requireEqual("loaded_checkpoint_sha256", expectedManifestSha256,
+                    loadedCheckpointSha256);
+            requireEqual("loaded_payload_sha256", expectedPayloadSha256, loadedPayloadSha256);
+            requireEqual("loaded_train_state_sha256", expectedTrainStateSha256,
+                    loadedTrainStateSha256);
+            requireEqual("model_parameter_sha256", expectedModelParameterSha256,
+                    modelParameterSha256);
+            requireEqual("environment_trajectory_contract", ENVIRONMENT_TRAJECTORY_CONTRACT,
+                    environmentTrajectoryContract);
+            requireEqual("sampler_identity", SAMPLER_IDENTITY, samplerIdentity);
+            requireEqual("sampler_contract_sha256", SAMPLER_CONTRACT_SHA256,
+                    samplerContractSha256);
+            if (sourceGeneration != SOURCE_GENERATION
+                    || loadedGeneration != expectedAdamStep) {
                 throw new IllegalArgumentException("checkpoint generation identity mismatch");
             }
         }
