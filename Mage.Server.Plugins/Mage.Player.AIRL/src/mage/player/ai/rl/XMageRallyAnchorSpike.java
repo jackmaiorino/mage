@@ -47,6 +47,8 @@ public final class XMageRallyAnchorSpike {
             "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper/Deck - Mono Red Rally.dek";
     public static final String DECK_SHA256 =
             "4b5019bd08f9387aeabebdca0d90aaa10dfd75fc75ed3a87c95a2fabf4dba834";
+    public static final String DECK_SHA256_LF =
+            "c6994cc1be913b15fec456d7baa8af6c049ef099463856344dea35b195a927a4";
     private static final long BRIDGE_TIMEOUT_MILLIS = 10L * 60_000L;
 
     private static final Map<String, Integer> RALLY_CARD_IDS = rallyCardIds();
@@ -62,7 +64,9 @@ public final class XMageRallyAnchorSpike {
             throw new IllegalStateException("Rally deck escaped repository root");
         }
         String deckSha = sha256(deckPath);
-        if (!DECK_SHA256.equals(deckSha)) {
+        // Git materializes this XML as CRLF in the certified Windows checkout
+        // and LF in this WSL worktree. The parsed 75-card deck is identical.
+        if (!DECK_SHA256.equals(deckSha) && !DECK_SHA256_LF.equals(deckSha)) {
             throw new IllegalStateException("Rally deck SHA-256 mismatch: " + deckSha);
         }
 
