@@ -14,7 +14,9 @@ The policy-scale 2.0 arm was nevertheless run as an explicitly experimental rapi
 
 Iteration 3 then continued experimentally from the rejected policy-scale 2.0 child using 64 new on-policy pairs at base 1070001 and one further warm-start update to Adam step 3. On final-harness fresh bases 1100001 and 1110001, the child scored `55-73` versus the retained centered-v2 control at `58-70`. The paired result was `G=1, L=4, T=123`, with one-sided exact `p=0.96875`. Iteration 3 failed every promotion condition and was retired.
 
-The archived-generation screen also failed to improve generation 384. Generation 384 remains the original anchor baseline, while centered-v2 aggressive manifest `706b3a...` remains the retained outcome-training parent after the iteration-2 and iteration-3 rejections. Both are below 50% in the relevant fresh CP7 blocks, and neither has demonstrated CP7 superiority. Nothing here supports a pro-level play claim.
+A rapid PPO-Clip experiment then reused the exact base-1070001 behavior corpus and Adam-step-2 parent. Four full-corpus clipped updates produced a verified Adam-step-6 child. On fresh base-1130001 seeds it scored `16-16` versus the retained centered-v2 control at `17-15`. The exact paired result was `G=1, L=2, T=29`, with one-sided exact `p=0.875` and zero selected-action projections in either block. The PPO child failed the rapid qualification rule and was retired.
+
+The archived-generation screen also failed to improve generation 384. Generation 384 remains the original anchor baseline, while centered-v2 aggressive manifest `706b3a...` remains the retained outcome-training parent after the iteration-2, iteration-3, and PPO-Clip rejections. Both are below 50% in the relevant fresh CP7 blocks, and neither has demonstrated CP7 superiority. Nothing here supports a pro-level play claim.
 
 ## Code provenance
 
@@ -27,6 +29,7 @@ XMage repository commits:
 - `e1d4ce80ccebca26095b5694a89c9468cd1f41ab`: selected-generation identity validation
 - `5d89881adcdb62c55ba4c260c4d34e1f76ad8e35`: derivative-root evaluation, candidate-controlled outcome export, dynamic fail-closed derivative identity validation, and this campaign report
 - `95bc86944a0b625c79aa4b505e87f0049f673901`: restricted selected-action projection, stable source validation, projection instrumentation, and checked alignment accounting
+- `fcd1bb2f681`: iteration-3 corpus, diagnostic, and final matched evidence
 
 Rust repository commits:
 
@@ -38,6 +41,7 @@ Rust repository commits:
 - `41fdd71a7195841545b81fe6f8c7e7d4e6c61669`: candidate-controlled XMage outcome export, strict terminal REINFORCE/value training, derivative verification, and checkpoint-scorer authority
 - `705b87284f7bc519870e43117969f27533c9829a`: iterative parent-bound CP7 outcome export and training, full parent Adam-state inheritance, legacy compatibility, and fail-closed export poisoning
 - `2c1fbfab37603114a3e25e5cc50c418294735105`: gated base-1090001 native phase-cursor diagnostic
+- `63517571834b0c88f14e74b61cd341f6b54cb565`: full-batch PPO-Clip outcome training, joint physical-group ratios, clipped-gradient telemetry, and strict derivative verification
 
 The iteration-2 corpus, artifacts, and live results were produced while the Rust changes were still uncommitted on top of `41fdd71a7195841545b81fe6f8c7e7d4e6c61669`. Those changes, plus the final fail-closed exporter-poison repair, are now committed as `705b87284f7bc519870e43117969f27533c9829a`. The implementation is confined to `native_policy_train_step_v1.rs`, `native_xmage_cp7_outcome_reinforce_v1.rs`, and `native_checkpoint_shadow_stdio_v1.rs`. The historical executable hash still pins the completed games, while the post-fix rebuild below is the current executable for future work.
 
@@ -70,6 +74,12 @@ After commit `705b87284f7bc519870e43117969f27533c9829a`, the Windows scorer was 
 This post-fix executable is the current scorer for future exports and live work. The completed iteration-2 games remain attributed to the pre-fix executable above; the exporter repair changes failure handling, not the recorded successful game outcomes. The iteration-3 base-1070001 export and final live base-1100001/base-1110001 runs used this post-fix executable.
 
 The isolated Windows diagnostic scorer for base 1090001 was 4,736,000 bytes with SHA-256 `88b5c42d6b96e9dfa60e1a9440f35f5f54aae0cc8cdc551d93f10a72e3f4d732`. It was built from commit `2c1fbfab37603114a3e25e5cc50c418294735105` at `target-windows-base109-step64-diagnostic\release\checkpoint_shadow_stdio_v1.exe` and used only for the gated episode-45, entry-step-64 snapshots described below.
+
+The Windows scorer used for both base-1130001 PPO and retained-control blocks was built from commit `63517571834b0c88f14e74b61cd341f6b54cb565`:
+
+- Path: `C:\Users\Jack\IdeaProjects\mtg-kernel-entropy-smoke-v1\target-windows-outcome-ppo\release\checkpoint_shadow_stdio_v1.exe`
+- Bytes: 4,801,024
+- SHA-256: `c73a1a0e18e6eb8bb8b62982a5294d4daa8674e5a1b10c59ba3e8defb4abdb57`
 
 ## Fixed source checkpoint
 
@@ -417,6 +427,42 @@ The child lost three wins and `2.34375` percentage points relative to the retain
 
 Base 1100001 is exact no-projection evidence and already favors the retained control. Base 1110001 is valid as a selected-action-projection diagnostic because the control required two exact selected-action projections; it is not full-menu promotion evidence. The combined direction is adverse, so iteration 3 is retired rather than expanded. The Adam-step-3 child is not promoted, the rejected Adam-step-2 branch is not revived, and centered-v2 Adam-step-1 manifest `706b3a...` remains the retained outcome-training parent.
 
+## PPO-Clip rapid experiment
+
+The next experiment changed the optimizer instead of continuing the one-step REINFORCE scale grid. It reused the exact base-1070001 schema-v2 corpus under its behavior parent, Adam-step-2 manifest `34cd78ed...`. This parent remains an experimental behavior authority, not the retained live parent.
+
+Commit `63517571834b0c88f14e74b61cd341f6b54cb565` added a narrow full-batch PPO-Clip mode. For each physical autoregressive decision it sums the selected substep log-probability differences, exponentiates once to obtain one joint likelihood ratio, and clips once at the physical-group boundary. Episode-balanced standardized advantages remain frozen from the behavior source. The trainer recomputes stop-gradient coefficients immediately before each update, retains the complete parent Adam state, and records before-and-after ratio, forward-KL, and action-total-variation telemetry for every epoch.
+
+The experiment used clip epsilon `0.2`, learning rate `3e-4`, value coefficient `0.05`, policy scale `1.0`, four epochs, and one full-corpus Adam update per epoch. Independent math and manifest reviews found no P0 or P1 defect. The focused module suite passed 10 tests with three external fixtures ignored by default. The explicitly enabled base-1070001 fixture then passed on all 4,616 groups and 5,495 rows. Its initial maximum absolute joint log ratio was `2.9592e-6` against the hard `2e-4` transport limit, with zero clipped groups.
+
+| Artifact field | Exact value |
+| --- | --- |
+| Root | `D:\mtg-kernel-xmage-cp7-outcome-ppo-base1070001-clip0p2-lr3e-4-vc0p05-epochs4-v1` |
+| Manifest SHA-256 | `ecc08eb5926763e81a72a6220db72175307475509bb83dfde54a68f366e3a241` |
+| Payload SHA-256 | `4f44579ef7c42e0eea117825d664112733fce797e1c54649b6e4f7ff9179da4a` |
+| Native-state SHA-256 | `8f4898a11df4841b79a1a6791d2ef5430b381ca7fb0679e2e6be534b3eccb7bc` |
+| Model-parameter SHA-256 | `23cb72509b4d43e79a6b3eee2e66521111d7f6267ad517733feb09b3acb8bc72` |
+| Adam step | 6 |
+
+| State | Clipped groups | Mean row TV | P90 row TV | Mean old-to-current KL | Mean clipped policy loss |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Initial Adam 2 | 0 | 0.000000062 | 0.000000236 | 0.000000000000052 | 0.000000008 |
+| After Adam 3 | 13 | 0.003093 | 0.005098 | 0.000426 | -0.000755 |
+| After Adam 4 | 38 | 0.005431 | 0.009557 | 0.001091 | -0.000973 |
+| After Adam 5 | 39 | 0.006684 | 0.013692 | 0.001381 | -0.001568 |
+| After Adam 6 | 38 | 0.007686 | 0.015957 | 0.001517 | -0.002371 |
+
+The final mean action TV was below the tentative `0.015` lower movement target, while p90 TV and KL were safely inside their upper limits. The clipped policy loss improved, but value MSE worsened from `0.7976085` to `0.8860727`, so total objective increased from `0.0398804` to `0.0419325`. Rather than tune a new grid from offline numbers, the conservative candidate advanced only to a rapid 16-pair live diagnostic.
+
+Both policies played the same fresh base-1130001 seat-swapped seeds sequentially. Neither block used selected-action projection.
+
+| Policy | Result | On play | On draw | Projections |
+| --- | ---: | ---: | ---: | ---: |
+| PPO Adam 6 | 16-16 (50.0%) | 7-9 | 9-7 | 0 |
+| Retained `706b3a...` | 17-15 (53.125%) | 8-8 | 9-7 | 0 |
+
+The direct paired result was `G=1, L=2, T=29`, with one-sided exact `p=0.875`. The P0 stratum was `G=0, L=1, T=15`; the P1 stratum was `G=1, L=1, T=14`. The predeclared rapid rule required pooled `G >= L + 2`, so the candidate failed immediately. It is a verified experimental artifact, but it is retired and does not replace the retained Adam-step-1 checkpoint.
+
 ## Decision and next measurement
 
 - Drop generation 256 and retain generation 384 as the live baseline.
@@ -432,8 +478,11 @@ Base 1100001 is exact no-projection evidence and already favors the retained con
 - Reject policy-scale 2.0 for promotion. Its fresh result was `50-78` versus the matched parent at `48-80`, with paired `G=3, L=1, T=124` and one-sided exact `p=0.3125`.
 - Record iteration 3 as a completed experimental continuation from the rejected Adam-step-2 policy-scale 2.0 branch, with a 128-episode on-policy corpus and one verified warm-start update to Adam step 3.
 - Reject the Adam-step-3 child. It scored `55-73` versus the retained control at `58-70`, with paired `G=1, L=4, T=123`, one-sided exact `p=0.96875`, and a P1 paired net of `-3`.
+- Record the PPO-Clip implementation and verified Adam-step-6 artifact as a completed rapid experiment. The update changed policy distributions conservatively and passed the transport and upper safety bounds, but it did not produce a live strength signal.
+- Reject the PPO-Clip child. It scored `16-16` versus the retained control at `17-15`, with exact paired `G=1, L=2, T=29`, one-sided exact `p=0.875`, and zero selected-action projections.
+- Do not micro-grid this PPO configuration. Its mean action movement missed the tentative lower target, its value MSE worsened across repeated value updates, and its first live direction was adverse.
 - Treat blocks containing selected-action projection as diagnostic evidence rather than exact full-menu promotion evidence. Keep the projection restricted, fail closed, and explicitly counted.
 - Keep base 1090001 excluded until phase identity is carried and validated across the shadow bridge.
-- Retain centered-v2 aggressive manifest `706b3aa80ec7a3c067d458fef06bb2237320543f202fb2349c5cb885975fdbbb` as the current outcome-training parent. Do not roll the live parent forward to either experimental child.
+- Retain centered-v2 aggressive manifest `706b3aa80ec7a3c067d458fef06bb2237320543f202fb2349c5cb885975fdbbb` as the current outcome-training parent. Do not roll the live parent forward to any of the rejected experimental children.
 
 This remains one deck mirror against XMage CP7. Pro-level status would require substantially stronger evidence across decks, matchups, hidden-information decisions, sideboarding or match structure, and stronger external opponents. No such claim is warranted here.
