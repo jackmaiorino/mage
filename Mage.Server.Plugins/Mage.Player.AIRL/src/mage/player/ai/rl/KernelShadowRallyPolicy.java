@@ -3,15 +3,26 @@ package mage.player.ai.rl;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.PassAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.RedManaAbility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Fail-closed live Rally policy backed by the promoted checkpoint shadow.
@@ -48,6 +59,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private final boolean modelControlled;
     private final RallyCanonicalDecisionPolicy delegate;
     private final SeededUniformMirrorPolicy simulationPolicyTemplate;
+    private final Map<UUID, Integer> initialArenaIds;
 
     private long requestOrdinal;
     private long physicalDecisionCount;
@@ -66,7 +78,19 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             RallyCanonicalDecisionPolicy delegate,
             SeededUniformMirrorPolicy simulationPolicy) {
         this(bridge, episodeId, parseSeat(physicalSeat), modelControlled,
-                delegate, simulationPolicy);
+                delegate, simulationPolicy, Collections.emptyMap());
+    }
+
+    public KernelShadowRallyPolicy(
+            XMageRallyBridgeProcessClient bridge,
+            long episodeId,
+            String physicalSeat,
+            boolean modelControlled,
+            RallyCanonicalDecisionPolicy delegate,
+            SeededUniformMirrorPolicy simulationPolicy,
+            Map<UUID, Integer> initialArenaIds) {
+        this(bridge, episodeId, parseSeat(physicalSeat), modelControlled,
+                delegate, simulationPolicy, initialArenaIds);
     }
 
     public KernelShadowRallyPolicy(
@@ -76,6 +100,18 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             boolean modelControlled,
             RallyCanonicalDecisionPolicy delegate,
             SeededUniformMirrorPolicy simulationPolicy) {
+        this(bridge, episodeId, physicalSeat, modelControlled, delegate,
+                simulationPolicy, Collections.emptyMap());
+    }
+
+    public KernelShadowRallyPolicy(
+            XMageRallyBridgeProcessClient bridge,
+            long episodeId,
+            XMageRallyBridgeProtocol.Seat physicalSeat,
+            boolean modelControlled,
+            RallyCanonicalDecisionPolicy delegate,
+            SeededUniformMirrorPolicy simulationPolicy,
+            Map<UUID, Integer> initialArenaIds) {
         if (bridge == null) {
             throw new IllegalArgumentException("bridge must not be null");
         }
@@ -107,6 +143,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         this.modelControlled = modelControlled;
         this.delegate = delegate;
         this.simulationPolicyTemplate = simulationPolicy.copy();
+        this.initialArenaIds = validateInitialArenaIds(initialArenaIds);
 
         validateActiveBindingAtConstruction();
     }
@@ -141,6 +178,46 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         stepExactlyOnce(decision, selected);
         recordSurfaceOutcome(checkedCategory, canonicalLegalCount, selected);
         return selected;
+    }
+
+    /**
+     * Select a live XMage priority ability by the Rust semantic row rather
+     * than assuming the two engines use the same menu order.
+     */
+    public synchronized ActivatedAbility choosePriorityAbility(
+            List<? extends ActivatedAbility> xmageAbilities) {
+        requireLive();
+        if (xmageAbilities == null || xmageAbilities.isEmpty()) {
+            throw fail("priority ability menu must be nonempty", null);
+        }
+        String category = "noncombat_activate_ability_or_spell";
+        ensureCounterCapacity(1);
+        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        validateSurfaceDecision(decision, category, xmageAbilities.size());
+
+        List<ActivatedAbility> abilitiesByRustRow;
+        try {
+            abilitiesByRustRow = mapPriorityRows(
+                    xmageAbilities, decision.getActionSemantics(), initialArenaIds);
+        } catch (KernelShadowPolicyViolation error) {
+            throw fail(error.getMessage(), error);
+        }
+
+        int selected;
+        if (modelControlled) {
+            selected = requireModelSelection(decision);
+        } else {
+            try {
+                selected = delegate.chooseNoncombat(category, abilitiesByRustRow.size());
+            } catch (RuntimeException error) {
+                throw fail("opponent delegate failed for " + category, error);
+            }
+        }
+        validateSelectedIndex(selected, abilitiesByRustRow.size());
+        ActivatedAbility result = abilitiesByRustRow.get(selected);
+        stepExactlyOnce(decision, selected);
+        recordSurfaceOutcome(category, abilitiesByRustRow.size(), selected);
+        return result;
     }
 
     @Override
@@ -790,6 +867,132 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         return false;
     }
 
+    private static Map<UUID, Integer> validateInitialArenaIds(
+            Map<UUID, Integer> bindings) {
+        if (bindings == null) {
+            throw new IllegalArgumentException("initialArenaIds must not be null");
+        }
+        if (bindings.isEmpty()) {
+            return Collections.emptyMap();
+        }
+        if (bindings.size() != 120) {
+            throw new IllegalArgumentException(
+                    "initialArenaIds must bind all 120 Rally cards");
+        }
+        Map<UUID, Integer> copy = new LinkedHashMap<>();
+        Set<Integer> seen = new HashSet<>();
+        for (Map.Entry<UUID, Integer> entry : bindings.entrySet()) {
+            UUID id = entry.getKey();
+            Integer arenaId = entry.getValue();
+            if (id == null || arenaId == null || arenaId < 0 || arenaId >= 120
+                    || !seen.add(arenaId)) {
+                throw new IllegalArgumentException(
+                        "initialArenaIds is not a bijection onto 0..119");
+            }
+            copy.put(id, arenaId);
+        }
+        if (seen.size() != 120) {
+            throw new IllegalArgumentException(
+                    "initialArenaIds does not cover 0..119");
+        }
+        return Collections.unmodifiableMap(copy);
+    }
+
+    private static List<ActivatedAbility> mapPriorityRows(
+            List<? extends ActivatedAbility> xmageAbilities,
+            List<XMageRallyBridgeProtocol.ActionSemantic> rustRows,
+            Map<UUID, Integer> initialArenaIds) {
+        if (xmageAbilities == null || rustRows == null
+                || xmageAbilities.size() != rustRows.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "priority semantic and XMage widths differ");
+        }
+        List<ActivatedAbility> mapped = new ArrayList<>(rustRows.size());
+        Set<ActivatedAbility> used = Collections.newSetFromMap(new IdentityHashMap<>());
+        for (XMageRallyBridgeProtocol.ActionSemantic row : rustRows) {
+            String kind = row.getActionKind();
+            Integer arenaId = "pass".equals(kind) ? null : priorityArenaId(row);
+            ActivatedAbility unique = null;
+            int matches = 0;
+            for (ActivatedAbility ability : xmageAbilities) {
+                if (priorityAbilityMatches(ability, kind, arenaId, initialArenaIds)) {
+                    unique = ability;
+                    matches++;
+                }
+            }
+            if (matches != 1 || unique == null || !used.add(unique)) {
+                throw new KernelShadowPolicyViolation(
+                        "priority row did not map to exactly one unused XMage ability: kind="
+                                + kind + " arena_id=" + arenaId + " matches=" + matches);
+            }
+            mapped.add(unique);
+        }
+        if (used.size() != xmageAbilities.size()) {
+            throw new KernelShadowPolicyViolation(
+                    "priority mapping did not consume the complete XMage menu");
+        }
+        return mapped;
+    }
+
+    private static boolean priorityAbilityMatches(
+            ActivatedAbility ability,
+            String kind,
+            Integer arenaId,
+            Map<UUID, Integer> initialArenaIds) {
+        if (ability == null) {
+            return false;
+        }
+        if ("pass".equals(kind)) {
+            return ability instanceof PassAbility;
+        }
+        if (ability instanceof PassAbility || ability.getSourceId() == null
+                || arenaId == null || !arenaId.equals(initialArenaIds.get(ability.getSourceId()))) {
+            return false;
+        }
+        if ("play_land".equals(kind)) {
+            return ability instanceof PlayLandAbility;
+        }
+        if ("cast_spell".equals(kind)) {
+            return ability instanceof SpellAbility;
+        }
+        if ("activate_mana_ability".equals(kind)) {
+            return ability instanceof ManaAbility;
+        }
+        return "activate_ability".equals(kind)
+                && !(ability instanceof PlayLandAbility)
+                && !(ability instanceof SpellAbility)
+                && !(ability instanceof ManaAbility);
+    }
+
+    private static int priorityArenaId(
+            XMageRallyBridgeProtocol.ActionSemantic semantic) {
+        JsonObject row = parseSemantic(semantic, semantic.getActionKind());
+        JsonElement sourceElement = row.get("source");
+        if (sourceElement == null || !sourceElement.isJsonObject()) {
+            throw new KernelShadowPolicyViolation(
+                    semantic.getActionKind() + " priority semantic lacks source");
+        }
+        JsonElement arenaElement = sourceElement.getAsJsonObject().get("arena_id");
+        if (arenaElement == null || !arenaElement.isJsonPrimitive()
+                || !arenaElement.getAsJsonPrimitive().isNumber()) {
+            throw new KernelShadowPolicyViolation(
+                    semantic.getActionKind() + " priority source lacks arena_id");
+        }
+        String wire = arenaElement.getAsString();
+        if (!wire.matches("0|[1-9][0-9]*")) {
+            throw new KernelShadowPolicyViolation("priority arena_id is not an unsigned integer");
+        }
+        try {
+            long value = Long.parseLong(wire);
+            if (value > Integer.MAX_VALUE) {
+                throw new KernelShadowPolicyViolation("priority arena_id exceeds Java range");
+            }
+            return (int) value;
+        } catch (NumberFormatException error) {
+            throw new KernelShadowPolicyViolation("priority arena_id is invalid", error);
+        }
+    }
+
     private String requireCategory(String category) {
         if (category == null || category.trim().isEmpty()) {
             throw fail("category must be nonempty", null);
@@ -840,6 +1043,60 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                 || isSurfaceSemanticAllowed("announce_x", "pass")) {
             throw new IllegalStateException("surface category semantic self-test failed");
         }
+        assertPrioritySemanticMapping();
+    }
+
+    private static void assertPrioritySemanticMapping() {
+        UUID landId = UUID.randomUUID();
+        UUID spellId = UUID.randomUUID();
+        UUID manaId = UUID.randomUUID();
+        UUID activatedId = UUID.randomUUID();
+
+        PlayLandAbility land = new PlayLandAbility("Mountain");
+        land.setSourceId(landId);
+        SpellAbility spell = new SpellAbility(new ManaCostsImpl<>("{R}"), "Fixture");
+        spell.setSourceId(spellId);
+        RedManaAbility mana = new RedManaAbility();
+        mana.setSourceId(manaId);
+        SimpleActivatedAbility activated = new SimpleActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>(""));
+        activated.setSourceId(activatedId);
+        PassAbility pass = new PassAbility();
+
+        Map<UUID, Integer> bindings = new LinkedHashMap<>();
+        bindings.put(landId, 3);
+        bindings.put(spellId, 8);
+        bindings.put(manaId, 17);
+        bindings.put(activatedId, 23);
+        List<ActivatedAbility> xmage = Arrays.asList(pass, activated, mana, land, spell);
+        List<XMageRallyBridgeProtocol.ActionSemantic> rust = Arrays.asList(
+                prioritySemantic("play_land", 3),
+                prioritySemantic("cast_spell", 8),
+                prioritySemantic("activate_mana_ability", 17),
+                prioritySemantic("activate_ability", 23),
+                new XMageRallyBridgeProtocol.ActionSemantic(
+                        "pass", "{\"action_kind\":\"pass\",\"actor\":\"p0\"}"));
+        List<ActivatedAbility> mapped = mapPriorityRows(xmage, rust, bindings);
+        if (mapped.size() != 5 || mapped.get(0) != land || mapped.get(1) != spell
+                || mapped.get(2) != mana || mapped.get(3) != activated
+                || mapped.get(4) != pass) {
+            throw new IllegalStateException("priority semantic row mapping failed");
+        }
+
+        List<ActivatedAbility> singleton = mapPriorityRows(
+                Collections.singletonList(pass),
+                Collections.singletonList(rust.get(4)), bindings);
+        if (singleton.size() != 1 || singleton.get(0) != pass) {
+            throw new IllegalStateException("singleton Rust pass mapping failed");
+        }
+    }
+
+    private static XMageRallyBridgeProtocol.ActionSemantic prioritySemantic(
+            String kind, int arenaId) {
+        return new XMageRallyBridgeProtocol.ActionSemantic(
+                kind,
+                "{\"action_kind\":\"" + kind + "\",\"actor\":\"p0\","
+                        + "\"source\":{\"arena_id\":" + arenaId + "}}");
     }
 
     public static void main(String[] args) {

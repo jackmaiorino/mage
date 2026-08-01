@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -186,13 +187,14 @@ public final class XMageRallyAnchorSpike {
             shuffleDeck(p1Deck, shuffle);
             verifyLibraryIds("p0", p0Deck, expectedLibraries.get(0));
             verifyLibraryIds("p1", p1Deck, expectedLibraries.get(1));
+            Map<UUID, Integer> initialArenaIds = initialArenaIds(p0Deck, p1Deck);
 
             p0Policy = policyForSeat(
                     bridge, baseSeed, episodeId, XMageRallyBridgeProtocol.Seat.P0,
-                    candidateSeat == XMageRallyBridgeProtocol.Seat.P0);
+                    candidateSeat == XMageRallyBridgeProtocol.Seat.P0, initialArenaIds);
             p1Policy = policyForSeat(
                     bridge, baseSeed, episodeId, XMageRallyBridgeProtocol.Seat.P1,
-                    candidateSeat == XMageRallyBridgeProtocol.Seat.P1);
+                    candidateSeat == XMageRallyBridgeProtocol.Seat.P1, initialArenaIds);
             MatchOptions matchOptions = fixedMatchOptions();
             TwoPlayerMatch match = new TwoPlayerMatch(matchOptions);
             match.startGame();
@@ -259,14 +261,16 @@ public final class XMageRallyAnchorSpike {
             long baseSeed,
             long episodeId,
             XMageRallyBridgeProtocol.Seat seat,
-            boolean modelControlled) {
+            boolean modelControlled,
+            Map<UUID, Integer> initialArenaIds) {
         String wire = seat.wire();
         SeededUniformMirrorPolicy simulation =
                 new SeededUniformMirrorPolicy(baseSeed, episodeId, wire);
         RallyCanonicalDecisionPolicy delegate = modelControlled
                 ? null : new SeededUniformMirrorPolicy(baseSeed, episodeId, wire);
         return new KernelShadowRallyPolicy(
-                bridge, episodeId, seat, modelControlled, delegate, simulation);
+                bridge, episodeId, seat, modelControlled, delegate, simulation,
+                initialArenaIds);
     }
 
     private static void requireNaturalTerminal(
@@ -405,6 +409,27 @@ public final class XMageRallyAnchorSpike {
                 throw new IllegalStateException("seat decks share a card UUID");
             }
         }
+    }
+
+    private static Map<UUID, Integer> initialArenaIds(Deck p0, Deck p1) {
+        Map<UUID, Integer> bindings = new HashMap<>();
+        int arenaId = 0;
+        for (Card card : p0.getCards()) {
+            if (card == null || bindings.put(card.getId(), arenaId) != null) {
+                throw new IllegalStateException("invalid p0 initial card identity");
+            }
+            arenaId++;
+        }
+        for (Card card : p1.getCards()) {
+            if (card == null || bindings.put(card.getId(), arenaId) != null) {
+                throw new IllegalStateException("invalid p1 initial card identity");
+            }
+            arenaId++;
+        }
+        if (arenaId != 120 || bindings.size() != 120) {
+            throw new IllegalStateException("initial arena binding must cover 120 cards");
+        }
+        return Collections.unmodifiableMap(bindings);
     }
 
     private static Map<String, Integer> rallyCardIds() {

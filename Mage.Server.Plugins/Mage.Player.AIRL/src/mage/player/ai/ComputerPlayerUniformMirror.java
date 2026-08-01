@@ -32,6 +32,7 @@ import mage.game.permanent.token.BloodToken;
 import mage.game.stack.StackObject;
 import mage.player.ai.rl.PythonMLBatchManager;
 import mage.player.ai.rl.PythonModel;
+import mage.player.ai.rl.KernelShadowRallyPolicy;
 import mage.player.ai.rl.RallyCanonicalDecisionPolicy;
 import mage.player.ai.rl.SeededUniformMirrorPolicy;
 import mage.player.ai.rl.StateSequenceBuilder;
@@ -148,6 +149,13 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             if (ability == null) {
                 throw violation("XMage playable menu contains null ability");
             }
+        }
+        if (mirrorPolicy instanceof KernelShadowRallyPolicy) {
+            List<ActivatedAbility> priorityMenu = new ArrayList<>(playable.size() + 1);
+            priorityMenu.addAll(playable);
+            priorityMenu.add(new PassAbility());
+            return ((KernelShadowRallyPolicy) mirrorPolicy)
+                    .choosePriorityAbility(priorityMenu);
         }
         Ability forcedPass = passOnlyPriorityResult(playable, mirrorPolicy);
         if (forcedPass != null) {
