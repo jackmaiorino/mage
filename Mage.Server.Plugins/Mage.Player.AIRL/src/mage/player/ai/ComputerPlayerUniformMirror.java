@@ -32,6 +32,7 @@ import mage.game.permanent.token.BloodToken;
 import mage.game.stack.StackObject;
 import mage.player.ai.rl.PythonMLBatchManager;
 import mage.player.ai.rl.PythonModel;
+import mage.player.ai.rl.RallyCanonicalDecisionPolicy;
 import mage.player.ai.rl.SeededUniformMirrorPolicy;
 import mage.player.ai.rl.StateSequenceBuilder;
 import mage.players.Player;
@@ -71,7 +72,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             java.util.regex.Pattern.compile(
                     "^Change this 1 of 1 target: [^\\r\\n?]{1,256}\\?$");
 
-    private final SeededUniformMirrorPolicy mirrorPolicy;
+    private final RallyCanonicalDecisionPolicy mirrorPolicy;
     private final String physicalSeat;
     private long canonicalEncounterTieBreaks;
     private long explicitConcedeAttempts;
@@ -83,6 +84,21 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         super(name, range, FAIL_FAST_MODEL, true, false, SeededUniformMirrorPolicy.POLICY_ID);
         this.physicalSeat = requireSeat(physicalSeat);
         this.mirrorPolicy = new SeededUniformMirrorPolicy(baseSeed, episodeId, physicalSeat);
+    }
+
+    /**
+     * Use an injected policy on the exact same fail-closed Rally surface as
+     * the seeded-uniform benchmark policy.
+     */
+    public ComputerPlayerUniformMirror(String name, RangeOfInfluence range,
+                                       RallyCanonicalDecisionPolicy mirrorPolicy,
+                                       String physicalSeat) {
+        super(name, range, FAIL_FAST_MODEL, true, false, SeededUniformMirrorPolicy.POLICY_ID);
+        this.physicalSeat = requireSeat(physicalSeat);
+        if (mirrorPolicy == null) {
+            throw new IllegalArgumentException("mirrorPolicy must be nonnull");
+        }
+        this.mirrorPolicy = mirrorPolicy;
     }
 
     private ComputerPlayerUniformMirror(ComputerPlayerUniformMirror source) {
@@ -669,9 +685,15 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 continue;
             }
             List<IndexedCandidate<Permanent>> orderedBlockers = canonicalize(legal, game, source);
-            int selectedRank = mirrorPolicy.chooseBlocker(orderedBlockers.size());
-            if (selectedRank >= 0) {
-                Permanent blocker = orderedBlockers.get(selectedRank).candidate;
+            boolean[] included = mirrorPolicy.chooseBlockers(orderedBlockers.size());
+            if (included == null || included.length != orderedBlockers.size()) {
+                throw violation("blocker policy returned an invalid inclusion vector");
+            }
+            for (int i = 0; i < included.length; i++) {
+                if (!included[i]) {
+                    continue;
+                }
+                Permanent blocker = orderedBlockers.get(i).candidate;
                 declareBlocker(getId(), blocker.getId(), attacker.getId(), game);
                 available.remove(blocker);
                 any = true;
@@ -683,6 +705,13 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     }
 
     public SeededUniformMirrorPolicy getMirrorPolicySnapshot() {
+        if (!(mirrorPolicy instanceof SeededUniformMirrorPolicy)) {
+            throw violation("seeded-uniform snapshot requested from an injected Rally policy");
+        }
+        return ((SeededUniformMirrorPolicy) mirrorPolicy).copy();
+    }
+
+    public RallyCanonicalDecisionPolicy getCanonicalDecisionPolicySnapshot() {
         return mirrorPolicy.copy();
     }
 
@@ -737,7 +766,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
 
     static TriggerOrderCache beginTriggerOrderCache(
             UUID gameId, List<TriggerOffer> canonicalOffers,
-            SeededUniformMirrorPolicy policy) {
+            RallyCanonicalDecisionPolicy policy) {
         if (gameId == null || canonicalOffers == null || policy == null
                 || canonicalOffers.size() < 2
                 || canonicalOffers.size() > MAX_TRIGGER_ORDER_OBJECTS) {
@@ -1180,7 +1209,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     }
 
     static Ability passOnlyPriorityResult(List<? extends ActivatedAbility> playable,
-                                          SeededUniformMirrorPolicy policy) {
+                                          RallyCanonicalDecisionPolicy policy) {
         if (playable == null || policy == null) {
             throw violation("priority seam received null input");
         }

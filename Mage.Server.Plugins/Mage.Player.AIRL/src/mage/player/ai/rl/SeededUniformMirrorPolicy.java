@@ -1,6 +1,5 @@
 package mage.player.ai.rl;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Map;
  * every aggregate substep is derived independently from that group. Candidate
  * count therefore cannot perturb any later physical decision.</p>
  */
-public final class SeededUniformMirrorPolicy implements Serializable {
+public final class SeededUniformMirrorPolicy implements RallyCanonicalDecisionPolicy {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,10 +56,12 @@ public final class SeededUniformMirrorPolicy implements Serializable {
         this.outcomeHistogram.putAll(source.outcomeHistogram);
     }
 
+    @Override
     public SeededUniformMirrorPolicy copy() {
         return new SeededUniformMirrorPolicy(this);
     }
 
+    @Override
     public int chooseNoncombat(String category, int canonicalLegalCount) {
         return chooseNoncombatWithoutReplacement(category, canonicalLegalCount, 1)[0];
     }
@@ -68,6 +69,7 @@ public final class SeededUniformMirrorPolicy implements Serializable {
     /**
      * Select canonical ranks sequentially without replacement inside one physical menu.
      */
+    @Override
     public int[] chooseNoncombatWithoutReplacement(String category, int canonicalLegalCount, int picks) {
         if (canonicalLegalCount <= 0) {
             throw new IllegalArgumentException("canonicalLegalCount must be positive");
@@ -102,6 +104,7 @@ public final class SeededUniformMirrorPolicy implements Serializable {
         return selected;
     }
 
+    @Override
     public boolean[] chooseAttackers(int canonicalEligibleCount) {
         if (canonicalEligibleCount <= 0) {
             throw new IllegalArgumentException("canonicalEligibleCount must be positive");
@@ -125,7 +128,20 @@ public final class SeededUniformMirrorPolicy implements Serializable {
     /**
      * @return {@code -1} for no block, otherwise the canonical blocker rank.
      */
+    @Override
     public int chooseBlocker(int canonicalLegalBlockerCount) {
+        boolean[] included = chooseBlockers(canonicalLegalBlockerCount);
+        for (int i = 0; i < included.length; i++) {
+            if (included[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Preserve the seeded benchmark's historical at-most-one blocker behavior. */
+    @Override
+    public boolean[] chooseBlockers(int canonicalLegalBlockerCount) {
         if (canonicalLegalBlockerCount <= 0) {
             throw new IllegalArgumentException("canonicalLegalBlockerCount must be positive");
         }
@@ -140,7 +156,11 @@ public final class SeededUniformMirrorPolicy implements Serializable {
         }
         increment(outcomeHistogram, "declare_blocker_for_attacker|legal="
                 + canonicalLegalBlockerCount + "|selected=" + (selected < 0 ? "none" : selected));
-        return selected;
+        boolean[] included = new boolean[canonicalLegalBlockerCount];
+        if (selected >= 0) {
+            included[selected] = true;
+        }
+        return included;
     }
 
     private long beginPhysicalDecision(String category) {
@@ -153,22 +173,27 @@ public final class SeededUniformMirrorPolicy implements Serializable {
         return groupSeed;
     }
 
+    @Override
     public long getPhysicalDecisionCount() {
         return physicalDecisionIndex;
     }
 
+    @Override
     public long getPolicyActionSelections() {
         return policyActionSelections;
     }
 
+    @Override
     public long getPolicyLeafEvaluations() {
         return policyLeafEvaluations;
     }
 
+    @Override
     public Map<String, Long> getPhysicalDecisionCategories() {
         return Collections.unmodifiableMap(new LinkedHashMap<>(physicalDecisionCategories));
     }
 
+    @Override
     public Map<String, Long> getOutcomeHistogram() {
         return Collections.unmodifiableMap(new LinkedHashMap<>(outcomeHistogram));
     }
