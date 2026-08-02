@@ -981,8 +981,7 @@ public final class XMageRallyAnchorSpike {
                     && (hasBehaviorCloneRoot || hasOutcomeRoot))
                     || (checkpointGeneration != null && checkpointGeneration < 0L)
                     || (teacherExportPath != null && opponentMode != OpponentMode.CP7)
-                    || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)
-                    || (teacherExportPath != null && outcomeExportPath != null)) {
+                    || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)) {
                 throw new IllegalArgumentException(
                         "base seed must be nonnegative, first episode must be even,"
                                 + " pairs must be in [1,128],"
@@ -990,8 +989,7 @@ public final class XMageRallyAnchorSpike {
                                 + " exactly one original or derivative root must be selected,"
                                 + " generation applies only to the original Store,"
                                 + " generation must be nonnegative,"
-                                + " exports require opponent cp7,"
-                                + " and teacher/outcome exports are mutually exclusive");
+                                + " and exports require opponent cp7");
             }
             try {
                 Math.addExact(firstEpisode, Math.subtractExact(
