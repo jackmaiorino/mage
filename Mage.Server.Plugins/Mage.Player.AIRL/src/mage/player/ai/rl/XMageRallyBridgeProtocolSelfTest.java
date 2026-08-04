@@ -34,6 +34,8 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 XMageRallyBridgeProtocolSelfTest::testRequestNoncanonicalInteger);
         run("direct-executable-required",
                 XMageRallyBridgeProtocolSelfTest::testDirectExecutableRequired);
+        run("configured-derivative-authority-kind",
+                XMageRallyBridgeProtocolSelfTest::testConfiguredDerivativeAuthorityKind);
         run("reset-score-step-terminal-flow",
                 XMageRallyBridgeProtocolSelfTest::testFullFlow);
         run("terminal-allows-next-episode-reset",
@@ -141,6 +143,38 @@ public final class XMageRallyBridgeProtocolSelfTest {
             threw = true;
         }
         require(threw, "cargo wrapper was accepted");
+    }
+
+    private static void testConfiguredDerivativeAuthorityKind() {
+        String authority = "qualified-policy-bounded-value-search-v1";
+        String manifest =
+                "204beb91c1a4b039e0c497f2b420e823b5cc9e2ceb8560f897d0b6251e916b72";
+        String payload =
+                "ca3c45cd69d8d60f1f921bc78c27b098064ef6b16fe7566b84e5045681781b28";
+        String trainState =
+                "7d854edb46119a611d4283e6cf4630d0207ceb24c12b4089a7d27a43c97fe0b3";
+        String model =
+                "47b10c1114efc01f9445c71c0c8c4d8cd4a4b89a2154ac68275f3b0c6ebb9ce3";
+        XMageRallyBridgeProtocol.CheckpointIdentity checkpoint =
+                new XMageRallyBridgeProtocol.CheckpointIdentity(
+                        authority,
+                        XMageRallyBridgeProtocol.SOURCE_RUN_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_GENERATION,
+                        XMageRallyBridgeProtocol.SOURCE_CHECKPOINT_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_SIDECAR_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_PAYLOAD_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_TRAIN_STATE_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_RUN_SHA256,
+                        1L,
+                        manifest,
+                        payload,
+                        trainState,
+                        model,
+                        XMageRallyBridgeProtocol.ENVIRONMENT_TRAJECTORY_CONTRACT,
+                        XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
+                        XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+        checkpoint.requireXMageCp7OutcomeAuthority(
+                authority, 1L, manifest, payload, trainState, model);
     }
 
     private static void testFullFlow() throws Exception {

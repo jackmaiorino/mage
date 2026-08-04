@@ -336,13 +336,14 @@ public final class XMageRallyBridgeProtocol {
         }
 
         void requireXMageCp7OutcomeAuthority(
+                String expectedAuthorityKind,
                 long expectedAdamStep,
                 String expectedManifestSha256,
                 String expectedPayloadSha256,
                 String expectedTrainStateSha256,
                 String expectedModelParameterSha256) {
             requireNonnegative(expectedAdamStep, "expected XMage CP7 outcome Adam step");
-            requireEqual("authority_kind", XMAGE_CP7_OUTCOME_AUTHORITY_KIND, authorityKind);
+            requireEqual("authority_kind", expectedAuthorityKind, authorityKind);
             requireEqual("source_run_sha256", SOURCE_RUN_SHA256, sourceRunSha256);
             requireEqual("source_checkpoint_sha256", SOURCE_CHECKPOINT_SHA256,
                     sourceCheckpointSha256);

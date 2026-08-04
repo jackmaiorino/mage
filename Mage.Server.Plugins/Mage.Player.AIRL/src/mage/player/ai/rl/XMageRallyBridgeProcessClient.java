@@ -51,6 +51,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             "xmage.rally.cp7BehaviorClone.modelParameterSha256";
     public static final String XMAGE_CP7_OUTCOME_ADAM_STEP_PROPERTY =
             "xmage.rally.cp7Outcome.adamStep";
+    public static final String XMAGE_CP7_OUTCOME_AUTHORITY_KIND_PROPERTY =
+            "xmage.rally.cp7Outcome.authorityKind";
     public static final String XMAGE_CP7_OUTCOME_MANIFEST_SHA256_PROPERTY =
             "xmage.rally.cp7Outcome.manifestSha256";
     public static final String XMAGE_CP7_OUTCOME_PAYLOAD_SHA256_PROPERTY =
@@ -813,17 +815,20 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
     }
 
     private static final class XMageCp7OutcomeExpectation {
+        private final String authorityKind;
         private final long adamStep;
         private final String manifestSha256;
         private final String payloadSha256;
         private final String trainStateSha256;
         private final String modelParameterSha256;
 
-        private XMageCp7OutcomeExpectation(long adamStep,
+        private XMageCp7OutcomeExpectation(String authorityKind,
+                                           long adamStep,
                                            String manifestSha256,
                                            String payloadSha256,
                                            String trainStateSha256,
                                            String modelParameterSha256) {
+            this.authorityKind = authorityKind;
             this.adamStep = adamStep;
             this.manifestSha256 = manifestSha256;
             this.payloadSha256 = payloadSha256;
@@ -832,6 +837,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         }
 
         private static XMageCp7OutcomeExpectation fromSystemProperties() {
+            String authorityKind = System.getProperty(
+                    XMAGE_CP7_OUTCOME_AUTHORITY_KIND_PROPERTY,
+                    XMageRallyBridgeProtocol.XMAGE_CP7_OUTCOME_AUTHORITY_KIND);
             String adamStep = System.getProperty(XMAGE_CP7_OUTCOME_ADAM_STEP_PROPERTY);
             String manifest = System.getProperty(XMAGE_CP7_OUTCOME_MANIFEST_SHA256_PROPERTY);
             String payload = System.getProperty(XMAGE_CP7_OUTCOME_PAYLOAD_SHA256_PROPERTY);
@@ -854,6 +862,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                         "invalid XMage CP7 outcome Adam step property", error);
             }
             if (parsedAdamStep < 0L
+                    || authorityKind.isEmpty()
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(manifest)
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(payload)
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(trainState)
@@ -862,12 +871,12 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                         "invalid XMage CP7 outcome identity properties");
             }
             return new XMageCp7OutcomeExpectation(
-                    parsedAdamStep, manifest, payload, trainState, model);
+                    authorityKind, parsedAdamStep, manifest, payload, trainState, model);
         }
 
         private void require(XMageRallyBridgeProtocol.CheckpointIdentity checkpoint) {
             checkpoint.requireXMageCp7OutcomeAuthority(
-                    adamStep, manifestSha256, payloadSha256,
+                    authorityKind, adamStep, manifestSha256, payloadSha256,
                     trainStateSha256, modelParameterSha256);
         }
     }
