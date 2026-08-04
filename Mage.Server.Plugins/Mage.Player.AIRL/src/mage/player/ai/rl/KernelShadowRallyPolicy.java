@@ -67,6 +67,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private final RallyCanonicalDecisionPolicy delegate;
     private final SeededUniformMirrorPolicy simulationPolicyTemplate;
     private final Map<UUID, Integer> initialArenaIds;
+    private final RallyCp7CounterfactualTeacher counterfactualTeacher;
     private final Map<UUID, Integer> dynamicArenaIds = new LinkedHashMap<>();
     private final Map<Integer, UUID> dynamicArenaUuids = new LinkedHashMap<>();
 
@@ -99,8 +100,21 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             RallyCanonicalDecisionPolicy delegate,
             SeededUniformMirrorPolicy simulationPolicy,
             Map<UUID, Integer> initialArenaIds) {
+        this(bridge, episodeId, physicalSeat, modelControlled, delegate,
+                simulationPolicy, initialArenaIds, null);
+    }
+
+    public KernelShadowRallyPolicy(
+            XMageRallyBridgeProcessClient bridge,
+            long episodeId,
+            String physicalSeat,
+            boolean modelControlled,
+            RallyCanonicalDecisionPolicy delegate,
+            SeededUniformMirrorPolicy simulationPolicy,
+            Map<UUID, Integer> initialArenaIds,
+            RallyCp7CounterfactualTeacher counterfactualTeacher) {
         this(bridge, episodeId, parseSeat(physicalSeat), modelControlled,
-                delegate, simulationPolicy, initialArenaIds);
+                delegate, simulationPolicy, initialArenaIds, counterfactualTeacher);
     }
 
     public KernelShadowRallyPolicy(
@@ -122,6 +136,19 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             RallyCanonicalDecisionPolicy delegate,
             SeededUniformMirrorPolicy simulationPolicy,
             Map<UUID, Integer> initialArenaIds) {
+        this(bridge, episodeId, physicalSeat, modelControlled, delegate,
+                simulationPolicy, initialArenaIds, null);
+    }
+
+    public KernelShadowRallyPolicy(
+            XMageRallyBridgeProcessClient bridge,
+            long episodeId,
+            XMageRallyBridgeProtocol.Seat physicalSeat,
+            boolean modelControlled,
+            RallyCanonicalDecisionPolicy delegate,
+            SeededUniformMirrorPolicy simulationPolicy,
+            Map<UUID, Integer> initialArenaIds,
+            RallyCp7CounterfactualTeacher counterfactualTeacher) {
         if (bridge == null) {
             throw new IllegalArgumentException("bridge must not be null");
         }
@@ -154,6 +181,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         this.delegate = delegate;
         this.simulationPolicyTemplate = simulationPolicy.copy();
         this.initialArenaIds = validateInitialArenaIds(initialArenaIds);
+        this.counterfactualTeacher = counterfactualTeacher;
 
         validateActiveBindingAtConstruction();
     }
@@ -196,6 +224,13 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
      */
     public synchronized ActivatedAbility choosePriorityAbility(
             List<? extends ActivatedAbility> xmageAbilities, Game game) {
+        return choosePriorityAbility(xmageAbilities, game, null);
+    }
+
+    public synchronized ActivatedAbility choosePriorityAbility(
+            List<? extends ActivatedAbility> xmageAbilities,
+            Game game,
+            UUID physicalPlayerId) {
         requireLive();
         if (xmageAbilities == null || xmageAbilities.isEmpty()) {
             throw fail("priority ability menu must be nonempty", null);
@@ -227,6 +262,14 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     xmageAbilities, decision.getActionSemantics(), allArenaIds());
         } catch (KernelShadowPolicyViolation error) {
             throw fail(error.getMessage(), error);
+        }
+
+        if (counterfactualTeacher != null) {
+            if (!modelControlled || physicalPlayerId == null) {
+                throw fail("counterfactual teacher lacks the model-controlled player id", null);
+            }
+            counterfactualTeacher.capturePriority(
+                    decision, abilitiesByRustRow, game, physicalPlayerId);
         }
 
         int selected;

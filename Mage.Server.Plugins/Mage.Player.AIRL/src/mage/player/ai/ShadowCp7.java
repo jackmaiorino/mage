@@ -18,9 +18,9 @@ import java.util.UUID;
  * calling thread needs no renaming -- as long as act()/pass() are never called
  * on this instance. This object is NOT a seated player; never add it to a game.
  */
-final class ShadowCp7 extends ComputerPlayer7 {
+public final class ShadowCp7 extends ComputerPlayer7 {
 
-    ShadowCp7(UUID seatId, int skill) {
+    public ShadowCp7(UUID seatId, int skill) {
         super(seatId, skill);
     }
 
@@ -29,7 +29,7 @@ final class ShadowCp7 extends ComputerPlayer7 {
      * sequence (empty = CP7 would pass). Fresh instances should be used per
      * query; the clears below are belt-and-braces against plan reuse.
      */
-    List<Ability> planOnce(Game game) {
+    public List<Ability> planOnce(Game game) {
         actions.clear();
         root = null;
         calculateActions(game);

@@ -108,7 +108,13 @@ public final class XMageRallyAnchorSpike {
             command.add(args.outcomeExportPath.toString());
         }
         long sampleStart = System.nanoTime();
-        try (XMageRallyBridgeProcessClient bridge =
+        try (RallyCp7CounterfactualTeacher counterfactualTeacher =
+                     args.shadowCp7ExportPath == null ? null
+                             : RallyCp7CounterfactualTeacher.create(
+                             args.shadowCp7ExportPath,
+                             args.cp7Skill,
+                             args.shadowCp7MaxThinkSeconds);
+             XMageRallyBridgeProcessClient bridge =
                      XMageRallyBridgeProcessClient.start(
                              command,
                              BRIDGE_TIMEOUT_MILLIS,
@@ -139,8 +145,10 @@ public final class XMageRallyAnchorSpike {
                 long firstEpisode = Math.addExact(
                         args.firstEpisodeId, Math.multiplyExact(2L, pairOrdinal));
                 long pairStart = System.nanoTime();
-                LegResult first = runLeg(bridge, decks, args, firstEpisode);
-                LegResult second = runLeg(bridge, decks, args, firstEpisode + 1L);
+                LegResult first = runLeg(
+                        bridge, decks, args, firstEpisode, counterfactualTeacher);
+                LegResult second = runLeg(
+                        bridge, decks, args, firstEpisode + 1L, counterfactualTeacher);
                 if (first.pairIndex != second.pairIndex
                         || first.environmentSeed != second.environmentSeed) {
                     throw new IllegalStateException(
@@ -269,12 +277,15 @@ public final class XMageRallyAnchorSpike {
     private static LegResult runLeg(XMageRallyBridgeProcessClient bridge,
                                     DeckTemplates decks,
                                     Args args,
-                                    long episodeId) throws Exception {
+                                    long episodeId,
+                                    RallyCp7CounterfactualTeacher counterfactualTeacher)
+            throws Exception {
         AtomicReference<LegResult> result = new AtomicReference<>();
         AtomicReference<Throwable> failure = new AtomicReference<>();
         Thread gameThread = new Thread(() -> {
             try {
-                result.set(runLegInGameThread(bridge, decks, args, episodeId));
+                result.set(runLegInGameThread(
+                        bridge, decks, args, episodeId, counterfactualTeacher));
             } catch (Throwable error) {
                 failure.set(error);
             }
@@ -318,7 +329,8 @@ public final class XMageRallyAnchorSpike {
             XMageRallyBridgeProcessClient bridge,
             DeckTemplates decks,
             Args args,
-            long episodeId) throws Exception {
+            long episodeId,
+            RallyCp7CounterfactualTeacher counterfactualTeacher) throws Exception {
         long start = System.nanoTime();
         bridge.reset("anchor-reset-" + episodeId, episodeId, args.baseSeed);
         XMageRallyBridgeProtocol.DecisionBody resetDecision = bridge.getCurrentDecision();
@@ -361,12 +373,12 @@ public final class XMageRallyAnchorSpike {
                         bridge, args.baseSeed, episodeId,
                         XMageRallyBridgeProtocol.Seat.P0,
                         candidateSeat == XMageRallyBridgeProtocol.Seat.P0,
-                        initialArenaIds);
+                        initialArenaIds, counterfactualTeacher);
                 p1Policy = policyForSeat(
                         bridge, args.baseSeed, episodeId,
                         XMageRallyBridgeProtocol.Seat.P1,
                         candidateSeat == XMageRallyBridgeProtocol.Seat.P1,
-                        initialArenaIds);
+                        initialArenaIds, counterfactualTeacher);
             } else {
                 XMageRallyBridgeProtocol.Seat cp7Seat =
                         candidateSeat == XMageRallyBridgeProtocol.Seat.P0
@@ -375,11 +387,13 @@ public final class XMageRallyAnchorSpike {
                 if (candidateSeat == XMageRallyBridgeProtocol.Seat.P0) {
                     p0Policy = policyForSeat(
                             bridge, args.baseSeed, episodeId,
-                            XMageRallyBridgeProtocol.Seat.P0, true, initialArenaIds);
+                            XMageRallyBridgeProtocol.Seat.P0, true, initialArenaIds,
+                            counterfactualTeacher);
                 } else {
                     p1Policy = policyForSeat(
                             bridge, args.baseSeed, episodeId,
-                            XMageRallyBridgeProtocol.Seat.P1, true, initialArenaIds);
+                            XMageRallyBridgeProtocol.Seat.P1, true, initialArenaIds,
+                            counterfactualTeacher);
                 }
                 String cp7Name = "cp7-" + cp7Seat.wire() + "-e" + episodeId;
                 cp7Mapper = new RallyCp7KernelShadowMapper(
@@ -541,7 +555,8 @@ public final class XMageRallyAnchorSpike {
             long episodeId,
             XMageRallyBridgeProtocol.Seat seat,
             boolean modelControlled,
-            Map<UUID, Integer> initialArenaIds) {
+            Map<UUID, Integer> initialArenaIds,
+            RallyCp7CounterfactualTeacher counterfactualTeacher) {
         String wire = seat.wire();
         SeededUniformMirrorPolicy simulation =
                 new SeededUniformMirrorPolicy(baseSeed, episodeId, wire);
@@ -549,7 +564,7 @@ public final class XMageRallyAnchorSpike {
                 ? null : new SeededUniformMirrorPolicy(baseSeed, episodeId, wire);
         return new KernelShadowRallyPolicy(
                 bridge, episodeId, seat, modelControlled, delegate, simulation,
-                initialArenaIds);
+                initialArenaIds, modelControlled ? counterfactualTeacher : null);
     }
 
     private static void requireNaturalTerminal(
@@ -874,6 +889,8 @@ public final class XMageRallyAnchorSpike {
         final int cp7Skill;
         final Path teacherExportPath;
         final Path outcomeExportPath;
+        final Path shadowCp7ExportPath;
+        final int shadowCp7MaxThinkSeconds;
         final Long checkpointGeneration;
         final Path behaviorCloneRoot;
         final Path outcomeRoot;
@@ -888,6 +905,8 @@ public final class XMageRallyAnchorSpike {
              int cp7Skill,
              Path teacherExportPath,
              Path outcomeExportPath,
+             Path shadowCp7ExportPath,
+             int shadowCp7MaxThinkSeconds,
              Long checkpointGeneration,
              Path behaviorCloneRoot,
              Path outcomeRoot) throws Exception {
@@ -901,6 +920,8 @@ public final class XMageRallyAnchorSpike {
             this.cp7Skill = cp7Skill;
             this.teacherExportPath = teacherExportPath;
             this.outcomeExportPath = outcomeExportPath;
+            this.shadowCp7ExportPath = shadowCp7ExportPath;
+            this.shadowCp7MaxThinkSeconds = shadowCp7MaxThinkSeconds;
             this.checkpointGeneration = checkpointGeneration;
             this.behaviorCloneRoot = behaviorCloneRoot == null
                     ? null : behaviorCloneRoot.toRealPath();
@@ -929,6 +950,8 @@ public final class XMageRallyAnchorSpike {
             allowed.add("--cp7-skill");
             allowed.add("--teacher-export");
             allowed.add("--outcome-export");
+            allowed.add("--shadow-cp7-export");
+            allowed.add("--shadow-cp7-max-think-seconds");
             allowed.add("--generation");
             if (!values.keySet().containsAll(required)
                     || !allowed.containsAll(values.keySet())) {
@@ -936,7 +959,9 @@ public final class XMageRallyAnchorSpike {
                         "required arguments: " + required
                                 + "; optional: --pairs, --opponent, --cp7-skill,"
                                 + " --store-root, --behavior-clone-root, --outcome-root,"
-                                + " --teacher-export, --outcome-export, --generation");
+                                + " --teacher-export, --outcome-export,"
+                                + " --shadow-cp7-export, --shadow-cp7-max-think-seconds,"
+                                + " --generation");
             }
             long baseSeed = Long.parseLong(values.get("--base-seed"));
             long firstEpisode = Long.parseLong(values.get("--first-episode"));
@@ -972,6 +997,19 @@ public final class XMageRallyAnchorSpike {
                 }
                 outcomeExportPath = parent.toRealPath().resolve(requested.getFileName());
             }
+            Path shadowCp7ExportPath = null;
+            if (values.containsKey("--shadow-cp7-export")) {
+                Path requested = Paths.get(values.get("--shadow-cp7-export"))
+                        .toAbsolutePath().normalize();
+                Path parent = requested.getParent();
+                if (parent == null || requested.getFileName() == null) {
+                    throw new IllegalArgumentException(
+                            "shadow CP7 export must name a file inside an existing directory");
+                }
+                shadowCp7ExportPath = parent.toRealPath().resolve(requested.getFileName());
+            }
+            int shadowCp7MaxThinkSeconds = Integer.parseInt(
+                    values.getOrDefault("--shadow-cp7-max-think-seconds", "5"));
             if (baseSeed < 0L || firstEpisode < 0L
                     || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128
                     || cp7Skill < 1 || cp7Skill > 10
@@ -981,7 +1019,12 @@ public final class XMageRallyAnchorSpike {
                     && (hasBehaviorCloneRoot || hasOutcomeRoot))
                     || (checkpointGeneration != null && checkpointGeneration < 0L)
                     || (teacherExportPath != null && opponentMode != OpponentMode.CP7)
-                    || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)) {
+                    || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)
+                    || (shadowCp7ExportPath != null && opponentMode != OpponentMode.CP7)
+                    || (values.containsKey("--shadow-cp7-max-think-seconds")
+                    && shadowCp7ExportPath == null)
+                    || shadowCp7MaxThinkSeconds < 1
+                    || shadowCp7MaxThinkSeconds > 120) {
                 throw new IllegalArgumentException(
                         "base seed must be nonnegative, first episode must be even,"
                                 + " pairs must be in [1,128],"
@@ -989,7 +1032,8 @@ public final class XMageRallyAnchorSpike {
                                 + " exactly one original or derivative root must be selected,"
                                 + " generation applies only to the original Store,"
                                 + " generation must be nonnegative,"
-                                + " and exports require opponent cp7");
+                                + " exports require opponent cp7,"
+                                + " and shadow think seconds must be in [1,120]");
             }
             try {
                 Math.addExact(firstEpisode, Math.subtractExact(
@@ -1008,6 +1052,8 @@ public final class XMageRallyAnchorSpike {
                     cp7Skill,
                     teacherExportPath,
                     outcomeExportPath,
+                    shadowCp7ExportPath,
+                    shadowCp7MaxThinkSeconds,
                     checkpointGeneration,
                     hasBehaviorCloneRoot
                             ? Paths.get(values.get("--behavior-clone-root")) : null,

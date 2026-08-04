@@ -141,7 +141,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                     game.getState().setPriorityPlayerId(getId());
                     game.firePriorityEvent(getId());
                     ActivatedAbility selectedAbility =
-                            shadow.choosePriorityAbility(priorityMenu, game);
+                            shadow.choosePriorityAbility(priorityMenu, game, getId());
                     act(game, selectedAbility);
                     return !(selectedAbility instanceof PassAbility);
                 }
@@ -216,7 +216,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             priorityMenu.addAll(playable);
             priorityMenu.add(new PassAbility());
             return ((KernelShadowRallyPolicy) mirrorPolicy)
-                    .choosePriorityAbility(priorityMenu, game);
+                    .choosePriorityAbility(priorityMenu, game, getId());
         }
         playable.add(0, new PassAbility());
         List<Integer> selected = genericChoose(
