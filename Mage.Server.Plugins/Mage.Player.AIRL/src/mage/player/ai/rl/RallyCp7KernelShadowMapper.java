@@ -22,6 +22,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetDiscard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -583,7 +584,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             UUID selected,
             Collection<UUID> candidates,
             int selectedIndex) {
-        if (!(observed.getSubject() instanceof TargetCardInHand)
+        if ((!(observed.getSubject() instanceof TargetCardInHand)
+                && !(observed.getSubject() instanceof TargetDiscard))
                 || observed.getSelected().size() != 1
                 || !"discard".equals(current.getActionSemantics()
                 .get(selectedIndex).getActionKind())) {
