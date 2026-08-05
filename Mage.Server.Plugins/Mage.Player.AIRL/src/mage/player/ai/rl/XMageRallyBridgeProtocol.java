@@ -341,7 +341,8 @@ public final class XMageRallyBridgeProtocol {
                 String expectedManifestSha256,
                 String expectedPayloadSha256,
                 String expectedTrainStateSha256,
-                String expectedModelParameterSha256) {
+                String expectedModelParameterSha256,
+                String expectedEnvironmentTrajectoryContract) {
             requireNonnegative(expectedAdamStep, "expected XMage CP7 outcome Adam step");
             requireEqual("authority_kind", expectedAuthorityKind, authorityKind);
             requireEqual("source_run_sha256", SOURCE_RUN_SHA256, sourceRunSha256);
@@ -359,7 +360,7 @@ public final class XMageRallyBridgeProtocol {
                     loadedTrainStateSha256);
             requireEqual("model_parameter_sha256", expectedModelParameterSha256,
                     modelParameterSha256);
-            requireEqual("environment_trajectory_contract", ENVIRONMENT_TRAJECTORY_CONTRACT,
+            requireEqual("environment_trajectory_contract", expectedEnvironmentTrajectoryContract,
                     environmentTrajectoryContract);
             requireEqual("sampler_identity", SAMPLER_IDENTITY, samplerIdentity);
             requireEqual("sampler_contract_sha256", SAMPLER_CONTRACT_SHA256,

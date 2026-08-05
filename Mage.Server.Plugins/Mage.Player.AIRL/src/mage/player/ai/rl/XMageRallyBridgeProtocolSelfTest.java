@@ -174,7 +174,39 @@ public final class XMageRallyBridgeProtocolSelfTest {
                         XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
                         XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
         checkpoint.requireXMageCp7OutcomeAuthority(
-                authority, 1L, manifest, payload, trainState, model);
+                authority, 1L, manifest, payload, trainState, model,
+                XMageRallyBridgeProtocol.ENVIRONMENT_TRAJECTORY_CONTRACT);
+
+        String environmentV2 = "environment-randomization-v2";
+        XMageRallyBridgeProtocol.CheckpointIdentity environmentV2Checkpoint =
+                new XMageRallyBridgeProtocol.CheckpointIdentity(
+                        authority,
+                        XMageRallyBridgeProtocol.SOURCE_RUN_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_GENERATION,
+                        XMageRallyBridgeProtocol.SOURCE_CHECKPOINT_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_SIDECAR_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_PAYLOAD_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_TRAIN_STATE_SHA256,
+                        XMageRallyBridgeProtocol.SOURCE_RUN_SHA256,
+                        1L,
+                        manifest,
+                        payload,
+                        trainState,
+                        model,
+                        environmentV2,
+                        XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
+                        XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+        environmentV2Checkpoint.requireXMageCp7OutcomeAuthority(
+                authority, 1L, manifest, payload, trainState, model, environmentV2);
+        boolean rejectedMismatch = false;
+        try {
+            environmentV2Checkpoint.requireXMageCp7OutcomeAuthority(
+                    authority, 1L, manifest, payload, trainState, model,
+                    XMageRallyBridgeProtocol.ENVIRONMENT_TRAJECTORY_CONTRACT);
+        } catch (IllegalArgumentException expected) {
+            rejectedMismatch = true;
+        }
+        require(rejectedMismatch, "environment trajectory contract mismatch was accepted");
     }
 
     private static void testFullFlow() throws Exception {

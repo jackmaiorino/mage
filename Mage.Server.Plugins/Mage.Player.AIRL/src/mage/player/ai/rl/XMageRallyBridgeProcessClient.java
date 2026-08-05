@@ -61,6 +61,8 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             "xmage.rally.cp7Outcome.trainStateSha256";
     public static final String XMAGE_CP7_OUTCOME_MODEL_PARAMETER_SHA256_PROPERTY =
             "xmage.rally.cp7Outcome.modelParameterSha256";
+    public static final String XMAGE_CP7_OUTCOME_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY =
+            "xmage.rally.cp7Outcome.environmentTrajectoryContract";
 
     private static final int MIN_MAX_LINE_BYTES = 128;
     private static final int MAX_MAX_LINE_BYTES = 16 * 1_048_576;
@@ -734,6 +736,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         private final String payloadSha256;
         private final String trainStateSha256;
         private final String modelParameterSha256;
+        private final String environmentTrajectoryContract;
 
         private Cp7BehaviorCloneExpectation(long adamStep,
                                             String manifestSha256,
@@ -827,13 +830,15 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                            String manifestSha256,
                                            String payloadSha256,
                                            String trainStateSha256,
-                                           String modelParameterSha256) {
+                                           String modelParameterSha256,
+                                           String environmentTrajectoryContract) {
             this.authorityKind = authorityKind;
             this.adamStep = adamStep;
             this.manifestSha256 = manifestSha256;
             this.payloadSha256 = payloadSha256;
             this.trainStateSha256 = trainStateSha256;
             this.modelParameterSha256 = modelParameterSha256;
+            this.environmentTrajectoryContract = environmentTrajectoryContract;
         }
 
         private static XMageCp7OutcomeExpectation fromSystemProperties() {
@@ -847,6 +852,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                     XMAGE_CP7_OUTCOME_TRAIN_STATE_SHA256_PROPERTY);
             String model = System.getProperty(
                     XMAGE_CP7_OUTCOME_MODEL_PARAMETER_SHA256_PROPERTY);
+            String environmentTrajectoryContract = System.getProperty(
+                    XMAGE_CP7_OUTCOME_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY,
+                    XMageRallyBridgeProtocol.ENVIRONMENT_TRAJECTORY_CONTRACT);
             for (String value : Arrays.asList(
                     adamStep, manifest, payload, trainState, model)) {
                 if (value == null) {
@@ -866,18 +874,24 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(manifest)
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(payload)
                     || !Cp7BehaviorCloneExpectation.isLowerHexSha256(trainState)
-                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(model)) {
+                    || !Cp7BehaviorCloneExpectation.isLowerHexSha256(model)
+                    || !(XMageRallyBridgeProtocol.ENVIRONMENT_TRAJECTORY_CONTRACT.equals(
+                            environmentTrajectoryContract)
+                            || "environment-randomization-v2".equals(
+                                    environmentTrajectoryContract))) {
                 throw new IllegalArgumentException(
                         "invalid XMage CP7 outcome identity properties");
             }
             return new XMageCp7OutcomeExpectation(
-                    authorityKind, parsedAdamStep, manifest, payload, trainState, model);
+                    authorityKind, parsedAdamStep, manifest, payload, trainState, model,
+                    environmentTrajectoryContract);
         }
 
         private void require(XMageRallyBridgeProtocol.CheckpointIdentity checkpoint) {
             checkpoint.requireXMageCp7OutcomeAuthority(
                     authorityKind, adamStep, manifestSha256, payloadSha256,
-                    trainStateSha256, modelParameterSha256);
+                    trainStateSha256, modelParameterSha256,
+                    environmentTrajectoryContract);
         }
     }
 
