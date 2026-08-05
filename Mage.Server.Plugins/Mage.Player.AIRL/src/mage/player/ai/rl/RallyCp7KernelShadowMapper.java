@@ -552,8 +552,93 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     observed.getSource(), observed.getGame());
             int index = selectedTargetIndex(
                     current, target, allowedKinds, observed.getSource(), observed.getGame());
+            UUID appliedTarget = canonicalEquivalentDiscardTarget(
+                    observed, current, target, remainingCandidates, index);
+            if (!appliedTarget.equals(target)) {
+                replaceObservedSingleCardTarget(observed, target, appliedTarget);
+                index = selectedTargetIndex(
+                        current, appliedTarget, allowedKinds,
+                        observed.getSource(), observed.getGame());
+                if (!"discard".equals(
+                        current.getActionSemantics().get(index).getActionKind())) {
+                    throw fail("canonical discard target did not map to a discard action", null);
+                }
+            }
             step(current, index, "target:" + current.getActionSemantics().get(index).getActionKind());
-            remainingCandidates.remove(target);
+            remainingCandidates.remove(appliedTarget);
+        }
+    }
+
+    /**
+     * CP7's final comparator uses process-local UUIDs to break ties between
+     * otherwise identical hand cards. The Rust surface already supplies an
+     * exact opening arena identity, so use its lowest occurrence only when the
+     * selected action is a one-card discard and every game-visible property of
+     * the alternative copy matches. This changes physical identity, not CP7's
+     * semantic card choice.
+     */
+    private UUID canonicalEquivalentDiscardTarget(
+            RallyCp7DecisionObserver.Decision observed,
+            XMageRallyBridgeProtocol.DecisionBody current,
+            UUID selected,
+            Collection<UUID> candidates,
+            int selectedIndex) {
+        if (!(observed.getSubject() instanceof TargetCardInHand)
+                || observed.getSelected().size() != 1
+                || !"discard".equals(current.getActionSemantics()
+                .get(selectedIndex).getActionKind())) {
+            return selected;
+        }
+        StableBinding selectedBinding = uuidBindings.get(selected);
+        Card selectedCard = observed.getGame().getCard(selected);
+        if (selectedBinding == null || selectedBinding.arenaId >= INITIAL_OBJECT_COUNT
+                || selectedCard == null
+                || observed.getGame().getState().getZone(selected) != mage.constants.Zone.HAND) {
+            return selected;
+        }
+
+        UUID canonical = selected;
+        int canonicalArenaId = selectedBinding.arenaId;
+        int selectedZoneChangeCount = selectedCard.getZoneChangeCounter(observed.getGame());
+        for (UUID candidateId : candidates) {
+            StableBinding candidateBinding = uuidBindings.get(candidateId);
+            Card candidateCard = observed.getGame().getCard(candidateId);
+            if (candidateBinding == null
+                    || candidateBinding.arenaId >= INITIAL_OBJECT_COUNT
+                    || candidateBinding.cardDbId != selectedBinding.cardDbId
+                    || candidateCard == null
+                    || !selectedCard.getClass().equals(candidateCard.getClass())
+                    || !selectedCard.getName().equals(candidateCard.getName())
+                    || !selectedCard.getOwnerId().equals(candidateCard.getOwnerId())
+                    || candidateCard.getZoneChangeCounter(observed.getGame())
+                    != selectedZoneChangeCount
+                    || observed.getGame().getState().getZone(candidateId)
+                    != mage.constants.Zone.HAND) {
+                continue;
+            }
+            if (candidateBinding.arenaId < canonicalArenaId) {
+                canonical = candidateId;
+                canonicalArenaId = candidateBinding.arenaId;
+            }
+        }
+        return canonical;
+    }
+
+    private void replaceObservedSingleCardTarget(
+            RallyCp7DecisionObserver.Decision observed,
+            UUID selected,
+            UUID canonical) {
+        Target target = (Target) observed.getSubject();
+        List<UUID> pending = target.getTargets();
+        if (pending.size() != 1 || !selected.equals(pending.get(0))
+                || target.getTargetAmount(selected) != 0) {
+            throw fail("cannot canonicalize a non-singleton discard target", null);
+        }
+        target.remove(selected);
+        target.add(canonical, observed.getGame());
+        List<UUID> replaced = target.getTargets();
+        if (replaced.size() != 1 || !canonical.equals(replaced.get(0))) {
+            throw fail("canonical discard target replacement was not retained", null);
         }
     }
 
