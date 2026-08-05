@@ -736,7 +736,6 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         private final String payloadSha256;
         private final String trainStateSha256;
         private final String modelParameterSha256;
-        private final String environmentTrajectoryContract;
 
         private Cp7BehaviorCloneExpectation(long adamStep,
                                             String manifestSha256,
@@ -824,6 +823,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         private final String payloadSha256;
         private final String trainStateSha256;
         private final String modelParameterSha256;
+        private final String environmentTrajectoryContract;
 
         private XMageCp7OutcomeExpectation(String authorityKind,
                                            long adamStep,
