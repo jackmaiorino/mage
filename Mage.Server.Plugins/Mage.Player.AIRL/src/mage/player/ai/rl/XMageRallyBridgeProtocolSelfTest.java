@@ -36,6 +36,10 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 XMageRallyBridgeProtocolSelfTest::testDirectExecutableRequired);
         run("configured-derivative-authority-kind",
                 XMageRallyBridgeProtocolSelfTest::testConfiguredDerivativeAuthorityKind);
+        run("population-store-identity-is-exact",
+                XMageRallyBridgeProtocolSelfTest::testPopulationStoreIdentity);
+        run("population-store-properties-reject-stale-hash",
+                XMageRallyBridgeProtocolSelfTest::testPopulationStoreProperties);
         run("reset-score-step-terminal-flow",
                 XMageRallyBridgeProtocolSelfTest::testFullFlow);
         run("terminal-allows-next-episode-reset",
@@ -207,6 +211,78 @@ public final class XMageRallyBridgeProtocolSelfTest {
             rejectedMismatch = true;
         }
         require(rejectedMismatch, "environment trajectory contract mismatch was accepted");
+    }
+
+    private static void testPopulationStoreIdentity() {
+        String shaA = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        String shaB = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+        XMageRallyBridgeProtocol.CheckpointIdentity checkpoint =
+                new XMageRallyBridgeProtocol.CheckpointIdentity(
+                        "population-store-validated-generation", shaA, 1024L,
+                        shaB, shaA, shaB, shaA, shaA, 1024L, shaB, shaA, shaB, shaA,
+                        "environment-randomization-v2",
+                        XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
+                        XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+        checkpoint.requirePopulationStoreGenerationAuthority(
+                "population-store-validated-generation", shaA, 1024L, shaB, shaA,
+                shaB, shaA, shaA, 1024L, shaB, shaA, shaB, shaA,
+                "environment-randomization-v2", XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
+                XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+        boolean rejected = false;
+        try {
+            checkpoint.requirePopulationStoreGenerationAuthority(
+                    "population-store-validated-generation", shaA, 1024L, shaB, shaA,
+                    shaB, shaA, shaB, 1024L, shaB, shaA, shaB, shaA,
+                    "environment-randomization-v2", XMageRallyBridgeProtocol.SAMPLER_IDENTITY,
+                    XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+        } catch (IllegalArgumentException expected) {
+            rejected = true;
+        }
+        require(rejected, "stale loaded run identity was accepted");
+    }
+
+    private static void testPopulationStoreProperties() {
+        String[] names = {
+                XMageRallyBridgeProcessClient.POPULATION_STORE_AUTHORITY_KIND_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_RUN_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_GENERATION_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_CHECKPOINT_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_SIDECAR_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_PAYLOAD_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SOURCE_TRAIN_STATE_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_LOADED_RUN_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_LOADED_GENERATION_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_LOADED_CHECKPOINT_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_LOADED_PAYLOAD_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_LOADED_TRAIN_STATE_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_MODEL_PARAMETER_SHA256_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SAMPLER_IDENTITY_PROPERTY,
+                XMageRallyBridgeProcessClient.POPULATION_STORE_SAMPLER_CONTRACT_SHA256_PROPERTY,
+        };
+        try {
+            System.setProperty(names[0], "population-store-validated-generation");
+            for (int index = 1; index <= 12; index++) {
+                System.setProperty(names[index], index == 2 || index == 8 ? "1024"
+                        : "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            }
+            System.setProperty(names[13], "environment-randomization-v2");
+            System.setProperty(names[14], XMageRallyBridgeProtocol.SAMPLER_IDENTITY);
+            System.setProperty(names[15], XMageRallyBridgeProtocol.SAMPLER_CONTRACT_SHA256);
+            XMageRallyBridgeProcessClient.validatePopulationStorePropertiesForTest(1024L);
+            System.setProperty(names[7], "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            boolean rejected = false;
+            try {
+                XMageRallyBridgeProcessClient.validatePopulationStorePropertiesForTest(1024L);
+            } catch (IllegalArgumentException expected) {
+                rejected = true;
+            }
+            require(rejected, "uppercase stale population hash was accepted");
+        } finally {
+            for (String name : names) {
+                System.clearProperty(name);
+            }
+        }
     }
 
     private static void testFullFlow() throws Exception {

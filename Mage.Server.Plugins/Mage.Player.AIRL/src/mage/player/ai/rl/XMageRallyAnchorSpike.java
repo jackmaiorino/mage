@@ -91,6 +91,11 @@ public final class XMageRallyAnchorSpike {
         } else if (args.behaviorCloneRoot != null) {
             command.add("--cp7-behavior-clone-root");
             command.add(args.behaviorCloneRoot.toString());
+        } else if (args.populationStoreRoot != null) {
+            command.add("--population-store-root");
+            command.add(args.populationStoreRoot.toString());
+            command.add("--generation");
+            command.add(Long.toString(args.checkpointGeneration));
         } else {
             command.add("--original-store-root");
             command.add(args.storeRoot.toString());
@@ -240,8 +245,10 @@ public final class XMageRallyAnchorSpike {
                     ? "xmage_cp7_outcome_reinforce"
                     : (args.behaviorCloneRoot != null
                     ? "cp7_behavior_clone"
+                    : (args.populationStoreRoot != null
+                    ? "population_store_" + args.checkpointGeneration
                     : (args.checkpointGeneration == null
-                    ? "default" : args.checkpointGeneration)))
+                    ? "default" : args.checkpointGeneration))))
                     + " opponent=" + args.opponentMode.wire
                     + " cp7_skill=" + args.cp7Skill
                     + " first_episode=" + args.firstEpisodeId
@@ -882,6 +889,7 @@ public final class XMageRallyAnchorSpike {
         final Path repoRoot;
         final Path scorerExecutable;
         final Path storeRoot;
+        final Path populationStoreRoot;
         final long baseSeed;
         final long firstEpisodeId;
         final int pairCount;
@@ -898,6 +906,7 @@ public final class XMageRallyAnchorSpike {
         Args(Path repoRoot,
              Path scorerExecutable,
              Path storeRoot,
+             Path populationStoreRoot,
              long baseSeed,
              long firstEpisodeId,
              int pairCount,
@@ -913,6 +922,8 @@ public final class XMageRallyAnchorSpike {
             this.repoRoot = repoRoot.toRealPath();
             this.scorerExecutable = scorerExecutable.toRealPath();
             this.storeRoot = storeRoot == null ? null : storeRoot.toRealPath();
+            this.populationStoreRoot = populationStoreRoot == null
+                    ? null : populationStoreRoot.toRealPath();
             this.baseSeed = baseSeed;
             this.firstEpisodeId = firstEpisodeId;
             this.pairCount = pairCount;
@@ -943,6 +954,7 @@ public final class XMageRallyAnchorSpike {
                     "--base-seed", "--first-episode"));
             Set<String> allowed = new HashSet<>(required);
             allowed.add("--store-root");
+            allowed.add("--population-store-root");
             allowed.add("--behavior-clone-root");
             allowed.add("--outcome-root");
             allowed.add("--pairs");
@@ -958,7 +970,7 @@ public final class XMageRallyAnchorSpike {
                 throw new IllegalArgumentException(
                         "required arguments: " + required
                                 + "; optional: --pairs, --opponent, --cp7-skill,"
-                                + " --store-root, --behavior-clone-root, --outcome-root,"
+                                + " --store-root, --population-store-root, --behavior-clone-root, --outcome-root,"
                                 + " --teacher-export, --outcome-export,"
                                 + " --shadow-cp7-export, --shadow-cp7-max-think-seconds,"
                                 + " --generation");
@@ -973,6 +985,7 @@ public final class XMageRallyAnchorSpike {
             Long checkpointGeneration = values.containsKey("--generation")
                     ? Long.parseLong(values.get("--generation")) : null;
             boolean hasStoreRoot = values.containsKey("--store-root");
+            boolean hasPopulationStoreRoot = values.containsKey("--population-store-root");
             boolean hasBehaviorCloneRoot = values.containsKey("--behavior-clone-root");
             boolean hasOutcomeRoot = values.containsKey("--outcome-root");
             Path teacherExportPath = null;
@@ -1013,10 +1026,12 @@ public final class XMageRallyAnchorSpike {
             if (baseSeed < 0L || firstEpisode < 0L
                     || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128
                     || cp7Skill < 1 || cp7Skill > 10
-                    || (hasStoreRoot ? 1 : 0) + (hasBehaviorCloneRoot ? 1 : 0)
+                    || (hasStoreRoot ? 1 : 0) + (hasPopulationStoreRoot ? 1 : 0)
+                    + (hasBehaviorCloneRoot ? 1 : 0)
                     + (hasOutcomeRoot ? 1 : 0) != 1
                     || (checkpointGeneration != null
                     && (hasBehaviorCloneRoot || hasOutcomeRoot))
+                    || (hasPopulationStoreRoot && checkpointGeneration == null)
                     || (checkpointGeneration != null && checkpointGeneration < 0L)
                     || (teacherExportPath != null && opponentMode != OpponentMode.CP7)
                     || (outcomeExportPath != null && opponentMode != OpponentMode.CP7)
@@ -1029,8 +1044,9 @@ public final class XMageRallyAnchorSpike {
                         "base seed must be nonnegative, first episode must be even,"
                                 + " pairs must be in [1,128],"
                                 + " CP7 skill must be in [1,10],"
-                                + " exactly one original or derivative root must be selected,"
-                                + " generation applies only to the original Store,"
+                                + " exactly one original, population, or derivative root must be selected,"
+                                + " population Store requires generation,"
+                                + " generation applies only to a Store,"
                                 + " generation must be nonnegative,"
                                 + " exports require opponent cp7,"
                                 + " and shadow think seconds must be in [1,120]");
@@ -1045,6 +1061,8 @@ public final class XMageRallyAnchorSpike {
                     Paths.get(values.get("--repo-root")),
                     Paths.get(values.get("--scorer-exe")),
                     hasStoreRoot ? Paths.get(values.get("--store-root")) : null,
+                    hasPopulationStoreRoot
+                            ? Paths.get(values.get("--population-store-root")) : null,
                     baseSeed,
                     firstEpisode,
                     pairCount,

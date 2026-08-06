@@ -291,6 +291,55 @@ public final class XMageRallyBridgeProtocol {
             }
         }
 
+        void requirePopulationStoreGenerationAuthority(
+                String expectedAuthorityKind,
+                String expectedSourceRunSha256,
+                long expectedSourceGeneration,
+                String expectedSourceCheckpointSha256,
+                String expectedSourceSidecarSha256,
+                String expectedSourcePayloadSha256,
+                String expectedSourceTrainStateSha256,
+                String expectedLoadedRunSha256,
+                long expectedLoadedGeneration,
+                String expectedLoadedCheckpointSha256,
+                String expectedLoadedPayloadSha256,
+                String expectedLoadedTrainStateSha256,
+                String expectedModelParameterSha256,
+                String expectedEnvironmentTrajectoryContract,
+                String expectedSamplerIdentity,
+                String expectedSamplerContractSha256) {
+            requireNonnegative(expectedSourceGeneration, "expected population source generation");
+            requireNonnegative(expectedLoadedGeneration, "expected population loaded generation");
+            requireEqual("authority_kind", expectedAuthorityKind, authorityKind);
+            requireEqual("source_run_sha256", expectedSourceRunSha256, sourceRunSha256);
+            requireEqual("source_checkpoint_sha256", expectedSourceCheckpointSha256,
+                    sourceCheckpointSha256);
+            requireEqual("source_sidecar_sha256", expectedSourceSidecarSha256,
+                    sourceSidecarSha256);
+            requireEqual("source_payload_sha256", expectedSourcePayloadSha256,
+                    sourcePayloadSha256);
+            requireEqual("source_train_state_sha256", expectedSourceTrainStateSha256,
+                    sourceTrainStateSha256);
+            requireEqual("loaded_run_sha256", expectedLoadedRunSha256, loadedRunSha256);
+            requireEqual("loaded_checkpoint_sha256", expectedLoadedCheckpointSha256,
+                    loadedCheckpointSha256);
+            requireEqual("loaded_payload_sha256", expectedLoadedPayloadSha256,
+                    loadedPayloadSha256);
+            requireEqual("loaded_train_state_sha256", expectedLoadedTrainStateSha256,
+                    loadedTrainStateSha256);
+            requireEqual("model_parameter_sha256", expectedModelParameterSha256,
+                    modelParameterSha256);
+            requireEqual("environment_trajectory_contract", expectedEnvironmentTrajectoryContract,
+                    environmentTrajectoryContract);
+            requireEqual("sampler_identity", expectedSamplerIdentity, samplerIdentity);
+            requireEqual("sampler_contract_sha256", expectedSamplerContractSha256,
+                    samplerContractSha256);
+            if (sourceGeneration != expectedSourceGeneration
+                    || loadedGeneration != expectedLoadedGeneration) {
+                throw new IllegalArgumentException("population Store generation identity mismatch");
+            }
+        }
+
         void requireExactCp7BehaviorCloneAuthority() {
             requireCp7BehaviorCloneAuthority(
                     CP7_BEHAVIOR_CLONE_ADAM_STEP,

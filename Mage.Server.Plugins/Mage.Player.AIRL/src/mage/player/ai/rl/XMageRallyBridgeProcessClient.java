@@ -63,6 +63,38 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             "xmage.rally.cp7Outcome.modelParameterSha256";
     public static final String XMAGE_CP7_OUTCOME_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY =
             "xmage.rally.cp7Outcome.environmentTrajectoryContract";
+    public static final String POPULATION_STORE_AUTHORITY_KIND_PROPERTY =
+            "xmage.rally.populationStore.authorityKind";
+    public static final String POPULATION_STORE_SOURCE_RUN_SHA256_PROPERTY =
+            "xmage.rally.populationStore.sourceRunSha256";
+    public static final String POPULATION_STORE_SOURCE_GENERATION_PROPERTY =
+            "xmage.rally.populationStore.sourceGeneration";
+    public static final String POPULATION_STORE_SOURCE_CHECKPOINT_SHA256_PROPERTY =
+            "xmage.rally.populationStore.sourceCheckpointSha256";
+    public static final String POPULATION_STORE_SOURCE_SIDECAR_SHA256_PROPERTY =
+            "xmage.rally.populationStore.sourceSidecarSha256";
+    public static final String POPULATION_STORE_SOURCE_PAYLOAD_SHA256_PROPERTY =
+            "xmage.rally.populationStore.sourcePayloadSha256";
+    public static final String POPULATION_STORE_SOURCE_TRAIN_STATE_SHA256_PROPERTY =
+            "xmage.rally.populationStore.sourceTrainStateSha256";
+    public static final String POPULATION_STORE_LOADED_RUN_SHA256_PROPERTY =
+            "xmage.rally.populationStore.loadedRunSha256";
+    public static final String POPULATION_STORE_LOADED_GENERATION_PROPERTY =
+            "xmage.rally.populationStore.loadedGeneration";
+    public static final String POPULATION_STORE_LOADED_CHECKPOINT_SHA256_PROPERTY =
+            "xmage.rally.populationStore.loadedCheckpointSha256";
+    public static final String POPULATION_STORE_LOADED_PAYLOAD_SHA256_PROPERTY =
+            "xmage.rally.populationStore.loadedPayloadSha256";
+    public static final String POPULATION_STORE_LOADED_TRAIN_STATE_SHA256_PROPERTY =
+            "xmage.rally.populationStore.loadedTrainStateSha256";
+    public static final String POPULATION_STORE_MODEL_PARAMETER_SHA256_PROPERTY =
+            "xmage.rally.populationStore.modelParameterSha256";
+    public static final String POPULATION_STORE_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY =
+            "xmage.rally.populationStore.environmentTrajectoryContract";
+    public static final String POPULATION_STORE_SAMPLER_IDENTITY_PROPERTY =
+            "xmage.rally.populationStore.samplerIdentity";
+    public static final String POPULATION_STORE_SAMPLER_CONTRACT_SHA256_PROPERTY =
+            "xmage.rally.populationStore.samplerContractSha256";
 
     private static final int MIN_MAX_LINE_BYTES = 128;
     private static final int MAX_MAX_LINE_BYTES = 16 * 1_048_576;
@@ -85,6 +117,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
     private final ExecutorService ioExecutor;
     private final Thread stderrThread;
     private final Long expectedCheckpointGeneration;
+    private final PopulationStoreExpectation expectedPopulationStore;
     private final Cp7BehaviorCloneExpectation expectedCp7BehaviorClone;
     private final XMageCp7OutcomeExpectation expectedXMageCp7Outcome;
     private final Set<String> usedRequestIds = new HashSet<>();
@@ -108,6 +141,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                           PrintStream diagnostics,
                                           long clientId,
                                           Long expectedCheckpointGeneration,
+                                          PopulationStoreExpectation expectedPopulationStore,
                                           Cp7BehaviorCloneExpectation expectedCp7BehaviorClone,
                                           XMageCp7OutcomeExpectation expectedXMageCp7Outcome) {
         this.process = process;
@@ -118,6 +152,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         this.maxLineBytes = maxLineBytes;
         this.diagnostics = diagnostics;
         this.expectedCheckpointGeneration = expectedCheckpointGeneration;
+        this.expectedPopulationStore = expectedPopulationStore;
         this.expectedCp7BehaviorClone = expectedCp7BehaviorClone;
         this.expectedXMageCp7Outcome = expectedXMageCp7Outcome;
         this.ioExecutor = Executors.newSingleThreadExecutor(
@@ -138,10 +173,14 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             throws IOException {
         List<String> checkedCommand = validateDirectCommand(command);
         Long expectedCheckpointGeneration = selectedGeneration(checkedCommand);
+        boolean selectsPopulationStore = selectsPopulationStore(checkedCommand);
         boolean selectsCp7BehaviorClone = selectsCp7BehaviorClone(checkedCommand);
         boolean selectsXMageCp7Outcome = selectsXMageCp7Outcome(checkedCommand);
         if ((selectsCp7BehaviorClone && selectsXMageCp7Outcome)
                 || (expectedCheckpointGeneration != null
+                && (selectsCp7BehaviorClone || selectsXMageCp7Outcome))
+                || (selectsPopulationStore && expectedCheckpointGeneration == null)
+                || (selectsPopulationStore
                 && (selectsCp7BehaviorClone || selectsXMageCp7Outcome))) {
             throw new IllegalArgumentException(
                     "bridge generation and derivative selections are mutually exclusive");
@@ -150,6 +189,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                 ? Cp7BehaviorCloneExpectation.fromSystemProperties() : null;
         XMageCp7OutcomeExpectation expectedXMageCp7Outcome = selectsXMageCp7Outcome
                 ? XMageCp7OutcomeExpectation.fromSystemProperties() : null;
+        PopulationStoreExpectation expectedPopulationStore = selectsPopulationStore
+                ? PopulationStoreExpectation.fromSystemProperties(
+                        expectedCheckpointGeneration) : null;
         if (exchangeTimeoutMillis <= 0L
                 || exchangeTimeoutMillis > MAX_EXCHANGE_TIMEOUT_MILLIS) {
             throw new IllegalArgumentException(
@@ -170,6 +212,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         return new XMageRallyBridgeProcessClient(
                 process, exchangeTimeoutMillis, maxLineBytes,
                 diagnostics, CLIENT_IDS.incrementAndGet(), expectedCheckpointGeneration,
+                expectedPopulationStore,
                 expectedCp7BehaviorClone, expectedXMageCp7Outcome);
     }
 
@@ -395,7 +438,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             if (!request.getRequestId().equals(response.getRequestId())) {
                 throw new IllegalArgumentException("response request_id does not echo request");
             }
-            if (expectedXMageCp7Outcome != null) {
+            if (expectedPopulationStore != null) {
+                expectedPopulationStore.require(response.getCheckpoint());
+            } else if (expectedXMageCp7Outcome != null) {
                 expectedXMageCp7Outcome.require(response.getCheckpoint());
             } else if (expectedCp7BehaviorClone != null) {
                 expectedCp7BehaviorClone.require(response.getCheckpoint());
@@ -712,6 +757,140 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
             index++;
         }
         return selected;
+    }
+
+    private static boolean selectsPopulationStore(List<String> command) {
+        boolean selected = false;
+        for (int index = 1; index < command.size(); index++) {
+            if (!"--population-store-root".equals(command.get(index))) {
+                continue;
+            }
+            if (selected || index + 1 >= command.size()) {
+                throw new IllegalArgumentException("invalid bridge population Store selection");
+            }
+            selected = true;
+            index++;
+        }
+        return selected;
+    }
+
+    static void validatePopulationStorePropertiesForTest(long selectedGeneration) {
+        PopulationStoreExpectation.fromSystemProperties(selectedGeneration);
+    }
+
+    private static final class PopulationStoreExpectation {
+        private final String authorityKind;
+        private final String sourceRunSha256;
+        private final long sourceGeneration;
+        private final String sourceCheckpointSha256;
+        private final String sourceSidecarSha256;
+        private final String sourcePayloadSha256;
+        private final String sourceTrainStateSha256;
+        private final String loadedRunSha256;
+        private final long loadedGeneration;
+        private final String loadedCheckpointSha256;
+        private final String loadedPayloadSha256;
+        private final String loadedTrainStateSha256;
+        private final String modelParameterSha256;
+        private final String environmentTrajectoryContract;
+        private final String samplerIdentity;
+        private final String samplerContractSha256;
+
+        private PopulationStoreExpectation(
+                String authorityKind, String sourceRunSha256, long sourceGeneration,
+                String sourceCheckpointSha256, String sourceSidecarSha256,
+                String sourcePayloadSha256, String sourceTrainStateSha256,
+                String loadedRunSha256, long loadedGeneration,
+                String loadedCheckpointSha256, String loadedPayloadSha256,
+                String loadedTrainStateSha256, String modelParameterSha256,
+                String environmentTrajectoryContract, String samplerIdentity,
+                String samplerContractSha256) {
+            this.authorityKind = authorityKind;
+            this.sourceRunSha256 = sourceRunSha256;
+            this.sourceGeneration = sourceGeneration;
+            this.sourceCheckpointSha256 = sourceCheckpointSha256;
+            this.sourceSidecarSha256 = sourceSidecarSha256;
+            this.sourcePayloadSha256 = sourcePayloadSha256;
+            this.sourceTrainStateSha256 = sourceTrainStateSha256;
+            this.loadedRunSha256 = loadedRunSha256;
+            this.loadedGeneration = loadedGeneration;
+            this.loadedCheckpointSha256 = loadedCheckpointSha256;
+            this.loadedPayloadSha256 = loadedPayloadSha256;
+            this.loadedTrainStateSha256 = loadedTrainStateSha256;
+            this.modelParameterSha256 = modelParameterSha256;
+            this.environmentTrajectoryContract = environmentTrajectoryContract;
+            this.samplerIdentity = samplerIdentity;
+            this.samplerContractSha256 = samplerContractSha256;
+        }
+
+        private static PopulationStoreExpectation fromSystemProperties(long selectedGeneration) {
+            String authorityKind = requiredProperty(POPULATION_STORE_AUTHORITY_KIND_PROPERTY);
+            String sourceRun = requiredSha(POPULATION_STORE_SOURCE_RUN_SHA256_PROPERTY);
+            long sourceGeneration = requiredGeneration(POPULATION_STORE_SOURCE_GENERATION_PROPERTY);
+            String sourceCheckpoint = requiredSha(POPULATION_STORE_SOURCE_CHECKPOINT_SHA256_PROPERTY);
+            String sourceSidecar = requiredSha(POPULATION_STORE_SOURCE_SIDECAR_SHA256_PROPERTY);
+            String sourcePayload = requiredSha(POPULATION_STORE_SOURCE_PAYLOAD_SHA256_PROPERTY);
+            String sourceTrainState = requiredSha(POPULATION_STORE_SOURCE_TRAIN_STATE_SHA256_PROPERTY);
+            String loadedRun = requiredSha(POPULATION_STORE_LOADED_RUN_SHA256_PROPERTY);
+            long loadedGeneration = requiredGeneration(POPULATION_STORE_LOADED_GENERATION_PROPERTY);
+            String loadedCheckpoint = requiredSha(POPULATION_STORE_LOADED_CHECKPOINT_SHA256_PROPERTY);
+            String loadedPayload = requiredSha(POPULATION_STORE_LOADED_PAYLOAD_SHA256_PROPERTY);
+            String loadedTrainState = requiredSha(POPULATION_STORE_LOADED_TRAIN_STATE_SHA256_PROPERTY);
+            String model = requiredSha(POPULATION_STORE_MODEL_PARAMETER_SHA256_PROPERTY);
+            String environment = requiredProperty(
+                    POPULATION_STORE_ENVIRONMENT_TRAJECTORY_CONTRACT_PROPERTY);
+            String sampler = requiredProperty(POPULATION_STORE_SAMPLER_IDENTITY_PROPERTY);
+            String samplerContract = requiredSha(POPULATION_STORE_SAMPLER_CONTRACT_SHA256_PROPERTY);
+            if (!"population-store-validated-generation".equals(authorityKind)
+                    || !"environment-randomization-v2".equals(environment)
+                    || sourceGeneration != selectedGeneration
+                    || loadedGeneration != selectedGeneration) {
+                throw new IllegalArgumentException("population Store identity properties disagree");
+            }
+            return new PopulationStoreExpectation(
+                    authorityKind, sourceRun, sourceGeneration, sourceCheckpoint, sourceSidecar,
+                    sourcePayload, sourceTrainState, loadedRun, loadedGeneration,
+                    loadedCheckpoint, loadedPayload, loadedTrainState, model, environment,
+                    sampler, samplerContract);
+        }
+
+        private void require(XMageRallyBridgeProtocol.CheckpointIdentity checkpoint) {
+            checkpoint.requirePopulationStoreGenerationAuthority(
+                    authorityKind, sourceRunSha256, sourceGeneration, sourceCheckpointSha256,
+                    sourceSidecarSha256, sourcePayloadSha256, sourceTrainStateSha256,
+                    loadedRunSha256, loadedGeneration, loadedCheckpointSha256,
+                    loadedPayloadSha256, loadedTrainStateSha256, modelParameterSha256,
+                    environmentTrajectoryContract, samplerIdentity, samplerContractSha256);
+        }
+
+        private static String requiredProperty(String name) {
+            String value = System.getProperty(name);
+            if (value == null || value.isEmpty()) {
+                throw new IllegalArgumentException("missing population Store property: " + name);
+            }
+            return value;
+        }
+
+        private static String requiredSha(String name) {
+            String value = requiredProperty(name);
+            if (!Cp7BehaviorCloneExpectation.isLowerHexSha256(value)) {
+                throw new IllegalArgumentException("invalid population Store SHA-256: " + name);
+            }
+            return value;
+        }
+
+        private static long requiredGeneration(String name) {
+            try {
+                long value = Long.parseLong(requiredProperty(name));
+                if (value < 0L) {
+                    throw new IllegalArgumentException("invalid population Store generation: " + name);
+                }
+                return value;
+            } catch (NumberFormatException error) {
+                throw new IllegalArgumentException("invalid population Store generation: " + name,
+                        error);
+            }
+        }
     }
 
     private static boolean selectsXMageCp7Outcome(List<String> command) {
