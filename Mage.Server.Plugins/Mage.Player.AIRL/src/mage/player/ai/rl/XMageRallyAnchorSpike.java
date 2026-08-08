@@ -62,6 +62,10 @@ public final class XMageRallyAnchorSpike {
 
     public static void main(String[] rawArgs) throws Exception {
         quietLogging();
+        if (rawArgs.length == 1 && "--self-test".equals(rawArgs[0])) {
+            System.exit(selfTest());
+            return;
+        }
         Args args = Args.parse(rawArgs);
         Path deckPath = args.repoRoot.resolve(DECK_RELATIVE_PATH).normalize().toRealPath();
         if (!deckPath.startsWith(args.repoRoot)) {
@@ -146,14 +150,40 @@ public final class XMageRallyAnchorSpike {
             long totalCp7PhysicalDecisions = 0L;
             long totalCp7ForcedEvents = 0L;
             Map<String, Long> totalCp7Kinds = new HashMap<>();
+            int pairsCompleted = 0;
+            EngineCriticalFaultException voidedFault = null;
+            pairLoop:
             for (int pairOrdinal = 0; pairOrdinal < args.pairCount; pairOrdinal++) {
                 long firstEpisode = Math.addExact(
                         args.firstEpisodeId, Math.multiplyExact(2L, pairOrdinal));
                 long pairStart = System.nanoTime();
-                LegResult first = runLeg(
-                        bridge, decks, args, firstEpisode, counterfactualTeacher);
-                LegResult second = runLeg(
-                        bridge, decks, args, firstEpisode + 1L, counterfactualTeacher);
+                LegResult first;
+                LegResult second;
+                try {
+                    first = runLeg(
+                            bridge, decks, args, firstEpisode, counterfactualTeacher);
+                    second = runLeg(
+                            bridge, decks, args, firstEpisode + 1L, counterfactualTeacher);
+                } catch (EngineCriticalFaultException fault) {
+                    // Predeclared pair-void: the engine's own critical-error
+                    // path (never a bridge I/O or candidate-side fault, see
+                    // isEngineCriticalFault) leaves the bridge's outcome
+                    // export episode unclosable, so this process cannot
+                    // safely attempt any further pair. Void this whole pair
+                    // (both legs contribute nothing), report it, and stop;
+                    // the orchestrator relaunches a fresh process for the
+                    // remaining pairs when the tolerance flag is set.
+                    if (!args.tolerateEngineFaults) {
+                        // Rethrow the original, unwrapped engine exception so
+                        // the sealed (flag-unset) path is byte-identical to
+                        // pre-pair-void behavior: same type, same message,
+                        // same GameImpl FATAL log lines, same exit code.
+                        throw (IllegalStateException) fault.engineFault;
+                    }
+                    System.out.println(voidLine(args, fault, pairsCompleted));
+                    voidedFault = fault;
+                    break pairLoop;
+                }
                 if (first.pairIndex != second.pairIndex
                         || first.environmentSeed != second.environmentSeed) {
                     throw new IllegalStateException(
@@ -235,8 +265,23 @@ public final class XMageRallyAnchorSpike {
                         first.candidatePriorityProjections,
                         second.candidatePriorityProjections))
                         + " elapsed_ms=" + pairElapsedMillis);
+                pairsCompleted = pairOrdinal + 1;
             }
             long elapsedMillis = (System.nanoTime() - sampleStart) / 1_000_000L;
+            if (voidedFault != null) {
+                System.out.println("XMAGE_RALLY_ANCHOR_SPIKE VOID_STOP"
+                        + " base_seed=" + args.baseSeed
+                        + " opponent=" + args.opponentMode.wire
+                        + " cp7_skill=" + args.cp7Skill
+                        + " first_episode=" + args.firstEpisodeId
+                        + " pairs_requested=" + args.pairCount
+                        + " pairs_completed=" + pairsCompleted
+                        + " games_completed=" + Math.multiplyExact(pairsCompleted, 2)
+                        + " voided_pair_index=" + voidedFault.pairIndex
+                        + " voided_episode=" + voidedFault.episodeId
+                        + " elapsed_ms=" + elapsedMillis);
+                return;
+            }
             int games = Math.multiplyExact(args.pairCount, 2);
             System.out.println("XMAGE_RALLY_ANCHOR_SPIKE PASS"
                     + " base_seed=" + args.baseSeed
@@ -449,7 +494,16 @@ public final class XMageRallyAnchorSpike {
             if (!p0.getId().equals(game.getStartingPlayerId())) {
                 throw new IllegalStateException("XMage rejected the fixed p0 starter");
             }
-            game.start(p0.getId());
+            try {
+                game.start(p0.getId());
+            } catch (IllegalStateException fault) {
+                if (!isEngineCriticalFault(fault)) {
+                    throw fault;
+                }
+                throw new EngineCriticalFaultException(
+                        resetDecision.getPairIndex(), episodeId, environmentSeed,
+                        candidateSeat, fault);
+            }
         }
 
         requireNaturalTerminal(game, p0, p1, p0Policy, p1Policy, cp7Mapper);
@@ -840,6 +894,191 @@ public final class XMageRallyAnchorSpike {
         }
     }
 
+    /**
+     * Predeclared pair-void: signals that a leg's game ended through XMage's
+     * own critical-error path rather than a bridge I/O failure or one of
+     * this file's candidate-side assertions. Carries the identifying fields
+     * needed to void the whole pair (both legs, contributing nothing to
+     * outcomes) and report it. See {@link #isEngineCriticalFault}.
+     */
+    private static final class EngineCriticalFaultException extends RuntimeException {
+        final long pairIndex;
+        final long episodeId;
+        final long environmentSeed;
+        final XMageRallyBridgeProtocol.Seat candidateSeat;
+        final Throwable engineFault;
+
+        EngineCriticalFaultException(long pairIndex, long episodeId, long environmentSeed,
+                                      XMageRallyBridgeProtocol.Seat candidateSeat,
+                                      Throwable engineFault) {
+            super("engine critical fault voided pair " + pairIndex, engineFault);
+            this.pairIndex = pairIndex;
+            this.episodeId = episodeId;
+            this.environmentSeed = environmentSeed;
+            this.candidateSeat = candidateSeat;
+            this.engineFault = engineFault;
+        }
+    }
+
+    // Exact text of mage.game.GameImpl's own private UNIT_TESTS_ERROR_TEXT
+    // constant. GameImpl.playPriority's outer catch (GameImpl.java, the
+    // "OUTER error - game must end" block) rethrows a checked MageException
+    // as an unchecked IllegalStateException with exactly this message, and
+    // only when the engine itself gives up in fast-fail test mode after an
+    // inner error it could not recover from. This is deliberately narrow and
+    // conservative: it matches this one deterministic, evidenced signature
+    // (mtg-kernel-cp7-anchor-panel-v2 seed 2026080801 pair 66, "Game error
+    // ... T13.M1" then "Game end on critical error: MageException") and
+    // nothing broader. Every other IllegalStateException in this file,
+    // including all of XMageRallyAnchorSpike's own candidate-side checks and
+    // any bridge I/O failure, keeps a different message and stays fatal.
+    private static final String ENGINE_CRITICAL_FAULT_MESSAGE = "Error in unit tests";
+
+    private static boolean isEngineCriticalFault(Throwable error) {
+        return error != null
+                && error.getClass() == IllegalStateException.class
+                && ENGINE_CRITICAL_FAULT_MESSAGE.equals(error.getMessage());
+    }
+
+    private static String voidLine(Args args, EngineCriticalFaultException fault,
+                                    int pairsCompletedBeforeVoid) {
+        return "XMAGE_RALLY_ANCHOR_PAIR_VOID"
+                + " base_seed=" + args.baseSeed
+                + " pair_index=" + fault.pairIndex
+                + " environment_seed=" + unsignedHex(fault.environmentSeed)
+                + " failing_episode=" + fault.episodeId
+                + " candidate_seat=" + fault.candidateSeat.wire()
+                + " fault_class=" + fault.engineFault.getClass().getSimpleName()
+                + " engine_error_message=" + sanitizeForLine(fault.engineFault.getMessage())
+                + " pairs_completed_before_void=" + pairsCompletedBeforeVoid;
+    }
+
+    private static String sanitizeForLine(String message) {
+        String value = message == null ? "" : message.trim();
+        if (value.isEmpty()) {
+            return "none";
+        }
+        return value.replaceAll("\\s+", "_");
+    }
+
+    // Resolves --tolerate-engine-faults: an explicit CLI value (true/false/
+    // 1/0) takes precedence; otherwise falls back to AI_ANCHOR_TOLERATE_
+    // ENGINE_FAULTS truthiness ("1" or "true", case-insensitive). Pure
+    // function (both inputs passed in) so it is unit-testable without
+    // mutating process environment; see selfTest().
+    private static boolean resolveTolerateEngineFaults(String cliValue, String envValue) {
+        if (cliValue != null) {
+            if ("true".equalsIgnoreCase(cliValue) || "1".equals(cliValue)) {
+                return true;
+            }
+            if ("false".equalsIgnoreCase(cliValue) || "0".equals(cliValue)) {
+                return false;
+            }
+            throw new IllegalArgumentException(
+                    "--tolerate-engine-faults must be true, false, 1, or 0");
+        }
+        return "1".equals(envValue) || "true".equalsIgnoreCase(envValue);
+    }
+
+    private static int selfTest() {
+        List<String> failures = new ArrayList<>();
+
+        if (!isEngineCriticalFault(new IllegalStateException("Error in unit tests"))) {
+            failures.add("exact engine signature was not recognized");
+        }
+        if (isEngineCriticalFault(new IllegalStateException("Error in unit tests "))) {
+            failures.add("trailing-whitespace variant was incorrectly recognized");
+        }
+        if (isEngineCriticalFault(new RuntimeException("Error in unit tests"))) {
+            failures.add("non-IllegalStateException type was incorrectly recognized");
+        }
+        if (isEngineCriticalFault(null)) {
+            failures.add("null was incorrectly recognized");
+        }
+        // Every candidate-side and bridge-facing fatal message this file
+        // throws must never collide with the engine's own signature.
+        String[] existingFatalMessages = {
+            "XMage did not reach a natural terminal",
+            "XMage terminal contains engine errors or pause",
+            "XMage player terminal flags are invalid",
+            "XMage ended before the native Rally episode",
+            "terminal winner mismatch: XMage=p0 Rust=p1",
+            "candidate policy is missing at terminal",
+            "native/XMage policy counts differ: steps=1/2 physical=1/2",
+            "XMage terminal outcome flags are inconsistent",
+            "Rally reset unexpectedly returned terminal",
+            "reset omitted the two initial Rally libraries",
+            "paired episodes did not share environment seed",
+            "paired episodes did not swap candidate seat",
+        };
+        for (String message : existingFatalMessages) {
+            if (isEngineCriticalFault(new IllegalStateException(message))) {
+                failures.add("existing fatal message collided with the engine signature: "
+                        + message);
+            }
+        }
+
+        EngineCriticalFaultException fault = new EngineCriticalFaultException(
+                66L, 133L, 0x3d403c464bfa8dcaL, XMageRallyBridgeProtocol.Seat.P1,
+                new IllegalStateException(ENGINE_CRITICAL_FAULT_MESSAGE));
+        Args probeArgs = null;
+        try {
+            probeArgs = Args.parse(new String[] {
+                "--repo-root", ".", "--scorer-exe", scannerSelfPath(),
+                "--base-seed", "2026080801", "--first-episode", "132",
+                "--outcome-root", ".",
+            });
+        } catch (Exception error) {
+            failures.add("self-test could not build a probe Args: " + error);
+        }
+        if (probeArgs != null) {
+            String line = voidLine(probeArgs, fault, 65);
+            String[] tokens = line.split(" ");
+            if (!"XMAGE_RALLY_ANCHOR_PAIR_VOID".equals(tokens[0])) {
+                failures.add("void line missing its marker token");
+            }
+            Map<String, String> fields = new HashMap<>();
+            for (int i = 1; i < tokens.length; i++) {
+                String[] parts = tokens[i].split("=", 2);
+                if (parts.length != 2 || fields.put(parts[0], parts[1]) != null) {
+                    failures.add("void line token was not a unique key=value pair: " + tokens[i]);
+                }
+            }
+            if (!"66".equals(fields.get("pair_index"))
+                    || !"133".equals(fields.get("failing_episode"))
+                    || !"p1".equals(fields.get("candidate_seat"))
+                    || !"IllegalStateException".equals(fields.get("fault_class"))
+                    || !"Error_in_unit_tests".equals(fields.get("engine_error_message"))
+                    || !"65".equals(fields.get("pairs_completed_before_void"))) {
+                failures.add("void line fields did not round-trip: " + line);
+            }
+        }
+
+        if (!resolveTolerateEngineFaults("true", null)
+                || !resolveTolerateEngineFaults(null, "1")
+                || !resolveTolerateEngineFaults(null, "TRUE")
+                || resolveTolerateEngineFaults("false", "1")
+                || resolveTolerateEngineFaults(null, null)
+                || resolveTolerateEngineFaults(null, "0")) {
+            failures.add("tolerate-engine-faults flag resolution was incorrect");
+        }
+
+        if (failures.isEmpty()) {
+            System.out.println("PASS XMageRallyAnchorSpike pair-void self-test");
+            return 0;
+        }
+        for (String failure : failures) {
+            System.out.println("FAIL " + failure);
+        }
+        return 1;
+    }
+
+    private static String scannerSelfPath() {
+        // A real repo root is required by Args.parse (toRealPath()); the
+        // JVM's own working directory always qualifies.
+        return Paths.get("").toAbsolutePath().toString();
+    }
+
     private static final class LegResult {
         final long episodeId;
         final long pairIndex;
@@ -902,6 +1141,7 @@ public final class XMageRallyAnchorSpike {
         final Long checkpointGeneration;
         final Path behaviorCloneRoot;
         final Path outcomeRoot;
+        final boolean tolerateEngineFaults;
 
         Args(Path repoRoot,
              Path scorerExecutable,
@@ -918,7 +1158,8 @@ public final class XMageRallyAnchorSpike {
              int shadowCp7MaxThinkSeconds,
              Long checkpointGeneration,
              Path behaviorCloneRoot,
-             Path outcomeRoot) throws Exception {
+             Path outcomeRoot,
+             boolean tolerateEngineFaults) throws Exception {
             this.repoRoot = repoRoot.toRealPath();
             this.scorerExecutable = scorerExecutable.toRealPath();
             this.storeRoot = storeRoot == null ? null : storeRoot.toRealPath();
@@ -937,6 +1178,7 @@ public final class XMageRallyAnchorSpike {
             this.behaviorCloneRoot = behaviorCloneRoot == null
                     ? null : behaviorCloneRoot.toRealPath();
             this.outcomeRoot = outcomeRoot == null ? null : outcomeRoot.toRealPath();
+            this.tolerateEngineFaults = tolerateEngineFaults;
         }
 
         static Args parse(String[] raw) throws Exception {
@@ -965,6 +1207,7 @@ public final class XMageRallyAnchorSpike {
             allowed.add("--shadow-cp7-export");
             allowed.add("--shadow-cp7-max-think-seconds");
             allowed.add("--generation");
+            allowed.add("--tolerate-engine-faults");
             if (!values.keySet().containsAll(required)
                     || !allowed.containsAll(values.keySet())) {
                 throw new IllegalArgumentException(
@@ -973,7 +1216,7 @@ public final class XMageRallyAnchorSpike {
                                 + " --store-root, --population-store-root, --behavior-clone-root, --outcome-root,"
                                 + " --teacher-export, --outcome-export,"
                                 + " --shadow-cp7-export, --shadow-cp7-max-think-seconds,"
-                                + " --generation");
+                                + " --generation, --tolerate-engine-faults");
             }
             long baseSeed = Long.parseLong(values.get("--base-seed"));
             long firstEpisode = Long.parseLong(values.get("--first-episode"));
@@ -1023,6 +1266,9 @@ public final class XMageRallyAnchorSpike {
             }
             int shadowCp7MaxThinkSeconds = Integer.parseInt(
                     values.getOrDefault("--shadow-cp7-max-think-seconds", "5"));
+            boolean tolerateEngineFaults = resolveTolerateEngineFaults(
+                    values.get("--tolerate-engine-faults"),
+                    System.getenv("AI_ANCHOR_TOLERATE_ENGINE_FAULTS"));
             if (baseSeed < 0L || firstEpisode < 0L
                     || (firstEpisode & 1L) != 0L || pairCount < 1 || pairCount > 128
                     || cp7Skill < 1 || cp7Skill > 10
@@ -1075,7 +1321,8 @@ public final class XMageRallyAnchorSpike {
                     checkpointGeneration,
                     hasBehaviorCloneRoot
                             ? Paths.get(values.get("--behavior-clone-root")) : null,
-                    hasOutcomeRoot ? Paths.get(values.get("--outcome-root")) : null);
+                    hasOutcomeRoot ? Paths.get(values.get("--outcome-root")) : null,
+                    tolerateEngineFaults);
         }
     }
 
