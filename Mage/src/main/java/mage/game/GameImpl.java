@@ -1880,7 +1880,7 @@ public abstract class GameImpl implements Game {
                             continue;
                         } else {
                             // tests - try to fail fast
-                            throw new MageException(UNIT_TESTS_ERROR_TEXT);
+                            throw newUnitTestFailure(e);
                         }
                     }
                     state.getPlayerList().getNext();
@@ -1895,12 +1895,22 @@ public abstract class GameImpl implements Game {
 
             // re-raise error in unit tests, so framework can catch it (example: errors in AI simulations)
             if (UNIT_TESTS_ERROR_TEXT.equals(e.getMessage())) {
-                throw new IllegalStateException(UNIT_TESTS_ERROR_TEXT);
+                throw uncheckedUnitTestFailure(e);
             }
         } finally {
             resetLKI();
             clearAllBookmarks();
         }
+    }
+
+    static MageException newUnitTestFailure(Exception cause) {
+        MageException failure = new MageException(UNIT_TESTS_ERROR_TEXT);
+        failure.initCause(cause);
+        return failure;
+    }
+
+    static IllegalStateException uncheckedUnitTestFailure(Exception failure) {
+        return new IllegalStateException(UNIT_TESTS_ERROR_TEXT, failure.getCause());
     }
 
     protected void resolve() {

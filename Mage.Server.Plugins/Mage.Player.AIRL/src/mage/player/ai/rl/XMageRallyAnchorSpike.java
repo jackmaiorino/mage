@@ -165,19 +165,19 @@ public final class XMageRallyAnchorSpike {
                     second = runLeg(
                             bridge, decks, args, firstEpisode + 1L, counterfactualTeacher);
                 } catch (EngineCriticalFaultException fault) {
-                    // Predeclared pair-void: the engine's own critical-error
-                    // path (never a bridge I/O or candidate-side fault, see
-                    // isEngineCriticalFault) leaves the bridge's outcome
-                    // export episode unclosable, so this process cannot
-                    // safely attempt any further pair. Void this whole pair
-                    // (both legs contribute nothing), report it, and stop;
+                    // Predeclared pair-void: GameImpl's fast-fail wrapper leaves
+                    // the bridge's outcome export episode unclosable, so this
+                    // process cannot safely attempt any further pair. Its cause
+                    // retains the originating violation for classification.
+                    // Void this whole pair (both legs contribute nothing), report it,
+                    // and stop;
                     // the orchestrator relaunches a fresh process for the
                     // remaining pairs when the tolerance flag is set.
                     if (!args.tolerateEngineFaults) {
                         // Rethrow the original, unwrapped engine exception so
-                        // the sealed (flag-unset) path is byte-identical to
-                        // pre-pair-void behavior: same type, same message,
-                        // same GameImpl FATAL log lines, same exit code.
+                        // the flag-unset path preserves its top-level type,
+                        // message, and exit code. GameImpl now also retains the
+                        // originating cause in its diagnostic stack output.
                         throw (IllegalStateException) fault.engineFault;
                     }
                     System.out.println(voidLine(args, fault, pairsCompleted));
@@ -895,10 +895,9 @@ public final class XMageRallyAnchorSpike {
     }
 
     /**
-     * Predeclared pair-void: signals that a leg's game ended through XMage's
-     * own critical-error path rather than a bridge I/O failure or one of
-     * this file's candidate-side assertions. Carries the identifying fields
-     * needed to void the whole pair (both legs, contributing nothing to
+     * Predeclared pair-void: signals that a leg ended through GameImpl's exact
+     * fast-fail wrapper. Carries the originating violation plus the identifying
+     * fields needed to void the whole pair (both legs, contributing nothing to
      * outcomes) and report it. See {@link #isEngineCriticalFault}.
      */
     private static final class EngineCriticalFaultException extends RuntimeException {
@@ -923,21 +922,20 @@ public final class XMageRallyAnchorSpike {
     // Exact text of mage.game.GameImpl's own private UNIT_TESTS_ERROR_TEXT
     // constant. GameImpl.playPriority's outer catch (GameImpl.java, the
     // "OUTER error - game must end" block) rethrows a checked MageException
-    // as an unchecked IllegalStateException with exactly this message, and
-    // only when the engine itself gives up in fast-fail test mode after an
-    // inner error it could not recover from. This is deliberately narrow and
-    // conservative: it matches this one deterministic, evidenced signature
+    // as an unchecked IllegalStateException with exactly this message and the
+    // originating inner exception as its direct cause. This is deliberately
+    // narrow and conservative: it matches this deterministic, evidenced
+    // signature
     // (mtg-kernel-cp7-anchor-panel-v2 seed 2026080801 pair 66, "Game error
     // ... T13.M1" then "Game end on critical error: MageException") and
-    // nothing broader. Every other IllegalStateException in this file,
-    // including all of XMageRallyAnchorSpike's own candidate-side checks and
-    // any bridge I/O failure, keeps a different message and stays fatal.
+    // nothing broader. A wrapper without a self-classifying cause stays fatal.
     private static final String ENGINE_CRITICAL_FAULT_MESSAGE = "Error in unit tests";
 
     private static boolean isEngineCriticalFault(Throwable error) {
         return error != null
                 && error.getClass() == IllegalStateException.class
-                && ENGINE_CRITICAL_FAULT_MESSAGE.equals(error.getMessage());
+                && ENGINE_CRITICAL_FAULT_MESSAGE.equals(error.getMessage())
+                && error.getCause() != null;
     }
 
     private static String voidLine(Args args, EngineCriticalFaultException fault,
@@ -949,8 +947,19 @@ public final class XMageRallyAnchorSpike {
                 + " failing_episode=" + fault.episodeId
                 + " candidate_seat=" + fault.candidateSeat.wire()
                 + " fault_class=" + fault.engineFault.getClass().getSimpleName()
-                + " engine_error_message=" + sanitizeForLine(fault.engineFault.getMessage())
+                + " engine_error_message=" + engineErrorMessage(fault.engineFault)
                 + " pairs_completed_before_void=" + pairsCompletedBeforeVoid;
+    }
+
+    private static String engineErrorMessage(Throwable engineFault) {
+        Throwable detail = engineFault == null ? null : engineFault.getCause();
+        if (detail == null) {
+            detail = engineFault;
+        }
+        if (detail == null) {
+            return "none";
+        }
+        return sanitizeForLine(detail.getClass().getName() + ": " + detail.getMessage());
     }
 
     private static String sanitizeForLine(String message) {
@@ -983,13 +992,22 @@ public final class XMageRallyAnchorSpike {
     private static int selfTest() {
         List<String> failures = new ArrayList<>();
 
-        if (!isEngineCriticalFault(new IllegalStateException("Error in unit tests"))) {
+        Throwable classificationProbe = new RallyCp7KernelShadowMapper.MapperViolation(
+                "Rust reached terminal before XMage CP7",
+                new RuntimeException("lower-level detail"));
+        if (!isEngineCriticalFault(new IllegalStateException(
+                "Error in unit tests", classificationProbe))) {
             failures.add("exact engine signature was not recognized");
         }
-        if (isEngineCriticalFault(new IllegalStateException("Error in unit tests "))) {
+        if (isEngineCriticalFault(new IllegalStateException("Error in unit tests"))) {
+            failures.add("cause-free engine signature was incorrectly recognized");
+        }
+        if (isEngineCriticalFault(new IllegalStateException(
+                "Error in unit tests ", classificationProbe))) {
             failures.add("trailing-whitespace variant was incorrectly recognized");
         }
-        if (isEngineCriticalFault(new RuntimeException("Error in unit tests"))) {
+        if (isEngineCriticalFault(new RuntimeException(
+                "Error in unit tests", classificationProbe))) {
             failures.add("non-IllegalStateException type was incorrectly recognized");
         }
         if (isEngineCriticalFault(null)) {
@@ -1012,7 +1030,7 @@ public final class XMageRallyAnchorSpike {
             "paired episodes did not swap candidate seat",
         };
         for (String message : existingFatalMessages) {
-            if (isEngineCriticalFault(new IllegalStateException(message))) {
+            if (isEngineCriticalFault(new IllegalStateException(message, classificationProbe))) {
                 failures.add("existing fatal message collided with the engine signature: "
                         + message);
             }
@@ -1020,7 +1038,9 @@ public final class XMageRallyAnchorSpike {
 
         EngineCriticalFaultException fault = new EngineCriticalFaultException(
                 66L, 133L, 0x3d403c464bfa8dcaL, XMageRallyBridgeProtocol.Seat.P1,
-                new IllegalStateException(ENGINE_CRITICAL_FAULT_MESSAGE));
+                new IllegalStateException(
+                        ENGINE_CRITICAL_FAULT_MESSAGE,
+                        classificationProbe));
         Args probeArgs = null;
         try {
             probeArgs = Args.parse(new String[] {
@@ -1048,7 +1068,9 @@ public final class XMageRallyAnchorSpike {
                     || !"133".equals(fields.get("failing_episode"))
                     || !"p1".equals(fields.get("candidate_seat"))
                     || !"IllegalStateException".equals(fields.get("fault_class"))
-                    || !"Error_in_unit_tests".equals(fields.get("engine_error_message"))
+                    || !("mage.player.ai.rl.RallyCp7KernelShadowMapper$MapperViolation:"
+                    + "_Rust_reached_terminal_before_XMage_CP7")
+                    .equals(fields.get("engine_error_message"))
                     || !"65".equals(fields.get("pairs_completed_before_void"))) {
                 failures.add("void line fields did not round-trip: " + line);
             }
