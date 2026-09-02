@@ -59,8 +59,12 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 () -> expectResetFailure("malformed_duplicate_nested", 2_000L, 1_048_576));
         run("missing-decision-clock-fails-closed",
                 () -> expectResetFailure("missing_clock", 2_000L, 1_048_576));
-        run("reset-p1-active-fails-closed",
-                () -> expectResetFailure("reset_p1_active", 2_000L, 1_048_576));
+        run("reset-round-1-p1-active-accepted",
+                XMageRallyBridgeProtocolSelfTest::testResetRoundOneP1Active);
+        run("reset-round-2-fails-closed",
+                () -> expectResetFailure("reset_round_2", 2_000L, 1_048_576));
+        run("reset-binding-round-and-starter",
+                XMageRallyBridgeProtocolSelfTest::testResetBindingRule);
         run("unknown-decision-clock-field-fails-closed",
                 () -> expectResetFailure("unknown_clock_field", 2_000L, 1_048_576));
         run("invalid-decision-clock-phase-fails-closed",
@@ -223,6 +227,104 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 XMageRallyBridgeProtocol.Seat.P1, "phase mismatch");
         expectClockFailure(p1, 12L, mage.constants.PhaseStep.PRECOMBAT_MAIN,
                 XMageRallyBridgeProtocol.Seat.P0, "active mismatch");
+    }
+
+    /**
+     * The kernel clock's turn is a round counter spanning both seats, so the
+     * first surfaced decision of an episode may legitimately be p1's Main1 in
+     * round 1 (XMage turn 2) when p0's opening turn surfaces no decision.
+     */
+    private static void testResetRoundOneP1Active() throws Exception {
+        ByteArrayOutputStream diagnosticBytes = new ByteArrayOutputStream();
+        try (PrintStream diagnostics = diagnostics(diagnosticBytes);
+             XMageRallyBridgeProcessClient client = start("reset_p1_active", 2_000L,
+                     1_048_576, diagnostics)) {
+            client.reset("reset", EPISODE, BASE_SEED);
+            require(client.isUsable(), "round-1 p1-active reset poisoned the client");
+            XMageRallyBridgeProtocol.DecisionBody first = client.getCurrentDecision();
+            require(first != null && first.getStep() == 0L
+                            && first.getKernelClock() != null
+                            && first.getKernelClock().getTurn() == 1L
+                            && first.getKernelClock().getPhaseStep()
+                            == XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1
+                            && first.getKernelClock().getActivePlayer()
+                            == XMageRallyBridgeProtocol.Seat.P1
+                            && first.getKernelClock().getPriorityPlayer()
+                            == XMageRallyBridgeProtocol.Seat.P1
+                            && first.getKernelClock().getStackDepth() == 0L,
+                    "round-1 p1-active reset was not bound");
+            require(XMageRallyClockComparator.requireResetBinding(
+                            first.getKernelClock(), 2L,
+                            mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                            XMageRallyBridgeProtocol.Seat.P1,
+                            XMageRallyBridgeProtocol.Seat.P0,
+                            "self_test", "reset_round_1_p1").getTurn() == 1L,
+                    "round-1 p1 reset did not normalize to XMage turn 2");
+            expectResetBindingFailure(first.getKernelClock(), 1L,
+                    XMageRallyBridgeProtocol.Seat.P1,
+                    XMageRallyBridgeProtocol.Seat.P0,
+                    "p1 reset accepted XMage turn 1");
+            expectResetBindingFailure(first.getKernelClock(), 2L,
+                    XMageRallyBridgeProtocol.Seat.P1,
+                    XMageRallyBridgeProtocol.Seat.P1,
+                    "p1 reset accepted a non-p0 XMage starting player");
+        }
+        require(diagnosticBytes.size() == 0,
+                "accepted p1-active reset emitted diagnostics: " + utf8(diagnosticBytes));
+    }
+
+    private static void testResetBindingRule() {
+        XMageRallyBridgeProtocol.KernelClock roundOneP0 =
+                new XMageRallyBridgeProtocol.KernelClock(
+                        1L, XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                        XMageRallyBridgeProtocol.Seat.P0,
+                        XMageRallyBridgeProtocol.Seat.P0, 0L);
+        require(XMageRallyClockComparator.requireResetBinding(
+                        roundOneP0, 1L, mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                        XMageRallyBridgeProtocol.Seat.P0,
+                        XMageRallyBridgeProtocol.Seat.P0,
+                        "self_test", "reset_round_1_p0").getTurn() == 1L,
+                "round-1 p0 reset no longer binds XMage turn 1");
+        expectResetBindingFailure(roundOneP0, 1L,
+                XMageRallyBridgeProtocol.Seat.P0,
+                XMageRallyBridgeProtocol.Seat.P1,
+                "p0 reset accepted a non-p0 XMage starting player");
+        XMageRallyBridgeProtocol.KernelClock roundTwoP0 =
+                new XMageRallyBridgeProtocol.KernelClock(
+                        2L, XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                        XMageRallyBridgeProtocol.Seat.P0,
+                        XMageRallyBridgeProtocol.Seat.P0, 0L);
+        expectResetBindingFailure(roundTwoP0, 3L,
+                XMageRallyBridgeProtocol.Seat.P0,
+                XMageRallyBridgeProtocol.Seat.P0,
+                "reset accepted kernel round 2");
+        XMageRallyBridgeProtocol.KernelClock roundTwoP1 =
+                new XMageRallyBridgeProtocol.KernelClock(
+                        2L, XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                        XMageRallyBridgeProtocol.Seat.P1,
+                        XMageRallyBridgeProtocol.Seat.P1, 0L);
+        expectResetBindingFailure(roundTwoP1, 4L,
+                XMageRallyBridgeProtocol.Seat.P1,
+                XMageRallyBridgeProtocol.Seat.P0,
+                "reset accepted kernel round 2 on p1");
+    }
+
+    private static void expectResetBindingFailure(
+            XMageRallyBridgeProtocol.KernelClock resetClock,
+            long xmageGlobalTurn,
+            XMageRallyBridgeProtocol.Seat xmageActivePlayer,
+            XMageRallyBridgeProtocol.Seat xmageStartingPlayer,
+            String label) {
+        boolean threw = false;
+        try {
+            XMageRallyClockComparator.requireResetBinding(
+                    resetClock, xmageGlobalTurn,
+                    mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                    xmageActivePlayer, xmageStartingPlayer, "self_test", label);
+        } catch (XMageRallyClockComparator.ClockMismatch expected) {
+            threw = expected.getMessage().contains(XMageRallyClockComparator.MARKER);
+        }
+        require(threw, label);
     }
 
     private static void expectClockFailure(

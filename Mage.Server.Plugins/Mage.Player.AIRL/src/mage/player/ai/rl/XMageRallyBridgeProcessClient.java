@@ -493,6 +493,24 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         terminal = resetTerminal;
     }
 
+    /**
+     * Validate the wire half of a reset decision, which is everything the
+     * client can check before XMage has a live game.
+     *
+     * <p>{@code kernel_clock.turn} is a ROUND counter that spans both seats, not
+     * an XMage turn number: kernel round {@code r} covers XMage turn
+     * {@code 2r - 1} (p0 active) and XMage turn {@code 2r} (p1 active). The
+     * kernel's starting player on this path is always p0, but the first
+     * surfaced decision of an episode legitimately lands on p1 in Main1 of
+     * round 1 whenever p0's opening turn surfaces no decision at all. A reset
+     * therefore binds kernel round 1 and never {@code active_player == p0}.
+     *
+     * <p>The two game-bound halves of the reset rule, that XMage's starting
+     * player binds to {@code Seat.P0} and that {@code 2 * turn - 1 +
+     * (active_player == p1 ? 1 : 0)} equals {@code game.getTurnNum()}, are
+     * enforced by {@link XMageRallyClockComparator#requireResetBinding} when a
+     * consumer first meets the reset decision against the live game.
+     */
     private static void validateResetState(XMageRallyBridgeProtocol.DecisionBody decision,
                                            long episodeId,
                                            long baseSeed) {
@@ -508,11 +526,9 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                 || decision.getInitialLibraryCardDefinitionIds() == null) {
             throw new IllegalArgumentException("reset decision metadata mismatch");
         }
-        if (resetClock == null
-                || resetClock.getTurn() != 1L
-                || resetClock.getActivePlayer() != XMageRallyBridgeProtocol.Seat.P0) {
+        if (resetClock == null || resetClock.getTurn() != 1L) {
             throw new IllegalArgumentException(
-                    "reset decision does not bind kernel starting player p0");
+                    "reset decision does not bind kernel round 1");
         }
     }
 

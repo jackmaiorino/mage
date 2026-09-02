@@ -21,6 +21,55 @@ final class XMageRallyClockComparator {
             Game game,
             String consumer,
             String label) {
+        return match(decision, game, false, consumer, label);
+    }
+
+    /**
+     * Bind an episode's reset decision (policy step 0) to the live XMage game.
+     *
+     * <p>The kernel's {@code turn} is a ROUND counter that spans both seats, not
+     * an XMage turn number: kernel round {@code r} covers XMage turn
+     * {@code 2r - 1} (p0 active) and XMage turn {@code 2r} (p1 active). The
+     * kernel's starting player is always p0, but the first surfaced decision of
+     * an episode legitimately lands on p1 in Main1 of round 1 whenever p0's
+     * opening turn surfaces no decision at all. A reset therefore binds kernel
+     * round 1, the starting-player identity, and the normalized turn; it never
+     * requires {@code active_player == p0}.
+     */
+    static XMageRallyBridgeProtocol.ExpectedClock requireResetBinding(
+            XMageRallyBridgeProtocol.DecisionBody resetDecision,
+            Game game,
+            String consumer,
+            String label) {
+        return match(resetDecision, game, true, consumer, label);
+    }
+
+    /**
+     * Pure reset binding for the same rule, for callers that already hold the
+     * live XMage turn, phase, active seat and the seat XMage's starting player
+     * binds to. See {@link #requireResetBinding(
+     * XMageRallyBridgeProtocol.DecisionBody, Game, String, String)} for the
+     * round-counter semantics.
+     */
+    static XMageRallyBridgeProtocol.ExpectedClock requireResetBinding(
+            XMageRallyBridgeProtocol.KernelClock resetClock,
+            long xmageGlobalTurn,
+            PhaseStep xmagePhase,
+            XMageRallyBridgeProtocol.Seat xmageActivePlayer,
+            XMageRallyBridgeProtocol.Seat xmageStartingPlayer,
+            String consumer,
+            String label) {
+        requireResetRound(resetClock, xmageStartingPlayer, consumer, label);
+        return requireMatch(resetClock, xmageGlobalTurn, xmagePhase, xmageActivePlayer,
+                consumer, label);
+    }
+
+    private static XMageRallyBridgeProtocol.ExpectedClock match(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            Game game,
+            boolean reset,
+            String consumer,
+            String label) {
         if (decision == null) {
             throw mismatch(consumer, label, "decision is null");
         }
@@ -29,10 +78,34 @@ final class XMageRallyClockComparator {
             throw mismatch(consumer, label, "decision has no kernel_clock");
         }
         Snapshot xmage = snapshot(game, consumer, label);
+        if (reset) {
+            requireResetRound(kernel, xmage.startingPlayer, consumer, label);
+        }
         return compare(kernel, xmage.globalTurn, xmage.phaseStep, xmage.activePlayer,
                 consumer, label,
                 "episode=" + decision.getEpisodeId()
                         + " policy_step=" + decision.getStep() + " ");
+    }
+
+    private static void requireResetRound(
+            XMageRallyBridgeProtocol.KernelClock resetClock,
+            XMageRallyBridgeProtocol.Seat xmageStartingPlayer,
+            String consumer,
+            String label) {
+        if (resetClock == null) {
+            throw mismatch(consumer, label, "reset decision has no kernel_clock");
+        }
+        if (resetClock.getTurn() != 1L) {
+            throw mismatch(consumer, label,
+                    "reset decision does not bind kernel round 1: kernel_turn="
+                            + resetClock.getTurn());
+        }
+        if (xmageStartingPlayer != XMageRallyBridgeProtocol.Seat.P0) {
+            throw mismatch(consumer, label,
+                    "reset decision does not bind kernel starting player p0:"
+                            + " xmage_starting_player="
+                            + seatWire(xmageStartingPlayer));
+        }
     }
 
     static XMageRallyBridgeProtocol.ExpectedClock requireMatch(
@@ -126,13 +199,14 @@ final class XMageRallyClockComparator {
         }
         XMageRallyBridgeProtocol.Seat active = seat(
                 game.getActivePlayerId(), starting, other);
+        XMageRallyBridgeProtocol.Seat startingSeat = seat(starting, starting, other);
         XMageRallyBridgeProtocol.KernelPhaseStep phase = phase(game.getTurnStepType());
-        if (active == null || phase == null) {
+        if (active == null || startingSeat == null || phase == null) {
             throw mismatch(consumer, label,
-                    "XMage clock has unknown active player or phase");
+                    "XMage clock has unknown active player, starting player or phase");
         }
         long globalTurn = game.getTurnNum();
-        return new Snapshot(globalTurn, phase, active);
+        return new Snapshot(globalTurn, phase, active, startingSeat);
     }
 
     private static XMageRallyBridgeProtocol.Seat seat(
@@ -211,13 +285,16 @@ final class XMageRallyClockComparator {
         private final long globalTurn;
         private final XMageRallyBridgeProtocol.KernelPhaseStep phaseStep;
         private final XMageRallyBridgeProtocol.Seat activePlayer;
+        private final XMageRallyBridgeProtocol.Seat startingPlayer;
 
         private Snapshot(long globalTurn,
                          XMageRallyBridgeProtocol.KernelPhaseStep phaseStep,
-                         XMageRallyBridgeProtocol.Seat activePlayer) {
+                         XMageRallyBridgeProtocol.Seat activePlayer,
+                         XMageRallyBridgeProtocol.Seat startingPlayer) {
             this.globalTurn = globalTurn;
             this.phaseStep = phaseStep;
             this.activePlayer = activePlayer;
+            this.startingPlayer = startingPlayer;
         }
     }
 }

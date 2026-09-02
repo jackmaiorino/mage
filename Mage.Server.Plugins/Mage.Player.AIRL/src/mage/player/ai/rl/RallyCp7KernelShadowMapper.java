@@ -1878,8 +1878,13 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             Game game,
             String label) {
         try {
-            return XMageRallyClockComparator.requireMatch(
-                    decision, game, "cp7_kernel_shadow_mapper", label);
+            // Policy step 0 is still the reset decision, so this is the first
+            // and only point where the reset clock meets the live game.
+            return decision != null && decision.getStep() == 0L
+                    ? XMageRallyClockComparator.requireResetBinding(
+                    decision, game, "cp7_kernel_shadow_mapper", label)
+                    : XMageRallyClockComparator.requireMatch(
+                            decision, game, "cp7_kernel_shadow_mapper", label);
         } catch (XMageRallyClockComparator.ClockMismatch mismatch) {
             throw fail("CP7_KERNEL_SHADOW_MAPPER_CLOCK_MISMATCH "
                     + mismatch.getMessage(), mismatch);

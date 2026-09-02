@@ -1476,8 +1476,13 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             Game game,
             String label) {
         try {
-            return XMageRallyClockComparator.requireMatch(
-                    decision, game, "kernel_shadow_policy", label);
+            // Policy step 0 is still the reset decision, so this is the first
+            // and only point where the reset clock meets the live game.
+            return decision != null && decision.getStep() == 0L
+                    ? XMageRallyClockComparator.requireResetBinding(
+                    decision, game, "kernel_shadow_policy", label)
+                    : XMageRallyClockComparator.requireMatch(
+                            decision, game, "kernel_shadow_policy", label);
         } catch (XMageRallyClockComparator.ClockMismatch mismatch) {
             throw fail("KERNEL_SHADOW_POLICY_CLOCK_MISMATCH "
                     + mismatch.getMessage(), mismatch);
