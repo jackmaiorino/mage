@@ -456,14 +456,14 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                 response.getCheckpoint().requireSelectedOriginalGeneration(
                         expectedCheckpointGeneration);
             }
-            if (response.getBody() instanceof XMageRallyBridgeProtocol.ErrorResponseBody) {
-                XMageRallyBridgeProtocol.ErrorResponseBody error =
-                        (XMageRallyBridgeProtocol.ErrorResponseBody) response.getBody();
-                throw new IllegalArgumentException(
-                        "Rust error " + error.getErrorCode() + ": " + error.getMessage());
-            }
         } catch (IOException | RuntimeException e) {
             throw fail("invalid bridge response", e);
+        }
+        if (response.getBody() instanceof XMageRallyBridgeProtocol.ErrorResponseBody) {
+            XMageRallyBridgeProtocol.ErrorResponseBody error =
+                    (XMageRallyBridgeProtocol.ErrorResponseBody) response.getBody();
+            throw fail("XMAGE_RALLY_SCORER_ERROR error_code="
+                    + error.getErrorCode(), null);
         }
         return response;
     }
@@ -497,6 +497,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                                            long episodeId,
                                            long baseSeed) {
         validateRallyDecks(decision.getDeckIds());
+        XMageRallyBridgeProtocol.KernelClock resetClock = decision.getKernelClock();
         if (decision.getEpisodeId() != episodeId || decision.getStep() != 0L
                 || !XMageRallyBridgeProtocol.u64Hex(baseSeed)
                 .equals(decision.getBaseSeedU64Hex())
@@ -506,6 +507,12 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
                 || decision.getCandidateSeat() != expectedCandidateSeat(episodeId)
                 || decision.getInitialLibraryCardDefinitionIds() == null) {
             throw new IllegalArgumentException("reset decision metadata mismatch");
+        }
+        if (resetClock == null
+                || resetClock.getTurn() != 1L
+                || resetClock.getActivePlayer() != XMageRallyBridgeProtocol.Seat.P0) {
+            throw new IllegalArgumentException(
+                    "reset decision does not bind kernel starting player p0");
         }
     }
 

@@ -79,6 +79,12 @@ public final class XMageRallyBridgeSelfTestPeer {
                 writeLf(System.out, decisionResponse("reset", true, false, false)
                         .replace(",\"kernel_clock\":" + kernelClockJson("p0"), ""));
                 return;
+            case "reset_p1_active":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false)
+                        .replace("\"active_player\":\"p0\"",
+                                "\"active_player\":\"p1\""));
+                return;
             case "unknown_clock_field":
                 requireReset(readRequest());
                 writeLf(System.out, decisionResponse("reset", true, false, false)

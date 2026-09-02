@@ -1855,14 +1855,22 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             bridge.step(requestId, episodeId, current.getStep(), selectedIndex,
                     expectedClock);
         } catch (XMageRallyBridgeProcessClient.BridgeFailure error) {
-            throw fail("Rust step failed at CP7 episode " + episodeId
-                    + " step " + current.getStep(), error);
+            throw fail(bridgeStepFailureMessage(
+                    episodeId, current.getStep(), error.getMessage()), error);
         }
         appliedPhysicalDecisionIds.add(current.getPhysicalDecisionId());
         appliedPolicySteps++;
         increment(appliedKinds, kind);
         lastAppliedActionKind = selectedActionKind;
         lastAppliedSourceArenaId = selectedSourceArenaId;
+    }
+
+    private static String bridgeStepFailureMessage(
+            long episodeId, long step, String bridgeMessage) {
+        return "CP7_KERNEL_SHADOW_MAPPER_BRIDGE_STEP_FAILURE"
+                + " episode=" + episodeId
+                + " step=" + step
+                + " " + (bridgeMessage == null ? "bridge_error=unknown" : bridgeMessage);
     }
 
     private XMageRallyBridgeProtocol.ExpectedClock requireClockMatch(
@@ -2448,6 +2456,14 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     "combat stable identity mapping accepted a repeated candidate");
         } catch (MapperViolation expected) {
             // Expected fail-closed duplicate rejection.
+        }
+        String scorerFailure = bridgeStepFailureMessage(
+                2L, 3L, "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch");
+        if (!scorerFailure.contains("CP7_KERNEL_SHADOW_MAPPER_BRIDGE_STEP_FAILURE")
+                || !scorerFailure.contains(
+                "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch")) {
+            throw new IllegalStateException(
+                    "CP7 bridge failure marker self-test failed");
         }
         requirePermutation(Arrays.asList(2, 0, 1), 3, "trigger self-test");
         if (factorialExact(3) != 6) {

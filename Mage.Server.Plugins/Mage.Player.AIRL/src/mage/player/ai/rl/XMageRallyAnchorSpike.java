@@ -166,6 +166,10 @@ public final class XMageRallyAnchorSpike {
                             bridge, decks, args, firstEpisode, counterfactualTeacher);
                     second = runLeg(
                             bridge, decks, args, firstEpisode + 1L, counterfactualTeacher);
+                } catch (ShadowPairFailureException failure) {
+                    System.out.println(failureLine(args, failure, pairsCompleted));
+                    System.out.flush();
+                    throw failure.gameFault;
                 } catch (EngineCriticalFaultException fault) {
                     // Predeclared pair-void: GameImpl's fast-fail wrapper leaves
                     // the bridge's outcome export episode unclosable, so this
@@ -499,6 +503,12 @@ public final class XMageRallyAnchorSpike {
             try {
                 game.start(p0.getId());
             } catch (IllegalStateException fault) {
+                Throwable shadowFailure = findShadowPairFailure(fault);
+                if (shadowFailure != null) {
+                    throw new ShadowPairFailureException(
+                            resetDecision.getPairIndex(), episodeId, environmentSeed,
+                            candidateSeat, fault, shadowFailure);
+                }
                 if (!isEngineCriticalFault(fault)) {
                     throw fault;
                 }
@@ -921,6 +931,31 @@ public final class XMageRallyAnchorSpike {
         }
     }
 
+    private static final class ShadowPairFailureException extends RuntimeException {
+        final long pairIndex;
+        final long episodeId;
+        final long environmentSeed;
+        final XMageRallyBridgeProtocol.Seat candidateSeat;
+        final IllegalStateException gameFault;
+        final Throwable shadowFailure;
+
+        ShadowPairFailureException(
+                long pairIndex,
+                long episodeId,
+                long environmentSeed,
+                XMageRallyBridgeProtocol.Seat candidateSeat,
+                IllegalStateException gameFault,
+                Throwable shadowFailure) {
+            super("shadow contract failure stopped pair " + pairIndex, gameFault);
+            this.pairIndex = pairIndex;
+            this.episodeId = episodeId;
+            this.environmentSeed = environmentSeed;
+            this.candidateSeat = candidateSeat;
+            this.gameFault = gameFault;
+            this.shadowFailure = shadowFailure;
+        }
+    }
+
     // Exact text of mage.game.GameImpl's own private UNIT_TESTS_ERROR_TEXT
     // constant. GameImpl.playPriority's outer catch (GameImpl.java, the
     // "OUTER error - game must end" block) rethrows a checked MageException
@@ -937,7 +972,53 @@ public final class XMageRallyAnchorSpike {
         return error != null
                 && error.getClass() == IllegalStateException.class
                 && ENGINE_CRITICAL_FAULT_MESSAGE.equals(error.getMessage())
-                && error.getCause() != null;
+                && error.getCause() != null
+                && findShadowPairFailure(error) == null;
+    }
+
+    private static Throwable findShadowPairFailure(Throwable error) {
+        Throwable current = error;
+        for (int depth = 0; current != null && depth < 64; depth++) {
+            if (current instanceof KernelShadowRallyPolicy.KernelShadowPolicyViolation
+                    || current instanceof RallyCp7KernelShadowMapper.MapperViolation
+                    || current instanceof XMageRallyClockComparator.ClockMismatch
+                    || containsMarkerToken(
+                    current.getMessage(), XMageRallyClockComparator.MARKER)
+                    || (current.getMessage() != null
+                    && current.getMessage().contains(
+                    "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch"))) {
+                return current;
+            }
+            Throwable next = current.getCause();
+            if (next == current) {
+                break;
+            }
+            current = next;
+        }
+        return null;
+    }
+
+    private static boolean containsMarkerToken(String message, String marker) {
+        if (message == null || marker == null || marker.isEmpty()) {
+            return false;
+        }
+        int start = message.indexOf(marker);
+        while (start >= 0) {
+            int end = start + marker.length();
+            boolean leftBoundary = start == 0
+                    || !isMarkerIdentifierCharacter(message.charAt(start - 1));
+            boolean rightBoundary = end == message.length()
+                    || !isMarkerIdentifierCharacter(message.charAt(end));
+            if (leftBoundary && rightBoundary) {
+                return true;
+            }
+            start = message.indexOf(marker, start + 1);
+        }
+        return false;
+    }
+
+    private static boolean isMarkerIdentifierCharacter(char value) {
+        return Character.isLetterOrDigit(value) || value == '_';
     }
 
     private static String voidLine(Args args, EngineCriticalFaultException fault,
@@ -951,6 +1032,22 @@ public final class XMageRallyAnchorSpike {
                 + " fault_class=" + fault.engineFault.getClass().getSimpleName()
                 + " engine_error_message=" + engineErrorMessage(fault.engineFault)
                 + " pairs_completed_before_void=" + pairsCompletedBeforeVoid;
+    }
+
+    private static String failureLine(
+            Args args,
+            ShadowPairFailureException failure,
+            int pairsCompletedBeforeFailure) {
+        return "XMAGE_RALLY_ANCHOR_PAIR_FAILURE"
+                + " base_seed=" + args.baseSeed
+                + " pair_index=" + failure.pairIndex
+                + " environment_seed=" + unsignedHex(failure.environmentSeed)
+                + " failing_episode=" + failure.episodeId
+                + " candidate_seat=" + failure.candidateSeat.wire()
+                + " failure_class=" + failure.shadowFailure.getClass().getName()
+                + " failure_message="
+                + sanitizeForLine(failure.shadowFailure.getMessage())
+                + " pairs_completed_before_failure=" + pairsCompletedBeforeFailure;
     }
 
     private static String engineErrorMessage(Throwable engineFault) {
@@ -994,22 +1091,47 @@ public final class XMageRallyAnchorSpike {
     private static int selfTest() {
         List<String> failures = new ArrayList<>();
 
-        Throwable classificationProbe = new RallyCp7KernelShadowMapper.MapperViolation(
-                "Rust reached terminal before XMage CP7",
-                new RuntimeException("lower-level detail"));
+        Throwable engineProbe = new RuntimeException("lower-level detail");
+        Throwable mapperProbe = new RallyCp7KernelShadowMapper.MapperViolation(
+                "CP7_KERNEL_SHADOW_MAPPER_CLOCK_MISMATCH "
+                        + XMageRallyClockComparator.MARKER + " consumer=probe");
+        Throwable policyProbe = new KernelShadowRallyPolicy.KernelShadowPolicyViolation(
+                "policy contract probe");
+        Throwable markerProbe = new RuntimeException(
+                "wrapped " + XMageRallyClockComparator.MARKER + " consumer=probe");
         if (!isEngineCriticalFault(new IllegalStateException(
-                "Error in unit tests", classificationProbe))) {
+                "Error in unit tests", engineProbe))) {
             failures.add("exact engine signature was not recognized");
+        }
+        for (Throwable shadowProbe : Arrays.asList(
+                mapperProbe, policyProbe, markerProbe,
+                new RuntimeException(
+                        "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch"))) {
+            IllegalStateException wrapper = new IllegalStateException(
+                    ENGINE_CRITICAL_FAULT_MESSAGE, shadowProbe);
+            if (findShadowPairFailure(wrapper) == null
+                    || isEngineCriticalFault(wrapper)) {
+                failures.add("shadow failure was classified as an engine void: "
+                        + shadowProbe.getClass().getSimpleName());
+            }
+        }
+        if (findShadowPairFailure(new RuntimeException(
+                XMageRallyClockComparator.MARKER + "ED")) != null) {
+            failures.add("near-miss clock marker was classified as a shadow failure");
+        }
+        if (findShadowPairFailure(new RuntimeException(
+                "(" + XMageRallyClockComparator.MARKER + "),")) == null) {
+            failures.add("punctuated clock marker was not classified as a shadow failure");
         }
         if (isEngineCriticalFault(new IllegalStateException("Error in unit tests"))) {
             failures.add("cause-free engine signature was incorrectly recognized");
         }
         if (isEngineCriticalFault(new IllegalStateException(
-                "Error in unit tests ", classificationProbe))) {
+                "Error in unit tests ", engineProbe))) {
             failures.add("trailing-whitespace variant was incorrectly recognized");
         }
         if (isEngineCriticalFault(new RuntimeException(
-                "Error in unit tests", classificationProbe))) {
+                "Error in unit tests", engineProbe))) {
             failures.add("non-IllegalStateException type was incorrectly recognized");
         }
         if (isEngineCriticalFault(null)) {
@@ -1032,7 +1154,7 @@ public final class XMageRallyAnchorSpike {
             "paired episodes did not swap candidate seat",
         };
         for (String message : existingFatalMessages) {
-            if (isEngineCriticalFault(new IllegalStateException(message, classificationProbe))) {
+            if (isEngineCriticalFault(new IllegalStateException(message, engineProbe))) {
                 failures.add("existing fatal message collided with the engine signature: "
                         + message);
             }
@@ -1042,7 +1164,7 @@ public final class XMageRallyAnchorSpike {
                 66L, 133L, 0x3d403c464bfa8dcaL, XMageRallyBridgeProtocol.Seat.P1,
                 new IllegalStateException(
                         ENGINE_CRITICAL_FAULT_MESSAGE,
-                        classificationProbe));
+                        engineProbe));
         Args probeArgs = null;
         try {
             probeArgs = Args.parse(new String[] {
@@ -1070,11 +1192,43 @@ public final class XMageRallyAnchorSpike {
                     || !"133".equals(fields.get("failing_episode"))
                     || !"p1".equals(fields.get("candidate_seat"))
                     || !"IllegalStateException".equals(fields.get("fault_class"))
-                    || !("mage.player.ai.rl.RallyCp7KernelShadowMapper$MapperViolation:"
-                    + "_Rust_reached_terminal_before_XMage_CP7")
+                    || !("java.lang.RuntimeException:_lower-level_detail")
                     .equals(fields.get("engine_error_message"))
                     || !"65".equals(fields.get("pairs_completed_before_void"))) {
                 failures.add("void line fields did not round-trip: " + line);
+            }
+
+            IllegalStateException gameFault = new IllegalStateException(
+                    ENGINE_CRITICAL_FAULT_MESSAGE, mapperProbe);
+            ShadowPairFailureException shadowFailure =
+                    new ShadowPairFailureException(
+                            66L, 133L, 0x3d403c464bfa8dcaL,
+                            XMageRallyBridgeProtocol.Seat.P1,
+                            gameFault, mapperProbe);
+            String failureRecord = failureLine(probeArgs, shadowFailure, 65);
+            String[] failureTokens = failureRecord.split(" ");
+            if (!"XMAGE_RALLY_ANCHOR_PAIR_FAILURE".equals(failureTokens[0])) {
+                failures.add("failure line missing its marker token");
+            }
+            Map<String, String> failureFields = new HashMap<>();
+            for (int i = 1; i < failureTokens.length; i++) {
+                String[] parts = failureTokens[i].split("=", 2);
+                if (parts.length != 2
+                        || failureFields.put(parts[0], parts[1]) != null) {
+                    failures.add("failure line token was not a unique key=value pair: "
+                            + failureTokens[i]);
+                }
+            }
+            if (!"66".equals(failureFields.get("pair_index"))
+                    || !"133".equals(failureFields.get("failing_episode"))
+                    || !"p1".equals(failureFields.get("candidate_seat"))
+                    || !("mage.player.ai.rl.RallyCp7KernelShadowMapper$MapperViolation")
+                    .equals(failureFields.get("failure_class"))
+                    || !String.valueOf(failureFields.get("failure_message")).contains(
+                    XMageRallyClockComparator.MARKER)
+                    || !"65".equals(
+                    failureFields.get("pairs_completed_before_failure"))) {
+                failures.add("failure line fields did not round-trip: " + failureRecord);
             }
         }
 
@@ -1088,7 +1242,8 @@ public final class XMageRallyAnchorSpike {
         }
 
         if (failures.isEmpty()) {
-            System.out.println("PASS XMageRallyAnchorSpike pair-void self-test");
+            System.out.println(
+                    "PASS XMageRallyAnchorSpike failure classification self-test");
             return 0;
         }
         for (String failure : failures) {

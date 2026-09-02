@@ -59,6 +59,8 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 () -> expectResetFailure("malformed_duplicate_nested", 2_000L, 1_048_576));
         run("missing-decision-clock-fails-closed",
                 () -> expectResetFailure("missing_clock", 2_000L, 1_048_576));
+        run("reset-p1-active-fails-closed",
+                () -> expectResetFailure("reset_p1_active", 2_000L, 1_048_576));
         run("unknown-decision-clock-field-fails-closed",
                 () -> expectResetFailure("unknown_clock_field", 2_000L, 1_048_576));
         run("invalid-decision-clock-phase-fails-closed",
@@ -639,13 +641,20 @@ public final class XMageRallyBridgeProtocolSelfTest {
                      "clock_mismatch_error", 2_000L, 1_048_576, diagnostics)) {
             client.reset("reset", EPISODE, BASE_SEED);
             boolean threw = false;
+            String failureMessage = null;
             try {
                 client.step("step-0", EPISODE, 0L, 1, clockFor(0L));
             } catch (XMageRallyBridgeProcessClient.BridgeFailure expected) {
                 threw = true;
+                failureMessage = expected.getMessage();
             }
             require(threw && !client.isUsable(),
                     "typed clock_mismatch did not fail closed");
+            require(failureMessage != null
+                            && failureMessage.contains(
+                            "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch")
+                            && !failureMessage.contains("invalid bridge response"),
+                    "typed clock_mismatch did not retain its scorer marker");
         }
         require(utf8(diagnosticBytes).contains("clock_mismatch"),
                 "typed clock_mismatch marker was lost from diagnostics");

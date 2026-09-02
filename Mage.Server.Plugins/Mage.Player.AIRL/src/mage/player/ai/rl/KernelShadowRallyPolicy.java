@@ -343,7 +343,17 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             tracePriorityMenuMatch("mapping_mismatch", xmageAbilities, game, decision);
             return false;
         }
-        requireClockMatch(decision, game, "priority_menu_match");
+        try {
+            XMageRallyClockComparator.requireMatch(
+                    decision, game, "kernel_shadow_policy", "priority_menu_match");
+        } catch (XMageRallyClockComparator.ClockMismatch expectedPhaseMismatch) {
+            dynamicArenaIds.clear();
+            dynamicArenaIds.putAll(dynamicArenaIdsBefore);
+            dynamicArenaUuids.clear();
+            dynamicArenaUuids.putAll(dynamicArenaUuidsBefore);
+            tracePriorityMenuMatch("clock_mismatch", xmageAbilities, game, decision);
+            return false;
+        }
         return true;
     }
 
@@ -1432,9 +1442,17 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                         + " semantic=" + applied.getSemantic().getCanonicalJson());
             }
         } catch (XMageRallyBridgeProcessClient.BridgeFailure error) {
-            throw fail("bridge step failed for episode " + episodeId
-                    + " step " + decision.getStep(), error);
+            throw fail(bridgeStepFailureMessage(
+                    episodeId, decision.getStep(), error.getMessage()), error);
         }
+    }
+
+    private static String bridgeStepFailureMessage(
+            long episodeId, long step, String bridgeMessage) {
+        return "KERNEL_SHADOW_POLICY_BRIDGE_STEP_FAILURE"
+                + " episode=" + episodeId
+                + " step=" + step
+                + " " + (bridgeMessage == null ? "bridge_error=unknown" : bridgeMessage);
     }
 
     private XMageRallyBridgeProtocol.DecisionBody requireCurrentDecision(
@@ -2492,6 +2510,14 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         assertCardTargetSemanticMapping();
         assertTargetSemanticMapping();
         assertCombatStableIdentityMapping();
+        String scorerFailure = bridgeStepFailureMessage(
+                2L, 3L, "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch");
+        if (!scorerFailure.contains("KERNEL_SHADOW_POLICY_BRIDGE_STEP_FAILURE")
+                || !scorerFailure.contains(
+                "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch")) {
+            throw new IllegalStateException(
+                    "policy bridge failure marker self-test failed");
+        }
     }
 
     private static void assertPrioritySemanticMapping() {
