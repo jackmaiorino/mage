@@ -12,6 +12,7 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.mana.ManaOptions;
@@ -137,7 +138,8 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 priorityMenu.add(new PassAbility());
                 KernelShadowRallyPolicy shadow = (KernelShadowRallyPolicy) mirrorPolicy;
                 boolean matches = shadow.matchesCurrentPriorityMenu(priorityMenu, game);
-                if (matches && shadowPriorityDirectDispatch(game.getTurnStepType())) {
+                if (matches && shadowPriorityDirectDispatch(
+                        game.getTurnStepType(), priorityMenu)) {
                     game.getState().setPriorityPlayerId(getId());
                     game.firePriorityEvent(getId());
                     ActivatedAbility selectedAbility =
@@ -171,8 +173,26 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         }
     }
 
-    private static boolean shadowPriorityDirectDispatch(PhaseStep step) {
-        return step == PhaseStep.BEGIN_COMBAT;
+    /**
+     * Consume a skipped begin-combat window only when every possible action
+     * is stackless. Selecting first and rejecting later is unsafe because the
+     * shadow policy advances the native bridge while it selects.
+     */
+    private static boolean shadowPriorityDirectDispatch(
+            PhaseStep step,
+            List<? extends ActivatedAbility> priorityMenu) {
+        if (step != PhaseStep.BEGIN_COMBAT
+                || priorityMenu == null
+                || priorityMenu.isEmpty()) {
+            return false;
+        }
+        for (ActivatedAbility ability : priorityMenu) {
+            if (!(ability instanceof PassAbility)
+                    && !(ability instanceof ManaAbility)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean phaseCatchupWindow(
@@ -1057,27 +1077,47 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     }
 
     private static void assertShadowPriorityRoutingSeam() {
+        List<ActivatedAbility> passOnly =
+                Collections.singletonList(new PassAbility());
+        List<ActivatedAbility> manaAndPass =
+                Arrays.asList(new RedManaAbility(), new PassAbility());
+        ActivatedAbility bloodAbility = firstActivatedAbility(new BloodToken());
+        List<ActivatedAbility> bloodAndPass =
+                Arrays.asList(bloodAbility, new PassAbility());
+        List<ActivatedAbility> manaBloodAndPass =
+                Arrays.asList(new RedManaAbility(), bloodAbility, new PassAbility());
+
         if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE, true, true)
-                || shadowPriorityDirectDispatch(PhaseStep.COMBAT_DAMAGE)) {
+                || shadowPriorityDirectDispatch(PhaseStep.COMBAT_DAMAGE, passOnly)) {
             throw new IllegalStateException(
                     "combat-damage priority escaped the hard-pass gate");
         }
         if (!phaseCatchupWindow(PhaseStep.BEGIN_COMBAT, false, true)
-                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT)) {
+                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, passOnly)
+                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, manaAndPass)) {
             throw new IllegalStateException(
-                    "begin-combat catchup no longer dispatches shadow priority");
+                    "begin-combat catchup no longer dispatches pass or mana priority");
+        }
+        if (shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, bloodAndPass)
+                || shadowPriorityDirectDispatch(
+                PhaseStep.BEGIN_COMBAT, manaBloodAndPass)
+                || shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, null)
+                || shadowPriorityDirectDispatch(
+                PhaseStep.BEGIN_COMBAT, Collections.emptyList())) {
+            throw new IllegalStateException(
+                    "begin-combat catchup dispatched a stack-using or invalid menu");
         }
         if (!phaseCatchupWindow(PhaseStep.DECLARE_ATTACKERS, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_ATTACKERS)
+                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_ATTACKERS, passOnly)
                 || !phaseCatchupWindow(PhaseStep.DECLARE_BLOCKERS, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_BLOCKERS)
+                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_BLOCKERS, passOnly)
                 || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.POSTCOMBAT_MAIN)) {
+                || shadowPriorityDirectDispatch(PhaseStep.POSTCOMBAT_MAIN, passOnly)) {
             throw new IllegalStateException(
                     "combat and postcombat catchup routing changed");
         }
         if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.PRECOMBAT_MAIN)) {
+                || shadowPriorityDirectDispatch(PhaseStep.PRECOMBAT_MAIN, passOnly)) {
             throw new IllegalStateException(
                     "ordinary empty-stack main phase entered shadow catchup routing");
         }
