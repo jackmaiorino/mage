@@ -23,6 +23,9 @@ public final class XMageRallyBridgeProtocolSelfTest {
     }
 
     public static void main(String[] args) throws Exception {
+        run("protocol-v2-identity", XMageRallyBridgeProtocolSelfTest::testProtocolIdentity);
+        run("clock-normalization-and-phase-map",
+                XMageRallyBridgeProtocolSelfTest::testClockComparator);
         run("request-round-trip", XMageRallyBridgeProtocolSelfTest::testRequestRoundTrip);
         run("pair-environment-seed-parity",
                 XMageRallyBridgeProtocolSelfTest::testPairEnvironmentSeedParity);
@@ -54,6 +57,18 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 () -> expectResetFailure("malformed_unknown", 2_000L, 1_048_576));
         run("duplicate-nested-field-fails-closed",
                 () -> expectResetFailure("malformed_duplicate_nested", 2_000L, 1_048_576));
+        run("missing-decision-clock-fails-closed",
+                () -> expectResetFailure("missing_clock", 2_000L, 1_048_576));
+        run("unknown-decision-clock-field-fails-closed",
+                () -> expectResetFailure("unknown_clock_field", 2_000L, 1_048_576));
+        run("invalid-decision-clock-phase-fails-closed",
+                () -> expectResetFailure("invalid_clock_phase", 2_000L, 1_048_576));
+        run("v1-response-identity-fails-closed",
+                () -> expectResetFailure("v1_response", 2_000L, 1_048_576));
+        run("score-current-clock-splice-fails-closed",
+                XMageRallyBridgeProtocolSelfTest::testScoreClockSplice);
+        run("typed-clock-mismatch-fails-closed",
+                XMageRallyBridgeProtocolSelfTest::testClockMismatchError);
         run("typed-error-fails-closed",
                 () -> expectResetFailure("error", 2_000L, 1_048_576));
         run("episode-splice-fails-closed",
@@ -98,13 +113,130 @@ public final class XMageRallyBridgeProtocolSelfTest {
                 "base_seed changed");
 
         XMageRallyBridgeProtocol.StepRequest step =
-                new XMageRallyBridgeProtocol.StepRequest("step-0", EPISODE, 0L, 1);
-        XMageRallyBridgeProtocol.Request decodedStep = CODEC.decodeRequest(
-                CODEC.encodeRequest(step));
+                new XMageRallyBridgeProtocol.StepRequest(
+                        "step-0", EPISODE, 0L, 1, clockFor(0L));
+        String stepJson = CODEC.encodeRequest(step);
+        require(stepJson.equals("{\"request_type\":\"step\",\"request_id\":\"step-0\","
+                        + "\"episode_id\":2,\"expected_step\":0,\"selected_index\":1,"
+                        + "\"expected_clock\":{\"turn\":1,\"phase_step\":\"Main1\","
+                        + "\"active_player\":\"p0\"}}"),
+                "v2 step JSON bytes changed: " + stepJson);
+        XMageRallyBridgeProtocol.Request decodedStep = CODEC.decodeRequest(stepJson);
         require(decodedStep instanceof XMageRallyBridgeProtocol.StepRequest
                         && ((XMageRallyBridgeProtocol.StepRequest) decodedStep)
-                        .getSelectedIndex() == 1,
+                        .getSelectedIndex() == 1
+                        && clockFor(0L).equals(
+                        ((XMageRallyBridgeProtocol.StepRequest) decodedStep)
+                                .getExpectedClock()),
                 "step round-trip failed");
+        XMageRallyBridgeProtocol.StepRequest optionalClock =
+                (XMageRallyBridgeProtocol.StepRequest) CODEC.decodeRequest(
+                        stepJson.replace(",\"expected_clock\":{\"turn\":1,"
+                                + "\"phase_step\":\"Main1\",\"active_player\":\"p0\"}", ""));
+        require(optionalClock.getExpectedClock() == null,
+                "optional expected_clock could not be omitted at codec boundary");
+        expectProtocolFailure(stepJson.replace(
+                "{\"turn\":1,\"phase_step\":\"Main1\",\"active_player\":\"p0\"}",
+                "null"));
+        expectProtocolFailure(stepJson.replace(
+                "\"active_player\":\"p0\"",
+                "\"active_player\":\"p0\",\"unknown\":0"));
+        expectProtocolFailure(stepJson.replace(
+                "\"phase_step\":\"Main1\"",
+                "\"phase_step\":\"MainThree\""));
+        expectProtocolFailure(stepJson.replace(
+                "\"turn\":1", "\"turn\":4294967296"));
+        expectProtocolFailure(stepJson.replace(
+                "\"turn\":1", "\"turn\":1,\"turn\":1"));
+        expectProtocolFailure(stepJson.replace(
+                ",\"phase_step\":\"Main1\"", ""));
+    }
+
+    private static void testProtocolIdentity() {
+        require("mtg-kernel-checkpoint-shadow-stdio/v2".equals(
+                        XMageRallyBridgeProtocol.PROTOCOL),
+                "protocol identity is not v2");
+        require(XMageRallyBridgeProtocol.SCHEMA_VERSION == 2,
+                "schema version is not 2");
+    }
+
+    private static void testClockComparator() {
+        mage.constants.PhaseStep[] xmagePhases = {
+                mage.constants.PhaseStep.UNTAP,
+                mage.constants.PhaseStep.UPKEEP,
+                mage.constants.PhaseStep.DRAW,
+                mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                mage.constants.PhaseStep.BEGIN_COMBAT,
+                mage.constants.PhaseStep.DECLARE_ATTACKERS,
+                mage.constants.PhaseStep.DECLARE_BLOCKERS,
+                mage.constants.PhaseStep.FIRST_COMBAT_DAMAGE,
+                mage.constants.PhaseStep.COMBAT_DAMAGE,
+                mage.constants.PhaseStep.END_COMBAT,
+                mage.constants.PhaseStep.POSTCOMBAT_MAIN,
+                mage.constants.PhaseStep.END_TURN,
+                mage.constants.PhaseStep.CLEANUP
+        };
+        XMageRallyBridgeProtocol.KernelPhaseStep[] kernelPhases = {
+                XMageRallyBridgeProtocol.KernelPhaseStep.UNTAP,
+                XMageRallyBridgeProtocol.KernelPhaseStep.UPKEEP,
+                XMageRallyBridgeProtocol.KernelPhaseStep.DRAW,
+                XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                XMageRallyBridgeProtocol.KernelPhaseStep.BEGIN_COMBAT,
+                XMageRallyBridgeProtocol.KernelPhaseStep.DECLARE_ATTACKERS,
+                XMageRallyBridgeProtocol.KernelPhaseStep.DECLARE_BLOCKERS,
+                XMageRallyBridgeProtocol.KernelPhaseStep.COMBAT_DAMAGE,
+                XMageRallyBridgeProtocol.KernelPhaseStep.COMBAT_DAMAGE,
+                XMageRallyBridgeProtocol.KernelPhaseStep.END_COMBAT,
+                XMageRallyBridgeProtocol.KernelPhaseStep.MAIN2,
+                XMageRallyBridgeProtocol.KernelPhaseStep.END,
+                XMageRallyBridgeProtocol.KernelPhaseStep.CLEANUP
+        };
+        for (int i = 0; i < xmagePhases.length; i++) {
+            XMageRallyBridgeProtocol.KernelClock kernel =
+                    new XMageRallyBridgeProtocol.KernelClock(
+                            6L, kernelPhases[i], XMageRallyBridgeProtocol.Seat.P0,
+                            XMageRallyBridgeProtocol.Seat.P1, 4_294_967_295L);
+            XMageRallyBridgeProtocol.ExpectedClock matched =
+                    XMageRallyClockComparator.requireMatch(
+                            kernel, 11L, xmagePhases[i],
+                            XMageRallyBridgeProtocol.Seat.P0, "self_test", "phase");
+            require(matched.getTurn() == 6L
+                            && matched.getPhaseStep() == kernelPhases[i]
+                            && matched.getActivePlayer() == XMageRallyBridgeProtocol.Seat.P0,
+                    "clock phase mapping failed at " + xmagePhases[i]);
+        }
+        XMageRallyBridgeProtocol.KernelClock p1 =
+                new XMageRallyBridgeProtocol.KernelClock(
+                        6L, XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                        XMageRallyBridgeProtocol.Seat.P1,
+                        XMageRallyBridgeProtocol.Seat.P0, 0L);
+        require(XMageRallyClockComparator.requireMatch(
+                        p1, 12L, mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                        XMageRallyBridgeProtocol.Seat.P1, "self_test", "p1")
+                        .getTurn() == 6L,
+                "kernel turn 6 p1 did not normalize to XMage T12");
+        expectClockFailure(p1, 11L, mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                XMageRallyBridgeProtocol.Seat.P1, "turn mismatch");
+        expectClockFailure(p1, 12L, mage.constants.PhaseStep.DECLARE_ATTACKERS,
+                XMageRallyBridgeProtocol.Seat.P1, "phase mismatch");
+        expectClockFailure(p1, 12L, mage.constants.PhaseStep.PRECOMBAT_MAIN,
+                XMageRallyBridgeProtocol.Seat.P0, "active mismatch");
+    }
+
+    private static void expectClockFailure(
+            XMageRallyBridgeProtocol.KernelClock kernel,
+            long turn,
+            mage.constants.PhaseStep phase,
+            XMageRallyBridgeProtocol.Seat active,
+            String label) {
+        boolean threw = false;
+        try {
+            XMageRallyClockComparator.requireMatch(
+                    kernel, turn, phase, active, "self_test", label);
+        } catch (XMageRallyClockComparator.ClockMismatch expected) {
+            threw = expected.getMessage().contains(XMageRallyClockComparator.MARKER);
+        }
+        require(threw, label + " did not retain the clock mismatch marker");
     }
 
     private static void testRequestUnknownField() throws Exception {
@@ -296,6 +428,16 @@ public final class XMageRallyBridgeProtocolSelfTest {
                     "reset did not return decision");
             XMageRallyBridgeProtocol.DecisionBody first = client.getCurrentDecision();
             require(first != null && first.getStep() == 0L, "reset decision missing");
+            require(first.getKernelClock() != null
+                            && first.getKernelClock().getTurn() == 1L
+                            && first.getKernelClock().getPhaseStep()
+                            == XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1
+                            && first.getKernelClock().getActivePlayer()
+                            == XMageRallyBridgeProtocol.Seat.P0
+                            && first.getKernelClock().getPriorityPlayer()
+                            == XMageRallyBridgeProtocol.Seat.P0
+                            && first.getKernelClock().getStackDepth() == 0L,
+                    "reset decision kernel_clock changed");
             require(first.getSelectedActionIndex() == 1, "Rust selection was not exposed");
             require(first.getActionSemantics().size() == 2, "semantic width mismatch");
             require("pass".equals(first.getActionSemantics().get(0).getActionKind())
@@ -318,7 +460,7 @@ public final class XMageRallyBridgeProtocolSelfTest {
                     "score_current was not bit/semantic stable");
 
             XMageRallyBridgeProtocol.Response stepped =
-                    client.step("step-0", EPISODE, 0L, 1);
+                    client.step("step-0", EPISODE, 0L, 1, clockFor(0L));
             XMageRallyBridgeProtocol.DecisionResponseBody steppedBody =
                     (XMageRallyBridgeProtocol.DecisionResponseBody) stepped.getBody();
             require(steppedBody.getAppliedAction() != null
@@ -331,9 +473,12 @@ public final class XMageRallyBridgeProtocolSelfTest {
                             == XMageRallyBridgeProtocol.Seat.P1
                             && client.getCurrentDecision().getSelectedActionIndex() == null,
                     "first transition state is wrong");
+            require(client.getCurrentDecision().getKernelClock().getActivePlayer()
+                            == XMageRallyBridgeProtocol.Seat.P1,
+                    "post-step kernel_clock active seat changed");
 
             XMageRallyBridgeProtocol.Response terminal =
-                    client.step("step-1", EPISODE, 1L, 0);
+                    client.step("step-1", EPISODE, 1L, 0, clockFor(1L));
             require(terminal.getBody() instanceof XMageRallyBridgeProtocol.TerminalResponseBody,
                     "second step did not return terminal");
             require(client.getCurrentDecision() == null && client.getTerminal() != null,
@@ -355,7 +500,7 @@ public final class XMageRallyBridgeProtocolSelfTest {
             client.reset("reset", EPISODE, BASE_SEED);
             boolean threw = false;
             try {
-                client.step("step-0", EPISODE, 0L, 1);
+                client.step("step-0", EPISODE, 0L, 1, clockFor(0L));
             } catch (XMageRallyBridgeProcessClient.BridgeFailure expected) {
                 threw = true;
             }
@@ -370,8 +515,8 @@ public final class XMageRallyBridgeProtocolSelfTest {
              XMageRallyBridgeProcessClient client = start("multi_episode", 2_000L,
                      1_048_576, diagnostics)) {
             client.reset("reset", EPISODE, BASE_SEED);
-            client.step("step-0", EPISODE, 0L, 1);
-            client.step("step-1", EPISODE, 1L, 0);
+            client.step("step-0", EPISODE, 0L, 1, clockFor(0L));
+            client.step("step-1", EPISODE, 1L, 0, clockFor(1L));
             require(client.getTerminal() != null, "first episode did not terminate");
             client.reset("reset-next", 4L, BASE_SEED);
             require(Long.valueOf(4L).equals(client.getActiveEpisodeId())
@@ -391,7 +536,8 @@ public final class XMageRallyBridgeProtocolSelfTest {
     }
 
     private static void testStepSplice() throws Exception {
-        expectLocalFailure(client -> client.step("step-1", EPISODE, 1L, 1));
+        expectLocalFailure(client -> client.step(
+                "step-1", EPISODE, 1L, 1, clockFor(1L)));
     }
 
     private static void testRequestIdReuse() throws Exception {
@@ -467,6 +613,50 @@ public final class XMageRallyBridgeProtocolSelfTest {
             threw = true;
         }
         require(threw, "invalid request JSON was accepted: " + json);
+    }
+
+    private static void testScoreClockSplice() throws Exception {
+        ByteArrayOutputStream diagnosticBytes = new ByteArrayOutputStream();
+        try (PrintStream diagnostics = diagnostics(diagnosticBytes);
+             XMageRallyBridgeProcessClient client = start(
+                     "score_clock_drift", 2_000L, 1_048_576, diagnostics)) {
+            client.reset("reset", EPISODE, BASE_SEED);
+            boolean threw = false;
+            try {
+                client.scoreCurrent("score", EPISODE, 0L);
+            } catch (XMageRallyBridgeProcessClient.BridgeFailure expected) {
+                threw = true;
+            }
+            require(threw && !client.isUsable(),
+                    "score_current accepted a clock-only decision splice");
+        }
+    }
+
+    private static void testClockMismatchError() throws Exception {
+        ByteArrayOutputStream diagnosticBytes = new ByteArrayOutputStream();
+        try (PrintStream diagnostics = diagnostics(diagnosticBytes);
+             XMageRallyBridgeProcessClient client = start(
+                     "clock_mismatch_error", 2_000L, 1_048_576, diagnostics)) {
+            client.reset("reset", EPISODE, BASE_SEED);
+            boolean threw = false;
+            try {
+                client.step("step-0", EPISODE, 0L, 1, clockFor(0L));
+            } catch (XMageRallyBridgeProcessClient.BridgeFailure expected) {
+                threw = true;
+            }
+            require(threw && !client.isUsable(),
+                    "typed clock_mismatch did not fail closed");
+        }
+        require(utf8(diagnosticBytes).contains("clock_mismatch"),
+                "typed clock_mismatch marker was lost from diagnostics");
+    }
+
+    private static XMageRallyBridgeProtocol.ExpectedClock clockFor(long step) {
+        return new XMageRallyBridgeProtocol.ExpectedClock(
+                1L,
+                XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                step == 0L ? XMageRallyBridgeProtocol.Seat.P0
+                        : XMageRallyBridgeProtocol.Seat.P1);
     }
 
     private static XMageRallyBridgeProcessClient start(String mode,

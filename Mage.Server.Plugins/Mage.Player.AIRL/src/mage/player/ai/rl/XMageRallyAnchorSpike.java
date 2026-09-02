@@ -89,6 +89,8 @@ public final class XMageRallyAnchorSpike {
 
         List<String> command = new ArrayList<>();
         command.add(args.scorerExecutable.toString());
+        command.add("--protocol");
+        command.add("v2");
         if (args.outcomeRoot != null) {
             command.add("--xmage-cp7-outcome-root");
             command.add(args.outcomeRoot.toString());

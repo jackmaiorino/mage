@@ -299,10 +299,16 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
     public synchronized XMageRallyBridgeProtocol.Response step(String requestId,
                                                                 long episodeId,
                                                                 long expectedStep,
-                                                                int selectedIndex)
+                                                                int selectedIndex,
+                                                                XMageRallyBridgeProtocol.ExpectedClock expectedClock)
             throws BridgeFailure {
         requireActiveDecision(episodeId, expectedStep, "step");
         XMageRallyBridgeProtocol.DecisionBody before = currentDecision;
+        if (expectedClock == null
+                || before.getKernelClock() == null
+                || !expectedClock.equals(before.getKernelClock().toExpectedClock())) {
+            throw fail("step expected_clock does not match the active decision", null);
+        }
         if (selectedIndex < 0 || selectedIndex >= before.getLegalActionCount()) {
             throw fail("selected_index is outside the active decision", null);
         }
@@ -313,7 +319,7 @@ public final class XMageRallyBridgeProcessClient implements Closeable {
         XMageRallyBridgeProtocol.StepRequest request;
         try {
             request = new XMageRallyBridgeProtocol.StepRequest(
-                    requestId, episodeId, expectedStep, selectedIndex);
+                    requestId, episodeId, expectedStep, selectedIndex, expectedClock);
         } catch (RuntimeException e) {
             throw fail("invalid step request", e);
         }

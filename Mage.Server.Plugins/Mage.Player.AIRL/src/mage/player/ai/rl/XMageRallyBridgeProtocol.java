@@ -19,8 +19,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class XMageRallyBridgeProtocol {
 
-    public static final String PROTOCOL = "mtg-kernel-checkpoint-shadow-stdio/v1";
-    public static final int SCHEMA_VERSION = 1;
+    public static final String PROTOCOL = "mtg-kernel-checkpoint-shadow-stdio/v2";
+    public static final int SCHEMA_VERSION = 2;
     public static final String MODEL_INPUT_COMMITMENT =
             "mtg-kernel-checkpoint-shadow-model-input-framed-sha256/v1";
     public static final String RANDOMIZATION_IDENTITY = "legacy_v1";
@@ -94,6 +94,137 @@ public final class XMageRallyBridgeProtocol {
         }
     }
 
+    public enum KernelPhaseStep {
+        UNTAP("Untap"),
+        UPKEEP("Upkeep"),
+        DRAW("Draw"),
+        MAIN1("Main1"),
+        BEGIN_COMBAT("BeginCombat"),
+        DECLARE_ATTACKERS("DeclareAttackers"),
+        DECLARE_BLOCKERS("DeclareBlockers"),
+        COMBAT_DAMAGE("CombatDamage"),
+        END_COMBAT("EndCombat"),
+        MAIN2("Main2"),
+        END("End"),
+        CLEANUP("Cleanup");
+
+        private final String wire;
+
+        KernelPhaseStep(String wire) {
+            this.wire = wire;
+        }
+
+        public String wire() {
+            return wire;
+        }
+
+        static KernelPhaseStep fromWire(String value) {
+            for (KernelPhaseStep step : values()) {
+                if (step.wire.equals(value)) {
+                    return step;
+                }
+            }
+            throw new IllegalArgumentException("unsupported kernel phase step: " + value);
+        }
+    }
+
+    public static final class ExpectedClock {
+        private final long turn;
+        private final KernelPhaseStep phaseStep;
+        private final Seat activePlayer;
+
+        public ExpectedClock(long turn, KernelPhaseStep phaseStep, Seat activePlayer) {
+            requireU32(turn, "expected_clock.turn");
+            if (phaseStep == null || activePlayer == null) {
+                throw new IllegalArgumentException(
+                        "expected_clock phase_step and active_player must not be null");
+            }
+            this.turn = turn;
+            this.phaseStep = phaseStep;
+            this.activePlayer = activePlayer;
+        }
+
+        public long getTurn() { return turn; }
+        public KernelPhaseStep getPhaseStep() { return phaseStep; }
+        public Seat getActivePlayer() { return activePlayer; }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof ExpectedClock)) {
+                return false;
+            }
+            ExpectedClock that = (ExpectedClock) other;
+            return turn == that.turn
+                    && phaseStep == that.phaseStep
+                    && activePlayer == that.activePlayer;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(turn, phaseStep, activePlayer);
+        }
+    }
+
+    public static final class KernelClock {
+        private final long turn;
+        private final KernelPhaseStep phaseStep;
+        private final Seat activePlayer;
+        private final Seat priorityPlayer;
+        private final long stackDepth;
+
+        KernelClock(long turn,
+                    KernelPhaseStep phaseStep,
+                    Seat activePlayer,
+                    Seat priorityPlayer,
+                    long stackDepth) {
+            requireU32(turn, "kernel_clock.turn");
+            requireU32(stackDepth, "kernel_clock.stack_depth");
+            if (phaseStep == null || activePlayer == null || priorityPlayer == null) {
+                throw new IllegalArgumentException(
+                        "kernel_clock phase_step and players must not be null");
+            }
+            this.turn = turn;
+            this.phaseStep = phaseStep;
+            this.activePlayer = activePlayer;
+            this.priorityPlayer = priorityPlayer;
+            this.stackDepth = stackDepth;
+        }
+
+        public long getTurn() { return turn; }
+        public KernelPhaseStep getPhaseStep() { return phaseStep; }
+        public Seat getActivePlayer() { return activePlayer; }
+        public Seat getPriorityPlayer() { return priorityPlayer; }
+        public long getStackDepth() { return stackDepth; }
+
+        public ExpectedClock toExpectedClock() {
+            return new ExpectedClock(turn, phaseStep, activePlayer);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) {
+                return true;
+            }
+            if (!(other instanceof KernelClock)) {
+                return false;
+            }
+            KernelClock that = (KernelClock) other;
+            return turn == that.turn
+                    && phaseStep == that.phaseStep
+                    && activePlayer == that.activePlayer
+                    && priorityPlayer == that.priorityPlayer
+                    && stackDepth == that.stackDepth;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(turn, phaseStep, activePlayer, priorityPlayer, stackDepth);
+        }
+    }
+
     public abstract static class Request {
         private final String requestType;
         private final String requestId;
@@ -151,11 +282,13 @@ public final class XMageRallyBridgeProtocol {
     public static final class StepRequest extends Request {
         private final long expectedStep;
         private final int selectedIndex;
+        private final ExpectedClock expectedClock;
 
         public StepRequest(String requestId,
                            long episodeId,
                            long expectedStep,
-                           int selectedIndex) {
+                           int selectedIndex,
+                           ExpectedClock expectedClock) {
             super("step", requestId, episodeId);
             requireNonnegative(expectedStep, "expected_step");
             if (selectedIndex < 0) {
@@ -163,6 +296,7 @@ public final class XMageRallyBridgeProtocol {
             }
             this.expectedStep = expectedStep;
             this.selectedIndex = selectedIndex;
+            this.expectedClock = expectedClock;
         }
 
         public long getExpectedStep() {
@@ -171,6 +305,10 @@ public final class XMageRallyBridgeProtocol {
 
         public int getSelectedIndex() {
             return selectedIndex;
+        }
+
+        public ExpectedClock getExpectedClock() {
+            return expectedClock;
         }
     }
 
@@ -519,6 +657,7 @@ public final class XMageRallyBridgeProtocol {
         private final List<Long> logitsF32Bits;
         private final long valueF32Bits;
         private final List<ActionSemantic> actionSemantics;
+        private final KernelClock kernelClock;
 
         DecisionBody(List<String> deckIds,
                      String randomizationIdentity,
@@ -547,7 +686,8 @@ public final class XMageRallyBridgeProtocol {
                      String coreEnvironmentHashU64Hex,
                      List<Long> logitsF32Bits,
                      long valueF32Bits,
-                     List<ActionSemantic> actionSemantics) {
+                     List<ActionSemantic> actionSemantics,
+                     KernelClock kernelClock) {
             this.deckIds = immutableCopy(deckIds);
             this.randomizationIdentity = randomizationIdentity;
             this.baseSeedU64Hex = baseSeedU64Hex;
@@ -577,6 +717,7 @@ public final class XMageRallyBridgeProtocol {
             this.logitsF32Bits = immutableCopy(logitsF32Bits);
             this.valueF32Bits = valueF32Bits;
             this.actionSemantics = immutableCopy(actionSemantics);
+            this.kernelClock = kernelClock;
         }
 
         public List<String> getDeckIds() { return deckIds; }
@@ -613,6 +754,7 @@ public final class XMageRallyBridgeProtocol {
         public List<Long> getLogitsF32Bits() { return logitsF32Bits; }
         public long getValueF32Bits() { return valueF32Bits; }
         public List<ActionSemantic> getActionSemantics() { return actionSemantics; }
+        public KernelClock getKernelClock() { return kernelClock; }
 
         boolean sameCurrentDecision(DecisionBody that) {
             return that != null
@@ -647,7 +789,8 @@ public final class XMageRallyBridgeProtocol {
                     that.coreEnvironmentHashU64Hex)
                     && logitsF32Bits.equals(that.logitsF32Bits)
                     && valueF32Bits == that.valueF32Bits
-                    && actionSemantics.equals(that.actionSemantics);
+                    && actionSemantics.equals(that.actionSemantics)
+                    && Objects.equals(kernelClock, that.kernelClock);
         }
     }
 
@@ -893,6 +1036,12 @@ public final class XMageRallyBridgeProtocol {
 
     private static void requireU63(long value, String field) {
         requireNonnegative(value, field);
+    }
+
+    private static void requireU32(long value, String field) {
+        if (value < 0L || value > 0xffff_ffffL) {
+            throw new IllegalArgumentException(field + " must be a u32");
+        }
     }
 
     private static void requireEqual(String field, String expected, String actual) {

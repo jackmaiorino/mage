@@ -12,7 +12,6 @@ import mage.abilities.common.PassAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.mana.ManaOptions;
@@ -138,15 +137,6 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 priorityMenu.add(new PassAbility());
                 KernelShadowRallyPolicy shadow = (KernelShadowRallyPolicy) mirrorPolicy;
                 boolean matches = shadow.matchesCurrentPriorityMenu(priorityMenu, game);
-                if (matches && shadowPriorityDirectDispatch(
-                        game.getTurnStepType(), priorityMenu)) {
-                    game.getState().setPriorityPlayerId(getId());
-                    game.firePriorityEvent(getId());
-                    ActivatedAbility selectedAbility =
-                            shadow.choosePriorityAbility(priorityMenu, game, getId());
-                    act(game, selectedAbility);
-                    return !(selectedAbility instanceof PassAbility);
-                }
                 if (!matches) {
                     ActivatedAbility selected = null;
                     if (shadow.isModelControlled()
@@ -173,33 +163,10 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         }
     }
 
-    /**
-     * Consume a skipped begin-combat window only when every possible action
-     * is stackless. Selecting first and rejecting later is unsafe because the
-     * shadow policy advances the native bridge while it selects.
-     */
-    private static boolean shadowPriorityDirectDispatch(
-            PhaseStep step,
-            List<? extends ActivatedAbility> priorityMenu) {
-        if (step != PhaseStep.BEGIN_COMBAT
-                || priorityMenu == null
-                || priorityMenu.isEmpty()) {
-            return false;
-        }
-        for (ActivatedAbility ability : priorityMenu) {
-            if (!(ability instanceof PassAbility)
-                    && !(ability instanceof ManaAbility)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private static boolean phaseCatchupWindow(
             PhaseStep step, boolean stackNonempty, boolean candidateActive) {
         return (step == PhaseStep.PRECOMBAT_MAIN
                 && (stackNonempty || !candidateActive))
-                || step == PhaseStep.BEGIN_COMBAT
                 || step == PhaseStep.DECLARE_ATTACKERS
                 || step == PhaseStep.DECLARE_BLOCKERS
                 || step == PhaseStep.POSTCOMBAT_MAIN;
@@ -271,8 +238,8 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             return Collections.emptyList();
         }
         List<IndexedCandidate<T>> ordered = canonicalize(candidates, game, source);
-        int[] selectedRanks = mirrorPolicy.chooseNoncombatWithoutReplacement(
-                category(actionType), ordered.size(), boundedMax);
+        int[] selectedRanks = chooseNoncombatWithoutReplacement(
+                category(actionType), ordered.size(), boundedMax, game);
         List<Integer> selected = new ArrayList<>(selectedRanks.length);
         for (int rank : selectedRanks) {
             selected.add(ordered.get(rank).originalIndex);
@@ -438,7 +405,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 break;
             }
             Card selected = mirrorPolicy instanceof KernelShadowRallyPolicy
-                    ? ((KernelShadowRallyPolicy) mirrorPolicy).chooseCardTarget(menu)
+                    ? ((KernelShadowRallyPolicy) mirrorPolicy).chooseCardTarget(menu, game)
                     : chooseCanonicalOne("card_target", menu, game, source);
             if (selected == null) {
                 break;
@@ -494,7 +461,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         if (count > Integer.MAX_VALUE) {
             throw violation("announceX legal domain exceeds exact benchmark implementation");
         }
-        return min + mirrorPolicy.chooseNoncombat("announce_x", (int) count);
+        return min + chooseNoncombat("announce_x", (int) count, game);
     }
 
     @Override
@@ -507,13 +474,13 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                              String trueText, String falseText, Ability source, Game game) {
         return chooseUseCallback(
                 outcome, message, secondMessage, trueText, falseText, source,
-                isExactChainLightningSource(source, game), getManaAvailable(game));
+                isExactChainLightningSource(source, game), getManaAvailable(game), game);
     }
 
     boolean chooseUseCallback(
             Outcome outcome, String message, String secondMessage,
             String trueText, String falseText, Ability source,
-            boolean exactChainSource, ManaOptions available) {
+            boolean exactChainSource, ManaOptions available, Game game) {
         if (available == null) {
             throw violation("chooseUse callback seam received null mana surface");
         }
@@ -529,7 +496,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 throw violation("unsupported near-match to Chain Lightning retarget contract");
             }
             return chainLightningChoiceForRank(
-                    mirrorPolicy.chooseNoncombat("chain_lightning_copy_retarget", 2), true);
+                    chooseNoncombat("chain_lightning_copy_retarget", 2, game), true);
         }
         if (chainRetargetPrompt) {
             throw violation("Chain Lightning retarget prompt came from a non-Chain source");
@@ -543,7 +510,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             // eventual mana payment cannot succeed.
             boolean affordable = available.enough(manaFromMessage(message));
             return chainLightningChoiceForRank(
-                    mirrorPolicy.chooseNoncombat("chain_lightning_copy", 2), affordable);
+                    chooseNoncombat("chain_lightning_copy", 2, game), affordable);
         }
         // XMage can offer an optional additional cost before checking whether
         // base + additional mana is jointly affordable. In that state YES is
@@ -565,11 +532,11 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 && !message.toLowerCase(java.util.Locale.ROOT).contains("instead of")) {
             Mana optional = manaFromMessage(message);
             if (optional.count() > 0 && !available.enough(optional)) {
-                mirrorPolicy.chooseNoncombat("choose_use_forced_false", 1);
+                chooseNoncombat("choose_use_forced_false", 1, game);
                 return false;
             }
         }
-        return mirrorPolicy.chooseNoncombat("choose_use", 2) == 1;
+        return chooseNoncombat("choose_use", 2, game) == 1;
     }
 
     private static boolean isExactChainLightningSource(Ability source, Game game) {
@@ -636,7 +603,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 throw violation("trigger-order group has non-canonical semantic duplicates");
             }
             triggerOrderCache = beginTriggerOrderCache(
-                    game.getId(), triggerOffers(canonical), mirrorPolicy);
+                    game.getId(), triggerOffers(canonical), mirrorPolicy, game);
         }
         return consumeTriggerOrder(abilities, game);
     }
@@ -736,7 +703,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     @Override
     public boolean choosePile(Outcome outcome, String message,
                               List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
-        return mirrorPolicy.chooseNoncombat("choose_pile", 2) == 0;
+        return chooseNoncombat("choose_pile", 2, game) == 0;
     }
 
     @Override
@@ -747,7 +714,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         }
         List<String> original = new ArrayList<>(effectsMap.keySet());
         List<IndexedCandidate<String>> ordered = canonicalize(original, game, null);
-        int rank = mirrorPolicy.chooseNoncombat("replacement_effect", ordered.size());
+        int rank = chooseNoncombat("replacement_effect", ordered.size(), game);
         return ordered.get(rank).originalIndex;
     }
 
@@ -945,7 +912,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
 
     static TriggerOrderCache beginTriggerOrderCache(
             UUID gameId, List<TriggerOffer> canonicalOffers,
-            RallyCanonicalDecisionPolicy policy) {
+            RallyCanonicalDecisionPolicy policy, Game game) {
         if (gameId == null || canonicalOffers == null || policy == null
                 || canonicalOffers.size() < 2
                 || canonicalOffers.size() > MAX_TRIGGER_ORDER_OBJECTS) {
@@ -958,8 +925,11 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 throw violation("trigger-order group lacks unique stable ability identities");
             }
         }
-        int selectedRank = policy.chooseNoncombat(
-                "order_triggers", factorialExact(canonicalOffers.size()));
+        int width = factorialExact(canonicalOffers.size());
+        int selectedRank = policy instanceof KernelShadowRallyPolicy
+                ? ((KernelShadowRallyPolicy) policy).chooseNoncombat(
+                "order_triggers", width, game)
+                : policy.chooseNoncombat("order_triggers", width);
         int[] order = triggerPermutations(canonicalOffers.size()).get(selectedRank);
         List<TriggerOffer> selected = new ArrayList<>(order.length);
         for (int index : order) {
@@ -1077,47 +1047,21 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
     }
 
     private static void assertShadowPriorityRoutingSeam() {
-        List<ActivatedAbility> passOnly =
-                Collections.singletonList(new PassAbility());
-        List<ActivatedAbility> manaAndPass =
-                Arrays.asList(new RedManaAbility(), new PassAbility());
-        ActivatedAbility bloodAbility = firstActivatedAbility(new BloodToken());
-        List<ActivatedAbility> bloodAndPass =
-                Arrays.asList(bloodAbility, new PassAbility());
-        List<ActivatedAbility> manaBloodAndPass =
-                Arrays.asList(new RedManaAbility(), bloodAbility, new PassAbility());
-
-        if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE, true, true)
-                || shadowPriorityDirectDispatch(PhaseStep.COMBAT_DAMAGE, passOnly)) {
+        if (phaseCatchupWindow(PhaseStep.COMBAT_DAMAGE, true, true)) {
             throw new IllegalStateException(
                     "combat-damage priority escaped the hard-pass gate");
         }
-        if (!phaseCatchupWindow(PhaseStep.BEGIN_COMBAT, false, true)
-                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, passOnly)
-                || !shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, manaAndPass)) {
+        if (phaseCatchupWindow(PhaseStep.BEGIN_COMBAT, false, true)) {
             throw new IllegalStateException(
-                    "begin-combat catchup no longer dispatches pass or mana priority");
-        }
-        if (shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, bloodAndPass)
-                || shadowPriorityDirectDispatch(
-                PhaseStep.BEGIN_COMBAT, manaBloodAndPass)
-                || shadowPriorityDirectDispatch(PhaseStep.BEGIN_COMBAT, null)
-                || shadowPriorityDirectDispatch(
-                PhaseStep.BEGIN_COMBAT, Collections.emptyList())) {
-            throw new IllegalStateException(
-                    "begin-combat catchup dispatched a stack-using or invalid menu");
+                    "begin-combat escaped the inherited hard-pass routing");
         }
         if (!phaseCatchupWindow(PhaseStep.DECLARE_ATTACKERS, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_ATTACKERS, passOnly)
                 || !phaseCatchupWindow(PhaseStep.DECLARE_BLOCKERS, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.DECLARE_BLOCKERS, passOnly)
-                || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.POSTCOMBAT_MAIN, passOnly)) {
+                || !phaseCatchupWindow(PhaseStep.POSTCOMBAT_MAIN, false, true)) {
             throw new IllegalStateException(
                     "combat and postcombat catchup routing changed");
         }
-        if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, false, true)
-                || shadowPriorityDirectDispatch(PhaseStep.PRECOMBAT_MAIN, passOnly)) {
+        if (phaseCatchupWindow(PhaseStep.PRECOMBAT_MAIN, false, true)) {
             throw new IllegalStateException(
                     "ordinary empty-stack main phase entered shadow catchup routing");
         }
@@ -1147,7 +1091,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                 new TriggerOffer(second.getId(), "trigger|second", second),
                 new TriggerOffer(third.getId(), "trigger|third", third));
         SeededUniformMirrorPolicy policy = new SeededUniformMirrorPolicy(71_501L, 17L, "p0");
-        TriggerOrderCache cache = beginTriggerOrderCache(gameId, canonical, policy);
+        TriggerOrderCache cache = beginTriggerOrderCache(gameId, canonical, policy, null);
         if (policy.getPhysicalDecisionCount() != 1L
                 || policy.getPolicyActionSelections() != 1L
                 || policy.getPolicyLeafEvaluations() != 1L) {
@@ -1294,7 +1238,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         long forcedBefore = unpayable.getForcedNoPolicySelections();
         boolean unpayableChoice = unpayable.chooseUseCallback(
                 Outcome.AIDontUseIt, "Pay Kicker {R} ?", null, null, null,
-                source, false, oneRed);
+                source, false, oneRed, null);
         SeededUniformMirrorPolicy unpayableAfter = unpayable.getMirrorPolicySnapshot();
         if (unpayableChoice
                 || unpayableAfter.getPhysicalDecisionCount()
@@ -1312,7 +1256,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         long affordableForcedBefore = affordable.getForcedNoPolicySelections();
         boolean affordableChoice = affordable.chooseUseCallback(
                 Outcome.AIDontUseIt, "Pay Kicker {R} ?", null, null, null,
-                source, false, twoRed);
+                source, false, twoRed, null);
         SeededUniformMirrorPolicy affordableAfter = affordable.getMirrorPolicySnapshot();
         if (affordableChoice != expectedChoice
                 || affordableAfter.getPhysicalDecisionCount() != 1L
@@ -1346,7 +1290,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
             int rank = expected.chooseNoncombat("chain_lightning_copy", 2);
             boolean choice = player.chooseUseCallback(
                     Outcome.Copy, CHAIN_LIGHTNING_PROMPT, null, null, null,
-                    source, true, i == 0 ? oneRed : twoRed);
+                    source, true, i == 0 ? oneRed : twoRed, null);
             SeededUniformMirrorPolicy after = player.getMirrorPolicySnapshot();
             if (choice != (rank == 0)
                     || after.getPhysicalDecisionCount() != 1L
@@ -1364,7 +1308,7 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
                     "chain_lightning_copy_retarget", rank);
             boolean choice = player.chooseUseCallback(
                     Outcome.Damage, retargetPrompt, null, null, null,
-                    source, true, noMana);
+                    source, true, noMana, null);
             SeededUniformMirrorPolicy after = player.getMirrorPolicySnapshot();
             if (choice != (rank == 0)
                     || after.getPhysicalDecisionCount() != 1L
@@ -1378,17 +1322,17 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
         expectUniformMirrorViolation(
                 () -> selfTestPlayer(30L, "p0").chooseUseCallback(
                         Outcome.Damage, "Change this 1 of 2 targets?", null, null, null,
-                        source, true, noMana),
+                        source, true, noMana, null),
                 "malformed Chain Lightning retarget callback");
         expectUniformMirrorViolation(
                 () -> selfTestPlayer(31L, "p0").chooseUseCallback(
                         Outcome.Damage, retargetPrompt, null, null, null,
-                        source, false, noMana),
+                        source, false, noMana, null),
                 "Chain Lightning retarget prompt with non-Chain source");
         expectUniformMirrorViolation(
                 () -> selfTestPlayer(32L, "p0").chooseUseCallback(
                         Outcome.Copy, CHAIN_LIGHTNING_PROMPT, null, null, null,
-                        source, false, twoRed),
+                        source, false, twoRed, null),
                 "Chain Lightning payment prompt with non-Chain source");
     }
 
@@ -1496,8 +1440,23 @@ public final class ComputerPlayerUniformMirror extends ComputerPlayerRL {
 
     private <T> T chooseCanonicalOne(String category, List<T> candidates, Game game, Ability source) {
         List<IndexedCandidate<T>> ordered = canonicalize(candidates, game, source);
-        int rank = mirrorPolicy.chooseNoncombat(category, ordered.size());
+        int rank = chooseNoncombat(category, ordered.size(), game);
         return ordered.get(rank).candidate;
+    }
+
+    private int chooseNoncombat(String category, int width, Game game) {
+        return mirrorPolicy instanceof KernelShadowRallyPolicy
+                ? ((KernelShadowRallyPolicy) mirrorPolicy)
+                .chooseNoncombat(category, width, game)
+                : mirrorPolicy.chooseNoncombat(category, width);
+    }
+
+    private int[] chooseNoncombatWithoutReplacement(
+            String category, int width, int picks, Game game) {
+        return mirrorPolicy instanceof KernelShadowRallyPolicy
+                ? ((KernelShadowRallyPolicy) mirrorPolicy)
+                .chooseNoncombatWithoutReplacement(category, width, picks, game)
+                : mirrorPolicy.chooseNoncombatWithoutReplacement(category, width, picks);
     }
 
     private <T> List<IndexedCandidate<T>> canonicalize(List<T> candidates, Game game, Ability source) {

@@ -74,6 +74,44 @@ public final class XMageRallyBridgeSelfTestPeer {
                                         + "\"authority_kind\":");
                 writeLf(System.out, duplicate);
                 return;
+            case "missing_clock":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false)
+                        .replace(",\"kernel_clock\":" + kernelClockJson("p0"), ""));
+                return;
+            case "unknown_clock_field":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false)
+                        .replace("\"stack_depth\":0}",
+                                "\"stack_depth\":0,\"unknown\":0}"));
+                return;
+            case "invalid_clock_phase":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false)
+                        .replace("\"phase_step\":\"Main1\"",
+                                "\"phase_step\":\"MainThree\""));
+                return;
+            case "v1_response":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false)
+                        .replace(XMageRallyBridgeProtocol.PROTOCOL,
+                                "mtg-kernel-checkpoint-shadow-stdio/v1")
+                        .replace("\"schema_version\":2", "\"schema_version\":1"));
+                return;
+            case "score_clock_drift":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false));
+                requireScore(readRequest(), 0L);
+                writeLf(System.out, decisionResponse("score", false, false, false)
+                        .replace("\"phase_step\":\"Main1\"",
+                                "\"phase_step\":\"Main2\""));
+                return;
+            case "clock_mismatch_error":
+                requireReset(readRequest());
+                writeLf(System.out, decisionResponse("reset", true, false, false));
+                requireStep(readRequest(), 0L, 1);
+                writeLf(System.out, clockMismatchResponse("step-0"));
+                return;
             case "error":
                 requireReset(readRequest());
                 writeLf(System.out, errorResponse("reset"));
@@ -192,12 +230,22 @@ public final class XMageRallyBridgeSelfTestPeer {
         }
         XMageRallyBridgeProtocol.StepRequest actual =
                 (XMageRallyBridgeProtocol.StepRequest) request;
+        XMageRallyBridgeProtocol.ExpectedClock expectedClock = stepClock(step);
         if (!("step-" + step).equals(actual.getRequestId())
                 || actual.getEpisodeId() != EPISODE
                 || actual.getExpectedStep() != step
-                || actual.getSelectedIndex() != selected) {
+                || actual.getSelectedIndex() != selected
+                || !expectedClock.equals(actual.getExpectedClock())) {
             throw new IOException("step request mismatch");
         }
+    }
+
+    private static XMageRallyBridgeProtocol.ExpectedClock stepClock(long step) {
+        return new XMageRallyBridgeProtocol.ExpectedClock(
+                1L,
+                XMageRallyBridgeProtocol.KernelPhaseStep.MAIN1,
+                step == 0L ? XMageRallyBridgeProtocol.Seat.P0
+                        : XMageRallyBridgeProtocol.Seat.P1);
     }
 
     private static String decisionResponse(String requestId,
@@ -218,8 +266,10 @@ public final class XMageRallyBridgeSelfTestPeer {
         String selectionSeed = afterFirstStep ? "null" : "\"5555555555555555\"";
         String selected = afterFirstStep ? "null" : "1";
         String applied = afterFirstStep ? appliedLand() : "null";
+        String kernelClock = kernelClockJson(actor);
         return "{\"protocol\":\"" + XMageRallyBridgeProtocol.PROTOCOL + "\","
-                + "\"schema_version\":1,\"request_id\":\"" + requestId + "\","
+                + "\"schema_version\":" + XMageRallyBridgeProtocol.SCHEMA_VERSION
+                + ",\"request_id\":\"" + requestId + "\","
                 + checkpointJson(wrongCheckpoint)
                 + ",\"response_type\":\"decision\",\"decision\":{"
                 + "\"deck_ids\":[\"Rally\",\"Rally\"],"
@@ -247,12 +297,14 @@ public final class XMageRallyBridgeSelfTestPeer {
                 + "\"core_environment_hash_u64_hex\":\"4444444444444444\","
                 + "\"logits_f32_bits\":[1056964608,1065353216],"
                 + "\"value_f32_bits\":1048576000,\"action_semantics\":" + semantics
+                + ",\"kernel_clock\":" + kernelClock
                 + "},\"applied_action\":" + applied + "}";
     }
 
     private static String terminalResponse(String requestId) {
         return "{\"protocol\":\"" + XMageRallyBridgeProtocol.PROTOCOL + "\","
-                + "\"schema_version\":1,\"request_id\":\"" + requestId + "\","
+                + "\"schema_version\":" + XMageRallyBridgeProtocol.SCHEMA_VERSION
+                + ",\"request_id\":\"" + requestId + "\","
                 + checkpointJson(false)
                 + ",\"response_type\":\"terminal\",\"terminal\":{"
                 + "\"deck_ids\":[\"Rally\",\"Rally\"],"
@@ -275,10 +327,25 @@ public final class XMageRallyBridgeSelfTestPeer {
 
     private static String errorResponse(String requestId) {
         return "{\"protocol\":\"" + XMageRallyBridgeProtocol.PROTOCOL + "\","
-                + "\"schema_version\":1,\"request_id\":\"" + requestId + "\","
+                + "\"schema_version\":" + XMageRallyBridgeProtocol.SCHEMA_VERSION
+                + ",\"request_id\":\"" + requestId + "\","
                 + checkpointJson(false)
                 + ",\"response_type\":\"error\",\"error_code\":\"test_error\","
                 + "\"message\":\"intentional test error\"}";
+    }
+
+    private static String clockMismatchResponse(String requestId) {
+        return errorResponse(requestId)
+                .replace("\"error_code\":\"test_error\"",
+                        "\"error_code\":\"clock_mismatch\"")
+                .replace("intentional test error",
+                        "expected_clock does not match the kernel clock of the current decision");
+    }
+
+    private static String kernelClockJson(String actor) {
+        return "{\"turn\":1,\"phase_step\":\"Main1\","
+                + "\"active_player\":\"" + actor + "\","
+                + "\"priority_player\":\"" + actor + "\",\"stack_depth\":0}";
     }
 
     private static String checkpointJson(boolean wrong) {

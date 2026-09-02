@@ -196,11 +196,17 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
     @Override
     public synchronized int chooseNoncombat(String category, int canonicalLegalCount) {
+        throw fail("live noncombat selection requires an XMage game clock", null);
+    }
+
+    public synchronized int chooseNoncombat(
+            String category, int canonicalLegalCount, Game game) {
         requireLive();
         String checkedCategory = requireCategory(category);
         ensureCounterCapacity(1);
-        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
-        validateSurfaceDecision(decision, checkedCategory, canonicalLegalCount);
+        XMageRallyBridgeProtocol.DecisionBody decision =
+                requireCurrentDecision(game, checkedCategory);
+        validateSurfaceDecision(decision, checkedCategory, canonicalLegalCount, game);
 
         int selected;
         if (modelControlled) {
@@ -213,7 +219,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             }
         }
         validateSelectedIndex(selected, canonicalLegalCount);
-        stepExactlyOnce(decision, selected);
+        stepExactlyOnce(decision, selected, game, checkedCategory);
         recordSurfaceOutcome(checkedCategory, canonicalLegalCount, selected);
         return selected;
     }
@@ -235,9 +241,13 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         if (xmageAbilities == null || xmageAbilities.isEmpty()) {
             throw fail("priority ability menu must be nonempty", null);
         }
+        if (game == null) {
+            throw fail("priority ability selection requires an XMage game", null);
+        }
         String category = "noncombat_activate_ability_or_spell";
         ensureCounterCapacity(1);
-        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        XMageRallyBridgeProtocol.DecisionBody decision =
+                requireCurrentDecision(game, category);
         try {
             bindPriorityTokenSources(
                     xmageAbilities, decision.getActionSemantics(), game);
@@ -254,7 +264,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     decision.getActionSemantics(), game)
                     + " xmage_lands=" + xmageLandSummary(game), null);
         }
-        validateSurfaceDecision(decision, category, xmageAbilities.size());
+        validateSurfaceDecision(decision, category, xmageAbilities.size(), game);
 
         List<ActivatedAbility> abilitiesByRustRow;
         try {
@@ -284,7 +294,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         }
         validateSelectedIndex(selected, abilitiesByRustRow.size());
         ActivatedAbility result = abilitiesByRustRow.get(selected);
-        stepExactlyOnce(decision, selected);
+        stepExactlyOnce(decision, selected, game, category);
         recordSurfaceOutcome(category, abilitiesByRustRow.size(), selected);
         return result;
     }
@@ -301,6 +311,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             return false;
         }
         XMageRallyBridgeProtocol.DecisionBody decision = bridge.getCurrentDecision();
+        if (decision != null) {
+            requireClockMatch(decision, game, "priority_menu_match");
+        }
         if (decision == null || decision.getActingPlayer() != physicalSeat
                 || !"surface".equals(decision.getDecisionKind())
                 || decision.getLegalActionCount() != xmageAbilities.size()
@@ -367,10 +380,11 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         if (decision.getEpisodeId() != episodeId) {
             throw fail("postcombat rendezvous crossed the bound episode", null);
         }
+        requireClockMatch(decision, game, "postcombat_selected_projection");
         if (decision.getActingPlayer() != physicalSeat) {
             return null;
         }
-        validateCommonDecision(decision);
+        validateCommonDecision(decision, game, "postcombat_selected_projection");
         if (!"surface".equals(decision.getDecisionKind())
                 || decision.getSubstepIndex() != 0
                 || decision.getSubstepCount() != 1
@@ -429,7 +443,8 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         ensureCounterCapacity(1);
         tracePriorityMenuMatch(
                 "selected_row_catchup", xmageAbilities, game, decision);
-        stepExactlyOnce(decision, selectedIndex);
+        stepExactlyOnce(
+                decision, selectedIndex, game, "postcombat_selected_projection");
         selectedPriorityProjectionCount++;
         recordSurfaceOutcome(
                 "noncombat_activate_ability_or_spell",
@@ -572,15 +587,17 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     }
 
     /** Select a card callback by Rust stable arena identity, not XMage rank. */
-    public synchronized Card chooseCardTarget(List<? extends Card> xmageMenu) {
+    public synchronized Card chooseCardTarget(
+            List<? extends Card> xmageMenu, Game game) {
         requireLive();
-        if (xmageMenu == null || xmageMenu.isEmpty()) {
-            throw fail("card-target menu must be nonempty", null);
+        if (xmageMenu == null || xmageMenu.isEmpty() || game == null) {
+            throw fail("card-target menu and game must be nonempty", null);
         }
         String category = "card_target";
         ensureCounterCapacity(1);
-        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
-        validateSurfaceDecision(decision, category, xmageMenu.size());
+        XMageRallyBridgeProtocol.DecisionBody decision =
+                requireCurrentDecision(game, category);
+        validateSurfaceDecision(decision, category, xmageMenu.size(), game);
 
         List<UUID> xmageIds = new ArrayList<>(xmageMenu.size());
         Map<UUID, Card> cardsById = new LinkedHashMap<>();
@@ -623,7 +640,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     + " xmage_arena_id=" + allArenaIds().get(selectedId)
                     + " xmage_card=" + (result == null ? "STOP" : result.getName()));
         }
-        stepExactlyOnce(decision, selected);
+        stepExactlyOnce(decision, selected, game, category);
         recordSurfaceOutcome(category, idsByRustRow.size(), selected);
         return result;
     }
@@ -635,13 +652,14 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             throw fail("target menu and game must be nonempty", null);
         }
         ensureCounterCapacity(1);
-        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
+        XMageRallyBridgeProtocol.DecisionBody decision =
+                requireCurrentDecision(game, "target");
         boolean cardIdentity = decision.getActionSemantics().stream()
                 .anyMatch(semantic -> semantic != null
                         && ("discard".equals(semantic.getActionKind())
                         || "choose_cost_target".equals(semantic.getActionKind())));
         String category = cardIdentity ? "card_target" : "target";
-        validateSurfaceDecision(decision, category, xmageMenu.size());
+        validateSurfaceDecision(decision, category, xmageMenu.size(), game);
 
         List<UUID> idsByRustRow;
         try {
@@ -677,7 +695,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     + " rust=" + decision.getActionSemantics().get(selected).getCanonicalJson()
                     + " xmage_uuid=" + (result == null ? "STOP" : result));
         }
-        stepExactlyOnce(decision, selected);
+        stepExactlyOnce(decision, selected, game, category);
         recordSurfaceOutcome(category, idsByRustRow.size(), selected);
         return result;
     }
@@ -685,6 +703,11 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     @Override
     public synchronized int[] chooseNoncombatWithoutReplacement(
             String category, int canonicalLegalCount, int picks) {
+        throw fail("live aggregate selection requires an XMage game clock", null);
+    }
+
+    public synchronized int[] chooseNoncombatWithoutReplacement(
+            String category, int canonicalLegalCount, int picks, Game game) {
         requireLive();
         if (picks != 1) {
             throw fail("surface callback must contain exactly one Rust substep; picks=" + picks,
@@ -692,8 +715,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         }
         String checkedCategory = requireCategory(category);
         ensureCounterCapacity(1);
-        XMageRallyBridgeProtocol.DecisionBody decision = requireCurrentDecision();
-        validateSurfaceDecision(decision, checkedCategory, canonicalLegalCount);
+        XMageRallyBridgeProtocol.DecisionBody decision =
+                requireCurrentDecision(game, checkedCategory);
+        validateSurfaceDecision(decision, checkedCategory, canonicalLegalCount, game);
 
         int selected;
         if (modelControlled) {
@@ -712,7 +736,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             selected = delegated[0];
         }
         validateSelectedIndex(selected, canonicalLegalCount);
-        stepExactlyOnce(decision, selected);
+        stepExactlyOnce(decision, selected, game, checkedCategory);
         recordSurfaceOutcome(checkedCategory, canonicalLegalCount, selected);
         return new int[]{selected};
     }
@@ -748,19 +772,20 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         String category = "declare_attackers";
         int candidateCount = eligible.size();
         ensureCounterCapacity(candidateCount);
+        XMageRallyBridgeProtocol.DecisionBody firstDecision =
+                requireCurrentDecision(game, category);
         boolean[] delegated = delegatedCombatSelection(category, candidateCount, false);
         List<UUID> selected = new ArrayList<>();
         Set<UUID> used = new HashSet<>();
         Long physicalDecisionId = null;
-        XMageRallyBridgeProtocol.DecisionBody firstDecision = requireCurrentDecision();
 
         for (int substep = 0; substep < candidateCount; substep++) {
             XMageRallyBridgeProtocol.DecisionBody decision = substep == 0
-                    ? firstDecision : requireCurrentDecision();
+                    ? firstDecision : requireCurrentDecision(game, category);
             BinaryShape shape = validateCombatDecision(
                     decision, category, "attacker_inclusion",
                     "choose_attacker_inclusion", candidateCount,
-                    substep, physicalDecisionId);
+                    substep, physicalDecisionId, game);
             if (physicalDecisionId == null) {
                 physicalDecisionId = decision.getPhysicalDecisionId();
             }
@@ -781,7 +806,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                 selected.add(attacker.getId());
             }
             traceCombatSelection(decision, shape.attacker, attacker, selectedIndex, null);
-            stepExactlyOnce(decision, selectedIndex);
+            stepExactlyOnce(decision, selectedIndex, game, category);
             policyActionSelections++;
             policyLeafEvaluations++;
         }
@@ -812,12 +837,14 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
         List<BlockAssignment> assignments = new ArrayList<>();
         while (hasLegalBlockerPair(pendingAttackers, availableBlockers, game)) {
-            XMageRallyBridgeProtocol.DecisionBody firstDecision = requireCurrentDecision();
+            XMageRallyBridgeProtocol.DecisionBody firstDecision =
+                    requireCurrentDecision(game, "declare_blocker_for_attacker");
             if (!"blocker_inclusion".equals(firstDecision.getDecisionKind())) {
                 throw fail("XMage has a blocker group but kernel decision kind is "
                         + firstDecision.getDecisionKind(), null);
             }
-            validateCommonDecision(firstDecision);
+            validateCommonDecision(
+                    firstDecision, game, "declare_blocker_for_attacker");
 
             BinaryShape firstShape;
             try {
@@ -850,11 +877,11 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
             for (int substep = 0; substep < candidateCount; substep++) {
                 XMageRallyBridgeProtocol.DecisionBody decision = substep == 0
-                        ? firstDecision : requireCurrentDecision();
+                        ? firstDecision : requireCurrentDecision(game, category);
                 BinaryShape shape = validateCombatDecision(
                         decision, category, "blocker_inclusion",
                         "choose_blocker_inclusion", candidateCount,
-                        substep, physicalDecisionId);
+                        substep, physicalDecisionId, game);
                 if (physicalDecisionId == null) {
                     physicalDecisionId = decision.getPhysicalDecisionId();
                 }
@@ -887,7 +914,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                 }
                 traceCombatSelection(
                         decision, shape.blocker, blocker, selectedIndex, attacker);
-                stepExactlyOnce(decision, selectedIndex);
+                stepExactlyOnce(decision, selectedIndex, game, category);
                 policyActionSelections++;
                 policyLeafEvaluations++;
             }
@@ -1240,8 +1267,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
     private void validateSurfaceDecision(
             XMageRallyBridgeProtocol.DecisionBody decision,
             String category,
-            int canonicalLegalCount) {
-        validateCommonDecision(decision);
+            int canonicalLegalCount,
+            Game game) {
+        validateCommonDecision(decision, game, category);
         if (canonicalLegalCount <= 0) {
             throw fail("canonicalLegalCount must be positive", null);
         }
@@ -1278,8 +1306,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             String semanticKind,
             int candidateCount,
             int substep,
-            Long physicalDecisionId) {
-        validateCommonDecision(decision);
+            Long physicalDecisionId,
+            Game game) {
+        validateCommonDecision(decision, game, category);
         if (!decisionKind.equals(decision.getDecisionKind())) {
             throw fail(category + " expected decision kind " + decisionKind
                     + " but got " + decision.getDecisionKind(), null);
@@ -1308,10 +1337,14 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         }
     }
 
-    private void validateCommonDecision(XMageRallyBridgeProtocol.DecisionBody decision) {
+    private void validateCommonDecision(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            Game game,
+            String label) {
         if (decision == null) {
             throw fail("current kernel decision is null", null);
         }
+        requireClockMatch(decision, game, label);
         if (decision.getEpisodeId() != episodeId) {
             throw fail("kernel decision episode mismatch", null);
         }
@@ -1366,11 +1399,16 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
 
     private void stepExactlyOnce(
             XMageRallyBridgeProtocol.DecisionBody decision,
-            int selectedIndex) {
+            int selectedIndex,
+            Game game,
+            String label) {
+        XMageRallyBridgeProtocol.ExpectedClock expectedClock =
+                requireClockMatch(decision, game, label + ":step");
         String requestId = nextRequestId();
         try {
             XMageRallyBridgeProtocol.Response response = bridge.step(
-                    requestId, episodeId, decision.getStep(), selectedIndex);
+                    requestId, episodeId, decision.getStep(), selectedIndex,
+                    expectedClock);
             XMageRallyBridgeProtocol.AppliedAction applied;
             if (response.getBody() instanceof XMageRallyBridgeProtocol.DecisionResponseBody) {
                 applied = ((XMageRallyBridgeProtocol.DecisionResponseBody) response.getBody())
@@ -1396,18 +1434,33 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         }
     }
 
-    private XMageRallyBridgeProtocol.DecisionBody requireCurrentDecision() {
+    private XMageRallyBridgeProtocol.DecisionBody requireCurrentDecision(
+            Game game, String label) {
         if (bridge == null) {
             throw fail("deserialized live policy has no bridge", null);
         }
         XMageRallyBridgeProtocol.DecisionBody decision = bridge.getCurrentDecision();
         if (decision != null) {
+            requireClockMatch(decision, game, label);
             return decision;
         }
         if (bridge.getTerminal() != null) {
             throw fail("kernel reached terminal before XMage requested decision", null);
         }
         throw fail("bridge has no current decision", null);
+    }
+
+    private XMageRallyBridgeProtocol.ExpectedClock requireClockMatch(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            Game game,
+            String label) {
+        try {
+            return XMageRallyClockComparator.requireMatch(
+                    decision, game, "kernel_shadow_policy", label);
+        } catch (XMageRallyClockComparator.ClockMismatch mismatch) {
+            throw fail("KERNEL_SHADOW_POLICY_CLOCK_MISMATCH "
+                    + mismatch.getMessage(), mismatch);
+        }
     }
 
     private void recordSurfaceOutcome(String category, int legalCount, int selected) {

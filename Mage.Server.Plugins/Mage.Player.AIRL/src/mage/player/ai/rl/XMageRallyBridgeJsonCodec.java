@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-/** Strict duplicate-free JSON codec matching the Rust shadow scorer V1. */
+/** Strict duplicate-free JSON codec matching the Rust shadow scorer V2. */
 public final class XMageRallyBridgeJsonCodec {
 
     private static final Pattern CANONICAL_INTEGER = Pattern.compile("0|-?[1-9][0-9]*");
@@ -62,7 +62,7 @@ public final class XMageRallyBridgeJsonCodec {
             "selected_action_index", "candidate_order_commitment_128_hex",
             "model_input_commitment", "model_input_sha256",
             "diagnostic_state_hash_u64_hex", "core_environment_hash_u64_hex",
-            "logits_f32_bits", "value_f32_bits", "action_semantics");
+            "logits_f32_bits", "value_f32_bits", "action_semantics", "kernel_clock");
     private static final Set<String> DECISION_ALLOWED_FIELDS = plus(
             DECISION_FIELDS, "initial_library_card_definition_ids");
 
@@ -82,6 +82,11 @@ public final class XMageRallyBridgeJsonCodec {
             "terminal_outcome", "terminal_classification", "terminal_code", "winner",
             "terminal_reward", "terminal_reason", "policy_step_count",
             "physical_decision_count");
+
+    private static final Set<String> KERNEL_CLOCK_FIELDS = set(
+            "turn", "phase_step", "active_player", "priority_player", "stack_depth");
+    private static final Set<String> EXPECTED_CLOCK_FIELDS = set(
+            "turn", "phase_step", "active_player");
 
     public String encodeRequest(XMageRallyBridgeProtocol.Request request) {
         if (request == null) {
@@ -104,6 +109,16 @@ public final class XMageRallyBridgeJsonCodec {
                         (XMageRallyBridgeProtocol.StepRequest) request;
                 writer.name("expected_step").value(step.getExpectedStep());
                 writer.name("selected_index").value(step.getSelectedIndex());
+                XMageRallyBridgeProtocol.ExpectedClock expectedClock =
+                        step.getExpectedClock();
+                if (expectedClock != null) {
+                    writer.name("expected_clock").beginObject();
+                    writer.name("turn").value(expectedClock.getTurn());
+                    writer.name("phase_step").value(expectedClock.getPhaseStep().wire());
+                    writer.name("active_player").value(
+                            expectedClock.getActivePlayer().wire());
+                    writer.endObject();
+                }
             } else {
                 throw new IllegalArgumentException("unsupported request implementation");
             }
@@ -133,13 +148,19 @@ public final class XMageRallyBridgeJsonCodec {
                             requestId, episodeId,
                             signedLong(object, "expected_step", "request"));
                 case "step":
-                    exactFields(object, set("request_type", "request_id", "episode_id",
-                            "expected_step", "selected_index"), "step request");
+                    Set<String> requiredStepFields = set(
+                            "request_type", "request_id", "episode_id",
+                            "expected_step", "selected_index");
+                    requiredAllowedFields(object, requiredStepFields,
+                            plus(requiredStepFields, "expected_clock"), "step request");
                     return new XMageRallyBridgeProtocol.StepRequest(
                             requestId, episodeId,
                             signedLong(object, "expected_step", "request"),
                             javaInt(object, "selected_index", ZERO,
-                                    BigInteger.valueOf(Integer.MAX_VALUE), "request"));
+                                    BigInteger.valueOf(Integer.MAX_VALUE), "request"),
+                            object.has("expected_clock")
+                                    ? expectedClock(object(
+                                    object, "expected_clock", "step request")) : null);
                 default:
                     throw new ProtocolException("unsupported request_type: " + type);
             }
@@ -298,6 +319,8 @@ public final class XMageRallyBridgeJsonCodec {
         long valueBits = u32(object, "value_f32_bits", "decision");
         List<XMageRallyBridgeProtocol.ActionSemantic> semantics = semantics(
                 array(object, "action_semantics", "decision"), acting);
+        XMageRallyBridgeProtocol.KernelClock kernelClock = kernelClock(
+                object(object, "kernel_clock", "decision"));
         if (legalCount != logits.size() || legalCount != semantics.size()) {
             throw new ProtocolException(
                     "legal_action_count does not match logits/action_semantics width");
@@ -320,7 +343,39 @@ public final class XMageRallyBridgeJsonCodec {
                 episodeId, step, environmentRevision, physicalDecision,
                 substepIndex, substepCount, acting, decisionKind, legalCount, candidate,
                 controls, actorOrdinal, actionSeed, selected, candidateOrder, modelCommitment,
-                modelSha, diagnosticHash, environmentHash, logits, valueBits, semantics);
+                modelSha, diagnosticHash, environmentHash, logits, valueBits, semantics,
+                kernelClock);
+    }
+
+    private static XMageRallyBridgeProtocol.KernelClock kernelClock(JsonObject object)
+            throws ProtocolException {
+        exactFields(object, KERNEL_CLOCK_FIELDS, "kernel_clock");
+        return new XMageRallyBridgeProtocol.KernelClock(
+                u32(object, "turn", "kernel_clock"),
+                kernelPhaseStep(object, "phase_step", "kernel_clock"),
+                seat(object, "active_player", "kernel_clock"),
+                seat(object, "priority_player", "kernel_clock"),
+                u32(object, "stack_depth", "kernel_clock"));
+    }
+
+    private static XMageRallyBridgeProtocol.ExpectedClock expectedClock(JsonObject object)
+            throws ProtocolException {
+        exactFields(object, EXPECTED_CLOCK_FIELDS, "expected_clock");
+        return new XMageRallyBridgeProtocol.ExpectedClock(
+                u32(object, "turn", "expected_clock"),
+                kernelPhaseStep(object, "phase_step", "expected_clock"),
+                seat(object, "active_player", "expected_clock"));
+    }
+
+    private static XMageRallyBridgeProtocol.KernelPhaseStep kernelPhaseStep(
+            JsonObject object, String field, String context) throws ProtocolException {
+        String value = string(object, field, context);
+        try {
+            return XMageRallyBridgeProtocol.KernelPhaseStep.fromWire(value);
+        } catch (IllegalArgumentException error) {
+            throw new ProtocolException(context + " has invalid " + field + ": " + value,
+                    error);
+        }
     }
 
     private static XMageRallyBridgeProtocol.AppliedAction nullableApplied(JsonElement value)

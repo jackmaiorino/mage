@@ -285,7 +285,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             recordForcedNoPolicy("forced_priority_pass_after_native_terminal");
             return;
         }
-        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
+        XMageRallyBridgeProtocol.DecisionBody current =
+                currentForCp7OrNull(observed.getGame(), "priority_pass");
         if (current == null) {
             tracePriorityPass("forced_other_actor", observed,
                     bridge.getCurrentDecision());
@@ -313,7 +314,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         }
         requireSurface(current, "priority pass");
         tracePriorityPass("step", observed, current);
-        step(current, selected, "priority_pass");
+        step(current, selected, "priority_pass", observed.getGame());
     }
 
     private void tracePriorityPass(
@@ -456,7 +457,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         if (ability.getSourceId() == null) {
             throw fail("CP7 priority action has no source id", null);
         }
-        XMageRallyBridgeProtocol.DecisionBody current = requireCurrentCp7("priority action");
+        XMageRallyBridgeProtocol.DecisionBody current = requireCurrentCp7(
+                observed.getGame(), "priority action");
         requireSurface(current, "priority action");
         String expectedKind = priorityKind(ability);
         prebindPriorityTokenSources(current, observed.getGame());
@@ -498,7 +500,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     : bound.arenaId + "/" + bound.cardDbId)
                     + " expected_rows=" + expectedRows, null);
         }
-        step(current, matches.get(0), "priority_action:" + expectedKind);
+        step(current, matches.get(0), "priority_action:" + expectedKind,
+                observed.getGame());
     }
 
     private void applyObjectTargets(
@@ -519,20 +522,22 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             candidates = new ArrayList<>(reconstructed);
         }
         if (selected.isEmpty()) {
-            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
+            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
+                    observed.getGame(), "finish_target_selection");
             if (current == null) {
                 recordForcedNoPolicy("forced_empty_target");
                 return;
             }
             requireSurface(current, "empty target");
             int finish = uniqueKindIndex(current, FINISH_TARGET_KINDS);
-            step(current, finish, "finish_target_selection");
+            step(current, finish, "finish_target_selection", observed.getGame());
             return;
         }
 
         Set<UUID> remainingCandidates = new LinkedHashSet<>(candidates);
         for (UUID target : selected) {
-            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
+            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
+                    observed.getGame(), "target");
             if (current == null) {
                 if (isForcedSingleBloodDiscard(observed, selected, candidates, current)) {
                     recordForcedNoPolicy("forced_single_blood_discard");
@@ -565,7 +570,9 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     throw fail("canonical discard target did not map to a discard action", null);
                 }
             }
-            step(current, index, "target:" + current.getActionSemantics().get(index).getActionKind());
+            step(current, index,
+                    "target:" + current.getActionSemantics().get(index).getActionKind(),
+                    observed.getGame());
             remainingCandidates.remove(appliedTarget);
         }
     }
@@ -699,7 +706,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             throw fail("chooseUse has an invalid observer shape", null);
         }
         boolean selectedValue = (Boolean) observed.getSelected().get(0);
-        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
+        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
+                observed.getGame(), "choose_use");
         if (current == null) {
             if (!selectedValue) {
                 recordForcedNoPolicy("forced_false_choose_use");
@@ -747,7 +755,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             throw fail("chooseUse did not identify exactly one Rust action; matches="
                     + matches.size(), null);
         }
-        step(current, matches.get(0), "choose_use");
+        step(current, matches.get(0), "choose_use", observed.getGame());
     }
 
     private boolean isForcedJointlyUnaffordableBushwhackerKicker(
@@ -809,7 +817,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         }
 
         XMageRallyBridgeProtocol.DecisionBody current =
-                requireCurrentCp7("trigger order");
+                requireCurrentCp7(observed.getGame(), "trigger order");
         requireSurface(current, "trigger order");
         int expectedWidth = factorialExact(offered.size());
         if (current.getLegalActionCount() != expectedWidth) {
@@ -905,7 +913,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     + " selected_index=" + selectedIndex
                     + " pending_sources=" + pendingSources);
         }
-        step(current, selectedIndex, "trigger_order");
+        step(current, selectedIndex, "trigger_order", observed.getGame());
         if (offered.size() > 2) {
             triggerOrderReplay = new TriggerOrderReplay(
                     observed.getGame().getId(), offered, 1);
@@ -996,7 +1004,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         Set<UUID> used = new HashSet<>();
         for (int substep = 0; substep < eligible.size(); substep++) {
             XMageRallyBridgeProtocol.DecisionBody current =
-                    requireCurrentCp7("attacker inclusion");
+                    requireCurrentCp7(observed.getGame(), "attacker inclusion");
             requireBinaryShape(current, "attacker_inclusion", substep, eligible.size(),
                     physicalDecisionId);
             if (substep == 0) {
@@ -1010,7 +1018,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                 throw fail("attacker aggregate repeats an XMage identity", null);
             }
             int selectedIndex = selected.contains(attacker.getId()) ? 1 : 0;
-            step(current, selectedIndex, "attacker_inclusion");
+            step(current, selectedIndex, "attacker_inclusion", observed.getGame());
         }
         if (used.size() != eligible.size()) {
             throw fail("attacker mapping did not consume the complete XMage menu", null);
@@ -1044,7 +1052,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         Set<BlockAssignment> applied = new HashSet<>();
         while (hasLegalBlockerPair(attackers, available, game)) {
             XMageRallyBridgeProtocol.DecisionBody first =
-                    requireCurrentCp7("blocker inclusion");
+                    requireCurrentCp7(game, "blocker inclusion");
             requireCommon(first, "blocker inclusion");
             if (!"blocker_inclusion".equals(first.getDecisionKind())
                     || first.getSubstepIndex() != 0
@@ -1065,7 +1073,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             List<Permanent> selectedForAttacker = new ArrayList<>();
             for (int substep = 0; substep < legal.size(); substep++) {
                 XMageRallyBridgeProtocol.DecisionBody current = substep == 0
-                        ? first : requireCurrentCp7("blocker inclusion");
+                        ? first : requireCurrentCp7(game, "blocker inclusion");
                 requireBinaryShape(current, "blocker_inclusion", substep, legal.size(),
                         physicalDecisionId);
                 if (substep == 0) {
@@ -1091,7 +1099,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     applied.add(pair);
                     selectedForAttacker.add(blocker);
                 }
-                step(current, include ? 1 : 0, "blocker_inclusion");
+                step(current, include ? 1 : 0, "blocker_inclusion", game);
             }
             if (usedBlockers.size() != legal.size()) {
                 throw fail("blocker mapping did not consume the complete XMage menu", null);
@@ -1775,15 +1783,17 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         }
     }
 
-    private XMageRallyBridgeProtocol.DecisionBody requireCurrentCp7(String label) {
-        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
+    private XMageRallyBridgeProtocol.DecisionBody requireCurrentCp7(
+            Game game, String label) {
+        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(game, label);
         if (current == null) {
             throw fail("Rust has no CP7 decision for " + label, null);
         }
         return current;
     }
 
-    private XMageRallyBridgeProtocol.DecisionBody currentForCp7OrNull() {
+    private XMageRallyBridgeProtocol.DecisionBody currentForCp7OrNull(
+            Game game, String label) {
         XMageRallyBridgeProtocol.DecisionBody current = bridge.getCurrentDecision();
         if (current == null) {
             if (bridge.getTerminal() != null) {
@@ -1794,6 +1804,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         if (current.getEpisodeId() != episodeId) {
             throw fail("Rust current episode changed", null);
         }
+        requireClockMatch(current, game, label);
         return current.getActingPlayer() == physicalSeat ? current : null;
     }
 
@@ -1819,10 +1830,13 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
     private void step(
             XMageRallyBridgeProtocol.DecisionBody current,
             int selectedIndex,
-            String kind) {
+            String kind,
+            Game game) {
         if (selectedIndex < 0 || selectedIndex >= current.getLegalActionCount()) {
             throw fail("selected Rust action is outside the legal width", null);
         }
+        XMageRallyBridgeProtocol.ExpectedClock expectedClock =
+                requireClockMatch(current, game, kind + ":step");
         String requestId = "xmage-cp7-shadow-" + episodeId + "-" + requestOrdinal;
         if (requestOrdinal == Long.MAX_VALUE || appliedPolicySteps == Long.MAX_VALUE) {
             throw fail("CP7 mapper counter exhausted", null);
@@ -1840,7 +1854,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                     source, "arena_id", selectedActionKind + " source");
         }
         try {
-            bridge.step(requestId, episodeId, current.getStep(), selectedIndex);
+            bridge.step(requestId, episodeId, current.getStep(), selectedIndex,
+                    expectedClock);
         } catch (XMageRallyBridgeProcessClient.BridgeFailure error) {
             throw fail("Rust step failed at CP7 episode " + episodeId
                     + " step " + current.getStep(), error);
@@ -1850,6 +1865,19 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         increment(appliedKinds, kind);
         lastAppliedActionKind = selectedActionKind;
         lastAppliedSourceArenaId = selectedSourceArenaId;
+    }
+
+    private XMageRallyBridgeProtocol.ExpectedClock requireClockMatch(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            Game game,
+            String label) {
+        try {
+            return XMageRallyClockComparator.requireMatch(
+                    decision, game, "cp7_kernel_shadow_mapper", label);
+        } catch (XMageRallyClockComparator.ClockMismatch mismatch) {
+            throw fail("CP7_KERNEL_SHADOW_MAPPER_CLOCK_MISMATCH "
+                    + mismatch.getMessage(), mismatch);
+        }
     }
 
     private boolean matchesBoundUuid(UUID id, JsonObject stable, Game game) {
