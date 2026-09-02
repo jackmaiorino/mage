@@ -285,8 +285,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             recordForcedNoPolicy("forced_priority_pass_after_native_terminal");
             return;
         }
-        XMageRallyBridgeProtocol.DecisionBody current =
-                currentForCp7OrNull(observed.getGame(), "priority_pass");
+        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
         if (current == null) {
             tracePriorityPass("forced_other_actor", observed,
                     bridge.getCurrentDecision());
@@ -522,8 +521,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             candidates = new ArrayList<>(reconstructed);
         }
         if (selected.isEmpty()) {
-            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
-                    observed.getGame(), "finish_target_selection");
+            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
             if (current == null) {
                 recordForcedNoPolicy("forced_empty_target");
                 return;
@@ -536,8 +534,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
 
         Set<UUID> remainingCandidates = new LinkedHashSet<>(candidates);
         for (UUID target : selected) {
-            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
-                    observed.getGame(), "target");
+            XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
             if (current == null) {
                 if (isForcedSingleBloodDiscard(observed, selected, candidates, current)) {
                     recordForcedNoPolicy("forced_single_blood_discard");
@@ -706,8 +703,7 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             throw fail("chooseUse has an invalid observer shape", null);
         }
         boolean selectedValue = (Boolean) observed.getSelected().get(0);
-        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(
-                observed.getGame(), "choose_use");
+        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
         if (current == null) {
             if (!selectedValue) {
                 recordForcedNoPolicy("forced_false_choose_use");
@@ -1785,15 +1781,15 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
 
     private XMageRallyBridgeProtocol.DecisionBody requireCurrentCp7(
             Game game, String label) {
-        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull(game, label);
+        XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
         if (current == null) {
             throw fail("Rust has no CP7 decision for " + label, null);
         }
+        requireClockMatch(current, game, label);
         return current;
     }
 
-    private XMageRallyBridgeProtocol.DecisionBody currentForCp7OrNull(
-            Game game, String label) {
+    private XMageRallyBridgeProtocol.DecisionBody currentForCp7OrNull() {
         XMageRallyBridgeProtocol.DecisionBody current = bridge.getCurrentDecision();
         if (current == null) {
             if (bridge.getTerminal() != null) {
@@ -1804,7 +1800,9 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         if (current.getEpisodeId() != episodeId) {
             throw fail("Rust current episode changed", null);
         }
-        requireClockMatch(current, game, label);
+        // Cursor lookup is observational. Same-seat future decisions can be
+        // rejected by menu shape without consuming them. Required callbacks
+        // admit in requireCurrentCp7; optional callbacks admit in step().
         return current.getActingPlayer() == physicalSeat ? current : null;
     }
 

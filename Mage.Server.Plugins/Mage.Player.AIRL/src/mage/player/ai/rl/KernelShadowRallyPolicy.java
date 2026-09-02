@@ -311,9 +311,6 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             return false;
         }
         XMageRallyBridgeProtocol.DecisionBody decision = bridge.getCurrentDecision();
-        if (decision != null) {
-            requireClockMatch(decision, game, "priority_menu_match");
-        }
         if (decision == null || decision.getActingPlayer() != physicalSeat
                 || !"surface".equals(decision.getDecisionKind())
                 || decision.getLegalActionCount() != xmageAbilities.size()
@@ -338,7 +335,6 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     xmageAbilities, decision.getActionSemantics(), game);
             mapPriorityRows(
                     xmageAbilities, decision.getActionSemantics(), allArenaIds());
-            return true;
         } catch (KernelShadowPolicyViolation expectedPhaseMismatch) {
             dynamicArenaIds.clear();
             dynamicArenaIds.putAll(dynamicArenaIdsBefore);
@@ -347,6 +343,8 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             tracePriorityMenuMatch("mapping_mismatch", xmageAbilities, game, decision);
             return false;
         }
+        requireClockMatch(decision, game, "priority_menu_match");
+        return true;
     }
 
     /**
@@ -380,11 +378,9 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
         if (decision.getEpisodeId() != episodeId) {
             throw fail("postcombat rendezvous crossed the bound episode", null);
         }
-        requireClockMatch(decision, game, "postcombat_selected_projection");
         if (decision.getActingPlayer() != physicalSeat) {
             return null;
         }
-        validateCommonDecision(decision, game, "postcombat_selected_projection");
         if (!"surface".equals(decision.getDecisionKind())
                 || decision.getSubstepIndex() != 0
                 || decision.getSubstepCount() != 1
@@ -394,6 +390,7 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
                     xmageAbilities, game, decision);
             return null;
         }
+        validateCommonDecisionBinding(decision, "postcombat_selected_projection");
         try {
             for (XMageRallyBridgeProtocol.ActionSemantic semantic
                     : decision.getActionSemantics()) {
@@ -1341,10 +1338,16 @@ public final class KernelShadowRallyPolicy implements RallyCanonicalDecisionPoli
             XMageRallyBridgeProtocol.DecisionBody decision,
             Game game,
             String label) {
+        requireClockMatch(decision, game, label);
+        validateCommonDecisionBinding(decision, label);
+    }
+
+    private void validateCommonDecisionBinding(
+            XMageRallyBridgeProtocol.DecisionBody decision,
+            String label) {
         if (decision == null) {
             throw fail("current kernel decision is null", null);
         }
-        requireClockMatch(decision, game, label);
         if (decision.getEpisodeId() != episodeId) {
             throw fail("kernel decision episode mismatch", null);
         }
