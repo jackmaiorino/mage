@@ -524,7 +524,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             reconstructed.addAll(selected);
             candidates = new ArrayList<>(reconstructed);
         }
-        if (isTerminalDuringCostSubdecisionOfAppliedAction(observed, true)) {
+        if (isTerminalDuringForcedCostSubdecisionOfAppliedActivation(
+                observed, selected, candidates)) {
             recordForcedNoPolicy("forced_cost_subdecision_after_native_terminal");
             return;
         }
@@ -695,28 +696,41 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
 
     /**
      * A native terminal that arrives while XMage is still inside a cost
-     * sub-decision (or a chooseUse prompt) of the CP7 action the kernel has
-     * ALREADY applied is the same situation as the tolerated
+     * sub-decision of the CP7 activation the kernel has ALREADY applied is the
+     * same situation as the tolerated
      * {@code forced_priority_pass_after_native_terminal}: the kernel applies
-     * an activation or cast as one step (costs paid, ability or spell pushed)
-     * and then advances through every forced-only window, so when neither
-     * player has a real choice left it resolves the stack and reaches game
-     * over inside that very step, while XMage is still asking CP7 which card
-     * to discard for the cost. No CP7 decision has been skipped: the kernel
-     * consumed CP7's action at the PRIORITY_ACTION callback, and XMage's own
-     * game runs on to its terminal, where the anchor spike's terminal-winner
-     * equality check decides whether the two engines agree. A genuine
-     * disagreement therefore still fails the pair; only the ORDER in which
-     * the two engines finish is tolerated here. Any other terminal-before-CP7
-     * shape keeps failing closed in {@link #currentForCp7OrNull()}.
+     * an activation as one step (costs paid, ability pushed) and then advances
+     * through every forced-only window, so when neither player has a real
+     * choice left it resolves the stack and reaches game over inside that very
+     * step, while XMage is still asking CP7 which card to discard for the
+     * cost. The exception is deliberately narrow:
+     * <ul>
+     * <li>the source must be the last applied CP7 action and that action must
+     * be an {@code activate_ability} (casts never record a source arena id in
+     * {@link #step}, so a terminal during a post-cast cost sub-decision still
+     * fails closed by design);</li>
+     * <li>the callback's subject must be one of that source's own cost targets
+     * (the exact Target instance the cost is paying through);</li>
+     * <li>XMage's candidate set must leave CP7 no choice: the selection equals
+     * the whole candidate set and the cost requires exactly that many
+     * targets (one legal card for a discard-one cost). A candidate set with a
+     * real choice means the kernel auto-resolved something XMage did not, a
+     * shadow divergence, and keeps failing closed even when the winner would
+     * be unchanged.</li>
+     * </ul>
+     * Boolean prompts are not covered: there is no evidence the kernel
+     * auto-resolves a boolean cost choice only when it is forced. No CP7
+     * decision is skipped here: the kernel consumed CP7's activation at the
+     * PRIORITY_ACTION callback, and XMage's own game runs on to its terminal,
+     * where the anchor spike's terminal-winner equality check decides whether
+     * the two engines agree. Any other terminal-before-CP7 shape keeps failing
+     * closed in {@link #currentForCp7OrNull()}.
      */
-    private boolean isTerminalDuringCostSubdecisionOfAppliedAction(
-            RallyCp7DecisionObserver.Decision observed, boolean requireCostTarget) {
-        if (bridge.getCurrentDecision() != null) {
-            return false;
-        }
-        XMageRallyBridgeProtocol.TerminalBody terminal = bridge.getTerminal();
-        if (terminal == null) {
+    private boolean isTerminalDuringForcedCostSubdecisionOfAppliedActivation(
+            RallyCp7DecisionObserver.Decision observed,
+            List<UUID> selected,
+            List<UUID> candidates) {
+        if (bridge.getCurrentDecision() != null || bridge.getTerminal() == null) {
             return false;
         }
         Ability source = observed.getSource();
@@ -727,32 +741,30 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         if (sourceBinding == null) {
             return false;
         }
-        return isCostSubdecisionOfAppliedAction(
-                source, observed.getSubject(), requireCostTarget,
+        return isForcedCostSubdecisionOfAppliedActivation(
+                source, observed.getSubject(), selected, candidates,
                 sourceBinding.arenaId, lastAppliedActionKind, lastAppliedSourceArenaId);
     }
 
     /**
-     * Pure shape check behind {@link #isTerminalDuringCostSubdecisionOfAppliedAction}:
-     * the callback's source is the kernel-applied activation or cast (same
-     * stable arena id as the last applied CP7 action), and, when a cost
-     * target is required, the callback's subject is one of that source's own
-     * cost targets (the exact Target instance the cost is paying through).
+     * Pure shape check behind
+     * {@link #isTerminalDuringForcedCostSubdecisionOfAppliedActivation}.
      */
-    static boolean isCostSubdecisionOfAppliedAction(
-            Ability source, Object subject, boolean requireCostTarget,
+    static boolean isForcedCostSubdecisionOfAppliedActivation(
+            Ability source, Object subject, List<UUID> selected, List<UUID> candidates,
             int sourceArenaId, String lastAppliedKind, Integer lastAppliedArenaId) {
-        if (lastAppliedArenaId == null || lastAppliedArenaId != sourceArenaId) {
+        if (lastAppliedArenaId == null || lastAppliedArenaId != sourceArenaId
+                || !"activate_ability".equals(lastAppliedKind)) {
             return false;
-        }
-        if (!"activate_ability".equals(lastAppliedKind)
-                && !"cast_spell".equals(lastAppliedKind)) {
-            return false;
-        }
-        if (!requireCostTarget) {
-            return true;
         }
         if (!(subject instanceof Target)) {
+            return false;
+        }
+        Target target = (Target) subject;
+        if (selected.isEmpty() || selected.size() != candidates.size()
+                || !new HashSet<>(selected).equals(new HashSet<>(candidates))
+                || target.getMinNumberOfTargets() != candidates.size()
+                || target.getMaxNumberOfTargets() != candidates.size()) {
             return false;
         }
         for (Cost cost : source.getCosts()) {
@@ -760,8 +772,8 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             if (targets == null) {
                 continue;
             }
-            for (Target target : targets) {
-                if (target == subject) {
+            for (Target costTarget : targets) {
+                if (costTarget == target) {
                     return true;
                 }
             }
@@ -787,10 +799,6 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             throw fail("chooseUse has an invalid observer shape", null);
         }
         boolean selectedValue = (Boolean) observed.getSelected().get(0);
-        if (isTerminalDuringCostSubdecisionOfAppliedAction(observed, false)) {
-            recordForcedNoPolicy("forced_cost_subdecision_after_native_terminal");
-            return;
-        }
         XMageRallyBridgeProtocol.DecisionBody current = currentForCp7OrNull();
         if (current == null) {
             if (!selectedValue) {
@@ -2560,21 +2568,30 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
                 bloodDiscardTarget = cost.getTargets().get(0);
             }
         }
+        UUID onlyCard = UUID.fromString("00000000-0000-0000-0000-000000000201");
+        UUID otherCard = UUID.fromString("00000000-0000-0000-0000-000000000202");
+        List<UUID> oneCard = Collections.singletonList(onlyCard);
+        List<UUID> twoCards = Arrays.asList(onlyCard, otherCard);
         if (bloodDiscardTarget == null
-                || !isCostSubdecisionOfAppliedAction(
-                bloodShape, bloodDiscardTarget, true, 120, "activate_ability", 120)
-                || !isCostSubdecisionOfAppliedAction(
-                bloodShape, "chooseUse prompt", false, 120, "cast_spell", 120)
-                || isCostSubdecisionOfAppliedAction(
-                bloodShape, bloodDiscardTarget, true, 120, "activate_ability", 61)
-                || isCostSubdecisionOfAppliedAction(
-                bloodShape, bloodDiscardTarget, true, 120, "pass", 120)
-                || isCostSubdecisionOfAppliedAction(
-                bloodShape, new TargetCardInHand(), true, 120, "activate_ability", 120)
-                || isCostSubdecisionOfAppliedAction(
-                bloodShape, bloodDiscardTarget, true, 120, "activate_ability", null)) {
+                || !isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, oneCard, oneCard, 120, "activate_ability", 120)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, oneCard, twoCards, 120, "activate_ability", 120)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, oneCard, oneCard, 120, "cast_spell", 120)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, "chooseUse prompt", oneCard, oneCard, 120, "activate_ability", 120)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, new TargetCardInHand(), oneCard, oneCard, 120, "activate_ability", 120)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, oneCard, oneCard, 120, "activate_ability", 61)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, oneCard, oneCard, 120, "activate_ability", null)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                bloodShape, bloodDiscardTarget, Collections.emptyList(), Collections.emptyList(),
+                120, "activate_ability", 120)) {
             throw new IllegalStateException(
-                    "terminal-during-cost-subdecision shape self-test failed");
+                    "terminal-during-forced-cost-subdecision shape self-test failed");
         }
         String scorerFailure = bridgeStepFailureMessage(
                 2L, 3L, "XMAGE_RALLY_SCORER_ERROR error_code=clock_mismatch");
