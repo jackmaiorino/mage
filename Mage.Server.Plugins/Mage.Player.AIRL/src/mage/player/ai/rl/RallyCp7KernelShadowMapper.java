@@ -711,12 +711,14 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
      * fails closed by design);</li>
      * <li>the callback's subject must be one of that source's own cost targets
      * (the exact Target instance the cost is paying through);</li>
-     * <li>XMage's candidate set must leave CP7 no choice: the selection equals
-     * the whole candidate set and the cost requires exactly that many
-     * targets (one legal card for a discard-one cost). A candidate set with a
-     * real choice means the kernel auto-resolved something XMage did not, a
-     * shadow divergence, and keeps failing closed even when the winner would
-     * be unchanged.</li>
+     * <li>XMage must have had exactly one legal candidate, CP7 must have
+     * selected exactly that one, and the cost must require exactly one target
+     * (a discard-one cost with a one-card hand). Costs that take several
+     * targets are excluded even when every legal object is selected, because
+     * a first-pick or ordering decision is still a decision. Any candidate set
+     * with a real choice means the kernel auto-resolved something XMage did
+     * not, a shadow divergence, and keeps failing closed even when the winner
+     * would be unchanged.</li>
      * </ul>
      * Boolean prompts are not covered: there is no evidence the kernel
      * auto-resolves a boolean cost choice only when it is forced. No CP7
@@ -761,10 +763,10 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
             return false;
         }
         Target target = (Target) subject;
-        if (selected.isEmpty() || selected.size() != candidates.size()
-                || !new HashSet<>(selected).equals(new HashSet<>(candidates))
-                || target.getMinNumberOfTargets() != candidates.size()
-                || target.getMaxNumberOfTargets() != candidates.size()) {
+        if (selected.size() != 1 || candidates.size() != 1
+                || !selected.get(0).equals(candidates.get(0))
+                || target.getMinNumberOfTargets() != 1
+                || target.getMaxNumberOfTargets() != 1) {
             return false;
         }
         for (Cost cost : source.getCosts()) {
@@ -2572,6 +2574,26 @@ public final class RallyCp7KernelShadowMapper implements RallyCp7DecisionObserve
         UUID otherCard = UUID.fromString("00000000-0000-0000-0000-000000000202");
         List<UUID> oneCard = Collections.singletonList(onlyCard);
         List<UUID> twoCards = Arrays.asList(onlyCard, otherCard);
+        SimpleActivatedAbility discardTwoShape = new SimpleActivatedAbility(
+                new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        discardTwoShape.addCost(new DiscardTargetCost(
+                new TargetCardInHand(2, 2, new mage.filter.FilterCard())));
+        discardTwoShape.setSourceId(UUID.fromString("00000000-0000-0000-0000-000000000133"));
+        Target discardTwoTarget = null;
+        for (Cost cost : discardTwoShape.getCosts()) {
+            if (cost instanceof DiscardTargetCost) {
+                discardTwoTarget = cost.getTargets().get(0);
+            }
+        }
+        if (discardTwoTarget == null
+                || isForcedCostSubdecisionOfAppliedActivation(
+                discardTwoShape, discardTwoTarget, twoCards, twoCards, 121, "activate_ability", 121)
+                || isForcedCostSubdecisionOfAppliedActivation(
+                discardTwoShape, discardTwoTarget, Arrays.asList(otherCard, onlyCard), twoCards,
+                121, "activate_ability", 121)) {
+            throw new IllegalStateException(
+                    "exact-two cost must never be recorded as a forced cost sub-decision");
+        }
         if (bloodDiscardTarget == null
                 || !isForcedCostSubdecisionOfAppliedActivation(
                 bloodShape, bloodDiscardTarget, oneCard, oneCard, 120, "activate_ability", 120)
