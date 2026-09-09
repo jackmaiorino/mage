@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lightning Bolt" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Goblin Bushwhacker" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Great Furnace" Annotation="0"/>
+  <Cards CatID="0" Quantity="14" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Chain Lightning" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="End the Festivities" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Reckless Impulse" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Voldaren Epicure" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Experimental Synthesizer" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Rally at the Hornburg" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Goblin Tomb Raider" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Clockwork Percussionist" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Galvanic Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Burning-Tree Emissary" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Flaring Pain" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Raze" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Smash to Smithereens" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Relic of Progenitus" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Cast into the Fire" Annotation="0"/>
+</Deck>

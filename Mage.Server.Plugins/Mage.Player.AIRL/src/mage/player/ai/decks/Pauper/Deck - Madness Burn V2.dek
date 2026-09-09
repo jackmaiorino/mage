@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Faithless Looting" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lava Dart" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Voldaren Epicure" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lightning Bolt" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Highway Robbery" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Sneaky Snacker" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Grab the Prize" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Kessig Flamebreather" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Guttersnipe" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Fiery Temper" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Fireblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="18" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Searing Blaze" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Cast into the Fire" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Smash to Smithereens" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Relic of Progenitus" Annotation="0"/>
+</Deck>

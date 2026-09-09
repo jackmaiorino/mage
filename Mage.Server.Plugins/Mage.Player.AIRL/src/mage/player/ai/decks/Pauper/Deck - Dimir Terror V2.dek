@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Snuff Out" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Mental Note" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Cast Down" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Deep Analysis" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Abandon Attachments" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Contaminated Aquifer" Annotation="0"/>
+  <Cards CatID="0" Quantity="10" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Gurmag Angler" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Sneaky Snacker" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Dispel" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Murmuring Mystic" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Thought Scour" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Tolarian Terror" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Ice Tunnel" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Suffocating Fumes" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Unexpected Fangs" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Unexpected Fangs" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Arms of Hadar" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Steel Sabotage" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Annul" Annotation="0"/>
+</Deck>

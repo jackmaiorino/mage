@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Eviscerator's Insight" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Refurbished Familiar" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Toxin Analysis" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Vault of Whispers" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Fanatical Offering" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Makeshift Munitions" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Slagwoods Bridge" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Drossforge Bridge" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Ichor Wellspring" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Writhing Chrysalis" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Twisted Landscape" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Nyxborn Hydra" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Cleansing Wildfire" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Cast Down" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Lembas" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Gixian Infiltrator" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Weather the Storm" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Duress" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Troublemaker Ouphe" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Breath Weapon" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Ancient Grudge" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Terminate" Annotation="0"/>
+</Deck>

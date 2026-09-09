@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Avenging Hunter" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Generous Ent" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Llanowar Elves" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Masked Vandal" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Nyxborn Hydra" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Priest of Titania" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Quirion Ranger" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Timberwatch Elf" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Fyndhorn Elves" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Elvish Mystic" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Sagu Wildling" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Wellwisher" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lead the Stampede" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Winding Way" Annotation="0"/>
+  <Cards CatID="0" Quantity="12" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Gingerbread Cabin" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Wellwisher" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Faerie Macabre" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Spinewoods Paladin" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Vitu-Ghazi Inspector" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Viridian Longbow" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Webweaver Changeling" Annotation="0"/>
+</Deck>

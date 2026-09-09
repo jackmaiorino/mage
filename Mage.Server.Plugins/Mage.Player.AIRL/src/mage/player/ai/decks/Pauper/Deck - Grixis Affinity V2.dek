@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Makeshift Munitions" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Refurbished Familiar" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Ichor Wellspring" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Silverbluff Bridge" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Mistvault Bridge" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Vault of Whispers" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Galvanic Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Great Furnace" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Blood Fountain" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Myr Enforcer" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Thoughtcast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Reckoner's Bargain" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Seat of the Synod" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Toxin Analysis" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Glint Hawk" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Drossforge Bridge" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Cryogen Relic" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Black Mage's Rod" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Extract a Confession" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Unexpected Fangs" Annotation="0"/>
+</Deck>

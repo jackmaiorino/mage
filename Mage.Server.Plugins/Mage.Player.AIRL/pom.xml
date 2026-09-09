@@ -59,6 +59,17 @@
     <build>
         <!-- XMage plugins often keep sources under src/ -->
         <sourceDirectory>src</sourceDirectory>
+        <!--
+            The default testSourceDirectory (src/test/java) would sit inside
+            sourceDirectory above and get swept into the main compile too
+            (sourceDirectory=src is scanned recursively for all *.java),
+            failing default-compile with "package org.junit does not
+            exist" since JUnit is a test-scope dependency. Point tests at a
+            sibling directory instead so main and test compilation stay
+            separate, matching this module's flat "package folders directly
+            under the source root" convention.
+        -->
+        <testSourceDirectory>test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -72,6 +83,21 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!--
+                DeterminizationSampler's deck paths (pauperDefaults(),
+                pauperRegistrationsV2()) are hardcoded relative to the repo
+                root (how the real server is always launched). Surefire's
+                default fork working directory is this module's own
+                basedir, so pin it back to the repo root or every deck-path
+                test silently loads zero cards.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <workingDirectory>${root.dir}</workingDirectory>
                 </configuration>
             </plugin>
             <!-- Enable exec:java for this module when invoked from root -->

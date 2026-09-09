@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Tolarian Terror" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Cryptic Serpent" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Murmuring Mystic" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Thought Scour" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Mental Note" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Dispel" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Force Spike" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Ponder" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Sleep of the Dead" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Deem Inferior" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Deep Analysis" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Artful Dodge" Annotation="0"/>
+  <Cards CatID="0" Quantity="16" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Gut Shot" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Annul" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="true" Name="Steel Sabotage" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Azure Fleet Admiral" Annotation="0"/>
+</Deck>
