@@ -175,6 +175,26 @@ public final class DeterminizationSampler {
         return loadArchetypes(paths);
     }
 
+    /**
+     * Every registered Pauper deck (historical nine plus revisioned
+     * registrations). Sampling for training keeps using pauperDefaults();
+     * this roster exists for the kernel pool manifest and sideboard policy.
+     */
+    public static DeterminizationSampler pauperRegistrationsV2() {
+        String base = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
+        Map<String, String> paths = new LinkedHashMap<>();
+        paths.put("Wildfire", base + "/Deck - Jund Wildfire.dek");
+        paths.put("Rally", base + "/Deck - Mono Red Rally.dek");
+        paths.put("Affinity", base + "/Deck - Grixis Affinity.dek");
+        paths.put("Elves", base + "/Deck - Elves.dek");
+        paths.put("SpyCombo", base + "/Deck - Spy Combo.dek");
+        paths.put("Burn", base + "/Deck - Mono-Red Burn.dek");
+        paths.put("Terror", base + "/Deck - Mono-Blue Terror.dek");
+        paths.put("CawGates", base + "/Deck - Caw-Gates.dek");
+        paths.put("Faeries", base + "/Deck - Mono-Blue Faeries.dek");
+        return loadArchetypes(paths);
+    }
+
     private static String archetypeNameFromDeckPath(Path deckPath) {
         String name = deckPath == null || deckPath.getFileName() == null
                 ? "Archetype"
