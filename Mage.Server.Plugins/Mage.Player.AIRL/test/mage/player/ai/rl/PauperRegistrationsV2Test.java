@@ -130,6 +130,11 @@ public class PauperRegistrationsV2Test {
         return entries.stream().mapToInt(DeckCardInfo::getAmount).sum();
     }
 
+    // Wave 2 (task-1-brief.md, 2026-09-10-pauper-meta-wave2): Urzatron is a
+    // new registration, not a revision of an existing archetype, so it gets
+    // its own path constant and test method rather than joining V2_FILES.
+    private static final String URZATRON_FILE = PAUPER_BASE + "/Deck - Urzatron.dek";
+
     @Test
     public void pauperRegistrationsV2HistoricalArchetypesHave60MainboardCards() {
         DeterminizationSampler sampler = DeterminizationSampler.pauperRegistrationsV2();
@@ -160,5 +165,14 @@ public class PauperRegistrationsV2Test {
             Assert.assertEquals(label + " (" + path + ") mainboard count", 60, mainboard);
             Assert.assertEquals(label + " (" + path + ") sideboard count", 15, sideboard);
         }
+    }
+
+    @Test
+    public void urzatronDekFileImportsSixtyMainboardFifteenSideboard() {
+        DeckCardLists lists = importDek(URZATRON_FILE);
+        int mainboard = totalAmount(lists.getCards());
+        int sideboard = totalAmount(lists.getSideboard());
+        Assert.assertEquals("Urzatron (" + URZATRON_FILE + ") mainboard count", 60, mainboard);
+        Assert.assertEquals("Urzatron (" + URZATRON_FILE + ") sideboard count", 15, sideboard);
     }
 }

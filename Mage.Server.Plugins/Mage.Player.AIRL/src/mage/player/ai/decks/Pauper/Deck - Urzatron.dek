@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Bonder's Ornament" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Barrels of Blasting Jelly" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="false" Name="Bojuka Bog" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Crop Rotation" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Boulderbranch Golem" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Bramble Wurm" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Conduit Pylons" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Expedition Map" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Urza's Mine" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="0" Quantity="3" Sideboard="false" Name="Generous Ent" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Malevolent Rumble" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Maelstrom Colossus" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Pinnacle Kill-Ship" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="false" Name="Unfathomable Truths" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Urza's Power Plant" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Urza's Tower" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="false" Name="Ancient Stirrings" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Breath Weapon" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="0" Quantity="4" Sideboard="true" Name="Relic of Progenitus" Annotation="0"/>
+  <Cards CatID="0" Quantity="1" Sideboard="true" Name="Rooftop Percher" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Tangle" Annotation="0"/>
+  <Cards CatID="0" Quantity="2" Sideboard="true" Name="Earth Rift" Annotation="0"/>
+</Deck>
