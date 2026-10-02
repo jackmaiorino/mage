@@ -106,7 +106,7 @@ public class FdnLifegainCreaturesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertPermanentCount(playerA, "Bind the Monster", 1);
-        assertAttachedTo(playerA, "Bind the Monster", "Slippery Bogle", true);
+        assertAttachedTo(playerB, "Bind the Monster", "Slippery Bogle", true);
         assertTapped("Slippery Bogle", true);
         assertLife(playerA, 19);
     }
