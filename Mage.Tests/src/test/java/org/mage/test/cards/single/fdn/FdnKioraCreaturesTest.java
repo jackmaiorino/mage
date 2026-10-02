@@ -110,7 +110,7 @@ public class FdnKioraCreaturesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Tormod's Crypt");
         attack(1, playerA, KIORA);
         activateAbility(1, PhaseStep.DECLARE_ATTACKERS, playerB,
-                "{T}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.", playerA);
+                "{T},", playerA); // The Crypt is player B's only activated permanent.
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
