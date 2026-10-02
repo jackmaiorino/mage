@@ -58,6 +58,7 @@ public class FdnKomaCreaturesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Treetop Snarespinner"); // 1/4
         attack(1, playerA, KOMA);
         block(1, playerB, "Treetop Snarespinner", KOMA);
+        setChoice(playerA, "X=4"); // Four to the blocker, four tramples through.
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
