@@ -78,7 +78,7 @@ public class FdnHomunculusCreaturesTest extends CardTestPlayerBase {
             if (!HORDE.equals(permanent.getName())) {
                 continue;
             }
-            int expected = permanent instanceof PermanentToken ? 2 : 5;
+            int expected = permanent instanceof PermanentToken ? 2 : 3;
             Assert.assertEquals(expected, permanent.getPower().getValue());
             Assert.assertEquals(expected, permanent.getToughness().getValue());
             Assert.assertEquals(4, permanent.getManaValue());
