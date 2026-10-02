@@ -67,7 +67,7 @@ public class FdnDrawCreaturesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertLife(playerB, 19);
-        assertTapped(playerA, "Strix Lookout", true);
+        assertTapped("Strix Lookout", true);
         assertHandCount(playerA, 1);
         assertGraveyardCount(playerA, "Forest", 1);
     }
@@ -88,7 +88,7 @@ public class FdnDrawCreaturesTest extends CardTestPlayerBase {
         execute();
         assertPermanentCount(playerA, "Faerie Token", 1);
         assertHandCount(playerA, 2);
-        assertTapped(playerA, "Strix Lookout", true);
+        assertTapped("Strix Lookout", true);
         assertGraveyardCount(playerA, "Forest", 1);
     }
 }
