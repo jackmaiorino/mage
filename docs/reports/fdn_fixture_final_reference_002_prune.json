@@ -1,0 +1,124 @@
+{
+  "cold_source": "E:\\mtg-fdn-fixtures\\fdn-fixture-final-reference-002",
+  "independent_verified_mirror": "C:\\Users\\Jack\\fdn-fixture-final-reference-002-sealed",
+  "removed_bytes": 721775,
+  "removed_files": [
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\closure.json",
+      "bytes": 5365,
+      "sha256": "42d77ef1aac5871a4585388d76f0f567f6ea5707e9a94ac5ff088d73719bea93"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\hosted-job.log",
+      "bytes": 158701,
+      "sha256": "8806ec7990fbb3989339c621c8d5a964da2a576d2bbe234898bbcf8926ccbeb3"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\manifest.json",
+      "bytes": 3396,
+      "sha256": "fe93b5738098100da882a4d2d6d8d4c83407dfa860fbb14e037a63bb7b64f15d"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnCelestialArmorTest.xml",
+      "bytes": 29228,
+      "sha256": "97069f309b76e9284362220a3c57b7f53905528865372ded00f5f75db1079b14"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnCombatAssignmentTest.xml",
+      "bytes": 28377,
+      "sha256": "3bcf582179acb4a66790e8703206ab512888726665eed2d33a3ceb709ef430cc"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnCounterCreaturesTest.xml",
+      "bytes": 28405,
+      "sha256": "62d145a56c02a9d03615a4fb9d99493039dbec44507cc89565bb7a9efd5200cc"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnDrawCreaturesTest.xml",
+      "bytes": 28432,
+      "sha256": "1cd7559754964a8865154317c9770e8bc2499201adfd833d429844a0638847d1"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnHomunculusCreaturesTest.xml",
+      "bytes": 28454,
+      "sha256": "08dbcb46bde1336da1e0565eac1482de54978ba63dab38dcab9f84bc8e9fe861"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnKioraCreaturesTest.xml",
+      "bytes": 29030,
+      "sha256": "7264bfb77718ccc5c99d7833ff515cb7f0b6e535055c8bf67fd92d7afd8b4e46"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnKomaCreaturesTest.xml",
+      "bytes": 28969,
+      "sha256": "f194ce24f42bd8d12672fa605615b71cb1c89e75dce6565c16775e0f81925067"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnLifegainCreaturesTest.xml",
+      "bytes": 28585,
+      "sha256": "740030e294520960dd9293e41836d773f441a0bf985e5344a564ba060fb56b8c"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnLuminousRebukeTest.xml",
+      "bytes": 29219,
+      "sha256": "588e4ca80a7709292a3c1092a14d6899ebe4048970bb33c965d945a8637ada3f"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnProwlerCreaturesTest.xml",
+      "bytes": 29478,
+      "sha256": "f6f8ff0b6ffd87c324faf01f2502ebb48c2e6f92998315ddbf1ddbba4b80d89b"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnSylvanScavengingTest.xml",
+      "bytes": 29484,
+      "sha256": "b0f48fca759a27e7633916b66f11166f0e0e0423c5fa7cc3a0ddbd9cd27d981b"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnUnchartedVoyageTest.xml",
+      "bytes": 29340,
+      "sha256": "1a0c4188c4ce32c18330778c23735da38a57213dc265ff3c6378b95ce8e94815"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnWitnessProtectionTest.xml",
+      "bytes": 30104,
+      "sha256": "b2cbc40b6fcfc4793f9675bade5ef991dcd64a92b7757849d0f47d27db8750bc"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.combat.DamageDistributionTest.xml",
+      "bytes": 29764,
+      "sha256": "699654761f3fcd13719b8d027dccdfe2c1cd4af65801b00cb9e69c528619a9ef"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.combat.FirstStrikeTest.xml",
+      "bytes": 29434,
+      "sha256": "43ae45dafe20a2d22d6f8f5c76a6ed856c194cfc5e4ff3a98d3ff95c942c3235"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.mulligan.LondonMulliganTest.xml",
+      "bytes": 28612,
+      "sha256": "8404552eb3a02d8aa0032ed0b558fecf0c739d74c1b3fe3fbae82a0b069520af"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\reference-results\\manifest.json",
+      "bytes": 4217,
+      "sha256": "e66b097cdd4e0b7ccb6c2d323c079b72b03f909915ffca1ecad43c5c95160caf"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\reference-results\\maven.log",
+      "bytes": 80758,
+      "sha256": "e2c1623fcbca079b7131dbba615110c4b02ff8af734b146d2177740b7581ceea"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\reference-results\\outputs.json",
+      "bytes": 463,
+      "sha256": "196afa46dec1d2e742c60b91db95cb6c6a232b85703538f2834869baa8570977"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-fixture-final-reference-002\\results\\reference-results\\summary.json",
+      "bytes": 3960,
+      "sha256": "19704519b99d2113804fe613ba26e3ea323ae52700d292f908560b7573b9c8a8"
+    }
+  ],
+  "restoration_recipe": "Copy sealed files from the retained E source or independent C mirror; verify seal.json SHA-256s.",
+  "closed_at": "2026-10-02T18:53:22.382709+00:00"
+}
