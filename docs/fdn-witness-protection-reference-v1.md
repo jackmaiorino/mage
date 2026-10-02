@@ -3,7 +3,7 @@
 Sixteen strict XMage reference cases in `FdnWitnessProtectionTest` cover the
 kernel batch's derived characteristics, card-type removal, preserved Legendary,
 older/later Armor and Flying grants, retained counters, removed lord/static
-abilities, Guarded Heir death LKI with restoration control, Aura/host removal,
+abilities, Clockwork Percussionist death LKI with restoration control, Aura/host removal,
 removed mana/draw abilities and removed ward.
 
 Source authority: `Mage.Sets/src/mage/cards/w/WitnessProtection.java`.

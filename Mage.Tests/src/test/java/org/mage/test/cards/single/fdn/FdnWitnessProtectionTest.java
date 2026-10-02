@@ -19,7 +19,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class FdnWitnessProtectionTest extends CardTestPlayerBase {
     private static final String WITNESS = "Witness Protection";
     private static final String BUSINESS = "Legitimate Businessperson";
-    private static final String SPINNER = "Snarespinner";
+    private static final String SPINNER = "Treetop Snarespinner";
     private static final String ARMOR = "Celestial Armor";
     private static final String DWYNEN = "Dwynen, Gilt-Leaf Daen";
 
@@ -146,30 +146,32 @@ public class FdnWitnessProtectionTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void transformedHeirDoesNotCreateAKnightWhenItDies() {
-        setup("Guarded Heir");
+    public void transformedPercussionistDoesNotImpulseDrawWhenItDies() {
+        setup("Clockwork Percussionist");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, WITNESS, "Guarded Heir", true);
+        addCard(Zone.LIBRARY, playerA, "Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, WITNESS, "Clockwork Percussionist", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", BUSINESS);
         finish();
-        assertGraveyardCount(playerA, "Guarded Heir", 1);
+        assertGraveyardCount(playerA, "Clockwork Percussionist", 1);
         assertGraveyardCount(playerA, WITNESS, 1);
-        assertPermanentCount(playerA, "Knight Token", 0);
+        assertExileCount(playerA, 0);
     }
 
     @Test
-    public void removingWitnessBeforeHeirDiesRestoresItsDeathTrigger() {
-        setup("Guarded Heir");
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+    public void removingWitnessBeforePercussionistDiesRestoresItsDeathTrigger() {
+        setup("Clockwork Percussionist");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.HAND, playerA, "Disenchant");
-        addCard(Zone.HAND, playerA, "Doom Blade");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, WITNESS, "Guarded Heir", true);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.LIBRARY, playerA, "Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, WITNESS, "Clockwork Percussionist", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Disenchant", WITNESS, true);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Doom Blade", "Guarded Heir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Clockwork Percussionist");
         finish();
-        assertGraveyardCount(playerA, "Guarded Heir", 1);
-        assertPermanentCount(playerA, "Knight Token", 1);
+        assertGraveyardCount(playerA, "Clockwork Percussionist", 1);
+        assertExileCount(playerA, 1);
     }
 
     @Test
@@ -179,7 +181,7 @@ public class FdnWitnessProtectionTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, WITNESS, SPINNER, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Disenchant", WITNESS);
         finish();
-        assertPowerToughness(playerA, SPINNER, 1, 3);
+        assertPowerToughness(playerA, SPINNER, 1, 4);
         assertAbility(playerA, SPINNER, ReachAbility.getInstance(), true);
         assertPermanentCount(playerA, BUSINESS, 0);
     }
