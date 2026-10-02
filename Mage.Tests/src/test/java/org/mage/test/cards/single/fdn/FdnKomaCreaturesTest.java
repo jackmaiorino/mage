@@ -3,6 +3,7 @@ package org.mage.test.cards.single.fdn;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
@@ -41,9 +42,10 @@ public class FdnKomaCreaturesTest extends CardTestPlayerBase {
     @Test
     public void fullyBlockedCombatDoesNotCreateCoils() {
         addCard(Zone.BATTLEFIELD, playerA, KOMA);
-        addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon"); // 9/9
+        addCard(Zone.BATTLEFIELD, playerB, "Tolarian Terror");
+        addCounters(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Tolarian Terror", CounterType.P1P1, 4); // 9/9
         attack(1, playerA, KOMA);
-        block(1, playerB, "Ancient Brontodon", KOMA);
+        block(1, playerB, "Tolarian Terror", KOMA);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
