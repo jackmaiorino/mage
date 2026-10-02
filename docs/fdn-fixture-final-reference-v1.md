@@ -2,7 +2,7 @@
 
 The fixture milestone needs executed combat references. The earlier kernel
 combat report inspected `DamageDistributionTest` and `FirstStrikeTest` but
-did not execute them. Extend the existing focused hosted workflow to run those
+did not execute them. Extended the existing focused hosted workflow to run those
 classes, all twelve earlier FDN card comparison classes, London mulligans and
 four new strict Foundations allocation positions. Main Java sources are unchanged.
 
@@ -30,8 +30,22 @@ Kindercatch. The other three new allocation cases, 24 existing combat cases,
 seven London cases and all earlier FDN card classes passed. Retain the failed
 run's XML and log; verify the corrected source before claiming the aggregate.
 
-Corrected execution is pending. Use the inherited Java23.0.2 / Maven3.9.9 hosted workflow,
-one Maven thread, two JVM processors, the8GiB storage cap and60GiB reserve.
-Preserve both local PCs' actual reservations. Require every selected class's XML
-report with nonzero tests and zero failures/errors/skips; retain source/output
-hashes and the exact completed counts before claiming success.
+Corrected run 37049882555 at `5cc4decd8ffe16c317e1c2540d18e064c19648a4`
+passed all 146 cases in all 16 selected classes, with zero failures, errors or
+skips. This includes all four new allocation positions, 24 existing combat
+cases, seven London cases and 111 earlier FDN card cases. Compiled merge commit:
+`07cf417941e148f18b3310e2e178465193f0b657`. Independently checked all 23 source
+hashes against Git blobs, every output digest, and each XML report's counts.
+
+The inherited Temurin23.0.2 / Maven3.9.9 hosted workflow used one Maven thread
+and two JVM processors. Actual build/dependency footprint was 691,086,878 bytes,
+below the 8GiB cap; free storage was 90,055,323,648 bytes, above the 60GiB reserve.
+Both local PCs' reservations were preserved.
+
+Passing evidence is sealed at `E:/mtg-fdn-fixtures/fdn-fixture-final-reference-002`,
+with an independently verified mirror at
+`C:/Users/Jack/fdn-fixture-final-reference-002-sealed`. The failed first attempt
+is retained under the corresponding `001` paths. Scratch was deleted only
+after verification, with committed `docs/reports/fdn_fixture_final_reference_001_prune.json`
+and `fdn_fixture_final_reference_002_prune.json` receipts. These comparisons
+verify the targeted scenarios; complete kernel regression/CI remains separate.
