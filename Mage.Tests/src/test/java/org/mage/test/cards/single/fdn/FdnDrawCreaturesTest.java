@@ -30,6 +30,7 @@ public class FdnDrawCreaturesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mischievous Mystic", 2);
         addCard(Zone.HAND, playerA, "Divination");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination", true);
+        setChoice(playerA, "Whenever you draw your second card each turn, create a 1/1 blue Faerie creature token with flying.");
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
