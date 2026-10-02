@@ -101,7 +101,7 @@ public class FdnLifegainCreaturesTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sun-Blessed Healer");
         setChoice(playerA, true);
         addTarget(playerA, "Bind the Monster");
-        addTarget(playerA, "Slippery Bogle");
+        setChoice(playerA, "Slippery Bogle");
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
