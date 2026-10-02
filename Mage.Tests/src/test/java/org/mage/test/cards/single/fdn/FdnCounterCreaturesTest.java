@@ -73,7 +73,7 @@ public class FdnCounterCreaturesTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Mossborn Hydra");
         addCard(Zone.HAND, playerA, "Forest", 2);
         addCard(Zone.HAND, playerB, "Forest");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mossborn Hydra");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mossborn Hydra", true);
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         playLand(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Forest");
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
