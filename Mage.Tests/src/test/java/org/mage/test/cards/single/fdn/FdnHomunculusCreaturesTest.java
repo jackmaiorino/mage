@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class FdnHomunculusCreaturesTest extends CardTestPlayerBase {
 
     private static final String HORDE = "Homunculus Horde";
-    private static final String ORDER_TRIGGER = "Whenever you draw your second card each turn, create a token that's a copy of this creature.";
+    private static final String ORDER_TRIGGER = "Whenever you draw your second card each turn, create a token that's a copy of {this}.";
 
     @Test
     public void fourDrawsCreateOnlyOneCopy() {
@@ -64,9 +64,10 @@ public class FdnHomunculusCreaturesTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
         addCard(Zone.BATTLEFIELD, playerA, HORDE);
+        addCard(Zone.BATTLEFIELD, playerB, "Treetop Snarespinner");
         addCard(Zone.HAND, playerA, "Felling Blow");
         addCard(Zone.HAND, playerA, "Divination");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felling Blow", HORDE, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Felling Blow", HORDE + "^Treetop Snarespinner", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Divination", true);
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
