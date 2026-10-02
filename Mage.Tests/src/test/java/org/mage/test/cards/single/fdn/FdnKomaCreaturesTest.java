@@ -53,6 +53,20 @@ public class FdnKomaCreaturesTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void trampleDamageToPlayerCreatesFourCoils() {
+        addCard(Zone.BATTLEFIELD, playerA, KOMA);
+        addCard(Zone.BATTLEFIELD, playerB, "Treetop Snarespinner"); // 1/4
+        attack(1, playerA, KOMA);
+        block(1, playerB, "Treetop Snarespinner", KOMA);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertLife(playerB, 16);
+        assertGraveyardCount(playerB, "Treetop Snarespinner", 1);
+        assertPermanentCount(playerA, COIL, 4);
+    }
+
+    @Test
     public void noncombatDamageDoesNotCreateCoils() {
         addCard(Zone.BATTLEFIELD, playerA, KOMA);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
@@ -83,6 +97,24 @@ public class FdnKomaCreaturesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, KOMA, 0);
         assertGraveyardCount(playerB, "Counterspell", 1);
         assertPermanentCount(playerA, COIL, 0);
+    }
+
+    @Test
+    public void decliningForceSpikePaymentStillCannotCounterKoma() {
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, KOMA);
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.HAND, playerB, "Force Spike");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, KOMA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Force Spike", KOMA);
+        setChoice(playerA, false); // The payable choice remains available.
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertPermanentCount(playerA, KOMA, 1);
+        assertGraveyardCount(playerA, KOMA, 0);
+        assertGraveyardCount(playerB, "Force Spike", 1);
     }
 
     @Test
