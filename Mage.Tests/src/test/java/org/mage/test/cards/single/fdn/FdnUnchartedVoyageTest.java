@@ -138,7 +138,7 @@ public class FdnUnchartedVoyageTest extends CardTestPlayerBase {
         setup(4);
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         addCard(Zone.HAND, playerB, "Raise the Alarm");
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Raise the Alarm", true);
+        castSpell(1, PhaseStep.UPKEEP, playerB, "Raise the Alarm", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, VOYAGE, "Soldier Token");
         setChoice(playerB, false);
         addTarget(playerA, TestPlayer.TARGET_SKIP);
@@ -151,8 +151,11 @@ public class FdnUnchartedVoyageTest extends CardTestPlayerBase {
 
     @Test
     public void emptyCasterLibrarySkipsSurveilWithoutDrawing() {
-        setup(4);
+        skipInitShuffling();
         removeAllCardsFromLibrary(playerA);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, VOYAGE);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 2);
         addCard(Zone.BATTLEFIELD, playerB, ELF);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, VOYAGE, ELF);
         setChoice(playerB, false);
