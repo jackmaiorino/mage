@@ -63,6 +63,7 @@ public class FdnKomaCreaturesTest extends CardTestPlayerBase {
         execute();
         assertLife(playerB, 16);
         assertGraveyardCount(playerB, "Treetop Snarespinner", 1);
+        assertGraveyardCount(playerA, KOMA, 1); // Simultaneous deathtouch damage.
         assertPermanentCount(playerA, COIL, 4);
     }
 
