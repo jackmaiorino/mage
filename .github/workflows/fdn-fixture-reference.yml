@@ -6,8 +6,11 @@ on:
       - '.github/workflows/fdn-fixture-reference.yml'
       - 'Mage.Tests/src/test/java/org/mage/test/cards/single/fdn/**'
       - 'Mage.Tests/src/test/java/org/mage/test/mulligan/**'
+      - 'Mage.Tests/src/test/java/org/mage/test/combat/DamageDistributionTest.java'
+      - 'Mage.Tests/src/test/java/org/mage/test/combat/FirstStrikeTest.java'
       - 'Mage.Sets/src/mage/cards/w/WitnessProtection.java'
       - 'Mage/src/main/java/mage/game/mulligan/**'
+      - 'Mage/src/main/java/mage/game/combat/**'
       - '**/pom.xml'
 
 permissions:
@@ -59,10 +62,13 @@ jobs:
           python3 - <<'PY'
           import hashlib, json, pathlib, shutil, subprocess
           paths = [
-              'Mage.Tests/src/test/java/org/mage/test/cards/single/fdn/FdnWitnessProtectionTest.java',
               'Mage.Tests/src/test/java/org/mage/test/mulligan/LondonMulliganTest.java',
+              'Mage.Tests/src/test/java/org/mage/test/combat/DamageDistributionTest.java',
+              'Mage.Tests/src/test/java/org/mage/test/combat/FirstStrikeTest.java',
               'Mage.Sets/src/mage/cards/w/WitnessProtection.java',
+              'Mage/src/main/java/mage/game/combat/CombatGroup.java',
           ]
+          paths.extend(str(p) for p in sorted(pathlib.Path('Mage.Tests/src/test/java/org/mage/test/cards/single/fdn').glob('Fdn*Test.java')))
           free = shutil.disk_usage('.').free
           manifest = {
               'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
@@ -77,12 +83,12 @@ jobs:
           if free < manifest['reserve_bytes'] + manifest['projected_bytes']:
               raise SystemExit('Insufficient storage after reclaiming unused hosted SDKs')
           PY
-      - name: Run Witness Protection and London reference cases
+      - name: Run FDN fixture and combat reference cases
         shell: bash
         run: |
           set -euo pipefail
           mvn -B -ntp -T 1 -pl Mage.Tests -am \
-            -Dtest=FdnWitnessProtectionTest,LondonMulliganTest \
+            '-Dtest=Fdn*Test,LondonMulliganTest,DamageDistributionTest,FirstStrikeTest' \
             -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false \
             -Dxmage.dataCollectors.printGameLogs=false \
             '-DargLine=-Xmx3g -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8' \
@@ -96,10 +102,16 @@ jobs:
           results = pathlib.Path('reference-results')
           results.mkdir(exist_ok=True)
           summaries = []
-          for name, minimum in [
-              ('org.mage.test.cards.single.fdn.FdnWitnessProtectionTest', 16),
-              ('org.mage.test.mulligan.LondonMulliganTest', 3),
-          ]:
+          selected = [('org.mage.test.cards.single.fdn.' + p.stem, 1)
+                      for p in sorted(pathlib.Path('Mage.Tests/src/test/java/org/mage/test/cards/single/fdn').glob('Fdn*Test.java'))]
+          selected += [('org.mage.test.mulligan.LondonMulliganTest', 7),
+                       ('org.mage.test.combat.DamageDistributionTest', 8),
+                       ('org.mage.test.combat.FirstStrikeTest', 16)]
+          assert len(selected) == 16, 'Every fixture/reference class must be selected'
+          selected = [(name, 4 if name.endswith('.FdnCombatAssignmentTest')
+                       else 16 if name.endswith('.FdnWitnessProtectionTest')
+                       else minimum) for name, minimum in selected]
+          for name, minimum in selected:
               path = pathlib.Path('Mage.Tests/target/surefire-reports') / ('TEST-' + name + '.xml')
               if not path.is_file():
                   summaries.append({'name': name, 'missing_report': True})
@@ -122,7 +134,7 @@ jobs:
           for row in summaries:
               print(row)
           if not all(row.get('passed', False) for row in summaries):
-              raise SystemExit('Both selected reference suites must pass without skipped cases')
+              raise SystemExit('Every selected reference suite must pass without skipped cases')
           if footprint['total_bytes'] > 8 * 1024**3 or footprint['free_bytes'] < 60 * 1024**3:
               raise SystemExit('Reference build exceeded its declared storage envelope')
           PY
@@ -135,5 +147,7 @@ jobs:
           retention-days: 30
           path: |
             reference-results/
-            Mage.Tests/target/surefire-reports/TEST-org.mage.test.cards.single.fdn.FdnWitnessProtectionTest.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.cards.single.fdn.Fdn*Test.xml
             Mage.Tests/target/surefire-reports/TEST-org.mage.test.mulligan.LondonMulliganTest.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.combat.DamageDistributionTest.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.combat.FirstStrikeTest.xml
