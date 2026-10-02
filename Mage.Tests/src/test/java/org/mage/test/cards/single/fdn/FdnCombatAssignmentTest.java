@@ -27,14 +27,14 @@ public class FdnCombatAssignmentTest extends CardTestPlayerBase {
 
     @Test
     public void nontramplerCanAssignLessThanLethalToFirstBlocker() {
-        gangBlock("Vorstclaw"); // 6/6 without trample
+        gangBlock("Kindercatch"); // 6/6 without trample
         setChoiceAmount(playerA, 2, 4);
         finish();
 
         assertDamageReceived(playerB, FIRST, 2);
         assertPermanentCount(playerB, FIRST, 1);
         assertGraveyardCount(playerB, SECOND, 1);
-        assertGraveyardCount(playerA, "Vorstclaw", 1);
+        assertGraveyardCount(playerA, "Kindercatch", 1);
         assertLife(playerB, 20);
     }
 

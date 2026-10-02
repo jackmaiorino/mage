@@ -22,7 +22,15 @@ comes from [Wizards' release notes](https://magic.wizards.com/en/news/feature/fo
 arbitrary blocker allocation, lethal to every blocker before trample reaches a
 player, and one damage per blocker with deathtouch.
 
-Execution is pending. Use the inherited Java23.0.2 / Maven3.9.9 hosted workflow,
+Run 37048866770 at 2d71bf29ecc executed all 146 cases across the 16 classes:
+145 passed, one failed, zero errors/skips. The failure was the new nontrample
+fixture: Vorstclaw is printed 7/7, so assigning 2/4 fails the requirement to
+assign all seven damage. Replace it with the source-verified vanilla 6/6
+Kindercatch. The other three new allocation cases, 24 existing combat cases,
+seven London cases and all earlier FDN card classes passed. Retain the failed
+run's XML and log; verify the corrected source before claiming the aggregate.
+
+Corrected execution is pending. Use the inherited Java23.0.2 / Maven3.9.9 hosted workflow,
 one Maven thread, two JVM processors, the8GiB storage cap and60GiB reserve.
 Preserve both local PCs' actual reservations. Require every selected class's XML
 report with nonzero tests and zero failures/errors/skips; retain source/output

@@ -66,6 +66,11 @@ jobs:
               'Mage.Tests/src/test/java/org/mage/test/combat/DamageDistributionTest.java',
               'Mage.Tests/src/test/java/org/mage/test/combat/FirstStrikeTest.java',
               'Mage.Sets/src/mage/cards/w/WitnessProtection.java',
+              'Mage.Sets/src/mage/cards/k/Kindercatch.java',
+              'Mage.Sets/src/mage/cards/r/RumblingBaloth.java',
+              'Mage.Sets/src/mage/cards/m/MyrEnforcer.java',
+              'Mage.Sets/src/mage/cards/c/ColossalDreadmaw.java',
+              'Mage.Sets/src/mage/cards/b/BowOfNylea.java',
               'Mage/src/main/java/mage/game/combat/CombatGroup.java',
           ]
           paths.extend(str(p) for p in sorted(pathlib.Path('Mage.Tests/src/test/java/org/mage/test/cards/single/fdn').glob('Fdn*Test.java')))
