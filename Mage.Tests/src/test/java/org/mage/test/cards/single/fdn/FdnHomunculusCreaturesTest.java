@@ -4,6 +4,7 @@ import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -76,13 +77,13 @@ public class FdnHomunculusCreaturesTest extends CardTestPlayerBase {
             if (!HORDE.equals(permanent.getName())) {
                 continue;
             }
-            int expected = permanent.isToken() ? 2 : 5;
+            int expected = permanent instanceof PermanentToken ? 2 : 5;
             Assert.assertEquals(expected, permanent.getPower().getValue());
             Assert.assertEquals(expected, permanent.getToughness().getValue());
             Assert.assertEquals(4, permanent.getManaValue());
             Assert.assertTrue(permanent.getColor(currentGame).isBlue());
             Assert.assertTrue(permanent.hasSubtype(SubType.HOMUNCULUS, currentGame));
-            if (permanent.isToken()) {
+            if (permanent instanceof PermanentToken) {
                 copies++;
             }
         }
