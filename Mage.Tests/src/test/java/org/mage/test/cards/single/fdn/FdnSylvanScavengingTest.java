@@ -122,10 +122,10 @@ public class FdnSylvanScavengingTest extends CardTestPlayerBase {
         setup();
         addCard(Zone.BATTLEFIELD, playerA, ELF);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Zone.HAND, playerA, "Snap");
+        addCard(Zone.HAND, playerA, "Unsummon");
         setModeChoice(playerA, "1");
         addTarget(playerA, ELF);
-        castSpell(1, PhaseStep.END_TURN, playerA, "Snap", ELF);
+        castSpell(1, PhaseStep.END_TURN, playerA, "Unsummon", ELF);
         finish();
         assertHandCount(playerA, ELF, 1);
         assertPermanentCount(playerA, ELF, 0);
@@ -138,6 +138,7 @@ public class FdnSylvanScavengingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Good-Fortune Unicorn");
         addCard(Zone.BATTLEFIELD, playerA, "Dazzling Angel");
         setModeChoice(playerA, "2");
+        setChoice(playerA, "put a +1/+1 counter on that creature");
         finish();
         assertPermanentCount(playerA, RACCOON, 1);
         assertCounterCount(RACCOON, CounterType.P1P1, 1);
