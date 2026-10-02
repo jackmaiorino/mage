@@ -138,7 +138,7 @@ public class FdnSylvanScavengingTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Good-Fortune Unicorn");
         addCard(Zone.BATTLEFIELD, playerA, "Dazzling Angel");
         setModeChoice(playerA, "2");
-        setChoice(playerA, "put a +1/+1 counter on that creature");
+        setChoice(playerA, "Whenever another creature you control enters, put a +1/+1 counter on that creature.");
         finish();
         assertPermanentCount(playerA, RACCOON, 1);
         assertCounterCount(RACCOON, CounterType.P1P1, 1);
