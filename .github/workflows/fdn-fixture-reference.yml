@@ -1,0 +1,158 @@
+name: FDN fixture reference tests
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fdn-fixture-reference.yml'
+      - 'Mage.Tests/src/test/java/org/mage/test/cards/single/fdn/**'
+      - 'Mage.Tests/src/test/java/org/mage/test/mulligan/**'
+      - 'Mage.Tests/src/test/java/org/mage/test/combat/DamageDistributionTest.java'
+      - 'Mage.Tests/src/test/java/org/mage/test/combat/FirstStrikeTest.java'
+      - 'Mage.Sets/src/mage/cards/w/WitnessProtection.java'
+      - 'Mage/src/main/java/mage/game/mulligan/**'
+      - 'Mage/src/main/java/mage/game/combat/**'
+      - '**/pom.xml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fdn-reference-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      MAVEN_OPTS: '-Xmx3g -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8'
+    steps:
+      - name: Check out reference sources
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Set up pinned Java
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '23.0.2'
+      - name: Install pinned Maven
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/apache-maven-3.9.9-bin.tar.gz"
+          curl --fail --location --retry 3 \
+            https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9/apache-maven-3.9.9-bin.tar.gz \
+            --output "$archive"
+          printf '%s  %s\n' a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b "$archive" | sha512sum --check
+          tar -xzf "$archive" -C "$RUNNER_TEMP"
+          printf '%s\n' "$RUNNER_TEMP/apache-maven-3.9.9/bin" >> "$GITHUB_PATH"
+      - name: Record source and storage preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reference-results
+          # This runner is disposable. Reclaim unused preinstalled SDKs only
+          # when needed to preserve the project's 60 GiB storage reserve.
+          python3 - <<'PY'
+          import pathlib, shutil, subprocess
+          if shutil.disk_usage('.').free < 64 * 1024**3:
+              for sdk in ['/usr/local/lib/android', '/usr/share/dotnet', '/opt/ghc']:
+                  if pathlib.Path(sdk).exists():
+                      subprocess.run(['sudo', 'rm', '-rf', '--', sdk], check=True)
+          PY
+          python3 - <<'PY'
+          import hashlib, json, pathlib, shutil, subprocess
+          paths = [
+              'Mage.Tests/src/test/java/org/mage/test/mulligan/LondonMulliganTest.java',
+              'Mage.Tests/src/test/java/org/mage/test/combat/DamageDistributionTest.java',
+              'Mage.Tests/src/test/java/org/mage/test/combat/FirstStrikeTest.java',
+              'Mage.Sets/src/mage/cards/w/WitnessProtection.java',
+              'Mage.Sets/src/mage/cards/k/Kindercatch.java',
+              'Mage.Sets/src/mage/cards/r/RumblingBaloth.java',
+              'Mage.Sets/src/mage/cards/m/MyrEnforcer.java',
+              'Mage.Sets/src/mage/cards/c/ColossalDreadmaw.java',
+              'Mage.Sets/src/mage/cards/b/BowOfNylea.java',
+              'Mage/src/main/java/mage/game/combat/CombatGroup.java',
+          ]
+          paths.extend(str(p) for p in sorted(pathlib.Path('Mage.Tests/src/test/java/org/mage/test/cards/single/fdn').glob('Fdn*Test.java')))
+          free = shutil.disk_usage('.').free
+          manifest = {
+              'git_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'java': subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT, text=True).strip(),
+              'maven': subprocess.check_output(['mvn', '-version'], text=True).strip(),
+              'linker': None, 'gpu_ordinal': None, 'seeds': [],
+              'input_sha256s': {p: hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in paths},
+              'projected_bytes': 4 * 1024**3, 'cap_bytes': 8 * 1024**3,
+              'reserve_bytes': 60 * 1024**3, 'preflight_free_bytes': free,
+          }
+          pathlib.Path('reference-results/manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+          if free < manifest['reserve_bytes'] + manifest['projected_bytes']:
+              raise SystemExit('Insufficient storage after reclaiming unused hosted SDKs')
+          PY
+      - name: Run FDN fixture and combat reference cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -T 1 -pl Mage.Tests -am \
+            '-Dtest=Fdn*Test,LondonMulliganTest,DamageDistributionTest,FirstStrikeTest' \
+            -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false \
+            -Dxmage.dataCollectors.printGameLogs=false \
+            '-DargLine=-Xmx3g -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8' \
+            test 2>&1 | tee reference-results/maven.log
+      - name: Verify selected suites and record outputs
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, pathlib, shutil, xml.etree.ElementTree as ET
+          results = pathlib.Path('reference-results')
+          results.mkdir(exist_ok=True)
+          summaries = []
+          selected = [('org.mage.test.cards.single.fdn.' + p.stem, 1)
+                      for p in sorted(pathlib.Path('Mage.Tests/src/test/java/org/mage/test/cards/single/fdn').glob('Fdn*Test.java'))]
+          selected += [('org.mage.test.mulligan.LondonMulliganTest', 7),
+                       ('org.mage.test.combat.DamageDistributionTest', 8),
+                       ('org.mage.test.combat.FirstStrikeTest', 16)]
+          assert len(selected) == 16, 'Every fixture/reference class must be selected'
+          selected = [(name, 4 if name.endswith('.FdnCombatAssignmentTest')
+                       else 16 if name.endswith('.FdnWitnessProtectionTest')
+                       else minimum) for name, minimum in selected]
+          for name, minimum in selected:
+              path = pathlib.Path('Mage.Tests/target/surefire-reports') / ('TEST-' + name + '.xml')
+              if not path.is_file():
+                  summaries.append({'name': name, 'missing_report': True})
+                  continue
+              root = ET.parse(path).getroot()
+              counts = {key: int(root.get(key, '0')) for key in ['tests', 'failures', 'errors', 'skipped']}
+              summaries.append({'name': name, **counts, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                                'passed': counts['tests'] >= minimum and not any(counts[k] for k in ['failures', 'errors', 'skipped'])})
+          (results / 'summary.json').write_text(json.dumps(summaries, indent=2) + '\n')
+          build_bytes = sum(p.stat().st_size for target in pathlib.Path('.').rglob('target')
+                            if target.is_dir() for p in target.rglob('*') if p.is_file())
+          repository = pathlib.Path.home() / '.m2/repository'
+          dependency_bytes = sum(p.stat().st_size for p in repository.rglob('*') if p.is_file())
+          output_hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest()
+                           for p in results.iterdir() if p.is_file()}
+          footprint = {'build_bytes': build_bytes, 'dependency_bytes': dependency_bytes,
+                       'total_bytes': build_bytes + dependency_bytes,
+                       'free_bytes': shutil.disk_usage('.').free, 'output_sha256s': output_hashes}
+          (results / 'outputs.json').write_text(json.dumps(footprint, indent=2) + '\n')
+          for row in summaries:
+              print(row)
+          if not all(row.get('passed', False) for row in summaries):
+              raise SystemExit('Every selected reference suite must pass without skipped cases')
+          if footprint['total_bytes'] > 8 * 1024**3 or footprint['free_bytes'] < 60 * 1024**3:
+              raise SystemExit('Reference build exceeded its declared storage envelope')
+          PY
+      - name: Upload reference evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: fdn-reference-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            reference-results/
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.cards.single.fdn.Fdn*Test.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.mulligan.LondonMulliganTest.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.combat.DamageDistributionTest.xml
+            Mage.Tests/target/surefire-reports/TEST-org.mage.test.combat.FirstStrikeTest.xml
