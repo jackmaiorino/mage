@@ -1,0 +1,59 @@
+{
+  "cold_source": "E:\\mtg-fdn-fixtures\\fdn-mage-witness-hosted-001",
+  "independent_verified_mirror": "C:\\Users\\Jack\\fdn-mage-witness-hosted-001-sealed",
+  "removed_bytes": 275753,
+  "removed_files": [
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\closure.json",
+      "bytes": 1528,
+      "sha256": "faf8e55d623461a41aa46e9a34480c66f98e5c1b7e2a6d8494db9f813c0d78bd"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\hosted-job.log",
+      "bytes": 139907,
+      "sha256": "a397ac441a67a397b4d2badca6ad59831d1ce83dd3957777a463cee9dc38fdcf"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\launch.json",
+      "bytes": 250,
+      "sha256": "667ad59c1a89880e9bf563283c2fbc5212f946e8abd85b2428b0ff64fc784ab4"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\manifest.json",
+      "bytes": 1218,
+      "sha256": "907d1e40e384151c08d1e1ab7df9d3b0ddb8040d25c739ec1f8047ed44090741"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.cards.single.fdn.FdnWitnessProtectionTest.xml",
+      "bytes": 30655,
+      "sha256": "5d56400d690b60b5886ce8242d6c701d56350c457d38f54ed10392c2b5a57d89"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\Mage.Tests\\target\\surefire-reports\\TEST-org.mage.test.mulligan.LondonMulliganTest.xml",
+      "bytes": 28590,
+      "sha256": "e938083f1730a3e7a85c5d4aae4c9be0a27a4cfa59d4db92af35c113092748e7"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\reference-results\\manifest.json",
+      "bytes": 1285,
+      "sha256": "19a2e59a76b1f4aa210c705defc5ee2dc31a3ea11c7ddccdd4848d643c9694e8"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\reference-results\\maven.log",
+      "bytes": 71365,
+      "sha256": "d0bd74e81d9f55159f2534e242dc85e3882fb464d49c96fdd7ce9febf512666d"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\reference-results\\outputs.json",
+      "bytes": 463,
+      "sha256": "1fe7fc45c2979b0c828437a08b6102a78e04b5bd5726f47473f4c272954677be"
+    },
+    {
+      "path": "D:\\e-scratch\\fdn-mage-witness-hosted-001\\results\\reference-results\\summary.json",
+      "bytes": 492,
+      "sha256": "7f2eb04c5d6bc537a15fa2e0aaf3d07a03886006f0793b0c4e48ffd4507dd10d"
+    }
+  ],
+  "restoration_recipe": "Copy sealed files from the retained E source or independent C mirror; verify seal.json SHA-256s.",
+  "closed_at": "2026-10-02T18:07:49.588412+00:00"
+}
