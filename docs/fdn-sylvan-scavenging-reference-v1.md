@@ -15,7 +15,7 @@ and `Mage/src/main/java/mage/game/permanent/token/RaccoonToken.java`.
 Neither main source changed. The newly compiled test uses the previously
 verified main classes.
 
-Guarded run prefix: `C:/Users/haley/fdn-mage-scavenging-003`.
+Guarded run prefix: `C:/Users/hostuser/fdn-mage-scavenging-003`.
 Java 23.0.2, Maven 3.9.9, one Maven thread, two JVM processors,
 4 GiB Maven heap and 3 GiB test heap. No GPU or training.
 Projected allocation 1 GiB, cap 2 GiB, reserve 60 GiB.

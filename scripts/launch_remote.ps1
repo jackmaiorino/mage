@@ -23,6 +23,6 @@ $env:PBT_MIN_EPISODES = "200"
 $env:PYTHONUNBUFFERED = "1"
 $env:MAVEN_OPTS = "-Xmx8g -Xms4g -XX:+UseG1GC -XX:MaxGCPauseMillis=50"
 
-Set-Location "C:\Users\haley\mage"
+Set-Location "$env:USERPROFILE\mage"
 New-Item -ItemType Directory -Path "local-training\local_pbt" -Force | Out-Null
 py -3.12 scripts/run_local_pbt.py 2>&1 | Tee-Object -FilePath "local-training\local_pbt\training_console.log"

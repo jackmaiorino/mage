@@ -4,7 +4,7 @@
 # Thesis-clean: terminal-only reward, weaker opponent is still a real CP7.
 # Eval ALWAYS vs skill-1 Grixis (comparable to all prior results).
 # Per-eval sweep cleanup so the disk does not refill (killed the last run).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/bignet_curr_RESULT.log"
 $tlog = "local-training/bignet_curr.log"; $telog = "local-training/bignet_curr.err"

@@ -3,7 +3,7 @@
 # HOLDS/CLIMBS -- vs the known SELF-PLAY degradation (armS: 50->34->34->32->29).
 # If league holds ~50% while self dropped to ~30%, the regression is the diet, not the pipeline.
 # Everything else identical to the armS self-play diagnostic (size S, GPU split, clean eval).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/league_continue_RESULT.log"
 $tlog = "local-training/league_continue_train.log"

@@ -3,7 +3,7 @@
 # Multi-profile faithful league (holds 0.52) + WORLD_MODEL_LOSS_COEF=0.1, no mulligan freeze.
 # Eval Grixis-skill1 + castable-Spy each chunk; AUTO-ABORT if castable-Spy collapses (<0.55) --
 # the prior WM01 failure mode was castable-Spy 74->56 from shared-encoder drift.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/wm01_RESULT.log"
 $tlog = "local-training/wm01_train.log"; $telog = "local-training/wm01_train.err"

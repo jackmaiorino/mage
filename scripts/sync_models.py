@@ -9,8 +9,8 @@ Usage:
 
 Env vars:
     SYNC_INTERVAL_MIN   Minutes between sync attempts (default: 10)
-    REMOTE_HOST         Remote SSH host (default: haley@10.0.0.22)
-    REMOTE_REPO         Remote repo path (default: C:/Users/haley/mage)
+    REMOTE_HOST         Remote SSH host (default: hostuser@10.0.0.22)
+    REMOTE_REPO         Remote repo path (default: C:/Users/hostuser/mage)
     MIN_WINRATE_GAP     Min winrate difference to trigger sync (default: 0.03)
     SYNC_PROFILES       Comma-separated profiles (default: all 4 training profiles)
 """
@@ -28,8 +28,8 @@ from typing import Optional, Tuple
 REPO_ROOT = Path(__file__).resolve().parent.parent
 PROFILES_ROOT = REPO_ROOT / "Mage.Server.Plugins" / "Mage.Player.AIRL" / "src" / "mage" / "player" / "ai" / "rl" / "profiles"
 
-REMOTE_HOST = os.getenv("REMOTE_HOST", "haley@10.0.0.22")
-REMOTE_REPO = os.getenv("REMOTE_REPO", "C:/Users/haley/mage")
+REMOTE_HOST = os.getenv("REMOTE_HOST", "hostuser@10.0.0.22")
+REMOTE_REPO = os.getenv("REMOTE_REPO", "C:/Users/hostuser/mage")
 REMOTE_PROFILES_ROOT = f"{REMOTE_REPO}/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 
 SYNC_INTERVAL = float(os.getenv("SYNC_INTERVAL_MIN", "10")) * 60

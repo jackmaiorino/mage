@@ -6,7 +6,7 @@
 # the may30 world-model run de-myopia'd value (+0.15-0.26 AUC) but collapsed
 # winrate 49->37.5 WITHOUT an anchor; the anchor is the new ingredient).
 # Continue from the competent fresh-128 on the faithful league diet. Thesis-clean.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/worldmodel_RESULT.log"
 $tlog = "local-training/worldmodel.log"; $telog = "local-training/worldmodel.err"

@@ -3,7 +3,7 @@
 # board-conditional distinction candidate_q proved the 128/2-layer net cannot?
 # NO abort gate (a fresh net legitimately starts near 0 and must climb).
 # NO baseline restore (the fresh net IS the product).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/bignet_RESULT.log"
 $tlog = "local-training/bignet_train.log"; $telog = "local-training/bignet_train.err"

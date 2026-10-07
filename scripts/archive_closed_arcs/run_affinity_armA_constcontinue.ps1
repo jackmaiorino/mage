@@ -1,7 +1,7 @@
 # PAIRED EXPERIMENT Arm A = CONST-continue (volume control). Codex #32 design.
 # Both arms restore the SAME fixed ref checkpoint C (47.5% const model) so only SIL differs.
 # Arm A: no SIL, just continue constant-0.10 training 6k eps (measures "more volume" effect).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_armA_constcontinue.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

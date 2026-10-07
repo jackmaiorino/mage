@@ -1,7 +1,7 @@
 # SPY 60k GATE (Codex #59): full gauntlet, det, n=256/matchup, game logging for
 # win-path decomposition. Gate vs 22k (uniform 47.0%): >=50% OR +3pp, Grixis holds,
 # elves/terror not worse.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/spy_60k_gate.log"
 Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'java.exe' -or ($_.Name -match 'python' -and $_.CommandLine -match 'gpu_service_host|run_local_pbt') } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }

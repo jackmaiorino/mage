@@ -1,12 +1,12 @@
 @echo off
-REM Training script for remote GPU node (Haley's PC, RTX 4060)
-REM Run from: C:\Users\haley\mage
+REM Training script for remote GPU node (the compute host, RTX 4060)
+REM Run from: %USERPROFILE%\mage
 REM Usage: scripts\run_remote_training.bat
 
 setlocal
 
 REM -- Paths --
-set "PATH=C:\Users\haley\apache-maven-3.9.9\bin;C:\Program Files\Git\cmd;%PATH%"
+set "PATH=%USERPROFILE%\apache-maven-3.9.9\bin;C:\Program Files\Git\cmd;%PATH%"
 set "JAVA_HOME=C:\Program Files\Java\jdk-23"
 
 REM -- GPU service ports (offset from local to avoid confusion) --
@@ -48,7 +48,7 @@ set ENTROPY_START=0.15
 set ENTROPY_END=0.02
 set ENTROPY_DECAY_STEPS=500000
 
-cd /d C:\Users\haley\mage
+cd /d %USERPROFILE%\mage
 echo Starting training on remote node (RTX 4060)...
 echo GPU service port: %GPU_SERVICE_PORT%
 echo Metrics port: %GPU_SERVICE_METRICS_PORT%

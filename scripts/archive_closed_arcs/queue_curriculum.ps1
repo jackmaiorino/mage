@@ -1,7 +1,7 @@
 # Unattended curriculum experiment: Stage1 (slow-Rally bootstrap) -> eval -> Stage2 (real
 # diet harden) -> eval. Compare Stage2 eval Rally matchup to the 47.3% control (Rally 23%).
 # Decision: if Rally lifts meaningfully (e.g. 23 -> 40%+) the curriculum bootstrap works.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $qlog = "local-training/queue_curriculum.log"
 "=== QUEUE curriculum $(Get-Date) ===" | Out-File $qlog

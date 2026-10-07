@@ -1,7 +1,7 @@
 # CURRICULUM Stage 2 (harden/transfer): continue from Stage 1's model (NO restore) on the
 # REAL balanced diet (includes real Rally/Terror/Elves). Tests whether the racing/blocking
 # skill learned vs slow aggro TRANSFERS to the real (faster) clock.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_curr_stage2.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

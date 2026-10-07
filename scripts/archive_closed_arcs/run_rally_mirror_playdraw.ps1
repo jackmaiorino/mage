@@ -2,7 +2,7 @@
 # Pass 1 = agent ON THE PLAY (default). Pass 2 = agent ON THE DRAW (EVAL_OPPONENT_ON_PLAY=1).
 # Deterministic, seed 5151, n=128/side. Confirms play-side ~= gauntlet mirror (35-43%) and
 # gives the draw-side + true balanced baseline for the mirror training experiment.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Rally-Anchor-Value\models"
 $out = "local-training/rally_mirror_playdraw256.log"

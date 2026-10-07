@@ -2,7 +2,7 @@
 # meta-candidate count (the CSV opponent_type mislabels league snapshot opponents as
 # SELFPLAY, so it's useless). Decisive: meta-candidates>0 + lastOpponentType showing
 # META-RL/CROSS/LOCAL-SNAP = diet engaged; all H-CP7/SELFPLAY = still broken.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $tlog = "local-training/probe_dbg_train.log"; $telog = "local-training/probe_dbg_train.err"
 function Kill-Train {

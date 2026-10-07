@@ -3,7 +3,7 @@
 # DOMINATES slow decks (control/midrange -> time to combo) but loses to AGGRO (raced),
 # the ~0.50 is a matchup/race property. If it caps ~0.50 vs EVERYTHING, it's general
 # under-piloting (proficiency). Fixed model, skill-1, seed 5151, 96g each.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/matchup_diag_RESULT.log"
 $reg = "local-training/_brew_win_registry.json"   # Spy Winning agent deck

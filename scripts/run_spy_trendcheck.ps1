@@ -3,7 +3,7 @@
 # raw PPO (no SEARCH_OP / candidate_q / de-myopia), train vs the eval target
 # (CP7 skill-1) in chunks, eval vs Grixis after each chunk -> read the SLOPE.
 # Climbing => undertrained (commit to long run). Flat => investigate.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/spy_trendcheck_RESULT.log"
 $tlog = "local-training/spy_trendcheck_train.log"

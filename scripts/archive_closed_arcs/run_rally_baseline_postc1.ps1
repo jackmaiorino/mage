@@ -1,7 +1,7 @@
 ﻿# PIVOT: Mono Red Rally DOMINANCE baseline vs the 8-deck tier-1 gauntlet (clean greedy eval).
 # Where does the existing Rally model stand per-matchup? (dominance = >60%). Establishes the
 # training target before any training. 128/2 arch (registry), greedy, skill 1.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/rally_baseline_post_c1_RESULT.log"
 $baseReg = "local-training/_brew_win_registry.json"

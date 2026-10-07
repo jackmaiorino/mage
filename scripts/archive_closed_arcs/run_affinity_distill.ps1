@@ -5,7 +5,7 @@
 # (py4j_entry_point conditional reference-KL; archetype int already plumbed for belief head).
 # Target: Rally>=35% AND uniform>=50% simultaneously. Params: $env:DISTILL_TOTAL,
 # $env:SPEC_COEF, $env:ANCHOR_COEF.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log     = "local-training/affinity_distill.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

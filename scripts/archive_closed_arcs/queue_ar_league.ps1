@@ -1,7 +1,7 @@
 # A/R league first gate (Codex #40): train league to ~15k -> eval Affinity on the UNIFORM
 # fixed CP gauntlet. Apply gate: Rally >=8pp over ref C (20%) & uniform flat/up -> continue;
 # else accept scoped floor. (Eval also reports the Rally slice = the key metric.)
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $q = "local-training/queue_ar_league.log"
 "=== QUEUE A/R league first-gate $(Get-Date) ===" | Out-File $q

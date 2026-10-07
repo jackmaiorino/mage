@@ -23,11 +23,11 @@ the explicit trample allocation and payable Force Spike refusal. The prior
 seven-case run passed. The intermediate nine-case attempt's missing
 damage-allocation choice was corrected; its failed log and XML remain
 preserved outside Git. The preceding nine-case run also passed; its XML
-is preserved separately at `C:/Users/haley/fdn-mage-koma-003.xml`.
+is preserved separately at `C:/Users/hostuser/fdn-mage-koma-003.xml`.
 
 Small manifest: Java 23.0.2, Maven 3.9.9; CPU only, one reactor thread,
 JVM active processor count two, GPU ordinal none. Owned reference copy:
-`C:/Users/haley/mage-fdn-counter-parity-codex`. Logs and XML remain outside
+`C:/Users/hostuser/mage-fdn-counter-parity-codex`. Logs and XML remain outside
 Git. Test source SHA-256:
 `797af8c555d7f6473f695b121ee9d51c7605a1dbc5cfd65c28f1e171bb0c6a8a`.
 Surefire XML SHA-256:

@@ -1,7 +1,7 @@
 import json, os, glob, sys
 
 LANDS = {"Forest", "Swamp"}
-BASE = "C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
+BASE = "C:/Users/user/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
 SUB = "game_logs/Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity"
 
 def find(fname):

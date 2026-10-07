@@ -7,7 +7,7 @@ param(
   [string]$Out = "local-training/affinity_router_eval_RESULT.log",
   [string]$RunId = "affinity_router_eval"
 )
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $baseReg  = "local-training/_brew_win_registry.json"
 $reg      = "local-training/_affinity_gauntlet_registry.json"

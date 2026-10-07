@@ -1,1 +1,1 @@
-C:\Users\Jack\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono Red Rally.dek
+C:\Users\user\IdeaProjects\mage\Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\decks\Pauper\Deck - Mono Red Rally.dek

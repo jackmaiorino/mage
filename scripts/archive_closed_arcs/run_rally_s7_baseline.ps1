@@ -2,7 +2,7 @@
 # Two checkpoints (post-c1 = the historical 67%; latest = armF-era Rally), full 8-deck
 # gauntlet, skill 1, n=256/matchup, --deterministic-eval (serial; parallel breaks
 # determinism via shared-GPU-service interleaving). Seed base 5151 = dev block.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Rally-Anchor-Value\models"
 $out = "local-training/rally_s7_baseline.log"

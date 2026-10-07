@@ -4,7 +4,7 @@
 # combo discovery). Thesis-clean: terminal-only reward, fixed-reference opponents.
 # META-H clock (CP7 skill-3 on the aggressive pool decks) -- meta profiles kept
 # UNQUALIFIED so no 128-dim NN snapshot is loaded (would shape-mismatch vs 256).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/bignet_league_RESULT.log"
 $tlog = "local-training/bignet_league.log"; $telog = "local-training/bignet_league.err"

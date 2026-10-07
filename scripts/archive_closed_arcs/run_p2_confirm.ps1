@@ -2,7 +2,7 @@
 # Greedy eval, gate+search+diag ON. Aggregates the in-engine funnel counters (summed across JVMs):
 #   libLands==0 decisions, libLands<=1, libEmpty, board>=2, both(combo-ready), total; + search CALLS/FOUND.
 # 0 combo-ready over 256 games -> 95% upper bound ~1.2% (cleanly fails the >=2% gate).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/p2_confirm_RESULT.log"
 $reg  = "local-training/_brew_win_registry.json"

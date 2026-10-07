@@ -1,6 +1,6 @@
 ﻿{
     "updated_at_utc":  "2026-03-01T23:00:09.9099747Z",
-    "registry_path":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league\\pauper_spy_pbt_registry.json",
+    "registry_path":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league\\pauper_spy_pbt_registry.json",
     "eval_every_minutes":  180,
     "last_eval_utc":  "",
     "next_eval_utc":  "2026-03-01T22:40:33.5985021Z",
@@ -18,10 +18,10 @@
                          "last_restart_reason":  "",
                          "launched_at_utc":  "2026-03-01T22:35:36.1693825Z",
                          "metrics_port":  9100,
-                         "train_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-A.decklist.txt",
-                         "opponent_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
-                         "stdout_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-A.stdout.log",
-                         "stderr_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-A.stderr.log",
+                         "train_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-A.decklist.txt",
+                         "opponent_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
+                         "stdout_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-A.stdout.log",
+                         "stderr_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-A.stderr.log",
                          "exit_code":  null
                      },
                      {
@@ -33,10 +33,10 @@
                          "last_restart_reason":  "",
                          "launched_at_utc":  "2026-03-01T22:35:36.1883385Z",
                          "metrics_port":  9101,
-                         "train_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-B.decklist.txt",
-                         "opponent_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
-                         "stdout_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-B.stdout.log",
-                         "stderr_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-B.stderr.log",
+                         "train_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-B.decklist.txt",
+                         "opponent_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
+                         "stdout_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-B.stdout.log",
+                         "stderr_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-B.stderr.log",
                          "exit_code":  null
                      },
                      {
@@ -48,10 +48,10 @@
                          "last_restart_reason":  "",
                          "launched_at_utc":  "2026-03-01T22:35:36.2006533Z",
                          "metrics_port":  9102,
-                         "train_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-C.decklist.txt",
-                         "opponent_decklist":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
-                         "stdout_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-C.stdout.log",
-                         "stderr_log":  "C:\\Users\\Jack\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-C.stderr.log",
+                         "train_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\Pauper-Spy-Combo-C.decklist.txt",
+                         "opponent_decklist":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\generated_decklists\\_league_meta_opponents.decklist.txt",
+                         "stdout_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-C.stdout.log",
+                         "stderr_log":  "C:\\Users\\user\\IdeaProjects\\mage\\Mage.Server.Plugins\\Mage.Player.AIRL\\src\\mage\\player\\ai\\rl\\league_reports\\pauper\\orchestrator\\trainers\\Pauper-Spy-Combo-C.stderr.log",
                          "exit_code":  null
                      },
                      {

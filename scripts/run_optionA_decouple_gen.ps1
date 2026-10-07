@@ -2,14 +2,14 @@
 # dump hook enabled to accumulate a candidate_q target dataset (npz shards) for
 # offline replay. Starts from baseline. Model drift here is irrelevant -- only
 # the dumped npz are kept; the mixed-mode run restores baseline.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/optionA_decouple_gen.log"
 $tlog = "local-training/optionA_decouple_gen_train.log"
 $telog= "local-training/optionA_decouple_gen_train.err"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $bak  = "local-training\backups\spy_value_baseline_20260531"
-$dump = "C:\Users\Jack\IdeaProjects\mage\local-training\cq_dump"
+$dump = "$env:USERPROFILE\IdeaProjects\mage\local-training\cq_dump"
 $refabs = (Resolve-Path "$bak\model_latest.pt").Path
 $mins = [int]($env:GEN_MINUTES); if ($mins -le 0) { $mins = 120 }
 $iters = [int]($mins / 5)

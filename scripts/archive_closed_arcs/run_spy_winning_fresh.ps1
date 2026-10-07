@@ -19,7 +19,7 @@
 # Terminal-only reward: RL_HEURISTIC_STEP_REWARDS=0 set explicitly (also the
 # documented default; no shaped step rewards).
 # Back up nothing -- this IS a from-scratch run, not a continuation.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/spy_winning_fresh.log"
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"

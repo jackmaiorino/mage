@@ -22,7 +22,7 @@ errors were corrected, and their logs remain preserved.
 
 Small manifest: Java 23.0.2, Maven 3.9.9; CPU only, one Maven reactor
 thread, JVM active processor count two; GPU ordinal none. Owned reference
-copy: `C:/Users/haley/mage-fdn-counter-parity-codex`. Logs and XML remain
+copy: `C:/Users/hostuser/mage-fdn-counter-parity-codex`. Logs and XML remain
 outside Git. Test source SHA-256:
 `447980bc1d5249cfc225245bf57a36cca1f23050988bc981329428a097f15cef`.
 Surefire XML SHA-256:

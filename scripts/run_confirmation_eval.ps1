@@ -1,6 +1,6 @@
 # DOMINANCE CONFIRMATION EVAL: model_best (0.594 @ n=96) at n=256 x 3 seeds.
 # Pooled n=768 -> CI ~ +/-3.5pp. Gate (roadmap): wr >= 0.60 with CI-low >= 0.55.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/confirmation_RESULT.log"
 $reg = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"

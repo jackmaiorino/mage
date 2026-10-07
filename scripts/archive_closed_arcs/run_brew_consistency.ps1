@@ -4,7 +4,7 @@
 # consistency-only list (winning list's mana tuning, NO Avenging Hunter initiative).
 # Compare legal-reach / cast / winrate trajectory vs fresh128_control (f128_cN).
 # READ: reach UP + wr UP => list was the bottleneck; reach UP but cast/wr flat => PLAY is.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/brew_cons_RESULT.log"
 $tlog = "local-training/brew_cons.log"; $telog = "local-training/brew_cons.err"

@@ -12,7 +12,7 @@ with mtg-kernel's `fdn_counter_creatures_v1` tests at `109bd020`.
 | Hydra entry | Resolves alive with one counter and 1/1 stats before state-based actions. |
 | Controlled landfall | Two own land entries take counters from one to four; an opposing entry contributes no doubling. |
 
-HaleysPC command, from the owned source copy:
+The compute host command, from the owned source copy:
 
 ```text
 mvn -B -T 1 -pl Mage.Tests -am -Dtest=FdnCounterCreaturesTest -Dsurefire.failIfNoSpecifiedTests=false -DfailIfNoTests=false -Dxmage.dataCollectors.printGameLogs=false "-DargLine=-Xmx3g -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8" test
@@ -22,7 +22,7 @@ Result: five tests, zero failures/errors/skips; reactor BUILD SUCCESS,
 36.072 seconds on the cached corrected run. The first run passed four
 cases but scheduled a land play while Hydra was still on the stack.
 Adding the harness's explicit stack-resolution wait corrected that test.
-The original failure remains in `C:/Users/haley/fdn-mage-counter-001.log`.
+The original failure remains in `C:/Users/hostuser/fdn-mage-counter-001.log`.
 Passing log: `fdn-mage-counter-002.log/.exit`; Surefire XML remains in the
 owned `mage-fdn-counter-parity-codex/Mage.Tests/target/surefire-reports/`.
 

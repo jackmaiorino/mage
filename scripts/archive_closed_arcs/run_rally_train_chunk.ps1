@@ -1,7 +1,7 @@
 # RALLY DOMINANCE TRAINING (Codex #26): warm-start fine-tune on the weighted soft-matchup diet,
 # CP7 skill-1 gauntlet opponents (matches the benchmark). Chunk 1 = 30k episodes; re-baseline after.
 # Goal: 58.2% -> >60% by improving Elves/Terror/Faeries/mirror/Grixis WITHOUT decaying Burn/Caw/Wildfire.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/rally_train_chunk.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

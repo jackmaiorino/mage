@@ -1,6 +1,6 @@
 # Run full Arm B (CONST + win-replay SIL, dedup off) then eval it at matched seed.
 # Plumbing already smoke-validated; Arm A (control) already done = 47.3%.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $qlog = "local-training/queue_armB.log"
 "=== QUEUE Arm B only $(Get-Date) ===" | Out-File $qlog

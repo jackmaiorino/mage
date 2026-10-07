@@ -4,7 +4,7 @@
 # fire SEARCH_OP at each ACTIVATE_ABILITY_OR_SPELL decision with 12 playouts x top-3,
 # log per-candidate win rates. Then analyze with search_op_analyze.py.
 # Param: $env:PROBE_EPISODES (default 8 = smoke; set 120 for the real probe).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/fanout_probe.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

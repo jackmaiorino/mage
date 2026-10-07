@@ -3,7 +3,7 @@
 # over a Rally-OVERWEIGHTED gauntlet pool (~36% mirror, 64% breadth). Single Rally
 # profile, terminal-only. Goal: lift mirror 35.5% -> >=45% balanced while uniform stays
 # >=70%. Flagship is immutable-backed-up (rally_flagship_75_8); this writes a branch.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles"
 $rmd  = "$prof\Pauper-Rally-Anchor-Value\models"

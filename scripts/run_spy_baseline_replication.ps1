@@ -3,7 +3,7 @@
 # multiple seeds. 5151/9999 reproduce prior measurements (determinism check); the
 # rest are fresh independent draws (across-seed spread). Same tool/opponent/skill/n
 # as every prior baseline measurement (run_cp7_eval_sweep, grixis, skill 1, n=128).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/baseline_replication_RESULT.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

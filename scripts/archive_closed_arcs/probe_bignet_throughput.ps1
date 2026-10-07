@@ -1,6 +1,6 @@
 # Throughput + fresh-init sanity probe for the d_model=256/4-layer net, LOCAL.
 # Fresh-inits the bigger net, runs ~12 min on CP7 diet, measures eps/min, restores.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/bignet_probe.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

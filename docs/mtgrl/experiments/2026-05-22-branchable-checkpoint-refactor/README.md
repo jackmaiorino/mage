@@ -146,7 +146,7 @@ Conclusion:
 
 ## Artifact Handling
 
-Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`, `20260522_d033_checkpoint_branch_probe*`, and `20260522_d070_checkpoint_branch_probe*`, with bridge CSVs under ignored `local-training/local_pbt/corpora/20260522_v211_*` through `20260522_v216_*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probes used a generated Python 3.12 venv outside the repo at `C:\Users\Jack\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.
+Raw probe directories were generated under ignored `local-training/local_pbt/spy_line_replay/20260522_d030_checkpoint_branch_probe*`, `20260522_d033_checkpoint_branch_probe*`, and `20260522_d070_checkpoint_branch_probe*`, with bridge CSVs under ignored `local-training/local_pbt/corpora/20260522_v211_*` through `20260522_v216_*`. They were summarized here and are disposable local artifacts, not commit material. The successful local probes used a generated Python 3.12 venv outside the repo at `C:\Users\user\.codex\cache\mage-mtgrl-venv-py312` with dependency install disabled to avoid the Python 3.14 PyTorch wheel blocker.
 
 ## v221 Candidate Sweep
 
@@ -238,7 +238,7 @@ Next exact unit:
 Two blockers from the v232 handoff were repaired before the D086 checkpoint probe:
 
 - The failure-corpus collector now exports compact replay metadata (`action_counterfactual_compatible`, scenario, seed, `random_util_seed`, and replay-random scope), and the target-selection manifest builder can also parse those fields directly from compact log headers. Regenerating the v231 corpus keeps `1,988` loss-decision rows and now ranks `game_20260522_140523_0001_D086` first with `replay_ready=true`, scenario `1`, seed `763880686`, and random-util seed `7640891576595197415`.
-- The detached CLI worker harness now launches Codex children with a sanitized environment (`CODEX_HOME`, `HOME`, `USERPROFILE`, `APPDATA`, and `LOCALAPPDATA` pinned to Jack's profile and app-thread inheritance removed), classifies Responses transport failures in `status.json`, and exposes a no-lease `transport-smoke` command through both `cli_worker.py` and `cli_orchestrator.py`. The post-repair smoke returned `cli transport smoke ok`.
+- The detached CLI worker harness now launches Codex children with a sanitized environment (`CODEX_HOME`, `HOME`, `USERPROFILE`, `APPDATA`, and `LOCALAPPDATA` pinned to the maintainer's profile and app-thread inheritance removed), classifies Responses transport failures in `status.json`, and exposes a no-lease `transport-smoke` command through both `cli_worker.py` and `cli_orchestrator.py`. The post-repair smoke returned `cli transport smoke ok`.
 
 Next exact unit remains unchanged: run the D086 forced-prefix bridge and checkpoint-branch probe directly through the repaired local path, and only admit evidence under the terminal-loss/source and terminal-win/sibling gate.
 

@@ -4,7 +4,7 @@
 # league diet, terminal-only, lower LR (avoid the hot-failed 256 instability), audit gates ON.
 # Param: $env:LEAGUE_TARGET (episodes/profile; default 2000 = BOOTSTRAP CHECK -- judge by
 # in-training winfrac, fresh nets read ~0 greedy until entropy decays). Extend to 15k/30k if it bootstraps.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_AR_league_registry.json"

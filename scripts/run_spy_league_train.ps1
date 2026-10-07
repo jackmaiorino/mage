@@ -4,7 +4,7 @@
 # self-mill with no 3-creature board to flashback Dread Return -> deck out) as the LEADING
 # metric -- if it falls, the model is learning even before winrate moves. PURE faithful diet
 # (no candidate_q) to isolate whether training ALONE teaches the orchestration.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/league_train_RESULT.log"
 $tlog = "local-training/league_train.log"; $telog = "local-training/league_train.err"

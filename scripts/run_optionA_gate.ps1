@@ -3,7 +3,7 @@
 # Encoder UNFROZEN (candidate_q reshapes it), candidate_q 4x value, KL-anchored to
 # the frozen baseline policy to protect execution. Then eval de-myopia'd vs baseline
 # and run the leading (value-AUC) + execution-guard (castable-Spy/durdle) probes.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out   = "local-training/optionA_gate_RESULT.log"
 $tlog  = "local-training/optionA_gate_train.log"

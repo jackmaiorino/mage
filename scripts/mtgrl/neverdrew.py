@@ -1,5 +1,5 @@
 import json, os
-base = r"C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
+base = r"C:/Users/user/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
 MD="game_logs/Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity"
 never_drew=[
 ('baseline_auc_ab','game_20260530_143147_0009.txt'),('baseline_auc_ab','game_20260530_143350_0022.txt'),

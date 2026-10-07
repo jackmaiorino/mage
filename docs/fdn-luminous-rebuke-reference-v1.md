@@ -26,7 +26,7 @@ The upstream card implementation is pinned at
 Test-source SHA-256:
 `b6ef8bb7a1f92b31e39b5db3d4dce8b69ea48ea21de387c792c8fbc0eae1f57f`.
 
-`fdn-mage-rebuke-001` exited zero on HaleysPC. Surefire reports eleven tests,
+`fdn-mage-rebuke-001` exited zero on the compute host. Surefire reports eleven tests,
 zero failures, errors or skips, in 29.859 seconds; the reactor completed in
 38.143 seconds. Surefire XML SHA-256:
 `72224af6359caf54980b4e7eecd863f4a1ee51fcc0c3a0ff6828568ef5b29341`.

@@ -3,7 +3,7 @@
 # scale params (+floor) so they can't collapse, and drop all LRs hard. From the validated
 # function-preserving transplant. ABORT EARLY if vs-CP drops >8pp from the ~35.6% thermometer.
 # Param: $env:LEAGUE_TARGET (episodes/profile; default 6000).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $asrc = "E:/mage-training/backups/affinity_256_transplant/model.pt"

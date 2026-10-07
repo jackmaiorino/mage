@@ -66,7 +66,7 @@ Both local PCs' reservations were preserved.
 
 Passing evidence is sealed at `E:/mtg-fdn-fixtures/fdn-fixture-final-reference-002`,
 with an independently verified mirror at
-`C:/Users/Jack/fdn-fixture-final-reference-002-sealed`. The failed first attempt
+`C:/Users/user/fdn-fixture-final-reference-002-sealed`. The failed first attempt
 is retained under the corresponding `001` paths. Scratch was deleted only
 after verification, with committed `docs/reports/fdn_fixture_final_reference_001_prune.json`
 and `fdn_fixture_final_reference_002_prune.json` receipts. These comparisons

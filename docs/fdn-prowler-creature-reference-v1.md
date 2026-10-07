@@ -27,12 +27,12 @@ Surefire XML SHA-256
 combined log SHA-256
 `2ad6c7b569007f833e67639260ba21fb15a2a7bb3620b065579418039e366da3`.
 
-HaleysPC used Java 23.0.2, Maven 3.9.9, one Maven thread, two active JVM
+The compute host used Java 23.0.2, Maven 3.9.9, one Maven thread, two active JVM
 processors, no GPU, a 128 MiB build allowance and a 60 GiB storage reserve.
 The guard monitors and can stop only its own identified child tree.
 Unchanged main classes from the successful Kiora reference run were reused;
 the new Prowler test was compiled. Logs, XML and the small manifest stay
-outside Git under `C:/Users/haley/fdn-mage-prowler-001`.
+outside Git under `C:/Users/hostuser/fdn-mage-prowler-001`.
 
 The kernel checks the same rules contracts. Its ward tests use Snap, paying
 that spell's `{1}{U}` cost before ward; XMage uses Unsummon for `{U}`. Its

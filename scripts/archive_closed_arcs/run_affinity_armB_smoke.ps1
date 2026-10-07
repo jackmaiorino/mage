@@ -1,7 +1,7 @@
 # SMOKE GATE for Arm B: 300 episodes with the win-replay SIL config, to confirm
 # [WIN_REPLAY] actually fires (buffer fills + replays) before committing the full 6k.
 # Same config as run_affinity_armB_winreplay_sil.ps1 but 300 eps, separate log, no backup.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_armB_smoke.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
@@ -30,7 +30,7 @@ $env:WIN_REPLAY_MAX_ROWS="150"; $env:WIN_REPLAY_DEDUP="1"
 $env:SIL_LOSS_COEF="0.5"; $env:SIL_WINDOW_GATED="1"; $env:SIL_ADVANTAGE_CLIP="2.0"; $env:SIL_WEIGHT_FLOOR="0.2"
 $env:REFERENCE_POLICY_KL_COEF="0.03"; $env:MCTS_REFERENCE_MODEL_PATH="$ref"
 # Python stdout isn't captured in local py4j mode; have the SIL loss write a diag file instead.
-$env:SIL_DIAG_FILE="C:/Users/Jack/IdeaProjects/mage/local-training/_sil_smoke_diag.txt"
+$env:SIL_DIAG_FILE="$env:USERPROFILE/IdeaProjects/mage/local-training/_sil_smoke_diag.txt"
 Remove-Item $env:SIL_DIAG_FILE -ErrorAction SilentlyContinue
 
 "=== ARM B SMOKE (300 eps, win-replay) $(Get-Date) ===" | Out-File $log

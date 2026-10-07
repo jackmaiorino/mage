@@ -2,7 +2,7 @@
 # processes (own JVM + own GPU-service port); only intra-process --parallel breaks it.
 # Per arm: restore model once, run 8 per-opponent sweeps as 4-concurrent PS jobs.
 # Verification: win-arm Grixis must reproduce the narrow gate exactly (120/256).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $out = "local-training/spy_promotion_gate2.log"
@@ -24,7 +24,7 @@ foreach($a in $arms){
     $port = 26150 + $i*10; $mport = 27150 + $i*10; $i++
     $jobs += Start-Job -ArgumentList $opp,$port,$mport,$a.label,$a.reg,$a.init -ScriptBlock {
       param($opp,$port,$mport,$label,$reg,$init)
-      Set-Location "C:\Users\Jack\IdeaProjects\mage"
+      Set-Location "$env:USERPROFILE\IdeaProjects\mage"
       $env:SEARCH_OP_ENABLE="0"; $env:USE_TRT_INFERENCE="0"
       $env:MODEL_D_MODEL="128"; $env:MODEL_NUM_LAYERS="2"; $env:MODEL_NHEAD="4"; $env:MODEL_DIM_FEEDFORWARD="512"
       $env:RL_INITIATIVE_FEATURES_ENABLE=$init

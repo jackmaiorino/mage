@@ -466,7 +466,7 @@ env["USE_TRT_INFERENCE"] = os.getenv("USE_TRT_INFERENCE", "1")
 - [ ] **Step 3: Run benchmark -- PyTorch baseline**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage
+cd C:/Users/user/IdeaProjects/mage
 TRAIN_PROFILES=5 USE_TRT_INFERENCE=0 py -3.12 scripts/run_local_pbt.py &
 # Wait 2 min warmup, measure:
 sleep 120

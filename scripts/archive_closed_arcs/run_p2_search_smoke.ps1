@@ -6,7 +6,7 @@
 # Two passes vs Grixis skill 1, same Step-1-best model:
 #   p2_baseline = search OFF (control)
 #   p2_search   = online-prefix combo-ready-gated + autopilot + generic order
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/p2_search_smoke_RESULT.log"
 $reg  = "local-training/_brew_win_registry.json"   # agent = Spy Winning, opp pool has Grixis

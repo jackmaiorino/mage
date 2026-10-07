@@ -3,7 +3,7 @@
 # -2.0 sentinel fills, SIGNED branch) alone regressed training, vs the search/Q config.
 # If ctrlG holds ~0.52 -> code clean, collapse is search-linked -> run Control B.
 # If ctrlG collapses -> code regression in 16b153d906 -> bisect stride/sentinels.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/ctrlG_RESULT.log"
 $tlog = "local-training/ctrlG_train.log"; $telog = "local-training/ctrlG_train.err"
