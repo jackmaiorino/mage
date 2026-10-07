@@ -20,7 +20,7 @@ controller argument; both were corrected without changing engine behavior.
 
 Small manifest: Java 23.0.2, Maven 3.9.9; CPU only, one Maven reactor thread,
 JVM active processor count two; GPU ordinal none. Owned reference copy:
-`C:/Users/haley/mage-fdn-counter-parity-codex`. Logs and XML remain outside
+`C:/Users/hostuser/mage-fdn-counter-parity-codex`. Logs and XML remain outside
 Git. Test source SHA-256:
 `89a6a8f6c52645f783493d9f780c3fdda31bb2ce3f0912fabc558777835bb739`.
 Surefire XML SHA-256:

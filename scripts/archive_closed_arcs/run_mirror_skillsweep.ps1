@@ -4,7 +4,7 @@
 # SKILL-SWEEP (vs Grixis at CP skill 1/3/5/7) = does a stronger opponent punish our lazy/beatdown play
 #   (winrate drops as skill rises -> opponent quality was capping us).
 # Waits for any running eval to free the GPU first.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/mirror_skillsweep_RESULT.log"
 $baseReg = "local-training/_brew_win_registry.json"   # RL_AGENT_DECK_LIST = Spy Winning

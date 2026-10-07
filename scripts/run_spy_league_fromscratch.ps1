@@ -4,7 +4,7 @@
 # MIRROR frozen self-snapshots + CP7, NOT CP7-only). Multi-profile so meta NN models are served.
 # Annealing entropy: explore early (discover the combo), sharpen later. Eval Spy vs Grixis each
 # chunk -> learning CURVE. PASS = climbs from ~chance toward 0.4-0.5 (pipeline healthy + replicable).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/league_fromscratch_RESULT.log"
 $tlog = "local-training/league_fromscratch_train.log"

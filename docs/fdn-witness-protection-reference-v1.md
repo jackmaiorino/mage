@@ -32,7 +32,7 @@ mvn -B -ntp -T 1 -pl Mage.Tests -am \
 ```
 
 Sealed evidence: `E:/mtg-fdn-fixtures/fdn-mage-witness-hosted-001`.
-Independent verified mirror: `C:/Users/Jack/fdn-mage-witness-hosted-001-sealed`.
+Independent verified mirror: `C:/Users/user/fdn-mage-witness-hosted-001-sealed`.
 `seal.json` and `closure.json` identify each retained manifest, log and XML.
 The committed `docs/reports/fdn_mage_witness_hosted_001_prune.json` records
 removal of duplicate scratch after both retained copies were verified.

@@ -2,7 +2,7 @@
 # preserving) league-trained = the capacity test (fresh-256 couldn't bootstrap). Both profiles
 # init from their 256 transplants. Same 2-profile Affinity+Rally league, terminal-only, ACTOR_LR=5e-5,
 # audit gates ON. Param: $env:LEAGUE_TARGET (NEW episodes/profile; default 8000 = first gate ~ +8k).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $asrc = "E:/mage-training/backups/affinity_256_transplant/model.pt"   # Affinity 256/2 (function-preserving 7k)

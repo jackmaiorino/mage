@@ -2,7 +2,7 @@
 #   local-training/cloud/mage-src.tar.gz     (git archive of HEAD -- commit first!)
 #   local-training/cloud/mage-models.tar.gz  (best/baseline checkpoints + fp32 onnx + meta pins)
 # Upload both + run: tar xzf mage-src.tar.gz && bash scripts/cloud/provision_rental_box.sh --models-tarball mage-models.tar.gz
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Stop"
 New-Item -ItemType Directory -Force "local-training\cloud" | Out-Null
 

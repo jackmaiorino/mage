@@ -7,7 +7,7 @@ param(
   [Parameter(Mandatory=$true)][string]$Out,
   [Parameter(Mandatory=$true)][string]$RunId
 )
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $baseReg = "local-training/_brew_win_registry.json"
 $reg  = "local-training/_affinity_gauntlet_registry.json"

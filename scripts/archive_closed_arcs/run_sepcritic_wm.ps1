@@ -7,7 +7,7 @@
 # Gradient routing VERIFIED (build_separate_critic_warmstart.py): WM/value grad ->
 # critic encoder, 0.0 -> policy encoder. Continue-from a WARM-STARTED model whose
 # critic encoder = copy of the competent teacher policy encoder.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/sepcritic_RESULT.log"
 $tlog = "local-training/sepcritic.log"; $telog = "local-training/sepcritic.err"

@@ -3,7 +3,7 @@
 # FROM_MCTS_TARGETS=0, no dumps). Isolates whether episode generation under search
 # (runner blocking + playouts + mix bias) alone collapses the policy.
 # If ctrlB collapses -> generation-side cause. If holds -> contradiction, recheck learner.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/ctrlB_RESULT.log"
 $tlog = "local-training/ctrlB_train.log"; $telog = "local-training/ctrlB_train.err"

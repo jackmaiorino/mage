@@ -4,7 +4,7 @@
 # terminal-win gated (silEligible -> Python SIL loss), re-enqueued across batches,
 # KL-anchored to the base. Tests whether reinforcing rare own-wins breaks the
 # fast-aggro floor. Thesis-clean (imitates the agent's OWN real-rules wins).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_armB_winreplay_sil.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
@@ -49,7 +49,7 @@ $env:SIL_WEIGHT_FLOOR="0.2"        # min SIL weight on won rows so early racing/
 # KL anchor to the base (prevents over-fit/drift, the v1 SIL failure mode)
 $env:REFERENCE_POLICY_KL_COEF="0.03"
 $env:MCTS_REFERENCE_MODEL_PATH="$ref"
-$env:SIL_DIAG_FILE="C:/Users/Jack/IdeaProjects/mage/local-training/_sil_armB_diag.txt"
+$env:SIL_DIAG_FILE="$env:USERPROFILE/IdeaProjects/mage/local-training/_sil_armB_diag.txt"
 Remove-Item $env:SIL_DIAG_FILE -ErrorAction SilentlyContinue
 
 "=== AFFINITY Arm B CONST+WIN-REPLAY-SIL $(Get-Date) ===" | Out-File $log -Append

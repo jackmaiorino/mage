@@ -4,7 +4,7 @@
 # exact 7k identity, learns the archetype conditioning from terminal reward). ONE coherent
 # archetype-adaptive net (no mid-game switch, no shared-encoder distill). Init from 7k.
 # Param: $env:LEAGUE_TARGET (NEW episodes/profile; default 10000).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $asrc = "E:/mage-training/backups/affinity_ar_league_7k_snap/model.pt"        # Affinity 7k (362C17FF)

@@ -1,6 +1,6 @@
 # Curriculum v2: single MIXED-DIFFICULTY red-gradient run (drastic/medium/real + maintenance)
 # from ref C 47.5%, then eval vs the REAL gauntlet. Compare real-Rally to the 18-23% baseline.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $qlog = "local-training/queue_curriculum_v2.log"
 "=== QUEUE curriculum v2 (mixed red gradient) $(Get-Date) ===" | Out-File $qlog

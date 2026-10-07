@@ -2,7 +2,7 @@
 #   wait for Arm A (CONST-continue control) -> eval A -> SMOKE-GATE (verify SIL fires)
 #   -> full Arm B (CONST + win-replay SIL) -> eval B.
 # Aborts before the 6k Arm B if the smoke shows SIL is not firing (silent no-op guard).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $qlog = "local-training/queue_winreplay.log"
 "=== QUEUE win-replay experiment $(Get-Date) ===" | Out-File $qlog

@@ -1,6 +1,6 @@
 import json, os, glob, sys
 
-BASE = "C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
+BASE = "C:/Users/user/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
 RUNS = ["baseline_auc_ab","baseline_auc_s9999","baseline_auc_big5151"]
 MATCH = "Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity"
 

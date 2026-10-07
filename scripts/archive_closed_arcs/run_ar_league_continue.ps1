@@ -7,7 +7,7 @@
 # Param: $env:LEAGUE_TARGET (NEW episodes/profile this segment; default 8000 = +8k on the 7k
 # base = ~15k total trained = Codex first gate). CSVs are reset so this is an unambiguous delta;
 # the model's train_step_counter (entropy schedule) continues via the restored snapshot extra_state.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $asrc = "E:/mage-training/backups/affinity_ar_league_7k_snap/model.pt"        # Affinity 7k (362C17FF)

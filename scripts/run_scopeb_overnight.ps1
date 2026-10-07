@@ -1,6 +1,6 @@
 # scope_B overnight: clean frozen-encoder Q-head training, then auto n=128 blend eval.
 # Tests "undertrained" vs "frozen-myopic-encoder ceiling" for Option B.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/scopeb_overnight_RESULT.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

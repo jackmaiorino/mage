@@ -3,7 +3,7 @@
 # (harvest run = no-search BASELINE). Replay prefix-to-root under same seed+episodeTag (fidelity-proven)
 # and fire finish-search ONCE at the root. Compare bigMill/comboWin: baseline vs search, per root.
 # GATE: P(bigMill|root)>=30-40%, bigMill 8%->>=20-25%, comboWin materially up.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/goexplore_paired_RESULT.log"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

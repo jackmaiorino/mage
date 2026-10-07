@@ -2,7 +2,7 @@
 # (>=3 creatures in play + landless library) raise winrate? If yes, "premature
 # all-in Spy -> self-deck" is the confirmed leak. Same baseline model both arms;
 # only env SPY_FINISH_GATE differs. Paired seeds 5151 + 9999, n=128.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/spy_gate_eval_RESULT.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

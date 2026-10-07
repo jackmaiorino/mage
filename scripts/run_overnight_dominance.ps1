@@ -5,7 +5,7 @@
 # Gates: validation (c1+c2 both <0.42 -> abort), rolling (2 consecutive <0.42).
 # Aborts SAVE the collapsed model for autopsy before restoring baseline.
 # NO baseline restore on healthy completion -- the trained model is the product.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/overnight_RESULT.log"
 $tlog = "local-training/overnight_train.log"; $telog = "local-training/overnight_train.err"

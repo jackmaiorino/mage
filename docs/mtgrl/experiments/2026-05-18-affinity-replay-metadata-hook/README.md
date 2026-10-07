@@ -31,7 +31,7 @@ REPLAY: scenario=<n> seed=<seed> agent_deck=<file> opp_deck=<file> action_counte
 ```powershell
 python -m py_compile scripts\run_cp7_eval_sweep.py scripts\build_affinity_replay_anchor_manifest.py
 python scripts\build_affinity_replay_anchor_manifest.py
-python C:\Users\Jack\.codex\skills\mage-research-agent\scripts\airl_maven.py compile
+python C:\Users\user\.codex\skills\mage-research-agent\scripts\airl_maven.py compile
 python scripts\run_cp7_eval_sweep.py --help
 ```
 

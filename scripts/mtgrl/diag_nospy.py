@@ -1,6 +1,6 @@
 import json, glob, os
 
-base = r"C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
+base = r"C:/Users/user/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
 runs = ["baseline_auc_ab","baseline_auc_s9999","baseline_auc_big5151"]
 
 BLUE_SOURCES = ["Saruli Caretaker","Lotus Petal"]

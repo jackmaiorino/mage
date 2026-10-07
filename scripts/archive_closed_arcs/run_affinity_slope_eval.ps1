@@ -1,5 +1,5 @@
 ﻿# DECK #2: Grixis Affinity DOMINANCE baseline vs the 8-deck gauntlet (clean greedy eval, skill 1).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/affinity_slope_eval_RESULT.log"
 $baseReg = "local-training/_brew_win_registry.json"

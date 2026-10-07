@@ -1,6 +1,6 @@
 # QUEUE: wait for the Wildfire clean-run to free the GPU, then run the constant-entropy
 # Affinity experiment (paper recipe) + eval. Chains on the single local GPU.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $q = "local-training/queue_const_entropy.log"
 "=== QUEUE start $(Get-Date) -- waiting for Wildfire clean-run ===" | Out-File $q
 # wait until Wildfire DONE or java absent for 2 consecutive checks
@@ -14,7 +14,7 @@ for ($i=0; $i -lt 300; $i++) {
 }
 Start-Sleep -Seconds 10
 "=== running const-entropy experiment $(Get-Date) ===" | Out-File $q -Append
-powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Jack\IdeaProjects\mage\scripts\run_affinity_const_entropy.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\IdeaProjects\mage\scripts\run_affinity_const_entropy.ps1"
 "=== running const-entropy eval $(Get-Date) ===" | Out-File $q -Append
-powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\Jack\IdeaProjects\mage\scripts\run_affinity_const_entropy_eval.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "$env:USERPROFILE\IdeaProjects\mage\scripts\run_affinity_const_entropy_eval.ps1"
 "=== QUEUE done $(Get-Date) ===" | Out-File $q -Append

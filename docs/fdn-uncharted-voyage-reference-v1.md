@@ -1,6 +1,6 @@
 # FDN Uncharted Voyage reference cases
 
-Eleven strict XMage gameplay cases pass on HaleysPC using Java 23.0.2,
+Eleven strict XMage gameplay cases pass on the compute host using Java 23.0.2,
 Maven 3.9.9, one Maven task and two JVM processors. No GPU is used. The
 reactor completed in 36.522 seconds; the eleven tests took 27.333 seconds,
 with zero failures, errors or skips.
@@ -29,7 +29,7 @@ The verification checkout reused the unchanged main classes validated by
 the preceding FDN reference batches and recompiled the new tests. A cold
 checkout must compile its main classes instead of using the skip flag.
 
-Retained prefix: `C:/Users/haley/fdn-mage-voyage-003`.
+Retained prefix: `C:/Users/hostuser/fdn-mage-voyage-003`.
 Surefire XML SHA-256:
 `cf029b76feceeb0f14d1470ba9d1e757cc3166cf0d0322a744150618d0ee4fcf`.
 Log SHA-256:

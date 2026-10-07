@@ -4,7 +4,7 @@
 # Baseline to beat: full-winning model vs CP-Grixis skill-5 = 0.269 (mirror skill-sweep).
 # HONEST: this makes bad play LOSE; it will NOT by itself make the rare combo appear (that's
 # Step 2 = search/demo discovery). Anti-collapse anchor = the external strong clock.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/league_step1_RESULT.log"
 $tlog = "local-training/league_step1.log"; $telog = "local-training/league_step1.err"

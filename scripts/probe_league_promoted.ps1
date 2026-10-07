@@ -1,7 +1,7 @@
 # PROBE 2 (~9min): after seeding promoted=true + snapshot pool + LEAGUE_PROMOTE_WR=0.40,
 # does OPPONENT_SAMPLER=league now engage the real diet (META/CROSS/LOCAL-SNAP) instead of
 # falling to CP7-only Stage-0? Multi-profile so cross-profile snapshot models are loaded.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $f = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\logs\stats\training_stats.csv"
 $tlog = "local-training/probe_league_train.log"; $telog = "local-training/probe_league_train.err"

@@ -2,7 +2,7 @@
 
 Nine strict-choice cases passed against XMage source pin
 `a5c90fe180021e70e2a644ade00eeab07f857a40` in
-`fdn-mage-kiora-003` on HaleysPC. The corresponding mtg-kernel batch
+`fdn-mage-kiora-003` on the compute host. The corresponding mtg-kernel batch
 implements Kiora, the Rising Tide and Scion of the Deep in opt-in FDN v43.
 
 | Case | Verified behavior |
@@ -49,7 +49,7 @@ were compressed before retry; the complete sorted class-file content hash
 was identical before and after. The guarded launcher records source/log/XML
 hashes and checks the 60 GiB reserve every three seconds, stopping only its
 identified child tree. Raw manifests, logs and XML remain outside Git under
-`C:/Users/haley/fdn-mage-kiora-003*`.
+`C:/Users/hostuser/fdn-mage-kiora-003*`.
 
 These bounded rules comparisons establish no full-set Limited support,
 original-fixture natural-terminal result or playing-strength claim.

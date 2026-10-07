@@ -4,7 +4,7 @@
 # self-mill with no 3-creature board to flashback Dread Return -> deck out) as the LEADING
 # metric -- if it falls, the model is learning even before winrate moves. PURE faithful diet
 # (no candidate_q) to isolate whether training ALONE teaches the orchestration.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/candq_RESULT.log"
 $tlog = "local-training/candq_train.log"; $telog = "local-training/candq_train.err"
@@ -78,7 +78,7 @@ $trainEnv = {
   $env:SEARCH_OP_ARBITER_CAST_FILTER="Balustrade Spy"
   $env:SEARCH_OP_MAX_ACTIVATIONS="1"; $env:SEARCH_OP_PLAYOUTS="2"
   $env:SEARCH_OP_PLAYOUT_TIMEOUT_MS="10000"; $env:SEARCH_OP_TOTAL_TIMEOUT_MS="30000"
-  $env:CANDIDATE_Q_DUMP_DIR="C:/Users/Jack/IdeaProjects/mage/local-training/candq_dumps"
+  $env:CANDIDATE_Q_DUMP_DIR="$env:USERPROFILE/IdeaProjects/mage/local-training/candq_dumps"
   $env:CANDIDATE_Q_FROM_MCTS_TARGETS="1"; $env:CANDIDATE_Q_LOSS_COEF="0.1"
   $env:CANDIDATE_Q_MCTS_SIGNED_TARGETS="1"
   $env:SEARCH_OP_APPLY_OVERRIDE="0"      # targets-only: no behavior override, no oldLogp clobber

@@ -3,7 +3,7 @@
 # / 40% cross=Rally), CP anchor includes CP-Rally (eval-relevant hard target). PBT weight-copy
 # DISABLED (different decks). Eval on the uniform fixed CP gauntlet. Param: $env:LEAGUE_SMOKE
 # (episodes; 0 = full run 60000). Provenance + opponent-composition logged (LEAGUE_DEBUG).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $prof = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles"
 $ref  = "E:/mage-training/backups/affinity_const_entropy_20260626/model.pt"

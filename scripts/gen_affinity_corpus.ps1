@@ -11,7 +11,7 @@ param(
   [int]$Parallel = 8,
   [string]$Opponents = "grixis,burn,faeries,terror,wildfire,caw,elves,rally"
 )
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $profile  = "Pauper-Affinity-Anchor-Value"
 $baseReg  = "local-training/_brew_win_registry.json"

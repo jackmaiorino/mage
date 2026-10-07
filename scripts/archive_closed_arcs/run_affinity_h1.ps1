@@ -1,7 +1,7 @@
 # H1: hard-matchup-weighted terminal-only continuation from ref C (Codex #36, lever #2).
 # Same FIXED Affinity list + real gauntlet; oversample hard matchups (Rally 3x / sub-45 2x /
 # easy 1x). Terminal-only, constant entropy 0.10, LR 5e-5. Eval is on the UNIFORM mixture.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_h1.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

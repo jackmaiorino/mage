@@ -3,7 +3,7 @@
 # + self, instead of the passive Spy mirror (which was DEGENERATE: castable 76->48%,
 # winrate 50->30%). Hypothesis: aggressive diet -> clock pressure -> reachability holds.
 # Eval Spy vs Grixis after each chunk -> compare castable-Spy trajectory to self-play.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/sweep_meta_RESULT.log"
 $tlog = "local-training/sweep_meta_train.log"

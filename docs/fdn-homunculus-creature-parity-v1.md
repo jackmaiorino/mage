@@ -20,7 +20,7 @@ Blow targets, and expect its single +1/+1 counter.
 
 Small manifest: Java 23.0.2, Maven 3.9.9; CPU only, one reactor thread,
 JVM active processor count two, GPU ordinal none. Owned reference copy:
-`C:/Users/haley/mage-fdn-counter-parity-codex`. Logs and XML remain outside
+`C:/Users/hostuser/mage-fdn-counter-parity-codex`. Logs and XML remain outside
 Git. Test source SHA-256:
 `bb40a4fe4134732d8ad16bf36d454fe566245c7fb21bdc42d9e2f2a23e7af096`.
 Surefire XML SHA-256:

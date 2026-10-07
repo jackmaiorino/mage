@@ -1,7 +1,7 @@
 import json, os, glob, re
 
 LANDS = {"Forest", "Swamp"}
-BASE = "C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
+BASE = "C:/Users/user/IdeaProjects/mage/local-training/local_pbt/cp7_eval_sweeps"
 DIRS = ["baseline_auc_ab", "baseline_auc_s9999", "baseline_auc_big5151"]
 SUB = "game_logs/Pauper-Spy-Combo-Value__Deck_-_Spy_Combo__vs__Deck_-_Grixis_Affinity"
 RL_STATE = re.compile(r"PlayerRL1 L(\d+) H\d+(?:\[[^\]]*\])? B\d+(?:\[[^\]]*\])? G(\d+)")

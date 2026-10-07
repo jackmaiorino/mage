@@ -9,7 +9,7 @@ param(
   [int]$Skill = 7,
   [int]$N = 128
 )
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $baseReg = "local-training/_brew_win_registry.json"
 $reg  = "local-training/_scoreboard_$($Profile)_registry.json"

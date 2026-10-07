@@ -1,5 +1,5 @@
 @echo off
-REM Remote GPU service, training-only (Haley's RTX 4060).
+REM Remote GPU service, training-only (the compute host's RTX 4060).
 REM Inference stays on local PC via ONNX (hybrid mode).
 
 set GPU_SERVICE_PORT=26100
@@ -25,5 +25,5 @@ set ENTROPY_DECAY_STEPS=530000
 set PYTHONUNBUFFERED=1
 set PYTHONIOENCODING=utf-8
 
-cd /d C:\Users\haley\mage
+cd /d %USERPROFILE%\mage
 py -3.12 Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\MLPythonCode\gpu_service_host.py

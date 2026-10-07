@@ -1,7 +1,7 @@
 # CURRICULUM Stage 1 (bootstrap): Affinity vs SLOW-Rally-heavy diet from ref C 47.5%.
 # Goal: generate real Affinity-vs-aggro WINS (slow opponent is beatable) so the agent
 # learns racing/blocking/removal sequencing -- the skill self-imitation couldn't bootstrap.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $log  = "local-training/affinity_curr_stage1.log"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"

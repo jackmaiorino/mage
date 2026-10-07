@@ -9,7 +9,7 @@
 # CONTROL = run_fresh128_control.ps1 (identical recipe, these slots = 0). Fresh-start
 # (Codex: a plateaued teacher confounds a schema change). Metric = fizzle rate
 # (executed/cast_spy) + dominated-cast (NO_BOARD) + winrate vs the fresh-128 control.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/obs_zonecount_RESULT.log"
 $tlog = "local-training/obs_zonecount.log"; $telog = "local-training/obs_zonecount.err"

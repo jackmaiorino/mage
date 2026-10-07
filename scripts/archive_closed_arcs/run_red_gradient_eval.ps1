@@ -1,6 +1,6 @@
 # Map the winnability gradient: greedy-eval ref C (47.5%) vs real-Rally / slow-Rally /
 # drastic-Rally. Tells us if ANY winnable red opponent exists to anchor a curriculum.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/red_gradient_eval_RESULT.log"
 $baseReg = "local-training/_brew_win_registry.json"

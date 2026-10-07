@@ -1,6 +1,6 @@
 # H1 unattended: hard-weighted train from ref C -> eval on UNIFORM 8-deck gauntlet (matched seed).
 # Then apply Codex decision rule: Rally +>=8pp vs ref C, uniform mean flat/up, easy regression <=5pp.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $q = "local-training/queue_h1.log"
 "=== QUEUE H1 $(Get-Date) ===" | Out-File $q

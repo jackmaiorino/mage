@@ -87,7 +87,7 @@
 - Problem: ONNX (5.5GB) + PyTorch training (6GB) on 12GB GPU = 91% OOM rate
 - **Tested:** INT8 ONNX quantization -- 10-30x slower, ORT dequantizes to FP32. Dead end.
 - **Tested:** Model shrinking -- already at minimum (d_model=128, 2 layers). Dead end.
-- **Tested:** Remote GPU training (Haley's RTX 4060) -- infrastructure works, PC intermittently available.
+- **Tested:** Remote GPU training (the compute host's RTX 4060) -- infrastructure works, PC intermittently available.
 - **Analyzed:** Time-multiplex (pause ONNX during training) -- viable but medium effort.
 - **Found:** ONNX_GPU_MEM_LIMIT_MB wasn't being passed to JVM (defaulted to 5120MB instead of 2048MB).
 - **Fixed:** Capped ONNX arena to 2048MB + added torch.cuda.empty_cache() after training batches.
@@ -135,7 +135,7 @@ Replace with nothing (or a pass if needed for the if/else structure).
 - [ ] **Step 2: Delete dead Python files**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage
+cd C:/Users/user/IdeaProjects/mage
 rm Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/trt_inference.py
 rm Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/onnx_export_int8.py
 ```
@@ -202,7 +202,7 @@ See docs/PROJECT_TIMELINE.md for context."
 - [ ] **Step 1: Delete all dead scripts**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage
+cd C:/Users/user/IdeaProjects/mage
 rm -f scripts/deploy-budget-gpu.bat
 rm -f scripts/teardown-budget-gpu.bat
 rm -f scripts/run-training-oneliner.ps1
@@ -235,7 +235,7 @@ These are untracked runtime artifacts. No git commit needed.
 - [ ] **Step 1: Delete stale logs**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl
+cd C:/Users/user/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl
 rm -rf logs/
 rm -f MLPythonCode/mtg_ai.log
 rm -f MLPythonCode/mulligan_training.log
@@ -287,7 +287,7 @@ profiles/test/                         0       (empty)
 - [ ] **Step 1: Delete dead profiles**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles
+cd C:/Users/user/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles
 
 # Large dead profiles
 rm -rf Pauper-MonoRedRally rally-local Pauper-Standard engine-bench smoke-pad-test Vintage-Cube
@@ -342,7 +342,7 @@ Pauper-Wildfire-A/
 - [ ] **Step 1: Delete investigation artifacts**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles
+cd C:/Users/user/IdeaProjects/mage/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles
 for p in Pauper-Rally Pauper-Wildfire Pauper-Affinity Pauper-Elves; do
   rm -rf "$p/models/onnx/int8"
   rm -rf "$p/models/onnx/int8_from_fp32"
@@ -379,7 +379,7 @@ Not in git. Disk cleanup only.
 - [ ] **Step 1: Remove stale test logs**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage/local-training/local_pbt
+cd C:/Users/user/IdeaProjects/mage/local-training/local_pbt
 rm -f config_a.log config_c.log trainer_overnight.log sync.log sync_models.log
 ```
 
@@ -414,7 +414,7 @@ git commit -m "docs: mark TensorRT plan as superseded"
 - [ ] **Step 1: Check disk savings**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage
+cd C:/Users/user/IdeaProjects/mage
 du -sh .
 du -sh Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/
 ```

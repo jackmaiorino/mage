@@ -2,7 +2,7 @@
 # entropy decay MATCHED to the run budget (~300k train_step), GPU split, batch 25ms.
 # Tests the UNDERTRAINING hypothesis on the current model. Eval vs Grixis after
 # each chunk -> learning-curve slope. Climbing/crossing 60% => undertrained.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/sweep_armS_RESULT.log"
 $tlog = "local-training/sweep_armS_train.log"

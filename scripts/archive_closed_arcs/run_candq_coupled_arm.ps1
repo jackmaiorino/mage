@@ -5,7 +5,7 @@
 # Gates: validation (c1+c2 both <0.42 -> abort), rolling (2 consecutive <0.42).
 # Aborts SAVE the collapsed model for autopsy before restoring baseline.
 # NO baseline restore on healthy completion -- the trained model is the product.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/overnight_RESULT.log"
 $tlog = "local-training/overnight_train.log"; $telog = "local-training/overnight_train.err"
@@ -106,8 +106,8 @@ $trainEnv = {
   # KL anchor: hold the policy near the frozen 0.573 reference so the encoder can
   # reshape to encode the board-conditional distinction WITHOUT execution collapsing
   $env:REFERENCE_POLICY_KL_COEF="1.0"
-  $env:MCTS_REFERENCE_MODEL_PATH="C:/Users/Jack/IdeaProjects/mage/local-training/backups/ref_frozen_0573.pt"
-  $env:CANDIDATE_Q_DUMP_DIR="C:/Users/Jack/IdeaProjects/mage/local-training/candq_dumps_v7"
+  $env:MCTS_REFERENCE_MODEL_PATH="$env:USERPROFILE/IdeaProjects/mage/local-training/backups/ref_frozen_0573.pt"
+  $env:CANDIDATE_Q_DUMP_DIR="$env:USERPROFILE/IdeaProjects/mage/local-training/candq_dumps_v7"
   $env:TRAIN_PROFILES="1"; $env:NUM_GAME_RUNNERS="64"; $env:TOTAL_EPISODES="99999999"
   if ($mode -eq "torch") { $env:PY_SERVICE_MODE="shared_gpu" } else { Remove-Item Env:\PY_SERVICE_MODE -ErrorAction SilentlyContinue }
 }

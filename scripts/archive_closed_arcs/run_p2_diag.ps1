@@ -2,7 +2,7 @@
 # Small search-only eval with RL_ONLINE_PREFIX_DIAG=1 -> prints:
 #   [OPDIAG-ONCE] enable=... gate=... (confirms env propagation + flag values, once/JVM)
 #   [OPDIAG] combo-ready ACTIVATE: cand=.. maxT=.. minT=.. selSize=..  (shows which trigger cond blocks search)
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/p2_diag_RESULT.log"
 $reg  = "local-training/_brew_win_registry.json"

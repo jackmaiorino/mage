@@ -2,7 +2,7 @@
 # Greedy eval (exploration off, MODE=eval), matched seeds. Run the matchup once forcing
 # KEEP at the first mulligan and once forcing MULL; join by opening hand -> compare terminal
 # outcomes. Provenance printed (Codex hard rule). Param: $env:M0_GAMES (default 128).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $baseReg = "local-training/_brew_win_registry.json"
 $reg  = "local-training/_m0_registry.json"

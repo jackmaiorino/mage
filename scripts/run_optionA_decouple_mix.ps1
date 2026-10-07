@@ -3,7 +3,7 @@
 # dumped dataset to keep the shared encoder de-myopia'd. Tests whether
 # execution-safe de-myopia converts to winrate at PPO volume the gate couldn't
 # reach. Then eval de-myopia'd vs baseline at TWO seeds (n=256 pooled) + probes.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/optionA_decouple_mix_RESULT.log"
 $tlog = "local-training/optionA_decouple_mix_train.log"
@@ -11,7 +11,7 @@ $telog= "local-training/optionA_decouple_mix_train.err"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $bak  = "local-training\backups\spy_value_baseline_20260531"
 $demy = "local-training\backups\spy_value_decouple_20260602"
-$dump = "C:\Users\Jack\IdeaProjects\mage\local-training\cq_dump"
+$dump = "$env:USERPROFILE\IdeaProjects\mage\local-training\cq_dump"
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"
 $refabs = (Resolve-Path "$bak\model_latest.pt").Path
 $mins = [int]($env:MIX_MINUTES); if ($mins -le 0) { $mins = 360 }

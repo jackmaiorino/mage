@@ -3,7 +3,7 @@
 # exploration-generated trajectory? Capture trace under seed S, replay its controllable prefix
 # under the SAME seed, compare cell-equality per controllable decision. Standalone RLTrainer
 # (py4j local inference auto-starts).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/goexplore_winpos_RESULT.log"
 $md   = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

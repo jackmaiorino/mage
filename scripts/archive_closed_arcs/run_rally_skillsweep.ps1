@@ -1,6 +1,6 @@
 # Rally DOMINANCE skill-sweep (Codex #26): confirm the 67% (skill1) holds vs stiffer CP at skill 3 & 5.
 # Uses the trained/dominant model already in the profile. Gauntlet, greedy.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/rally_skillsweep_RESULT.log"
 $reg = "local-training/_rally_gauntlet_registry.json"   # already points agent=Rally, pool=gauntlet

@@ -1,7 +1,7 @@
 # SPY ARM-2 PROMOTION GATE (Codex #58): full 8-deck gauntlet, det, n=256/matchup,
 # seed 5151. Arm win = 22k winning-list (+initiative feats); arm base = frozen
 # old-list control. Primary: uniform gauntlet win vs base; secondary: Grixis holds +8pp.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $out = "local-training/spy_promotion_gate.log"

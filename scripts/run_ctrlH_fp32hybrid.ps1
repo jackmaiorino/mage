@@ -3,7 +3,7 @@
 # -2.0 sentinel fills, SIGNED branch) alone regressed training, vs the search/Q config.
 # If ctrlH holds ~0.52 -> code clean, collapse is search-linked -> run Control B.
 # If ctrlH collapses -> code regression in 16b153d906 -> bisect stride/sentinels.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/ctrlH_RESULT.log"
 $tlog = "local-training/ctrlH_train.log"; $telog = "local-training/ctrlH_train.err"

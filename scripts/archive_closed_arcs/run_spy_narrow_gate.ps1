@@ -1,7 +1,7 @@
 # SPY ARM-2 NARROW GATE (Codex #57): trained-winning-list (22k) vs frozen old-list
 # baseline, deterministic harness, Grixis skill-1, n=256, seed 5151 (dev block).
 # Gate: win >= base + 8pp OR win > 55%.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"
 $out = "local-training/spy_narrow_gate.log"

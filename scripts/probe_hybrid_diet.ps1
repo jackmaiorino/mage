@@ -2,7 +2,7 @@
 # the good-era mix (local-snapshot + cross-profile + CP7), or fall back to CP7-only like
 # single-profile league did? Multi-profile (all 4), check the opponent_type distribution of
 # the rows it adds. NO winrate claim -- just verifying the diet engages before the long run.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $f = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\logs\stats\training_stats.csv"
 $tlog = "local-training/probe_hybrid_train.log"; $telog = "local-training/probe_hybrid_train.err"

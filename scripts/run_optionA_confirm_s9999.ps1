@@ -1,7 +1,7 @@
 # Option-A 2nd-seed CONFIRM: re-eval the saved de-myopia'd model vs baseline at
 # seed 9999 (gate used 5151) + re-probe value-AUC + castable-Spy. NO retrain.
 # Replicates the de-myopia AUC before spending HPC SU on the decouple.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/optionA_confirm_s9999_RESULT.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

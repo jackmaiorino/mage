@@ -4,7 +4,7 @@
 # untrained on the new cards), but validates deck files + shows whether the better mana
 # base raises LEGAL SPY REACH (Spy castable) without retraining. Metric split (Codex):
 # legal-reach (candidate_offer_oracle 'offered') vs actual cast vs winrate.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out  = "local-training/pretest_decks_RESULT.log"
 $reg  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"

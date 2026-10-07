@@ -6,14 +6,14 @@
 
 **Architecture:** Single RTX 4070 Super (12GB) running ONNX inference + PyTorch training. Current bottleneck: VRAM contention between ONNX (~5GB) and PyTorch (~5-6GB) on a 12GB GPU causes 27-47% OOM rate and limits throughput to ~2.5 rows/sec per profile vs theoretical ~4+ rows/sec. Model: d_model=512, 6 layers, 8 heads, 5 ONNX heads at 34MB each (FP16).
 
-**Tech Stack:** Java 8+ / ONNX Runtime 1.19 (CUDA EP), Python 3.12 / PyTorch (CUDA), RTX 4070 Super 12GB local, RTX 4060 8GB remote (Haley's PC, intermittently available).
+**Tech Stack:** Java 8+ / ONNX Runtime 1.19 (CUDA EP), Python 3.12 / PyTorch (CUDA), RTX 4070 Super 12GB local, RTX 4060 8GB remote (the compute host, intermittently available).
 
 ---
 
 ## Current State
 
 - **ONNX inference:** FP16, local GPU, 5.3GB VRAM, 35% GPU util, ~48ms avg latency (8-9ms actual run, rest is batch assembly wait)
-- **Training:** Broken -- pointing at Haley's PC (10.0.0.22:26100) which is offline. Games complete but no weight updates.
+- **Training:** Broken -- pointing at the compute host (10.0.0.22:26100) which is offline. Games complete but no weight updates.
 - **Profiles:** 4 (Rally, Wildfire, Affinity, Elves), 64 runners total
 - **Best historical:** ~7 effective eps/sec (1.75 rows/sec/profile x4, dual-sided) with FP16 ONNX + GPU training at CUDA_MEM_FRACTION=0.55, but 27% OOM rate
 
@@ -87,7 +87,7 @@ Key env vars for this config (already defaults in run_local_pbt.py):
 - [ ] **Step 2: Compile and start training**
 
 ```bash
-cd C:/Users/Jack/IdeaProjects/mage
+cd C:/Users/user/IdeaProjects/mage
 mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile
 py -3.12 scripts/run_local_pbt.py > local-training/local_pbt/config_a.log 2>&1 &
 ```
@@ -133,18 +133,18 @@ taskkill //F //IM python3.12.exe
 
 ---
 
-### Task 3: Config B -- FP16 ONNX GPU + Remote PyTorch Training (Haley's RTX 4060)
+### Task 3: Config B -- FP16 ONNX GPU + Remote PyTorch Training (the compute host's RTX 4060)
 
-**Depends on:** Haley's PC (10.0.0.22) being online. If offline, skip and note in results.
+**Depends on:** The compute host (10.0.0.22) being online. If offline, skip and note in results.
 
 **Files:**
 - None modified (env var override only)
 
-- [ ] **Step 1: Check if Haley's PC is reachable**
+- [ ] **Step 1: Check if the compute host is reachable**
 
 ```bash
 ping -n 1 10.0.0.22
-ssh haley@10.0.0.22 "echo OK"
+ssh hostuser@10.0.0.22 "echo OK"
 ```
 
 If unreachable, skip this task entirely and record "SKIPPED: host offline" in results.
@@ -152,12 +152,12 @@ If unreachable, skip this task entirely and record "SKIPPED: host offline" in re
 - [ ] **Step 2: Start GPU service on remote**
 
 ```bash
-ssh haley@10.0.0.22 "cd C:\\Users\\haley\\mage && py -3.12 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py" &
+ssh hostuser@10.0.0.22 "cd C:\\Users\\hostuser\\mage && py -3.12 Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/gpu_service_host.py" &
 ```
 
 Or use schtasks if SSH session management is needed. Verify it's listening:
 ```bash
-ssh haley@10.0.0.22 "curl -s http://localhost:27100/metrics | head -5"
+ssh hostuser@10.0.0.22 "curl -s http://localhost:27100/metrics | head -5"
 ```
 
 - [ ] **Step 3: Start local training pointing at remote**
@@ -167,12 +167,12 @@ GPU_SERVICE_ENDPOINT=10.0.0.22:26100 py -3.12 scripts/run_local_pbt.py > local-t
 ```
 
 ONNX inference stays local (full 12GB available, no contention).
-Training data flows over LAN to Haley's 4060.
+Training data flows over LAN to the compute host's 4060.
 
 - [ ] **Step 4: Measure for 10 minutes**
 
 Same measurement protocol as Config A. Additionally check:
-- Remote GPU: `ssh haley@10.0.0.22 "nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader"`
+- Remote GPU: `ssh hostuser@10.0.0.22 "nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader"`
 - Network errors: `grep -ac "request failed\|Connection refused\|timed out" local-training/local_pbt/trainer.log`
 
 - [ ] **Step 5: Record Config B results**
@@ -334,7 +334,7 @@ taskkill //F //IM java.exe; taskkill //F //IM python3.12.exe
 
 ### Task 6: Config D -- INT8 ONNX GPU + Remote PyTorch Training
 
-**Depends on:** Haley's PC online AND Config C showing INT8 ONNX works correctly.
+**Depends on:** The compute host online AND Config C showing INT8 ONNX works correctly.
 
 - [ ] **Step 1: Swap in INT8 models (same as Task 5 Step 1)**
 
@@ -512,7 +512,7 @@ Save to `local-training/local_pbt/throughput_investigation_2026-04-12.md`:
 
 ## Hardware
 - Local: RTX 4070 Super (12GB), 24 cores, 32GB RAM
-- Remote: RTX 4060 (8GB), 16 cores (Haley's PC, intermittent)
+- Remote: RTX 4060 (8GB), 16 cores (the compute host, intermittent)
 
 ## Results
 

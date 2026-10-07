@@ -1,6 +1,6 @@
 # 1) Eval the checkpoint-average (n=192, seed 5151) vs model_best's known 0.582@s5151/n256.
 # 2) Launch the overnight sustained hybrid run from whichever is stronger.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/avg_eval_RESULT.log"
 $reg = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/league/pauper_spy_pbt_registry.json"

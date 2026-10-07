@@ -1,7 +1,7 @@
 # L1 long-clean-run chunk (Codex #38). 10k eps of UNIFORM real-gauntlet terminal-only
 # training. Chunk 1 restores ref C; later chunks continue from the profile (warm-start).
 # Param: $env:L1_CHUNK (1..N). Backs up to affinity_L1_ck<N>. Provenance logged.
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $deckDir = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
 $md  = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/profiles/Pauper-Affinity-Anchor-Value/models"

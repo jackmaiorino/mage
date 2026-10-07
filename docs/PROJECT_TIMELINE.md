@@ -42,7 +42,7 @@
 - Problem: ONNX (5.5GB) + PyTorch training (6GB) on 12GB GPU = 91% OOM rate
 - **Tested:** INT8 ONNX quantization -- 10-30x slower, ORT dequantizes to FP32. Dead end.
 - **Tested:** Model shrinking -- already at minimum (d_model=128, 2 layers). Dead end.
-- **Tested:** Remote GPU training (Haley's RTX 4060) -- infrastructure works, PC intermittently available.
+- **Tested:** Remote GPU training (the compute host's RTX 4060) -- infrastructure works, PC intermittently available.
 - **Analyzed:** Time-multiplex (pause ONNX during training) -- viable but medium effort.
 - **Found:** ONNX_GPU_MEM_LIMIT_MB wasn't being passed to JVM (defaulted to 5120MB instead of 2048MB).
 - **Fixed:** Capped ONNX arena to 2048MB + added torch.cuda.empty_cache() after training batches.

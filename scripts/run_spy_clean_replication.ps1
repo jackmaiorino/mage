@@ -4,7 +4,7 @@
 # 9999=0.562 high, 4242=0.500 mid) -> if clean_s* match repl_s* within noise, nothing broke.
 # Assumes `mvn ... clean compile` already ran (uses --skip-compile so the eval does NOT
 # trigger an incremental recompile that could re-introduce stale-class behavior).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $out = "local-training/clean_replication_RESULT.log"
 $md  = "Mage.Server.Plugins\Mage.Player.AIRL\src\mage\player\ai\rl\profiles\Pauper-Spy-Combo-Value\models"

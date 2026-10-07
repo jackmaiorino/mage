@@ -1,7 +1,7 @@
 # L1 unattended gated pipeline (Codex #38): up to 10 chunks of 10k-ep uniform clean training
 # from ref C, eval each on the uniform 8-deck gauntlet, apply abort gates. Tests whether
 # Affinity-vs-Rally CLIMBS with a long clean run (undertrained) or stays flat (wall).
-Set-Location "C:\Users\Jack\IdeaProjects\mage"
+Set-Location "$env:USERPROFILE\IdeaProjects\mage"
 $ErrorActionPreference = "Continue"
 $q = "local-training/queue_L1.log"
 "=== QUEUE L1 long clean run $(Get-Date) ===" | Out-File $q
